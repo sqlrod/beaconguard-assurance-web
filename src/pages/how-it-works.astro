@@ -6,13 +6,68 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h1>How It Works</h1>
     <p>
-      Requests are evaluated through a deterministic policy and enforcement boundary
-      with verifiable, replayable outcomes.
+      BeaconGuard evaluates each outgoing AI request through a governed path
+      before the request proceeds.
     </p>
+  </section>
+
+  <section>
+    <h2>Request Path</h2>
+    <p>
+      1) A request is normalized by the calling application with key identity and
+      context.  
+      2) BeaconGuard evaluates that context against active policy.
+      3) A deterministic authorization decision is produced (allow/deny and reason).
+      4) The outcome and evidence are emitted to an immutable record stream.
+    </p>
+  </section>
+
+  <section>
+    <h2>Enforcement Boundary</h2>
+    <p>
+      Applications do not need to embed AI governance rules in business logic.
+      BeaconGuard places governance in a dedicated boundary where policy decisions
+      remain consistent regardless of model behavior or prompt drift.
+    </p>
+  </section>
+
+  <section>
+    <h2>Deterministic Decision Path</h2>
+    <p>
+      For equivalent request state and policy snapshot, BeaconGuard returns equivalent
+      decisions. This is the foundation for operational confidence, incident response,
+      and reproducible reviews.
+    </p>
+  </section>
+
+  <section>
+    <h2>Input and Output Governance</h2>
+    <p>
+      Inputs require explicit context (actors, requested action, attributes, policy identity),
+      so decisions are traceable. Outputs remain constrained to a minimal set:
+      decision result, policy identity, and reasoning context.
+    </p>
+  </section>
+
+  <section>
+    <h2>Evidence at Runtime</h2>
+    <ul>
+      <li>Evidence is emitted as structured records, designed for audit and investigation.</li>
+      <li>Failure conditions are explicit rather than implicit.</li>
+      <li>Decision provenance stays attached to policy identity and input context.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Technical Deepening</h2>
     <ul>
       <li><a href="/docs/architecture">Boundary and components</a></li>
       <li><a href="/docs/enforcement-runtime">Enforcement runtime</a></li>
       <li><a href="/docs/threat-model">Threat model</a></li>
     </ul>
+    <div class="page-actions">
+      <a class="btn-primary" href="/deployment">Review deployment expectations</a>
+      <a class="btn-secondary" href="/trust-assurance">Read trust and assurance details</a>
+    </div>
   </section>
 </BaseLayout>

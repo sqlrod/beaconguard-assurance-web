@@ -6,13 +6,61 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h1>Platform</h1>
     <p>
-      BeaconGuard is an authorization and audit layer that sits between enterprise
-      applications and AI systems.
+      BeaconGuard is enterprise governance infrastructure for runtime AI decisions.
     </p>
+  </section>
+
+  <section>
+    <h2>What BeaconGuard Is</h2>
+    <p>
+      BeaconGuard is a policy control plane and deterministic enforcement layer
+      that sits between enterprise systems and AI/model endpoints.
+    </p>
+    <p>
+      It evaluates requests against policy and returns an explicit authorization
+      decision that is reproducible and reviewable.
+    </p>
+  </section>
+
+  <section>
+    <h2>What BeaconGuard Is Not</h2>
+    <p>BeaconGuard is not:</p>
+    <ul>
+      <li>A chatbot or assistant.</li>
+      <li>An AI model host or training platform.</li>
+      <li>A prompt-engineering framework.</li>
+      <li>General-purpose monitoring or observability alone.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Core Platform Functions</h2>
+    <div class="section-grid">
+      <div class="content-card">
+        <h3>Policy Control Plane</h3>
+        <p>Distributes signed policy artifacts and policy identity to enforcement points.</p>
+      </div>
+      <div class="content-card">
+        <h3>Deterministic Enforcement</h3>
+        <p>Applies policy consistently across time, environments, and request variations.</p>
+      </div>
+      <div class="content-card">
+        <h3>Evidence Emission</h3>
+        <p>Records auditable outcomes and decision context for governance review.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Deep Technical Paths</h2>
     <ul>
       <li><a href="/docs/overview">Platform overview</a></li>
       <li><a href="/docs/architecture">System architecture</a></li>
       <li><a href="/docs/policy-model">Policy model</a></li>
     </ul>
+    <div class="page-actions">
+      <a class="btn-primary" href="/how-it-works">See runtime workflow</a>
+      <a class="btn-secondary" href="/contact">Talk to a platform specialist</a>
+    </div>
   </section>
 </BaseLayout>

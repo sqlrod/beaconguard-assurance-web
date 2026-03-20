@@ -6,12 +6,61 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h1>Deployment</h1>
     <p>
-      BeaconGuard is designed for controlled deployment in regulated environments
-      with explicit policy distribution and immutable audit output.
+      BeaconGuard is intended for controlled enterprise environments where governance
+      is part of production operations, not a later add-on.
     </p>
+  </section>
+
+  <section>
+    <h2>Placement and Intent</h2>
+    <p>
+      The platform belongs in the runtime path between application services and AI/model
+      endpoints. This ensures every authorization-sensitive interaction is governed before
+      the request reaches or consumes model outputs.
+    </p>
+    <p>
+      BeaconGuard is designed to support environments with strict audit posture and
+      operational controls.
+    </p>
+  </section>
+
+  <section>
+    <h2>Deployment Model</h2>
+    <ul>
+      <li>Independent service execution with explicit trust boundaries.</li>
+      <li>Signed policy artifacts with controlled promotion flows.</li>
+      <li>Clear environment separation for policy, keys, and execution tiers.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Trust Boundaries and Operational Posture</h2>
+    <p>
+      Policy is authoritative at enforcement time.
+      Applications and downstream systems should not silently bypass governance outcomes.
+      When policy material is missing or unverifiable, decisions must fail closed.
+    </p>
+  </section>
+
+  <section>
+    <h2>Integration Pattern</h2>
+    <p>
+      Treat BeaconGuard as an authorization layer with explicit request normalization and
+      deterministic enforcement responses. This reduces application coupling and keeps
+      governance policy lifecycle separate from model integration details.
+    </p>
+  </section>
+
+  <section>
+    <h2>Technical references</h2>
     <ul>
       <li><a href="/docs/deployment-integration">Deployment and integration</a></li>
       <li><a href="/docs/compliance-audit">Compliance controls</a></li>
+      <li><a href="/how-it-works">How BeaconGuard enforces decisions</a></li>
     </ul>
+    <div class="page-actions">
+      <a class="btn-primary" href="/trust-assurance">Understand trust boundaries</a>
+      <a class="btn-secondary" href="/contact">Discuss deployment needs</a>
+    </div>
   </section>
 </BaseLayout>

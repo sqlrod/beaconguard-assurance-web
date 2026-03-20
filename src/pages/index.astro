@@ -3,111 +3,112 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="BeaconGuard Assurance">
-  <!-- ===================== -->
-  <!-- HERO -->
-  <!-- ===================== -->
   <section class="landing">
     <h1>BeaconGuard Assurance</h1>
-
-    <h2>
-      Deterministic Control Plane for Regulated AI
-    </h2>
-
-   <center> <p>
-      An authorization and audit layer that governs AI
-      interactions in healthcare and other regulated environments.
+    <p class="hero-subheadline">
+      Deterministic governance between enterprise applications and AI/model endpoints.
     </p>
-
     <p>
-      Policy-driven enforcement converts probabilistic model behavior into
-      deterministic, auditable decisions.
-    </p> </center>
+      BeaconGuard is a runtime control plane for enterprise AI operations.
+      It enforces policy decisions consistently, records reviewable evidence,
+      and makes trust boundaries explicit.
+    </p>
+    <div class="page-actions">
+      <a class="btn-primary" href="/platform">Explore the platform</a>
+      <a class="btn-secondary" href="/design-partner-program">Apply for design partner review</a>
+    </div>
   </section>
 
-  <!-- ===================== -->
-  <!-- SYSTEM OVERVIEW -->
-  <!-- ===================== -->
   <section>
-    <h2>What BeaconGuard Is</h2>
+    <h2>Why BeaconGuard Exists</h2>
+    <p>
+      Enterprise AI systems often fail the same question under pressure:
+      when outcomes need to be explained months later, what exactly was authorized,
+      who decided it, and what evidence remains?
+    </p>
+    <p>
+      BeaconGuard exists where application-level logs are not enough.
+      It brings authorization intent and enforcement outcomes into a durable, deterministic boundary.
+    </p>
+  </section>
 
+  <section>
+    <h2>What BeaconGuard Does</h2>
     <p>
       BeaconGuard operates as an externalized control plane that sits between
-      regulated systems and AI models.
+      enterprise systems and AI endpoints.
     </p>
-
     <p>
       Authorization logic is removed from applications and enforced independently
       using signed, versioned policy artifacts.
     </p>
-
     <p>
-      Every authorization decision produces an immutable audit record that can be
-      replayed to prove why access was allowed or denied.
+      Every request gets a deterministic governance decision and a reviewable evidence record.
     </p>
   </section>
 
-  <!-- ===================== -->
-  <!-- PROBLEM -->
-  <!-- ===================== -->
   <section>
-    <h2>Why AI Authorization Fails Today</h2>
-
-    <p>
-      Most AI systems rely on application-level logging that records prompts,
-      responses, and metadata but does not capture the authorization intent that
-      governed the interaction.
-    </p>
-
-    <p>
-      As models change and prompts evolve, historical logs lose the ability to
-      explain why a decision occurred at a specific point in time.
-    </p>
-
-    <p>
-      When authorization intent cannot be reconstructed deterministically,
-      compliance review becomes speculative instead of evidentiary.
-    </p>
+    <h2>Core Platform Outcomes</h2>
+    <div class="section-grid">
+      <div class="content-card">
+        <h3>Deterministic Control</h3>
+        <p>The same input and policy context produce the same authorization outcome every time.</p>
+      </div>
+      <div class="content-card">
+        <h3>Operational Governance</h3>
+        <p>Policy evaluation is centralized into infrastructure logic separate from model behavior.</p>
+      </div>
+      <div class="content-card">
+        <h3>Evidence for Review</h3>
+        <p>Decision context and outcomes are emitted in formats designed for audit and incident review.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- ===================== -->
-  <!-- DIFFERENTIATORS -->
-  <!-- ===================== -->
   <section>
-    <h2>What the BeaconGuard Policy Stack Changes</h2>
-
+    <h2>Where BeaconGuard Sits in the Stack</h2>
     <p>
-      <strong>Deterministic Policy Evaluation.</strong>
-      Decisions are evaluated against immutable policy snapshots that can be
-      replayed to produce identical outcomes under identical inputs.
+      BeaconGuard sits in the runtime path between your applications and AI/model providers.
+      Applications submit normalized authorization context, BeaconGuard evaluates policy,
+      and the decision returns as an explicit allow/deny signal.
     </p>
-
     <p>
-      <strong>Externalized Enforcement.</strong>
-      Authorization logic is enforced outside of applications and AI systems,
-      independent of model internals or vendor implementations.
+      This preserves enterprise logic in a dedicated governance layer, while your core systems
+      remain focused on product workflows.
     </p>
-
-    <p>
-      <strong>First-Class Decision Audit.</strong>
-      Each decision produces a verifiable record capturing policy identity,
-      decision context, and outcome.
-    </p>
+    <p><a href="/how-it-works">Understand the decision flow</a></p>
   </section>
 
-  <!-- ===================== -->
-  <!-- CTA -->
-  <!-- ===================== -->
   <section>
-    <h2>Learn More</h2>
+    <h2>Who It Is For</h2>
+    <p>BeaconGuard is for organizations that run AI inside production systems where:</p>
+    <ul>
+      <li>authorization outcomes must be explainable and repeatable,</li>
+      <li>decision evidence must be reviewable after the fact, and</li>
+      <li>governance must be enforced independent of prompt or model implementation.</li>
+    </ul>
+  </section>
 
+  <section>
+    <h2>Design Partner Positioning</h2>
     <p>
-      BeaconGuard is designed for regulated environments that require provable
-      authorization guarantees, deterministic replay, and audit-ready evidence.
+      We work with teams that are building regulated AI workflows and want to
+      validate governance patterns before broad rollout.
     </p>
+    <p>
+      Design partners help shape practical policy and evidence requirements that match real operational constraints.
+    </p>
+    <p><a href="/design-partner-program">Learn about BeaconGuard design partners</a></p>
+  </section>
 
+  <section>
+    <h2>Get Started</h2>
     <p>
-      Technical documentation will describe the control plane, enforcement
-      runtime, and audit model in detail.
+      Start with platform goals and architecture fit, then move into technical depth as needed.
     </p>
+    <div class="page-actions">
+      <a class="btn-primary" href="/platform">Review the platform scope</a>
+      <a class="btn-secondary" href="/contact">Talk to BeaconGuard</a>
+    </div>
   </section>
 </BaseLayout>

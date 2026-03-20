@@ -6,13 +6,59 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h1>Trust &amp; Assurance</h1>
     <p>
-      This section explains what BeaconGuard guarantees in auditability, decision
-      replay, and evidence boundaries.
+      Trust in AI operations requires concrete evidence, not broad promises.
+      BeaconGuard focuses on deterministic authorization, traceable decisions,
+      and bounded behavior.
     </p>
+  </section>
+
+  <section>
+    <h2>Trust Model</h2>
+    <p>
+      BeaconGuard enforces policy at runtime and records decision context against
+      explicit policy identity. The trust boundary is the point where policy,
+      not model behavior, decides execution rights.
+    </p>
+  </section>
+
+  <section>
+    <h2>Auditability</h2>
+    <ul>
+      <li>Immutable decision records for allowed and denied outcomes.</li>
+      <li>Policy identity, request context, and result captured at decision time.</li>
+      <li>Decision lineage that supports investigation and external review.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Replayability</h2>
+    <p>
+      With the same policy snapshot and normalized input, BeaconGuard enables replay
+      of decision outcomes for reconstruction and validation. That makes governance
+      checks defensible over time.
+    </p>
+  </section>
+
+  <section>
+    <h2>Evidence Boundaries</h2>
+    <p>
+      BeaconGuard provides decision evidence, not model reasoning.
+      It does not claim certainty about model quality, only about policy governance at
+      the boundary where enterprise systems transfer control.
+    </p>
+  </section>
+
+  <section>
+    <h2>Assurance references</h2>
     <ul>
       <li><a href="/docs/compliance-audit">Compliance and audit</a></li>
       <li><a href="/docs/overview">Deterministic overview</a></li>
       <li><a href="/docs/policy-model">Policy identity and replay</a></li>
+      <li><a href="/docs/threat-model">Threat model</a></li>
     </ul>
+    <div class="page-actions">
+      <a class="btn-primary" href="/platform">Review platform assumptions</a>
+      <a class="btn-secondary" href="/contact">Discuss assurance expectations</a>
+    </div>
   </section>
 </BaseLayout>
