@@ -5,7 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout title="How It Works | BeaconGuard Assurance">
   <section>
     <h1>How It Works</h1>
-    <p>
+    <p class="lead">
       BeaconGuard evaluates each outgoing AI request through a governed path
       before the request proceeds.
     </p>
@@ -13,13 +13,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section>
     <h2>Request Path</h2>
-    <p>
-      1) A request is normalized by the calling application with key identity and
-      context.  
-      2) BeaconGuard evaluates that context against active policy.
-      3) A deterministic authorization decision is produced (allow/deny and reason).
-      4) The outcome and evidence are emitted to an immutable record stream.
-    </p>
+    <div class="flow-diagram flow-diagram--stack">
+      <div class="flow-step">
+        <p class="flow-step-title">1. Normalize</p>
+        <p>Application submits identity, action, and context.</p>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-step">
+        <p class="flow-step-title">2. Decide</p>
+        <p>BeaconGuard evaluates active policy against the request.</p>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-step">
+        <p class="flow-step-title">3. Emit</p>
+        <p>Decision, reason, and evidence are emitted to a durable record.</p>
+      </div>
+    </div>
   </section>
 
   <section>
@@ -56,6 +65,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <li>Failure conditions are explicit rather than implicit.</li>
       <li>Decision provenance stays attached to policy identity and input context.</li>
     </ul>
+  </section>
+
+  <section>
+    <h2>Decision and Review Loop</h2>
+    <div class="flow-diagram flow-diagram--tight">
+      <div class="flow-step">
+        <p class="flow-step-title">Decision</p>
+        <p>Allow/deny computed from policy and state.</p>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-step">
+        <p class="flow-step-title">Execution</p>
+        <p>Model call proceeds only when allowed.</p>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-step">
+        <p class="flow-step-title">Review</p>
+        <p>Outcome, policy identity, and context are replayable.</p>
+      </div>
+    </div>
   </section>
 
   <section>

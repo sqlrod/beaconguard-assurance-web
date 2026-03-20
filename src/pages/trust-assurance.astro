@@ -5,11 +5,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout title="Trust & Assurance | BeaconGuard Assurance">
   <section>
     <h1>Trust &amp; Assurance</h1>
-    <p>
+    <p class="lead">
       Trust in AI operations requires concrete evidence, not broad promises.
       BeaconGuard focuses on deterministic authorization, traceable decisions,
       and bounded behavior.
     </p>
+  </section>
+
+  <section>
+    <h2>Evidence Flow</h2>
+    <div class="flow-diagram flow-diagram--tight">
+      <div class="flow-step">
+        <p class="flow-step-title">Policy decision</p>
+        <p>Input and policy identity are evaluated.</p>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-step">
+        <p class="flow-step-title">Record</p>
+        <p>Decision result is emitted as immutable evidence.</p>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-step">
+        <p class="flow-step-title">Review</p>
+        <p>Audit and assurance teams can reproduce context quickly.</p>
+      </div>
+    </div>
   </section>
 
   <section>

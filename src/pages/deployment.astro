@@ -5,7 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout title="Deployment | BeaconGuard Assurance">
   <section>
     <h1>Deployment</h1>
-    <p>
+    <p class="lead">
       BeaconGuard is intended for controlled enterprise environments where governance
       is part of production operations, not a later add-on.
     </p>
@@ -40,6 +40,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       Applications and downstream systems should not silently bypass governance outcomes.
       When policy material is missing or unverifiable, decisions must fail closed.
     </p>
+  </section>
+
+  <section>
+    <h2>Decision Boundary Pattern</h2>
+    <div class="flow-diagram">
+      <div class="flow-step">
+        <p class="flow-step-title">Policy boundary</p>
+        <p>Control points prevent unauthorised model execution.</p>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-step">
+        <p class="flow-step-title">Fail-closed behavior</p>
+        <p>Unverifiable states block unsafe execution.</p>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-step">
+        <p class="flow-step-title">Deployment evidence</p>
+        <p>Operational evidence supports assurance reviews.</p>
+      </div>
+    </div>
   </section>
 
   <section>
