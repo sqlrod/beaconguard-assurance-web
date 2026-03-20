@@ -73,10 +73,44 @@ body {
   font-size: 1.05rem;
   color: var(--brand-primary);
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.62rem;
 }
 
 .brand:hover {
   text-decoration: underline;
+}
+
+.brand-logo {
+  width: 126px;
+  height: auto;
+  max-height: 34px;
+  display: block;
+}
+
+.brand-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* =========================
@@ -177,6 +211,19 @@ a:hover {
   font-weight: 500;
 }
 
+.hero-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.hero-logo {
+  width: clamp(170px, 20vw, 230px);
+  height: auto;
+  display: block;
+  max-height: 86px;
+}
+
 /* Constrain hero width */
 .landing > * {
   max-width: 900px;
@@ -238,6 +285,20 @@ a:hover {
   .landing h1,
   .landing h2 {
     text-align: center;
+  }
+
+  .brand {
+    gap: 0.45rem;
+  }
+
+  .brand-logo {
+    width: 112px;
+    max-height: 30px;
+  }
+
+  .hero-logo {
+    width: clamp(150px, 52vw, 220px);
+    max-height: 74px;
   }
 }
 

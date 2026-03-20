@@ -4,10 +4,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout title="BeaconGuard Assurance">
   <section class="landing">
+    <div class="hero-logo-wrap">
+      <img
+        src="/brand/beaconguard-logo.png"
+        alt="BeaconGuard logo"
+        class="hero-logo"
+      />
+    </div>
     <p class="hero-eyebrow">Enterprise AI Governance</p>
-    <h1>Deterministic governance for AI runtime operations</h1>
+    <h1>Deterministic AI governance between enterprise applications and model endpoints.</h1>
     <p class="hero-subheadline">
-      BeaconGuard is a runtime control plane that sits between enterprise applications and AI/model endpoints.
+      BeaconGuard centralizes policy enforcement, returns explicit allow/deny decisions with context, and preserves reviewable evidence for production AI operations.
     </p>
     <div class="page-actions">
       <a class="btn-primary" href="/platform">Explore platform fit</a>
@@ -17,14 +24,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="stack-section homepage-block">
     <h2>Why BeaconGuard Exists</h2>
-    <p>
-      Enterprise AI systems often fail the same question under pressure:
-      when outcomes need to be explained months later, what exactly was authorized,
-      who decided it, and what evidence remains?
+    <p class="lead">
+      BeaconGuard is enterprise AI governance infrastructure that inserts a deterministic policy-enforcement boundary between enterprise applications and AI/model endpoints.
     </p>
     <p>
-      BeaconGuard exists where application-level logs are not enough.
-      It brings authorization intent and enforcement outcomes into a durable, deterministic boundary.
+      It is designed for production environments where authorization outcomes must be explainable, repeatable, and reviewable, and governance must stay independent of prompt wording or model implementation.
     </p>
   </section>
 
@@ -130,7 +134,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </p>
     <div class="page-actions">
       <a class="btn-primary" href="/platform">Review the platform scope</a>
-      <a class="btn-secondary" href="/contact">Talk to BeaconGuard</a>
+      <a class="btn-secondary" href="/trust-assurance">Trust &amp; Assurance</a>
+      <a class="btn-secondary" href="/deployment">Deployment</a>
+      <a class="btn-secondary" href="/design-partner-program">Design Partner Program</a>
     </div>
   </section>
 </BaseLayout>
