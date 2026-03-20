@@ -1,6 +1,7 @@
 ---
 const { title = "BeaconGuard Assurance" } = Astro.props;
 const currentPath = Astro.url.pathname;
+import "../styles/global.css";
 ---
 
 <!DOCTYPE html>
@@ -13,7 +14,6 @@ const currentPath = Astro.url.pathname;
 
     <meta name="description" content="Deterministic control plane for regulated AI systems." />
 
-    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
 
   <body>
