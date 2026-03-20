@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="BeaconGuard Assurance">
+  <!-- ===================== -->
+  <!-- HERO -->
+  <!-- ===================== -->
+  <section class="landing">
+    <h1>BeaconGuard Assurance</h1>
+
+    <h2>
+      Deterministic Control Plane for Regulated AI
+    </h2>
+
+   <center> <p>
+      An authorization and audit layer that governs AI
+      interactions in healthcare and other regulated environments.
+    </p>
+
+    <p>
+      Policy-driven enforcement converts probabilistic model behavior into
+      deterministic, auditable decisions.
+    </p> </center>
+  </section>
+
+  <!-- ===================== -->
+  <!-- SYSTEM OVERVIEW -->
+  <!-- ===================== -->
+  <section>
+    <h2>What BeaconGuard Is</h2>
+
+    <p>
+      BeaconGuard operates as an externalized control plane that sits between
+      regulated systems and AI models.
+    </p>
+
+    <p>
+      Authorization logic is removed from applications and enforced independently
+      using signed, versioned policy artifacts.
+    </p>
+
+    <p>
+      Every authorization decision produces an immutable audit record that can be
+      replayed to prove why access was allowed or denied.
+    </p>
+  </section>
+
+  <!-- ===================== -->
+  <!-- PROBLEM -->
+  <!-- ===================== -->
+  <section>
+    <h2>Why AI Authorization Fails Today</h2>
+
+    <p>
+      Most AI systems rely on application-level logging that records prompts,
+      responses, and metadata but does not capture the authorization intent that
+      governed the interaction.
+    </p>
+
+    <p>
+      As models change and prompts evolve, historical logs lose the ability to
+      explain why a decision occurred at a specific point in time.
+    </p>
+
+    <p>
+      When authorization intent cannot be reconstructed deterministically,
+      compliance review becomes speculative instead of evidentiary.
+    </p>
+  </section>
+
+  <!-- ===================== -->
+  <!-- DIFFERENTIATORS -->
+  <!-- ===================== -->
+  <section>
+    <h2>What the BeaconGuard Policy Stack Changes</h2>
+
+    <p>
+      <strong>Deterministic Policy Evaluation.</strong>
+      Decisions are evaluated against immutable policy snapshots that can be
+      replayed to produce identical outcomes under identical inputs.
+    </p>
+
+    <p>
+      <strong>Externalized Enforcement.</strong>
+      Authorization logic is enforced outside of applications and AI systems,
+      independent of model internals or vendor implementations.
+    </p>
+
+    <p>
+      <strong>First-Class Decision Audit.</strong>
+      Each decision produces a verifiable record capturing policy identity,
+      decision context, and outcome.
+    </p>
+  </section>
+
+  <!-- ===================== -->
+  <!-- CTA -->
+  <!-- ===================== -->
+  <section>
+    <h2>Learn More</h2>
+
+    <p>
+      BeaconGuard is designed for regulated environments that require provable
+      authorization guarantees, deterministic replay, and audit-ready evidence.
+    </p>
+
+    <p>
+      Technical documentation will describe the control plane, enforcement
+      runtime, and audit model in detail.
+    </p>
+  </section>
+</BaseLayout>

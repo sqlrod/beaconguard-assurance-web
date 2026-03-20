@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="BeaconGuard Architecture">
+  <section>
+    <h1>System Architecture</h1>
+
+    <p>
+      BeaconGuard is composed of a policy control plane, a deterministic
+      enforcement runtime, and an append-only audit ledger.
+    </p>
+
+    <figure>
+      <img
+        src="/diagrams/beaconguard-architecture.svg"
+        alt="BeaconGuard Assurance architecture diagram"
+        style="max-width: 100%; height: auto;"
+      />
+      <figcaption>
+        High-level component boundaries and trust domains.
+      </figcaption>
+    </figure>
+
+  <center>  <p>
+      The diagram illustrates static structural relationships only.
+      It does not imply execution order or runtime flow.
+    </p> </center>
+  </section>
+</BaseLayout>

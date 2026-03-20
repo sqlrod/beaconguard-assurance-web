@@ -1,0 +1,381 @@
+/* =========================
+   BRAND TOKENS
+   ========================= */
+
+:root {
+  --bg-white: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --border-subtle: #e5e7eb;
+
+  --brand-primary: #1e3a8a;   /* Beacon Blue */
+  --brand-secondary: #334155;
+  --brand-accent: #2563eb;
+}
+
+/* =========================
+   GLOBAL BASELINE
+   ========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+  color: var(--text-primary);
+  background-color: var(--bg-white);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   HEADER / FOOTER
+   ========================= */
+
+.site-header,
+.site-footer {
+  background-color: var(--bg-white);
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.header-inner,
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+
+.brand:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   NAVIGATION
+   ========================= */
+
+.header-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.header-nav a {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.header-nav a:hover {
+  text-decoration: underline;
+  color: var(--brand-accent);
+}
+
+/* =========================
+   MAIN CONTENT
+   ========================= */
+
+main#content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+section {
+  margin-bottom: 4rem;
+}
+
+section:last-of-type {
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 2.6rem;
+  line-height: 1.15;
+  margin: 0 0 1.25rem 0;
+  letter-spacing: -0.015em;
+  color: var(--brand-primary);
+}
+
+h2 {
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin: 0 0 1.25rem 0;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+p {
+  max-width: 720px;
+  margin: 0 0 1.5rem 0;
+  color: var(--text-secondary);
+}
+
+/* =========================
+   LINKS
+   ========================= */
+
+a {
+  color: var(--brand-accent);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   LANDING HERO
+   ========================= */
+
+.landing {
+  padding-top: 4rem;
+  padding-bottom: 3rem;
+}
+
+/* Constrain hero width */
+.landing > * {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Title — CENTERED */
+.landing h1 {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  white-space: nowrap;
+}
+
+/* Subtitle — CENTERED */
+.landing h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Hero descriptor — CENTERED */
+.landing .hero-descriptor {
+  
+  margin-bottom: 1.25rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Long explanatory copy — LEFT ALIGNED, ONE LINE */
+.landing p {
+  text-align: left;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* =========================
+   RESPONSIVE SAFETY
+   ========================= */
+
+@media (max-width: 900px) {
+  .landing h1,
+  .landing h2,
+  .landing .hero-descriptor,
+  .landing p {
+    white-space: normal;
+    text-align: left;
+  }
+
+  .landing h1,
+  .landing h2 {
+    text-align: center;
+  }
+}
+
+
+/* =========================
+   FIGURES
+   ========================= */
+
+figure {
+  margin: 3rem 0;
+}
+
+figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+  text-align: center;
+/* =========================
+   FOOTER EXPANSION
+   ========================= */
+
+.site-footer {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.footer-left strong {
+  color: var(--text-primary);
+}
+
+.footer-center {
+  text-align: center;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.footer-right a {
+  color: var(--brand-accent);
+  text-decoration: none;
+}
+
+.footer-right a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive footer */
+
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .footer-center,
+  .footer-right {
+    text-align: left;
+  }
+}
+
+}
+/* =========================
+   PRINT / PDF EXPORT
+   ========================= */
+
+@media print {
+  /* Reset colors for print */
+  * {
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  /* Hide navigation */
+  .site-header,
+  .header-nav {
+    display: none !important;
+  }
+
+  /* Simplify footer */
+  .site-footer {
+    border-top: none;
+    margin-top: 2rem;
+  }
+
+  .footer-inner {
+    display: block;
+  }
+
+  .footer-center,
+  .footer-right {
+    display: none;
+  }
+
+  /* Layout adjustments */
+  main#content {
+    padding: 0;
+    max-width: none;
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+
+  h1, h2 {
+    page-break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Diagrams */
+  img {
+    max-width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+  }
+
+  /* Links show URL */
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+  }
+}
+/* =========================
+   ACCESSIBILITY
+   ========================= */
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Visible focus states */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--brand-accent);
+  outline-offset: 2px;
+}
+
+/* Improve nav current state */
+.header-nav a[aria-current="page"] {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Ensure sufficient contrast for secondary text */
+p,
+figcaption {
+  color: var(--text-secondary);
+}

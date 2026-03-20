@@ -1,0 +1,14 @@
+{
+  "name": "beaconguard-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "astro": "^5.16.15",
+    "astro-mermaid": "^1.3.1"
+  }
+}
