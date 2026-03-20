@@ -4,6 +4,7 @@
 
 :root {
   --bg-white: #ffffff;
+  --bg-soft: #f4f8ff;
   --text-primary: #0f172a;
   --text-secondary: #334155;
   --border-subtle: #e5e7eb;
@@ -11,6 +12,8 @@
   --brand-primary: #1e3a8a;   /* Beacon Blue */
   --brand-secondary: #334155;
   --brand-accent: #2563eb;
+  --brand-glow: #1e40af;
+  --hero-accent: #0f2d6b;
 }
 
 /* =========================
@@ -26,7 +29,10 @@ html {
     Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.55;
   color: var(--text-primary);
-  background-color: var(--bg-white);
+  background:
+    radial-gradient(circle at 5% 12%, #eaf1ff 0%, transparent 38%),
+    radial-gradient(circle at 95% 0%, #edf3ff 0%, transparent 40%),
+    var(--bg-soft);
 }
 
 body {
@@ -159,6 +165,16 @@ a:hover {
 .landing {
   padding-top: 4rem;
   padding-bottom: 3rem;
+  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 60%);
+  border: 1px solid rgba(30, 58, 138, 0.14);
+  border-radius: 0.75rem;
+  padding: 3rem 1.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.landing p.hero-subheadline {
+  color: var(--hero-accent);
+  font-weight: 500;
 }
 
 /* Constrain hero width */
@@ -172,7 +188,10 @@ a:hover {
 .landing h1 {
   text-align: center;
   margin-bottom: 1.25rem;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Subtitle — CENTERED */
@@ -180,7 +199,7 @@ a:hover {
   text-align: center;
   margin-bottom: 1.5rem;
   font-weight: 500;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 /* Hero descriptor — CENTERED */
@@ -188,7 +207,7 @@ a:hover {
   
   margin-bottom: 1.25rem;
   color: var(--text-secondary);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 /* Long explanatory copy — LEFT ALIGNED, ONE LINE */
@@ -197,6 +216,10 @@ a:hover {
   margin-bottom: 0.75rem;
   color: var(--text-secondary);
   white-space: normal;
+}
+
+.landing .hero-eyebrow {
+  margin-left: 0.25rem;
 }
 
 /* =========================
@@ -292,6 +315,14 @@ figcaption {
   color: var(--text-primary);
 }
 
+.homepage-block {
+  border-left: 3px solid var(--brand-accent);
+  background: #ffffff;
+  border-radius: 0.7rem;
+  padding: 1.35rem 1.35rem 1rem;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+}
+
 .stack-section {
   padding-top: 0.25rem;
 }
@@ -350,7 +381,7 @@ figcaption {
   border: 1px solid var(--border-subtle);
   border-radius: 0.55rem;
   padding: 0.75rem 0.8rem;
-  background-color: #f8fbff;
+  background-color: #f5f9ff;
 }
 
 .flow-step-title {
@@ -500,17 +531,29 @@ li {
 /* Skip link */
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: -8rem;
   left: 0;
   background: #000;
   color: #fff;
   padding: 0.5rem 0.75rem;
   z-index: 1000;
   text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease, top 150ms ease;
+  transform: translateY(-4px);
 }
 
 .skip-link:focus {
   top: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.skip-link:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
 }
 
 /* Visible focus states */
