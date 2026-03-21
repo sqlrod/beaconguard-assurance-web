@@ -10,8 +10,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       BeaconGuard inserts a non-bypassable policy and evidence boundary between financial applications and AI/model endpoints, returning explicit allow/deny decisions with context and preserving reviewable evidence for risk, audit, and security review.
     </p>
     <div class="page-actions">
-      <a class="btn-primary" href="/platform">Review the architecture</a>
-      <a class="btn-secondary" href="/design-partner-program">Request a review walkthrough</a>
+      <a class="btn-primary" href="/platform">Access the architecture blueprint</a>
+      <a class="btn-secondary" href="/design-partner-program">Request the reviewer walkthrough</a>
     </div>
   </section>
 
@@ -39,6 +39,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       A request enters BeaconGuard before model execution and only proceeds when policy is satisfied.
     </p>
     <p>Authorization logic is applied at runtime by a deterministic policy runtime, then returned as allow/deny plus explanation metadata.</p>
+    <p class="homepage-risk-framing">
+      LLMs are probabilistic systems and should not be the authorization boundary for sensitive financial workflows. BeaconGuard inserts deterministic policy control in the request path before model execution.
+    </p>
   </section>
 
   <section class="stack-section homepage-block">
@@ -111,6 +114,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="stack-section homepage-block">
     <h2>Failure handling and operational control</h2>
+    <div class="homepage-failclosed-callout">
+      <h3>Fail-closed control gate</h3>
+      <p>
+        If trust assumptions, policy conditions, or request context are missing, malformed, or out of bounds, BeaconGuard fails closed before the request reaches the model path.
+      </p>
+    </div>
     <div class="section-grid section-grid--compact">
       <div class="content-card">
         <h3>Fail-closed behavior</h3>

@@ -415,6 +415,32 @@ figcaption {
   margin-left: 0.25rem;
 }
 
+.homepage-risk-framing {
+  margin: 0.85rem 0 0;
+  border-left: 2px solid var(--brand-secondary);
+  padding-left: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.homepage-failclosed-callout {
+  margin-bottom: 1rem;
+  border: 1px solid rgba(251, 146, 60, 0.28);
+  border-left: 3px solid var(--deny-accent);
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem 0.95rem;
+  background: linear-gradient(180deg, rgba(24, 36, 60, 0.7), rgba(12, 18, 32, 0.95));
+}
+
+.homepage-failclosed-callout h3 {
+  margin: 0 0 0.45rem;
+  color: #fed7aa;
+}
+
+.homepage-failclosed-callout p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
 .muted-copy {
   color: var(--text-muted);
   font-style: italic;
