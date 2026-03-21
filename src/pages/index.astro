@@ -27,9 +27,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       It preserves the exact boundary where policy is enforced: separate from model behavior, separate from prompt logic, and separate from downstream business data stores.
     </p>
     <div class="boundary-statement">
-      <p>BeaconGuard is not the system of record.</p>
-      <p>BeaconGuard is not the transaction processor.</p>
-      <p>BeaconGuard is the control and evidence layer between applications and AI use in sensitive financial workflows.</p>
+      <p><strong class="boundary-statement-key">BeaconGuard is not the system of record.</strong><span class="boundary-statement-detail"> Operational telemetry may stay in existing enterprise systems.</span></p>
+      <p><strong class="boundary-statement-key">BeaconGuard is not the transaction processor.</strong><span class="boundary-statement-detail"> It only gates and evaluates request intent.</span></p>
+      <p><strong class="boundary-statement-key">It is the control and evidence layer</strong><span class="boundary-statement-detail"> between applications and AI use in sensitive financial workflows.</span></p>
     </div>
   </section>
 
@@ -138,7 +138,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <li>Control behavior can be reviewed without exposing model internals.</li>
     </ul>
     <p class="muted-copy">
-      Security and audit teams consume the same decision context needed for review-ready governance.
+      Security and risk teams consume the same decision context needed for review-ready governance.
     </p>
   </section>
 
