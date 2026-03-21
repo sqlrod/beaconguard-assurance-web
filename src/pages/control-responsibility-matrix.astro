@@ -1,0 +1,102 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Control Responsibility Matrix | BeaconGuard Assurance">
+  <section class="stack-section">
+    <h1>Control Responsibility Matrix</h1>
+    <p class="lead">
+      This page helps reviewers understand which responsibilities BeaconGuard owns, which remain with the application and system of record, and which stay outside BeaconGuard’s control boundary. It is intended to reduce ambiguity during architecture, security, risk, and procurement review.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Responsibility model</h2>
+    <p>
+      BeaconGuard governs whether an AI interaction is allowed to proceed under policy.
+      BeaconGuard does not replace transaction systems, systems of record, model providers,
+      or downstream operational ownership.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Responsibility matrix</h2>
+    <div class="responsibility-matrix-wrap">
+      <table class="responsibility-matrix">
+        <thead>
+          <tr>
+            <th>Responsibility</th>
+            <th>BeaconGuard</th>
+            <th>Application</th>
+            <th>Model provider</th>
+            <th>System of record</th>
+            <th>Operations / reviewers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Authorization decision at the AI request boundary</td>
+            <td>Owns policy evaluation and explicit allow/deny decisioning</td>
+            <td>Submits normalized request context and enforces returned decision</td>
+            <td>Does not own authorization policy</td>
+            <td>Does not own AI request authorization</td>
+            <td>Review boundary correctness and policy fit</td>
+          </tr>
+          <tr>
+            <td>Business transaction execution</td>
+            <td>Does not execute business transactions</td>
+            <td>Orchestrates allowed workflow steps</td>
+            <td>Does not execute business transactions</td>
+            <td>Remains authoritative for transaction/state recording</td>
+            <td>Validate control separation and escalation paths</td>
+          </tr>
+          <tr>
+            <td>Model behavior and output quality</td>
+            <td>Does not guarantee model quality or business correctness</td>
+            <td>Determines how allowed outputs are used</td>
+            <td>Owns model behavior and model-serving characteristics</td>
+            <td>Does not determine model quality</td>
+            <td>Evaluate suitability and downstream control expectations</td>
+          </tr>
+          <tr>
+            <td>Decision evidence and review context</td>
+            <td>Emits structured decision evidence within its control boundary</td>
+            <td>Correlates BeaconGuard decisions with workflow context as needed</td>
+            <td>Does not provide BeaconGuard policy evidence</td>
+            <td>May hold downstream business records, not BeaconGuard decision evidence by default</td>
+            <td>Review evidence, trace decisions, and assess control operation</td>
+          </tr>
+          <tr>
+            <td>Fail-closed behavior when required conditions are not met</td>
+            <td>Denies requests when policy or trust conditions are missing, malformed, or out of bounds</td>
+            <td>Must respect and enforce deny outcomes</td>
+            <td>Does not control BeaconGuard fail-closed semantics</td>
+            <td>Not responsible for AI request gating</td>
+            <td>Validate that failure handling is explicit and reviewable</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack-section">
+    <h2>What reviewers should verify</h2>
+    <ul>
+      <li>The application submits the context BeaconGuard requires to evaluate policy</li>
+      <li>BeaconGuard’s allow/deny response is enforced by the application</li>
+      <li>Model execution does not become the authorization boundary</li>
+      <li>Systems of record remain authoritative for business state</li>
+      <li>Reviewers can distinguish BeaconGuard evidence from downstream business records</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Next step</h2>
+    <p>Reviewers can continue structured evaluation through the Reviewer Kit, Trust Center, and Contact path.</p>
+    <div class="page-actions">
+      <a class="btn-primary" href="/reviewer-kit">Open Reviewer Kit</a>
+      <a class="btn-secondary" href="/trust-assurance">Review Trust Center</a>
+      <a class="btn-secondary" href="/contact">Continue via contact</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -666,6 +666,35 @@ li {
   margin-bottom: 0.4rem;
 }
 
+.responsibility-matrix-wrap {
+  overflow-x: auto;
+}
+
+.responsibility-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 840px;
+}
+
+.responsibility-matrix th,
+.responsibility-matrix td {
+  border: 1px solid var(--border-subtle);
+  padding: 0.72rem 0.8rem;
+  vertical-align: top;
+  text-align: left;
+  color: var(--text-secondary);
+}
+
+.responsibility-matrix th {
+  background: rgba(15, 23, 40, 0.85);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.responsibility-matrix tr:nth-child(even) td {
+  background-color: rgba(11, 18, 32, 0.4);
+}
+
 @media (max-width: 900px) {
   .flow-diagram,
   .flow-diagram--stack,
