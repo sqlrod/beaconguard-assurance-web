@@ -1,80 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 620" role="img" aria-label="BeaconGuard fintech control boundary architecture">
-  <rect x="0" y="0" width="980" height="620" fill="#070b14"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 720" role="img" aria-label="BeaconGuard fintech control boundary architecture">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8" fill="none" stroke="#64748b" stroke-width="2" />
+    </marker>
+  </defs>
 
-  <text x="40" y="46" fill="#93c5fd" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="600">
-    BeaconGuard Architecture (Policy and Evidence Control)
+  <rect x="0" y="0" width="980" height="720" fill="#070b14" />
+
+  <text x="490" y="58" text-anchor="middle" fill="#93c5fd" font-size="21" font-family="Arial, Helvetica, sans-serif" font-weight="700">
+    BeaconGuard control-boundary architecture
   </text>
 
-  <rect x="270" y="20" width="440" height="56" rx="9" fill="#0f172a" stroke="#3b82f6" stroke-width="2"/>
-  <text x="490" y="44" text-anchor="middle" fill="#cbd5e1" font-size="13" font-family="Arial, Helvetica, sans-serif">
-    Financial application context
-  </text>
-  <text x="490" y="63" text-anchor="middle" fill="#93c5fd" font-size="16" font-family="Arial, Helvetica, sans-serif" font-weight="700">
+  <rect x="310" y="82" width="360" height="60" rx="10" fill="#0f172a" stroke="#1d4ed8" stroke-width="2" />
+  <text x="490" y="112" text-anchor="middle" fill="#93c5fd" font-size="16" font-family="Arial, Helvetica, sans-serif" font-weight="600">
     Financial application
   </text>
-
-  <text x="490" y="105" text-anchor="middle" fill="#93c5fd" font-size="12" font-family="Arial, Helvetica, sans-serif">
-    Request path (context + authorization intent)
+  <text x="490" y="130" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">
+    Request path
   </text>
-  <line x1="490" y1="76" x2="490" y2="130" stroke="#64748b" stroke-width="2"/>
-  <polygon points="490,132 484,124 496,124" fill="#64748b"/>
 
-  <g id="control-boundary">
-    <rect x="70" y="140" width="840" height="260" rx="14" fill="#0b1220" stroke="#334155" stroke-width="2"/>
-    <text x="490" y="168" text-anchor="middle" fill="#93c5fd" font-size="14" font-family="Arial, Helvetica, sans-serif">
-      BeaconGuard control boundary
-    </text>
+  <line x1="490" y1="142" x2="490" y2="165" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
 
-    <rect x="110" y="194" width="360" height="186" rx="10" fill="#0c1b33" stroke="#1d4ed8" stroke-width="2"/>
-    <text x="290" y="216" text-anchor="middle" fill="#93c5fd" font-size="15" font-family="Arial, Helvetica, sans-serif">
-      Policy control plane
-    </text>
-    <text x="140" y="244" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy definition</text>
-    <text x="140" y="262" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy packaging</text>
-    <text x="140" y="280" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy distribution</text>
+  <rect x="80" y="170" width="820" height="280" rx="14" fill="#0b1220" stroke="#334155" stroke-width="2" />
+  <text x="490" y="198" text-anchor="middle" fill="#93c5fd" font-size="15" font-family="Arial, Helvetica, sans-serif" font-weight="600">
+    BeaconGuard control boundary
+  </text>
 
-    <rect x="520" y="194" width="360" height="186" rx="10" fill="#071f2f" stroke="#0ea5e9" stroke-width="2"/>
-    <text x="700" y="216" text-anchor="middle" fill="#93c5fd" font-size="15" font-family="Arial, Helvetica, sans-serif">
-      Deterministic enforcement runtime
-    </text>
-    <text x="550" y="244" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Request-context normalization</text>
-    <text x="550" y="262" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy evaluation</text>
-    <text x="550" y="280" fill="#f59e0b" font-size="12" font-family="Arial, Helvetica, sans-serif">Decision gate: allow / deny</text>
+  <rect x="120" y="232" width="320" height="170" rx="10" fill="#0c1b33" stroke="#1d4ed8" stroke-width="2" />
+  <text x="280" y="254" text-anchor="middle" fill="#93c5fd" font-size="15" font-family="Arial, Helvetica, sans-serif" font-weight="600">
+    Policy control plane
+  </text>
+  <text x="143" y="282" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy definition</text>
+  <text x="143" y="300" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy packaging</text>
+  <text x="143" y="318" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy distribution</text>
 
-    <line x1="290" y1="230" x2="520" y2="230" stroke="#60a5fa" stroke-width="2"/>
-    <line x1="490" y1="275" x2="490" y2="310" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 3"/>
-    <text x="470" y="290" fill="#e2e8f0" font-size="11" font-family="Arial, Helvetica, sans-serif">control handoff</text>
-  </g>
+  <rect x="540" y="232" width="320" height="170" rx="10" fill="#071f2f" stroke="#0ea5e9" stroke-width="2" />
+  <text x="700" y="254" text-anchor="middle" fill="#93c5fd" font-size="15" font-family="Arial, Helvetica, sans-serif" font-weight="600">
+    Deterministic enforcement runtime
+  </text>
+  <text x="570" y="282" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Request-context normalization</text>
+  <text x="570" y="300" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy evaluation</text>
+  <text x="570" y="318" fill="#f59e0b" font-size="12" font-family="Arial, Helvetica, sans-serif">Decision gate: allow / deny</text>
 
-  <rect x="190" y="425" width="600" height="72" rx="10" fill="#0a1b2f" stroke="#0f766e" stroke-width="2"/>
-  <text x="490" y="451" text-anchor="middle" fill="#93c5fd" font-size="15" font-family="Arial, Helvetica, sans-serif">
+  <line x1="440" y1="317" x2="540" y2="317" stroke="#60a5fa" stroke-width="2" />
+  <text x="490" y="336" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="Arial, Helvetica, sans-serif">Control handoff</text>
+
+  <path d="M490 402 L490 405 C490 425 240 425 240 446" fill="none" stroke="#fb923c" stroke-width="2" />
+  <line x1="240" y1="446" x2="260" y2="446" stroke="#fb923c" stroke-width="2" />
+  <line x1="260" y1="446" x2="260" y2="492" stroke="#fb923c" stroke-width="2" />
+  <line x1="260" y1="492" x2="360" y2="492" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="236" y="442" text-anchor="start" fill="#fdba74" font-size="10" font-family="Arial, Helvetica, sans-serif">Fail-closed path</text>
+  <text x="236" y="456" text-anchor="start" fill="#fdba74" font-size="10" font-family="Arial, Helvetica, sans-serif">Malformed / missing / out-of-bounds</text>
+
+  <line x1="490" y1="450" x2="490" y2="495" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="500" y="473" fill="#94a3b8" font-size="10" font-family="Arial, Helvetica, sans-serif">Evidence path</text>
+
+  <rect x="250" y="495" width="480" height="92" rx="10" fill="#0a1b2f" stroke="#0f766e" stroke-width="2" />
+  <text x="490" y="520" text-anchor="middle" fill="#93c5fd" font-size="16" font-family="Arial, Helvetica, sans-serif" font-weight="600">
     Evidence and review output
   </text>
-  <text x="490" y="472" text-anchor="middle" fill="#a7f3d0" font-size="12" font-family="Arial, Helvetica, sans-serif">
-    Decision record, context, policy identity, and outcomes for review
+  <text x="490" y="542" text-anchor="middle" fill="#a7f3d0" font-size="12" font-family="Arial, Helvetica, sans-serif">
+    Evidence record for review
+  </text>
+  <text x="490" y="562" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">
+    Decision context, policy identity, outcomes
   </text>
 
-  <rect x="270" y="520" width="440" height="70" rx="9" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
-  <text x="490" y="550" text-anchor="middle" fill="#ddd6fe" font-size="16" font-family="Arial, Helvetica, sans-serif">
+  <line x1="490" y1="587" x2="490" y2="618" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+
+  <rect x="310" y="618" width="360" height="68" rx="10" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2" />
+  <text x="490" y="650" text-anchor="middle" fill="#ddd6fe" font-size="16" font-family="Arial, Helvetica, sans-serif" font-weight="600">
     AI / Model endpoint
   </text>
-  <text x="490" y="568" text-anchor="middle" fill="#93c5fd" font-size="12" font-family="Arial, Helvetica, sans-serif">
+  <text x="490" y="667" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, Helvetica, sans-serif">
     Executes only approved requests
   </text>
 
-  <line x1="490" y1="410" x2="490" y2="520" stroke="#64748b" stroke-width="2"/>
-  <polygon points="490,520 484,512 496,512" fill="#64748b"/>
-  <text x="530" y="468" text-anchor="start" fill="#94a3b8" font-size="11" font-family="Arial, Helvetica, sans-serif">Evidence stream</text>
-
-  <path d="M 320 320 C 230 330 230 390 320 390" fill="none" stroke="#fb923c" stroke-width="2"/>
-  <polygon points="320,392 312,386 318,378" fill="#fb923c"/>
-  <text x="190" y="364" fill="#fdba74" font-size="11" font-family="Arial, Helvetica, sans-serif">Fail-closed path</text>
-  <text x="190" y="378" fill="#fdba74" font-size="10" font-family="Arial, Helvetica, sans-serif">malformed / missing / out-of-bounds</text>
-
-  <text x="780" y="390" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="Arial, Helvetica, sans-serif" transform="rotate(90 780 390)">Trust domains</text>
-  <line x1="720" y1="140" x2="720" y2="400" stroke="#475569" stroke-width="1.5" stroke-dasharray="2 4"/>
-  <rect x="730" y="300" width="160" height="80" rx="8" fill="#111827" stroke="#475569"/>
-  <text x="810" y="322" text-anchor="middle" fill="#cbd5e1" font-size="10" font-family="Arial, Helvetica, sans-serif">Policy domain</text>
-  <text x="810" y="338" text-anchor="middle" fill="#cbd5e1" font-size="10" font-family="Arial, Helvetica, sans-serif">Execution domain</text>
-  <text x="810" y="354" text-anchor="middle" fill="#cbd5e1" font-size="10" font-family="Arial, Helvetica, sans-serif">Review domain</text>
 </svg>
