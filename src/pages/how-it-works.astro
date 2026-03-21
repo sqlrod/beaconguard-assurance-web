@@ -12,23 +12,53 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section>
-    <h2>Request Path</h2>
-    <div class="flow-diagram flow-diagram--stack">
-      <div class="flow-step">
-        <p class="flow-step-title">1. Normalize</p>
-        <p>Application submits identity, action, and context.</p>
+    <p class="section-label">Runtime sequence</p>
+    <h2>Runtime decision sequence</h2>
+    <div class="infra-diagram">
+      <div class="flow-diagram flow-diagram--tight">
+        <div class="flow-step flow-node-primary">
+          <p class="flow-step-title">1. Normalize</p>
+          <p>Request context, actor, action, and policy identity are normalized.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-node-boundary">
+          <p class="flow-step-title">2. Evaluate</p>
+          <p>Policy engine applies deterministic control and produces decision state.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-node-evidence">
+          <p class="flow-step-title">3. Emit evidence</p>
+          <p>Decision, policy version, and request context are recorded.</p>
+        </div>
       </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">2. Decide</p>
-        <p>BeaconGuard evaluates active policy against the request.</p>
+
+      <div class="flow-diagram flow-diagram--stack">
+        <div class="flow-step flow-node-primary flow-pulse">
+          <p class="flow-step-title">4. Gate execution</p>
+          <p>Allowed requests proceed to the model path.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-node-evidence">
+          <p class="flow-step-title">5. Review record</p>
+          <p>Outcome is retained for replay and security review.</p>
+        </div>
       </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">3. Emit</p>
-        <p>Decision, reason, and evidence are emitted to a durable record.</p>
+
+      <div class="flow-diagram flow-diagram--stack">
+        <div class="flow-step flow-node-deny">
+          <p class="flow-step-title">Fail-closed branch</p>
+          <p>Malformed or untrusted input never reaches execution.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-node-evidence">
+          <p class="flow-step-title">4. Fail action</p>
+          <p>Denied requests are returned with context and kept reviewable.</p>
+        </div>
       </div>
     </div>
+    <p class="flow-path-note">
+      Fail-closed is explicit: no trusted decision, no execution.
+    </p>
   </section>
 
   <section>
