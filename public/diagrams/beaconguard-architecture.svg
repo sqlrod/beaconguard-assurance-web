@@ -30,17 +30,17 @@
   <text x="280" y="254" text-anchor="middle" fill="#93c5fd" font-size="15" font-family="Arial, Helvetica, sans-serif" font-weight="600">
     Policy control plane
   </text>
-  <text x="143" y="282" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy definition</text>
-  <text x="143" y="300" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy packaging</text>
-  <text x="143" y="318" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy distribution</text>
+  <text x="280" y="282" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy definition</text>
+  <text x="280" y="300" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy packaging</text>
+  <text x="280" y="318" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy distribution</text>
 
   <rect x="540" y="232" width="320" height="170" rx="10" fill="#071f2f" stroke="#0ea5e9" stroke-width="2" />
   <text x="700" y="254" text-anchor="middle" fill="#93c5fd" font-size="15" font-family="Arial, Helvetica, sans-serif" font-weight="600">
     Deterministic enforcement runtime
   </text>
-  <text x="570" y="282" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Request-context normalization</text>
-  <text x="570" y="300" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy evaluation</text>
-  <text x="570" y="318" fill="#f59e0b" font-size="12" font-family="Arial, Helvetica, sans-serif">Decision gate: allow / deny</text>
+  <text x="700" y="282" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Request-context normalization</text>
+  <text x="700" y="300" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Arial, Helvetica, sans-serif">Policy evaluation</text>
+  <text x="700" y="318" text-anchor="middle" fill="#f59e0b" font-size="12" font-family="Arial, Helvetica, sans-serif">Decision gate: allow / deny</text>
 
   <line x1="440" y1="317" x2="540" y2="317" stroke="#60a5fa" stroke-width="2" />
   <text x="490" y="336" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="Arial, Helvetica, sans-serif">Control handoff</text>
@@ -48,13 +48,13 @@
   <path d="M490 405 C490 430 390 430 390 455" fill="none" stroke="#fb923c" stroke-width="2" />
   <line x1="390" y1="455" x2="320" y2="455" stroke="#fb923c" stroke-width="2" />
   <line x1="320" y1="455" x2="320" y2="492" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow)" />
-  <text x="268" y="438" text-anchor="start" fill="#fdba74" font-size="10" font-family="Arial, Helvetica, sans-serif">Fail-closed path</text>
-  <text x="268" y="452" text-anchor="start" fill="#fdba74" font-size="10" font-family="Arial, Helvetica, sans-serif">Malformed / missing / out-of-bounds</text>
+  <text x="250" y="445" text-anchor="start" fill="#fdba74" font-size="10" font-family="Arial, Helvetica, sans-serif">Fail-closed path</text>
+  <text x="250" y="459" text-anchor="start" fill="#fdba74" font-size="10" font-family="Arial, Helvetica, sans-serif">Malformed / missing / out-of-bounds</text>
 
-  <line x1="490" y1="450" x2="490" y2="495" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)" />
-  <text x="500" y="473" fill="#94a3b8" font-size="10" font-family="Arial, Helvetica, sans-serif">Evidence path</text>
+  <line x1="490" y1="450" x2="490" y2="540" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="500" y="498" fill="#94a3b8" font-size="10" font-family="Arial, Helvetica, sans-serif">Evidence path</text>
 
-  <rect x="250" y="495" width="480" height="92" rx="10" fill="#0a1b2f" stroke="#0f766e" stroke-width="2" />
+  <rect x="250" y="540" width="480" height="92" rx="10" fill="#0a1b2f" stroke="#0f766e" stroke-width="2" />
   <text x="490" y="520" text-anchor="middle" fill="#93c5fd" font-size="16" font-family="Arial, Helvetica, sans-serif" font-weight="600">
     Evidence and review output
   </text>
@@ -65,9 +65,9 @@
     Decision context, policy identity, outcomes
   </text>
 
-  <line x1="490" y1="587" x2="490" y2="618" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="490" y1="632" x2="490" y2="645" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
 
-  <rect x="310" y="618" width="360" height="68" rx="10" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2" />
+  <rect x="310" y="645" width="360" height="68" rx="10" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2" />
   <text x="490" y="650" text-anchor="middle" fill="#ddd6fe" font-size="16" font-family="Arial, Helvetica, sans-serif" font-weight="600">
     AI / Model endpoint
   </text>
