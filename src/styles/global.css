@@ -71,7 +71,7 @@ body {
 .footer-inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 1.25rem 1.5rem;
+  padding: 1.25rem 1.5rem 1.25rem 1rem;
 
   display: flex;
   align-items: center;
@@ -88,6 +88,7 @@ body {
   align-items: center;
   gap: 0.45rem;
   line-height: 1.15;
+  margin-right: 1.15rem;
 }
 
 .brand-wordmark {
@@ -126,7 +127,9 @@ body {
 
 .header-nav {
   display: flex;
-  gap: 2rem;
+  gap: 1.6rem;
+  margin-left: auto;
+  justify-content: flex-end;
 }
 
 .header-nav a {
@@ -297,6 +300,15 @@ a:hover {
 
   .brand {
     gap: 0.45rem;
+  }
+
+  .header-inner {
+    padding-left: 0.8rem;
+    padding-right: 1rem;
+  }
+
+  .header-nav {
+    gap: 1rem;
   }
 }
 
