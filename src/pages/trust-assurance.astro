@@ -58,10 +58,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h2>Reviewer evidence focus</h2>
     <ul>
-      <li>Evidence includes decision outcome, policy identity, and normalized request context.</li>
-      <li>Evidence is intended for control review, incident reconstruction, and policy testing confidence.</li>
-      <li>BeaconGuard does not claim evidence of model quality or business correctness, only the enforcement decision boundary behavior.</li>
-      <li>Evidence should be cross-checked against external systems that establish identity, entitlement, and transaction impact.</li>
+      <li>BeaconGuard emits structured evidence for each request decision, including allow/deny outcome, policy identity, and normalized context.</li>
+      <li>The evidence supports review of policy governance and decision context, including replay and audit preparation.</li>
+      <li>BeaconGuard claims deterministic boundary governance behavior, explicit outcomes, and decision traceability within its control surface.</li>
+      <li>BeaconGuard does not claim model-quality certainty or business-logic correctness, and does not replace broader transactional outcomes.</li>
+      <li>External systems and downstream results still require cross-checking outside BeaconGuard, including identity, entitlement, and settlement controls.</li>
     </ul>
   </section>
 
