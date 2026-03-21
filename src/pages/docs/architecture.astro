@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="BeaconGuard Architecture">
-  <section>
+  <section class="doc-architecture">
     <h1>System Architecture</h1>
 
     <p>
@@ -11,24 +11,24 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       The architecture separates policy definition, runtime enforcement, and reviewable evidence output so control decisions stay explicit and bounded.
     </p>
 
-    <figure>
+    <figure class="doc-diagram-frame">
       <img
         src="/diagrams/beaconguard-architecture.svg"
-        alt="BeaconGuard Assurance architecture diagram"
-        style="max-width: 100%; height: auto;"
+        alt="BeaconGuard control boundary architecture"
+        class="doc-diagram"
       />
       <figcaption>
         High-level component boundaries and trust domains in the control architecture.
       </figcaption>
     </figure>
 
-    <section>
+    <section class="doc-architecture-section">
       <h2>What this diagram shows</h2>
       <p>
         The diagram shows the control boundary between your application and AI/model endpoint, the major components that shape runtime policy control, and the enterprise trust domains across those components.
       </p>
       <p>
-        It also separates what is static structure from runtime sequence:
+        It clearly separates static structure from runtime sequence:
         components and trust zones are fixed by design, while allow/deny outcomes are determined at execution time.
       </p>
       <p>
@@ -36,26 +36,30 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </p>
     </section>
 
-    <section>
-      <h2>Component breakdown</h2>
-      <h3>Policy control plane</h3>
+    <section class="doc-architecture-section">
+      <h2>Policy control plane</h2>
       <p>
         Defines and distributes policy inputs for BeaconGuard enforcement.
         It is where enterprises manage control intent, not model behavior.
       </p>
+    </section>
 
-      <h3>Deterministic enforcement runtime</h3>
+    <section class="doc-architecture-section">
+      <h2>Deterministic enforcement runtime</h2>
       <p>
         Applies policy in the request path and returns explicit allow/deny outcomes with context for every authorization decision.
+        If request context is malformed, missing, or out of bounds, BeaconGuard fails closed.
       </p>
+    </section>
 
-      <h3>Evidence and review layer</h3>
+    <section class="doc-architecture-section">
+      <h2>Evidence and review layer</h2>
       <p>
         Captures structured decision evidence so review teams can reconstruct control outcomes during review and incident analysis.
       </p>
     </section>
 
-    <section>
+    <section class="doc-architecture-section">
       <h2>Trust boundaries</h2>
       <ul>
         <li><strong>What enters BeaconGuard:</strong> request context, policy intent, and required authorization signals.</li>
@@ -65,7 +69,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </ul>
     </section>
 
-    <section>
+    <section class="doc-architecture-section">
       <h2>What BeaconGuard is not</h2>
       <ul>
         <li>BeaconGuard is not the system of record.</li>
@@ -75,8 +79,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </ul>
     </section>
 
-    <section>
-      <h2>Next for review</h2>
+    <section class="doc-architecture-section">
+      <h2>Relationship to runtime flow</h2>
       <ul>
         <li><a href="/how-it-works">How It Works</a></li>
         <li><a href="/trust-assurance">Trust Center</a></li>
