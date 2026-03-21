@@ -6,7 +6,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h1>Deployment</h1>
     <p class="lead">
-      BeaconGuard is intended for controlled enterprise environments where governance
+      BeaconGuard is intended for controlled enterprise and financial workflow environments where governance
       is part of production operations, not a later add-on.
     </p>
   </section>
@@ -15,11 +15,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>Placement and Intent</h2>
     <p>
       The platform belongs in the runtime path between application services and AI/model
-      endpoints. This ensures every authorization-sensitive interaction is governed before
+      endpoints. This ensures every authorization-sensitive interaction is governed in a bounded control boundary before
       the request reaches or consumes model outputs.
     </p>
     <p>
-      BeaconGuard is designed to support environments with strict audit posture and
+      BeaconGuard is designed to support environments with deterministic policy control, strict audit posture, and
       operational controls.
     </p>
   </section>
@@ -28,15 +28,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>Deployment Model</h2>
     <ul>
       <li>Independent service execution with explicit trust boundaries.</li>
-      <li>Signed policy artifacts with controlled promotion flows.</li>
-      <li>Clear environment separation for policy, keys, and execution tiers.</li>
+      <li>Signed policy artifacts with deterministic policy promotion flows.</li>
+      <li>Clear policy and execution separation for keys, environments, and control tiers.</li>
     </ul>
   </section>
 
   <section>
     <h2>Trust Boundaries and Operational Posture</h2>
     <p>
-      Policy is authoritative at enforcement time.
+      Policy is authoritative at enforcement time within the control boundary.
       Applications and downstream systems should not silently bypass governance outcomes.
       When policy material is missing or unverifiable, decisions must fail closed.
     </p>
@@ -47,17 +47,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="flow-diagram">
       <div class="flow-step">
         <p class="flow-step-title">Policy boundary</p>
-        <p>Control points prevent unauthorised model execution.</p>
+        <p>Control points enforce deterministic allow/deny before execution.</p>
       </div>
       <div class="flow-arrow" aria-hidden="true">→</div>
       <div class="flow-step">
         <p class="flow-step-title">Fail-closed behavior</p>
-        <p>Unverifiable states block unsafe execution.</p>
+        <p>Malformed, missing, or out-of-bounds states block unsafe execution.</p>
       </div>
       <div class="flow-arrow" aria-hidden="true">→</div>
       <div class="flow-step">
         <p class="flow-step-title">Deployment evidence</p>
-        <p>Operational evidence supports assurance reviews.</p>
+        <p>Operational evidence supports deterministic governance reviews.</p>
       </div>
     </div>
   </section>
@@ -79,7 +79,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <li><a href="/how-it-works">How BeaconGuard enforces decisions</a></li>
     </ul>
     <div class="page-actions">
-      <a class="btn-primary" href="/trust-assurance">Understand trust boundaries</a>
+      <a class="btn-primary" href="/trust-assurance">Understand Trust Center boundaries</a>
       <a class="btn-secondary" href="/contact">Discuss deployment needs</a>
     </div>
   </section>

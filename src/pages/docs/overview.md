@@ -6,7 +6,7 @@ layout: /src/layouts/BaseLayout.astro
 # BeaconGuard Overview
 
 BeaconGuard Assurance is a deterministic authorization and audit control plane
-designed for regulated AI systems.
+for bounded financial-control execution in enterprise AI runtimes.
 
 It separates **authorization intent**, **decision logic**, and **audit evidence**
 from application code and AI model behavior.
@@ -15,8 +15,7 @@ from application code and AI model behavior.
 
 ## Core Objectives
 
-BeaconGuard is built to satisfy requirements that traditional AI systems fail
-to meet:
+BeaconGuard is built for a deterministic control-boundary posture with requirements that traditional AI systems fail to meet:
 
 - Deterministic authorization outcomes
 - Replayable decisions with identical results

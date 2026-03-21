@@ -6,8 +6,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h1>How It Works</h1>
     <p class="lead">
-      BeaconGuard evaluates each outgoing AI request through a governed path
-      before the request proceeds.
+      BeaconGuard evaluates each outgoing AI request through a deterministic control boundary
+      before the request proceeds to model execution.
     </p>
   </section>
 
@@ -65,7 +65,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>Enforcement Boundary</h2>
     <p>
       Applications do not need to embed AI governance rules in business logic.
-      BeaconGuard places governance in a dedicated boundary where policy decisions
+      BeaconGuard places governance in a dedicated boundary where deterministic policy decisions
       remain consistent regardless of model behavior or prompt drift.
     </p>
   </section>
@@ -75,7 +75,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <p>
       For equivalent request state and policy snapshot, BeaconGuard returns equivalent
       decisions. This is the foundation for operational confidence, incident response,
-      and reproducible reviews.
+      and reproducible reviews in financial workflows.
     </p>
   </section>
 
@@ -120,13 +120,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h2>Technical Deepening</h2>
     <ul>
-      <li><a href="/docs/architecture">Boundary and components</a></li>
+      <li><a href="/docs/architecture">Boundary and deterministic control components</a></li>
       <li><a href="/docs/enforcement-runtime">Enforcement runtime</a></li>
       <li><a href="/docs/threat-model">Threat model</a></li>
     </ul>
     <div class="page-actions">
       <a class="btn-primary" href="/deployment">Review deployment expectations</a>
-      <a class="btn-secondary" href="/trust-assurance">Review trust and review surfaces</a>
+      <a class="btn-secondary" href="/trust-assurance">Review Trust Center evidence surfaces</a>
     </div>
   </section>
 </BaseLayout>
