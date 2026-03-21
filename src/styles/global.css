@@ -74,9 +74,10 @@ body {
   margin: 0 auto;
   padding: 1.25rem 1.5rem 1.25rem 0.75rem;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
+  column-gap: 1rem;
 }
 
 .brand {
@@ -89,7 +90,7 @@ body {
   align-items: center;
   gap: 0.45rem;
   line-height: 1.15;
-  margin-right: 2rem;
+  margin-right: 0;
 }
 
 .brand-wordmark {
@@ -128,10 +129,11 @@ body {
 
 .header-nav {
   display: flex;
-  gap: 1.6rem;
-  margin-left: auto;
-  justify-content: flex-end;
+  justify-content: center;
+  gap: 1.35rem;
+  flex: 1 1 auto;
   flex-shrink: 0;
+  min-width: 0;
 }
 
 .header-nav a {
@@ -311,6 +313,9 @@ a:hover {
 
   .header-nav {
     gap: 1rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    row-gap: 0.6rem;
   }
 }
 
