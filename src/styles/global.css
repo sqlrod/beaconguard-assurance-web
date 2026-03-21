@@ -69,36 +69,33 @@ body {
 }
 
 .brand {
-  font-weight: 600;
-  font-size: 1.05rem;
-  color: var(--brand-primary);
+  font-weight: 650;
+  font-size: 1.03rem;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.62rem;
+  gap: 0.45rem;
+  line-height: 1.15;
+}
+
+.brand-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.28rem;
 }
 
 .brand:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
-.brand-logo {
-  width: 126px;
-  height: auto;
-  max-height: 34px;
-  display: block;
-}
-
-.brand-text {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.brand-wordmark span {
+  color: var(--brand-primary);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.65em;
 }
 
 .visually-hidden {
@@ -211,19 +208,6 @@ a:hover {
   font-weight: 500;
 }
 
-.hero-logo-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-
-.hero-logo {
-  width: clamp(170px, 20vw, 230px);
-  height: auto;
-  display: block;
-  max-height: 86px;
-}
-
 /* Constrain hero width */
 .landing > * {
   max-width: 900px;
@@ -266,7 +250,12 @@ a:hover {
 }
 
 .landing .hero-eyebrow {
-  margin-left: 0.25rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
 }
 
 /* =========================
@@ -289,16 +278,6 @@ a:hover {
 
   .brand {
     gap: 0.45rem;
-  }
-
-  .brand-logo {
-    width: 112px;
-    max-height: 30px;
-  }
-
-  .hero-logo {
-    width: clamp(150px, 52vw, 220px);
-    max-height: 74px;
   }
 }
 
