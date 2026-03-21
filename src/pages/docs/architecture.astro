@@ -34,6 +34,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <p>
         The evidence path is shown as a review stream that follows policy decisions for security, risk, and audit visibility.
       </p>
+      <p>
+        Reviewers should verify where BeaconGuard is invoked: request context enters the control boundary after application shaping, policy decisions are made inside the boundary, and only approved traffic exits toward the model path.
+      </p>
     </section>
 
     <section class="doc-architecture-section">
@@ -66,6 +69,15 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <li><strong>What BeaconGuard decides:</strong> deterministic allow/deny with explicit decision context.</li>
         <li><strong>What proceeds to the model endpoint:</strong> only requests that pass policy and context checks.</li>
         <li><strong>What is emitted for review:</strong> structured evidence of decisions, policy references, and rationale for governance visibility.</li>
+      </ul>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>Reviewer checkpoints</h2>
+      <ul>
+        <li>Confirm the placement of the boundary relative to transaction, analyst, and service logic.</li>
+        <li>Confirm policy inputs are versioned and auditable at enforcement time.</li>
+        <li>Confirm fail-closed behavior is explicit for malformed, missing, or out-of-bounds request context.</li>
       </ul>
     </section>
 
