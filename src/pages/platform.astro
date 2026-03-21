@@ -74,6 +74,33 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section>
+    <h2>Example workflow: AI-assisted financial dispute resolution</h2>
+
+    <h3>The enterprise risk</h3>
+    <p>
+      A financial operations team uses AI to summarize case history, draft analyst support text, or recommend next-step actions during payment disputes or account-action exceptions.
+      LLMs are probabilistic systems and should not be relied on as the authorization boundary for sensitive financial workflows.
+      If the model receives unauthorized context or outputs action guidance outside policy, the institution assumes unnecessary operational, financial, and control risk.
+    </p>
+
+    <h3>Where BeaconGuard fits</h3>
+    <p>
+      BeaconGuard sits between the financial application and the AI/model endpoint as the control and evidence layer.
+      It evaluates request context against centralized policy, returns explicit allow/deny decisions with context, and preserves structured evidence for later security, risk, and audit review.
+    </p>
+
+    <h3>Failure handling</h3>
+    <p>
+      If trust assumptions, policy conditions, or request context are missing, malformed, or out of bounds, BeaconGuard fails closed before the request proceeds into the model path.
+    </p>
+
+    <h3>Why it matters</h3>
+    <p>
+      This converts AI usage in sensitive financial workflows from an unbounded probabilistic risk into a governed runtime path with deterministic control decisions and reviewable evidence.
+    </p>
+  </section>
+
+  <section>
     <h2>Deep Technical Paths</h2>
     <ul>
       <li><a href="/docs/overview">Platform overview</a></li>

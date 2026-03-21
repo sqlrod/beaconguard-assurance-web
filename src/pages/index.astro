@@ -96,6 +96,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section homepage-block">
+    <h2>Example workflow: AI-assisted financial dispute resolution</h2>
+    <p>
+      A financial operations team uses AI to summarize dispute history, draft analyst support text, or recommend next actions during payment-dispute and account-exception handling.
+      Because LLMs are probabilistic systems, they are not the authorization boundary for sensitive financial decisions.
+      BeaconGuard sits between the financial application and the AI/model endpoint as the control and evidence layer.
+    </p>
+    <p>
+      It evaluates request context against centralized policy and returns explicit allow/deny decisions with context.
+      It preserves structured evidence for security, risk, and audit review.
+      If trust assumptions, policy conditions, or context are missing or out of bounds, BeaconGuard fails closed before the request reaches model execution.
+    </p>
+  </section>
+
+  <section class="stack-section homepage-block">
     <h2>Failure handling and operational control</h2>
     <div class="section-grid section-grid--compact">
       <div class="content-card">
