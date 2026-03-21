@@ -5,6 +5,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout title="Reviewer Kit | BeaconGuard Assurance">
   <section class="stack-section">
     <h1>Reviewer Kit</h1>
+    <p class="lead">
+      This page is intended to let architecture, security, risk, and design-partner reviewers begin a self-serve evaluation of BeaconGuard before deeper engagement.
+    </p>
     <p>
       BeaconGuard’s reviewer kit is the starting point for architecture, security, risk, and design-partner evaluation.
       It is designed to help reviewers understand the control boundary, deployment model, evidence expectations, and scope boundaries before deeper engagement.
@@ -36,11 +39,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>Included review materials</h2>
     <p>The following review materials are prepared for the evaluation process:</p>
     <ul>
-      <li>Architecture blueprint</li>
-      <li>Reviewer walkthrough</li>
-      <li>Deployment boundary review</li>
-      <li>Sample evidence and replay expectations</li>
-      <li>Design partner briefing</li>
+      <li>
+        <a href="/docs/architecture">Architecture blueprint</a>
+        <p>Shows where BeaconGuard sits and how request authorization is separated from model execution.</p>
+      </li>
+      <li>
+        <a href="/how-it-works">Reviewer walkthrough</a>
+        <p>Maps the runtime decision flow and outcomes for each request.</p>
+      </li>
+      <li>
+        <a href="/deployment">Deployment boundary review</a>
+        <p>Outlines deployment posture, trust boundaries, and operating assumptions.</p>
+      </li>
+      <li>
+        <a href="/trust-assurance">Sample evidence and replay expectations</a>
+        <p>Describes what decision context and review artifacts should be expected.</p>
+      </li>
+      <li>
+        <a href="/design-partner-program">Design partner briefing</a>
+        <p>Defines the joint evaluation topics used in design-partner engagements.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Reviewer checklist</h2>
+    <ul>
+      <li>Confirm where BeaconGuard sits in the request path</li>
+      <li>Review how policy decisions are evaluated and returned</li>
+      <li>Verify fail-closed behavior when required conditions are not met</li>
+      <li>Review what evidence is emitted for later review</li>
+      <li>Confirm what BeaconGuard does not own or replace</li>
+      <li>Identify what your team would need to validate during a pilot</li>
     </ul>
   </section>
 
@@ -67,7 +97,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="stack-section">
     <h2>Next step</h2>
-    <p>Teams that want to evaluate BeaconGuard in more detail can use the contact path to begin a reviewer walkthrough or design-partner briefing.</p>
+    <p>After reviewing the materials above, teams can use the contact path to request a reviewer walkthrough or design-partner briefing.</p>
     <div class="page-actions">
       <a class="btn-primary" href="/contact">Open contact path</a>
       <a class="btn-secondary" href="/design-partner-program">Request design-partner review</a>
