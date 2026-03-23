@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Sample Decision Record | BeaconGuard Assurance">
+  <section class="stack-section">
+    <h1>Sample Decision Record</h1>
+    <p class="lead">
+      This sample illustrates the kinds of decision context BeaconGuard emits for reviewer analysis.
+      It is an example review artifact, not a real customer record and not a claim that every deployment will expose fields in identical presentation form.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>What this sample is for</h2>
+    <ul>
+      <li>Help reviewers understand what a governed decision record contains</li>
+      <li>Show how policy identity, decision outcome, and request context are separated from downstream business records</li>
+      <li>Support architecture, security, risk, and audit review</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Sample fields</h2>
+    <div class="sample-record sample-record--compact">
+      <div class="sample-record-row">
+        <span class="sample-record-label">Decision outcome</span>
+        <span class="sample-record-value">DENY</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">Policy identity</span>
+        <span class="sample-record-value">policy.financial.dispute.v1</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">Decision reason</span>
+        <span class="sample-record-value">Missing required authorization context</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">Request action</span>
+        <span class="sample-record-value">Dispute case recommendation</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">Actor type</span>
+        <span class="sample-record-value">Operations analyst</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">Context status</span>
+        <span class="sample-record-value">Incomplete</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">Fail-closed result</span>
+        <span class="sample-record-value">Request blocked before model execution</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">Review note</span>
+        <span class="sample-record-value">Application must collect required context before retry</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack-section">
+    <h2>What reviewers should notice</h2>
+    <ul>
+      <li>BeaconGuard records the policy-governed decision, not the business transaction itself</li>
+      <li>The record explains why the request was allowed or denied at the control boundary</li>
+      <li>The sample is for evidence expectation review, not model-quality evaluation</li>
+      <li>Downstream systems remain responsible for business-state and transaction authority</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Next step</h2>
+    <div class="page-actions">
+      <a class="btn-primary" href="/reviewer-kit">Return to Reviewer Kit</a>
+      <a class="btn-secondary" href="/trust-assurance">Review Trust Center</a>
+      <a class="btn-secondary" href="/contact">Request review support</a>
+    </div>
+  </section>
+</BaseLayout>

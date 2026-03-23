@@ -695,6 +695,44 @@ li {
   background-color: rgba(11, 18, 32, 0.4);
 }
 
+.sample-record {
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.55rem;
+  background: linear-gradient(180deg, rgba(15, 23, 40, 0.9), rgba(11, 18, 32, 0.95));
+  padding: 0.95rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.sample-record-row {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1fr) minmax(0, 2fr);
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(38, 49, 75, 0.55);
+  padding-bottom: 0.55rem;
+}
+
+.sample-record-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.sample-record-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.sample-record-value {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 780px) {
+  .sample-record-row {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}
+
 @media (max-width: 900px) {
   .flow-diagram,
   .flow-diagram--stack,
