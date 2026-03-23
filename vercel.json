@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "beaconguard-assurance-web.vercel.app"
+        }
+      ],
+      "destination": "https://www.beaconguardassurance.com/$1",
+      "permanent": true
+    }
+  ]
+}
