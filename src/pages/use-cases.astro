@@ -6,41 +6,44 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h1>Use Cases</h1>
     <p>
-      BeaconGuard is positioned first for regulated financial workflows where probabilistic model behavior cannot act as the authorization boundary.
+      BeaconGuard is designed first for regulated financial workflows where probabilistic model behavior cannot serve as the authorization
+      boundary. It helps teams govern whether AI-assisted actions are allowed to proceed under policy.
     </p>
   </section>
 
   <section>
-    <h2>High-trust Use Cases</h2>
+    <h2>Priority financial workflows</h2>
     <div class="section-grid">
       <div class="content-card">
-        <h3>AI-assisted payment disputes</h3>
-        <p>Request scope, case context, and action eligibility are policy-gated before any payout, reversal, or account action can proceed.</p>
+        <h3>AI-assisted payment dispute handling</h3>
+        <p>Request scope, case context, and action eligibility must be policy-gated before AI-assisted work is allowed to proceed.</p>
       </div>
       <div class="content-card">
         <h3>Exception operations</h3>
-        <p>AI can summarize or recommend outcomes, but execution rights remain deterministic and are controlled by policy before completion.</p>
+        <p>AI may summarize or recommend, but deterministic policy control must govern whether execution-related steps are allowed.</p>
       </div>
       <div class="content-card">
-        <h3>Internal servicing workflows</h3>
-        <p>Analyst and servicing flows with regulated data access and action paths are bound by explicit, reviewable controls and policy checks.</p>
+        <h3>Analyst and servicing workflows</h3>
+        <p>Regulated data access and action paths require explicit, reviewable controls before AI interaction is allowed.</p>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Operational Patterns</h2>
+    <h2>Operational patterns</h2>
     <ul>
-      <li>AI-assisted payment handling where request context and requested action must pass explicit policy checks.</li>
-      <li>Exception routing where AI suggests next steps but deterministic policy controls authorize execution.</li>
-      <li>Internal analyst workflows where regulated data movement and privileged actions remain policy governed and auditable.</li>
+      <li>Policy-gated requests before model execution</li>
+      <li>Deterministic allow/deny at the request boundary</li>
+      <li>Explicit reviewable evidence for governed workflows</li>
+      <li>Fail-closed handling when required policy or trust conditions are not met</li>
     </ul>
   </section>
 
   <section>
     <h2>Financial workflow focus</h2>
     <p>
-      BeaconGuard is built around financial workflow governance first, where model outputs are helpful, but deterministic control is required for authorization decisions and downstream enforcement.
+      BeaconGuard is focused first on financial-services workflows where authorization, evidence, and control ownership remain explicit. It is
+      not being presented here as a broad multi-industry platform page.
     </p>
   </section>
 
