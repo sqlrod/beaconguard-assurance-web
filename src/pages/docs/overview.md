@@ -19,7 +19,7 @@ BeaconGuard is built for a deterministic control-boundary posture with requireme
 
 - Deterministic authorization outcomes
 - Replayable decisions with identical results
-- Immutable, evidence-grade audit records
+- Append-only, tamper-evident decision records designed to preserve evidentiary value in regulated environments
 - Externalized enforcement independent of model internals
 
 ---

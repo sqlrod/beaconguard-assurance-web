@@ -9,8 +9,8 @@ This section describes how BeaconGuard Assurance is deployed and integrated into
 existing systems. The guidance is intentionally conservative and environment-
 agnostic to support regulated environments.
 
-BeaconGuard is designed to integrate **without modifying AI models or
-application business logic**.
+BeaconGuard is designed to integrate without changes to model internals and without distributing governance rules throughout application business logic.
+Applications submit normalized authorization context and enforce BeaconGuard's explicit decision response.
 
 ---
 
