@@ -73,6 +73,20 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </section>
 
     <section class="doc-architecture-section">
+      <h2>Compatibility layer for non-native clients</h2>
+      <p>
+        Some applications and clients do not natively produce the request structure BeaconGuard evaluates.
+        In those cases, a governed compatibility layer may sit before the BeaconGuard control boundary.
+      </p>
+      <p>
+        Its job is to normalize requests into the BeaconGuard path.
+        It is not a policy engine.
+        It is not a bypass around fail-closed behavior.
+        Evidence and review output still belong to BeaconGuard’s control boundary, not to the compatibility layer.
+      </p>
+    </section>
+
+    <section class="doc-architecture-section">
       <h2>Reviewer checkpoints</h2>
       <ul>
         <li>Confirm the placement of the boundary relative to transaction, analyst, and service logic.</li>

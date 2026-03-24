@@ -17,29 +17,34 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="infra-diagram">
       <div class="flow-diagram flow-diagram--tight">
         <div class="flow-step flow-node-primary">
-          <p class="flow-step-title">1. Normalize</p>
+          <p class="flow-step-title">1. Compatibility normalization</p>
+          <p>For non-native clients, request shape and context are adapted before BeaconGuard control evaluation.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-node-primary">
+          <p class="flow-step-title">2. Normalize</p>
           <p>Request context, actor, action, and policy identity are normalized.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-node-boundary">
-          <p class="flow-step-title">2. Evaluate</p>
+          <p class="flow-step-title">3. Evaluate</p>
           <p>Policy engine applies deterministic control and produces decision state.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-node-evidence">
-          <p class="flow-step-title">3. Emit evidence</p>
+          <p class="flow-step-title">4. Emit evidence</p>
           <p>Decision, policy version, and request context are recorded.</p>
         </div>
       </div>
 
       <div class="flow-diagram flow-diagram--stack">
         <div class="flow-step flow-node-primary flow-pulse">
-          <p class="flow-step-title">4. Gate execution</p>
+          <p class="flow-step-title">5. Gate execution</p>
           <p>Allowed requests proceed to the model path.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-node-evidence">
-          <p class="flow-step-title">5. Review record</p>
+          <p class="flow-step-title">6. Review record</p>
           <p>Outcome is retained for replay and security review.</p>
         </div>
       </div>
@@ -51,13 +56,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-node-evidence">
-          <p class="flow-step-title">4. Fail action</p>
+          <p class="flow-step-title">7. Fail action</p>
           <p>Denied requests are returned with context and kept reviewable.</p>
         </div>
       </div>
     </div>
     <p class="flow-path-note">
       Fail-closed is explicit: no trusted decision, no execution.
+    </p>
+  </section>
+
+  <section>
+    <h2>Compatibility-layer path</h2>
+    <p>
+      Some non-native clients require a governed compatibility layer before BeaconGuard evaluation.
+      That layer normalizes request shape and context into the structure BeaconGuard evaluates.
+      It does not originate policy decisions.
+      It does not weaken fail-closed behavior.
+      BeaconGuard still performs the deterministic allow/deny decision and emits reviewable evidence.
     </p>
   </section>
 
@@ -76,6 +92,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       For equivalent request state and policy snapshot, BeaconGuard returns equivalent
       decisions. This is the foundation for operational confidence, incident response,
       and reproducible reviews in financial workflows.
+    </p>
+    <p>
+      Compatibility normalization occurs before BeaconGuard policy evaluation when needed.
+      It is not a replacement for the deterministic decision path.
     </p>
   </section>
 

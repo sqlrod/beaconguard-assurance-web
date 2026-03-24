@@ -29,6 +29,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
       <div class="flow-arrow" aria-hidden="true">→</div>
       <div class="flow-step">
+        <p class="flow-step-title">Compatibility layer</p>
+        <p>Non-native requests are governed and normalized before entering policy control runtime.</p>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <div class="flow-step">
         <p class="flow-step-title">Policy control runtime</p>
         <p>BeaconGuard evaluates in a bounded trust boundary and returns deterministic decisions.</p>
       </div>
@@ -38,6 +43,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p>Only approved requests continue downstream.</p>
       </div>
     </div>
+  </section>
+
+  <section>
+    <h2>Compatibility layer for non-native clients</h2>
+    <p>
+      Some applications do not natively emit the request structure BeaconGuard evaluates.
+      In those cases, a governed compatibility layer can normalize requests before they enter the BeaconGuard control boundary.
+    </p>
+    <p>
+      The compatibility layer does not make policy decisions.
+      It does not bypass BeaconGuard.
+      BeaconGuard remains the policy authority, fail-closed boundary, and evidence-emitting control layer.
+    </p>
   </section>
 
   <section>

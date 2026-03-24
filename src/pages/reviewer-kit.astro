@@ -76,11 +76,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <ul>
       <li>Confirm where BeaconGuard sits in the request path</li>
       <li>Review how policy decisions are evaluated and returned</li>
+      <li>Confirm whether a compatibility layer is present and that it only normalizes requests before BeaconGuard evaluation</li>
       <li>Verify fail-closed behavior when required conditions are not met</li>
       <li>Review what evidence is emitted for later review</li>
       <li>Confirm what BeaconGuard does not own or replace</li>
       <li>Identify what your team would need to validate during a pilot</li>
     </ul>
+  </section>
+
+  <section class="stack-section">
+    <p>
+      When non-native clients are involved, reviewers should verify that request adaptation does not become a policy actor or bypass the BeaconGuard boundary.
+    </p>
   </section>
 
   <section class="stack-section">
