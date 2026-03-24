@@ -584,11 +584,31 @@ figcaption {
   grid-template-columns: 1.5fr auto 1.5fr auto 1.5fr;
 }
 
+.flow-diagram--sequence-2 {
+  grid-template-columns: minmax(0, 1fr) 1.8rem minmax(0, 1fr);
+}
+
+.flow-diagram--sequence-3 {
+  grid-template-columns: minmax(0, 1fr) 1.8rem minmax(0, 1fr) 1.8rem minmax(0, 1fr);
+}
+
+.flow-diagram--sequence-4 {
+  grid-template-columns: minmax(0, 1fr) 1.8rem minmax(0, 1fr) 1.8rem minmax(0, 1fr) 1.8rem minmax(0, 1fr);
+}
+
 .flow-step {
   border: 1px solid var(--border-subtle);
   border-radius: 0.55rem;
   padding: 0.75rem 0.8rem;
   background-color: var(--bg-lift);
+}
+
+.flow-step--uniform {
+  min-height: 7.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.42rem;
 }
 
 .boundary-statement {
@@ -647,6 +667,7 @@ figcaption {
   color: var(--brand-accent);
   font-weight: 600;
   font-size: 1.3rem;
+  min-height: 1.3rem;
 }
 
 .flow-branch {
@@ -741,9 +762,20 @@ li {
     gap: 0.5rem;
   }
 
+  .flow-diagram--sequence-2,
+  .flow-diagram--sequence-3,
+  .flow-diagram--sequence-4 {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
   .flow-arrow {
     justify-content: flex-start;
     transform: rotate(90deg);
+  }
+
+  .flow-step--uniform {
+    min-height: 0;
   }
 }
 

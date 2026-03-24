@@ -22,23 +22,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section>
     <h2>Where Financial Control Executes</h2>
-    <div class="flow-diagram">
-      <div class="flow-step">
+    <div class="flow-diagram flow-diagram--sequence-4">
+      <div class="flow-step flow-step--uniform">
         <p class="flow-step-title">Incoming request</p>
         <p>Application sends normalized authorization context.</p>
       </div>
       <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
+      <div class="flow-step flow-step--uniform">
         <p class="flow-step-title">Compatibility layer</p>
         <p>Non-native requests are governed and normalized before entering policy control runtime.</p>
       </div>
       <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
+      <div class="flow-step flow-step--uniform">
         <p class="flow-step-title">Policy control runtime</p>
         <p>BeaconGuard evaluates in a bounded trust boundary and returns deterministic decisions.</p>
       </div>
       <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
+      <div class="flow-step flow-step--uniform">
         <p class="flow-step-title">AI execution</p>
         <p>Only approved requests continue downstream.</p>
       </div>

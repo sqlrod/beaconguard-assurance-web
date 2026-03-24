@@ -15,47 +15,47 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <p class="section-label">Runtime sequence</p>
     <h2>Runtime decision sequence</h2>
     <div class="infra-diagram">
-      <div class="flow-diagram flow-diagram--tight">
-        <div class="flow-step flow-node-primary">
+      <div class="flow-diagram flow-diagram--sequence-3">
+        <div class="flow-step flow-step--uniform flow-node-primary">
           <p class="flow-step-title">1. Compatibility normalization</p>
           <p>For non-native clients, request shape and context are adapted before BeaconGuard control evaluation.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-node-primary">
+        <div class="flow-step flow-step--uniform flow-node-primary">
           <p class="flow-step-title">2. Normalize</p>
           <p>Request context, actor, action, and policy identity are normalized.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-node-boundary">
+        <div class="flow-step flow-step--uniform flow-node-boundary">
           <p class="flow-step-title">3. Evaluate</p>
           <p>Policy engine applies deterministic control and produces decision state.</p>
         </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-node-evidence">
+      </div>
+
+      <div class="flow-diagram flow-diagram--sequence-3">
+        <div class="flow-step flow-step--uniform flow-node-evidence">
           <p class="flow-step-title">4. Emit evidence</p>
           <p>Decision, policy version, and request context are recorded.</p>
         </div>
-      </div>
-
-      <div class="flow-diagram flow-diagram--stack">
-        <div class="flow-step flow-node-primary flow-pulse">
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-step--uniform flow-node-primary">
           <p class="flow-step-title">5. Gate execution</p>
           <p>Allowed requests proceed to the model path.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-node-evidence">
+        <div class="flow-step flow-step--uniform flow-node-evidence">
           <p class="flow-step-title">6. Review record</p>
           <p>Outcome is retained for replay and security review.</p>
         </div>
       </div>
 
-      <div class="flow-diagram flow-diagram--stack">
-        <div class="flow-step flow-node-deny">
+      <div class="flow-diagram flow-diagram--sequence-2">
+        <div class="flow-step flow-step--uniform flow-node-deny">
           <p class="flow-step-title">Fail-closed branch</p>
           <p>Malformed or untrusted input never reaches execution.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-node-evidence">
+        <div class="flow-step flow-step--uniform flow-node-evidence">
           <p class="flow-step-title">7. Fail action</p>
           <p>Denied requests are returned with context and kept reviewable.</p>
         </div>
