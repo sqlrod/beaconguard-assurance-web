@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /config/
+Disallow: /*.json$
+Allow: /
+
+Sitemap: https://www.beaconguardassurance.com/sitemap.xml
