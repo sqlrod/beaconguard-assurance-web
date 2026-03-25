@@ -13,7 +13,9 @@ import "../styles/global.css";
     <title>{title}</title>
 
     <meta name="description" content="Deterministic control plane for regulated AI systems." />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="icon" href="/beaconguard-master-icon.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/beaconguard-master-icon.png" type="image/png" sizes="any" />
+    <link rel="apple-touch-icon" href="/beaconguard-master-icon.png" />
 
   </head>
 
@@ -24,9 +26,11 @@ import "../styles/global.css";
     <header class="site-header" role="banner">
       <div class="header-inner">
         <a href="/" class="brand" aria-label="BeaconGuard Assurance home">
-            <span class="brand-wordmark">
-              BeaconGuard <span>Assurance</span>
-            </span>
+            <img
+              class="brand-logo"
+              src="/beaconguard-master-logo.png"
+              alt="BeaconGuard Assurance"
+            />
         </a>
 
         <nav class="header-nav" aria-label="Primary navigation">
@@ -51,7 +55,10 @@ import "../styles/global.css";
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <div class="footer-left">
-          <strong>BeaconGuard Assurance</strong><br />
+          <div class="footer-brand-mark">
+            <img class="footer-brand-icon" src="/beaconguard-master-icon.png" alt="" aria-hidden="true" />
+            <strong>BeaconGuard Assurance</strong>
+          </div>
           Deterministic control boundaries for AI runtime governance.
         </div>
 
