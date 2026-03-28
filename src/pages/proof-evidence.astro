@@ -69,7 +69,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </p>
 
     <div class="infra-diagram" style="margin-top: 1rem;">
-      <div class="flow-diagram flow-diagram--sequence-3">
+      <div class="flow-diagram flow-diagram--sequence-3 proof-binding-flow">
         <div class="flow-step flow-step--uniform flow-node-primary">
           <p class="flow-step-title">Application Request</p>
           <p>Inbound event enters BeaconGuard.</p>
@@ -97,4 +97,60 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a class="btn-secondary" href="/canonical-workflow">Canonical Workflow</a>
     </div>
   </section>
+
+  <style>
+    @media (max-width: 900px) {
+      .proof-binding-flow {
+        display: block;
+        gap: 0;
+      }
+
+      .proof-binding-flow .flow-step {
+        width: 100%;
+        min-height: 0;
+      }
+
+      .proof-binding-flow .flow-arrow {
+        display: none;
+      }
+
+      .proof-binding-flow .flow-step + .flow-step {
+        margin-top: 1rem;
+        position: relative;
+        padding-top: 1.2rem;
+      }
+
+      .proof-binding-flow .flow-step + .flow-step::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translate(-50%, -65%);
+        width: 2px;
+        height: 0.9rem;
+        background: var(--brand-accent);
+      }
+
+      .proof-binding-flow .flow-step + .flow-step::after {
+        content: "↓";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translate(-50%, -100%);
+        font-size: 0.86rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--brand-accent);
+      }
+
+      .proof-binding-flow .flow-step {
+        padding: 0.9rem 0.9rem;
+        border-radius: 0.65rem;
+      }
+
+      .proof-binding-flow .flow-step-title {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
 </BaseLayout>
