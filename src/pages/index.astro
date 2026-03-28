@@ -69,8 +69,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section homepage-block">
     <p class="section-label">Control boundary overview</p>
     <h2>Request control boundary</h2>
-    <div class="infra-diagram">
-      <div class="flow-diagram flow-diagram--stack">
+    <div class="infra-diagram home-boundary-diagram">
+      <div class="flow-diagram flow-diagram--stack home-request-flow">
         <div class="flow-step flow-node-primary">
           <p class="flow-step-title">Enterprise Application</p>
           <p>Submits AI request with business context and authorization intent.</p>
@@ -86,7 +86,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <p>Executes approved requests and emits model output only.</p>
         </div>
       </div>
-      <div class="flow-diagram flow-branch">
+      <div class="flow-diagram flow-branch home-review-branch">
         <p class="flow-branch-title">Evidence &amp; review stream</p>
         <div class="flow-step flow-node-evidence flow-pulse">
           <p class="flow-step-title">Decision Record</p>
@@ -99,9 +99,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </p>
   </section>
 
-  <section class="stack-section homepage-block">
+  <section class="stack-section homepage-block home-boundary-section">
     <h2>Evidence and replay surface</h2>
-    <div class="flow-diagram flow-diagram--stack">
+    <div class="flow-diagram flow-diagram--stack home-evidence-flow">
       <div class="flow-step">
         <p class="flow-step-title">Application</p>
         <p>Submits request context and policy intent</p>
@@ -119,6 +119,92 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
     <p>Every decision is reviewable with the same context used at evaluation time.</p>
   </section>
+
+  <style>
+    .home-boundary-section {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .home-boundary-section .flow-path-note,
+    .home-boundary-section .flow-branch-title,
+    .home-boundary-section p {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .home-boundary-section .flow-step {
+      min-height: 0;
+    }
+
+    @media (max-width: 900px) {
+      .home-request-flow,
+      .home-evidence-flow {
+        display: block;
+        gap: 0;
+      }
+
+      .home-review-branch {
+        display: block;
+      }
+
+      .home-request-flow .flow-step,
+      .home-evidence-flow .flow-step {
+        width: 100%;
+        min-height: 0;
+      }
+
+      .home-request-flow .flow-arrow,
+      .home-evidence-flow .flow-arrow {
+        display: none;
+      }
+
+      .home-request-flow .flow-step + .flow-step,
+      .home-evidence-flow .flow-step + .flow-step {
+        margin-top: 1rem;
+        position: relative;
+        padding-top: 1.1rem;
+      }
+
+      .home-request-flow .flow-step + .flow-step::before,
+      .home-evidence-flow .flow-step + .flow-step::before {
+        content: "";
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        width: 2px;
+        height: 0.9rem;
+        background: var(--brand-accent);
+        transform: translateY(-65%);
+      }
+
+      .home-request-flow .flow-step + .flow-step::after,
+      .home-evidence-flow .flow-step + .flow-step::after {
+        content: "↓";
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        transform: translate(-45%, -100%);
+        font-size: 0.9rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--brand-accent);
+      }
+
+      .home-request-flow .flow-step,
+      .home-evidence-flow .flow-step,
+      .home-request-flow .flow-branch .flow-step {
+        padding: 0.9rem 0.95rem;
+        border-radius: 0.65rem;
+      }
+
+      .home-request-flow .flow-step-title,
+      .home-evidence-flow .flow-step-title,
+      .home-review-branch .flow-step-title {
+        margin-bottom: 0.45rem;
+      }
+    }
+  </style>
 
   <section class="stack-section homepage-block">
     <h2>Example workflow: AI-assisted financial dispute resolution</h2>
