@@ -47,7 +47,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="stack-section">
     <h2>What Reviewers Inspect</h2>
-    <ul>
+    <ul class="reviewers-inspection-list">
       <li><strong>Explicit Enforcement</strong>: The <code>decision_class</code> and <code>enforced</code> fields show denied path execution rather than a warning-only model.</li>
       <li><strong>Policy Identity</strong>: The <code>policy_id</code> identifies which governed policy controlled the outcome.</li>
       <li><strong>Trigger Condition</strong>: The <code>trigger_condition</code> records why the deny path was executed.</li>
@@ -82,7 +82,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-step--uniform flow-node-evidence">
           <p class="flow-step-title">Reviewer Evidence</p>
-          <p>decision_class, enforced, policy_id, trigger_condition, decision_hash, manifest_hash.</p>
+          <p class="review-evidence-grid">
+            <span><code>decision_class</code></span>
+            <span><code>manifest_hash</code></span>
+            <span><code>trigger_condition</code></span>
+            <span><code>policy_id</code></span>
+            <span><code>enforced</code></span>
+            <span><code>decision_hash</code></span>
+          </p>
         </div>
       </div>
     </div>
@@ -99,6 +106,27 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <style>
+    .review-evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(3, auto);
+      gap: 0.35rem 1rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: inherit;
+    }
+
+    .review-evidence-grid span {
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .reviewers-inspection-list code {
+      font-size: 0.95em;
+      font-weight: 500;
+    }
+
     @media (max-width: 900px) {
       .proof-binding-flow {
         display: block;
