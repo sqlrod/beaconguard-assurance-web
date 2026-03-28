@@ -47,10 +47,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="stack-section">
     <h2>What Reviewers Inspect</h2>
-    <ul class="reviewers-inspection-list">
-      <li><strong>Explicit Enforcement</strong>: The <code>decision_class</code> and <code>enforced</code> fields show denied path execution rather than a warning-only model.</li>
-      <li><strong>Policy Identity</strong>: The <code>policy_id</code> identifies which governed policy controlled the outcome.</li>
-      <li><strong>Trigger Condition</strong>: The <code>trigger_condition</code> records why the deny path was executed.</li>
+    <ul>
+      <li><strong>Explicit Enforcement</strong>: The decision_class and enforced fields show denied path execution rather than a warning-only model.</li>
+      <li><strong>Policy Identity</strong>: The policy_id identifies which governed policy controlled the outcome.</li>
+      <li><strong>Trigger Condition</strong>: The trigger_condition records why the deny path was executed.</li>
       <li><strong>Trust Validation</strong>: The trust block confirms signature and replay validation outcomes.</li>
       <li>
         <strong>Cryptographic Binding</strong>: The decision hash and manifest hash bind emitted decision and evidence artifacts to the same control event.
@@ -83,12 +83,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="flow-step flow-step--uniform flow-node-evidence">
           <p class="flow-step-title">Reviewer Evidence</p>
           <p class="review-evidence-grid">
-            <span><code>decision_class</code></span>
-            <span><code>manifest_hash</code></span>
-            <span><code>trigger_condition</code></span>
-            <span><code>policy_id</code></span>
-            <span><code>enforced</code></span>
-            <span><code>decision_hash</code></span>
+            <span>decision_class</span>
+            <span>manifest_hash</span>
+            <span>trigger_condition</span>
+            <span>policy_id</span>
+            <span>enforced</span>
+            <span>decision_hash</span>
           </p>
         </div>
       </div>
@@ -121,12 +121,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       margin: 0;
     }
 
-    .review-evidence-grid code {
-      font-size: inherit;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
     .reviewers-inspection-list code {
       font-size: 0.95em;
       font-weight: 500;
@@ -145,17 +139,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         font-size: 0.9rem;
       }
 
-      .reviewers-inspection-list code {
-        font-size: 1em;
-        font-weight: 500;
-        color: inherit;
-      }
-
       .review-evidence-grid {
         gap: 0.3rem 0.6rem;
       }
 
-      .review-evidence-grid code {
+      .review-evidence-grid span {
         white-space: normal;
         overflow-wrap: break-word;
         word-break: break-word;
