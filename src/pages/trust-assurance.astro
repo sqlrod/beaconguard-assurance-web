@@ -3,7 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Trust Center | BeaconGuard Assurance">
-  <section>
+  <div class="trust-assurance-page">
+  <section class="trust-assurance-section">
     <h1>Trust Center</h1>
     <p class="lead">The Control Boundary for AI Liability.</p>
     <p class="lead">
@@ -11,9 +12,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </p>
   </section>
 
-  <section>
+  <section class="trust-assurance-section">
     <h2>Evidence Flow</h2>
-    <div class="flow-diagram flow-diagram--tight">
+    <div class="flow-diagram flow-diagram--tight trust-assurance-flow">
       <div class="flow-step">
         <p class="flow-step-title">Policy decision</p>
         <p>Input and policy identity are evaluated.</p>
@@ -31,14 +32,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <section>
+  <section class="trust-assurance-section">
     <h2>Trust Model</h2>
     <p>
       BeaconGuard enforces policy at runtime and records decision context against explicit policy identity. The control boundary is where policy, not model behavior, decides execution rights.
     </p>
   </section>
 
-  <section>
+  <section class="trust-assurance-section">
     <h2>Auditability</h2>
     <ul>
       <li>Decision records for allowed and denied outcomes with policy identity.</li>
@@ -47,7 +48,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </ul>
   </section>
 
-  <section>
+  <section class="trust-assurance-section">
     <h2>Replayability</h2>
     <p>
       With the same policy snapshot and normalized input, BeaconGuard enables replay
@@ -56,7 +57,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </p>
   </section>
 
-  <section>
+  <section class="trust-assurance-section">
     <h2>Reviewer Evidence Focus</h2>
     <ul>
       <li>BeaconGuard emits structured evidence for each request decision, including allow/deny outcome, policy identity, and normalized context.</li>
@@ -67,7 +68,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </ul>
   </section>
 
-  <section>
+  <section class="trust-assurance-section">
     <h2>Evidence Boundaries</h2>
     <p>
       BeaconGuard provides decision evidence, not model reasoning.
@@ -76,7 +77,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </p>
   </section>
 
-  <section>
+  <section class="trust-assurance-section">
     <h2>Review References</h2>
     <ul>
       <li><a href="/sample-decision-record">Review a sample decision record</a></li>
@@ -91,4 +92,100 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a class="btn-secondary" href="/contact">Discuss review expectations</a>
     </div>
   </section>
+  </div>
+
+  <style>
+    .trust-assurance-page {
+      display: grid;
+      gap: 0.6rem;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .trust-assurance-section {
+      width: 100%;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      overflow-x: clip;
+    }
+
+    .trust-assurance-section h1,
+    .trust-assurance-section h2 {
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .trust-assurance-section p,
+    .trust-assurance-section li,
+    .trust-assurance-section a {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .trust-assurance-section .page-actions {
+      align-items: stretch;
+    }
+
+    .trust-assurance-section .page-actions a {
+      white-space: normal;
+    }
+
+    @media (max-width: 900px) {
+      .trust-assurance-section {
+        padding-inline: 0;
+      }
+
+      .trust-assurance-flow {
+        display: block;
+        gap: 0;
+      }
+
+      .trust-assurance-flow .flow-step {
+        width: 100%;
+        min-height: 0;
+      }
+
+      .trust-assurance-flow .flow-arrow {
+        display: none;
+      }
+
+      .trust-assurance-flow .flow-step + .flow-step {
+        margin-top: 1.1rem;
+        position: relative;
+        padding-top: 1.1rem;
+      }
+
+      .trust-assurance-flow .flow-step + .flow-step::before {
+        content: "";
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        width: 2px;
+        height: 0.9rem;
+        background: var(--brand-accent);
+        transform: translateY(-65%);
+      }
+
+      .trust-assurance-flow .flow-step + .flow-step::after {
+        content: "↓";
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        transform: translate(-45%, -100%);
+        font-size: 0.9rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--brand-accent);
+      }
+
+      .trust-assurance-flow .flow-step {
+        padding: 0.9rem 0.95rem;
+        border-radius: 0.65rem;
+      }
+
+      .trust-assurance-flow .flow-step-title {
+        margin-bottom: 0.45rem;
+      }
+    }
+  </style>
 </BaseLayout>
