@@ -27,7 +27,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       reaching the model.
     </p>
     <div class="infra-diagram">
-      <div class="flow-diagram flow-diagram--sequence-3">
+      <div class="flow-diagram flow-diagram--sequence-3 security-workflow">
         <div class="flow-step flow-step--uniform flow-node-primary">
           <p class="flow-step-title">Untrusted / malformed / replayed request</p>
           <p>Ingress validation runs before policy evaluation.</p>
@@ -44,7 +44,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
       </div>
 
-      <div class="flow-diagram flow-diagram--sequence-2" style="margin-top: 1rem;">
+      <div class="flow-diagram flow-diagram--sequence-2 security-workflow" style="margin-top: 1rem;">
         <div class="flow-step flow-step--uniform flow-node-primary">
           <p class="flow-step-title">Trusted / valid / policy-compliant request</p>
           <p>Inbound trust checks pass and request enters enforcement.</p>
@@ -87,4 +87,60 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a class="btn-secondary" href="/canonical-workflow">Canonical Workflow</a>
     </div>
   </section>
+
+  <style>
+    @media (max-width: 900px) {
+      .security-workflow {
+        display: block;
+        gap: 0;
+      }
+
+      .security-workflow .flow-step {
+        width: 100%;
+        min-height: 0;
+      }
+
+      .security-workflow .flow-step-title {
+        font-size: 0.98rem;
+      }
+
+      .security-workflow .flow-arrow {
+        display: none;
+      }
+
+      .security-workflow .flow-step + .flow-step {
+        margin-top: 1.2rem;
+        position: relative;
+        padding-top: 1.35rem;
+      }
+
+      .security-workflow .flow-step + .flow-step::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: -0.62rem;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 0.75rem;
+        background: var(--brand-accent);
+      }
+
+      .security-workflow .flow-step + .flow-step::after {
+        content: "↓";
+        position: absolute;
+        left: 50%;
+        top: -0.6rem;
+        transform: translate(-50%, -65%);
+        font-size: 0.9rem;
+        line-height: 1;
+        color: var(--brand-accent);
+        font-weight: 700;
+      }
+
+      .security-workflow .flow-node-boundary {
+        border-left: 4px solid var(--brand-accent);
+        box-shadow: 0 0 0 1px rgba(91, 155, 224, 0.2);
+      }
+    }
+  </style>
 </BaseLayout>
