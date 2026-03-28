@@ -36,6 +36,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       class="how-it-works-lightbox"
       aria-hidden="true"
     >
+      <div class="how-it-works-lightbox-content">
+        <img
+          src="/how-it-works.png"
+          alt="BeaconGuard request evaluation flow showing validation, deterministic decision, allow or deny enforcement, model execution, and decision evidence output"
+          class="how-it-works-modal-image"
+        />
+      </div>
       <button
         type="button"
         class="how-it-works-lightbox-close"
@@ -44,11 +51,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       >
         ×
       </button>
-      <img
-        src="/how-it-works.png"
-        alt="BeaconGuard request evaluation flow showing validation, deterministic decision, allow or deny enforcement, model execution, and decision evidence output"
-        class="how-it-works-modal-image"
-      />
     </div>
   </section>
 
@@ -182,23 +184,34 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     .how-it-works-lightbox {
       position: fixed;
       inset: 0;
-      z-index: 1100;
+      z-index: 9999;
       background: rgba(2, 6, 13, 0.88);
       display: none;
+      overflow: visible;
       align-items: center;
       justify-content: center;
-      padding: 1.25rem;
+      padding: 1.5rem;
     }
 
     .how-it-works-lightbox.is-open {
       display: flex;
     }
 
-    .how-it-works-lightbox img {
+    .how-it-works-lightbox-content {
       max-width: 95vw;
-      max-height: 90vh;
+      max-height: 95vh;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .how-it-works-modal-image {
+      max-width: 95vw;
+      max-height: 95vh;
       width: auto;
       height: auto;
+      object-fit: contain;
       border: 1px solid var(--border-subtle);
       background: #0a1220;
       box-shadow: 0 16px 42px rgba(2, 4, 10, 0.65);
