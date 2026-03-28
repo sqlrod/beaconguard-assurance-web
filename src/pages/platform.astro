@@ -25,7 +25,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section>
     <h2>Where Financial Control Executes</h2>
-    <div class="flow-diagram flow-diagram--sequence-4">
+    <div class="flow-diagram flow-diagram--sequence-4 platform-control-flow">
       <div class="flow-step flow-step--uniform">
         <p class="flow-step-title">Incoming request</p>
         <p>Application sends normalized authorization context.</p>
@@ -134,4 +134,58 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a class="btn-secondary" href="/contact">Talk to a platform specialist</a>
     </div>
   </section>
+
+  <style>
+    @media (max-width: 900px) {
+      .platform-control-flow {
+        display: block;
+        gap: 0;
+        width: 100%;
+      }
+
+      .platform-control-flow .flow-step {
+        width: 100%;
+        min-height: 0;
+        padding: 0.9rem 0.95rem;
+        border-radius: 0.65rem;
+      }
+
+      .platform-control-flow .flow-arrow {
+        display: none !important;
+      }
+
+      .platform-control-flow .flow-step + .flow-step {
+        margin-top: 1rem;
+        position: relative;
+        padding-top: 1.1rem;
+      }
+
+      .platform-control-flow .flow-step + .flow-step::before {
+        content: "";
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        width: 2px;
+        height: 0.9rem;
+        background: var(--brand-accent);
+        transform: translateY(-65%);
+      }
+
+      .platform-control-flow .flow-step + .flow-step::after {
+        content: "↓";
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        transform: translate(-45%, -100%);
+        font-size: 0.9rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--brand-accent);
+      }
+
+      .platform-control-flow .flow-step-title {
+        margin-bottom: 0.45rem;
+      }
+    }
+  </style>
 </BaseLayout>
