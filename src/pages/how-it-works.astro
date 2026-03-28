@@ -13,61 +13,72 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section>
     <p class="section-label">Runtime sequence</p>
-    <h2>Runtime decision sequence</h2>
-    <div class="infra-diagram">
-      <div class="flow-diagram flow-diagram--sequence-3">
-        <div class="flow-step flow-step--uniform flow-node-primary">
-          <p class="flow-step-title">1. Compatibility normalization</p>
-          <p>For non-native clients, request shape and context are adapted before BeaconGuard control evaluation.</p>
+    <h2>Runtime Decision Sequence</h2>
+    <div class="infra-diagram diagram-frame">
+      <div class="workflow-boundary">
+        <div class="flow-step flow-step--uniform flow-node-primary flow-spine-step" style="grid-column: 2; grid-row: 1">
+          <p class="flow-step-title">Application Request</p>
+          <p>Request enters the BeaconGuard boundary.</p>
         </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-primary">
-          <p class="flow-step-title">2. Normalize</p>
-          <p>Request context, actor, action, and policy identity are normalized.</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-boundary">
-          <p class="flow-step-title">3. Evaluate</p>
-          <p>Policy engine applies deterministic control and produces decision state.</p>
-        </div>
-      </div>
 
-      <div class="flow-diagram flow-diagram--sequence-3">
-        <div class="flow-step flow-step--uniform flow-node-evidence">
-          <p class="flow-step-title">4. Emit evidence</p>
-          <p>Decision, policy version, and request context are recorded.</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-primary">
-          <p class="flow-step-title">5. Gate execution</p>
-          <p>Allowed requests proceed to the model path.</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-evidence">
-          <p class="flow-step-title">6. Review record</p>
-          <p>Outcome is retained for replay and security review.</p>
-        </div>
-      </div>
+        <div class="flow-arrow flow-arrow-down" aria-hidden="true" style="grid-column: 2; grid-row: 2">↓</div>
 
-      <div class="flow-diagram flow-diagram--sequence-2">
-        <div class="flow-step flow-step--uniform flow-node-deny">
-          <p class="flow-step-title">Fail-closed branch</p>
-          <p>Malformed or untrusted input never reaches execution.</p>
+        <div class="flow-boundary-shell flow-node-boundary" style="grid-column: 2; grid-row: 3">
+          <p class="flow-step-title flow-boundary-title">BeaconGuard Control Boundary</p>
+          <div class="flow-boundary-stack">
+            <div>
+              <p class="flow-step-title">Request Validation</p>
+              <p>Request structure and required fields are validated.</p>
+            </div>
+            <div>
+              <p class="flow-step-title">Trust &amp; Replay Validation</p>
+              <p>Signature, nonce, and replay conditions are verified.</p>
+            </div>
+            <div>
+              <p class="flow-step-title">Deterministic Policy Evaluation</p>
+              <p>Policy rules are evaluated against request context.</p>
+            </div>
+          </div>
         </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-evidence">
-          <p class="flow-step-title">7. Fail action</p>
-          <p>Denied requests are returned with context and kept reviewable.</p>
+
+        <div class="flow-arrow flow-arrow-down" aria-hidden="true" style="grid-column: 2; grid-row: 4">↓</div>
+
+        <div class="flow-step flow-step--uniform flow-node-boundary flow-control-outcome" style="grid-column: 2; grid-row: 5">
+          <p class="flow-step-title">Control Outcome</p>
+          <p>Explicit ALLOW or DENY decision returned.</p>
+        </div>
+
+        <div class="wf-branch-arrows" style="grid-column: 1; grid-row: 6; grid-column-end: span 3">
+          <span class="flow-arrow flow-arrow-branch">↓</span>
+          <span class="flow-arrow flow-arrow-branch">↓</span>
+        </div>
+
+        <div class="wf-branch-row" style="grid-column: 1; grid-row: 7; grid-column-end: span 3">
+          <div class="flow-step flow-step--uniform flow-node-primary flow-branch-step">
+            <p class="flow-step-title">ALLOW</p>
+            <p>Request proceeds to bounded model interaction.</p>
+          </div>
+          <div class="flow-step flow-step--uniform flow-node-deny flow-branch-step">
+            <p class="flow-step-title">DENY</p>
+            <p>Request is blocked and fail-closed policy is enforced.</p>
+          </div>
+        </div>
+
+        <div class="wf-branch-arrows" style="grid-column: 1; grid-row: 8; grid-column-end: span 3">
+          <span class="flow-arrow flow-arrow-branch">↓</span>
+          <span class="flow-arrow flow-arrow-branch">↓</span>
+        </div>
+
+        <div class="flow-step flow-step--uniform flow-node-evidence flow-evidence-step" style="grid-column: 2; grid-row: 9">
+          <p class="flow-step-title">Decision Evidence</p>
+          <p>Structured decision record retained for review and replay.</p>
         </div>
       </div>
     </div>
-    <p class="flow-path-note">
-      Fail-closed is explicit: no trusted decision, no execution.
-    </p>
   </section>
 
   <section>
-    <h2>Compatibility-layer path</h2>
+    <h2>Compatibility-Layer Path</h2>
     <p>
       Some non-native clients require a governed compatibility layer before BeaconGuard evaluation.
       That layer normalizes request shape and context into the structure BeaconGuard evaluates.
@@ -118,7 +129,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section>
-    <h2>Reviewer focus</h2>
+    <h2>Reviewer Focus</h2>
     <p>
       A reviewer should confirm that the request path is normalized before evaluation, that policy evaluation
       produces deterministic allow/deny outcomes, that malformed or missing inputs fail closed, and that each
@@ -128,22 +139,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section>
     <h2>Decision and Review Loop</h2>
-    <div class="flow-diagram flow-diagram--tight">
-      <div class="flow-step">
-        <p class="flow-step-title">Decision</p>
-        <p>Allow/deny computed from policy and state.</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">Execution</p>
-        <p>Model call proceeds only when allowed.</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">Review</p>
-        <p>Outcome, policy identity, and context are replayable.</p>
-      </div>
-    </div>
+    <p>
+      A control outcome is produced before execution; allow moves to bounded model interaction, deny blocks by fail-closed policy, and each outcome is retained as decision evidence.
+    </p>
   </section>
 
   <section>
@@ -158,4 +156,173 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a class="btn-secondary" href="/trust-assurance">Review Trust Center evidence surfaces</a>
     </div>
   </section>
+
+  <style>
+    .diagram-frame {
+      width: max-content;
+      max-width: none;
+      margin: 1.8rem auto 0;
+      display: block;
+      overflow: visible;
+      padding: 0.5rem 0.65rem 0.65rem;
+    }
+
+    .diagram-frame .workflow-boundary {
+      margin: 0 auto;
+      width: max-content;
+      max-width: none;
+      min-width: 0;
+    }
+
+    .workflow-boundary {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  --node-width: min(300px, 100%);
+  --evidence-width: min(300px, 100%);
+  gap: 2rem 0.85rem;
+  align-items: stretch;
+  justify-items: stretch;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+    .flow-spine-step {
+      width: var(--node-width);
+      justify-self: center;
+      min-height: 108px;
+    }
+
+    .flow-control-outcome {
+      width: var(--node-width);
+      justify-self: center;
+      min-height: 118px;
+      border-left-width: 5px;
+    }
+
+    .flow-boundary-shell {
+  width: min(90%, 540px);
+  justify-self: center;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background-color: rgba(20, 34, 52, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.18);
+}
+
+    .flow-boundary-title {
+      margin-bottom: 0.35rem;
+    }
+
+    .flow-boundary-stack {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+  .flow-boundary-stack > div {
+  border-left: 2px solid rgba(148, 163, 184, 0.36);
+  padding-left: 0.65rem;
+}
+
+    .flow-boundary-stack > div > p {
+      margin: 0;
+      font-size: 0.93rem;
+      line-height: 1.45;
+    }
+
+    .flow-boundary-stack > div + div {
+      padding-top: 0.45rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.18);
+      border-left: none;
+      padding-left: 0;
+    }
+
+    .wf-branch-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      width: min(100%, 700px);
+      justify-items: stretch;
+      justify-content: center;
+      justify-self: center;
+    }
+
+    .wf-branch-row .flow-branch-step {
+      width: min(300px, 100%);
+    }
+
+    .wf-branch-arrows {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      justify-items: center;
+      gap: 0;
+      justify-self: center;
+      width: 100%;
+      max-width: 620px;
+      padding: 0 0.1rem;
+    }
+
+    .flow-branch-step {
+  width: min(300px, 100%);
+  min-height: 110px;
+  justify-self: center;
+}
+
+    .flow-evidence-step {
+      width: var(--evidence-width);
+      justify-self: center;
+      min-height: 108px;
+      background-color: rgba(245, 158, 11, 0.06);
+      border-color: rgba(245, 158, 11, 0.38);
+      box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.2);
+    }
+
+    .flow-arrow-down {
+      justify-content: center;
+      font-size: 1.2rem;
+      min-height: 1.2rem;
+      color: var(--text-muted);
+    }
+
+    .flow-arrow-branch {
+      color: var(--text-muted);
+      justify-content: center;
+      text-align: center;
+      font-size: 1.1rem;
+      min-height: 1.1rem;
+      transform: none;
+      width: fit-content;
+    }
+
+    .wf-branch-arrows .flow-arrow-branch:last-of-type {
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .workflow-boundary {
+        grid-template-columns: 1fr;
+        gap: 1rem 0;
+        max-width: 100%;
+      }
+
+      .workflow-boundary > [style],
+      .workflow-boundary > * {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+      }
+
+      .flow-spine-step,
+      .flow-control-outcome,
+      .flow-branch-step,
+      .flow-evidence-step {
+        width: 100%;
+      }
+
+      .flow-arrow-branch {
+        transform: none !important;
+      }
+    }
+  </style>
 </BaseLayout>

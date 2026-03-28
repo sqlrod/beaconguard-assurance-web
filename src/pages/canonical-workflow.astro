@@ -1,0 +1,272 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="AI-Assisted Cross-Border FinCrime Analyst Review | BeaconGuard Assurance">
+  <section class="stack-section">
+    <h1>AI-Assisted Cross-Border FinCrime Analyst Review</h1>
+    <p class="lead">
+      BeaconGuard is engineered for high-risk, human-reviewed workflows where AI output may assist a regulated decision path, while policy
+      control remains deterministic and reviewable.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Workflow Context</h2>
+    <p>
+      In this workflow, AI can assist analysis for cross-border AML and fraud review, but no inference decision proceeds without BeaconGuard
+      approval and structured evidence emission.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>The Enforcement Sequence</h2>
+    <ol>
+      <li><strong>Application Input:</strong> The financial or analyst application submits a cross-border case for AI-assisted summarization or recommendation.</li>
+      <li><strong>Gateway Intake:</strong> BeaconGuard intercepts the payload.</li>
+      <li>
+        <strong>Trust &amp; Replay Validation:</strong> The payload is cryptographically validated and checked for replay.
+        <strong>Deny path is executed if invalid.</strong>
+      </li>
+      <li>
+        <strong>Deterministic Policy Evaluation:</strong> The request is checked against governed policy constraints for required AML, KYC, or workflow evidence.
+        <strong>Deny path is executed if incomplete or out of bounds.</strong>
+      </li>
+      <li><strong>Control Outcome:</strong> BeaconGuard returns an explicit control outcome after deterministic policy enforcement.</li>
+      <li><strong>Decision Evidence:</strong> A structured JSON decision record is retained for architecture review and security inspection.</li>
+    </ol>
+
+    <div class="infra-diagram workflow-frame">
+      <div class="workflow-grid">
+        <div class="flow-step flow-step--uniform flow-node-primary wf-node" style="grid-column: 1; grid-row: 1">
+          <p class="flow-step-title">Analyst / Financial Application</p>
+          <p>Case context arrives for review.</p>
+        </div>
+        <div class="flow-step flow-step--uniform flow-node-boundary wf-node" style="grid-column: 2; grid-row: 1">
+          <p class="flow-step-title">BeaconGuard Gateway Intake</p>
+          <p>Central control entry and request normalization.</p>
+        </div>
+        <div class="flow-step flow-step--uniform flow-node-boundary wf-node" style="grid-column: 3; grid-row: 1">
+          <p class="flow-step-title">Trust / Replay</p>
+          <p>Signature, nonce, and replay state are validated.</p>
+        </div>
+
+        <div class="wf-arrow wf-arrow-right" style="grid-column: 1; grid-row: 2">→</div>
+        <div class="wf-arrow wf-arrow-right" style="grid-column: 2; grid-row: 2">→</div>
+        <div class="wf-cell-spacer" style="grid-column: 3; grid-row: 2"></div>
+
+        <div class="flow-step flow-step--uniform flow-node-boundary wf-node wf-sequence-step" style="grid-column: 2; grid-row: 3">
+          <p class="flow-step-title">Deterministic Policy Evaluation</p>
+          <p>AML/KYC and compliance signals are evaluated.</p>
+        </div>
+
+        <div class="wf-arrow wf-arrow-down" style="grid-column: 2; grid-row: 4">↓</div>
+
+        <div class="flow-step flow-step--uniform flow-node-evidence wf-node wf-sequence-step" style="grid-column: 2; grid-row: 5">
+          <p class="flow-step-title">Control Outcome</p>
+          <p>Explicit allow or deny result.</p>
+        </div>
+
+        <div class="wf-branch-arrows" style="grid-column: 1; grid-row: 6; grid-column-end: span 3">
+          <span class="wf-arrow wf-arrow-branch">↓</span>
+          <span class="wf-arrow wf-arrow-branch">↓</span>
+        </div>
+
+        <div class="wf-branch-row" style="grid-column: 1; grid-row: 7; grid-column-end: span 3">
+          <div class="flow-step flow-step--uniform flow-node-primary wf-node wf-branch-step">
+          <p class="flow-step-title">ALLOW</p>
+          <p>Request proceeds to bounded model interaction.</p>
+        </div>
+          <div class="flow-step flow-step--uniform flow-node-deny wf-node wf-branch-step">
+          <p class="flow-step-title">DENY</p>
+          <p>Request is blocked and fail-closed policy is enforced.</p>
+        </div>
+        </div>
+
+        <div class="wf-branch-arrows" style="grid-column: 1; grid-row: 8; grid-column-end: span 3">
+          <span class="wf-arrow wf-arrow-branch">↓</span>
+          <span class="wf-arrow wf-arrow-branch">↓</span>
+        </div>
+
+        <div class="flow-step flow-step--uniform flow-node-evidence wf-node wf-evidence" style="grid-column: 2; grid-row: 9">
+          <p class="flow-step-title">Decision Evidence</p>
+          <p>Structured decision record retained for reviewer inspection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="stack-section">
+    <h2>Decision Evidence</h2>
+    <p>
+      The workflow emits structured enforcement records only after BeaconGuard has decided allow or deny. Reviewers inspect the decision signal,
+      enforcement fields, trust validation, and evidence hashes to determine exactly what control path executed.
+    </p>
+    <div class="page-actions">
+      <a class="btn-secondary" href="/proof-evidence">Review Decision Evidence</a>
+      <a class="btn-secondary" href="/security">Security</a>
+      <a class="btn-secondary" href="/reviewer-kit">Reviewer Kit</a>
+    </div>
+  </section>
+
+<style>
+  .workflow-grid {
+  --decision-step-width: 300px;
+    --evidence-width: min(300px, 100%);
+    width: max-content;
+    max-width: none;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, var(--decision-step-width));
+  gap: 2rem 0.78rem;
+  align-items: stretch;
+  justify-items: stretch;
+  justify-content: stretch;
+    
+  margin: 0 auto;
+}
+
+.workflow-frame {
+  width: max-content;
+  max-width: none;
+  margin: 1.8rem auto 0;
+  display: block;
+  overflow: visible;
+  padding: 0.5rem 0.65rem 0.65rem;
+}
+
+.workflow-frame > .workflow-grid {
+  margin: 0 auto;
+  overflow: visible;
+}
+
+  .wf-branch-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    width: min(100%, 700px);
+    justify-items: stretch;
+    justify-content: center;
+    justify-self: center;
+  }
+
+  .wf-branch-row .wf-branch-step {
+    width: min(300px, 100%);
+  }
+
+  .wf-branch-arrows {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: 0;
+    justify-self: center;
+    width: min(100%, 700px);
+    padding: 0 0.1rem;
+    max-width: 700px;
+  }
+
+  .wf-node {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  width: var(--decision-step-width);
+  max-width: 100%;
+  min-width: 300px;
+    justify-self: center;
+  }
+
+  .wf-sequence-step {
+  width: var(--decision-step-width);
+  max-width: 100%;
+  min-width: 300px;
+  justify-self: center;
+}
+
+  .wf-evidence {
+  width: var(--decision-step-width);
+  max-width: 100%;
+  min-width: 300px;
+  justify-self: center;
+  grid-column: 1 / -1 !important;
+  border-color: rgba(245, 158, 11, 0.45);
+  background-color: rgba(245, 158, 11, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.22);
+}
+
+  .wf-branch-step {
+  width: var(--decision-step-width);
+  max-width: 100%;
+  min-width: 300px;
+  justify-self: center;
+}
+
+  .wf-arrow {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 1.5rem;
+    text-align: center;
+  }
+
+  .wf-cell-spacer {
+    min-height: 1.5rem;
+  }
+
+  .wf-arrow-right {
+    font-size: 1.1rem;
+    justify-content: center;
+  }
+
+  .wf-arrow-down {
+    font-size: 1.2rem;
+    justify-content: center;
+  }
+
+  .wf-arrow-branch {
+    font-size: 1.15rem;
+    min-height: 1.15rem;
+    justify-self: center;
+    transform: none;
+  }
+
+  .wf-branch-arrows .wf-arrow-branch:last-of-type {
+    transform: none;
+  }
+
+  .wf-arrow-right {
+    justify-self: center;
+  }
+
+  @media (max-width: 900px) {
+    .workflow-grid {
+      grid-template-columns: 1fr;
+      gap: 1.2rem 0;
+    }
+
+    .workflow-grid > * {
+      grid-column: 1 !important;
+      grid-row: auto !important;
+    }
+
+    .wf-arrow,
+    .wf-cell-spacer {
+      min-height: 1rem;
+    }
+
+    .wf-arrow-top,
+    .wf-arrow-bottom,
+    .wf-arrow-branch {
+      transform: none !important;
+      min-height: 1rem;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+</BaseLayout>

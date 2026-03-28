@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Reviewable Decision Evidence | BeaconGuard Assurance">
+  <section class="stack-section">
+    <h1>Reviewable Decision Evidence</h1>
+    <p class="lead">
+      Claims of AI safety are insufficient for enterprise security architecture. BeaconGuard emits structured, cryptographic proof of every
+      enforcement action.
+    </p>
+    <p>
+      This is a canonical, sanitized BeaconGuard decision record derived from live enforcement behavior. The artifact is publicly presented
+      in a simplified form while preserving the real product structure and proof surface.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Canonical Decision Record Statement</h2>
+    <p>
+      The fields below are the core signals a reviewer inspects to understand what happened, why it happened, and what evidence was emitted.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>JSON</h2>
+    <pre class="sample-record"><code class="language-json">{`{
+  "event_timestamp": "2026-03-27T14:32:01Z",
+  "correlation_id": "req_884a2b9c_fcrime",
+  "boundary_enforcement": {
+    "decision_class": "DENY_POLICY",
+    "enforced": true,
+    "policy_id": "pol_aml_crossborder_v1.4",
+    "trigger_condition": "missing_mandatory_compliance_evidence"
+  },
+  "cryptographic_provenance": {
+    "x_bg_decision_hash": "a7f8b9...c3d2e1",
+    "x_bg_manifest_hash": "b2e4c6...d8f0a2"
+  },
+  "trust_validation": {
+    "signature_present": true,
+    "signature_valid": true,
+    "replay_detected": false
+  }
+}`}</code></pre>
+  </section>
+
+  <section class="stack-section">
+    <h2>What Reviewers Inspect</h2>
+    <ul>
+      <li><strong>Explicit Enforcement</strong>: The <code>decision_class</code> and <code>enforced</code> fields show denied path execution rather than a warning-only model.</li>
+      <li><strong>Policy Identity</strong>: The <code>policy_id</code> identifies which governed policy controlled the outcome.</li>
+      <li><strong>Trigger Condition</strong>: The <code>trigger_condition</code> records why the deny path was executed.</li>
+      <li><strong>Trust Validation</strong>: The trust block confirms signature and replay validation outcomes.</li>
+      <li>
+        <strong>Cryptographic Binding</strong>: The decision hash and manifest hash bind emitted decision and evidence artifacts to the same control event.
+      </li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Cryptographic Binding Explanation</h2>
+    <p>
+      The decision hash and manifest hash are emitted with the decision to support verification that a decision and its evidence record were
+      produced from the same control event in the enforcement path.
+    </p>
+    <p class="flow-path-note">
+      This is a canonical, sanitized artifact, not an internal source export, and is derived from live enforcement behavior.
+    </p>
+
+    <div class="infra-diagram" style="margin-top: 1rem;">
+      <div class="flow-diagram flow-diagram--sequence-3">
+        <div class="flow-step flow-step--uniform flow-node-primary">
+          <p class="flow-step-title">Application Request</p>
+          <p>Inbound event enters BeaconGuard.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-step--uniform flow-node-boundary">
+          <p class="flow-step-title">BeaconGuard Decision</p>
+          <p>Deterministic allow/deny with policy context.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-step--uniform flow-node-evidence">
+          <p class="flow-step-title">Reviewer Evidence</p>
+          <p>decision_class, enforced, policy_id, trigger_condition, decision_hash, manifest_hash.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack-section">
+    <h2>Related Review Material</h2>
+    <div class="page-actions">
+      <a class="btn-secondary" href="/security">Security</a>
+      <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
+      <a class="btn-secondary" href="/reviewer-kit">Reviewer Kit</a>
+      <a class="btn-secondary" href="/canonical-workflow">Canonical Workflow</a>
+    </div>
+  </section>
+</BaseLayout>

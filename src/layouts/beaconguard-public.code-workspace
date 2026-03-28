@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../beaconguard-public"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"specstory.cloudSync.enabled": "never"
+	}
+}

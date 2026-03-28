@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Deterministic Control for Probabilistic Models | BeaconGuard Assurance">
+  <section class="stack-section">
+    <h1>Deterministic Control for Probabilistic Models</h1>
+    <p class="lead">
+      BeaconGuard keeps model behavior out of the authorization layer by placing deterministic control before any model execution.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>The Control Problem</h2>
+    <p>
+      Large Language Models (LLMs) are probabilistic generation engines. They cannot serve as the authorization boundary for regulated
+      financial operations. Relying on prompt engineering to govern cross-border AML or high-risk fraud workflows creates unquantifiable
+      operational risk.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Zero-Trust AI Ingress</h2>
+    <p>
+      BeaconGuard Assurance enforces a deterministic control boundary before model inference. Requests are evaluated for cryptographic trust,
+      structural validity, and policy compliance before the LLM is invoked. Untrusted, malformed, or replayed requests are blocked from
+      reaching the model.
+    </p>
+    <div class="infra-diagram">
+      <div class="flow-diagram flow-diagram--sequence-3">
+        <div class="flow-step flow-step--uniform flow-node-primary">
+          <p class="flow-step-title">Untrusted / malformed / replayed request</p>
+          <p>Ingress validation runs before policy evaluation.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-step--uniform flow-node-boundary">
+          <p class="flow-step-title">BeaconGuard deterministic boundary</p>
+          <p>Trust, structure, and policy checks execute in the same controlled control layer.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-step--uniform flow-node-deny">
+          <p class="flow-step-title">Blocked before model inference</p>
+          <p>Denied requests do not proceed to model output.</p>
+        </div>
+      </div>
+
+      <div class="flow-diagram flow-diagram--sequence-2" style="margin-top: 1rem;">
+        <div class="flow-step flow-step--uniform flow-node-primary">
+          <p class="flow-step-title">Trusted / valid / policy-compliant request</p>
+          <p>Inbound trust checks pass and request enters enforcement.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step flow-step--uniform flow-node-boundary">
+          <p class="flow-step-title">BeaconGuard deterministic boundary</p>
+          <p>Model invocation only after allow decision.</p>
+        </div>
+      </div>
+      <p class="flow-path-note">
+        The model remains outside the control boundary and only receives requests that pass deterministic enforcement.
+      </p>
+    </div>
+  </section>
+
+  <section class="stack-section">
+    <h2>Fail-Closed Enforcement</h2>
+    <p>
+      When required compliance conditions are not met, BeaconGuard executes a deterministic, fail-closed denial. The system prevents the
+      AI from manufacturing an unauthorized forward path and preserves human-reviewed operational authority.
+    </p>
+    <div class="section-grid section-grid--compact">
+      <div class="content-card">
+        <h3>Deterministic Deny</h3>
+        <p>Missing trust proofs, invalid structure, or policy gaps resolve to deny, not permissive fallback.</p>
+      </div>
+      <div class="content-card">
+        <h3>Blocking Path Control</h3>
+        <p>Blocked requests never reach model output and do not proceed as inferred exceptions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack-section">
+    <h2>Where to go next</h2>
+    <p><a href="/trust-assurance">Trust Center</a></p>
+    <div class="page-actions">
+      <a class="btn-secondary" href="/proof-evidence">Reviewable Decision Evidence</a>
+      <a class="btn-secondary" href="/canonical-workflow">Canonical Workflow</a>
+    </div>
+  </section>
+</BaseLayout>
