@@ -414,26 +414,22 @@ figcaption {
   padding: 0 0.2rem;
 }
 
-.doc-diagram-frame {
-  border: 1px solid var(--border-subtle);
-  border-radius: 0.65rem;
-  padding: 0.9rem;
-  background: linear-gradient(170deg, rgba(15, 23, 36, 0.9), rgba(9, 13, 24, 0.9));
-  box-shadow: none;
+.system-architecture-section {
+  padding: 32px 0 40px;
 }
 
-.doc-diagram {
+.system-architecture-img {
   width: 100%;
-  display: block;
-  max-width: 980px;
+  max-width: 720px;
   height: auto;
-  border-radius: 0.45rem;
+  display: block;
+  margin: 0 auto;
 }
 
-.doc-diagram-frame figcaption {
-  margin-top: 0.6rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
+@media (max-width: 768px) {
+  .system-architecture-img {
+    max-width: 100%;
+  }
 }
 
 .doc-architecture-section {

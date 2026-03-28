@@ -11,14 +11,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       The architecture separates policy definition, runtime enforcement, and reviewable evidence output so control decisions stay explicit and bounded.
     </p>
 
-    <figure class="doc-diagram-frame">
+    <figure class="system-architecture-section">
       <img
-        src="/diagrams/beaconguard-architecture.svg"
-        alt="BeaconGuard control boundary architecture"
-        class="doc-diagram"
+        src="/system-architecture.png"
+        alt="BeaconGuard control-boundary architecture showing deterministic decision enforcement before model access and evidence output"
+        class="system-architecture-img"
       />
-      <figcaption>
-        High-level component boundaries and trust domains in the control architecture.
+      <figcaption class="system-architecture-caption">
+        High-level component boundaries and trust domains in the control architecture
       </figcaption>
     </figure>
 
@@ -116,3 +116,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </section>
   </section>
 </BaseLayout>
+
+<style>
+  .system-architecture-caption {
+    margin: 0.65rem 0 0;
+    color: var(--text-muted);
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+</style>
