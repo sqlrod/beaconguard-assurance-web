@@ -9,7 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h1>Control Responsibility Matrix</h1>
     <p class="lead">
-      This page helps reviewers understand which responsibilities BeaconGuard owns, which remain with the application and system of record, and which stay outside BeaconGuard’s control boundary. It is intended to reduce ambiguity during architecture, security, risk, and procurement review.
+      This page helps reviewers understand which responsibilities BeaconGuard owns, which remain with the application and system of record, and which stay outside BeaconGuard's control boundary. It is intended to reduce ambiguity during architecture, security, risk, and procurement review.
     </p>
   </section>
 
@@ -40,7 +40,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <tr>
             <td>Authorization decision at the AI request boundary</td>
             <td>Owns policy evaluation and explicit allow, deny, or needs-review decisioning</td>
-            <td>Submits normalized request context and enforces returned decision</td>
+            <td>Submits signed request metadata, workflow context, and enforces returned decision</td>
             <td>Does not own authorization policy</td>
             <td>Does not own AI request authorization</td>
             <td>Review boundary correctness and policy fit</td>
@@ -55,7 +55,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </tr>
           <tr>
             <td>Model behavior and output quality</td>
-            <td>Does not guarantee model quality or business correctness</td>
+            <td>Does not claim model quality or business correctness</td>
             <td>Determines how allowed outputs are used</td>
             <td>Owns model behavior and model-serving characteristics</td>
             <td>Does not determine model quality</td>
@@ -85,7 +85,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h2>What reviewers should verify</h2>
     <ul>
-      <li>The application submits the context BeaconGuard requires to evaluate policy</li>
+      <li>The application submits signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, context tags, and freshness inputs BeaconGuard requires to evaluate policy</li>
       <li>BeaconGuard's allow, deny, or needs-review response is enforced by the application</li>
       <li>Model execution does not become the authorization boundary</li>
       <li>Systems of record remain authoritative for business state</li>

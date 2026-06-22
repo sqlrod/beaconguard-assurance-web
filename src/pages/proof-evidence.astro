@@ -3,121 +3,115 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Proof & Evidence | BeaconGuard Audit-Ready Decision Records"
-  description="Review sanitized BeaconGuard evidence records for financial, healthcare, and regulated internal automation workflows."
+  title="Proof & Evidence | BeaconGuard Decision Records"
+  description="BeaconGuard decision records show deterministic policy inputs, allow/deny/needs-review decisions, and audit-ready evidence at the AI request boundary."
 >
   <section class="stack-section">
     <h1>Proof &amp; Evidence</h1>
     <p class="lead">
-      Claims of AI safety are insufficient for enterprise security architecture. BeaconGuard emits structured evidence for every policy decision so reviewers can inspect what happened, why it happened, and which policy controlled the outcome.
-    </p>
-    <p>
-      These are short, sanitized example records. They do not include real PHI, real patient scenarios, real customer records, or real organization data.
+      BeaconGuard evidence records are designed to show what was requested, which deterministic policy inputs were evaluated, what decision was returned, and why the request was allowed, denied, or routed for review. Existing systems remain the systems of record. BeaconGuard emits decision evidence at the AI request boundary.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Decision Record Statement</h2>
-    <p>
-      The fields below are core signals a reviewer inspects to understand what happened, why it happened, and what evidence was emitted.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Example 1: Financial workflow</h2>
+    <h2>Healthcare operational AI request</h2>
     <pre class="sample-record"><code class="language-json">{`{
-  "event_timestamp": "2026-03-27T14:32:01Z",
-  "correlation_id": "req_financial_dispute_001",
-  "workflow_type": "financial_dispute_review",
-  "policy_result": "needs_review",
-  "policy_id": "policy.financial.dispute.v1",
-  "reason": "customer-impacting recommendation requires analyst approval",
-  "evidence_record": {
-    "decision_hash": "a7f8b9...c3d2e1",
-    "policy_snapshot": "snap_financial_dispute_v1"
+  "correlation_id": "req_7f21_healthops",
+  "workflow_type": "care_management_summary",
+  "boundary_enforcement": {
+    "decision_class": "NEEDS_REVIEW",
+    "enforced": true,
+    "policy_id": "pol_healthcare_ai_context_v1.2",
+    "trigger_condition": "approved_pathway_required"
+  },
+  "request_context": {
+    "source_system": "care_management_workflow",
+    "user_role": "care_coordinator",
+    "context_tags": [
+      "patient_related",
+      "restricted_operational_context"
+    ],
+    "approved_model_pathway": false,
+    "request_freshness_window_sec": 300
+  },
+  "decision_reason": [
+    "Requested model pathway is not approved for patient-related context.",
+    "Workflow requires privacy or architecture review before model execution."
+  ],
+  "evidence": {
+    "request_id": "req_7f21_healthops",
+    "policy_version": "v1.2",
+    "decision_timestamp": "2026-06-22T15:42:11Z",
+    "review_surface": "privacy_security_audit"
   }
 }`}</code></pre>
   </section>
 
   <section class="stack-section">
-    <h2>Example 2: Healthcare workflow</h2>
+    <h2>Financial workflow request</h2>
     <pre class="sample-record"><code class="language-json">{`{
-  "event_timestamp": "2026-03-27T14:36:19Z",
-  "correlation_id": "req_phi_summary_001",
-  "workflow_type": "phi_summary_request",
-  "policy_result": "needs_review",
-  "policy_id": "policy.healthcare.privacy_review.v1",
-  "reason": "request contains sensitive patient-related context and requires approved pathway or privacy review",
-  "evidence_record": {
-    "decision_hash": "c1d4e6...a9b0f2",
-    "policy_snapshot": "snap_privacy_review_v1"
+  "correlation_id": "req_8a44_fincrime",
+  "workflow_type": "aml_fraud_review",
+  "boundary_enforcement": {
+    "decision_class": "NEEDS_REVIEW",
+    "enforced": true,
+    "policy_id": "pol_financial_analyst_ai_v1.1",
+    "trigger_condition": "customer_impacting_recommendation"
+  },
+  "request_context": {
+    "source_system": "aml_case_workflow",
+    "user_role": "financial_crime_analyst",
+    "case_metadata_present": true,
+    "approved_model_pathway": true,
+    "request_freshness_window_sec": 300
+  },
+  "decision_reason": [
+    "AML, fraud, or dispute recommendation requires analyst approval.",
+    "Decision evidence is required for risk, compliance, and audit review."
+  ],
+  "evidence": {
+    "request_id": "req_8a44_fincrime",
+    "policy_version": "v1.1",
+    "decision_timestamp": "2026-06-22T15:45:18Z",
+    "review_surface": "risk_compliance_audit"
   }
 }`}</code></pre>
   </section>
 
   <section class="stack-section">
-    <h2>Example 3: Enterprise operations workflow</h2>
+    <h2>Regulated internal automation request</h2>
     <pre class="sample-record"><code class="language-json">{`{
-  "event_timestamp": "2026-03-27T14:41:08Z",
-  "correlation_id": "req_prod_auto_001",
+  "correlation_id": "req_4c19_internalops",
   "workflow_type": "production_automation_request",
-  "policy_result": "deny",
-  "policy_id": "policy.internal_automation.change_window.v1",
-  "reason": "automation attempted action outside approved role or change window",
-  "evidence_record": {
-    "decision_hash": "f8e2d1...b4c6a3",
-    "policy_snapshot": "snap_change_window_v1"
-  }
+  "boundary_enforcement": {
+    "decision_class": "DENY",
+    "enforced": true,
+    "policy_id": "pol_internal_ai_automation_v1.0",
+    "trigger_condition": "unauthorized_action_scope"
+  },
+  "request_context": {
+    "source_system": "internal_ops_console",
+    "user_role": "support_analyst",
+    "requested_action": "modify_production_record",
+    "change_window_active": false,
+    "approved_automation_pathway": false
+  },
+  "decision_reason": [
+    "Requested action is outside approved role scope.",
+    "Production modification requires approved automation pathway and active change window."
+  ]
 }`}</code></pre>
   </section>
 
   <section class="stack-section">
     <h2>What Reviewers Inspect</h2>
     <ul>
-      <li><strong>Explicit Enforcement</strong>: The policy_result field shows whether the request was allowed, denied, or routed for review.</li>
-      <li><strong>Policy Identity</strong>: The policy_id identifies which governed policy controlled the outcome.</li>
-      <li><strong>Reason</strong>: The reason records why the policy path was executed.</li>
-      <li><strong>Workflow Type</strong>: The workflow_type helps reviewers separate healthcare, financial, and internal operations examples.</li>
-      <li>
-        <strong>Evidence Binding</strong>: The decision hash and policy snapshot link emitted decision and evidence artifacts to the same control event.
-      </li>
+      <li>Which existing workflow submitted the AI-bound request</li>
+      <li>Which signed request metadata, source-system attributes, context tags, and freshness inputs were evaluated</li>
+      <li>Which policy returned allow, deny, or needs-review</li>
+      <li>Why model execution was allowed, blocked, or routed for review</li>
+      <li>What audit-ready evidence was preserved for later review</li>
     </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Evidence Binding Explanation</h2>
-    <p>
-      The decision hash and policy snapshot are emitted with the decision to support verification that a decision and its evidence record were produced from the same control event in the enforcement path.
-    </p>
-    <p class="flow-path-note">
-      These examples are public, sanitized artifacts used to describe the expected evidence surface.
-    </p>
-
-    <div class="infra-diagram" style="margin-top: 1rem;">
-      <div class="flow-diagram flow-diagram--sequence-3 proof-binding-flow">
-        <div class="flow-step flow-step--uniform flow-node-primary">
-          <p class="flow-step-title">Application Request</p>
-          <p>Inbound event enters BeaconGuard.</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-boundary">
-          <p class="flow-step-title">BeaconGuard Decision</p>
-          <p>Deterministic allow, deny, or needs-review with policy context.</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-evidence">
-          <p class="flow-step-title">Reviewer Evidence</p>
-          <p class="review-evidence-grid">
-            <span>policy_result</span>
-            <span>policy_snapshot</span>
-            <span>reason</span>
-            <span>policy_id</span>
-            <span>workflow_type</span>
-            <span>decision_hash</span>
-          </p>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section class="stack-section">
@@ -131,92 +125,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <style>
-    .review-evidence-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.35rem 0.9rem;
-      margin: 0;
-      padding: 0;
-      color: inherit;
-      font-size: 1rem;
-      line-height: 1.4;
+    .sample-record {
+      overflow-x: auto;
     }
 
-    .review-evidence-grid span {
+    .sample-record code {
       display: block;
-      margin: 0;
-    }
-
-    .review-evidence-grid span {
-      white-space: normal;
+      white-space: pre-wrap;
       overflow-wrap: anywhere;
       word-break: break-word;
-    }
-
-    @media (max-width: 900px) {
-      .sample-record {
-        overflow-x: auto;
-      }
-
-      .sample-record code {
-        display: block;
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-        font-size: 0.9rem;
-      }
-
-      .proof-binding-flow {
-        display: block;
-        gap: 0;
-      }
-
-      .proof-binding-flow .flow-step {
-        width: 100%;
-        min-height: 0;
-      }
-
-      .proof-binding-flow .flow-arrow {
-        display: none;
-      }
-
-      .proof-binding-flow .flow-step + .flow-step {
-        margin-top: 1rem;
-        position: relative;
-        padding-top: 1.2rem;
-      }
-
-      .proof-binding-flow .flow-step + .flow-step::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 0;
-        transform: translate(-50%, -65%);
-        width: 2px;
-        height: 0.9rem;
-        background: var(--brand-accent);
-      }
-
-      .proof-binding-flow .flow-step + .flow-step::after {
-        content: "↓";
-        position: absolute;
-        left: 50%;
-        top: 0;
-        transform: translate(-50%, -100%);
-        font-size: 0.86rem;
-        font-weight: 700;
-        line-height: 1;
-        color: var(--brand-accent);
-      }
-
-      .proof-binding-flow .flow-step {
-        padding: 0.9rem 0.9rem;
-        border-radius: 0.65rem;
-      }
-
-      .proof-binding-flow .flow-step-title {
-        margin-bottom: 0.5rem;
-      }
+      font-size: 0.9rem;
     }
   </style>
 </BaseLayout>

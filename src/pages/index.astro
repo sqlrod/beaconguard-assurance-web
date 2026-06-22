@@ -3,175 +3,136 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="BeaconGuard Assurance | Policy Control for AI-Assisted Regulated Workflows"
-  description="BeaconGuard provides deterministic policy control and evidence capture before AI execution in regulated workflows, supporting compliance, privacy, security, risk, and audit review."
+  title="BeaconGuard Assurance | AI Policy Control and Evidence Boundary"
+  description="BeaconGuard provides inline deterministic authorization and evidence capture before AI execution in high-risk enterprise workflows across healthcare, financial services, and regulated internal automation."
 >
   <section class="landing">
-    <p class="hero-eyebrow">Regulated AI Operations</p>
-    <h1>Deterministic policy control for AI-assisted regulated workflows.</h1>
-    <p>Control Before AI Execution. Evidence After Every Decision.</p>
+    <p class="hero-eyebrow">Inline Runtime Control Boundary</p>
+    <h1>Policy control before AI execution. Evidence after every decision.</h1>
     <p class="hero-subheadline">
-      BeaconGuard inserts a policy and evidence boundary between enterprise applications and AI/model endpoints, returning explicit allow, deny, or needs-review decisions with preserved evidence for security, compliance, privacy, risk, and audit teams.
+      BeaconGuard is an inline deterministic authorization and evidence boundary for high-risk enterprise AI workflows across healthcare, financial services, and regulated internal automation.
     </p>
-    <p class="hero-subheadline">Sensitive requests are evaluated before AI or automation execution.</p>
+    <p class="hero-subheadline">
+      BeaconGuard deploys alongside existing enterprise applications as an inline policy proxy. It evaluates signed request metadata, workflow context, user role, source-system trust, approved-pathway status, freshness controls, and governed policy before model execution. It returns allow, deny, or needs-review decisions and preserves audit-ready evidence.
+    </p>
     <div class="page-actions">
       <a class="btn-primary" href="/platform">Review the Platform</a>
-      <a class="btn-secondary" href="/canonical-workflow">Explore Workflow Examples</a>
-      <a class="btn-secondary" href="/proof-evidence">Review Proof &amp; Evidence</a>
-      <a class="btn-secondary" href="/reviewer-kit">Open the Reviewer Kit</a>
+      <a class="btn-secondary" href="/healthcare">Healthcare Architecture Review</a>
+      <a class="btn-secondary" href="/fintech">Financial Workflow Review</a>
     </div>
   </section>
 
   <section class="stack-section homepage-block">
-    <h2>Built for sensitive regulated operations</h2>
+    <h2>Existing Systems Remain in Place</h2>
     <p>
-      BeaconGuard is built for workflows where AI or automation should not execute until policy has been checked.
-      It keeps model behavior out of the authorization decision point and gives reviewers a standard record of what happened.
-    </p>
-    <p>
-      The top-level control pattern applies across regulated enterprise operations. Financial crime, fraud, and dispute review remain valid
-      examples, while healthcare privacy review, hospital operations support, and internal automation are also policy-gated workflow patterns.
+      BeaconGuard does not replace existing enterprise applications. It interposes an inline policy enforcement boundary at the AI request layer so existing workflows can be made fail-closed, policy-controlled, and auditable before model execution.
     </p>
     <ul>
-      <li>Healthcare privacy and operational AI review</li>
-      <li>Financial crime, fraud, and dispute review</li>
-      <li>Internal automation touching regulated systems</li>
-      <li>Customer-impacting account or service decisions</li>
-      <li>Employee use of AI tools with sensitive data</li>
+      <li>Existing applications continue to own workflow logic and systems of record.</li>
+      <li>BeaconGuard enforces policy before AI or model execution.</li>
+      <li>Decision evidence is preserved for security, privacy, compliance, risk, and audit review.</li>
     </ul>
   </section>
 
   <section class="stack-section homepage-block">
-    <h2>What BeaconGuard controls</h2>
-    <p class="lead">
-      BeaconGuard is a runtime policy and evidence boundary for AI-assisted regulated workflows.
-    </p>
-    <p>
-      It does not replace applications, models, clinical review, transaction systems, or compliance programs.
-      It decides whether a request is permitted under explicit policy and returns deterministic outcomes with decision context for each event.
-    </p>
-    <ul>
-      <li>What context can be sent to AI/model endpoints</li>
-      <li>Which requests are allowed, denied, or routed for approval</li>
-      <li>Which users, roles, workflows, or systems can trigger AI execution</li>
-      <li>What evidence is preserved for later review</li>
-      <li>What conditions require human approval</li>
-    </ul>
+    <h2>Review Paths</h2>
+    <div class="section-grid section-grid--compact">
+      <div class="content-card">
+        <h3>Healthcare Operations</h3>
+        <p>For PHI-sensitive operational workflows, approved AI pathways, privacy review routing, role-based request controls, and audit-ready decision evidence.</p>
+        <p><a href="/healthcare">Review Healthcare Use Case</a></p>
+      </div>
+      <div class="content-card">
+        <h3>Financial Workflows</h3>
+        <p>For AML, KYC, fraud, dispute review, customer-impacting recommendations, and analyst-assist workflows requiring deterministic request control before model execution.</p>
+        <p><a href="/fintech">Review Financial Use Case</a></p>
+      </div>
+      <div class="content-card">
+        <h3>Regulated Internal Automation</h3>
+        <p>For internal AI agents or automations that need policy enforcement before acting against production systems or sensitive operational data.</p>
+      </div>
+    </div>
   </section>
 
   <section class="stack-section homepage-block">
-    <h2>Where BeaconGuard sits in the request path</h2>
+    <h2>What BeaconGuard Controls</h2>
     <p class="lead">
-      A request enters BeaconGuard before model execution and only proceeds when policy is satisfied.
+      BeaconGuard evaluates deterministic context tags, approved-pathway status, source-system metadata, signed request attributes, and governed policy before model execution.
     </p>
-    <p>Authorization logic is applied at runtime by a deterministic policy runtime, then returned as allow, deny, or needs-review plus decision metadata.</p>
-    <p class="homepage-risk-framing">
-      LLMs are probabilistic systems and should not be the authorization boundary for sensitive regulated workflows. BeaconGuard inserts deterministic policy control in the request path before model execution.
-    </p>
+    <ul>
+      <li>Which AI requests are allowed to proceed</li>
+      <li>Which requests are denied before model execution</li>
+      <li>Which requests require human review</li>
+      <li>Which model pathways are approved for the workflow</li>
+      <li>Which user roles may invoke the workflow</li>
+      <li>Which signed context tags and source-system attributes are required</li>
+      <li>Which evidence is preserved for later review</li>
+    </ul>
   </section>
 
   <section class="stack-section homepage-block">
     <p class="section-label">Control boundary overview</p>
-    <h2>Request control boundary</h2>
+    <h2>Inline Policy Proxy at the AI Request Boundary</h2>
     <div class="infra-diagram home-boundary-diagram">
       <div class="flow-diagram flow-diagram--stack home-request-flow">
         <div class="flow-step flow-node-primary">
-          <p class="flow-step-title">Enterprise Application</p>
-          <p>Submits AI request with business context and authorization intent.</p>
+          <p class="flow-step-title">Existing Enterprise Application</p>
+          <p>Owns workflow logic, records, user experience, and operational process.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-node-boundary">
-          <p class="flow-step-title">BeaconGuard Boundary</p>
-          <p>Evaluates policy and returns deterministic allow, deny, or needs-review with reasons.</p>
+          <p class="flow-step-title">BeaconGuard Policy Enforcement Point</p>
+          <p>Evaluates signed request metadata, source-system trust, context tags, freshness windows, and governed policy.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-node-evidence">
-          <p class="flow-step-title">AI / Model Endpoint</p>
-          <p>Receives the request only when policy permits execution.</p>
+          <p class="flow-step-title">Approved Model Endpoint</p>
+          <p>Receives only allowed requests after execution-boundary authorization.</p>
         </div>
       </div>
       <div class="flow-diagram flow-branch home-review-branch">
         <p class="flow-branch-title">Evidence &amp; review stream</p>
         <div class="flow-step flow-node-evidence flow-pulse">
-          <p class="flow-step-title">Decision Record</p>
-          <p>Decision context, policy identity, and outcome are emitted for audit and security review.</p>
+          <p class="flow-step-title">Audit-Ready Evidence</p>
+          <p>Allow, deny, and needs-review decisions preserve policy inputs and decision context.</p>
         </div>
       </div>
     </div>
     <p class="flow-path-note">
-      Decision outcomes are explicit and reviewable; execution occurs only after policy approval or approved review.
+      BeaconGuard is the fail-closed checkpoint before model execution, not a replacement for the systems that already run the business workflow.
     </p>
   </section>
 
-  <section class="stack-section homepage-block home-boundary-section">
-    <h2>Evidence and replay surface</h2>
-    <div class="flow-diagram flow-diagram--stack home-evidence-flow">
-      <div class="flow-step">
-        <p class="flow-step-title">Application</p>
-        <p>Submits request context and policy intent</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">BeaconGuard</p>
-        <p>Evaluates policy with deterministic control</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">AI / Model Endpoint</p>
-        <p>Executes only approved actions with trace metadata</p>
-      </div>
-    </div>
-    <p>Every decision is reviewable with the same context used at evaluation time.</p>
-  </section>
-
   <style>
-    .home-boundary-section {
+    .home-boundary-section,
+    .homepage-block {
       overflow-wrap: anywhere;
       word-break: break-word;
-    }
-
-    .home-boundary-section .flow-path-note,
-    .home-boundary-section .flow-branch-title,
-    .home-boundary-section p {
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .home-boundary-section .flow-step {
-      min-height: 0;
     }
 
     @media (max-width: 900px) {
       .home-request-flow,
-      .home-evidence-flow {
+      .home-review-branch {
         display: block;
         gap: 0;
       }
 
-      .home-review-branch {
-        display: block;
-      }
-
-      .home-request-flow .flow-step,
-      .home-evidence-flow .flow-step {
+      .home-request-flow .flow-step {
         width: 100%;
         min-height: 0;
       }
 
-      .home-request-flow .flow-arrow,
-      .home-evidence-flow .flow-arrow {
+      .home-request-flow .flow-arrow {
         display: none;
       }
 
-      .home-request-flow .flow-step + .flow-step,
-      .home-evidence-flow .flow-step + .flow-step {
+      .home-request-flow .flow-step + .flow-step {
         margin-top: 1rem;
         position: relative;
         padding-top: 1.1rem;
       }
 
-      .home-request-flow .flow-step + .flow-step::before,
-      .home-evidence-flow .flow-step + .flow-step::before {
+      .home-request-flow .flow-step + .flow-step::before {
         content: "";
         position: absolute;
         left: 1rem;
@@ -182,8 +143,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         transform: translateY(-65%);
       }
 
-      .home-request-flow .flow-step + .flow-step::after,
-      .home-evidence-flow .flow-step + .flow-step::after {
+      .home-request-flow .flow-step + .flow-step::after {
         content: "↓";
         position: absolute;
         left: 1rem;
@@ -194,111 +154,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         line-height: 1;
         color: var(--brand-accent);
       }
-
-      .home-request-flow .flow-step,
-      .home-evidence-flow .flow-step,
-      .home-request-flow .flow-branch .flow-step {
-        padding: 0.9rem 0.95rem;
-        border-radius: 0.65rem;
-      }
-
-      .home-request-flow .flow-step-title,
-      .home-evidence-flow .flow-step-title,
-      .home-review-branch .flow-step-title {
-        margin-bottom: 0.45rem;
-      }
     }
   </style>
-
-  <section class="stack-section homepage-block">
-    <h2>Workflow examples</h2>
-    <div class="section-grid section-grid--compact">
-      <div class="content-card">
-        <h3>Healthcare AI Operations Review</h3>
-        <p>Policy checks can detect PHI-sensitive context, require an approved AI pathway, route privacy review, or deny unapproved model endpoints before execution.</p>
-      </div>
-      <div class="content-card">
-        <h3>Financial Crime / Fraud Review</h3>
-        <p>Analyst support, dispute review, AML, KYC, and fraud workflows can be gated so customer-impacting recommendations require policy approval and evidence.</p>
-      </div>
-      <div class="content-card">
-        <h3>Regulated Internal Automation</h3>
-        <p>Automation touching regulated systems can be denied or routed for approval when role, change window, or action scope conditions are not met.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Failure handling and operational control</h2>
-    <div class="homepage-failclosed-callout">
-      <h3>Fail-closed control gate</h3>
-      <p>
-        If trust assumptions, policy conditions, or request context are missing, malformed, or out of bounds, BeaconGuard fails closed before the request reaches the model path.
-      </p>
-    </div>
-    <div class="section-grid section-grid--compact">
-      <div class="content-card">
-        <h3>Fail-closed behavior</h3>
-        <p>When policy context is malformed or incomplete, BeaconGuard defaults to deny and records the block condition.</p>
-      </div>
-      <div class="content-card">
-        <h3>Control assertions</h3>
-        <p>Explicit allow, deny, and needs-review decisions remain reproducible and linked to policy identity and input context.</p>
-      </div>
-      <div class="content-card">
-        <h3>Replayability</h3>
-        <p>Equivalent requests under the same policy state return equivalent outcomes for audit validation.</p>
-      </div>
-      <div class="content-card">
-        <h3>Review readiness</h3>
-        <p>Decision artifacts are structured for security, privacy, compliance, risk, and audit teams to reconstruct control behavior.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Deployment boundary and responsibility</h2>
-    <p>
-      BeaconGuard is designed for controlled deployment postures where control decisions remain bounded at the policy layer and auditable by operational, compliance, privacy, security, and risk teams.
-    </p>
-    <ul>
-      <li>Deployment can be phased by policy domain and environment, without changing model behavior.</li>
-      <li>Operational teams retain ownership of transaction execution workflows; BeaconGuard owns the control envelope.</li>
-      <li>Decision outcomes are reviewable independently from the model implementation path.</li>
-    </ul>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Trust and review surface</h2>
-    <p>Risk, security, privacy, compliance, and audit stakeholders can use BeaconGuard as the review layer for runtime controls.</p>
-    <ul>
-      <li>Decision context and outcomes are explicit and reproducible.</li>
-      <li>Evidence is preserved for investigation and controls testing.</li>
-      <li>Control behavior can be reviewed without exposing model internals.</li>
-    </ul>
-    <p class="muted-copy">
-      Review teams consume the same decision context needed for audit-ready governance.
-    </p>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Design partner review path</h2>
-    <div class="stack-callout">
-      <p>Design partners help validate policy boundaries, fail-closed behavior, and evidence requirements before production rollout.</p>
-      <p><a href="/design-partner-program">Learn how we run design partner evaluations</a></p>
-    </div>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Get Started</h2>
-    <p>
-      Start with the architecture and move into workflow examples, deployment boundaries, and review planning.
-    </p>
-    <div class="page-actions">
-      <a class="btn-primary" href="/platform">Review the Platform</a>
-      <a class="btn-secondary" href="/canonical-workflow">Explore Workflow Examples</a>
-      <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
-      <a class="btn-secondary" href="/deployment">Review deployment boundary</a>
-    </div>
-  </section>
 </BaseLayout>

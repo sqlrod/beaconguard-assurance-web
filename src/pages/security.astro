@@ -4,159 +4,63 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Security | BeaconGuard Fail-Closed AI Policy Enforcement"
-  description="BeaconGuard is designed for fail-closed policy enforcement, approval gates, sensitive data handling, and evidence integrity in regulated AI operations."
+  description="BeaconGuard evaluates signed metadata, workflow identity, source-system trust, approved-pathway status, deterministic context tags, and freshness controls before AI execution."
 >
   <section class="stack-section">
     <h1>Security</h1>
     <p class="lead">
-      BeaconGuard keeps model behavior out of the authorization layer by placing deterministic policy checks before AI or automation execution.
+      BeaconGuard is an execution-boundary authorization layer for regulated enterprise workflows where AI requests must be policy-controlled, fail-closed, and auditable before model execution.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>The Control Problem</h2>
+    <h2>Zero-Trust AI Ingress</h2>
     <p>
-      Large Language Models (LLMs) are probabilistic generation engines. They cannot serve as the authorization boundary for regulated operations where security, privacy, compliance, audit, or risk teams need explicit control before execution.
-      Relying on prompt engineering alone to govern sensitive data handling, customer-impacting recommendations, or regulated internal automation creates operational risk.
+      BeaconGuard treats every AI request as untrusted until signed metadata, workflow identity, source-system trust, user role, approved-pathway status, and required policy inputs are validated.
     </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Policy-Enforced AI Ingress</h2>
-    <p>
-      BeaconGuard Assurance enforces a deterministic control boundary before model inference. Requests are evaluated for trust, structural validity, data sensitivity, user role, workflow scope, and policy compliance before the LLM is invoked.
-      Untrusted, malformed, replayed, or out-of-policy requests are blocked from reaching the model.
-    </p>
-    <div class="infra-diagram">
-      <div class="flow-diagram flow-diagram--sequence-3 security-workflow">
-        <div class="flow-step flow-step--uniform flow-node-primary">
-          <p class="flow-step-title">Untrusted / malformed / replayed request</p>
-          <p>Ingress validation runs before policy evaluation.</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-boundary">
-          <p class="flow-step-title">BeaconGuard deterministic boundary</p>
-          <p>Trust, structure, and policy checks execute in the same controlled control layer.</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-deny">
-          <p class="flow-step-title">Blocked before model inference</p>
-          <p>Denied requests do not proceed to model output.</p>
-        </div>
-      </div>
-
-      <div class="flow-diagram flow-diagram--sequence-2 security-workflow" style="margin-top: 1rem;">
-        <div class="flow-step flow-step--uniform flow-node-primary">
-          <p class="flow-step-title">Trusted / valid / policy-compliant request</p>
-          <p>Inbound trust checks pass and request enters enforcement.</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step flow-step--uniform flow-node-boundary">
-          <p class="flow-step-title">BeaconGuard deterministic boundary</p>
-          <p>Model invocation only after allow decision.</p>
-        </div>
-      </div>
-      <p class="flow-path-note">
-        The model remains outside the control boundary and only receives requests that pass deterministic enforcement.
-      </p>
-    </div>
   </section>
 
   <section class="stack-section">
     <h2>Fail-Closed Enforcement</h2>
     <p>
-      When required policy conditions are not met, BeaconGuard executes a deterministic, fail-closed denial. The system prevents AI or automation from creating an unauthorized forward path and preserves human-reviewed operational authority where approval is required.
+      If required context, signatures, policy inputs, approved-pathway status, or freshness controls are missing or invalid, BeaconGuard denies or routes the request for review rather than allowing model execution by default.
     </p>
-    <div class="section-grid section-grid--compact">
-      <div class="content-card">
-        <h3>Deterministic Deny</h3>
-        <p>Missing trust proofs, invalid structure, or policy gaps resolve to deny, not permissive fallback.</p>
-      </div>
-      <div class="content-card">
-        <h3>Approval Gates</h3>
-        <p>Requests that require human review can be routed as needs-review before execution proceeds.</p>
-      </div>
-      <div class="content-card">
-        <h3>Least-Privilege AI Execution</h3>
-        <p>Policy can limit which users, roles, workflows, systems, and data types are allowed to trigger model invocation.</p>
-      </div>
-      <div class="content-card">
-        <h3>Evidence Integrity</h3>
-        <p>Decision records preserve the policy identity, request context, outcome, and reason needed for later review.</p>
-      </div>
-    </div>
   </section>
 
   <section class="stack-section">
-    <h2>Designed for Regulated Review Environments</h2>
+    <h2>Existing Security Stack Remains in Place</h2>
     <p>
-      BeaconGuard is designed to produce evidence useful to security, privacy, compliance, and audit teams in workflows where uncontrolled AI execution is not acceptable.
-      It separates policy enforcement from model response and does not claim certifications, legal compliance guarantees, or replacement of internal control programs.
+      BeaconGuard does not replace SIEM, IAM, GRC, WAF, API gateway, EHR, AML, fraud, or case-management systems. It adds a dedicated AI request enforcement boundary that evaluates workflow-level policy context before model execution and emits evidence for existing review processes.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Deterministic Context Tagging</h2>
+    <p>
+      BeaconGuard's core authorization boundary evaluates deterministic tags and metadata supplied by host applications, signed request contracts, or optional preprocessors. It does not rely on probabilistic free-text inference as the authorization boundary.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Replay and Freshness Controls</h2>
+    <p>
+      BeaconGuard can evaluate request IDs, timestamps, signed metadata, and freshness windows. Deployment-specific replay controls may use local state, cache-backed nonce tracking, or signed request constraints depending on architecture requirements.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Why BeaconGuard is not an API Gateway</h2>
+    <p>
+      Standard API gateways route traffic using endpoints, tokens, and network policies. BeaconGuard evaluates workflow-level AI policy context before model execution, including user role, workflow identity, signed request metadata, approved-pathway status, source-system trust, freshness windows, and evidence requirements.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Where to go next</h2>
-    <p><a href="/trust-assurance">Trust Center</a></p>
     <div class="page-actions">
       <a class="btn-secondary" href="/proof-evidence">Reviewable Decision Evidence</a>
       <a class="btn-secondary" href="/canonical-workflow">Workflow Examples</a>
+      <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
     </div>
   </section>
-
-  <style>
-    @media (max-width: 900px) {
-      .security-workflow {
-        display: block;
-        gap: 0;
-      }
-
-      .security-workflow .flow-step {
-        width: 100%;
-        min-height: 0;
-      }
-
-      .security-workflow .flow-step-title {
-        font-size: 0.98rem;
-      }
-
-      .security-workflow .flow-arrow {
-        display: none;
-      }
-
-      .security-workflow .flow-step + .flow-step {
-        margin-top: 1.2rem;
-        position: relative;
-        padding-top: 1.35rem;
-      }
-
-      .security-workflow .flow-step + .flow-step::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: -0.62rem;
-        transform: translateX(-50%);
-        width: 2px;
-        height: 0.75rem;
-        background: var(--brand-accent);
-      }
-
-      .security-workflow .flow-step + .flow-step::after {
-        content: "↓";
-        position: absolute;
-        left: 50%;
-        top: -0.6rem;
-        transform: translate(-50%, -65%);
-        font-size: 0.9rem;
-        line-height: 1;
-        color: var(--brand-accent);
-        font-weight: 700;
-      }
-
-      .security-workflow .flow-node-boundary {
-        border-left: 4px solid var(--brand-accent);
-        box-shadow: 0 0 0 1px rgba(91, 155, 224, 0.2);
-      }
-    }
-  </style>
 </BaseLayout>

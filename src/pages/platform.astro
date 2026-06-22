@@ -3,121 +3,99 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Platform | BeaconGuard AI Policy and Evidence Boundary"
-  description="BeaconGuard sits between regulated systems and AI/model endpoints to evaluate requests against deterministic policy before execution and preserve evidence for review."
+  title="Platform | BeaconGuard AI Authorization and Evidence Boundary"
+  description="BeaconGuard sits between regulated enterprise applications and AI/model endpoints as an inline policy proxy that evaluates deterministic policy inputs before model execution."
 >
   <section>
-    <h1>Platform</h1>
+    <h1>Inline authorization and evidence boundary for AI-assisted workflows.</h1>
     <p class="lead">
-      BeaconGuard sits between regulated systems and AI/model endpoints. Each request is evaluated against deterministic policy before execution.
+      BeaconGuard sits between regulated enterprise applications and AI/model endpoints. It deploys alongside existing systems as an inline policy proxy. Each request is evaluated before model execution using deterministic policy inputs such as signed metadata, workflow identity, user role, source-system trust, approved-pathway status, request timestamps, freshness windows, and required context tags.
     </p>
   </section>
 
   <section>
-    <h2>What BeaconGuard Is</h2>
+    <h2>Existing Systems Remain in Place</h2>
     <p>
-      It is a runtime policy and evidence boundary that evaluates request context against centralized policy and returns an explicit decision: allow, deny, or needs review.
-    </p>
-    <p>
-      Every decision can produce an evidence record for audit, compliance, privacy, and risk review.
-    </p>
-    <p>
-      Related context: <a href="/deployment">Deployment</a> and <a href="/trust-assurance">Trust Center</a>.
+      BeaconGuard does not replace the system of record, workflow application, case-management platform, EHR, AML system, fraud system, SIEM, IAM, or GRC tool. Those systems continue to own their existing functions. BeaconGuard enforces the AI request boundary before model execution and emits decision evidence after allow, deny, or needs-review outcomes.
     </p>
   </section>
 
   <section>
-    <h2>Where Policy Control Executes</h2>
-    <div class="flow-diagram flow-diagram--sequence-4 platform-control-flow">
-      <div class="flow-step flow-step--uniform">
-        <p class="flow-step-title">Application or workflow request</p>
-        <p>Enterprise application, internal tool, or operational system sends request context.</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step flow-step--uniform">
-        <p class="flow-step-title">BeaconGuard policy evaluation</p>
-        <p>User, role, workflow, data type, risk level, and requested action are checked.</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step flow-step--uniform">
-        <p class="flow-step-title">Decision response</p>
-        <p>BeaconGuard returns allow, deny, or needs-review with policy reasons.</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step flow-step--uniform">
-        <p class="flow-step-title">Allowed execution and evidence</p>
-        <p>AI/model endpoint is invoked only if allowed, with a review path and evidence record available.</p>
-      </div>
-    </div>
+    <h2>Architecture Sequence</h2>
+    <ol>
+      <li>Existing regulated application or workflow submits an AI-bound request</li>
+      <li>BeaconGuard receives the request before model execution</li>
+      <li>Signed metadata, source trust, user role, workflow identity, context tags, and policy inputs are validated</li>
+      <li>Freshness and replay controls are checked using request IDs, timestamps, signed metadata, or deployment-specific state controls</li>
+      <li>Deterministic Context Tagging and Approved-Pathway Verification occurs</li>
+      <li>Deterministic policy evaluation runs</li>
+      <li>BeaconGuard returns allow, deny, or needs-review</li>
+      <li>Only allowed requests proceed to approved model endpoint</li>
+      <li>Decision evidence is preserved for audit, security, privacy, compliance, and risk review</li>
+    </ol>
   </section>
 
   <section>
-    <h2>Compatibility layer for non-native clients</h2>
-    <p>
-      Some applications do not natively emit the request structure BeaconGuard evaluates.
-      In those cases, a governed compatibility layer can normalize requests before they enter the BeaconGuard control boundary.
-    </p>
-    <p>
-      The compatibility layer does not make policy decisions.
-      It does not bypass BeaconGuard.
-      BeaconGuard remains the policy authority, fail-closed boundary, and evidence-emitting control layer.
-    </p>
-  </section>
-
-  <section>
-    <h2>What BeaconGuard Is Not</h2>
-    <p>BeaconGuard is not:</p>
-    <ul>
-      <li>A chatbot or assistant.</li>
-      <li>An AI model host or training platform.</li>
-      <li>A prompt-engineering framework.</li>
-      <li>General-purpose monitoring or observability alone.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Core Platform Functions</h2>
+    <h2>Decision Outputs</h2>
     <div class="section-grid section-grid--compact">
       <div class="content-card">
-        <h3>Policy Control Plane</h3>
-        <p>Distributes signed policy artifacts and policy identity to enforcement points.</p>
+        <h3>Allow</h3>
+        <p>The request meets policy requirements and can proceed to the approved model endpoint.</p>
       </div>
       <div class="content-card">
-        <h3>Deterministic Enforcement</h3>
-        <p>Applies policy consistently across time, environments, and request variations.</p>
+        <h3>Deny</h3>
+        <p>The request fails required policy, trust, freshness, role, pathway, or context checks before model execution.</p>
       </div>
       <div class="content-card">
-        <h3>Evidence Emission</h3>
-        <p>Records audit-ready outcomes and decision context for governance review.</p>
-      </div>
-      <div class="content-card">
-        <h3>Review Replay</h3>
-        <p>Reconstructs historical decisions from policy state and request inputs.</p>
+        <h3>Needs Review</h3>
+        <p>The request is routed for human review before model execution because policy requires approval.</p>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Applicable workflow examples</h2>
+    <h2>BeaconGuard as a Policy Enforcement Point</h2>
     <p>
-      BeaconGuard is designed for regulated applications, enterprise applications, internal tools, and operational systems where sensitive requests require policy evaluation before model invocation or automation.
+      BeaconGuard functions as a policy enforcement point at the AI request boundary. It can consume policy inputs from existing identity, workflow, application, governance, or source systems, but it does not become the system of record and does not modify legacy application logic.
     </p>
-    <ul>
-      <li>PHI redaction or approval before AI summarization</li>
-      <li>Financial dispute review before model-assisted recommendation</li>
-      <li>Internal operations automation requiring approval before action</li>
-      <li>Vendor AI access requests requiring policy checks</li>
-      <li>Sensitive data handling before model invocation</li>
-    </ul>
   </section>
 
   <section>
-    <h2>Failure handling</h2>
+    <h2>Capability Blocks</h2>
+    <div class="section-grid">
+      <div class="content-card">
+        <h3>Healthcare AI Control</h3>
+        <p>BeaconGuard supports PHI-sensitive operational AI workflows by enforcing approved model pathways, deterministic context tags, user-role boundaries, source-system trust, and needs-review routing before model execution.</p>
+        <ul>
+          <li>Care-management summary support</li>
+          <li>Discharge-planning assistance</li>
+          <li>Patient-message draft review</li>
+          <li>Utilization-review preparation</li>
+          <li>Referral-intake or chart-abstraction workflows</li>
+        </ul>
+      </div>
+      <div class="content-card">
+        <h3>Financial Workflow Control</h3>
+        <p>BeaconGuard supports AI-assisted financial workflows where analyst-assist outputs, fraud review, AML/KYC review, dispute handling, or customer-impacting recommendations require deterministic request control before model execution.</p>
+        <ul>
+          <li>AML analyst support</li>
+          <li>Fraud exception review</li>
+          <li>KYC escalation support</li>
+          <li>Dispute resolution assistance</li>
+          <li>Account-action recommendation gating</li>
+        </ul>
+      </div>
+      <div class="content-card">
+        <h3>Regulated Internal Automation</h3>
+        <p>BeaconGuard supports internal AI agents and automations that need policy enforcement before interacting with production systems, sensitive data, or regulated operational workflows.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why BeaconGuard is not just an API Gateway</h2>
     <p>
-      If trust assumptions, policy conditions, or request context are missing, malformed, or out of bounds, BeaconGuard fails closed before the request proceeds into the model or automation path.
-    </p>
-    <p>
-      BeaconGuard governs whether AI interactions are allowed to proceed under policy at the request boundary. It does not claim to eliminate downstream workflow, policy-authoring, signer, legal, clinical, or model-quality risk.
+      Standard API gateways route traffic based on endpoints, tokens, and network policies. BeaconGuard evaluates workflow-level AI policy context before model execution, including user role, workflow identity, signed request metadata, approved-pathway status, source-system trust, freshness windows, and evidence requirements.
     </p>
   </section>
 
@@ -130,62 +108,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </ul>
     <div class="page-actions">
       <a class="btn-primary" href="/how-it-works">See runtime workflow</a>
-      <a class="btn-secondary" href="/canonical-workflow">Explore workflow examples</a>
-      <a class="btn-secondary" href="/contact">Talk to a platform specialist</a>
+      <a class="btn-secondary" href="/healthcare">Review healthcare path</a>
+      <a class="btn-secondary" href="/fintech">Review financial path</a>
     </div>
   </section>
-
-  <style>
-    @media (max-width: 900px) {
-      .platform-control-flow {
-        display: block;
-        gap: 0;
-        width: 100%;
-      }
-
-      .platform-control-flow .flow-step {
-        width: 100%;
-        min-height: 0;
-        padding: 0.9rem 0.95rem;
-        border-radius: 0.65rem;
-      }
-
-      .platform-control-flow .flow-arrow {
-        display: none !important;
-      }
-
-      .platform-control-flow .flow-step + .flow-step {
-        margin-top: 1rem;
-        position: relative;
-        padding-top: 1.1rem;
-      }
-
-      .platform-control-flow .flow-step + .flow-step::before {
-        content: "";
-        position: absolute;
-        left: 1rem;
-        top: 0;
-        width: 2px;
-        height: 0.9rem;
-        background: var(--brand-accent);
-        transform: translateY(-65%);
-      }
-
-      .platform-control-flow .flow-step + .flow-step::after {
-        content: "↓";
-        position: absolute;
-        left: 1rem;
-        top: 0;
-        transform: translate(-45%, -100%);
-        font-size: 0.9rem;
-        font-weight: 700;
-        line-height: 1;
-        color: var(--brand-accent);
-      }
-
-      .platform-control-flow .flow-step-title {
-        margin-bottom: 0.45rem;
-      }
-    }
-  </style>
 </BaseLayout>

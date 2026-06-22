@@ -5,11 +5,13 @@ layout: /src/layouts/BaseLayout.astro
 
 # BeaconGuard Overview
 
-BeaconGuard Assurance is a deterministic authorization and audit control plane
-for bounded regulated workflow execution in enterprise AI runtimes.
+BeaconGuard Assurance is an inline deterministic authorization and audit
+control boundary for bounded regulated workflow execution in enterprise AI
+runtimes.
 
-It separates **authorization intent**, **decision logic**, and **audit evidence**
-from application code and AI model behavior.
+It deploys alongside existing systems and separates **authorization intent**,
+**decision logic**, and **audit evidence** from application code and AI model
+behavior.
 
 ---
 
@@ -17,10 +19,14 @@ from application code and AI model behavior.
 
 BeaconGuard is built for a deterministic control-boundary posture with requirements that traditional AI systems fail to meet:
 
-- Deterministic authorization outcomes
+- Signed request metadata, workflow identity, user role, source-system trust,
+  approved-pathway status, deterministic context tags, freshness windows, and
+  replay controls
+- Deterministic authorization outcomes: allow, deny, or needs-review
 - Replayable decisions with identical results
 - Append-only, tamper-evident decision records designed to preserve evidentiary value in regulated environments
 - Externalized enforcement independent of model internals
+- Existing systems remain authoritative for workflow logic and records
 
 ---
 
@@ -32,8 +38,10 @@ BeaconGuard is intentionally **not**:
 - A prompt framework
 - An observability dashboard
 - A heuristic safety filter
+- A replacement for EHR, AML, fraud, SIEM, IAM, GRC, case-management, or workflow systems
 
-It governs **whether** an interaction is allowed and **records why**.
+It governs **whether** an interaction is allowed, denied, or routed for review
+and **records why**.
 
 ---
 

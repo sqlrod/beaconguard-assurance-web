@@ -22,7 +22,7 @@ BeaconGuard operates under the following assumptions:
 - Policy snapshots are authored and signed by trusted parties
 - Transport-level security (e.g., TLS) is provided by the deployment environment
 
-If these assumptions do not hold, BeaconGuard makes no guarantees.
+If these assumptions do not hold, BeaconGuard's control assertions may not apply.
 
 ---
 
@@ -129,7 +129,7 @@ Residual risk is explicitly acknowledged:
 
 - Misconfiguration can deny legitimate access
 - Policy authoring errors can encode incorrect intent
-- Key management failures undermine integrity guarantees
+- Key management failures undermine integrity assertions
 
 BeaconGuard prioritizes **visibility and determinism** over silent tolerance.
 

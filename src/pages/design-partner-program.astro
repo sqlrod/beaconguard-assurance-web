@@ -3,114 +3,66 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Design Partner Program | BeaconGuard Regulated AI Operations"
-  description="BeaconGuard design partner evaluations for healthcare, security, compliance, regulated operations, financial services, and internal audit teams."
+  title="Controlled Architecture Evaluation | BeaconGuard Assurance"
+  description="For healthcare, financial services, and regulated enterprise teams evaluating AI workflow control before model execution."
 >
   <section>
-    <h1>Design Partner Program</h1>
+    <h1>Controlled Architecture Evaluation</h1>
+    <p class="lead">
+      For healthcare, financial services, and regulated enterprise teams evaluating AI workflow control before model execution.
+    </p>
     <p>
-      The program is for healthcare, security, compliance, privacy, regulated operations, audit, and financial services teams evaluating deterministic policy control before AI or automation execution.
+      BeaconGuard is seeking bounded architecture reviews with teams that own regulated workflows where AI requests need deterministic policy enforcement, approved-pathway checks, needs-review routing, or audit-ready evidence.
     </p>
   </section>
 
   <section>
-    <h2>Who We Partner With</h2>
-    <div class="section-grid section-grid--compact">
-      <div class="content-card">
-        <h3>Product and platform teams</h3>
-        <p>Teams introducing runtime policy control for AI-enabled workflows, internal tools, and operational systems.</p>
-      </div>
-      <div class="content-card">
-        <h3>Security, compliance, and privacy teams</h3>
-        <p>Groups aligning runtime AI behavior with assurance, sensitive data handling, and review objectives.</p>
-      </div>
-      <div class="content-card">
-        <h3>Regulated operations teams</h3>
-        <p>Organizations testing approval-gated AI workflows where execution requires policy checks and evidence.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Target Design Partner Profiles</h2>
-    <ul>
-      <li>Healthcare compliance or privacy team evaluating AI controls</li>
-      <li>Security team reviewing internal AI usage</li>
-      <li>Regulated operations team testing approval-gated AI workflows</li>
-      <li>Financial services compliance team evaluating AI-assisted analyst workflows</li>
-      <li>Internal audit team evaluating evidence capture for AI-assisted actions</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>What We Validate With Partners</h2>
-    <div class="section-grid">
-      <div class="content-card">
-        <h3>Use-case boundaries</h3>
-        <p>Where deterministic control should intervene and what should remain out of scope.</p>
-      </div>
-      <div class="content-card">
-        <h3>Policy posture</h3>
-        <p>Operationally practical policy granularity across enterprise contexts.</p>
-      </div>
-      <div class="content-card">
-        <h3>Evidence workflow</h3>
-        <p>How policy decisions are reviewed during audit, privacy review, operations, and incidents.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>What you receive</h2>
-    <ul>
-      <li>Architecture boundary workshop</li>
-      <li>Policy and trust-assumption review</li>
-      <li>Threat-model and failure-mode walkthrough</li>
-      <li>Sample decision-record and replay review</li>
-      <li>Deployment blueprint and operating model</li>
-      <li>Mutual success criteria for pilot readiness</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>What we validate together</h2>
-    <ul>
-      <li>Which actions require deterministic gating</li>
-      <li>What context must be present for policy evaluation</li>
-      <li>What evidence reviewers need for sign-off</li>
-      <li>Where BeaconGuard stops and your systems remain authoritative</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Intended Engagement</h2>
-    <div class="section-grid section-grid--compact">
-      <div class="content-card">
-        <h3>Step 1</h3>
-        <p>Align governance outcomes, policy scope, and evidence requirements.</p>
-      </div>
-      <div class="content-card">
-        <h3>Step 2</h3>
-        <p>Validate integration, deployment boundaries, and operating controls.</p>
-      </div>
-      <div class="content-card">
-        <h3>Step 3</h3>
-        <p>Review replayability and assurance behavior under operational scenarios.</p>
-      </div>
-    </div>
-    <p class="muted-copy">
-      This is a collaboration-first process with practical validation, not a sales-only loop.
+    <h2>Not a Rip-and-Replace Proposal</h2>
+    <p>
+      BeaconGuard does not replace existing enterprise applications. The evaluation should focus on whether an existing workflow can be made fail-closed, policy-controlled, and auditable at the AI request boundary.
     </p>
+  </section>
+
+  <section>
+    <h2>Evaluation Format</h2>
+    <p>
+      For innovation offices, this may operate as a design-partner discussion. For CIO, CISO, privacy, compliance, and architecture teams, the intended format is a controlled technical validation review.
+    </p>
+  </section>
+
+  <section>
+    <h2>Who Should Participate</h2>
+    <div class="section-grid section-grid--compact">
+      <div class="content-card">
+        <h3>Healthcare AI Control Architecture Review</h3>
+        <p>Healthcare privacy, security, clinical informatics, digital health, compliance, audit, and hospital operations technology teams.</p>
+      </div>
+      <div class="content-card">
+        <h3>Financial Workflow Review</h3>
+        <p>AML platform, financial crime engineering, fraud technology, risk, compliance, and security architecture teams.</p>
+      </div>
+      <div class="content-card">
+        <h3>Regulated Internal Automation Review</h3>
+        <p>IT operations, platform engineering, enterprise architecture, and internal tooling teams evaluating AI agents or automations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What We Validate Together</h2>
+    <ul>
+      <li>Where the AI request boundary exists in the current workflow</li>
+      <li>Which existing systems remain authoritative for workflow logic and records</li>
+      <li>Which signed request metadata, workflow identity, user role, source-system trust, context tags, freshness windows, and approved-pathway inputs are available</li>
+      <li>Which actions should return allow, deny, or needs-review</li>
+      <li>What audit-ready evidence reviewers need after each decision</li>
+    </ul>
   </section>
 
   <section>
     <h2>Contact the team</h2>
-    <ul>
-      <li><a href="/contact">Contact for design partner briefing</a></li>
-      <li><a href="/reviewer-kit">Open the Reviewer Kit</a></li>
-    </ul>
     <div class="page-actions">
-      <a class="btn-primary" href="/contact">Request partner briefing</a>
+      <a class="btn-primary" href="/contact">Request Controlled Architecture Evaluation</a>
       <a class="btn-secondary" href="/platform">Review platform overview</a>
     </div>
   </section>

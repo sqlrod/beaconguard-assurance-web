@@ -35,6 +35,11 @@ A snapshot is treated as read-only once published.
 
 Authorization decisions must be evaluated on **normalized inputs**.
 
+Typical inputs include signed request metadata, workflow identity, user role,
+source-system trust, approved-pathway status, deterministic context tags,
+request IDs, timestamps, freshness windows, requested action, and policy
+identity.
+
 Normalization ensures:
 
 - Stable field names and types
@@ -48,7 +53,7 @@ Normalization ensures:
 
 A decision output is a minimal, structured result:
 
-- **ALLOW** or **DENY** (and optionally a bounded degraded mode if explicitly defined)
+- **ALLOW**, **DENY**, or **NEEDS_REVIEW**
 - Deterministic reason codes
 - Policy identifier and version
 - Optional obligations (if required by policy)

@@ -10,8 +10,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <h1>System Architecture</h1>
 
     <p>
-      BeaconGuard inserts a deterministic policy and evidence boundary between enterprise applications and AI/model endpoints.
-      The architecture separates policy definition, runtime enforcement, and reviewable evidence output so control decisions stay explicit and bounded.
+      BeaconGuard inserts an inline policy proxy and evidence boundary between regulated enterprise applications and AI/model endpoints.
+      The architecture separates policy definition, runtime enforcement, and reviewable evidence output so control decisions stay explicit and bounded while existing systems remain in place.
     </p>
 
     <figure class="system-architecture-section">
@@ -38,7 +38,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         The evidence path is shown as a review stream that follows policy decisions for security, risk, and audit visibility.
       </p>
       <p>
-        Reviewers should verify where BeaconGuard is invoked: request context enters the control boundary after application shaping, policy decisions are made inside the boundary, and only approved traffic exits toward the model path.
+        Reviewers should verify where BeaconGuard is invoked: signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, deterministic context tags, request IDs, timestamps, freshness windows, and policy inputs enter the control boundary after application shaping, policy decisions are made inside the boundary, and only approved traffic exits toward the model path.
       </p>
     </section>
 
@@ -46,7 +46,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <h2>Policy control plane</h2>
       <p>
         Defines and distributes policy inputs for BeaconGuard enforcement.
-        It is where enterprises manage control intent, not model behavior.
+        It is where enterprises manage control intent, not model behavior or system-of-record data.
       </p>
     </section>
 
@@ -54,7 +54,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <h2>Deterministic enforcement runtime</h2>
       <p>
         Applies policy in the request path and returns explicit allow, deny, or needs-review outcomes with context for every authorization decision.
-        If request context is malformed, missing, or out of bounds, BeaconGuard fails closed.
+        If signed metadata, policy inputs, approved-pathway status, context tags, freshness controls, or required trust attributes are missing or invalid, BeaconGuard fails closed or routes for review.
       </p>
     </section>
 
@@ -68,7 +68,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <section class="doc-architecture-section">
       <h2>Trust boundaries</h2>
       <ul>
-        <li><strong>What enters BeaconGuard:</strong> request context, policy intent, and required authorization signals.</li>
+        <li><strong>What enters BeaconGuard:</strong> signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, context tags, freshness inputs, policy intent, and required authorization signals.</li>
         <li><strong>What BeaconGuard decides:</strong> deterministic allow, deny, or needs-review with explicit decision context.</li>
         <li><strong>What proceeds to the model endpoint:</strong> only requests that pass policy and context checks.</li>
         <li><strong>What is emitted for review:</strong> structured evidence of decisions, policy references, and rationale for governance visibility.</li>
@@ -105,6 +105,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <li>BeaconGuard is not the transaction processor.</li>
         <li>BeaconGuard is not the model host.</li>
         <li>BeaconGuard is not the application UI.</li>
+        <li>BeaconGuard does not replace existing EHR, AML, fraud, case-management, SIEM, IAM, GRC, or workflow systems.</li>
       </ul>
     </section>
 

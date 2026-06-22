@@ -9,7 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h1>How It Works</h1>
     <p class="lead">
-      BeaconGuard evaluates each regulated workflow request through a deterministic control boundary before the request proceeds to model or automation execution.
+      BeaconGuard evaluates each regulated workflow request through an inline policy proxy before the request proceeds to model or automation execution.
     </p>
   </section>
 
@@ -19,7 +19,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <ol>
       <li>A regulated workflow requests AI assistance.</li>
       <li>BeaconGuard receives the request before the model call.</li>
-      <li>Policy rules evaluate user, role, workflow, data type, risk level, and requested action.</li>
+      <li>Policy rules evaluate signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, context tags, freshness windows, and requested action.</li>
       <li>BeaconGuard returns allow, deny, or needs-review.</li>
       <li>Allowed requests continue to the model or automation endpoint.</li>
       <li>Denied requests are blocked.</li>
@@ -34,7 +34,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <section class="how-it-works-diagram">
       <img
         src="/how-it-works.png"
-        alt="BeaconGuard request evaluation flow showing validation, deterministic decision, allow or deny enforcement, model execution, and decision evidence output"
+        alt="BeaconGuard request evaluation flow showing validation, deterministic decision, allow, deny, or needs-review enforcement, model execution, and decision evidence output"
         class="how-it-works-img"
         id="how-it-works-img"
       />
@@ -45,7 +45,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>Compatibility-Layer Path</h2>
     <p>
       Some non-native clients require a governed compatibility layer before BeaconGuard evaluation.
-      That layer normalizes request shape and context into the structure BeaconGuard evaluates.
+      Host applications or optional preprocessors may generate deterministic context metadata tags before the request reaches BeaconGuard. BeaconGuard's core policy boundary evaluates those tags and other signed request attributes before model execution.
       It does not originate policy decisions.
       It does not weaken fail-closed behavior.
       BeaconGuard still performs the deterministic allow, deny, or needs-review decision and emits reviewable evidence.
@@ -55,9 +55,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h2>Enforcement Boundary</h2>
     <p>
-      Applications do not need to embed AI governance rules in business logic.
-      BeaconGuard places governance in a dedicated boundary where deterministic policy decisions
-      remain consistent regardless of model behavior or prompt drift.
+      Existing applications remain in place and continue to own workflow logic and systems of record.
+      BeaconGuard places policy enforcement in a dedicated AI request boundary where deterministic decisions remain consistent regardless of model behavior or prompt drift.
     </p>
   </section>
 
@@ -75,9 +74,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h2>Input and Output Governance</h2>
     <p>
-      Inputs require explicit context (actors, requested action, attributes, policy identity),
-      so decisions are traceable. Outputs remain constrained to a minimal set:
-      decision result, policy identity, approval status, and reasoning context.
+      Inputs require signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, context tags, request IDs, timestamps, freshness windows, requested action, and policy identity.
+      Outputs remain constrained to a minimal set: decision result, policy identity, approval status, and reasoning context.
     </p>
   </section>
 

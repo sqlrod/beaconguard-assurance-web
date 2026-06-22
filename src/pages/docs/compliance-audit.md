@@ -19,6 +19,9 @@ explicit provenance.
 BeaconGuard is designed to support common review and audit requirements:
 
 - Deterministic authorization outcomes
+- Allow, deny, or needs-review decisions before model execution
+- Signed request metadata, workflow identity, user role, source-system trust,
+  approved-pathway status, context tags, freshness windows, and replay controls
 - Explicit, versioned policy intent
 - Tamper-evident audit records
 - Replayable decision evidence
@@ -35,7 +38,7 @@ Every authorization evaluation produces a structured audit record containing:
 
 - Timestamp
 - Policy snapshot identifier and version
-- Normalized request inputs
+- Normalized request inputs, including signed metadata and workflow identity
 - Decision outcome and reason codes
 - Evaluation provenance
 
@@ -53,6 +56,7 @@ Key properties:
 - No in-place modification or deletion
 - Policy snapshots referenced by cryptographic identity
 - Inputs captured in normalized, replayable form
+- Existing systems remain the systems of record
 
 This enables auditors to reconstruct decisions exactly as they occurred.
 
@@ -101,6 +105,7 @@ They do not extend to:
 - Model training data
 - Model internal reasoning
 - Downstream application behavior beyond authorization
+- EHR, AML, fraud, SIEM, IAM, GRC, case-management, or workflow system replacement
 
 These boundaries are explicit to avoid over-claiming compliance coverage. BeaconGuard does not make legal compliance guarantees and does not replace internal compliance programs.
 

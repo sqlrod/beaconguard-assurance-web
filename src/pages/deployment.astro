@@ -4,108 +4,52 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Deployment | BeaconGuard Regulated Enterprise Environments"
-  description="BeaconGuard deployment patterns for regulated enterprise environments, including internal pilots, sandbox evaluation, policy simulation, and controlled proofs of concept."
+  description="BeaconGuard deploys alongside existing applications in regulated enterprise workflow environments as an inline policy enforcement boundary before model execution."
 >
-  <div class="deployment-page">
-  <section class="deployment-section">
+  <section class="stack-section">
     <h1>Deployment</h1>
     <p class="lead">
-      BeaconGuard is intended for regulated enterprise environments where governance is part of runtime operations, not a later add-on.
+      BeaconGuard is intended for regulated enterprise workflow environments where governance is part of runtime operations, not a later add-on.
     </p>
   </section>
 
-  <section class="deployment-section">
-    <h2>Placement and Intent</h2>
+  <section class="stack-section">
+    <h2>Deployment Without System Replacement</h2>
     <p>
-      The platform belongs in the runtime path between application services and AI/model
-      endpoints. This ensures every authorization-sensitive interaction is governed in a bounded control boundary before
-      the request reaches or consumes model outputs.
-    </p>
-    <p>
-      BeaconGuard is designed to support environments with deterministic policy control, strict audit posture, and
-      operational controls.
+      BeaconGuard is designed to deploy alongside existing applications. Existing systems continue to own workflow logic, records, case management, identity, logging, and compliance processes. BeaconGuard interposes at the AI request boundary to enforce policy before model execution and emit decision evidence afterward.
     </p>
   </section>
 
-  <section class="deployment-section">
+  <section class="stack-section">
     <h2>Deployment Scenarios</h2>
     <ul>
-      <li>Internal pilot</li>
-      <li>Sandbox evaluation</li>
-      <li>Policy simulation</li>
+      <li>Healthcare architecture evaluation</li>
+      <li>Financial workflow evaluation</li>
+      <li>Internal automation evaluation</li>
+      <li>Sandbox policy simulation</li>
+      <li>Non-production controlled validation</li>
       <li>Workflow-specific proof of concept</li>
-      <li>Controlled design partner deployment</li>
     </ul>
-    <p class="muted-copy">
-      These scenarios describe evaluation paths and do not claim production hospital deployment or customer adoption.
-    </p>
-  </section>
-
-  <section class="deployment-section">
-    <h2>Deployment Model</h2>
-    <ul>
-      <li>Independent service execution with explicit trust boundaries.</li>
-      <li>Signed policy artifacts with deterministic policy promotion flows.</li>
-      <li>Clear policy and execution separation for keys, environments, and control tiers.</li>
-    </ul>
-  </section>
-
-  <section class="deployment-section">
-    <h2>Compatibility-Layer Deployment Note</h2>
     <p>
-      Some deployments may place a governed compatibility layer between the application and BeaconGuard runtime when the client does not natively emit the required authorization structure. This does not move policy authority out of BeaconGuard, and the compatibility layer is for normalization only, not policy decisioning.
+      BeaconGuard can be evaluated before production deployment using synthetic or de-identified workflow scenarios, deterministic metadata tags, mock request IDs, and representative policy schemas.
     </p>
   </section>
 
-  <section class="deployment-section">
+  <section class="stack-section">
+    <h2>Placement and Intent</h2>
+    <p>
+      BeaconGuard belongs in the runtime path between existing application services and AI/model endpoints. This ensures authorization-sensitive interaction is governed at the AI request boundary before the request reaches or consumes model outputs.
+    </p>
+  </section>
+
+  <section class="stack-section">
     <h2>Trust Boundaries and Operational Posture</h2>
     <p>
-      Policy is authoritative at enforcement time within the control boundary.
-      Applications and downstream systems should not silently bypass governance outcomes.
-      When policy material is missing or unverifiable, decisions must fail closed.
+      Policy is authoritative at enforcement time within the inline runtime control boundary. Applications and downstream systems should not silently bypass governance outcomes. When required policy material, signed metadata, source-system trust, approved-pathway status, or freshness inputs are missing or invalid, decisions must fail closed or route for review.
     </p>
   </section>
 
-  <section class="deployment-section">
-    <h2>Deployment Review Focus</h2>
-    <ul>
-      <li>Where BeaconGuard is inserted in the request path and where it receives normalized context.</li>
-      <li>Which trust assumptions must be held by adjacent systems (identity, tenancy, and model endpoint governance).</li>
-      <li>What operational checks trigger fail-closed behavior and verify that unsafe traffic cannot reach execution.</li>
-      <li>Which responsibilities remain outside BeaconGuard, including model behavior tuning, downstream transaction posting, and UI/business process outcomes.</li>
-    </ul>
-  </section>
-
-  <section class="deployment-section">
-    <h2>Decision Boundary Pattern</h2>
-    <div class="flow-diagram flow-diagram--sequence-3 deployment-boundary-flow">
-      <div class="flow-step">
-        <p class="flow-step-title">Policy boundary</p>
-        <p>Control points enforce deterministic allow, deny, or needs-review before execution.</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">Fail-closed behavior</p>
-        <p>Malformed, missing, or out-of-bounds states block unsafe execution.</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">Deployment evidence</p>
-        <p>Operational evidence supports deterministic governance reviews.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="deployment-section">
-    <h2>Integration Pattern</h2>
-    <p>
-      Treat BeaconGuard as an authorization layer with explicit request normalization and
-      deterministic enforcement responses. This reduces application coupling and keeps
-      governance policy lifecycle separate from model integration details.
-    </p>
-  </section>
-
-  <section class="deployment-section">
+  <section class="stack-section">
     <h2>Technical References</h2>
     <ul>
       <li><a href="/docs/deployment-integration">Deployment and integration</a></li>
@@ -113,108 +57,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <li><a href="/how-it-works">How BeaconGuard enforces decisions</a></li>
     </ul>
     <div class="page-actions">
-      <a class="btn-primary" href="/trust-assurance">Understand Trust Center boundaries</a>
-      <a class="btn-secondary" href="/contact">Discuss deployment needs</a>
+      <a class="btn-primary" href="/contact">Discuss deployment needs</a>
+      <a class="btn-secondary" href="/trust-assurance">Understand Trust Center boundaries</a>
     </div>
   </section>
-  </div>
-
-  <style>
-    .deployment-page {
-      display: grid;
-      gap: 0.6rem;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .deployment-section {
-      width: 100%;
-      min-width: 0;
-      overflow-wrap: anywhere;
-      overflow-x: clip;
-    }
-
-    .deployment-section h1,
-    .deployment-section h2 {
-      word-wrap: break-word;
-      overflow-wrap: anywhere;
-    }
-
-    .deployment-section p,
-    .deployment-section li {
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .deployment-section .page-actions {
-      align-items: stretch;
-      overflow-wrap: anywhere;
-    }
-
-    .deployment-section .page-actions a {
-      white-space: normal;
-    }
-
-    @media (max-width: 900px) {
-      .deployment-section {
-        padding-inline: 0;
-      }
-
-      .deployment-boundary-flow {
-        display: block;
-        gap: 0;
-      }
-
-      .deployment-boundary-flow .flow-step {
-        width: 100%;
-        min-height: 0;
-      }
-
-      .deployment-boundary-flow .flow-arrow {
-        display: none;
-      }
-
-      .deployment-boundary-flow .flow-step + .flow-step {
-        margin-top: 1.1rem;
-        position: relative;
-        padding-top: 1.1rem;
-      }
-
-      .deployment-boundary-flow .flow-step + .flow-step::before {
-        content: "";
-        position: absolute;
-        left: 1rem;
-        top: 0;
-        width: 2px;
-        height: 0.9rem;
-        background: var(--brand-accent);
-        transform: translateY(-65%);
-      }
-
-      .deployment-boundary-flow .flow-step + .flow-step::after {
-        content: "↓";
-        position: absolute;
-        left: 1rem;
-        top: 0;
-        transform: translate(-45%, -100%);
-        font-size: 0.9rem;
-        font-weight: 700;
-        line-height: 1;
-        color: var(--brand-accent);
-      }
-
-      .deployment-boundary-flow .flow-step {
-        padding: 0.9rem 0.95rem;
-        border-radius: 0.65rem;
-      }
-
-      .deployment-boundary-flow .flow-step-title {
-        margin-bottom: 0.45rem;
-      }
-
-      .deployment-section .flow-arrow + .flow-step {
-        margin-left: 0;
-      }
-    }
-  </style>
 </BaseLayout>

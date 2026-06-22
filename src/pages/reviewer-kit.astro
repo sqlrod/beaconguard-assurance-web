@@ -4,141 +4,75 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Reviewer Kit | BeaconGuard Assurance"
-  description="A reviewer-oriented summary of what BeaconGuard is, what it is not, how decisions are made, and what evidence is produced."
+  description="A reviewer-oriented summary of BeaconGuard as an inline runtime control boundary, policy enforcement point, fail-closed checkpoint, and evidence layer."
 >
   <section class="stack-section">
     <h1>Reviewer Kit</h1>
-    <p class="lead">Control Before AI Execution. Evidence After Every Decision.</p>
-    <p class="lead">
-      This page helps compliance, security, privacy, risk, audit, architecture, and design-partner reviewers begin a self-serve evaluation of BeaconGuard before deeper engagement.
-    </p>
+    <p class="lead">Policy control before AI execution. Evidence after every decision.</p>
     <p>
-      BeaconGuard's reviewer kit is the starting point for regulated-operations evaluation.
-      It is designed to help reviewers understand the control boundary, deployment model, evidence expectations, and scope boundaries before deeper engagement.
+      This page helps compliance, security, privacy, risk, audit, architecture, and technical validation reviewers understand BeaconGuard's placement, decision model, evidence surface, and non-replacement boundaries.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Who this is for</h2>
+    <h2>BeaconGuard is</h2>
     <ul>
-      <li>Security and risk reviewers</li>
-      <li>Compliance, privacy, and internal audit teams</li>
-      <li>Architecture and platform teams</li>
-      <li>Design partner evaluators</li>
-      <li>Operational stakeholders reviewing deployment and control boundaries</li>
+      <li>an inline runtime control boundary</li>
+      <li>a policy enforcement point before AI execution</li>
+      <li>an execution-boundary authorization layer</li>
+      <li>a fail-closed checkpoint</li>
+      <li>an evidence layer after allow/deny/review decisions</li>
+      <li>a way to add control to existing workflows without replacing core systems</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>BeaconGuard is not</h2>
+    <ul>
+      <li>legal review</li>
+      <li>HIPAA compliance program</li>
+      <li>clinical safety review</li>
+      <li>EHR</li>
+      <li>AML case-management system</li>
+      <li>fraud decision engine</li>
+      <li>transaction monitoring platform</li>
+      <li>SIEM</li>
+      <li>IAM</li>
+      <li>GRC</li>
+      <li>model monitoring</li>
+      <li>generic API gateway</li>
+      <li>replacement platform</li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>What reviewers can assess here</h2>
     <ul>
-      <li>Architecture boundary and request-path placement</li>
-      <li>Deterministic policy control and fail-closed behavior</li>
-      <li>How decisions are made: allow, deny, or needs-review</li>
-      <li>Deployment boundary and operating model</li>
-      <li>Evidence expectations for review and replay</li>
-      <li>Scope boundaries and non-goals</li>
+      <li>Where BeaconGuard sits at the AI request boundary</li>
+      <li>How signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, context tags, freshness windows, and replay controls are evaluated</li>
+      <li>How allow, deny, and needs-review decisions are returned</li>
+      <li>What audit-ready evidence is produced after decisions</li>
+      <li>Which existing systems remain authoritative outside BeaconGuard</li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>Included review materials</h2>
-    <p>The following review materials are prepared for the evaluation process:</p>
     <ul>
-      <li>
-        <a href="/sample-decision-record">Sample decision record</a>
-        <p>Illustrates the type of decision context reviewers should expect from a BeaconGuard-governed allow, deny, or needs-review record.</p>
-      </li>
-      <li>
-        <a href="/docs/architecture">Architecture blueprint</a>
-        <p>Shows where BeaconGuard sits and how request authorization is separated from model execution.</p>
-      </li>
-      <li>
-        <a href="/how-it-works">Reviewer walkthrough</a>
-        <p>Maps the runtime decision flow and outcomes for each request.</p>
-      </li>
-      <li>
-        <a href="/deployment">Deployment boundary review</a>
-        <p>Outlines deployment posture, trust boundaries, and operating assumptions.</p>
-      </li>
-      <li>
-        <a href="/trust-assurance">Sample evidence and replay expectations</a>
-        <p>Describes what decision context and review artifacts should be expected.</p>
-      </li>
-      <li>
-        <a href="/control-responsibility-matrix">Control responsibility matrix</a>
-        <p>Explains who owns authorization, execution, evidence, and fail-closed handling across the governed workflow.</p>
-      </li>
-      <li>
-        <a href="/design-partner-program">Design partner briefing</a>
-        <p>Defines the joint evaluation topics used in design-partner engagements.</p>
-      </li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Reviewer Checklist</h2>
-    <ul>
-      <li>Confirm where BeaconGuard sits in the request path</li>
-      <li>Review how policy decisions are evaluated and returned</li>
-      <li>Confirm whether a compatibility layer is present and that it only normalizes requests before BeaconGuard evaluation</li>
-      <li>Verify fail-closed behavior when required conditions are not met</li>
-      <li>Review what evidence is emitted for later review</li>
-      <li>Confirm what BeaconGuard does not own or replace</li>
-      <li>Identify what your team would need to validate during a pilot</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <p>
-      When non-native clients are involved, reviewers should verify that request adaptation does not become a policy actor or bypass the BeaconGuard boundary.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>What BeaconGuard claims</h2>
-    <ul>
-      <li>Deterministic policy control at the AI request boundary</li>
-      <li>Explicit allow, deny, and needs-review decisioning with context</li>
-      <li>Fail-closed behavior when policy or trust conditions are not met</li>
-      <li>Structured evidence for later review</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>What BeaconGuard does not claim</h2>
-    <ul>
-      <li>It is not the system of record</li>
-      <li>It is not the transaction processor</li>
-      <li>It is not the model host</li>
-      <li>It does not replace model-quality evaluation</li>
-      <li>It does not eliminate all downstream workflow risk</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Not a replacement for</h2>
-    <p>BeaconGuard is a runtime policy and evidence control layer. It is not a replacement for:</p>
-    <ul>
-      <li>legal review</li>
-      <li>clinical safety review</li>
-      <li>HIPAA compliance program</li>
-      <li>SOC 2 / HITRUST controls</li>
-      <li>model risk management</li>
-      <li>identity and access management</li>
-      <li>SIEM / logging platform</li>
-      <li>full GRC system</li>
+      <li><a href="/platform">Platform architecture</a></li>
+      <li><a href="/healthcare">Healthcare AI control</a></li>
+      <li><a href="/fintech">Financial workflow control</a></li>
+      <li><a href="/proof-evidence">Proof &amp; Evidence</a></li>
+      <li><a href="/deployment">Deployment boundary review</a></li>
+      <li><a href="/control-responsibility-matrix">Control responsibility matrix</a></li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>Next step</h2>
-    <p>After reviewing the materials above, teams can use the contact path to request a reviewer walkthrough or design-partner briefing.</p>
     <div class="page-actions">
-      <a class="btn-primary" href="/contact">Open contact path</a>
-      <a class="btn-secondary" href="/design-partner-program">Request design-partner review</a>
-      <a class="btn-secondary" href="/platform">Review platform architecture</a>
-      <a class="btn-secondary" href="/trust-assurance">Review Trust Center</a>
+      <a class="btn-primary" href="/contact">Request Controlled Architecture Evaluation</a>
+      <a class="btn-secondary" href="/design-partner-program">Review evaluation format</a>
     </div>
   </section>
 </BaseLayout>

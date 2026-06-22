@@ -6,8 +6,8 @@ layout: /src/layouts/BaseLayout.astro
 # Enforcement Runtime
 
 The BeaconGuard **Enforcement Runtime** is the component responsible for
-evaluating authorization requests against signed policy snapshots and producing
-deterministic decisions.
+evaluating AI-bound authorization requests against signed policy snapshots and
+producing deterministic decisions before model execution.
 
 It is intentionally designed to be:
 
@@ -25,14 +25,16 @@ The enforcement runtime sits between:
 - Regulated applications
 - AI models and inference services
 
-Its sole responsibility is to decide **whether an interaction is permitted**
-under the active policy snapshot and to emit an evidence-grade audit record.
+Its sole responsibility is to decide **whether an interaction is permitted,
+denied, or routed for review** under the active policy snapshot and to emit an
+evidence-grade audit record.
 
 It does not:
 - Modify prompts
 - Inspect model internals
 - Perform heuristic safety filtering
 - Make probabilistic judgments
+- Replace existing systems of record or workflow applications
 
 ---
 
@@ -40,7 +42,13 @@ It does not:
 
 Given:
 - A verified policy snapshot
-- Normalized request inputs
+- Signed request metadata
+- Workflow identity
+- User role
+- Source-system trust
+- Approved-pathway status
+- Deterministic context tags
+- Request IDs, timestamps, and freshness windows
 - Required reference artifacts (if any)
 
 The enforcement runtime will always produce the same decision output.
@@ -60,7 +68,8 @@ The runtime does not maintain internal mutable state between requests.
 All decision-relevant inputs must be provided explicitly:
 
 - Policy snapshot identifier
-- Request context
+- Signed request metadata and workflow context
+- Source-system trust, approved-pathway status, context tags, and freshness inputs
 - Reference artifact identifiers
 
 Any required state must be externalized and versioned.
@@ -75,6 +84,8 @@ If any of the following occur:
 
 - Policy snapshot cannot be verified
 - Required artifacts are missing or invalid
+- Approved-pathway status is missing or invalid
+- Freshness or replay controls fail
 - Input normalization fails
 - Internal evaluation error occurs
 
@@ -90,7 +101,7 @@ Silent fallback or permissive behavior is prohibited.
 
 Each evaluation produces a structured result including:
 
-- Decision outcome (ALLOW or DENY)
+- Decision outcome (ALLOW, DENY, or NEEDS_REVIEW)
 - Deterministic reason codes
 - Policy snapshot identifier and version
 - Optional obligations (if explicitly defined)

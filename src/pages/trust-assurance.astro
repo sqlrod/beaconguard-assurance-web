@@ -4,93 +4,52 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Trust Center | BeaconGuard Assurance"
-  description="BeaconGuard trust boundaries, evidence capture, and careful scope statements for regulated AI workflow review."
+  description="BeaconGuard provides technical control and evidence support at the AI request boundary for regulated enterprise workflows."
 >
-  <div class="trust-assurance-page">
-  <section class="trust-assurance-section">
+  <section class="stack-section">
     <h1>Trust Center</h1>
-    <p class="lead">Control Before AI Execution. Evidence After Every Decision.</p>
     <p class="lead">
-      Trust in AI-assisted regulated operations starts at the request boundary. BeaconGuard focuses on deterministic authorization, traceable decisions, and bounded control behavior for regulated workflows.
+      BeaconGuard provides technical control and evidence support at the AI request boundary. It does not create legal compliance guarantees and does not replace an organization's compliance, privacy, security, clinical safety, AML, fraud, SIEM, IAM, or GRC programs.
     </p>
   </section>
 
-  <section class="trust-assurance-section">
+  <section class="stack-section">
     <h2>Evidence Flow</h2>
     <div class="flow-diagram flow-diagram--tight trust-assurance-flow">
       <div class="flow-step">
         <p class="flow-step-title">Policy decision</p>
-        <p>Input and policy identity are evaluated.</p>
+        <p>Signed metadata, workflow identity, source-system trust, user role, context tags, and policy inputs are evaluated.</p>
       </div>
       <div class="flow-arrow" aria-hidden="true">→</div>
       <div class="flow-step">
         <p class="flow-step-title">Record</p>
-      <p>Decision result is emitted as structured evidence.</p>
+        <p>Allow, deny, or needs-review outcome is emitted as structured evidence.</p>
       </div>
       <div class="flow-arrow" aria-hidden="true">→</div>
       <div class="flow-step">
         <p class="flow-step-title">Review</p>
-        <p>Audit and assurance teams can reproduce context quickly.</p>
+        <p>Security, privacy, compliance, risk, and audit teams review decision context.</p>
       </div>
     </div>
   </section>
 
-  <section class="trust-assurance-section">
-    <h2>Trust Model</h2>
-    <p>
-      BeaconGuard enforces policy at runtime and records decision context against explicit policy identity. The control boundary is where policy, not model behavior, decides execution rights.
-    </p>
-  </section>
-
-  <section class="trust-assurance-section">
+  <section class="stack-section">
     <h2>Auditability</h2>
     <ul>
       <li>Decision records for allowed, denied, and needs-review outcomes with policy identity.</li>
-      <li>Policy identity, request context, and result captured at decision time.</li>
-      <li>Decision lineage that supports investigation and external review.</li>
+      <li>Policy identity, request context, approved-pathway status, source-system trust, and result captured at decision time.</li>
+      <li>Decision lineage that supports investigation and review without replacing existing systems of record.</li>
     </ul>
   </section>
 
-  <section class="trust-assurance-section">
-    <h2>Replayability</h2>
-    <p>
-      With the same policy snapshot and normalized input, BeaconGuard enables replay
-      of decision outcomes for reconstruction and validation. That makes governance
-      checks defensible over time.
-    </p>
-  </section>
-
-  <section class="trust-assurance-section">
-    <h2>Reviewer Evidence Focus</h2>
-    <ul>
-      <li>BeaconGuard emits structured evidence for each request decision, including allow, deny, or needs-review outcome, policy identity, and normalized context.</li>
-      <li>The evidence supports review of policy governance and decision context, including replay and audit preparation.</li>
-      <li>BeaconGuard claims deterministic boundary governance behavior, explicit outcomes, and decision traceability within its control surface.</li>
-      <li>BeaconGuard does not claim model-quality certainty or business-logic correctness, and does not replace broader transactional outcomes.</li>
-      <li>External systems and downstream results still require cross-checking outside BeaconGuard, including identity, entitlement, clinical, operational, financial, and transaction controls.</li>
-    </ul>
-  </section>
-
-  <section class="trust-assurance-section">
-    <h2>Scope Disclaimers</h2>
-    <ul>
-      <li>BeaconGuard does not make legal compliance guarantees.</li>
-      <li>BeaconGuard does not replace internal compliance programs.</li>
-      <li>BeaconGuard provides policy enforcement and evidence capture that can support review, audit, and governance processes.</li>
-      <li>BeaconGuard does not claim HIPAA compliance, SOC 2, HITRUST, PCI, FedRAMP, hospital deployment, or customer adoption on this site.</li>
-    </ul>
-  </section>
-
-  <section class="trust-assurance-section">
+  <section class="stack-section">
     <h2>Evidence Boundaries</h2>
     <p>
-      BeaconGuard provides decision evidence, not model reasoning.
-      It does not claim certainty about model quality, only about policy governance within
-      the boundary where enterprise systems transfer control.
+      BeaconGuard provides decision evidence, not model reasoning. It does not claim certainty about model quality, clinical safety, business-logic correctness, or legal compliance status.
     </p>
   </section>
 
-  <section class="trust-assurance-section">
+  <section class="stack-section">
     <h2>Review References</h2>
     <ul>
       <li><a href="/sample-decision-record">Review a sample decision record</a></li>
@@ -105,100 +64,4 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a class="btn-secondary" href="/contact">Discuss review expectations</a>
     </div>
   </section>
-  </div>
-
-  <style>
-    .trust-assurance-page {
-      display: grid;
-      gap: 0.6rem;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .trust-assurance-section {
-      width: 100%;
-      min-width: 0;
-      overflow-wrap: anywhere;
-      overflow-x: clip;
-    }
-
-    .trust-assurance-section h1,
-    .trust-assurance-section h2 {
-      word-wrap: break-word;
-      overflow-wrap: anywhere;
-    }
-
-    .trust-assurance-section p,
-    .trust-assurance-section li,
-    .trust-assurance-section a {
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .trust-assurance-section .page-actions {
-      align-items: stretch;
-    }
-
-    .trust-assurance-section .page-actions a {
-      white-space: normal;
-    }
-
-    @media (max-width: 900px) {
-      .trust-assurance-section {
-        padding-inline: 0;
-      }
-
-      .trust-assurance-flow {
-        display: block;
-        gap: 0;
-      }
-
-      .trust-assurance-flow .flow-step {
-        width: 100%;
-        min-height: 0;
-      }
-
-      .trust-assurance-flow .flow-arrow {
-        display: none;
-      }
-
-      .trust-assurance-flow .flow-step + .flow-step {
-        margin-top: 1.1rem;
-        position: relative;
-        padding-top: 1.1rem;
-      }
-
-      .trust-assurance-flow .flow-step + .flow-step::before {
-        content: "";
-        position: absolute;
-        left: 1rem;
-        top: 0;
-        width: 2px;
-        height: 0.9rem;
-        background: var(--brand-accent);
-        transform: translateY(-65%);
-      }
-
-      .trust-assurance-flow .flow-step + .flow-step::after {
-        content: "↓";
-        position: absolute;
-        left: 1rem;
-        top: 0;
-        transform: translate(-45%, -100%);
-        font-size: 0.9rem;
-        font-weight: 700;
-        line-height: 1;
-        color: var(--brand-accent);
-      }
-
-      .trust-assurance-flow .flow-step {
-        padding: 0.9rem 0.95rem;
-        border-radius: 0.65rem;
-      }
-
-      .trust-assurance-flow .flow-step-title {
-        margin-bottom: 0.45rem;
-      }
-    }
-  </style>
 </BaseLayout>
