@@ -2,25 +2,43 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="AI-Assisted Cross-Border FinCrime Analyst Review | BeaconGuard Assurance">
+<BaseLayout
+  title="Workflow Examples | BeaconGuard Regulated AI Operations"
+  description="Explore BeaconGuard workflow examples for healthcare AI operations review, financial crime and fraud review, and regulated internal automation."
+>
   <section class="stack-section">
-    <h1>AI-Assisted Cross-Border FinCrime Analyst Review</h1>
+    <h1>Workflow Examples</h1>
     <p class="lead">
-      BeaconGuard is engineered for high-risk, human-reviewed workflows where AI output may assist a regulated decision path, while policy
-      control remains deterministic and reviewable.
+      BeaconGuard is engineered for high-risk, human-reviewed workflows where AI output or automation may assist a regulated decision path, while policy control remains deterministic and reviewable.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Workflow Context</h2>
+    <h2>Healthcare AI Operations Review</h2>
     <p>
-      In this workflow, AI can assist analysis for cross-border AML and fraud review, but no model inference proceeds without BeaconGuard
-      approval and preserved decision evidence.
+      A hospital operations team requests AI assistance for a workflow involving sensitive operational or patient-related context.
+      BeaconGuard evaluates the request before model execution, checks policy for data sensitivity and user role, and returns allow, deny, or needs-review.
+      Evidence is preserved for privacy, compliance, and audit review.
+    </p>
+    <h3>Example controls</h3>
+    <ul>
+      <li>Detects potential PHI context</li>
+      <li>Requires approved AI pathway</li>
+      <li>Routes sensitive requests for privacy or compliance review</li>
+      <li>Blocks unapproved model endpoints</li>
+      <li>Preserves decision evidence</li>
+    </ul>
+    <p class="muted-copy">
+      This example uses patient-related context and PHI-sensitive workflows carefully. It does not claim diagnosis, treatment recommendation, direct clinical decision support, hospital deployment, or HIPAA compliance.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>The Enforcement Sequence</h2>
+    <h2>Financial Crime / Fraud Review</h2>
+    <p>
+      In this workflow, AI can assist analysis for cross-border AML, KYC, fraud, or financial dispute review, but no model inference proceeds without BeaconGuard policy evaluation and preserved decision evidence.
+      Financial services remains an example use case, not the whole product identity.
+    </p>
     <ol>
       <li><strong>Application Input:</strong> The financial or analyst application submits a cross-border case for AI-assisted summarization or recommendation.</li>
       <li><strong>Gateway Intake:</strong> BeaconGuard intercepts the payload.</li>
@@ -32,21 +50,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <strong>Deterministic Policy Evaluation:</strong> The request is checked against governed policy constraints for required AML, KYC, or workflow evidence.
         <strong>Deny path is executed if incomplete or out of bounds.</strong>
       </li>
-      <li><strong>Control Outcome:</strong> BeaconGuard returns an explicit control outcome after deterministic policy enforcement.</li>
+      <li><strong>Control Outcome:</strong> BeaconGuard returns allow, deny, or needs-review after deterministic policy enforcement.</li>
       <li><strong>Decision Evidence:</strong> A structured JSON decision record is retained for architecture review and security inspection.</li>
     </ol>
+  </section>
 
+  <section class="stack-section">
+    <h2>Regulated Internal Automation Review</h2>
+    <p>
+      An internal automation or AI agent attempts to perform an action against a regulated system. BeaconGuard checks policy before execution, blocks unauthorized actions, and records evidence for operational review.
+    </p>
+    <ul>
+      <li>Checks user, role, workflow, environment, requested action, and change window</li>
+      <li>Blocks automation outside approved role or operating conditions</li>
+      <li>Routes higher-risk actions for human approval</li>
+      <li>Preserves decision evidence for security, risk, operations, and audit review</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Architecture View</h2>
     <div class="workflow-diagram">
       <img src="/Workflow.png" alt="BeaconGuard control boundary workflow diagram" />
       <p class="workflow-diagram-caption">
-        High level component boundaries and trust domains in the control architecture
+        High level component boundaries and trust domains in the control architecture.
       </p>
     </div>
   </section>
+
   <section class="stack-section">
     <h2>Decision Evidence</h2>
     <p>
-      The workflow emits structured enforcement records only after BeaconGuard has decided allow or deny. Reviewers inspect the decision signal,
+      Each workflow emits structured enforcement records only after BeaconGuard has decided allow, deny, or needs-review. Reviewers inspect the decision signal,
       enforcement fields, trust validation, and evidence hashes to determine exactly what control path executed.
     </p>
     <div class="page-actions">

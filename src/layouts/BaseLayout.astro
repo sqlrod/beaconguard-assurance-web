@@ -1,5 +1,8 @@
 ---
-const { title = "BeaconGuard Assurance" } = Astro.props;
+const {
+  title = "BeaconGuard Assurance",
+  description = "BeaconGuard provides deterministic policy control and evidence capture before AI execution in regulated workflows, supporting compliance, privacy, security, risk, and audit review.",
+} = Astro.props;
 const currentPath = Astro.url.pathname;
 import "../styles/global.css";
 ---
@@ -12,7 +15,7 @@ import "../styles/global.css";
 
     <title>{title}</title>
 
-    <meta name="description" content="Deterministic control plane for regulated AI systems." />
+    <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
@@ -38,8 +41,8 @@ import "../styles/global.css";
           <a href="/platform" aria-current={currentPath === "/platform" ? "page" : undefined}>Platform</a>
           <a href="/how-it-works" aria-current={currentPath === "/how-it-works" ? "page" : undefined}>How It Works</a>
           <a href="/security" aria-current={currentPath === "/security" ? "page" : undefined}>Security</a>
+          <a href="/canonical-workflow" aria-current={currentPath === "/canonical-workflow" ? "page" : undefined}>Workflow Examples</a>
           <a href="/proof-evidence" aria-current={currentPath === "/proof-evidence" ? "page" : undefined}>Proof &amp; Evidence</a>
-          <a href="/canonical-workflow" aria-current={currentPath === "/canonical-workflow" ? "page" : undefined}>Workflow</a>
           <a href="/reviewer-kit" aria-current={currentPath === "/reviewer-kit" ? "page" : undefined}>Reviewer Kit</a>
           <a href="/design-partner-program" aria-current={currentPath === "/design-partner-program" ? "page" : undefined}>Design Partner</a>
           <a href="/company" aria-current={currentPath === "/company" ? "page" : undefined}>Company</a>
@@ -64,8 +67,8 @@ import "../styles/global.css";
         </div>
 
         <div class="footer-center">
-          <p class="footer-slogan-line">Deterministic Control. Verifiable Decisions.</p>
-          <p class="footer-slogan-line">The Control Boundary for AI Liability.</p>
+          <p class="footer-slogan-line">Control Before AI Execution.</p>
+          <p class="footer-slogan-line">Evidence After Every Decision.</p>
         </div>
 
         <div class="footer-right">

@@ -2,7 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Control Responsibility Matrix | BeaconGuard Assurance">
+<BaseLayout
+  title="Control Responsibility Matrix | BeaconGuard Assurance"
+  description="BeaconGuard responsibility boundaries for policy evaluation, application enforcement, model providers, systems of record, and reviewers."
+>
   <section class="stack-section">
     <h1>Control Responsibility Matrix</h1>
     <p class="lead">
@@ -13,7 +16,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h2>Responsibility model</h2>
     <p>
-      BeaconGuard governs whether an AI interaction is allowed to proceed under policy.
+      BeaconGuard governs whether an AI interaction is allowed to proceed, denied, or routed for review under policy.
       BeaconGuard does not replace transaction systems, systems of record, model providers,
       or downstream operational ownership.
     </p>
@@ -36,7 +39,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <tbody>
           <tr>
             <td>Authorization decision at the AI request boundary</td>
-            <td>Owns policy evaluation and explicit allow/deny decisioning</td>
+            <td>Owns policy evaluation and explicit allow, deny, or needs-review decisioning</td>
             <td>Submits normalized request context and enforces returned decision</td>
             <td>Does not own authorization policy</td>
             <td>Does not own AI request authorization</td>
@@ -83,7 +86,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>What reviewers should verify</h2>
     <ul>
       <li>The application submits the context BeaconGuard requires to evaluate policy</li>
-      <li>BeaconGuard’s allow/deny response is enforced by the application</li>
+      <li>BeaconGuard's allow, deny, or needs-review response is enforced by the application</li>
       <li>Model execution does not become the authorization boundary</li>
       <li>Systems of record remain authoritative for business state</li>
       <li>Reviewers can distinguish BeaconGuard evidence from downstream business records</li>

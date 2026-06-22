@@ -14,9 +14,9 @@ explicit provenance.
 
 ---
 
-## Compliance Objectives
+## Compliance Support Objectives
 
-BeaconGuard addresses common compliance requirements by design:
+BeaconGuard is designed to support common review and audit requirements:
 
 - Deterministic authorization outcomes
 - Explicit, versioned policy intent
@@ -85,13 +85,13 @@ internal faults:
 - The failure category is recorded
 - No permissive fallback is allowed
 
-This ensures that compliance gaps are visible rather than hidden.
+This helps make compliance gaps visible rather than hidden.
 
 ---
 
 ## Scope Boundaries
 
-BeaconGuard compliance guarantees apply to:
+BeaconGuard control assertions apply to:
 
 - Authorization decisions
 - Policy evaluation
@@ -102,7 +102,7 @@ They do not extend to:
 - Model internal reasoning
 - Downstream application behavior beyond authorization
 
-These boundaries are explicit to avoid over-claiming compliance coverage.
+These boundaries are explicit to avoid over-claiming compliance coverage. BeaconGuard does not make legal compliance guarantees and does not replace internal compliance programs.
 
 ---
 

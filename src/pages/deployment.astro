@@ -2,13 +2,15 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Deployment | BeaconGuard Assurance">
+<BaseLayout
+  title="Deployment | BeaconGuard Regulated Enterprise Environments"
+  description="BeaconGuard deployment patterns for regulated enterprise environments, including internal pilots, sandbox evaluation, policy simulation, and controlled proofs of concept."
+>
   <div class="deployment-page">
   <section class="deployment-section">
     <h1>Deployment</h1>
     <p class="lead">
-      BeaconGuard is intended for controlled enterprise and financial workflow environments where governance
-      is part of production operations, not a later add-on.
+      BeaconGuard is intended for regulated enterprise environments where governance is part of runtime operations, not a later add-on.
     </p>
   </section>
 
@@ -22,6 +24,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <p>
       BeaconGuard is designed to support environments with deterministic policy control, strict audit posture, and
       operational controls.
+    </p>
+  </section>
+
+  <section class="deployment-section">
+    <h2>Deployment Scenarios</h2>
+    <ul>
+      <li>Internal pilot</li>
+      <li>Sandbox evaluation</li>
+      <li>Policy simulation</li>
+      <li>Workflow-specific proof of concept</li>
+      <li>Controlled design partner deployment</li>
+    </ul>
+    <p class="muted-copy">
+      These scenarios describe evaluation paths and do not claim production hospital deployment or customer adoption.
     </p>
   </section>
 
@@ -55,7 +71,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <ul>
       <li>Where BeaconGuard is inserted in the request path and where it receives normalized context.</li>
       <li>Which trust assumptions must be held by adjacent systems (identity, tenancy, and model endpoint governance).</li>
-      <li>What operational checks trigger fail-closed behavior and prove that unsafe traffic cannot reach execution.</li>
+      <li>What operational checks trigger fail-closed behavior and verify that unsafe traffic cannot reach execution.</li>
       <li>Which responsibilities remain outside BeaconGuard, including model behavior tuning, downstream transaction posting, and UI/business process outcomes.</li>
     </ul>
   </section>
@@ -65,7 +81,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="flow-diagram flow-diagram--sequence-3 deployment-boundary-flow">
       <div class="flow-step">
         <p class="flow-step-title">Policy boundary</p>
-        <p>Control points enforce deterministic allow/deny before execution.</p>
+        <p>Control points enforce deterministic allow, deny, or needs-review before execution.</p>
       </div>
       <div class="flow-arrow" aria-hidden="true">→</div>
       <div class="flow-step">

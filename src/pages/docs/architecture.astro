@@ -2,7 +2,10 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="BeaconGuard Architecture">
+<BaseLayout
+  title="BeaconGuard Architecture"
+  description="BeaconGuard system architecture for deterministic policy evaluation, allow, deny, and needs-review decisions with evidence capture before AI execution."
+>
   <section class="doc-architecture">
     <h1>System Architecture</h1>
 
@@ -29,7 +32,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </p>
       <p>
         It clearly separates static structure from runtime sequence:
-        components and trust zones are fixed by design, while allow/deny outcomes are determined at execution time.
+        components and trust zones are fixed by design, while allow, deny, or needs-review outcomes are determined at execution time.
       </p>
       <p>
         The evidence path is shown as a review stream that follows policy decisions for security, risk, and audit visibility.
@@ -50,7 +53,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <section class="doc-architecture-section">
       <h2>Deterministic enforcement runtime</h2>
       <p>
-        Applies policy in the request path and returns explicit allow/deny outcomes with context for every authorization decision.
+        Applies policy in the request path and returns explicit allow, deny, or needs-review outcomes with context for every authorization decision.
         If request context is malformed, missing, or out of bounds, BeaconGuard fails closed.
       </p>
     </section>
@@ -66,7 +69,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <h2>Trust boundaries</h2>
       <ul>
         <li><strong>What enters BeaconGuard:</strong> request context, policy intent, and required authorization signals.</li>
-        <li><strong>What BeaconGuard decides:</strong> deterministic allow/deny with explicit decision context.</li>
+        <li><strong>What BeaconGuard decides:</strong> deterministic allow, deny, or needs-review with explicit decision context.</li>
         <li><strong>What proceeds to the model endpoint:</strong> only requests that pass policy and context checks.</li>
         <li><strong>What is emitted for review:</strong> structured evidence of decisions, policy references, and rationale for governance visibility.</li>
       </ul>

@@ -2,15 +2,18 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Reviewer Kit | BeaconGuard Assurance">
+<BaseLayout
+  title="Reviewer Kit | BeaconGuard Assurance"
+  description="A reviewer-oriented summary of what BeaconGuard is, what it is not, how decisions are made, and what evidence is produced."
+>
   <section class="stack-section">
     <h1>Reviewer Kit</h1>
-    <p class="lead">The Control Boundary for AI Liability.</p>
+    <p class="lead">Control Before AI Execution. Evidence After Every Decision.</p>
     <p class="lead">
-      This page is intended to let architecture, security, risk, and design-partner reviewers begin a self-serve evaluation of BeaconGuard before deeper engagement.
+      This page helps compliance, security, privacy, risk, audit, architecture, and design-partner reviewers begin a self-serve evaluation of BeaconGuard before deeper engagement.
     </p>
     <p>
-      BeaconGuard’s reviewer kit is the starting point for architecture, security, risk, and design-partner evaluation.
+      BeaconGuard's reviewer kit is the starting point for regulated-operations evaluation.
       It is designed to help reviewers understand the control boundary, deployment model, evidence expectations, and scope boundaries before deeper engagement.
     </p>
   </section>
@@ -19,6 +22,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>Who this is for</h2>
     <ul>
       <li>Security and risk reviewers</li>
+      <li>Compliance, privacy, and internal audit teams</li>
       <li>Architecture and platform teams</li>
       <li>Design partner evaluators</li>
       <li>Operational stakeholders reviewing deployment and control boundaries</li>
@@ -30,6 +34,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <ul>
       <li>Architecture boundary and request-path placement</li>
       <li>Deterministic policy control and fail-closed behavior</li>
+      <li>How decisions are made: allow, deny, or needs-review</li>
       <li>Deployment boundary and operating model</li>
       <li>Evidence expectations for review and replay</li>
       <li>Scope boundaries and non-goals</li>
@@ -42,7 +47,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <ul>
       <li>
         <a href="/sample-decision-record">Sample decision record</a>
-        <p>Illustrates the type of decision context reviewers should expect from a BeaconGuard-governed allow/deny record.</p>
+        <p>Illustrates the type of decision context reviewers should expect from a BeaconGuard-governed allow, deny, or needs-review record.</p>
       </li>
       <li>
         <a href="/docs/architecture">Architecture blueprint</a>
@@ -94,7 +99,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>What BeaconGuard claims</h2>
     <ul>
       <li>Deterministic policy control at the AI request boundary</li>
-      <li>Explicit allow and deny decisioning with context</li>
+      <li>Explicit allow, deny, and needs-review decisioning with context</li>
       <li>Fail-closed behavior when policy or trust conditions are not met</li>
       <li>Structured evidence for later review</li>
     </ul>
@@ -108,6 +113,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <li>It is not the model host</li>
       <li>It does not replace model-quality evaluation</li>
       <li>It does not eliminate all downstream workflow risk</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Not a replacement for</h2>
+    <p>BeaconGuard is a runtime policy and evidence control layer. It is not a replacement for:</p>
+    <ul>
+      <li>legal review</li>
+      <li>clinical safety review</li>
+      <li>HIPAA compliance program</li>
+      <li>SOC 2 / HITRUST controls</li>
+      <li>model risk management</li>
+      <li>identity and access management</li>
+      <li>SIEM / logging platform</li>
+      <li>full GRC system</li>
     </ul>
   </section>
 

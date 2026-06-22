@@ -2,29 +2,30 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Deterministic Control for Probabilistic Models | BeaconGuard Assurance">
+<BaseLayout
+  title="Security | BeaconGuard Fail-Closed AI Policy Enforcement"
+  description="BeaconGuard is designed for fail-closed policy enforcement, approval gates, sensitive data handling, and evidence integrity in regulated AI operations."
+>
   <section class="stack-section">
-    <h1>Deterministic Control for Probabilistic Models</h1>
+    <h1>Security</h1>
     <p class="lead">
-      BeaconGuard keeps model behavior out of the authorization layer by placing deterministic control before any model execution.
+      BeaconGuard keeps model behavior out of the authorization layer by placing deterministic policy checks before AI or automation execution.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>The Control Problem</h2>
     <p>
-      Large Language Models (LLMs) are probabilistic generation engines. They cannot serve as the authorization boundary for regulated
-      financial operations. Relying on prompt engineering to govern cross-border AML or high-risk fraud workflows creates unquantifiable
-      operational risk.
+      Large Language Models (LLMs) are probabilistic generation engines. They cannot serve as the authorization boundary for regulated operations where security, privacy, compliance, audit, or risk teams need explicit control before execution.
+      Relying on prompt engineering alone to govern sensitive data handling, customer-impacting recommendations, or regulated internal automation creates operational risk.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Zero-Trust AI Ingress</h2>
+    <h2>Policy-Enforced AI Ingress</h2>
     <p>
-      BeaconGuard Assurance enforces a deterministic control boundary before model inference. Requests are evaluated for cryptographic trust,
-      structural validity, and policy compliance before the LLM is invoked. Untrusted, malformed, or replayed requests are blocked from
-      reaching the model.
+      BeaconGuard Assurance enforces a deterministic control boundary before model inference. Requests are evaluated for trust, structural validity, data sensitivity, user role, workflow scope, and policy compliance before the LLM is invoked.
+      Untrusted, malformed, replayed, or out-of-policy requests are blocked from reaching the model.
     </p>
     <div class="infra-diagram">
       <div class="flow-diagram flow-diagram--sequence-3 security-workflow">
@@ -64,8 +65,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h2>Fail-Closed Enforcement</h2>
     <p>
-      When required compliance conditions are not met, BeaconGuard executes a deterministic, fail-closed denial. The system prevents the
-      AI from manufacturing an unauthorized forward path and preserves human-reviewed operational authority.
+      When required policy conditions are not met, BeaconGuard executes a deterministic, fail-closed denial. The system prevents AI or automation from creating an unauthorized forward path and preserves human-reviewed operational authority where approval is required.
     </p>
     <div class="section-grid section-grid--compact">
       <div class="content-card">
@@ -73,10 +73,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p>Missing trust proofs, invalid structure, or policy gaps resolve to deny, not permissive fallback.</p>
       </div>
       <div class="content-card">
-        <h3>Blocking Path Control</h3>
-        <p>Blocked requests never reach model output and do not proceed as inferred exceptions.</p>
+        <h3>Approval Gates</h3>
+        <p>Requests that require human review can be routed as needs-review before execution proceeds.</p>
+      </div>
+      <div class="content-card">
+        <h3>Least-Privilege AI Execution</h3>
+        <p>Policy can limit which users, roles, workflows, systems, and data types are allowed to trigger model invocation.</p>
+      </div>
+      <div class="content-card">
+        <h3>Evidence Integrity</h3>
+        <p>Decision records preserve the policy identity, request context, outcome, and reason needed for later review.</p>
       </div>
     </div>
+  </section>
+
+  <section class="stack-section">
+    <h2>Designed for Regulated Review Environments</h2>
+    <p>
+      BeaconGuard is designed to produce evidence useful to security, privacy, compliance, and audit teams in workflows where uncontrolled AI execution is not acceptable.
+      It separates policy enforcement from model response and does not claim certifications, legal compliance guarantees, or replacement of internal control programs.
+    </p>
   </section>
 
   <section class="stack-section">
@@ -84,7 +100,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <p><a href="/trust-assurance">Trust Center</a></p>
     <div class="page-actions">
       <a class="btn-secondary" href="/proof-evidence">Reviewable Decision Evidence</a>
-      <a class="btn-secondary" href="/canonical-workflow">Canonical Workflow</a>
+      <a class="btn-secondary" href="/canonical-workflow">Workflow Examples</a>
     </div>
   </section>
 

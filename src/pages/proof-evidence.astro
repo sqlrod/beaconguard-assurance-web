@@ -2,45 +2,71 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Reviewable Decision Evidence | BeaconGuard Assurance">
+<BaseLayout
+  title="Proof & Evidence | BeaconGuard Audit-Ready Decision Records"
+  description="Review sanitized BeaconGuard evidence records for financial, healthcare, and regulated internal automation workflows."
+>
   <section class="stack-section">
-    <h1>Reviewable Decision Evidence</h1>
+    <h1>Proof &amp; Evidence</h1>
     <p class="lead">
-      Claims of AI safety are insufficient for enterprise security architecture. BeaconGuard emits structured, cryptographic proof of every
-      enforcement action.
+      Claims of AI safety are insufficient for enterprise security architecture. BeaconGuard emits structured evidence for every policy decision so reviewers can inspect what happened, why it happened, and which policy controlled the outcome.
     </p>
     <p>
-      This is a canonical, sanitized BeaconGuard decision record derived from live enforcement behavior. The artifact is publicly presented
-      in a simplified form while preserving the real product structure and proof surface.
+      These are short, sanitized example records. They do not include real PHI, real patient scenarios, real customer records, or real organization data.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Canonical Decision Record Statement</h2>
+    <h2>Decision Record Statement</h2>
     <p>
-      The fields below are the core signals a reviewer inspects to understand what happened, why it happened, and what evidence was emitted.
+      The fields below are core signals a reviewer inspects to understand what happened, why it happened, and what evidence was emitted.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>JSON</h2>
+    <h2>Example 1: Financial workflow</h2>
     <pre class="sample-record"><code class="language-json">{`{
   "event_timestamp": "2026-03-27T14:32:01Z",
-  "correlation_id": "req_884a2b9c_fcrime",
-  "boundary_enforcement": {
-    "decision_class": "DENY_POLICY",
-    "enforced": true,
-    "policy_id": "pol_aml_crossborder_v1.4",
-    "trigger_condition": "missing_mandatory_compliance_evidence"
-  },
-  "cryptographic_provenance": {
-    "x_bg_decision_hash": "a7f8b9...c3d2e1",
-    "x_bg_manifest_hash": "b2e4c6...d8f0a2"
-  },
-  "trust_validation": {
-    "signature_present": true,
-    "signature_valid": true,
-    "replay_detected": false
+  "correlation_id": "req_financial_dispute_001",
+  "workflow_type": "financial_dispute_review",
+  "policy_result": "needs_review",
+  "policy_id": "policy.financial.dispute.v1",
+  "reason": "customer-impacting recommendation requires analyst approval",
+  "evidence_record": {
+    "decision_hash": "a7f8b9...c3d2e1",
+    "policy_snapshot": "snap_financial_dispute_v1"
+  }
+}`}</code></pre>
+  </section>
+
+  <section class="stack-section">
+    <h2>Example 2: Healthcare workflow</h2>
+    <pre class="sample-record"><code class="language-json">{`{
+  "event_timestamp": "2026-03-27T14:36:19Z",
+  "correlation_id": "req_phi_summary_001",
+  "workflow_type": "phi_summary_request",
+  "policy_result": "needs_review",
+  "policy_id": "policy.healthcare.privacy_review.v1",
+  "reason": "request contains sensitive patient-related context and requires approved pathway or privacy review",
+  "evidence_record": {
+    "decision_hash": "c1d4e6...a9b0f2",
+    "policy_snapshot": "snap_privacy_review_v1"
+  }
+}`}</code></pre>
+  </section>
+
+  <section class="stack-section">
+    <h2>Example 3: Enterprise operations workflow</h2>
+    <pre class="sample-record"><code class="language-json">{`{
+  "event_timestamp": "2026-03-27T14:41:08Z",
+  "correlation_id": "req_prod_auto_001",
+  "workflow_type": "production_automation_request",
+  "policy_result": "deny",
+  "policy_id": "policy.internal_automation.change_window.v1",
+  "reason": "automation attempted action outside approved role or change window",
+  "evidence_record": {
+    "decision_hash": "f8e2d1...b4c6a3",
+    "policy_snapshot": "snap_change_window_v1"
   }
 }`}</code></pre>
   </section>
@@ -48,24 +74,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h2>What Reviewers Inspect</h2>
     <ul>
-      <li><strong>Explicit Enforcement</strong>: The decision_class and enforced fields show denied path execution rather than a warning-only model.</li>
+      <li><strong>Explicit Enforcement</strong>: The policy_result field shows whether the request was allowed, denied, or routed for review.</li>
       <li><strong>Policy Identity</strong>: The policy_id identifies which governed policy controlled the outcome.</li>
-      <li><strong>Trigger Condition</strong>: The trigger_condition records why the deny path was executed.</li>
-      <li><strong>Trust Validation</strong>: The trust block confirms signature and replay validation outcomes.</li>
+      <li><strong>Reason</strong>: The reason records why the policy path was executed.</li>
+      <li><strong>Workflow Type</strong>: The workflow_type helps reviewers separate healthcare, financial, and internal operations examples.</li>
       <li>
-        <strong>Cryptographic Binding</strong>: The decision hash and manifest hash bind emitted decision and evidence artifacts to the same control event.
+        <strong>Evidence Binding</strong>: The decision hash and policy snapshot link emitted decision and evidence artifacts to the same control event.
       </li>
     </ul>
   </section>
 
   <section class="stack-section">
-    <h2>Cryptographic Binding Explanation</h2>
+    <h2>Evidence Binding Explanation</h2>
     <p>
-      The decision hash and manifest hash are emitted with the decision to support verification that a decision and its evidence record were
-      produced from the same control event in the enforcement path.
+      The decision hash and policy snapshot are emitted with the decision to support verification that a decision and its evidence record were produced from the same control event in the enforcement path.
     </p>
     <p class="flow-path-note">
-      This is a canonical, sanitized artifact, not an internal source export, and is derived from live enforcement behavior.
+      These examples are public, sanitized artifacts used to describe the expected evidence surface.
     </p>
 
     <div class="infra-diagram" style="margin-top: 1rem;">
@@ -77,17 +102,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-step--uniform flow-node-boundary">
           <p class="flow-step-title">BeaconGuard Decision</p>
-          <p>Deterministic allow/deny with policy context.</p>
+          <p>Deterministic allow, deny, or needs-review with policy context.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-step--uniform flow-node-evidence">
           <p class="flow-step-title">Reviewer Evidence</p>
           <p class="review-evidence-grid">
-            <span>decision_class</span>
-            <span>manifest_hash</span>
-            <span>trigger_condition</span>
+            <span>policy_result</span>
+            <span>policy_snapshot</span>
+            <span>reason</span>
             <span>policy_id</span>
-            <span>enforced</span>
+            <span>workflow_type</span>
             <span>decision_hash</span>
           </p>
         </div>
@@ -101,7 +126,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a class="btn-secondary" href="/security">Security</a>
       <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
       <a class="btn-secondary" href="/reviewer-kit">Reviewer Kit</a>
-      <a class="btn-secondary" href="/canonical-workflow">Canonical Workflow</a>
+      <a class="btn-secondary" href="/canonical-workflow">Workflow Examples</a>
     </div>
   </section>
 
@@ -109,21 +134,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     .review-evidence-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: repeat(3, auto);
-      gap: 0.35rem 1rem;
+      gap: 0.35rem 0.9rem;
       margin: 0;
       padding: 0;
-      list-style: none;
       color: inherit;
+      font-size: 1rem;
+      line-height: 1.4;
     }
 
     .review-evidence-grid span {
+      display: block;
       margin: 0;
     }
 
-    .reviewers-inspection-list code {
-      font-size: 0.95em;
-      font-weight: 500;
+    .review-evidence-grid span {
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     @media (max-width: 900px) {
@@ -137,16 +164,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         overflow-wrap: anywhere;
         word-break: break-word;
         font-size: 0.9rem;
-      }
-
-      .review-evidence-grid {
-        gap: 0.3rem 0.6rem;
-      }
-
-      .review-evidence-grid span {
-        white-space: normal;
-        overflow-wrap: break-word;
-        word-break: break-word;
       }
 
       .proof-binding-flow {

@@ -2,57 +2,61 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="BeaconGuard Assurance">
+<BaseLayout
+  title="BeaconGuard Assurance | Policy Control for AI-Assisted Regulated Workflows"
+  description="BeaconGuard provides deterministic policy control and evidence capture before AI execution in regulated workflows, supporting compliance, privacy, security, risk, and audit review."
+>
   <section class="landing">
-    <p class="hero-eyebrow">Financial AI Control Layer</p>
-    <h1>Deterministic policy control for AI in financial workflows.</h1>
-    <p>Deterministic Control. Verifiable Decisions.</p>
+    <p class="hero-eyebrow">Regulated AI Operations</p>
+    <h1>Deterministic policy control for AI-assisted regulated workflows.</h1>
+    <p>Control Before AI Execution. Evidence After Every Decision.</p>
     <p class="hero-subheadline">
-      BeaconGuard inserts a non-bypassable policy and evidence boundary between financial applications and AI/model endpoints, returning explicit allow/deny decisions with context and preserving reviewable evidence for risk, audit, and security review.
+      BeaconGuard inserts a policy and evidence boundary between enterprise applications and AI/model endpoints, returning explicit allow, deny, or needs-review decisions with preserved evidence for security, compliance, privacy, risk, and audit teams.
     </p>
-    <p class="hero-subheadline">No request reaches a model unless policy conditions are met.</p>
+    <p class="hero-subheadline">Sensitive requests are evaluated before AI or automation execution.</p>
     <div class="page-actions">
-      <a class="btn-primary" href="/platform">Access the architecture blueprint</a>
-      <a class="btn-secondary" href="/design-partner-program">Request the reviewer walkthrough</a>
-      <a class="btn-secondary" href="/proof-evidence">Review canonical proof surface</a>
+      <a class="btn-primary" href="/platform">Review the Platform</a>
+      <a class="btn-secondary" href="/canonical-workflow">Explore Workflow Examples</a>
+      <a class="btn-secondary" href="/proof-evidence">Review Proof &amp; Evidence</a>
       <a class="btn-secondary" href="/reviewer-kit">Open the Reviewer Kit</a>
     </div>
   </section>
 
   <section class="stack-section homepage-block">
-    <h2>Why financial institutions need this boundary</h2>
+    <h2>Built for sensitive regulated operations</h2>
     <p>
-      LLMs are useful in workflows like payment disputes, exception handling, and analyst support. BeaconGuard helps
-      institutions use these capabilities without promoting model behavior to the authorization decision point.
+      BeaconGuard is built for workflows where AI or automation should not execute until policy has been checked.
+      It keeps model behavior out of the authorization decision point and gives reviewers a standard record of what happened.
     </p>
     <p>
-      LLMs are probabilistic, while a compliance/control boundary must be deterministic. BeaconGuard keeps model output out of
-      the control decision path.
+      The top-level control pattern applies across regulated enterprise operations. Financial crime, fraud, and dispute review remain valid
+      examples, while healthcare privacy review, hospital operations support, and internal automation are also policy-gated workflow patterns.
     </p>
-    <p>BeaconGuard enables AI adoption in sensitive workflows without making the model itself the control point.</p>
     <ul>
-      <li>Reduce liability from unauthorized AI-mediated actions</li>
-      <li>Centralize policy enforcement outside application code</li>
-      <li>Produce review-ready evidence for control testing, audit, and incident reconstruction</li>
+      <li>Healthcare privacy and operational AI review</li>
+      <li>Financial crime, fraud, and dispute review</li>
+      <li>Internal automation touching regulated systems</li>
+      <li>Customer-impacting account or service decisions</li>
+      <li>Employee use of AI tools with sensitive data</li>
     </ul>
   </section>
 
   <section class="stack-section homepage-block">
     <h2>What BeaconGuard controls</h2>
     <p class="lead">
-      BeaconGuard is the control and evidence layer for AI request outcomes in sensitive financial workflows.
+      BeaconGuard is a runtime policy and evidence boundary for AI-assisted regulated workflows.
     </p>
     <p>
-      It does not replace applications, models, or transaction services. It decides only whether requests are permitted under explicit policy and returns deterministic outcomes with decision context for each event.
+      It does not replace applications, models, clinical review, transaction systems, or compliance programs.
+      It decides whether a request is permitted under explicit policy and returns deterministic outcomes with decision context for each event.
     </p>
-    <p>
-      It preserves the exact boundary where policy is enforced: separate from model behavior, separate from prompt logic, and separate from downstream business data stores.
-    </p>
-    <div class="boundary-statement">
-      <p><strong class="boundary-statement-key">BeaconGuard is not the system of record.</strong><span class="boundary-statement-detail"> Operational telemetry may stay in existing enterprise systems.</span></p>
-      <p><strong class="boundary-statement-key">BeaconGuard is not the transaction processor.</strong><span class="boundary-statement-detail"> It only gates and evaluates request intent.</span></p>
-      <p><strong class="boundary-statement-key">It is the control and evidence layer</strong><span class="boundary-statement-detail"> between applications and AI use in sensitive financial workflows.</span></p>
-    </div>
+    <ul>
+      <li>What context can be sent to AI/model endpoints</li>
+      <li>Which requests are allowed, denied, or routed for approval</li>
+      <li>Which users, roles, workflows, or systems can trigger AI execution</li>
+      <li>What evidence is preserved for later review</li>
+      <li>What conditions require human approval</li>
+    </ul>
   </section>
 
   <section class="stack-section homepage-block">
@@ -60,9 +64,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <p class="lead">
       A request enters BeaconGuard before model execution and only proceeds when policy is satisfied.
     </p>
-    <p>Authorization logic is applied at runtime by a deterministic policy runtime, then returned as allow/deny plus explanation metadata.</p>
+    <p>Authorization logic is applied at runtime by a deterministic policy runtime, then returned as allow, deny, or needs-review plus decision metadata.</p>
     <p class="homepage-risk-framing">
-      LLMs are probabilistic systems and should not be the authorization boundary for sensitive financial workflows. BeaconGuard inserts deterministic policy control in the request path before model execution.
+      LLMs are probabilistic systems and should not be the authorization boundary for sensitive regulated workflows. BeaconGuard inserts deterministic policy control in the request path before model execution.
     </p>
   </section>
 
@@ -78,12 +82,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-node-boundary">
           <p class="flow-step-title">BeaconGuard Boundary</p>
-          <p>Evaluates policy and returns deterministic allow/deny with reasons.</p>
+          <p>Evaluates policy and returns deterministic allow, deny, or needs-review with reasons.</p>
         </div>
         <div class="flow-arrow" aria-hidden="true">→</div>
         <div class="flow-step flow-node-evidence">
           <p class="flow-step-title">AI / Model Endpoint</p>
-          <p>Executes approved requests and emits model output only.</p>
+          <p>Receives the request only when policy permits execution.</p>
         </div>
       </div>
       <div class="flow-diagram flow-branch home-review-branch">
@@ -95,7 +99,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
     </div>
     <p class="flow-path-note">
-      Decision outcomes are explicit and reviewable; execution occurs only after policy approval.
+      Decision outcomes are explicit and reviewable; execution occurs only after policy approval or approved review.
     </p>
   </section>
 
@@ -207,17 +211,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </style>
 
   <section class="stack-section homepage-block">
-    <h2>Example workflow: AI-assisted financial dispute resolution</h2>
-    <p>
-      A financial operations team uses AI to summarize dispute history, draft analyst support text, or recommend next actions during payment-dispute and account-exception handling.
-      Because LLMs are probabilistic systems, they are not the authorization boundary for sensitive financial decisions.
-      BeaconGuard sits between the financial application and the AI/model endpoint as the control and evidence layer.
-    </p>
-    <p>
-      It evaluates request context against centralized policy and returns explicit allow/deny decisions with context.
-      It preserves structured evidence for security, risk, and audit review.
-      If trust assumptions, policy conditions, or context are missing or out of bounds, BeaconGuard fails closed before the request reaches model execution.
-    </p>
+    <h2>Workflow examples</h2>
+    <div class="section-grid section-grid--compact">
+      <div class="content-card">
+        <h3>Healthcare AI Operations Review</h3>
+        <p>Policy checks can detect PHI-sensitive context, require an approved AI pathway, route privacy review, or deny unapproved model endpoints before execution.</p>
+      </div>
+      <div class="content-card">
+        <h3>Financial Crime / Fraud Review</h3>
+        <p>Analyst support, dispute review, AML, KYC, and fraud workflows can be gated so customer-impacting recommendations require policy approval and evidence.</p>
+      </div>
+      <div class="content-card">
+        <h3>Regulated Internal Automation</h3>
+        <p>Automation touching regulated systems can be denied or routed for approval when role, change window, or action scope conditions are not met.</p>
+      </div>
+    </div>
   </section>
 
   <section class="stack-section homepage-block">
@@ -235,7 +243,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
       <div class="content-card">
         <h3>Control assertions</h3>
-        <p>Explicit allow/deny decisions remain reproducible and linked to policy identity and input context.</p>
+        <p>Explicit allow, deny, and needs-review decisions remain reproducible and linked to policy identity and input context.</p>
       </div>
       <div class="content-card">
         <h3>Replayability</h3>
@@ -243,7 +251,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
       <div class="content-card">
         <h3>Review readiness</h3>
-        <p>Decision artifacts are structured for security and risk teams to reconstruct control behavior.</p>
+        <p>Decision artifacts are structured for security, privacy, compliance, risk, and audit teams to reconstruct control behavior.</p>
       </div>
     </div>
   </section>
@@ -251,7 +259,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section homepage-block">
     <h2>Deployment boundary and responsibility</h2>
     <p>
-      BeaconGuard is designed for controlled deployment postures where control decisions remain bounded at the policy layer and auditable by operational and risk teams.
+      BeaconGuard is designed for controlled deployment postures where control decisions remain bounded at the policy layer and auditable by operational, compliance, privacy, security, and risk teams.
     </p>
     <ul>
       <li>Deployment can be phased by policy domain and environment, without changing model behavior.</li>
@@ -262,14 +270,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="stack-section homepage-block">
     <h2>Trust and review surface</h2>
-    <p>Risk, security, and audit stakeholders can use BeaconGuard as the review layer for runtime controls.</p>
+    <p>Risk, security, privacy, compliance, and audit stakeholders can use BeaconGuard as the review layer for runtime controls.</p>
     <ul>
       <li>Decision context and outcomes are explicit and reproducible.</li>
       <li>Evidence is preserved for investigation and controls testing.</li>
       <li>Control behavior can be reviewed without exposing model internals.</li>
     </ul>
     <p class="muted-copy">
-      Security and risk teams consume the same decision context needed for review-ready governance.
+      Review teams consume the same decision context needed for audit-ready governance.
     </p>
   </section>
 
@@ -284,13 +292,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section homepage-block">
     <h2>Get Started</h2>
     <p>
-      Start with the architecture and move into deployment control boundaries and review planning.
+      Start with the architecture and move into workflow examples, deployment boundaries, and review planning.
     </p>
     <div class="page-actions">
-      <a class="btn-primary" href="/platform">Access the architecture blueprint</a>
+      <a class="btn-primary" href="/platform">Review the Platform</a>
+      <a class="btn-secondary" href="/canonical-workflow">Explore Workflow Examples</a>
       <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
       <a class="btn-secondary" href="/deployment">Review deployment boundary</a>
-      <a class="btn-secondary" href="/design-partner-program">Design Partner Program</a>
     </div>
   </section>
 </BaseLayout>

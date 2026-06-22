@@ -2,7 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Sample Decision Record | BeaconGuard Assurance">
+<BaseLayout
+  title="Sample Decision Record | BeaconGuard Assurance"
+  description="A sanitized BeaconGuard sample decision record showing policy outcome, request action, actor type, and fail-closed result."
+>
   <section class="stack-section">
     <h1>Sample Decision Record</h1>
     <p class="lead">
@@ -25,35 +28,35 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="sample-record sample-record--compact">
       <div class="sample-record-row">
         <span class="sample-record-label">Decision outcome</span>
-        <span class="sample-record-value">DENY</span>
+        <span class="sample-record-value">NEEDS_REVIEW</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Policy identity</span>
-        <span class="sample-record-value">policy.financial.dispute.v1</span>
+        <span class="sample-record-value">policy.regulated.workflow_review.v1</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Decision reason</span>
-        <span class="sample-record-value">Missing required authorization context</span>
+        <span class="sample-record-value">Sensitive context requires approved review pathway</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Request action</span>
-        <span class="sample-record-value">Dispute case recommendation</span>
+        <span class="sample-record-value">AI-assisted summary request</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Actor type</span>
-        <span class="sample-record-value">Operations analyst</span>
+        <span class="sample-record-value">Regulated operations user</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Context status</span>
-        <span class="sample-record-value">Incomplete</span>
+        <span class="sample-record-value">Sensitive</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Fail-closed result</span>
-        <span class="sample-record-value">Request blocked before model execution</span>
+        <span class="sample-record-value">Request routed for human approval before model execution</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Review note</span>
-        <span class="sample-record-value">Application must collect required context before retry</span>
+        <span class="sample-record-value">Privacy, compliance, or risk reviewer must approve before retry</span>
       </div>
     </div>
   </section>
