@@ -4,64 +4,79 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Workflow Examples | BeaconGuard Regulated AI Operations"
-  description="Workflow examples for BeaconGuard control across healthcare AI operations, financial crime and fraud review, and regulated internal automation."
+  description="Workflow examples for BeaconGuard control across healthcare operations, financial crime and fraud review, and regulated internal automation using ALLOW and DENY."
 >
   <section class="stack-section">
     <h1>Workflow Examples</h1>
     <p class="lead">
-      BeaconGuard applies one inline runtime control boundary across healthcare, financial services, and regulated internal automation. Existing systems remain in place while AI-bound requests are controlled before model execution.
+      BeaconGuard applies one Runtime Control Boundary across healthcare, financial services, and regulated internal automation. Existing systems remain in place while requests to governed AI, APIs, or automated systems are controlled before execution.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Shared ALLOW / DENY template</h2>
+    <ol>
+      <li><strong>Request:</strong> Application or System Connector presents trusted request context.</li>
+      <li><strong>Validate:</strong> Request Validation and Context Normalization.</li>
+      <li><strong>Verify:</strong> Trust, Freshness, and Replay Checks as configured.</li>
+      <li><strong>Evaluate:</strong> Deterministic Playbook Evaluation against the Active Verified Release.</li>
+      <li><strong>Enforce:</strong> Return <strong>ALLOW</strong> (governed execution may proceed) or <strong>DENY</strong> (Execution Prevented).</li>
+      <li><strong>Record:</strong> Emit a Verifiable Decision Record with release_identity, playbook_identity, reason codes, and optional review obligations that do not permit execution.</li>
+    </ol>
+    <p class="muted-copy">
+      When required approval is absent, the result is DENY with a reason code such as APPROVAL_REQUIRED. Runtime permission results do not include a review-as-permission state.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Healthcare AI Operations Review</h2>
     <p>
-      BeaconGuard evaluates deterministic context tags, source-system metadata, signed request attributes, user role, workflow identity, approved-pathway status, and policy conditions before model execution. It does not replace the EHR or clinical workflow. It interposes a fail-closed AI request boundary so existing healthcare workflows can remain in place while AI-bound requests are controlled and auditable.
+      BeaconGuard evaluates deterministic context tags, source-system metadata, signed request attributes, user role, workflow identity, approved-pathway status, and Active Verified Release controls before governed execution. It does not replace the EHR or clinical workflow. It interposes a fail-closed Runtime Control Boundary so existing healthcare workflows can remain in place while governed requests are controlled and auditable.
     </p>
     <p class="muted-copy">
-      If context tagging is needed, the host application or an optional preprocessor can generate tags before the request reaches BeaconGuard. BeaconGuard then enforces policy against those tags and other deterministic request attributes.
+      If context tagging is needed, the host application or an optional System Connector can produce required context before Request Validation. BeaconGuard then evaluates against the Active Verified Release.
     </p>
     <ul>
-      <li>Approved-pathway verification before patient-related context reaches a model endpoint</li>
+      <li>Approved-pathway verification before patient-related context reaches a governed system</li>
       <li>User role and workflow identity checks before execution</li>
-      <li>Needs-review routing for privacy, security, compliance, or architecture review</li>
-      <li>Audit-ready evidence after allow, deny, or needs-review decisions</li>
+      <li>DENY with APPROVAL_REQUIRED (or similar) when approval is absent; review obligation does not permit execution</li>
+      <li>Verifiable Decision Records after ALLOW or DENY</li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>Financial Crime / Fraud / AML Review</h2>
     <p>
-      In this workflow, AI can assist analysis for cross-border AML, KYC, fraud, or financial dispute review, but no model inference proceeds without BeaconGuard policy evaluation and preserved decision evidence.
+      In this workflow, AI can assist analysis for cross-border AML, KYC, fraud, or financial dispute review, but no governed inference proceeds without BeaconGuard evaluation and a Verifiable Decision Record.
     </p>
     <ol>
       <li><strong>Application Input:</strong> The financial or analyst application submits a cross-border case for AI-assisted summarization or recommendation.</li>
-      <li><strong>Gateway Intake:</strong> BeaconGuard receives the request before model execution.</li>
+      <li><strong>Boundary Intake:</strong> BeaconGuard receives the request before governed execution (optionally via System Connector).</li>
       <li><strong>Trust and Replay Validation:</strong> Signed metadata, source-system trust, request ID, timestamp, and freshness inputs are checked.</li>
-      <li><strong>Deterministic Policy Evaluation:</strong> The request is checked against governed policy constraints for required AML, KYC, or workflow evidence.</li>
-      <li><strong>Control Outcome:</strong> BeaconGuard returns allow, deny, or needs-review after deterministic policy enforcement.</li>
-      <li><strong>Decision Evidence:</strong> A structured decision record is retained for security, risk, compliance, and audit review.</li>
+      <li><strong>Deterministic Playbook Evaluation:</strong> The request is checked against Compliance Playbook controls for required AML, KYC, or workflow evidence under the Active Verified Release.</li>
+      <li><strong>Control Outcome:</strong> BeaconGuard returns ALLOW or DENY.</li>
+      <li><strong>Decision Evidence:</strong> A Verifiable Decision Record is retained for security, risk, compliance, and audit review.</li>
     </ol>
   </section>
 
   <section class="stack-section">
     <h2>Regulated Internal Automation Review</h2>
     <p>
-      An internal automation or AI agent attempts to perform an action against a regulated system. BeaconGuard checks policy before execution, blocks unauthorized actions, and records evidence for operational review.
+      An internal automation or agent attempts to perform an action against a regulated system. BeaconGuard checks the Active Verified Release before execution, blocks unauthorized actions with DENY, and records evidence for operational review.
     </p>
     <ul>
       <li>Checks user role, workflow identity, environment, requested action, and change window</li>
       <li>Validates signed request metadata, approved automation pathway, and freshness inputs</li>
-      <li>Blocks automation outside approved role or operating conditions</li>
-      <li>Routes higher-risk actions for human approval</li>
-      <li>Preserves decision evidence for security, risk, operations, and audit review</li>
+      <li>Blocks automation outside approved role or operating conditions (DENY / Execution Prevented)</li>
+      <li>Records review obligations for higher-risk DENY cases without permitting execution</li>
+      <li>Preserves Verifiable Decision Records for security, risk, operations, and audit review</li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>Decision Evidence</h2>
     <p>
-      Each workflow emits structured enforcement records only after BeaconGuard has decided allow, deny, or needs-review. Reviewers inspect the decision signal, request metadata, policy inputs, freshness checks, and evidence record to determine exactly what control path executed.
+      Each workflow emits Verifiable Decision Records after BeaconGuard decides ALLOW or DENY. Reviewers inspect the decision signal, request metadata, release identity, freshness and replay checks, and any review obligation—without treating review as a permission result.
     </p>
     <div class="page-actions">
       <a class="btn-primary" href="/proof-evidence">Review Decision Evidence</a>

@@ -1,140 +1,130 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const allowRecord = `{
+  "decision": "ALLOW",
+  "request_id": "req_8f2a1c",
+  "timestamp": "2026-07-20T18:04:11Z",
+  "release_identity": "release.healthcare.ops.v12",
+  "playbook_identity": "playbook.healthcare.ops.summarize.v12",
+  "decision_context": {
+    "workflow": "phi_operational_summary",
+    "role": "care_ops_analyst",
+    "approved_pathway": true
+  },
+  "trust_check": "PASS",
+  "freshness_check": "PASS",
+  "replay_check": "PASS",
+  "outcome": "governed_execution_permitted",
+  "evidence_id": "vdr_allow_8f2a1c"
+}`;
+
+const denyPlaybookRecord = `{
+  "decision": "DENY",
+  "reason_code": "APPROVAL_REQUIRED",
+  "request_id": "req_3c91de",
+  "timestamp": "2026-07-20T18:06:02Z",
+  "release_identity": "release.healthcare.ops.v12",
+  "playbook_identity": "playbook.healthcare.ops.summarize.v12",
+  "decision_context": {
+    "workflow": "phi_operational_summary",
+    "role": "care_ops_analyst",
+    "approved_pathway": false
+  },
+  "trust_check": "PASS",
+  "freshness_check": "PASS",
+  "replay_check": "PASS",
+  "outcome": "execution_prevented",
+  "evidence_id": "vdr_deny_3c91de"
+}`;
+
+const denyTrustRecord = `{
+  "decision": "DENY",
+  "request_id": "req_replay_77",
+  "timestamp": "2026-07-20T18:09:44Z",
+  "release_identity": "release.finops.dispute.v5",
+  "playbook_identity": "playbook.finops.dispute.assist.v5",
+  "decision_context": {
+    "workflow": "dispute_review_assist",
+    "role": "fraud_analyst",
+    "approved_pathway": true
+  },
+  "trust_check": "PASS",
+  "freshness_check": "PASS",
+  "replay_check": "FAIL",
+  "outcome": "execution_prevented",
+  "evidence_id": "vdr_deny_replay_77"
+}`;
 ---
 
 <BaseLayout
-  title="Proof & Evidence | BeaconGuard Decision Records"
-  description="BeaconGuard decision records show deterministic policy inputs, allow/deny/needs-review decisions, and audit-ready evidence at the AI request boundary."
+  title="Proof and Evidence | Verifiable Decision Records"
+  description="Illustrative Verifiable Decision Record samples showing ALLOW and DENY results, release identity, and trust, freshness, and replay check outcomes."
 >
   <section class="stack-section">
-    <h1>Proof &amp; Evidence</h1>
+    <h1>Proof and Evidence</h1>
     <p class="lead">
-      BeaconGuard evidence records are designed to show what was requested, which deterministic policy inputs were evaluated, what decision was returned, and why the request was allowed, denied, or routed for review. Existing systems remain the systems of record. BeaconGuard emits decision evidence at the AI request boundary.
+      These sanitized samples illustrate how Verifiable Decision Records can present deterministic ALLOW or DENY results. They are illustrative review examples, not a normative API schema and not production evidence from a customer environment.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Healthcare operational AI request</h2>
-    <pre class="sample-record"><code class="language-json">{`{
-  "correlation_id": "req_7f21_healthops",
-  "workflow_type": "care_management_summary",
-  "boundary_enforcement": {
-    "decision_class": "NEEDS_REVIEW",
-    "enforced": true,
-    "policy_id": "pol_healthcare_ai_context_v1.2",
-    "trigger_condition": "approved_pathway_required"
-  },
-  "request_context": {
-    "source_system": "care_management_workflow",
-    "user_role": "care_coordinator",
-    "context_tags": [
-      "patient_related",
-      "restricted_operational_context"
-    ],
-    "approved_model_pathway": false,
-    "request_freshness_window_sec": 300
-  },
-  "decision_reason": [
-    "Requested model pathway is not approved for patient-related context.",
-    "Workflow requires privacy or architecture review before model execution."
-  ],
-  "evidence": {
-    "request_id": "req_7f21_healthops",
-    "policy_version": "v1.2",
-    "decision_timestamp": "2026-06-22T15:42:11Z",
-    "review_surface": "privacy_security_audit"
-  }
-}`}</code></pre>
+    <h2>ALLOW — controls satisfied</h2>
+    <p>
+      Trusted context and Active Verified Release requirements are satisfied. Governed execution may proceed. The Verifiable Decision Record preserves release identity and decision context.
+    </p>
+    <p class="sample-note">Illustrative sample — field names and values are for reviewer orientation only.</p>
+    <pre class="code-block"><code>{allowRecord}</code></pre>
   </section>
 
   <section class="stack-section">
-    <h2>Financial workflow request</h2>
-    <pre class="sample-record"><code class="language-json">{`{
-  "correlation_id": "req_8a44_fincrime",
-  "workflow_type": "aml_fraud_review",
-  "boundary_enforcement": {
-    "decision_class": "NEEDS_REVIEW",
-    "enforced": true,
-    "policy_id": "pol_financial_analyst_ai_v1.1",
-    "trigger_condition": "customer_impacting_recommendation"
-  },
-  "request_context": {
-    "source_system": "aml_case_workflow",
-    "user_role": "financial_crime_analyst",
-    "case_metadata_present": true,
-    "approved_model_pathway": true,
-    "request_freshness_window_sec": 300
-  },
-  "decision_reason": [
-    "AML, fraud, or dispute recommendation requires analyst approval.",
-    "Decision evidence is required for risk, compliance, and audit review."
-  ],
-  "evidence": {
-    "request_id": "req_8a44_fincrime",
-    "policy_version": "v1.1",
-    "decision_timestamp": "2026-06-22T15:45:18Z",
-    "review_surface": "risk_compliance_audit"
-  }
-}`}</code></pre>
+    <h2>DENY — playbook or control failure</h2>
+    <p>
+      The request fails a Compliance Playbook control, such as when a required approval is absent. Downstream execution is prevented. Governance or privacy review may follow from the Verifiable Decision Record; review does not change the DENY result or permit execution.
+    </p>
+    <p class="sample-note">
+      Illustrative sample — <code>APPROVAL_REQUIRED</code> is shown as an example reason style authorized by the product contract; it is not published here as a complete public enum.
+    </p>
+    <pre class="code-block"><code>{denyPlaybookRecord}</code></pre>
   </section>
 
   <section class="stack-section">
-    <h2>Regulated internal automation request</h2>
-    <pre class="sample-record"><code class="language-json">{`{
-  "correlation_id": "req_4c19_internalops",
-  "workflow_type": "production_automation_request",
-  "boundary_enforcement": {
-    "decision_class": "DENY",
-    "enforced": true,
-    "policy_id": "pol_internal_ai_automation_v1.0",
-    "trigger_condition": "unauthorized_action_scope"
-  },
-  "request_context": {
-    "source_system": "internal_ops_console",
-    "user_role": "support_analyst",
-    "requested_action": "modify_production_record",
-    "change_window_active": false,
-    "approved_automation_pathway": false
-  },
-  "decision_reason": [
-    "Requested action is outside approved role scope.",
-    "Production modification requires approved automation pathway and active change window."
-  ]
-}`}</code></pre>
+    <h2>DENY — trust, freshness, or replay failure</h2>
+    <p>
+      Admission checks fail closed. When a replay or freshness check fails, the result is DENY before governed execution. The record captures check outcomes for reconstruction and audit support. No machine-style reason enum is asserted here beyond the binary decision and check results.
+    </p>
+    <p class="sample-note">Illustrative sample — field names and values are for reviewer orientation only.</p>
+    <pre class="code-block"><code>{denyTrustRecord}</code></pre>
   </section>
 
   <section class="stack-section">
-    <h2>What Reviewers Inspect</h2>
+    <h2>What reviewers inspect</h2>
     <ul>
-      <li>Which existing workflow submitted the AI-bound request</li>
-      <li>Which signed request metadata, source-system attributes, context tags, and freshness inputs were evaluated</li>
-      <li>Which policy returned allow, deny, or needs-review</li>
-      <li>Why model execution was allowed, blocked, or routed for review</li>
-      <li>What audit-ready evidence was preserved for later review</li>
+      <li>Whether the decision is ALLOW or DENY</li>
+      <li>Whether explanatory reason text or an illustrative reason code clarifies the failure</li>
+      <li>Whether release identity and playbook identity are present</li>
+      <li>Whether trust, freshness, and replay checks are recorded</li>
+      <li>Whether any follow-on governance review is separate from the permission result</li>
+      <li>Whether evidence supports reconstruction without replacing systems of record</li>
     </ul>
   </section>
 
   <section class="stack-section">
-    <h2>Related Review Material</h2>
+    <h2>Related review material</h2>
     <div class="page-actions">
+      <a class="btn-primary" href="/sample-decision-record">Sample Decision Record page</a>
       <a class="btn-secondary" href="/security">Security</a>
       <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
-      <a class="btn-secondary" href="/reviewer-kit">Reviewer Kit</a>
-      <a class="btn-secondary" href="/canonical-workflow">Workflow Examples</a>
+      <a class="btn-secondary" href="/docs/compliance-audit">Compliance and Audit</a>
     </div>
   </section>
 
   <style>
-    .sample-record {
-      overflow-x: auto;
-    }
-
-    .sample-record code {
-      display: block;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      word-break: break-word;
+    .sample-note {
+      max-width: 720px;
+      margin: 0 0 0.85rem;
       font-size: 0.9rem;
+      color: var(--text-muted);
     }
   </style>
 </BaseLayout>

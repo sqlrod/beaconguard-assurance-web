@@ -3,55 +3,79 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Financial AI Workflow Control | BeaconGuard Assurance"
-  description="BeaconGuard deploys alongside existing financial systems to enforce deterministic policy checks before model execution in AML, KYC, fraud, dispute review, and customer-impacting workflows."
+  title="Financial | BeaconGuard for Regulated Financial Workflows"
+  description="BeaconGuard enforces ALLOW or DENY decisions for AML, KYC, fraud, dispute, and customer-impacting financial workflows before governed execution."
 >
   <section class="stack-section">
-    <h1>Deterministic control for AI-assisted financial workflows.</h1>
+    <h1>Deterministic control for regulated financial workflows</h1>
     <p class="lead">
-      BeaconGuard deploys alongside existing financial applications as an inline policy proxy. It enforces policy checks before model execution in AML, KYC, fraud, dispute review, and customer-impacting workflow paths.
+      BeaconGuard deploys alongside existing financial applications as a Runtime Control Boundary. It evaluates trusted request context against the Active Verified Release and returns ALLOW or DENY before governed execution for AML, KYC, fraud, dispute review, and customer-impacting recommendation paths.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Existing Financial Systems Remain in Place</h2>
+    <h2>Existing financial systems remain in place</h2>
     <p>
-      BeaconGuard does not substitute for transactional AML, KYC, fraud, dispute, ledger, or internal case-management systems. It secures existing financial workflow pipelines by providing an inline enforcement checkpoint that evaluates AI-bound requests against deterministic policy schemas before model execution.
+      BeaconGuard does not replace case management, transaction systems, analyst authorization, model risk management, or compliance judgment. Those systems remain authoritative. BeaconGuard enforces the request boundary before governed AI, APIs, or automated systems execute.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Financial Use Cases</h2>
-    <ul>
-      <li>AML analyst review</li>
-      <li>KYC escalation support</li>
-      <li>Fraud exception handling</li>
-      <li>Dispute resolution assistance</li>
-      <li>Account action or customer-impacting recommendation gating</li>
-      <li>Cross-border transfer review support</li>
-    </ul>
+    <h2>Financial scenarios</h2>
+    <div class="section-grid section-grid--scenarios">
+      <div class="content-card">
+        <h3>AML / KYC analyst assistance</h3>
+        <p><strong>Existing workflow:</strong> Analyst-assist request over case materials.</p>
+        <p><strong>Required trusted context:</strong> Workflow identity, analyst role, source-system trust, freshness.</p>
+        <p><strong>Control evaluated:</strong> Role and pathway controls in the Compliance Playbook.</p>
+        <p><strong>Result:</strong> ALLOW when requirements are satisfied; otherwise DENY.</p>
+        <p><strong>Why / When denied:</strong> Missing role, pathway, or approval conditions. An illustrative reason style is <code>APPROVAL_REQUIRED</code>.</p>
+        <p><strong>Evidence:</strong> Verifiable Decision Record with release identity.</p>
+        <p><strong>Authoritative system:</strong> Case management and AML systems remain authoritative.</p>
+      </div>
+      <div class="content-card">
+        <h3>Fraud or dispute review</h3>
+        <p><strong>Existing workflow:</strong> Dispute or fraud investigation assist.</p>
+        <p><strong>Required trusted context:</strong> Request identity, timestamps, approved pathway.</p>
+        <p><strong>Control evaluated:</strong> Trust, freshness, and replay checks plus playbook controls.</p>
+        <p><strong>Result:</strong> DENY on replay or freshness failure; ALLOW when controls pass.</p>
+        <p><strong>Why / When denied:</strong> Replay or freshness checks fail closed before governed execution.</p>
+        <p><strong>Evidence:</strong> Verifiable Decision Record for investigation reconstruction.</p>
+        <p><strong>Authoritative system:</strong> Fraud and dispute platforms remain authoritative.</p>
+      </div>
+      <div class="content-card">
+        <h3>Customer-impacting recommendation</h3>
+        <p><strong>Existing workflow:</strong> Recommendation that can affect a customer outcome.</p>
+        <p><strong>Required trusted context:</strong> Approved pathway and required approval state.</p>
+        <p><strong>Control evaluated:</strong> Approval and pathway requirements.</p>
+        <p><strong>Result:</strong> DENY when approval is absent.</p>
+        <p><strong>Why / When denied:</strong> Required approval is missing. An illustrative reason style is <code>APPROVAL_REQUIRED</code>.</p>
+        <p><strong>Evidence:</strong> Verifiable Decision Record; governance review may follow without permitting execution.</p>
+        <p><strong>Authoritative system:</strong> Customer operations and compliance remain authoritative.</p>
+      </div>
+      <div class="content-card">
+        <h3>Production-system automation</h3>
+        <p><strong>Existing workflow:</strong> Internal automation acting against production systems.</p>
+        <p><strong>Required trusted context:</strong> Environment, role, action, change window, freshness.</p>
+        <p><strong>Control evaluated:</strong> Deterministic Playbook Evaluation against the Active Verified Release.</p>
+        <p><strong>Result:</strong> ALLOW or DENY before the automation proceeds.</p>
+        <p><strong>Evidence:</strong> Verifiable Decision Record for operations and audit review.</p>
+        <p><strong>Authoritative system:</strong> Production systems of record remain authoritative.</p>
+      </div>
+    </div>
   </section>
 
   <section class="stack-section">
-    <h2>Fintech Control Points</h2>
+    <h2>What BeaconGuard does not replace</h2>
     <ul>
-      <li>Analyst workflow authorization</li>
-      <li>Required structured context validation</li>
-      <li>Transaction or case metadata validation</li>
-      <li>Source-system trust validation</li>
-      <li>Replay/freshness checks</li>
-      <li>Policy-based allow/deny/review routing</li>
-      <li>Evidence for security, risk, compliance, and audit review</li>
+      <li>Case management or transaction processing systems</li>
+      <li>Analyst authorization or compliance judgment</li>
+      <li>Model risk management programs</li>
+      <li>SIEM, IAM, or GRC platforms</li>
     </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>What BeaconGuard Does Not Replace</h2>
-    <p>
-      BeaconGuard does not replace AML case management, fraud decisioning, transaction monitoring, KYC systems, SIEM, model monitoring, or legal compliance review. BeaconGuard is the runtime control and evidence layer at the AI request boundary.
-    </p>
     <div class="page-actions">
       <a class="btn-primary" href="mailto:architecture@beaconguardassurance.com?subject=Financial%20Workflow%20Review">Request a Financial Workflow Review</a>
+      <a class="btn-secondary" href="/docs/architecture">Review System Architecture</a>
     </div>
   </section>
 </BaseLayout>

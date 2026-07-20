@@ -3,113 +3,132 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Platform | BeaconGuard AI Authorization and Evidence Boundary"
-  description="BeaconGuard sits between regulated enterprise applications and AI/model endpoints as an inline policy proxy that evaluates deterministic policy inputs before model execution."
+  title="Platform | BeaconGuard Runtime Control Capabilities"
+  description="BeaconGuard provides a Control Plane, Compliance Playbooks, Active Verified Releases, a Runtime Control Boundary, and Verifiable Decision Records for high-risk enterprise workflows."
 >
-  <section>
-    <h1>Inline authorization and evidence boundary for AI-assisted workflows.</h1>
+  <section class="stack-section">
+    <h1>Platform capabilities for deterministic runtime control</h1>
     <p class="lead">
-      BeaconGuard sits between regulated enterprise applications and AI/model endpoints. It deploys alongside existing systems as an inline policy proxy. Each request is evaluated before model execution using deterministic policy inputs such as signed metadata, workflow identity, user role, source-system trust, approved-pathway status, request timestamps, freshness windows, and required context tags.
+      BeaconGuard separates governed release management from runtime enforcement. Compliance Playbooks become Active Verified Releases; the Runtime Control Boundary evaluates trusted request context and returns explicit ALLOW or DENY results before governed execution.
     </p>
   </section>
 
-  <section>
-    <h2>Existing Systems Remain in Place</h2>
+  <section class="stack-section">
+    <h2>Existing systems remain in place</h2>
     <p>
-      BeaconGuard does not replace the system of record, workflow application, case-management platform, EHR, AML system, fraud system, SIEM, IAM, or GRC tool. Those systems continue to own their existing functions. BeaconGuard enforces the AI request boundary before model execution and emits decision evidence after allow, deny, or needs-review outcomes.
+      BeaconGuard does not replace the system of record, workflow application, case-management platform, EHR, AML system, fraud system, SIEM, IAM, or GRC tool. Those systems continue to own their existing functions. BeaconGuard enforces the request boundary before governed AI, APIs, or automated systems execute and emits a Verifiable Decision Record for every deterministic result.
     </p>
   </section>
 
-  <section>
-    <h2>Architecture Sequence</h2>
-    <ol>
-      <li>Existing regulated application or workflow submits an AI-bound request</li>
-      <li>BeaconGuard receives the request before model execution</li>
-      <li>Signed metadata, source trust, user role, workflow identity, context tags, and policy inputs are validated</li>
-      <li>Freshness and replay controls are checked using request IDs, timestamps, signed metadata, or deployment-specific state controls</li>
-      <li>Deterministic Context Tagging and Approved-Pathway Verification occurs</li>
-      <li>Deterministic policy evaluation runs</li>
-      <li>BeaconGuard returns allow, deny, or needs-review</li>
-      <li>Only allowed requests proceed to approved model endpoint</li>
-      <li>Decision evidence is preserved for audit, security, privacy, compliance, and risk review</li>
-    </ol>
+  <section class="stack-section">
+    <h2>BeaconGuard Control Plane</h2>
+    <p>
+      The management plane defines, validates, compiles, approves, signs, and distributes immutable release artifacts. A distributed release is not automatically active. It must pass Release Verification and Activation before it becomes the Active Verified Release used by the runtime.
+    </p>
   </section>
 
-  <section>
-    <h2>Decision Outputs</h2>
+  <section class="stack-section">
+    <h2>Compliance Playbooks</h2>
+    <p>
+      Compliance Playbooks express governed control intent for regulated workflows. They are the source definition for what must be validated before governed execution proceeds.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Validation and Compilation</h2>
+    <p>
+      Playbooks are validated and compiled into a deterministic form suitable for release packaging. Compilation does not replace governance approval or release signing.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Signed Immutable Release Artifact</h2>
+    <p>
+      Approved playbooks become Signed Immutable Release Artifacts for controlled distribution. Release identity travels with the package used at runtime.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Release Verification and Activation</h2>
+    <p>
+      Distributed releases are verified and activated before they govern evaluation. Only an Active Verified Release is used by the Runtime Control Boundary.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>BeaconGuard Runtime Control Boundary</h2>
+    <p>
+      The runtime data plane validates and normalizes request context; performs trust, freshness, and replay checks; evaluates each request against the Active Verified Release; and returns ALLOW or DENY before downstream execution. Admission failures fail closed as DENY.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>System Connector</h2>
+    <p>
+      An optional System Connector maps source protocols and context into the required request format when enterprise applications do not natively produce that structure. The System Connector does not evaluate controls, activate releases, or bypass fail-closed enforcement.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Deterministic decision results</h2>
     <div class="section-grid section-grid--compact">
       <div class="content-card">
-        <h3>Allow</h3>
-        <p>The request meets policy requirements and can proceed to the approved model endpoint.</p>
+        <h3>ALLOW</h3>
+        <p>The request satisfies Active Verified Release requirements and may proceed to governed execution.</p>
       </div>
       <div class="content-card">
-        <h3>Deny</h3>
-        <p>The request fails required policy, trust, freshness, role, pathway, or context checks before model execution.</p>
+        <h3>DENY</h3>
+        <p>The request is blocked before downstream execution. Missing approvals or trust conditions produce DENY with an explicit deterministic reason. An illustrative reason style is <code>APPROVAL_REQUIRED</code>.</p>
+      </div>
+    </div>
+    <p>
+      Human or governance review may follow from the Verifiable Decision Record or an associated obligation. Review does not permit execution and does not replace the ALLOW or DENY result.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Verifiable Decision Records</h2>
+    <p>
+      Every deterministic result emits a Verifiable Decision Record that preserves decision context, release identity, control result, and outcome for reconstruction, replay support, audit, and governance review.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Evidence, Replay, and Verification</h2>
+    <p>
+      Evidence is designed for replay and verification. Retention, integrity protection, and storage durability depend on the configured evidence provider and customer deployment. Do not treat evidence claims as legal certification or universal append-only storage.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Industry capability surfaces</h2>
+    <div class="section-grid section-grid--compact">
+      <div class="content-card">
+        <h3>Healthcare</h3>
+        <p>Approved pathways, role and trust checks, and Verifiable Decision Records for PHI-sensitive operational workflows.</p>
+        <p><a href="/healthcare">Review Healthcare</a></p>
       </div>
       <div class="content-card">
-        <h3>Needs Review</h3>
-        <p>The request is routed for human review before model execution because policy requires approval.</p>
+        <h3>Financial</h3>
+        <p>Deterministic request admission for AML, KYC, fraud, dispute, and customer-impacting recommendation workflows.</p>
+        <p><a href="/fintech">Review Financial</a></p>
+      </div>
+      <div class="content-card">
+        <h3>Regulated automation</h3>
+        <p>Fail-closed enforcement before agents or automations act against production systems.</p>
+        <p><a href="/canonical-workflow">Review Workflow Examples</a></p>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>BeaconGuard as a Policy Enforcement Point</h2>
-    <p>
-      BeaconGuard functions as a policy enforcement point at the AI request boundary. It can consume policy inputs from existing identity, workflow, application, governance, or source systems, but it does not become the system of record and does not modify legacy application logic.
-    </p>
-  </section>
-
-  <section>
-    <h2>Capability Blocks</h2>
-    <div class="section-grid">
-      <div class="content-card">
-        <h3>Healthcare AI Control</h3>
-        <p>BeaconGuard supports PHI-sensitive operational AI workflows by enforcing approved model pathways, deterministic context tags, user-role boundaries, source-system trust, and needs-review routing before model execution.</p>
-        <ul>
-          <li>Care-management summary support</li>
-          <li>Discharge-planning assistance</li>
-          <li>Patient-message draft review</li>
-          <li>Utilization-review preparation</li>
-          <li>Referral-intake or chart-abstraction workflows</li>
-        </ul>
-      </div>
-      <div class="content-card">
-        <h3>Financial Workflow Control</h3>
-        <p>BeaconGuard supports AI-assisted financial workflows where analyst-assist outputs, fraud review, AML/KYC review, dispute handling, or customer-impacting recommendations require deterministic request control before model execution.</p>
-        <ul>
-          <li>AML analyst support</li>
-          <li>Fraud exception review</li>
-          <li>KYC escalation support</li>
-          <li>Dispute resolution assistance</li>
-          <li>Account-action recommendation gating</li>
-        </ul>
-      </div>
-      <div class="content-card">
-        <h3>Regulated Internal Automation</h3>
-        <p>BeaconGuard supports internal AI agents and automations that need policy enforcement before interacting with production systems, sensitive data, or regulated operational workflows.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Why BeaconGuard is not just an API Gateway</h2>
-    <p>
-      Standard API gateways route traffic based on endpoints, tokens, and network policies. BeaconGuard evaluates workflow-level AI policy context before model execution, including user role, workflow identity, signed request metadata, approved-pathway status, source-system trust, freshness windows, and evidence requirements.
-    </p>
-  </section>
-
-  <section>
-    <h2>Deep Technical Paths</h2>
-    <ul>
-      <li><a href="/docs/overview">Platform overview</a></li>
-      <li><a href="/docs/architecture">System architecture</a></li>
-      <li><a href="/docs/policy-model">Policy model</a></li>
-    </ul>
+  <section class="stack-section">
+    <h2>Deep technical paths</h2>
     <div class="page-actions">
-      <a class="btn-primary" href="/how-it-works">See runtime workflow</a>
-      <a class="btn-secondary" href="/healthcare">Review healthcare path</a>
-      <a class="btn-secondary" href="/fintech">Review financial path</a>
+      <a class="btn-primary" href="/how-it-works">See How It Works</a>
+      <a class="btn-secondary" href="/docs/architecture">System Architecture</a>
+      <a class="btn-secondary" href="/docs/enforcement-runtime">Enforcement Runtime</a>
+      <a class="btn-secondary" href="/healthcare">Healthcare path</a>
+      <a class="btn-secondary" href="/fintech">Financial path</a>
     </div>
   </section>
 </BaseLayout>

@@ -1,298 +1,106 @@
 ﻿---
-
-title: DFD and Threat Flow
-
+title: Data-Flow Threat Analysis
 layout: /src/layouts/BaseLayout.astro
+description: Trust boundaries, data flows, threat conditions, and deterministic ALLOW or DENY enforcement responses for BeaconGuard-governed requests.
+---
+
+# Data-Flow Threat Analysis
+
+This page identifies the trust boundaries, data flows, threat conditions, and deterministic enforcement responses associated with a BeaconGuard-governed request. It supplements the [System Architecture](/docs/architecture) and [Threat Model](/docs/threat-model) documentation.
 
 ---
 
+## 1. Scope and trust boundary
 
+BeaconGuard inserts a Runtime Control Boundary between an enterprise application or workflow and a governed AI, API, or automated system. The management plane produces releases; the runtime data plane evaluates each request against an Active Verified Release and returns ALLOW or DENY before governed execution.
 
-\# DFD and Threat Flow
+Out of scope for this page:
 
-
-
-This document describes the \*\*Data Flow Diagram (DFD)\*\* and associated threat
-
-model for the BeaconGuard public website.
-
-
-
-It translates the static architectural view into a \*\*flow-based security view\*\*
-
-suitable for threat modeling and external security review.
-
-
-
-This page is \*\*not marketing documentation\*\*.
-
-
+- Product marketing claims
+- Legal compliance certification
+- Replacement of customer systems of record
 
 ---
 
+## 2. Data-flow sequence
 
-
-\## Scope and Intent
-
-
-
-This DFD applies \*\*only\*\* to:
-
-\- The public BeaconGuard website
-
-\- Static documentation delivery
-
-\- A no-JavaScript, no-client-logic architecture
-
-
-
-It does \*\*not\*\* describe:
-
-\- BeaconGuard runtime enforcement
-
-\- Authorization decisions
-
-\- Policy evaluation behavior
-
-
+1. Enterprise Application / Workflow submits a request.
+2. Optional System Connector maps source protocol and context.
+3. Request Validation and Context Normalization checks required structure.
+4. Trust, Freshness, and Replay Checks validate admission conditions.
+5. Deterministic Playbook Evaluation applies the Active Verified Release.
+6. BeaconGuard returns ALLOW or DENY.
+7. A Verifiable Decision Record is emitted.
+8. Evidence supports replay, verification, and governance review.
 
 ---
 
+## 3. Trust inputs
 
+Typical trusted inputs include signed or otherwise verified request metadata, workflow identity, user role, source-system trust, approved-pathway status, request identifiers, timestamps, freshness windows, and the Active Verified Release selected for evaluation.
 
-\## Key Constraint: No Client-Side Logic
-
-
-
-The website intentionally contains \*\*no client-side JavaScript\*\*.
-
-
-
-As a result:
-
-\- The browser acts only as a passive renderer
-
-\- No client-side state, logic, or enforcement exists
-
-\- All meaningful behavior occurs at the Edge or Origin layers
-
-
+Missing or invalid required inputs fail closed as DENY.
 
 ---
 
+## 4. Threat conditions
 
+<div class="docs-table-wrap">
 
-\## Trust Boundaries
+| Threat | Boundary | Control | Enforcement response | Residual responsibility |
+| --- | --- | --- | --- | --- |
+| Malformed request | Runtime Control Boundary | Request Validation and Context Normalization | DENY because required structure is missing or invalid | Application request construction |
+| Missing trusted context | Runtime Control Boundary | Trust checks and playbook requirements | DENY because required context is missing | Identity and source-system trust configuration |
+| Invalid signature or trust signal | Runtime Control Boundary | Trust and signature checks | DENY because trust cannot be verified | Key and identity-provider operations |
+| Stale request | Runtime Control Boundary | Freshness checks | DENY because freshness cannot be verified | Clock and request-timing practices |
+| Replayed request | Runtime Control Boundary | Replay checks | DENY because the request appears replayed | Replay-state provider and deployment configuration |
+| Inactive or unverified release | Release Verification and Activation | Release verification before activation | DENY because no verified active release is available | Release distribution and activation operations |
+| Unauthorized pathway | Deterministic Playbook Evaluation | Active Verified Release pathway controls | DENY because the pathway is not approved | Pathway governance and playbook authoring |
+| System Connector manipulation | Optional System Connector | Connector cannot evaluate controls or bypass fail-closed enforcement | DENY when normalized context fails validation or trust checks | Connector hardening and monitoring |
+| Downstream execution misuse | After ALLOW | BeaconGuard does not own post-ALLOW business logic | Not a runtime permission bypass; ALLOW only permits governed execution | Customer application and model-risk controls |
+| Evidence-provider failure | Evidence path | Verifiable Decision Record emission; storage durability is deployment-dependent | Runtime permission remains ALLOW or DENY; retention and integrity depend on provider configuration | Evidence-provider and customer infrastructure |
 
-
-
-\- \*\*User Agent\*\* — Untrusted client
-
-\- \*\*Public Internet / DNS\*\* — Untrusted network
-
-\- \*\*Edge / CDN\*\* — Semi-trusted delivery and enforcement layer
-
-\- \*\*Origin\*\* — Static file source of truth
-
-\- \*\*Build / CI Pipeline\*\* — Trusted but high-risk supply chain boundary
-
-\- \*\*Source \& Artifacts\*\* — Integrity-sensitive assets
-
-
+</div>
 
 ---
 
+## 5. Enforcement behavior
 
+Runtime permission results are binary:
 
-\## Data Flow Diagram (Security View)
+- **ALLOW** — required controls are satisfied; governed execution may proceed.
+- **DENY** — execution is prevented; no downstream execution occurs.
 
-
-
-```mermaid
-
-flowchart LR
-
-&nbsp; E1\[User Agent / Browser]:::ext
-
-&nbsp; E2\[DNS Resolver]:::ext
-
-
-
-&nbsp; P1\[Edge / CDN<br/>Routing + Cache]:::proc
-
-&nbsp; D5\[(Edge Cache)]:::store
-
-
-
-&nbsp; P2\[Origin Static Server<br/>(Immutable Files)]:::proc
-
-&nbsp; D4\[(Origin Storage<br/>Static Bundle)]:::store
-
-
-
-&nbsp; P3\[Build Pipeline<br/>(Astro Build)]:::proc
-
-&nbsp; D1\[(Source Repository)]:::store
-
-&nbsp; D2\[(Dependency Registry<br/>npm)]:::store
-
-&nbsp; D3\[(Build Artifacts<br/>Static Output)]:::store
-
-
-
-&nbsp; E1 -->|HTTP GET /path| P1
-
-&nbsp; P1 -->|Cache lookup| D5
-
-&nbsp; D5 -->|Cache hit| P1
-
-&nbsp; P1 -->|Cache miss| P2
-
-&nbsp; P2 -->|Read static file| D4
-
-&nbsp; D4 -->|File bytes| P2
-
-&nbsp; P2 -->|Response| P1
-
-&nbsp; P1 -->|Response| E1
-
-&nbsp; P1 -->|Store response| D5
-
-
-
-&nbsp; D1 -->|Source files| P3
-
-&nbsp; D2 -->|Pinned deps| P3
-
-&nbsp; P3 -->|Static artifacts| D3
-
-&nbsp; D3 -->|Deploy| D4
-
-
-
-&nbsp; classDef ext fill:#ffffff,stroke:#333,stroke-width:1px;
-
-&nbsp; classDef proc fill:#eef2ff,stroke:#333,stroke-width:1px;
-
-&nbsp; classDef store fill:#ecfeff,stroke:#333,stroke-width:1px;
-
-
-
-
-
-```
-
-
+When required approval is absent, BeaconGuard returns DENY with a deterministic reason indicating that approval is required. An illustrative reason style is `APPROVAL_REQUIRED`. Governance or human review may follow from the Verifiable Decision Record; review does not permit execution.
 
 ---
 
+## 6. Evidence and review
 
-
-\## Primary Threat Surfaces
-
-
-
-\### Edge / CDN Layer (Highest Risk)
-
-\- Cache poisoning
-
-\- Cache key manipulation
-
-\- Incorrect variation on headers or query strings
-
-\- Cache deception attacks
-
-
-
-The Edge is the \*\*primary enforcement point\*\* in a static architecture.
-
-
+Every deterministic result produces a Verifiable Decision Record that preserves decision context, release identity, control result, and outcome. Evidence is designed for replay and verification and supports audit and governance review. Retention and integrity protection depend on the configured evidence provider and shared customer deployment responsibilities.
 
 ---
 
+## 7. Residual risks
 
+BeaconGuard does not remove residual risk from:
 
-\### Build / CI Pipeline
+- Misconfigured identity providers or trust sources
+- Incorrect Compliance Playbook authoring
+- Compromised signing keys
+- Evidence-provider outages or misconfiguration
+- Misuse of allowed outputs after an ALLOW result
 
-\- Supply chain compromise via build-time dependencies
-
-\- Lockfile drift
-
-\- Artifact tampering prior to deployment
-
-
-
-Build integrity directly affects all delivered content.
-
-
+Those risks remain shared with customer operations and are addressed in the broader [Threat Model](/docs/threat-model).
 
 ---
 
+## 8. Related documentation
 
-
-\### Origin Configuration
-
-\- Incorrect MIME types
-
-\- Path traversal via misconfiguration
-
-\- Serving unintended files
-
-
-
-Origin must serve \*\*static files only\*\*, without execution.
-
-
-
----
-
-
-
-\## Validation Checklist
-
-\- Static-only origin (no SSR, no runtime execution)
-
-\- Deterministic URL-to-file mapping
-
-\- Deterministic cache key strategy enforced at CDN
-
-\- Immutable build artifacts per deploy
-
-\- Pinned dependency versions in build pipeline
-
-
-
-If any condition fails, the security posture is invalid.
-
-
-
----
-
-
-
-\## Non-Goals
-
-\- Authentication or authorization
-
-\- User-specific content
-
-\- Private documentation access
-
-\- Runtime policy enforcement
-
-
-
----
-
-
-
-\## Related Sections
-
-\- \[System Architecture](/docs/architecture)
-
-\- \[Threat Model](/docs/threat-model)
-
-\- \[Compliance and Audit](/docs/compliance-audit)
-
-
-
+- [System Architecture](/docs/architecture)
+- [Threat Model](/docs/threat-model)
+- [Enforcement Runtime](/docs/enforcement-runtime)
+- [Policy Model](/docs/policy-model)
+- [How It Works](/how-it-works)
+- [Security](/security)
+- [Compliance and Audit](/docs/compliance-audit)

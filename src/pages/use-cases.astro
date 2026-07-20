@@ -4,13 +4,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Use Cases | BeaconGuard Regulated AI Operations"
-  description="BeaconGuard workflow patterns for healthcare privacy review, financial services review, and regulated internal automation."
+  description="BeaconGuard workflow patterns for healthcare privacy review, financial services review, and regulated internal automation with ALLOW/DENY enforcement."
 >
   <section>
     <h1>Use Cases</h1>
     <p>
       BeaconGuard deploys alongside existing applications for regulated enterprise workflows where probabilistic model behavior cannot serve as the authorization boundary.
-      It helps teams govern whether AI-assisted actions are allowed, denied, or routed for approval under policy before model execution.
+      It evaluates trusted request context against an Active Verified Release and returns ALLOW or DENY before governed execution.
     </p>
   </section>
 
@@ -19,15 +19,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="section-grid">
       <div class="content-card">
         <h3>Healthcare privacy and operational AI review</h3>
-        <p>Deterministic context tags, user role, source-system trust, and approved AI pathway requirements can be policy-gated before AI-assisted work is allowed to proceed.</p>
+        <p>Deterministic context tags, user role, source-system trust, and approved pathway requirements can be playbook-gated before AI-assisted work is allowed to proceed. Absent approval yields DENY with Execution Prevented.</p>
       </div>
       <div class="content-card">
         <h3>Financial crime, fraud, and dispute review</h3>
-        <p>AML, KYC, fraud, dispute, and account exception workflows can require approval before customer-impacting recommendations proceed.</p>
+        <p>AML, KYC, fraud, dispute, and account exception workflows can require approval before customer-impacting recommendations proceed. Missing approval is DENY, not permission via review.</p>
       </div>
       <div class="content-card">
         <h3>Regulated internal automation</h3>
-        <p>Internal tools and AI agents touching regulated systems can be denied or routed for review before action.</p>
+        <p>Internal tools and agents touching regulated systems can be denied before action when controls or trust conditions fail. Verifiable Decision Records support governance follow-up without changing the DENY result.</p>
       </div>
     </div>
   </section>
@@ -35,10 +35,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section>
     <h2>Operational patterns</h2>
     <ul>
-      <li>Policy-gated requests before model execution</li>
-      <li>Deterministic allow, deny, or needs-review at the request boundary</li>
-      <li>Explicit reviewable evidence for governed workflows</li>
-      <li>Fail-closed handling when required policy or trust conditions are not met</li>
+      <li>Playbook-gated requests before governed execution</li>
+      <li>Deterministic ALLOW or DENY at the Runtime Control Boundary</li>
+      <li>DENY when approval is absent (illustrative reason style: <code>APPROVAL_REQUIRED</code>)</li>
+      <li>Verifiable Decision Records for Evidence, Replay, and Verification</li>
+      <li>Fail-closed handling when required release, trust, or freshness conditions are not met</li>
     </ul>
   </section>
 
@@ -56,6 +57,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <li><a href="/platform">Understand platform coverage</a></li>
       <li><a href="/trust-assurance">Review assurance model</a></li>
       <li><a href="/deployment">Compare deployment posture</a></li>
+      <li><a href="/canonical-workflow">Review workflow examples</a></li>
     </ul>
     <div class="page-actions">
       <a class="btn-primary" href="/design-partner-program">Request Controlled Architecture Evaluation</a>

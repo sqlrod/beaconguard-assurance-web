@@ -4,7 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Deployment | BeaconGuard Regulated Enterprise Environments"
-  description="BeaconGuard deploys alongside existing applications in regulated enterprise workflow environments as an inline policy enforcement boundary before model execution."
+  description="BeaconGuard deploys alongside existing applications as a Runtime Control Boundary that returns ALLOW or DENY before governed execution."
 >
   <section class="stack-section">
     <h1>Deployment</h1>
@@ -16,7 +16,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h2>Deployment Without System Replacement</h2>
     <p>
-      BeaconGuard is designed to deploy alongside existing applications. Existing systems continue to own workflow logic, records, case management, identity, logging, and compliance processes. BeaconGuard interposes at the AI request boundary to enforce policy before model execution and emit decision evidence afterward.
+      BeaconGuard deploys alongside existing applications. Existing systems continue to own workflow logic, records, case management, identity, logging, and compliance processes. BeaconGuard places a Runtime Control Boundary before governed AI, APIs, or automated systems execute, returns ALLOW or DENY, and emits Verifiable Decision Records.
     </p>
   </section>
 
@@ -26,34 +26,44 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <li>Healthcare architecture evaluation</li>
       <li>Financial workflow evaluation</li>
       <li>Internal automation evaluation</li>
-      <li>Sandbox policy simulation</li>
+      <li>Sandbox Compliance Playbook validation</li>
       <li>Non-production controlled validation</li>
       <li>Workflow-specific proof of concept</li>
     </ul>
     <p>
-      BeaconGuard can be evaluated before production deployment using synthetic or de-identified workflow scenarios, deterministic metadata tags, mock request IDs, and representative policy schemas.
+      BeaconGuard can be evaluated before production using synthetic or de-identified workflow scenarios, deterministic metadata tags, mock request IDs, and representative playbook controls.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Placement and Intent</h2>
     <p>
-      BeaconGuard belongs in the runtime path between existing application services and AI/model endpoints. This ensures authorization-sensitive interaction is governed at the AI request boundary before the request reaches or consumes model outputs.
+      BeaconGuard belongs on the runtime path between existing application services and the Governed AI / API / Automated System. An optional System Connector can map source protocols into the required request format. The connector does not evaluate controls or activate releases.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Trust Boundaries and Operational Posture</h2>
     <p>
-      Policy is authoritative at enforcement time within the inline runtime control boundary. Applications and downstream systems should not silently bypass governance outcomes. When required policy material, signed metadata, source-system trust, approved-pathway status, or freshness inputs are missing or invalid, decisions must fail closed or route for review.
+      Only an Active Verified Release governs evaluation at the Runtime Control Boundary. Applications must enforce ALLOW and DENY outcomes and must not silently bypass the boundary. When required release material, signed metadata, trust signals, approved-pathway status, approvals, freshness, or replay inputs are missing or invalid, decisions fail closed as DENY. Human review via a Verifiable Decision Record obligation does not permit execution.
     </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Shared Customer Responsibilities</h2>
+    <ul>
+      <li>Identity providers, network path controls, secrets, and host hardening</li>
+      <li>Release signing-key custody and environment separation</li>
+      <li>Evidence-provider configuration when append-only or durable retention is required</li>
+      <li>Operational monitoring and incident response around the control boundary</li>
+    </ul>
   </section>
 
   <section class="stack-section">
     <h2>Technical References</h2>
     <ul>
       <li><a href="/docs/deployment-integration">Deployment and integration</a></li>
-      <li><a href="/docs/compliance-audit">Compliance controls</a></li>
+      <li><a href="/docs/compliance-audit">Compliance and audit</a></li>
       <li><a href="/how-it-works">How BeaconGuard enforces decisions</a></li>
     </ul>
     <div class="page-actions">

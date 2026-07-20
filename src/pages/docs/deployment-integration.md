@@ -5,125 +5,130 @@ layout: /src/layouts/BaseLayout.astro
 
 # Deployment and Integration
 
-This section describes how BeaconGuard Assurance is deployed and integrated into
-existing systems. The guidance is intentionally conservative and environment-
-agnostic to support regulated environments.
+This section describes how BeaconGuard is deployed and integrated into existing
+systems. Guidance is conservative and environment-agnostic for regulated
+enterprise settings.
 
-BeaconGuard is designed to deploy alongside existing applications without changes to model internals and without distributing governance rules throughout application business logic.
-Applications submit signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, deterministic context tags, request IDs, timestamps, freshness windows, and policy inputs, then enforce BeaconGuard's explicit decision response.
+BeaconGuard deploys alongside existing applications. Applications submit trusted
+request context, enforce the returned **ALLOW** or **DENY** result before
+governed execution, and rely on Verifiable Decision Records for governance
+review. Deployment responsibilities are shared with the customer.
 
 ---
 
 ## Deployment Model
 
-BeaconGuard is deployed as an independent inline policy proxy or policy enforcement point at the AI request boundary.
+BeaconGuard is deployed as a **Runtime Control Boundary** on the path to a
+Governed AI / API / Automated System. An optional **System Connector** may map
+source protocols into the required request format.
 
-Common deployment characteristics:
+Common characteristics:
 
-- Runs as a standalone process or container
-- Stateless execution model
-- Horizontal scalability
+- Standalone process or container on the runtime data plane
+- Deterministic evaluation against an Active Verified Release
+- Horizontal scalability where the environment supports it
 - Externalized configuration and secrets
 
-The deployment environment is responsible for:
-- Process isolation
-- Network controls
-- Transport security (e.g., TLS)
-- Secrets management
+The deployment environment (customer) is responsible for:
+
+- Process isolation and host hardening
+- Network controls that keep the boundary on the governed path
+- Transport security (for example TLS)
+- Secrets and signing-key management
+- Identity provider integration
+- Evidence-provider configuration and monitoring
 
 ---
 
 ## Integration Pattern
 
-BeaconGuard integrates at the **AI request authorization boundary**.
-
 Typical request flow:
 
-1. Existing application prepares an AI-bound authorization request
-2. Request metadata and workflow context are normalized and sent to BeaconGuard
-3. BeaconGuard evaluates against the active policy snapshot
-4. A deterministic allow, deny, or needs-review decision is returned
-5. Application enforces the decision before model execution
+1. Application (or System Connector) prepares trusted request context
+2. Runtime performs Request Validation and Context Normalization
+3. Trust, Freshness, and Replay Checks run as configured
+4. Deterministic Playbook Evaluation uses the Active Verified Release
+5. Runtime returns **ALLOW** or **DENY**
+6. Application enforces the result before governed execution
+7. A Verifiable Decision Record is emitted
 
 BeaconGuard does not:
-- Call back into applications
-- Maintain session state
-- Mutate application data
-- Replace workflow logic, systems of record, SIEM, IAM, GRC, EHR, AML, fraud, or case-management systems
+
+- Call back into applications to execute workflow steps
+- Replace workflow logic or systems of record
+- Treat review obligations as permission to execute
+- Treat human review as a permission to execute
+
+When required approval is absent, the result is **DENY** (for example
+`APPROVAL_REQUIRED`) with Execution Prevented.
 
 ---
 
 ## Request Inputs
 
-Integration requires explicit request inputs, including:
+Integration requires explicit inputs, including as applicable:
 
 - Actor identity (user, system, service)
 - Signed request metadata
-- Workflow identity
-- Source-system trust
-- Approved-pathway status
+- Workflow identity and requested action
+- Source-system trust and approved-pathway status
 - Deterministic context tags
 - Request IDs, timestamps, and freshness windows
-- Requested action or capability
-- Contextual attributes required by policy
-- Reference artifact identifiers (if applicable)
+- Attributes required by the Compliance Playbook
 
-Inputs must be complete and explicit.
-Missing or malformed inputs result in a fail-closed decision.
+Missing or malformed required inputs result in fail-closed **DENY**.
 
 ---
 
-## Policy Distribution
+## Release Distribution and Activation
 
-Policy snapshots are distributed to enforcement runtimes out-of-band.
+Signed Immutable Release Artifacts are distributed through Controlled Release
+Distribution. Before use:
 
-Distribution properties:
+- Signatures and integrity are verified (Release Verification and Activation)
+- Only an **Active Verified Release** governs runtime evaluation
+- release_identity is fixed for each evaluation and recorded in evidence
 
-- Snapshots are signed before distribution
-- Enforcement verifies signatures before use
-- Snapshot identity is fixed for evaluation
-- Rollout and rollback are explicit
-
-Hot-reloading of policy is allowed only if snapshot identity is preserved.
+Draft playbooks and unsigned artifacts must not govern production evaluation.
 
 ---
 
-## Audit Integration
+## Evidence Integration
 
-Applications are not required to manage audit storage.
+BeaconGuard emits Verifiable Decision Records per evaluation, including
+decision outcome, reason codes, release_identity, playbook_identity, and check
+outcomes where applicable.
 
-BeaconGuard:
-- Emits structured audit records per evaluation
-- Includes policy identity and decision metadata
-- Can integrate with external storage or pipelines
-
-The audit sink must be append-only and durable to preserve evidentiary value.
+Evidence is integrity-protected decision evidence designed for replay and
+verification. Append-only retention is supported when configured with a
+required evidence provider. Customers own provider selection, retention, and
+operational monitoring.
 
 ---
 
 ## Failure Handling
 
-Applications must be prepared to handle denial and needs-review outcomes.
+Applications must enforce **DENY** outcomes and must not proceed with governed
+execution on admission or evaluation failure.
 
 Failure cases include:
-- Missing policy snapshots
-- Verification failures
+
+- Missing or unverifiable Active Verified Release
+- Trust, freshness, or replay check failures
 - Input normalization errors
 - Internal evaluation faults
+- Absent required approvals (`APPROVAL_REQUIRED` and similar reason codes)
 
-In all blocking cases, BeaconGuard returns a deterministic **DENY** or **NEEDS_REVIEW** outcome based on governed policy.
+All blocking cases return deterministic **DENY**. Human review via a Verifiable
+Decision Record obligation does not permit execution.
 
 ---
 
 ## Environment Separation
 
-Recommended environments include:
-
-- Development (non-production data)
-- Testing / validation
-- Production
-
-Policy snapshots and signing keys must not be shared across environments.
+Recommended environments include development, testing / validation, and
+production. Release artifacts and signing keys must not be casually shared
+across environments.
 
 ---
 
@@ -133,3 +138,4 @@ Policy snapshots and signing keys must not be shared across environments.
 - [Policy Model](/docs/policy-model)
 - [Compliance and Audit](/docs/compliance-audit)
 - [Threat Model](/docs/threat-model)
+- [Deployment page](/deployment)

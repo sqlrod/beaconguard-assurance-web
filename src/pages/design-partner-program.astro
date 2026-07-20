@@ -3,66 +3,83 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Controlled Architecture Evaluation | BeaconGuard Assurance"
-  description="For healthcare, financial services, and regulated enterprise teams evaluating AI workflow control before model execution."
+  title="Controlled Evaluation | BeaconGuard Architecture Review"
+  description="Request a bounded BeaconGuard Controlled Evaluation covering boundary placement, Compliance Playbook mapping, ALLOW and DENY cases, evidence review, and deployment fit."
 >
-  <section>
-    <h1>Controlled Architecture Evaluation</h1>
+  <section class="stack-section">
+    <h1>Controlled Evaluation</h1>
     <p class="lead">
-      For healthcare, financial services, and regulated enterprise teams evaluating AI workflow control before model execution.
-    </p>
-    <p>
-      BeaconGuard is seeking bounded architecture reviews with teams that own regulated workflows where AI requests need deterministic policy enforcement, approved-pathway checks, needs-review routing, or audit-ready evidence.
+      A Controlled Evaluation is a bounded architecture review for one regulated workflow. It validates Runtime Control Boundary placement, Compliance Playbook mapping, ALLOW and DENY cases, Verifiable Decision Records, and deployment fit without replacing existing systems of record.
     </p>
   </section>
 
-  <section>
-    <h2>Not a Rip-and-Replace Proposal</h2>
+  <section class="stack-section">
+    <h2>Not a rip-and-replace proposal</h2>
     <p>
-      BeaconGuard does not replace existing enterprise applications. The evaluation should focus on whether an existing workflow can be made fail-closed, policy-controlled, and auditable at the AI request boundary.
+      Existing applications continue to own workflow logic and records. BeaconGuard is evaluated as a deterministic control and evidence boundary before governed execution.
     </p>
   </section>
 
-  <section>
-    <h2>Evaluation Format</h2>
-    <p>
-      For innovation offices, this may operate as a design-partner discussion. For CIO, CISO, privacy, compliance, and architecture teams, the intended format is a controlled technical validation review.
-    </p>
+  <section class="stack-section">
+    <h2>Inputs</h2>
+    <ul>
+      <li>One bounded workflow</li>
+      <li>Representative request contract</li>
+      <li>Required identity and trust context</li>
+      <li>Desired controls for the Compliance Playbook</li>
+      <li>Deployment assumptions</li>
+    </ul>
   </section>
 
-  <section>
-    <h2>Who Should Participate</h2>
+  <section class="stack-section">
+    <h2>Activities</h2>
+    <ul>
+      <li>Boundary placement review</li>
+      <li>Request normalization and System Connector fit, when needed</li>
+      <li>Compliance Playbook mapping</li>
+      <li>ALLOW and DENY case design, including absent-approval DENY cases and trust failures</li>
+      <li>Evidence review using Verifiable Decision Records</li>
+      <li>Deployment-fit and responsibility review</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Outputs</h2>
+    <ul>
+      <li>Architecture-fit memo</li>
+      <li>Control responsibility matrix for the evaluated workflow</li>
+      <li>Sample Compliance Playbook or mapping artifact</li>
+      <li>Sample Verifiable Decision Records</li>
+      <li>Blocker register</li>
+      <li>Next-step recommendation</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Who should participate</h2>
     <div class="section-grid section-grid--compact">
       <div class="content-card">
-        <h3>Healthcare AI Control Architecture Review</h3>
-        <p>Healthcare privacy, security, clinical informatics, digital health, compliance, audit, and hospital operations technology teams.</p>
+        <h3>Healthcare</h3>
+        <p>Teams owning PHI-sensitive operational AI pathways and privacy review obligations.</p>
       </div>
       <div class="content-card">
-        <h3>Financial Workflow Review</h3>
-        <p>AML platform, financial crime engineering, fraud technology, risk, compliance, and security architecture teams.</p>
+        <h3>Financial services</h3>
+        <p>Teams owning AML, KYC, fraud, dispute, or customer-impacting recommendation workflows.</p>
       </div>
       <div class="content-card">
-        <h3>Regulated Internal Automation Review</h3>
-        <p>IT operations, platform engineering, enterprise architecture, and internal tooling teams evaluating AI agents or automations.</p>
+        <h3>Regulated internal automation</h3>
+        <p>Teams placing agents or automations against production systems under fail-closed controls.</p>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>What We Validate Together</h2>
-    <ul>
-      <li>Where the AI request boundary exists in the current workflow</li>
-      <li>Which existing systems remain authoritative for workflow logic and records</li>
-      <li>Which signed request metadata, workflow identity, user role, source-system trust, context tags, freshness windows, and approved-pathway inputs are available</li>
-      <li>Which actions should return allow, deny, or needs-review</li>
-      <li>What audit-ready evidence reviewers need after each decision</li>
-    </ul>
-  </section>
-
-  <section>
+  <section class="stack-section">
     <h2>Contact the team</h2>
+    <p>
+      Timing and commercial terms are confirmed during intake. Do not submit PHI, customer records, credentials, production secrets, or confidential evidence in the initial message.
+    </p>
     <div class="page-actions">
-      <a class="btn-primary" href="/contact">Request Controlled Architecture Evaluation</a>
+      <a class="btn-primary" href="/contact">Request Controlled Evaluation</a>
       <a class="btn-secondary" href="/platform">Review platform overview</a>
     </div>
   </section>

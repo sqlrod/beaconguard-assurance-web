@@ -3,64 +3,72 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Security | BeaconGuard Fail-Closed AI Policy Enforcement"
-  description="BeaconGuard evaluates signed metadata, workflow identity, source-system trust, approved-pathway status, deterministic context tags, and freshness controls before AI execution."
+  title="Security | BeaconGuard Runtime Admission and Fail-Closed Control"
+  description="BeaconGuard provides deterministic request admission, trust and freshness checks, release verification, and fail-closed DENY behavior before governed execution."
 >
   <section class="stack-section">
-    <h1>Security</h1>
+    <h1>Security at the Runtime Control Boundary</h1>
     <p class="lead">
-      BeaconGuard is an execution-boundary authorization layer for regulated enterprise workflows where AI requests must be policy-controlled, fail-closed, and auditable before model execution.
+      BeaconGuard admits requests only after deterministic validation against the Active Verified Release. Admission failures return DENY. Evidence supports reconstruction and governance review; it does not replace SIEM, IAM, GRC, or customer security programs.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Zero-Trust AI Ingress</h2>
+    <h2>Deterministic request admission</h2>
     <p>
-      BeaconGuard treats every AI request as untrusted until signed metadata, workflow identity, source-system trust, user role, approved-pathway status, and required policy inputs are validated.
+      The Runtime Control Boundary validates and normalizes request context, then evaluates trusted signals against the Active Verified Release. Runtime results are ALLOW or DENY only.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Fail-Closed Enforcement</h2>
+    <h2>Signature and trust checks</h2>
     <p>
-      If required context, signatures, policy inputs, approved-pathway status, or freshness controls are missing or invalid, BeaconGuard denies or routes the request for review rather than allowing model execution by default.
+      Required trust signals and signature or integrity expectations for request context must be satisfied before evaluation proceeds. Missing or invalid trust conditions fail closed as DENY.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Existing Security Stack Remains in Place</h2>
+    <h2>Freshness and replay checks</h2>
     <p>
-      BeaconGuard does not replace SIEM, IAM, GRC, WAF, API gateway, EHR, AML, fraud, or case-management systems. It adds a dedicated AI request enforcement boundary that evaluates workflow-level policy context before model execution and emits evidence for existing review processes.
+      Request identity, timestamps, and freshness windows support replay and freshness detection. Exact nonce, cache, or signed-constraint mechanisms are deployment-dependent. Failed checks return DENY.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Deterministic Context Tagging</h2>
+    <h2>Release verification and activation</h2>
     <p>
-      BeaconGuard's core authorization boundary evaluates deterministic tags and metadata supplied by host applications, signed request contracts, or optional preprocessors. It does not rely on probabilistic free-text inference as the authorization boundary.
+      Only an Active Verified Release governs runtime evaluation. Distributed releases must pass Release Verification and Activation before use. Mix-and-match or unverified artifacts are outside the approved runtime path.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Replay and Freshness Controls</h2>
+    <h2>Fail-closed behavior</h2>
     <p>
-      BeaconGuard can evaluate request IDs, timestamps, signed metadata, and freshness windows. Deployment-specific replay controls may use local state, cache-backed nonce tracking, or signed request constraints depending on architecture requirements.
+      When required controls, approvals, trust signals, freshness conditions, or replay checks are invalid, missing, stale, or out of bounds, BeaconGuard returns DENY and prevents downstream execution. There is no permissive fallback to a review-as-permission state.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Why BeaconGuard is not an API Gateway</h2>
-    <p>
-      Standard API gateways route traffic using endpoints, tokens, and network policies. BeaconGuard evaluates workflow-level AI policy context before model execution, including user role, workflow identity, signed request metadata, approved-pathway status, source-system trust, freshness windows, and evidence requirements.
-    </p>
+    <h2>External dependencies and customer responsibility</h2>
+    <ul>
+      <li>Identity providers and source-system trust remain customer-controlled.</li>
+      <li>Replay-state providers, when used, are external to the core decision evaluation and must be configured for fail-closed operation.</li>
+      <li>Evidence storage durability and integrity protection depend on the configured evidence provider and customer infrastructure.</li>
+      <li>Network, TLS, secrets, and host hardening remain deployment responsibilities.</li>
+    </ul>
   </section>
 
   <section class="stack-section">
-    <h2>Where to go next</h2>
+    <h2>What BeaconGuard is not</h2>
+    <ul>
+      <li>Not a replacement for SIEM, IAM, GRC, WAF, or API gateway platforms</li>
+      <li>Not a probabilistic authorization engine</li>
+      <li>Not a certification or attestation of legal compliance</li>
+    </ul>
     <div class="page-actions">
-      <a class="btn-secondary" href="/proof-evidence">Reviewable Decision Evidence</a>
-      <a class="btn-secondary" href="/canonical-workflow">Workflow Examples</a>
+      <a class="btn-primary" href="/proof-evidence">Review Proof and Evidence</a>
       <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
+      <a class="btn-secondary" href="/docs/threat-model">Threat Model</a>
     </div>
   </section>
 </BaseLayout>

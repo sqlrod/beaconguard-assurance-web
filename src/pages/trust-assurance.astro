@@ -4,60 +4,78 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Trust Center | BeaconGuard Assurance"
-  description="BeaconGuard provides technical control and evidence support at the AI request boundary for regulated enterprise workflows."
+  description="BeaconGuard Trust Center: product security architecture, evidence and verification, deployment responsibilities, review materials, and certification status without unsupported attestation claims."
 >
   <section class="stack-section">
     <h1>Trust Center</h1>
     <p class="lead">
-      BeaconGuard provides technical control and evidence support at the AI request boundary. It does not create legal compliance guarantees and does not replace an organization's compliance, privacy, security, clinical safety, AML, fraud, SIEM, IAM, or GRC programs.
+      This Trust Center summarizes how BeaconGuard approaches product security, evidence, and shared deployment responsibility. It does not provide legal compliance guarantees and does not replace customer compliance, privacy, security, clinical, AML, fraud, SIEM, IAM, or GRC programs.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Evidence Flow</h2>
-    <div class="flow-diagram flow-diagram--tight trust-assurance-flow">
-      <div class="flow-step">
-        <p class="flow-step-title">Policy decision</p>
-        <p>Signed metadata, workflow identity, source-system trust, user role, context tags, and policy inputs are evaluated.</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">Record</p>
-        <p>Allow, deny, or needs-review outcome is emitted as structured evidence.</p>
-      </div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step">
-        <p class="flow-step-title">Review</p>
-        <p>Security, privacy, compliance, risk, and audit teams review decision context.</p>
-      </div>
-    </div>
+    <h2>Product security architecture</h2>
+    <p>
+      BeaconGuard separates the management plane from the runtime data plane. Compliance Playbooks become Signed Immutable Release Artifacts. Only an Active Verified Release governs the Runtime Control Boundary, which returns ALLOW or DENY before governed execution.
+    </p>
   </section>
 
   <section class="stack-section">
-    <h2>Auditability</h2>
+    <h2>Evidence and verification</h2>
+    <p>
+      Every deterministic result produces a Verifiable Decision Record containing decision context, release identity, control result, and outcome. Evidence is designed for replay and verification and supports audit and governance review. Retention and integrity protection are deployment-dependent.
+    </p>
     <ul>
-      <li>Decision records for allowed, denied, and needs-review outcomes with policy identity.</li>
-      <li>Policy identity, request context, approved-pathway status, source-system trust, and result captured at decision time.</li>
-      <li>Decision lineage that supports investigation and review without replacing existing systems of record.</li>
+      <li>Decision records for ALLOW and DENY outcomes</li>
+      <li>Release identity and playbook identity for reconstruction</li>
+      <li>Trust, freshness, and replay check results where applicable</li>
+      <li>Optional review obligations that do not change the permission result</li>
     </ul>
   </section>
 
   <section class="stack-section">
-    <h2>Evidence Boundaries</h2>
+    <h2>Deployment responsibilities</h2>
     <p>
-      BeaconGuard provides decision evidence, not model reasoning. It does not claim certainty about model quality, clinical safety, business-logic correctness, or legal compliance status.
+      Customers remain responsible for identity providers, network controls, secrets, host hardening, evidence-provider configuration, and operational monitoring. BeaconGuard provides the control and evidence boundary; deployment responsibilities are shared.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Review References</h2>
+    <h2>Available review materials</h2>
     <ul>
-      <li><a href="/sample-decision-record">Review a sample decision record</a></li>
-      <li><a href="/docs/compliance-audit">Compliance and audit</a></li>
-      <li><a href="/docs/overview">Deterministic overview</a></li>
-      <li><a href="/docs/policy-model">Policy identity and replay</a></li>
-      <li><a href="/docs/threat-model">Threat model</a></li>
-      <li><a href="/control-responsibility-matrix">Review the control responsibility matrix</a></li>
+      <li><a href="/docs/architecture">System Architecture</a> — available</li>
+      <li><a href="/how-it-works">How It Works</a> — available</li>
+      <li><a href="/proof-evidence">Proof and Evidence samples</a> — sample</li>
+      <li><a href="/sample-decision-record">Sample Decision Record</a> — sample</li>
+      <li><a href="/control-responsibility-matrix">Control Responsibility Matrix</a> — available</li>
+      <li><a href="/docs/threat-model">Threat Model</a> — available</li>
+      <li><a href="/reviewer-kit">Reviewer Kit</a> — available</li>
+      <li>Customer-specific architecture-fit materials — controlled-access via Controlled Evaluation</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Security contact</h2>
+    <p>
+      For architecture and security review inquiries, contact
+      <a href="mailto:architecture@beaconguardassurance.com">architecture@beaconguardassurance.com</a>.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Compliance and certification status</h2>
+    <p>
+      BeaconGuard publishes technical architecture and controlled review materials for due diligence. This site does not claim SOC 2, ISO 27001, HITRUST, HIPAA certification, FedRAMP authorization, or similar attestation status. Ask during Controlled Evaluation for the current status of any formal assessment work.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Limitations and non-guarantees</h2>
+    <ul>
+      <li>No claim of legal evidentiary status or regulatory admissibility</li>
+      <li>No claim that evidence storage is universally append-only without the configured evidence provider</li>
+      <li>No replacement of customer systems of record or compliance programs</li>
+      <li>No probabilistic authorization of BeaconGuard enforcement results</li>
     </ul>
     <div class="page-actions">
       <a class="btn-primary" href="/platform">Review platform assumptions</a>

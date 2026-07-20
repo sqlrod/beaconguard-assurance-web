@@ -4,28 +4,67 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="BeaconGuard Documentation"
-  description="Technical reference for BeaconGuard policy control, enforcement runtime, evidence records, and regulated workflow integration."
+  description="Technical reference for BeaconGuard Compliance Playbooks, Runtime Control Boundary, Active Verified Releases, Verifiable Decision Records, and regulated workflow integration."
 >
   <section>
     <h1>Documentation</h1>
 
     <p>
-      This documentation describes the BeaconGuard inline policy proxy, enforcement
-      runtime, policy model, governance, evidence records, and integration guidance.
+      This documentation describes how BeaconGuard governs execution at the Runtime
+      Control Boundary: Compliance Playbooks become Signed Immutable Release Artifacts,
+      only an Active Verified Release drives Deterministic Playbook Evaluation, and
+      runtime results are ALLOW or DENY before governed execution.
     </p>
 
     <p>
-      All behavior is deterministic, versioned, and designed for high-trust regulated enterprise workflows where existing systems remain in place.
+      Evidence is integrity-protected decision context designed for replay and
+      verification. Deployment responsibilities are shared with the customer.
     </p>
 
+    <h2>Start Here</h2>
+    <ul>
+      <li><a href="/docs/overview">Product Overview</a> — what BeaconGuard is and is not</li>
+    </ul>
+
+    <h2>Product Overview</h2>
     <ul>
       <li><a href="/docs/overview">Overview</a></li>
-      <li><a href="/docs/architecture">System Architecture</a></li>
-      <li><a href="/docs/policy-model">Policy Model</a></li>
-      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
-      <li><a href="/docs/compliance-audit">Compliance &amp; Audit</a></li>
-      <li><a href="/docs/threat-model">Threat Model</a></li>
-      <li><a href="/docs/deployment-integration">Deployment &amp; Integration</a></li>
+    </ul>
+
+    <h2>System Architecture</h2>
+    <ul>
+      <li><a href="/docs/architecture">System Architecture</a> — management plane, runtime data plane, and control boundary</li>
+    </ul>
+
+    <h2>How It Works</h2>
+    <ul>
+      <li><a href="/how-it-works">How It Works</a> — request lifecycle from validation through enforce and record</li>
+    </ul>
+
+    <h2>Compliance Playbooks / Policy Model</h2>
+    <ul>
+      <li><a href="/docs/policy-model">Policy Model</a> — playbook hierarchy, release identity, ALLOW/DENY results</li>
+    </ul>
+
+    <h2>Enforcement Runtime</h2>
+    <ul>
+      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a> — Runtime Control Boundary, fail-closed semantics, System Connector</li>
+    </ul>
+
+    <h2>Evidence</h2>
+    <ul>
+      <li><a href="/docs/compliance-audit">Compliance and Audit</a> — Verifiable Decision Records and qualified evidence claims</li>
+    </ul>
+
+    <h2>Deployment</h2>
+    <ul>
+      <li><a href="/docs/deployment-integration">Deployment and Integration</a> — placement, customer responsibilities, Active Verified Release</li>
+    </ul>
+
+    <h2>Threat Model</h2>
+    <ul>
+      <li><a href="/docs/threat-model">Threat Model</a> — release, connector, control-plane, and evidence threats</li>
+      <li><a href="/docs/dfd-threat-flow">DFD and Threat Flow</a> — data-flow view supporting threat review</li>
     </ul>
   </section>
 </BaseLayout>

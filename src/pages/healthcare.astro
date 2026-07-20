@@ -3,99 +3,86 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Healthcare AI Control | BeaconGuard Assurance"
-  description="BeaconGuard deploys alongside existing healthcare applications to enforce approved-pathway, role, trust, and policy checks before AI model execution in PHI-sensitive operational workflows."
+  title="Healthcare | BeaconGuard for PHI-Sensitive Workflows"
+  description="BeaconGuard enforces ALLOW or DENY decisions for PHI-sensitive healthcare workflows before governed execution, with Verifiable Decision Records for privacy and compliance review."
 >
   <section class="stack-section">
-    <h1>Deterministic control for PHI-sensitive AI workflows.</h1>
+    <h1>Deterministic control for PHI-sensitive AI workflows</h1>
     <p class="lead">
-      BeaconGuard deploys alongside existing healthcare applications as an inline policy proxy. It enforces approved-pathway, role, trust, and policy checks before AI model execution, preserving reviewable evidence for privacy, security, compliance, risk, and architecture teams.
+      BeaconGuard deploys alongside existing healthcare applications as a Runtime Control Boundary. It evaluates trusted request context against the Active Verified Release and returns ALLOW or DENY before governed execution, preserving Verifiable Decision Records for privacy, security, compliance, risk, and architecture teams.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Existing Healthcare Systems Remain in Place</h2>
+    <h2>Existing healthcare systems remain in place</h2>
     <p>
-      BeaconGuard does not alter or replace the EHR, clinical decision workflows, case-management tools, compliance programs, SIEM, IAM, or existing healthcare operational applications. It acts as a non-disruptive policy boundary that interposes at the AI request layer, enforcing role-based controls, deterministic context tags, and approved-pathway verification before patient-related context is permitted to reach an approved model endpoint.
+      BeaconGuard does not replace the EHR, privacy office, clinical governance process, care-management platform, or other systems of record. Those systems remain authoritative. BeaconGuard enforces the request boundary before governed AI, APIs, or automated systems execute.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>AI-assisted PHI-sensitive healthcare operations review.</h2>
+    <h2>Scenario structure</h2>
     <p>
-      Healthcare teams are evaluating AI for operational summaries, staff-assist workflows, care-management support, discharge planning, patient communication drafting, and utilization review preparation. These workflows may involve patient-related context, restricted operational information, or PHI-sensitive inputs. BeaconGuard provides an inline policy boundary before model execution so the organization can enforce approved pathways and preserve evidence.
+      Each scenario below follows the same review pattern: existing workflow, required trusted context, control evaluated, ALLOW or DENY result, why or when denied, evidence produced, and the system that remains authoritative.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Healthcare Control Points</h2>
-    <ul>
-      <li>Approved model pathway verification</li>
-      <li>Deterministic context tag evaluation</li>
-      <li>User role and workflow authorization</li>
-      <li>Source-system trust validation</li>
-      <li>Signed request metadata validation</li>
-      <li>Freshness and replay controls</li>
-      <li>Needs-review routing</li>
-      <li>Audit-ready evidence record generation</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Healthcare Architecture Disclaimer</h2>
-    <p>
-      BeaconGuard does not rely on probabilistic PHI discovery as the authorization boundary. Host applications or optional preprocessors may generate deterministic context metadata tags. BeaconGuard evaluates those tags, signed request attributes, workflow identity, user role, approved-pathway status, and policy inputs before model execution.
-    </p>
-    <p>
-      BeaconGuard evaluates deterministic context tags, source-system metadata, signed request attributes, workflow identity, user role, approved-pathway status, and policy inputs before model execution.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Healthcare Scenarios</h2>
-    <div class="section-grid">
+    <h2>Healthcare scenarios</h2>
+    <div class="section-grid section-grid--scenarios">
       <div class="content-card">
-        <h3>Unapproved External Model for PHI-Heavy Summary</h3>
-        <p><strong>Condition:</strong> A care-management workflow requests an AI-generated summary of discharge-planning notes, recent encounters, and social-work comments. The request is pointed to an unapproved external model endpoint.</p>
-        <p><strong>BeaconGuard action:</strong> BeaconGuard denies the request or routes it for privacy review because the workflow lacks an approved PHI-handling pathway.</p>
-        <p><strong>Why it matters:</strong> Staff may believe the request is operationally useful, but sending patient-related context to an unapproved endpoint creates privacy, contractual, and audit exposure.</p>
-        <p><strong>Reviewer outcome:</strong> The reviewer can see that model execution was blocked until approved-pathway and policy conditions were satisfied.</p>
+        <h3>Unapproved pathway for PHI-heavy summary</h3>
+        <p><strong>Existing workflow:</strong> Operational summarization over PHI-bearing records.</p>
+        <p><strong>Required trusted context:</strong> Approved pathway, role, source-system trust, freshness.</p>
+        <p><strong>Control evaluated:</strong> Pathway approval against the Active Verified Release.</p>
+        <p><strong>Result:</strong> DENY</p>
+        <p><strong>Why / When denied:</strong> The pathway is not approved for this workflow.</p>
+        <p><strong>Evidence:</strong> Verifiable Decision Record with release identity and decision context.</p>
+        <p><strong>Authoritative system:</strong> EHR and clinical operations remain systems of record.</p>
       </div>
       <div class="content-card">
-        <h3>Role or Minimum-Necessary Violation</h3>
-        <p><strong>Condition:</strong> A contractor or non-clinical support user requests an AI-generated utilization-review summary that includes restricted patient-related context.</p>
-        <p><strong>BeaconGuard action:</strong> BeaconGuard denies the request because user role, workflow scope, context tags, or minimum-necessary policy conditions are not satisfied.</p>
-        <p><strong>Why it matters:</strong> Access to patient-related context should not expand because an AI tool can summarize it.</p>
+        <h3>Required privacy approval absent</h3>
+        <p><strong>Existing workflow:</strong> Privacy-gated operational AI assist.</p>
+        <p><strong>Required trusted context:</strong> Privacy approval status and role boundaries.</p>
+        <p><strong>Control evaluated:</strong> Approval requirement in the Compliance Playbook.</p>
+        <p><strong>Result:</strong> DENY</p>
+        <p><strong>Why / When denied:</strong> Required privacy approval is absent. An illustrative reason style is <code>APPROVAL_REQUIRED</code>.</p>
+        <p><strong>Evidence:</strong> Verifiable Decision Record; governance review may follow without permitting execution.</p>
+        <p><strong>Authoritative system:</strong> Privacy office and EHR remain authoritative.</p>
       </div>
       <div class="content-card">
-        <h3>Duplicate Patient Outreach / Replay Condition</h3>
-        <p><strong>Condition:</strong> A patient-message drafting workflow resubmits the same request because a front-end process retries with stale request identifiers.</p>
-        <p><strong>BeaconGuard action:</strong> BeaconGuard denies the duplicate request using request ID, timestamp, freshness window, signed metadata, or deployment-specific replay controls.</p>
-        <p><strong>Why it matters:</strong> Duplicate inference can create conflicting drafts, duplicate patient outreach, or ambiguous review evidence.</p>
+        <h3>Stale or replayed request</h3>
+        <p><strong>Existing workflow:</strong> Patient outreach or operational follow-up assistance.</p>
+        <p><strong>Required trusted context:</strong> Request identity, timestamps, freshness window.</p>
+        <p><strong>Control evaluated:</strong> Trust, freshness, and replay checks.</p>
+        <p><strong>Result:</strong> DENY</p>
+        <p><strong>Why / When denied:</strong> The request is stale or appears replayed.</p>
+        <p><strong>Evidence:</strong> Verifiable Decision Record capturing check outcomes.</p>
+        <p><strong>Authoritative system:</strong> Care operations systems remain authoritative.</p>
       </div>
       <div class="content-card">
-        <h3>Source Trust Failure on Clinical or Referral Content</h3>
-        <p><strong>Condition:</strong> A referral-intake or chart-abstraction workflow submits documents whose origin, signature, or source-system trust markers cannot be validated.</p>
-        <p><strong>BeaconGuard action:</strong> BeaconGuard denies the request before model execution because provenance and trust prerequisites were not established.</p>
-        <p><strong>Why it matters:</strong> If source content cannot be trusted, the organization should not rely on a model to process or summarize it inside a regulated operational workflow.</p>
+        <h3>Approved operational request</h3>
+        <p><strong>Existing workflow:</strong> Approved pathway with valid role and trust context.</p>
+        <p><strong>Required trusted context:</strong> Signed/trusted metadata, pathway, freshness, role.</p>
+        <p><strong>Control evaluated:</strong> Deterministic Playbook Evaluation against the Active Verified Release.</p>
+        <p><strong>Result:</strong> ALLOW</p>
+        <p><strong>Evidence:</strong> Verifiable Decision Record for later audit and reconstruction.</p>
+        <p><strong>Authoritative system:</strong> EHR and workflow application remain systems of record.</p>
       </div>
     </div>
   </section>
 
   <section class="stack-section">
-    <h2>What BeaconGuard Does Not Replace</h2>
+    <h2>What BeaconGuard does not replace</h2>
     <ul>
-      <li>BeaconGuard does not replace the EHR.</li>
-      <li>BeaconGuard does not replace clinical workflows.</li>
-      <li>BeaconGuard does not replace clinical safety review.</li>
-      <li>BeaconGuard does not provide diagnosis or treatment recommendations.</li>
-      <li>BeaconGuard does not replace a HIPAA compliance program.</li>
-      <li>BeaconGuard does not replace legal review.</li>
-      <li>BeaconGuard does not replace IAM, SIEM, GRC, SOC 2, HITRUST, or security program controls.</li>
-      <li>BeaconGuard is the runtime policy and evidence boundary at the AI request layer.</li>
+      <li>Electronic health records or clinical documentation systems</li>
+      <li>Privacy office judgment or clinical governance</li>
+      <li>Independent HIPAA certification or legal compliance attestation</li>
+      <li>Probabilistic clinical diagnosis or model-hosted clinical reasoning</li>
     </ul>
     <div class="page-actions">
-      <a class="btn-primary" href="mailto:architecture@beaconguardassurance.com?subject=Healthcare%20Architecture%20Review">Request a Healthcare Architecture Review</a>
+      <a class="btn-primary" href="mailto:architecture@beaconguardassurance.com?subject=Healthcare%20Workflow%20Review">Request a Healthcare Workflow Review</a>
+      <a class="btn-secondary" href="/docs/architecture">Review System Architecture</a>
     </div>
   </section>
 </BaseLayout>

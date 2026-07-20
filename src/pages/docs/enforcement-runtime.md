@@ -5,122 +5,111 @@ layout: /src/layouts/BaseLayout.astro
 
 # Enforcement Runtime
 
-The BeaconGuard **Enforcement Runtime** is the component responsible for
-evaluating AI-bound authorization requests against signed policy snapshots and
-producing deterministic decisions before model execution.
+The BeaconGuard **Runtime Control Boundary** (enforcement runtime) evaluates
+trusted request context against the **Active Verified Release** and produces a
+Deterministic Decision Result—**ALLOW** or **DENY**—before governed execution.
 
-It is intentionally designed to be:
+It is designed to be:
 
-- Stateless
 - Deterministic
-- Independently deployable
-- Auditable by construction
+- Fail closed
+- Independently deployable on the runtime data plane
+- Auditable by construction via Verifiable Decision Records
 
 ---
 
 ## Role in the System
 
-The enforcement runtime sits between:
-
-- Regulated applications
-- AI models and inference services
-
-Its sole responsibility is to decide **whether an interaction is permitted,
-denied, or routed for review** under the active policy snapshot and to emit an
-evidence-grade audit record.
+The Runtime Control Boundary sits on the path to a **Governed AI / API /
+Automated System**. Its responsibility is to decide whether governed execution
+is permitted or prevented under the Active Verified Release, and to emit a
+Verifiable Decision Record.
 
 It does not:
-- Modify prompts
+
+- Modify prompts or rewrite application payloads as a product function
 - Inspect model internals
-- Perform heuristic safety filtering
-- Make probabilistic judgments
-- Replace existing systems of record or workflow applications
+- Perform heuristic or probabilistic authorization
+- Replace systems of record or workflow applications
+- Treat human review as a permission to execute
+
+### Optional System Connector
+
+Some applications do not natively produce the required request format. The
+optional **System Connector** maps source protocols and context into the
+required structure before Request Validation and Context Normalization.
+
+The System Connector does not evaluate controls, activate releases, or bypass
+enforcement.
 
 ---
 
-## Deterministic Evaluation
+## Evaluation Path
 
-Given:
-- A verified policy snapshot
-- Signed request metadata
-- Workflow identity
-- User role
-- Source-system trust
-- Approved-pathway status
-- Deterministic context tags
-- Request IDs, timestamps, and freshness windows
-- Required reference artifacts (if any)
+1. **Request Validation and Context Normalization**
+2. **Trust, Freshness, and Replay Checks**
+3. **Deterministic Playbook Evaluation** against the Active Verified Release
+4. **Deterministic Decision Result** — ALLOW or DENY
+5. **Verifiable Decision Record** emission for Evidence, Replay, and Verification
 
-The enforcement runtime will always produce the same decision output.
-
-This property is required to support:
-- Replay-based audits
-- Incident investigation
-- Regulatory review
-- Cross-environment verification
+Given the same Active Verified Release and the same trusted normalized inputs,
+the runtime produces the same decision.
 
 ---
 
-## Stateless Execution Model
+## Runtime Source of Truth
 
-The runtime does not maintain internal mutable state between requests.
+At evaluation time, the **Active Verified Release** is the source of truth for
+control semantics. Management-plane playbook drafts and unsigned artifacts do
+not govern runtime decisions until they pass Release Verification and
+Activation.
 
-All decision-relevant inputs must be provided explicitly:
+---
 
-- Policy snapshot identifier
-- Signed request metadata and workflow context
-- Source-system trust, approved-pathway status, context tags, and freshness inputs
-- Reference artifact identifiers
+## Decision Contract
 
-Any required state must be externalized and versioned.
+<div class="docs-table-wrap">
+
+| Result | Meaning |
+| --- | --- |
+| ALLOW | Required controls are satisfied; governed execution may proceed. |
+| DENY | Execution is prevented; no downstream execution occurs. |
+
+</div>
+
+When required approval is absent, BeaconGuard returns DENY with a deterministic reason indicating that approval is required. An illustrative reason style is `APPROVAL_REQUIRED`. Any governance or human-review obligation remains separate from the runtime permission result.
 
 ---
 
 ## Failure Semantics
 
-The enforcement runtime operates under **fail-closed semantics**.
+The runtime operates under **fail-closed** semantics.
 
 If any of the following occur:
 
-- Policy snapshot cannot be verified
-- Required artifacts are missing or invalid
-- Approved-pathway status is missing or invalid
-- Freshness or replay controls fail
+- Active Verified Release cannot be verified or is not activated
+- Required artifacts or trust signals are missing or invalid
+- Approved-pathway status is missing or invalid when required
+- Freshness or replay checks fail
 - Input normalization fails
 - Internal evaluation error occurs
 
 The runtime must:
+
 - Return **DENY**
-- Emit an audit record describing the failure category
+- Emit a Verifiable Decision Record describing the failure category
 
 Silent fallback or permissive behavior is prohibited.
 
 ---
 
-## Output Contract
+## Evidence Emission
 
-Each evaluation produces a structured result including:
-
-- Decision outcome (ALLOW, DENY, or NEEDS_REVIEW)
-- Deterministic reason codes
-- Policy snapshot identifier and version
-- Optional obligations (if explicitly defined)
-
-Outputs are designed for machine consumption and audit replay,
-not narrative explanation.
-
----
-
-## Audit Integration
-
-The enforcement runtime is tightly coupled to the audit model.
-
-For every evaluation:
-- A record is emitted
-- The policy identity is recorded
-- Inputs and outputs are captured deterministically
-
-This enables full reconstruction of decision context after the fact.
+For every evaluation the runtime emits integrity-protected decision evidence
+designed for replay and verification. Records preserve release identity,
+playbook identity, decision context, check outcomes, and the ALLOW or DENY
+result. Storage durability and append-only behavior depend on the configured
+evidence provider and shared customer deployment responsibilities.
 
 ---
 
@@ -128,4 +117,6 @@ This enables full reconstruction of decision context after the fact.
 
 - [Overview](/docs/overview)
 - [Policy Model](/docs/policy-model)
+- [Compliance and Audit](/docs/compliance-audit)
 - [System Architecture](/docs/architecture)
+- [How It Works](/how-it-works)
