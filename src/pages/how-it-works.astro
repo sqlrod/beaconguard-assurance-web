@@ -4,112 +4,88 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="How It Works | BeaconGuard Regulated AI Runtime Control"
-  description="How BeaconGuard evaluates regulated workflow requests before AI/model execution and returns allow, deny, or needs-review decisions with preserved evidence."
+  description="See how BeaconGuard validates request context, verifies trust conditions, applies deterministic controls, enforces ALLOW or DENY outcomes, and produces verifiable decision evidence before governed execution."
 >
   <section>
     <h1>How It Works</h1>
     <p class="lead">
-      BeaconGuard evaluates each regulated workflow request through an inline policy proxy before the request proceeds to model or automation execution.
+      BeaconGuard evaluates enterprise requests before governed AI, APIs, or automated systems execute them. Each request passes through a deterministic runtime control boundary that validates context, verifies trust conditions, applies the active control set, enforces an explicit ALLOW or DENY result, and emits verifiable decision evidence.
     </p>
-  </section>
-
-  <section>
-    <p class="section-label">Runtime flow</p>
-    <h2>Policy Before Execution</h2>
-    <ol>
-      <li>A regulated workflow requests AI assistance.</li>
-      <li>BeaconGuard receives the request before the model call.</li>
-      <li>Policy rules evaluate signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, context tags, freshness windows, and requested action.</li>
-      <li>BeaconGuard returns allow, deny, or needs-review.</li>
-      <li>Allowed requests continue to the model or automation endpoint.</li>
-      <li>Denied requests are blocked.</li>
-      <li>Needs-review requests are routed for human approval.</li>
-      <li>Evidence is preserved for audit and compliance review.</li>
-    </ol>
   </section>
 
   <section>
     <p class="section-label">Runtime sequence</p>
     <h2>Runtime Decision Sequence</h2>
-    <section class="how-it-works-diagram">
-      <img
-        src="/how-it-works.png"
-        alt="BeaconGuard request evaluation flow showing validation, deterministic decision, allow, deny, or needs-review enforcement, model execution, and decision evidence output"
-        class="how-it-works-img"
-        id="how-it-works-img"
-      />
-    </section>
+    <p>
+      Each request moves through six deterministic stages: request intake, validation, trust verification, control evaluation, enforcement, and evidence recording. The sequence completes before governed execution proceeds.
+    </p>
+    <figure class="runtime-sequence-section">
+      <div
+        class="runtime-sequence-scroll"
+        tabindex="0"
+        aria-label="Runtime decision sequence diagram; scroll horizontally to inspect"
+      >
+        <img
+          src="/runtime-decision-sequence.svg"
+          alt="BeaconGuard six-stage request lifecycle showing Request, Validate, Verify, Evaluate, Enforce, and Record, with ALLOW or DENY enforcement and verifiable decision evidence"
+          class="runtime-sequence-img"
+          width="1600"
+          height="400"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <p class="runtime-sequence-scroll-hint">
+        Scroll horizontally to inspect the runtime sequence.
+      </p>
+      <figcaption class="runtime-sequence-caption">
+        One request. Six deterministic stages. Evidence for every result.
+      </figcaption>
+    </figure>
   </section>
 
   <section>
-    <h2>Compatibility-Layer Path</h2>
+    <h2>Optional System Connector</h2>
     <p>
-      Some non-native clients require a governed compatibility layer before BeaconGuard evaluation.
-      Host applications or optional preprocessors may generate deterministic context metadata tags before the request reaches BeaconGuard. BeaconGuard's core policy boundary evaluates those tags and other signed request attributes before model execution.
-      It does not originate policy decisions.
-      It does not weaken fail-closed behavior.
-      BeaconGuard still performs the deterministic allow, deny, or needs-review decision and emits reviewable evidence.
+      Some enterprise applications do not natively produce the protocol or context structure required by the BeaconGuard runtime. The optional System Connector maps source protocols and context into the required request format before request validation.
+    </p>
+    <p>
+      The System Connector does not evaluate controls, activate releases, or bypass enforcement.
     </p>
   </section>
 
   <section>
-    <h2>Enforcement Boundary</h2>
+    <h2>Deterministic enforcement outcomes</h2>
+    <h3>ALLOW</h3>
     <p>
-      Existing applications remain in place and continue to own workflow logic and systems of record.
-      BeaconGuard places policy enforcement in a dedicated AI request boundary where deterministic decisions remain consistent regardless of model behavior or prompt drift.
+      An allowed request satisfies the active control requirements and may proceed to governed execution.
+    </p>
+    <h3>DENY</h3>
+    <p>
+      A denied request is blocked before downstream execution. BeaconGuard fails closed when required validation, trust, freshness, replay, or control conditions are not satisfied.
     </p>
   </section>
 
   <section>
-    <h2>Deterministic Decision Path</h2>
+    <h2>Decision evidence and review</h2>
     <p>
-      For equivalent request state and policy snapshot, BeaconGuard returns equivalent decisions. This is the foundation for operational confidence, incident response, and reproducible reviews in regulated workflows.
+      Every ALLOW or DENY result produces verifiable decision evidence containing the decision context, active release identity, control result, and outcome.
     </p>
     <p>
-      Compatibility normalization occurs before BeaconGuard policy evaluation when needed.
-      It is not a replacement for the deterministic decision path.
-    </p>
-  </section>
-
-  <section>
-    <h2>Input and Output Governance</h2>
-    <p>
-      Inputs require signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, context tags, request IDs, timestamps, freshness windows, requested action, and policy identity.
-      Outputs remain constrained to a minimal set: decision result, policy identity, approval status, and reasoning context.
-    </p>
-  </section>
-
-  <section>
-    <h2>Evidence at Runtime</h2>
-    <ul>
-      <li>Evidence is emitted as structured records, designed for audit and investigation.</li>
-      <li>Failure conditions are explicit rather than implicit.</li>
-      <li>Decision provenance stays attached to policy identity and input context.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Reviewer Focus</h2>
-    <p>
-      A reviewer should confirm that the request path is normalized before evaluation, that policy evaluation
-      produces deterministic allow, deny, or needs-review outcomes, that malformed or missing inputs fail closed, and that each
-      execution decision writes reviewable evidence before model calls can occur.
-    </p>
-  </section>
-
-  <section>
-    <h2>Decision and Review Loop</h2>
-    <p>
-      A control outcome is produced before execution; allow moves to bounded model interaction, deny blocks by fail-closed policy, needs-review routes to human approval, and each outcome is retained as decision evidence.
+      Evidence may be routed for governance or human review without changing the runtime enforcement result that was already returned.
     </p>
   </section>
 
   <section>
     <h2>Technical Deepening</h2>
+    <p>
+      See <a href="/docs/architecture">System Architecture</a> for the complete control-plane, release-verification, activation, and runtime-boundary model.
+    </p>
     <ul>
-      <li><a href="/docs/architecture">Boundary and deterministic control components</a></li>
+      <li><a href="/docs/architecture">System Architecture</a></li>
       <li><a href="/docs/enforcement-runtime">Enforcement runtime</a></li>
-      <li><a href="/docs/threat-model">Threat model</a></li>
+      <li><a href="/docs/policy-model">Policy model</a></li>
+      <li><a href="/docs/compliance-audit">Compliance and audit</a></li>
     </ul>
     <div class="page-actions">
       <a class="btn-primary" href="/deployment">Review deployment expectations</a>
@@ -118,33 +94,79 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <style>
-    .how-it-works-diagram {
-      padding: 2rem 0;
-      text-align: center;
-      max-width: 1100px;
-      width: 100%;
-      margin: 2rem auto;
+    .runtime-sequence-section {
+      width: min(1440px, calc(100vw - 48px));
+      max-width: none;
+      margin: 3rem 0;
+      margin-left: 50%;
+      transform: translateX(-50%);
     }
 
-    .how-it-works-img {
+    .runtime-sequence-scroll {
       width: 100%;
-      max-width: 720px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-inline: contain;
+      scrollbar-gutter: stable;
+      background: var(--bg-deep, #0b1220);
+      border-radius: 8px;
+    }
+
+    .runtime-sequence-img {
       display: block;
-      margin: 0 auto;
+      width: 100%;
       height: auto;
+      margin: 0 auto;
     }
 
-    @media (max-width: 768px) {
-      .how-it-works-diagram {
-        padding: 18px 0 24px;
-        margin: 2rem auto;
-        max-width: 100%;
+    .runtime-sequence-scroll-hint {
+      display: none;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted, #9aa8c0);
+      margin-top: 0.5rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .runtime-sequence-caption {
+      margin: 0.65rem 0 0;
+      color: var(--text-muted);
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .runtime-sequence-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .runtime-sequence-scroll::-webkit-scrollbar-track {
+      background: var(--bg-deep, #0b1220);
+      border-radius: 4px;
+    }
+
+    .runtime-sequence-scroll::-webkit-scrollbar-thumb {
+      background: var(--border-muted, #2a3a5a);
+      border-radius: 4px;
+    }
+
+    .runtime-sequence-scroll::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-muted, #3a8a5a);
+    }
+
+    @media (max-width: 800px) {
+      .runtime-sequence-section {
+        width: calc(100vw - 24px);
       }
 
-      .how-it-works-img {
-        max-width: 100%;
+      .runtime-sequence-img {
+        width: 900px;
+        min-width: 900px;
       }
 
+      .runtime-sequence-scroll-hint {
+        display: block;
+      }
     }
   </style>
 </BaseLayout>

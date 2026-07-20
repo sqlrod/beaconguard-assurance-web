@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="400" viewBox="0 0 1600 400" role="img" aria-labelledby="seq-title seq-desc">
+  <title id="seq-title">BeaconGuard request lifecycle</title>
+  <desc id="seq-desc">Six-stage request lifecycle: Request, Validate, Verify, Evaluate, Enforce, and Record, with ALLOW or DENY enforcement and supporting System Connector and Active Verified Release inputs.</desc>
+
+  <defs>
+    <marker id="arrow-neutral" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#8291A5"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="400" fill="#0B1220"/>
+
+  <!-- Six-stage process strip -->
+  <!-- 1. REQUEST -->
+  <rect x="40" y="40" width="220" height="120" rx="6" fill="#0D1624" stroke="#40536A" stroke-width="1.5"/>
+  <text x="150" y="78" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#5B9EE8">1</text>
+  <text x="150" y="104" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#E7ECF3">Request</text>
+  <text x="150" y="128" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">Enterprise workflow</text>
+  <text x="150" y="146" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">submits decision context</text>
+
+  <path d="M260 100 H278" fill="none" stroke="#8291A5" stroke-width="2" marker-end="url(#arrow-neutral)"/>
+
+  <!-- 2. VALIDATE -->
+  <rect x="286" y="40" width="220" height="120" rx="6" fill="#0D1624" stroke="#40536A" stroke-width="1.5"/>
+  <text x="396" y="78" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#5B9EE8">2</text>
+  <text x="396" y="104" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#E7ECF3">Validate</text>
+  <text x="396" y="128" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">Request structure and</text>
+  <text x="396" y="146" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">required context are checked</text>
+
+  <path d="M506 100 H524" fill="none" stroke="#8291A5" stroke-width="2" marker-end="url(#arrow-neutral)"/>
+
+  <!-- 3. VERIFY -->
+  <rect x="532" y="40" width="220" height="120" rx="6" fill="#0D1624" stroke="#40536A" stroke-width="1.5"/>
+  <text x="642" y="78" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#5B9EE8">3</text>
+  <text x="642" y="104" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#E7ECF3">Verify</text>
+  <text x="642" y="128" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">Trust, freshness, and</text>
+  <text x="642" y="146" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">replay conditions are checked</text>
+
+  <path d="M752 100 H770" fill="none" stroke="#8291A5" stroke-width="2" marker-end="url(#arrow-neutral)"/>
+
+  <!-- 4. EVALUATE -->
+  <rect x="778" y="40" width="220" height="120" rx="6" fill="#0D1624" stroke="#40536A" stroke-width="1.5"/>
+  <text x="888" y="78" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#5B9EE8">4</text>
+  <text x="888" y="104" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#E7ECF3">Evaluate</text>
+  <text x="888" y="128" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">Active controls are applied</text>
+  <text x="888" y="146" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">deterministically</text>
+
+  <path d="M998 100 H1016" fill="none" stroke="#8291A5" stroke-width="2" marker-end="url(#arrow-neutral)"/>
+
+  <!-- 5. ENFORCE -->
+  <rect x="1024" y="40" width="220" height="120" rx="6" fill="#0D1624" stroke="#40536A" stroke-width="1.5"/>
+  <text x="1134" y="78" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#5B9EE8">5</text>
+  <text x="1134" y="104" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#E7ECF3">Enforce</text>
+  <text x="1134" y="128" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">An explicit ALLOW or</text>
+  <text x="1134" y="146" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">DENY result is returned</text>
+
+  <path d="M1244 100 H1262" fill="none" stroke="#8291A5" stroke-width="2" marker-end="url(#arrow-neutral)"/>
+
+  <!-- 6. RECORD -->
+  <rect x="1270" y="40" width="290" height="120" rx="6" fill="#0D1624" stroke="#40536A" stroke-width="1.5"/>
+  <text x="1415" y="78" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#5B9EE8">6</text>
+  <text x="1415" y="104" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#E7ECF3">Record</text>
+  <text x="1415" y="128" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">Verifiable decision</text>
+  <text x="1415" y="146" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">evidence is emitted</text>
+
+  <!-- Compact ALLOW / DENY branch under Enforce -->
+  <path d="M1134 160 V178" fill="none" stroke="#8291A5" stroke-width="2"/>
+  <path d="M1040 178 H1228" fill="none" stroke="#8291A5" stroke-width="2"/>
+  <path d="M1040 178 V192" fill="none" stroke="#4F8F70" stroke-width="2"/>
+  <path d="M1228 178 V192" fill="none" stroke="#B65A62" stroke-width="2"/>
+
+  <text x="1040" y="214" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#4F8F70">ALLOW</text>
+  <text x="1040" y="234" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">Governed execution proceeds</text>
+
+  <text x="1228" y="214" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#B65A62">DENY</text>
+  <text x="1228" y="234" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">Execution is prevented</text>
+
+  <!-- Supporting callouts -->
+  <rect x="40" y="280" width="740" height="88" rx="6" fill="#111B2A" stroke="#40536A" stroke-width="1.5"/>
+  <text x="60" y="312" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#E7ECF3">Optional System Connector</text>
+  <text x="60" y="338" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">Maps source protocols and context before request validation</text>
+  <text x="60" y="356" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">when native integration is not available.</text>
+
+  <rect x="820" y="280" width="740" height="88" rx="6" fill="#111B2A" stroke="#40536A" stroke-width="1.5"/>
+  <text x="840" y="312" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#E7ECF3">Active Verified Release</text>
+  <text x="840" y="338" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">Provides the approved control set used during</text>
+  <text x="840" y="356" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9EABBC">deterministic evaluation.</text>
+</svg>

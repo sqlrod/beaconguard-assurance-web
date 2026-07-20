@@ -4,108 +4,137 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="BeaconGuard Architecture"
-  description="BeaconGuard system architecture for deterministic policy evaluation, allow, deny, and needs-review decisions with evidence capture before AI execution."
+  description="BeaconGuard inserts a deterministic control and evidence boundary between enterprise workflows and governed AI, APIs, or automated systems with release management separated from runtime enforcement."
 >
   <section class="doc-architecture">
     <h1>System Architecture</h1>
 
     <p>
-      BeaconGuard inserts an inline policy proxy and evidence boundary between regulated enterprise applications and AI/model endpoints.
-      The architecture separates policy definition, runtime enforcement, and reviewable evidence output so control decisions stay explicit and bounded while existing systems remain in place.
+      BeaconGuard inserts a deterministic control and evidence boundary between enterprise workflows and governed AI, APIs, or automated systems. Release management is separated from runtime enforcement so every request is evaluated against an approved control set before execution, with verifiable evidence produced for every decision.
     </p>
 
     <figure class="system-architecture-section">
-      <img
-        src="/system-architecture.png"
-        alt="BeaconGuard control-boundary architecture showing deterministic decision enforcement before model access and evidence output"
-        class="system-architecture-img"
-      />
+      <div class="system-architecture-scroll" tabindex="0" aria-label="Architecture diagram: scroll horizontally to inspect">
+        <img
+          src="/system-architecture.svg"
+          alt="BeaconGuard architecture showing governed release management, deterministic runtime enforcement, allow and deny outcomes, and verifiable decision evidence"
+          class="system-architecture-img"
+          width="1600"
+          height="900"
+          loading="eager"
+          decoding="async"
+        />
+        <span class="system-architecture-scroll-hint">Scroll horizontally to inspect the architecture diagram</span>
+      </div>
       <figcaption class="system-architecture-caption">
-        High-level component boundaries and trust domains in the control architecture
+        Separation of governed release management, deterministic runtime enforcement, and verifiable evidence.
       </figcaption>
     </figure>
 
     <section class="doc-architecture-section">
       <h2>What this diagram shows</h2>
       <p>
-        The diagram shows the control boundary between your application and AI/model endpoint, the major components that shape runtime policy control, and the enterprise trust domains across those components.
+        The architecture separates BeaconGuard into two governed operating planes.
       </p>
       <p>
-        It clearly separates static structure from runtime sequence:
-        components and trust zones are fixed by design, while allow, deny, or needs-review outcomes are determined at execution time.
+        The management plane defines, validates, compiles, approves, signs, and distributes immutable release artifacts through the BeaconGuard Control Plane.
       </p>
       <p>
-        The evidence path is shown as a review stream that follows policy decisions for security, risk, and audit visibility.
+        The runtime data plane validates and normalizes request context, performs trust, freshness, and replay checks, and evaluates each request deterministically against the active verified release before downstream execution.
       </p>
       <p>
-        Reviewers should verify where BeaconGuard is invoked: signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, deterministic context tags, request IDs, timestamps, freshness windows, and policy inputs enter the control boundary after application shaping, policy decisions are made inside the boundary, and only approved traffic exits toward the model path.
-      </p>
-    </section>
-
-    <section class="doc-architecture-section">
-      <h2>Policy control plane</h2>
-      <p>
-        Defines and distributes policy inputs for BeaconGuard enforcement.
-        It is where enterprises manage control intent, not model behavior or system-of-record data.
+        Every deterministic decision produces a verifiable decision record. Allowed requests proceed to the governed AI, API, or automated system. Denied requests fail closed and do not execute downstream.
       </p>
     </section>
 
     <section class="doc-architecture-section">
-      <h2>Deterministic enforcement runtime</h2>
+      <h2>BeaconGuard Control Plane</h2>
       <p>
-        Applies policy in the request path and returns explicit allow, deny, or needs-review outcomes with context for every authorization decision.
-        If signed metadata, policy inputs, approved-pathway status, context tags, freshness controls, or required trust attributes are missing or invalid, BeaconGuard fails closed or routes for review.
+        The BeaconGuard Control Plane manages the governed release lifecycle for Compliance Playbooks. It separates control definition from runtime enforcement through validation, compilation, approval, immutable release creation, and controlled distribution.
+      </p>
+      <p>
+        A distributed release is not automatically active. It must pass release verification and activation before it becomes the active verified release used by the runtime.
       </p>
     </section>
 
     <section class="doc-architecture-section">
-      <h2>Evidence and review layer</h2>
+      <h2>Deterministic runtime enforcement</h2>
       <p>
-        Captures structured decision evidence so review teams can reconstruct control outcomes during review and incident analysis.
+        The BeaconGuard Runtime Control Boundary operates in the request path before governed execution.
+      </p>
+      <p>
+        It performs:
+      </p>
+      <ul>
+        <li>request validation and context normalization;</li>
+        <li>trust, freshness, and replay checks;</li>
+        <li>deterministic Compliance Playbook evaluation against the active verified release;</li>
+        <li>explicit allow or deny enforcement;</li>
+        <li>fail-closed handling when required controls or trusted context are invalid, missing, stale, replayed, or outside approved bounds.</li>
+      </ul>
+      <p>
+        Only an allowed request proceeds to the governed AI, API, or automated system.
+      </p>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>Evidence, replay, and verification</h2>
+      <p>
+        BeaconGuard emits a verifiable decision record for every deterministic result, including allowed and denied requests.
+      </p>
+      <p>
+        The record identifies the decision context, active release identity, control result, and outcome. This evidence supports reconstruction, replay, verification, audit review, incident analysis, and governance reporting.
+      </p>
+      <p>
+        Do not claim that evidence is append-only, cryptographically signed, or tamper-evident unless those guarantees are explicitly supported elsewhere by the authoritative product documentation and implementation.
       </p>
     </section>
 
     <section class="doc-architecture-section">
       <h2>Trust boundaries</h2>
       <ul>
-        <li><strong>What enters BeaconGuard:</strong> signed request metadata, workflow identity, user role, source-system trust, approved-pathway status, context tags, freshness inputs, policy intent, and required authorization signals.</li>
-        <li><strong>What BeaconGuard decides:</strong> deterministic allow, deny, or needs-review with explicit decision context.</li>
-        <li><strong>What proceeds to the model endpoint:</strong> only requests that pass policy and context checks.</li>
-        <li><strong>What is emitted for review:</strong> structured evidence of decisions, policy references, and rationale for governance visibility.</li>
+        <li><strong>What enters the runtime boundary:</strong> normalized request context and required trust signals.</li>
+        <li><strong>What governs evaluation:</strong> the active verified release produced through the controlled release lifecycle.</li>
+        <li><strong>What BeaconGuard decides:</strong> an explicit deterministic allow or deny result.</li>
+        <li><strong>What proceeds downstream:</strong> only requests that receive an allow result.</li>
+        <li><strong>What is prevented:</strong> denied requests and requests that fail required validation, trust, freshness, or replay checks.</li>
+        <li><strong>What is emitted for verification:</strong> a decision record containing release identity, decision context, control result, and outcome.</li>
       </ul>
     </section>
 
     <section class="doc-architecture-section">
-      <h2>Compatibility layer for non-native clients</h2>
+      <h2>System Connector for non-native integrations</h2>
       <p>
-        Some applications and clients do not natively produce the request structure BeaconGuard evaluates.
-        In those cases, a governed compatibility layer may sit before the BeaconGuard control boundary.
+        Some enterprise applications do not natively produce the protocol or context structure required by the BeaconGuard runtime. An optional System Connector can map source protocols and context into the required request format before the request enters the runtime control boundary.
       </p>
       <p>
-        Its job is to normalize requests into the BeaconGuard path.
-        It is not a policy engine.
-        It is not a bypass around fail-closed behavior.
-        Evidence and review output still belong to BeaconGuard’s control boundary, not to the compatibility layer.
+        The System Connector is not the policy evaluator, does not activate releases, and cannot bypass fail-closed enforcement. Deterministic evaluation and decision evidence remain functions of the BeaconGuard Runtime Control Boundary.
       </p>
     </section>
 
     <section class="doc-architecture-section">
       <h2>Reviewer checkpoints</h2>
       <ul>
-        <li>Confirm the placement of the boundary relative to transaction, analyst, and service logic.</li>
-        <li>Confirm policy inputs are versioned and auditable at enforcement time.</li>
-        <li>Confirm fail-closed behavior is explicit for malformed, missing, or out-of-bounds request context.</li>
+        <li>Confirm that the BeaconGuard Runtime Control Boundary is positioned before governed execution.</li>
+        <li>Confirm that Compliance Playbooks pass validation, compilation, approval, and immutable release creation before distribution.</li>
+        <li>Confirm that a distributed release is verified and activated before it becomes the active runtime release.</li>
+        <li>Confirm that request validation, trust, freshness, and replay checks occur before deterministic evaluation.</li>
+        <li>Confirm that allow and deny results originate from deterministic evaluation.</li>
+        <li>Confirm that denied requests do not reach the downstream system.</li>
+        <li>Confirm that every deterministic result emits a verifiable decision record.</li>
+        <li>Confirm that evidence identifies the active release used for the decision.</li>
       </ul>
     </section>
 
     <section class="doc-architecture-section">
       <h2>What BeaconGuard is not</h2>
       <ul>
-        <li>BeaconGuard is not the system of record.</li>
-        <li>BeaconGuard is not the transaction processor.</li>
-        <li>BeaconGuard is not the model host.</li>
-        <li>BeaconGuard is not the application UI.</li>
-        <li>BeaconGuard does not replace existing EHR, AML, fraud, case-management, SIEM, IAM, GRC, or workflow systems.</li>
+        <li>BeaconGuard is not the enterprise system of record.</li>
+        <li>BeaconGuard is not the business transaction processor.</li>
+        <li>BeaconGuard is not the AI or model host.</li>
+        <li>BeaconGuard is not the enterprise application UI.</li>
+        <li>The System Connector is not an enforcement bypass.</li>
+        <li>The Control Plane is not part of the per-request execution path.</li>
       </ul>
     </section>
 
@@ -128,5 +157,73 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     text-align: center;
     font-size: 0.95rem;
     line-height: 1.45;
+  }
+  
+  .system-architecture-section {
+    width: min(1440px, calc(100vw - 48px));
+    max-width: none;
+    margin: 3rem 0;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .system-architecture-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    scrollbar-gutter: stable;
+    background: var(--bg-deep, #0b1220);
+    border-radius: 8px;
+  }
+  
+  .system-architecture-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 1050px;
+    margin: 0 auto;
+  }
+  
+  .system-architecture-scroll-hint {
+    display: none;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted, #9aa8c0);
+    margin-top: 0.5rem;
+    padding-bottom: 0.25rem;
+  }
+  
+  @media (max-width: 800px) {
+    .system-architecture-section {
+      width: calc(100vw - 24px);
+    }
+    
+    .system-architecture-img {
+      width: 1050px;
+      min-width: 1050px;
+    }
+    
+    .system-architecture-scroll-hint {
+      display: block;
+    }
+  }
+  
+  .system-architecture-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .system-architecture-scroll::-webkit-scrollbar-track {
+    background: var(--bg-deep, #0b1220);
+    border-radius: 4px;
+  }
+  
+  .system-architecture-scroll::-webkit-scrollbar-thumb {
+    background: var(--border-muted, #2a3a5a);
+    border-radius: 4px;
+  }
+  
+  .system-architecture-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-muted, #3a8a5a);
   }
 </style>
