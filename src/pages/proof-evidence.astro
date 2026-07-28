@@ -59,13 +59,78 @@ const denyTrustRecord = `{
 
 <BaseLayout
   title="Proof and Evidence | Verifiable Decision Records"
-  description="Illustrative Verifiable Decision Record samples showing ALLOW and DENY results, release identity, and trust, freshness, and replay check outcomes."
+  description="Review BeaconGuard decision evidence and watch The BeaconGuard Review Process, a controlled product demonstration showing deterministic denial, reviewer step-up authentication, bounded one-time authorization, and rejection of authorization reuse."
 >
   <section class="stack-section">
     <h1>Proof and Evidence</h1>
     <p class="lead">
       These sanitized samples illustrate how Verifiable Decision Records can present deterministic ALLOW or DENY results. They are illustrative review examples, not a normative API schema and not production evidence from a customer environment.
     </p>
+  </section>
+
+  <section
+    id="beaconguard-review-process"
+    class="stack-section review-process-section"
+    aria-labelledby="beaconguard-review-process-title"
+  >
+    <p class="section-label">CONTROLLED PRODUCT DEMONSTRATION</p>
+    <h2 id="beaconguard-review-process-title">The BeaconGuard Review Process</h2>
+    <p>
+      This controlled demonstration uses Northbridge CareOps, a synthetic enterprise application created for the laboratory scenario. It shows how BeaconGuard handles a governed request that requires privileged review while preserving a strictly binary runtime decision model.
+    </p>
+    <p>
+      BeaconGuard returns only ALLOW or DENY at runtime. In this scenario, <code>REVIEW_REQUIRED</code> is recorded as the structured reason for DENY. The original denied request remains final and does not automatically resume after review.
+    </p>
+
+    <div class="review-process-layout">
+      <div class="review-process-media">
+        <div class="review-process-video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/0fe3XB5X648"
+            title="The BeaconGuard Review Process — Controlled Product Demonstration"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="review-process-fallback">
+          <a
+            href="https://youtu.be/0fe3XB5X648"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Watch The BeaconGuard Review Process on YouTube
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </p>
+      </div>
+
+      <div class="review-process-summary">
+        <h3>What the demonstration shows</h3>
+        <ul>
+          <li>The original request returns DENY with <code>REVIEW_REQUIRED</code> recorded as the structured reason.</li>
+          <li>The original denial remains final and cannot be resumed or changed by the reviewer.</li>
+          <li>The reviewer completes step-up authentication before privileged authorization can be issued.</li>
+          <li>A bounded one-time authorization is created for a new application request.</li>
+          <li>The new request is independently evaluated, and the authorization is consumed after successful use.</li>
+          <li>A subsequent attempt to reuse the authorization is denied, with reviewable evidence retained for each decision.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="review-process-outcome">
+      Review does not convert the original DENY into ALLOW. Any later execution requires a new request that independently satisfies the applicable authorization conditions.
+    </p>
+
+    <p class="sample-note">
+      Controlled laboratory demonstration using synthetic data. This is not a customer deployment, customer endorsement, external security certification, production qualification, or evidence of commercial traction.
+    </p>
+
+    <div class="page-actions">
+      <a class="btn-primary" href="/sample-decision-record">Review the Decision Evidence</a>
+      <a class="btn-secondary" href="/reviewer-kit">Open the Reviewer Kit</a>
+    </div>
   </section>
 
   <section class="stack-section">
@@ -80,10 +145,10 @@ const denyTrustRecord = `{
   <section class="stack-section">
     <h2>DENY — playbook or control failure</h2>
     <p>
-      The request fails a Compliance Playbook control, such as when a required approval is absent. Downstream execution is prevented. Governance or privacy review may follow from the Verifiable Decision Record; review does not change the DENY result or permit execution.
+      The request fails a Compliance Playbook control because a required precondition approval is absent before the request can be accepted. Downstream execution is prevented. This is distinct from the privileged review scenario above, where the structured DENY reason is <code>REVIEW_REQUIRED</code>.
     </p>
     <p class="sample-note">
-      Illustrative sample — <code>APPROVAL_REQUIRED</code> is shown as an example reason style authorized by the product contract; it is not published here as a complete public enum.
+      Illustrative sample — <code>APPROVAL_REQUIRED</code> here means a required external or precondition approval is missing at request time. It is not the BeaconGuard privileged-review reason <code>REVIEW_REQUIRED</code>, and it is not published as a complete public enum.
     </p>
     <pre class="code-block"><code>{denyPlaybookRecord}</code></pre>
   </section>
@@ -121,10 +186,90 @@ const denyTrustRecord = `{
 
   <style>
     .sample-note {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 0 0.85rem;
       font-size: 0.9rem;
       color: var(--text-muted);
+    }
+
+    .code-block {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .code-block code {
+      display: block;
+      white-space: pre;
+      word-break: normal;
+      overflow-wrap: normal;
+    }
+
+    #beaconguard-review-process {
+      scroll-margin-top: 1.5rem;
+    }
+
+    .review-process-section > p {
+      max-width: 760px;
+    }
+
+    .review-process-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 1.35rem 1.5rem;
+      align-items: start;
+      margin: 1.35rem 0 1.25rem;
+    }
+
+    .review-process-video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 0.6rem;
+      background: #0b1220;
+    }
+
+    .review-process-video iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .review-process-fallback {
+      margin: 0.7rem 0 0;
+      font-size: 0.92rem;
+    }
+
+    .review-process-summary h3 {
+      margin-bottom: 0.7rem;
+    }
+
+    .review-process-summary ul {
+      margin: 0;
+      padding-left: 1.15rem;
+    }
+
+    .review-process-summary li {
+      margin-bottom: 0.55rem;
+      color: var(--text-secondary);
+    }
+
+    .review-process-outcome {
+      max-width: 860px;
+      margin: 0 0 1rem;
+      padding: 0.85rem 1rem;
+      border-left: 3px solid var(--brand-accent);
+      background: linear-gradient(160deg, rgba(18, 31, 52, 0.78), rgba(10, 16, 27, 0.9));
+      border-radius: 0.45rem;
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 900px) {
+      .review-process-layout {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </BaseLayout>
