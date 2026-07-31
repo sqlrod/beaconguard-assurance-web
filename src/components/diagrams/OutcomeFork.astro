@@ -1,0 +1,38 @@
+---
+/**
+ * Shared mutually exclusive outcome fork after evidence persistence.
+ * Desktop: side-by-side arms. Mobile: stacked arms with explicit branch labels
+ * from the same decision point (not a sequential ALLOW→DENY path).
+ */
+interface Props {
+  allowLabel?: string;
+  denyLabel?: string;
+  forkLabel?: string;
+}
+
+const {
+  allowLabel = "Governed AI / API / Automated System",
+  denyLabel = "Hard Stop / No Downstream Execution",
+  forkLabel = "Mutually exclusive outcomes after evidence persistence",
+} = Astro.props;
+---
+
+<div class="bg-outcome-fork" aria-label={forkLabel}>
+  <p class="bg-outcome-fork-caption">{forkLabel}</p>
+  <div class="bg-outcome-fork-hub" aria-hidden="true">
+    <span class="bg-outcome-fork-stem">│</span>
+    <span class="bg-outcome-fork-split">├─────────────┤</span>
+  </div>
+  <div class="bg-outcome-fork-arms">
+    <div class="bg-flow-step bg-outcome-allow">
+      <span class="bg-outcome-branch-label">Branch: ALLOW</span>
+      <strong>ALLOW</strong>
+      <span>{allowLabel}</span>
+    </div>
+    <div class="bg-flow-step bg-outcome-deny">
+      <span class="bg-outcome-branch-label">Branch: DENY</span>
+      <strong>DENY</strong>
+      <span>{denyLabel}</span>
+    </div>
+  </div>
+</div>

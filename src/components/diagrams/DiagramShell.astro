@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  caption: string;
+  className?: string;
+}
+
+const { title, caption, className = "" } = Astro.props;
+
+const titleId = `bg-diagram-${title
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/(^-|-$)/g, "")}`;
+---
+
+<figure class:list={["bg-diagram", className]} aria-labelledby={titleId}>
+  <h3 id={titleId} class="bg-diagram-title">{title}</h3>
+  <div class="bg-diagram-canvas">
+    <slot />
+  </div>
+  <figcaption class="bg-diagram-caption">{caption}</figcaption>
+  <details class="bg-diagram-text-details">
+    <summary>Text version</summary>
+    <div class="bg-diagram-text">
+      <slot name="text" />
+    </div>
+  </details>
+</figure>

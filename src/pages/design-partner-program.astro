@@ -1,15 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ControlledEvaluationFlow from "../components/diagrams/ControlledEvaluationFlow.astro";
 ---
 
 <BaseLayout
   title="Controlled Evaluation | BeaconGuard Architecture Review"
-  description="Request a bounded BeaconGuard Controlled Evaluation covering boundary placement, Compliance Playbook mapping, ALLOW and DENY cases, evidence review, and deployment fit."
+  description="Request a bounded BeaconGuard Controlled Evaluation covering boundary placement, identity and trust mapping, Compliance Playbook controls, ALLOW and DENY cases, evidence review, and deployment-fit qualification."
 >
   <section class="stack-section">
     <h1>Controlled Evaluation</h1>
     <p class="lead">
       A Controlled Evaluation is a bounded architecture review for one regulated workflow. It validates Runtime Control Boundary placement, Compliance Playbook mapping, ALLOW and DENY cases, Verifiable Decision Records, and deployment fit without replacing existing systems of record.
+    </p>
+    <p>
+      BeaconGuard is currently in controlled internal qualification across enterprise security, identity, evidence integrity, deployment operations, recovery, and cross-platform packaging. Customer-specific architecture and deployment-fit reviews are available through this bounded evaluation model.
     </p>
   </section>
 
@@ -23,23 +27,40 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h2>Inputs</h2>
     <ul>
-      <li>One bounded workflow</li>
+      <li>One bounded regulated workflow</li>
       <li>Representative request contract</li>
-      <li>Required identity and trust context</li>
-      <li>Desired controls for the Compliance Playbook</li>
-      <li>Deployment assumptions</li>
+      <li>Workforce and workload identity assumptions</li>
+      <li>Tenant and environment boundaries</li>
+      <li>Required trust context</li>
+      <li>Compliance Playbook controls</li>
+      <li>Evidence and retention expectations</li>
+      <li>Target deployment assumptions</li>
+      <li>Recovery and rollback expectations</li>
     </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Controlled Evaluation workflow</h2>
+    <ControlledEvaluationFlow />
   </section>
 
   <section class="stack-section">
     <h2>Activities</h2>
     <ul>
-      <li>Boundary placement review</li>
-      <li>Request normalization and System Connector fit, when needed</li>
+      <li>Runtime boundary placement</li>
+      <li>System Connector fit</li>
+      <li>Request-authenticity mapping</li>
+      <li>Identity and service-identity mapping</li>
+      <li>Tenant and environment isolation review</li>
       <li>Compliance Playbook mapping</li>
-      <li>ALLOW and DENY case design, including absent-approval DENY cases and trust failures</li>
-      <li>Evidence review using Verifiable Decision Records</li>
-      <li>Deployment-fit and responsibility review</li>
+      <li>ALLOW and DENY case design</li>
+      <li>Post-DENY governance review scenario design (review does not permit execution)</li>
+      <li>Replay and duplicate-request analysis</li>
+      <li>Evidence-provider and retention review</li>
+      <li>Installation-target preflight</li>
+      <li>Release and package identity verification</li>
+      <li>Backup, restore, rollback, and recovery planning</li>
+      <li>Responsibility and operational-acceptance review</li>
     </ul>
   </section>
 
@@ -63,9 +84,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>Outputs</h2>
     <ul>
       <li>Architecture-fit memo</li>
-      <li>Control responsibility matrix for the evaluated workflow</li>
-      <li>Sample Compliance Playbook or mapping artifact</li>
+      <li>Control responsibility matrix</li>
+      <li>Identity and trust-boundary map</li>
+      <li>Compliance Playbook or mapping artifact</li>
       <li>Sample Verifiable Decision Records</li>
+      <li>Deployment qualification assessment</li>
+      <li>Recovery and rollback considerations</li>
       <li>Blocker register</li>
       <li>Next-step recommendation</li>
     </ul>

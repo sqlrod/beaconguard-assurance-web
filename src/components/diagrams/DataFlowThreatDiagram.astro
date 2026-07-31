@@ -1,0 +1,225 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+import OutcomeFork from "./OutcomeFork.astro";
+---
+
+<DiagramShell
+  title="Data-flow and trust boundaries"
+  caption="Numbered directional data flows across customer-controlled, BeaconGuard runtime, evidence-provider, governed-system, and management trust boundaries. The Control Plane is outside the request path. The customer IdP does not decide ALLOW or DENY."
+  className="bg-diagram--dfd"
+>
+  <div
+    class="bg-dfd-flow"
+    role="img"
+    aria-label="Data-flow diagram with numbered directional flows and trust boundaries"
+  >
+    <section class="bg-dfd-zone" aria-label="Customer-controlled boundary">
+      <h4 class="bg-dfd-zone-title">Customer-controlled boundary</h4>
+      <div class="bg-flow-step" data-dfd-node="app">Enterprise Application</div>
+      <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+      <p class="bg-dfd-flow-label">1. Request context</p>
+      <div class="bg-flow-step bg-flow-step--optional" data-dfd-node="connector">
+        Optional System Connector
+        <span class="bg-flow-step-detail">Non-evaluating</span>
+      </div>
+      <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+      <div class="bg-flow-step" data-dfd-node="idp">Customer Identity Provider</div>
+      <p class="bg-dfd-flow-label">
+        2. Trusted identity context → runtime verification
+        <span class="bg-dfd-flow-sub">
+          (customer-controlled; IdP does not decide ALLOW or DENY)
+        </span>
+      </p>
+    </section>
+
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <p class="bg-dfd-flow-label">
+      3. Normalized request context + identity context → runtime
+    </p>
+
+    <section
+      class="bg-dfd-zone bg-dfd-zone--runtime"
+      aria-label="BeaconGuard runtime boundary"
+    >
+      <h4 class="bg-dfd-zone-title">BeaconGuard runtime boundary</h4>
+
+      <div class="bg-flow-step bg-flow-step--boundary" data-dfd-node="runtime">
+        Runtime Control Boundary
+        <span class="bg-flow-step-detail">Deterministic evaluation</span>
+      </div>
+
+      <div
+        class="bg-dfd-store-row"
+        aria-label="Runtime stores feeding evaluation"
+      >
+        <div class="bg-dfd-store-link">
+          <div class="bg-flow-arrow bg-flow-arrow--up" aria-hidden="true">↑</div>
+          <p class="bg-dfd-flow-label">4. Active release → evaluation</p>
+          <div class="bg-flow-step" data-dfd-node="release">
+            Active Verified Release
+          </div>
+        </div>
+        <div class="bg-dfd-store-link">
+          <div class="bg-flow-arrow bg-flow-arrow--bidir" aria-hidden="true">
+            ↕
+          </div>
+          <p class="bg-dfd-flow-label">5. Replay verify ↔ shared state</p>
+          <div class="bg-flow-step" data-dfd-node="replay">
+            Shared Replay State
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+      <div class="bg-flow-step bg-flow-step--decision" data-dfd-node="decision">
+        Determine ALLOW or DENY
+      </div>
+      <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+      <div class="bg-flow-step bg-outcome-evidence" data-dfd-node="vdr">
+        <strong>Generate / Persist Verifiable Decision Record</strong>
+        <span>Runtime action — record is written outward</span>
+      </div>
+    </section>
+
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <p class="bg-dfd-flow-label">
+      6. Write decision record → evidence-provider boundary
+    </p>
+
+    <section
+      class="bg-dfd-zone bg-dfd-zone--evidence"
+      aria-label="Evidence-provider boundary"
+    >
+      <h4 class="bg-dfd-zone-title">Evidence-provider boundary</h4>
+      <div class="bg-flow-step" data-dfd-node="evidence-provider">
+        Configured Evidence Provider
+        <span class="bg-flow-step-detail">
+          Separate supporting trust boundary — not part of the Runtime Control
+          Boundary
+        </span>
+      </div>
+      <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+      <div class="bg-flow-step bg-outcome-evidence" data-dfd-node="stored-vdr">
+        Stored Verifiable Decision Records
+      </div>
+      <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+      <p class="bg-dfd-flow-label">
+        7. Write success / verification result → runtime outcome path
+      </p>
+      <p class="bg-flow-note">
+        Retention, integrity, and durability depend on the configured evidence
+        provider — not universally append-only.
+      </p>
+    </section>
+
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <p class="bg-dfd-flow-label">
+      Outcomes after successful evidence persistence (mutually exclusive)
+    </p>
+
+    <OutcomeFork
+      allowLabel="8. Forward to Governed AI / API / Automated System"
+      denyLabel="9. Return DENY to Enterprise Application — no downstream execution"
+      forkLabel="Outcomes after evidence persistence (mutually exclusive)"
+    />
+
+    <section
+      class="bg-dfd-zone bg-dfd-zone--governed"
+      aria-label="Governed downstream boundary"
+    >
+      <h4 class="bg-dfd-zone-title">Governed downstream-system boundary</h4>
+      <div class="bg-flow-step bg-outcome-allow" data-dfd-node="governed">
+        Governed AI / API / Automated System
+        <span class="bg-flow-step-detail">
+          Reached only on ALLOW after successful evidence persistence
+        </span>
+      </div>
+      <p class="bg-flow-note">
+        DENY path (flow 9) returns to the Enterprise Application with no
+        governed-system execution.
+      </p>
+    </section>
+
+    <section
+      class="bg-dfd-zone bg-dfd-zone--mgmt"
+      aria-label="Management-plane boundary"
+    >
+      <h4 class="bg-dfd-zone-title">
+        Management-plane boundary (outside request path)
+      </h4>
+      <div class="bg-flow" role="list">
+        <div class="bg-flow-step" role="listitem" data-dfd-node="operator">
+          Operator / Administrator
+        </div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <p class="bg-dfd-flow-label">10. Administration</p>
+        <div class="bg-flow-step" role="listitem" data-dfd-node="control-plane">
+          Control Plane
+          <span class="bg-flow-step-detail">Playbook and release lifecycle</span>
+        </div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <p class="bg-dfd-flow-label">
+          11–12. Controlled distribution → verification → activation
+        </p>
+        <div
+          class="bg-flow-step bg-outcome-evidence"
+          role="listitem"
+          data-dfd-node="mgmt-release"
+        >
+          Active Verified Release (feeds runtime evaluation — flow 4)
+        </div>
+      </div>
+    </section>
+
+    <p class="bg-flow-note">
+      13. Monitoring or review may read evidence where configured. Evidence
+      retention and integrity remain provider-dependent.
+    </p>
+  </div>
+
+  <div slot="text">
+    <ol>
+      <li>
+        Customer-controlled: Enterprise Application → Optional System Connector
+        (request context).
+      </li>
+      <li>
+        Customer Identity Provider supplies trusted identity context for runtime
+        verification; does not decide ALLOW or DENY.
+      </li>
+      <li>
+        Normalized request and identity context enter the BeaconGuard Runtime
+        Boundary.
+      </li>
+      <li>Active Verified Release feeds deterministic evaluation.</li>
+      <li>Replay verification uses Shared Replay State.</li>
+      <li>
+        Runtime generates and writes the Verifiable Decision Record to the
+        separate Evidence-provider boundary.
+      </li>
+      <li>
+        Write success / verification result returns to the outcome path;
+        outcomes depend on successful evidence persistence.
+      </li>
+      <li>
+        ALLOW forwards to the governed system only after successful evidence
+        persistence.
+      </li>
+      <li>
+        DENY returns to the Enterprise Application with no downstream execution.
+      </li>
+      <li>Operator / Administrator → Control Plane (outside request path).</li>
+      <li>
+        Control Plane manages Compliance Playbook release lifecycle through
+        distribution, verification, and activation.
+      </li>
+      <li>
+        Active Verified Release feeds runtime evaluation (flow 4).
+      </li>
+      <li>
+        Monitoring or review may access evidence where configured;
+        provider-dependent retention and integrity.
+      </li>
+    </ol>
+  </div>
+</DiagramShell>

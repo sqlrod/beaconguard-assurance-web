@@ -1,0 +1,163 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import DeploymentTopology from "../../components/diagrams/DeploymentTopology.astro";
+---
+
+<BaseLayout
+  title="Deployment and Integration"
+  description="How BeaconGuard is deployed and integrated into existing systems as a Runtime Control Boundary with evidence-before-forward ordering."
+>
+  <section class="stack-section">
+    <h1>Deployment and Integration</h1>
+
+    <p>
+      This section describes how BeaconGuard is deployed and integrated into existing
+      systems. Guidance is conservative and environment-agnostic for regulated
+      enterprise settings.
+    </p>
+
+    <p>
+      BeaconGuard deploys alongside existing applications. Applications submit trusted
+      request context, enforce the returned <strong>ALLOW</strong> or <strong>DENY</strong> result before
+      governed execution, and rely on Verifiable Decision Records for governance
+      review. Deployment responsibilities are shared with the customer.
+    </p>
+
+    <DeploymentTopology />
+
+    <h2>Deployment Model</h2>
+
+    <p>
+      BeaconGuard is deployed as a <strong>Runtime Control Boundary</strong> on the path to a
+      Governed AI / API / Automated System. An optional <strong>System Connector</strong> may map
+      source protocols into the required request format. The Control Plane operates
+      outside the per-request path.
+    </p>
+
+    <p>Common characteristics:</p>
+    <ul>
+      <li>Standalone process or container on the runtime data plane</li>
+      <li>Deterministic evaluation against an Active Verified Release</li>
+      <li>Horizontal scalability where the environment supports it</li>
+      <li>Externalized configuration and secrets</li>
+    </ul>
+
+    <p>The deployment environment (customer) is responsible for:</p>
+    <ul>
+      <li>Process isolation and host hardening</li>
+      <li>Network controls that keep the boundary on the governed path</li>
+      <li>Transport security (for example TLS)</li>
+      <li>Secrets and signing-key management</li>
+      <li>Identity provider integration</li>
+      <li>Evidence-provider configuration and monitoring</li>
+    </ul>
+
+    <h2>Integration Pattern</h2>
+
+    <p>Typical request flow (evidence before forward):</p>
+    <ol>
+      <li>Application (or System Connector) prepares trusted request context</li>
+      <li>Runtime performs Request Validation and Context Normalization</li>
+      <li>Trust, Freshness, and Replay Checks run as configured</li>
+      <li>Deterministic Playbook Evaluation uses the Active Verified Release</li>
+      <li>Runtime determines <strong>ALLOW</strong> or <strong>DENY</strong></li>
+      <li>Verifiable Decision Record is persisted</li>
+      <li>Application enforces the result; only after record persistence may ALLOW proceed to governed execution</li>
+    </ol>
+
+    <p>BeaconGuard does not:</p>
+    <ul>
+      <li>Call back into applications to execute workflow steps</li>
+      <li>Replace workflow logic or systems of record</li>
+      <li>Treat review obligations as permission to execute</li>
+      <li>Treat human review as a permission to execute</li>
+    </ul>
+
+    <p>
+      When required approval is absent, the result is <strong>DENY</strong> (for example
+      <code>APPROVAL_REQUIRED</code>) with Execution Prevented.
+    </p>
+
+    <h2>Request Inputs</h2>
+
+    <p>Integration requires explicit inputs, including as applicable:</p>
+    <ul>
+      <li>Actor identity (user, system, service)</li>
+      <li>Signed request metadata</li>
+      <li>Workflow identity and requested action</li>
+      <li>Source-system trust and approved-pathway status</li>
+      <li>Deterministic context tags</li>
+      <li>Request IDs, timestamps, and freshness windows</li>
+      <li>Attributes required by the Compliance Playbook</li>
+    </ul>
+
+    <p>Missing or malformed required inputs result in fail-closed <strong>DENY</strong>.</p>
+
+    <h2>Release Distribution and Activation</h2>
+
+    <p>
+      Signed Immutable Release Artifacts are distributed through Controlled Release
+      Distribution. Before use:
+    </p>
+    <ul>
+      <li>Signatures and integrity are verified (Release Verification and Activation)</li>
+      <li>Only an <strong>Active Verified Release</strong> governs runtime evaluation</li>
+      <li>release_identity is fixed for each evaluation and recorded in evidence</li>
+    </ul>
+
+    <p>Draft playbooks and unsigned artifacts must not govern production evaluation.</p>
+
+    <h2>Evidence Integration</h2>
+
+    <p>
+      BeaconGuard emits Verifiable Decision Records per evaluation, including
+      decision outcome, reason codes, release_identity, playbook_identity, and check
+      outcomes where applicable.
+    </p>
+
+    <p>
+      Evidence is integrity-protected decision evidence designed for replay and
+      verification. Append-only retention is supported when configured with a
+      required evidence provider. Customers own provider selection, retention, and
+      operational monitoring.
+    </p>
+
+    <h2>Failure Handling</h2>
+
+    <p>
+      Applications must enforce <strong>DENY</strong> outcomes and must not proceed with governed
+      execution on admission or evaluation failure.
+    </p>
+
+    <p>Failure cases include:</p>
+    <ul>
+      <li>Missing or unverifiable Active Verified Release</li>
+      <li>Trust, freshness, or replay check failures</li>
+      <li>Input normalization errors</li>
+      <li>Internal evaluation faults</li>
+      <li>Absent required approvals (<code>APPROVAL_REQUIRED</code> and similar reason codes)</li>
+    </ul>
+
+    <p>
+      All blocking cases return deterministic <strong>DENY</strong>. Human review via a Verifiable
+      Decision Record obligation does not permit execution.
+    </p>
+
+    <h2>Environment Separation</h2>
+
+    <p>
+      Recommended environments include development, testing / validation, and
+      production. Release artifacts and signing keys must not be casually shared
+      across environments.
+    </p>
+
+    <h2>Related Sections</h2>
+    <ul>
+      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
+      <li><a href="/docs/policy-model">Policy Model</a></li>
+      <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
+      <li><a href="/docs/threat-model">Threat Model</a></li>
+      <li><a href="/deployment">Deployment page</a></li>
+    </ul>
+  </section>
+</BaseLayout>

@@ -2,8 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!--
     Intentionally excluded:
-    - /diagram-test (development diagram harness; not a production content page)
-    - /docs/dfd-threat-flow (website-edge threat DFD; not primary product documentation)
+    - Development-only harness routes are not published.
   -->
   <url>
     <loc>https://www.beaconguardassurance.com/</loc>
@@ -152,6 +151,12 @@
   <url>
     <loc>https://www.beaconguardassurance.com/docs/deployment-integration</loc>
     <lastmod>2026-07-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.beaconguardassurance.com/docs/dfd-threat-flow</loc>
+    <lastmod>2026-07-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

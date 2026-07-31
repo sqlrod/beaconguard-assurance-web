@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ControlBoundaryOverview from "../components/diagrams/ControlBoundaryOverview.astro";
 ---
 
 <BaseLayout
@@ -9,68 +10,52 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h1>Workflow Examples</h1>
     <p class="lead">
-      BeaconGuard applies one Runtime Control Boundary across healthcare, financial services, and regulated internal automation. Existing systems remain in place while requests to governed AI, APIs, or automated systems are controlled before execution.
+      BeaconGuard applies one Runtime Control Boundary across healthcare, financial services, and regulated internal automation. Existing systems remain in place while requests to governed AI, APIs, or automated systems are controlled before execution. Runtime permission results are ALLOW or DENY only.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Shared ALLOW / DENY template</h2>
-    <ol>
-      <li><strong>Request:</strong> Application or System Connector presents trusted request context.</li>
-      <li><strong>Validate:</strong> Request Validation and Context Normalization.</li>
-      <li><strong>Verify:</strong> Trust, Freshness, and Replay Checks as configured.</li>
-      <li><strong>Evaluate:</strong> Deterministic Playbook Evaluation against the Active Verified Release.</li>
-      <li><strong>Enforce:</strong> Return <strong>ALLOW</strong> (governed execution may proceed) or <strong>DENY</strong> (Execution Prevented).</li>
-      <li><strong>Record:</strong> Emit a Verifiable Decision Record with release_identity, playbook_identity, reason codes, and optional review obligations that do not permit execution.</li>
-    </ol>
+    <h2>Shared control-boundary sequence</h2>
+    <p>
+      Every industry context uses the same reusable sequence: enterprise application context enters the Runtime Control Boundary (optionally via System Connector), evaluation returns ALLOW or DENY, a Verifiable Decision Record is produced, and only ALLOW may proceed to governed execution.
+    </p>
+    <ControlBoundaryOverview />
     <p class="muted-copy">
-      When required approval is absent, the result is DENY with a reason code such as APPROVAL_REQUIRED. Runtime permission results do not include a review-as-permission state.
+      When required approval is absent, the result is DENY with a reason code such as APPROVAL_REQUIRED. Review obligations do not permit execution and are not a third runtime result.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Healthcare AI Operations Review</h2>
+    <h2>Industry context panels</h2>
     <p>
-      BeaconGuard evaluates deterministic context tags, source-system metadata, signed request attributes, user role, workflow identity, approved-pathway status, and Active Verified Release controls before governed execution. It does not replace the EHR or clinical workflow. It interposes a fail-closed Runtime Control Boundary so existing healthcare workflows can remain in place while governed requests are controlled and auditable.
+      The same control boundary applies in each context. What changes is the source application, required deterministic context, control conditions, governed downstream system, and review stakeholders—not the runtime decision model.
     </p>
-    <p class="muted-copy">
-      If context tagging is needed, the host application or an optional System Connector can produce required context before Request Validation. BeaconGuard then evaluates against the Active Verified Release.
-    </p>
-    <ul>
-      <li>Approved-pathway verification before patient-related context reaches a governed system</li>
-      <li>User role and workflow identity checks before execution</li>
-      <li>DENY with APPROVAL_REQUIRED (or similar) when approval is absent; review obligation does not permit execution</li>
-      <li>Verifiable Decision Records after ALLOW or DENY</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Financial Crime / Fraud / AML Review</h2>
-    <p>
-      In this workflow, AI can assist analysis for cross-border AML, KYC, fraud, or financial dispute review, but no governed inference proceeds without BeaconGuard evaluation and a Verifiable Decision Record.
-    </p>
-    <ol>
-      <li><strong>Application Input:</strong> The financial or analyst application submits a cross-border case for AI-assisted summarization or recommendation.</li>
-      <li><strong>Boundary Intake:</strong> BeaconGuard receives the request before governed execution (optionally via System Connector).</li>
-      <li><strong>Trust and Replay Validation:</strong> Signed metadata, source-system trust, request ID, timestamp, and freshness inputs are checked.</li>
-      <li><strong>Deterministic Playbook Evaluation:</strong> The request is checked against Compliance Playbook controls for required AML, KYC, or workflow evidence under the Active Verified Release.</li>
-      <li><strong>Control Outcome:</strong> BeaconGuard returns ALLOW or DENY.</li>
-      <li><strong>Decision Evidence:</strong> A Verifiable Decision Record is retained for security, risk, compliance, and audit review.</li>
-    </ol>
-  </section>
-
-  <section class="stack-section">
-    <h2>Regulated Internal Automation Review</h2>
-    <p>
-      An internal automation or agent attempts to perform an action against a regulated system. BeaconGuard checks the Active Verified Release before execution, blocks unauthorized actions with DENY, and records evidence for operational review.
-    </p>
-    <ul>
-      <li>Checks user role, workflow identity, environment, requested action, and change window</li>
-      <li>Validates signed request metadata, approved automation pathway, and freshness inputs</li>
-      <li>Blocks automation outside approved role or operating conditions (DENY / Execution Prevented)</li>
-      <li>Records review obligations for higher-risk DENY cases without permitting execution</li>
-      <li>Preserves Verifiable Decision Records for security, risk, operations, and audit review</li>
-    </ul>
+    <div class="section-grid section-grid--scenarios">
+      <div class="content-card">
+        <h3>Healthcare</h3>
+        <p><strong>Typical source application:</strong> Care operations, privacy-gated assist, or EHR-adjacent workflow UI.</p>
+        <p><strong>Required deterministic context:</strong> Role, workflow identity, approved pathway, source-system trust, context tags, freshness.</p>
+        <p><strong>Example control conditions:</strong> Pathway approval; privacy approval present when required; trust and freshness within bounds.</p>
+        <p><strong>Governed downstream system:</strong> Approved model pathway or operational AI assist.</p>
+        <p><strong>Review stakeholders:</strong> Privacy, compliance, clinical governance, security, architecture.</p>
+      </div>
+      <div class="content-card">
+        <h3>Financial</h3>
+        <p><strong>Typical source application:</strong> AML, KYC, fraud, or dispute analyst workflow.</p>
+        <p><strong>Required deterministic context:</strong> Analyst or service identity, case and transaction context, source trust, requested action, freshness.</p>
+        <p><strong>Example control conditions:</strong> Role and pathway controls; approval state when required; replay and freshness checks.</p>
+        <p><strong>Governed downstream system:</strong> Approved governed analysis or recommendation service.</p>
+        <p><strong>Review stakeholders:</strong> Risk, compliance, fraud operations, security, audit.</p>
+      </div>
+      <div class="content-card">
+        <h3>Regulated Internal Automation</h3>
+        <p><strong>Typical source application:</strong> Existing internal agent or automation orchestrator.</p>
+        <p><strong>Required deterministic context:</strong> Trusted context for role, environment, requested action, change window, freshness.</p>
+        <p><strong>Example control conditions:</strong> Approved automation pathway; environment and change-window bounds; Active Verified Release match.</p>
+        <p><strong>Governed downstream system:</strong> Production system or regulated automation target.</p>
+        <p><strong>Review stakeholders:</strong> Security, operations, risk, audit.</p>
+      </div>
+    </div>
   </section>
 
   <section class="stack-section">

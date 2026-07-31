@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import FailClosedSecurityGate from "../components/diagrams/FailClosedSecurityGate.astro";
 ---
 
 <BaseLayout
   title="Security | BeaconGuard Runtime Admission and Fail-Closed Control"
-  description="BeaconGuard provides deterministic request admission, trust and freshness checks, release verification, and fail-closed DENY behavior before governed execution."
+  description="BeaconGuard provides deterministic request admission, authenticated request context, tenant and environment isolation, distributed replay resistance, and fail-closed DENY behavior before governed execution."
 >
   <section class="stack-section">
     <h1>Security at the Runtime Control Boundary</h1>
@@ -21,6 +22,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section">
+    <h2>Request authenticity</h2>
+    <p>
+      BeaconGuard requires authenticated request context before governed evaluation. Missing, invalid, mismatched, or out-of-bounds trust material fails closed as DENY.
+    </p>
+  </section>
+
+  <section class="stack-section">
     <h2>Signature and trust checks</h2>
     <p>
       Required trust signals and signature or integrity expectations for request context must be satisfied before evaluation proceeds. Missing or invalid trust conditions fail closed as DENY.
@@ -28,9 +36,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section">
-    <h2>Freshness and replay checks</h2>
+    <h2>Tenant and environment isolation</h2>
     <p>
-      Request identity, timestamps, and freshness windows support replay and freshness detection. Exact nonce, cache, or signed-constraint mechanisms are deployment-dependent. Failed checks return DENY.
+      Authorization context is bound to the applicable tenant and environment. Authority established for one boundary is not silently accepted in another.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Freshness and distributed replay resistance</h2>
+    <p>
+      Request identity, timestamps, and freshness windows support freshness detection. Replay protection is coordinated across distributed runtime instances where shared operation is configured. Duplicate or previously consumed request authority fails closed rather than being accepted by another instance.
     </p>
   </section>
 
@@ -42,19 +57,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section">
-    <h2>Fail-closed behavior</h2>
+    <h2>Bounded review authorization</h2>
     <p>
-      When required controls, approvals, trust signals, freshness conditions, or replay checks are invalid, missing, stale, or out of bounds, BeaconGuard returns DENY and prevents downstream execution. There is no permissive fallback to a review-as-permission state.
+      A privileged review may authorize a new, bounded request after step-up verification. It does not change the original DENY, resume the original request, or create reusable standing permission.
     </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Fail-closed dependency handling</h2>
+    <p>
+      When a required trust, replay, authorization, release, or evidence dependency is unavailable or cannot be verified, the governed operation does not fall back to permissive execution. BeaconGuard returns DENY and prevents downstream execution. There is no review-as-permission fallback.
+    </p>
+    <FailClosedSecurityGate />
   </section>
 
   <section class="stack-section">
     <h2>External dependencies and customer responsibility</h2>
     <ul>
       <li>Identity providers and source-system trust remain customer-controlled.</li>
+      <li>Network, TLS, secrets, and host hardening remain deployment responsibilities.</li>
       <li>Replay-state providers, when used, are external to the core decision evaluation and must be configured for fail-closed operation.</li>
       <li>Evidence storage durability and integrity protection depend on the configured evidence provider and customer infrastructure.</li>
-      <li>Network, TLS, secrets, and host hardening remain deployment responsibilities.</li>
+      <li>Operational monitoring and incident response remain shared customer responsibilities.</li>
     </ul>
   </section>
 

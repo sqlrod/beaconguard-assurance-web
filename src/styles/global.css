@@ -1068,3 +1068,854 @@ p,
 figcaption {
   color: var(--text-secondary);
 }
+
+/* ========================= DIAGRAMS ========================= */
+
+.bg-diagram {
+  margin: 1.5rem 0 2rem;
+  padding: 1.15rem 1.1rem 1.25rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.7rem;
+  background:
+    linear-gradient(180deg, rgba(14, 23, 39, 0.96), rgba(10, 15, 28, 0.94));
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+}
+
+/* Nested page sections inherit a 4rem bottom margin; diagrams must not. */
+.bg-diagram section {
+  margin-bottom: 0;
+}
+
+.bg-diagram-title {
+  margin: 0 0 0.85rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+.bg-diagram-canvas {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.bg-diagram-caption {
+  margin: 0.85rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.bg-diagram-text-details {
+  margin-top: 0.75rem;
+  border-top: 1px solid rgba(38, 55, 80, 0.7);
+  padding-top: 0.55rem;
+}
+
+.bg-diagram-text-details > summary {
+  cursor: pointer;
+  color: var(--brand-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  list-style: none;
+}
+
+.bg-diagram-text-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.bg-diagram-text-details > summary::before {
+  content: "▸ ";
+}
+
+.bg-diagram-text-details[open] > summary::before {
+  content: "▾ ";
+}
+
+.bg-diagram-text {
+  margin-top: 0.65rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.bg-diagram-text p,
+.bg-diagram-text ol,
+.bg-diagram-text ul {
+  margin: 0 0 0.55rem;
+}
+
+.bg-diagram-text :last-child {
+  margin-bottom: 0;
+}
+
+.bg-diagram-banner {
+  margin: 0 0 0.75rem;
+  padding: 0.55rem 0.7rem;
+  border-left: 3px solid var(--brand-accent);
+  background: rgba(11, 20, 34, 0.72);
+  border-radius: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.bg-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.bg-flow-step {
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.55rem;
+  padding: 0.7rem 0.8rem;
+  background-color: var(--bg-lift);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  align-content: start;
+}
+
+.bg-flow-step strong,
+.bg-flow-step-label {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.bg-flow-step strong.diagram-step-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+
+.bg-flow-step-detail,
+.bg-flow-step span:not(.bg-gate-fail):not(.bg-flow-note):not(.bg-fail-marker):not(.bg-outcome-branch-label):not(.diagram-step-number):not(.diagram-step-description):not(.bg-fail-gate-name):not(.bg-fail-rail-step-name) {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.bg-flow-step--boundary {
+  border-left: 3px solid var(--brand-accent);
+}
+
+.bg-flow-step--decision {
+  border-left: 3px solid var(--brand-primary);
+  font-weight: 600;
+}
+
+.bg-flow-step--optional {
+  border-style: dashed;
+}
+
+.bg-flow-step--inputs ul,
+.bg-inline-list {
+  margin: 0.2rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.bg-flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-accent);
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-height: 1rem;
+  line-height: 1;
+  user-select: none;
+  flex: 0 0 auto;
+}
+
+.bg-flow-note {
+  display: block;
+  margin: 0.35rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.bg-flow-note--sibling {
+  margin: 0.15rem 0 0.15rem;
+  padding: 0.45rem 0.65rem;
+  border-left: 2px solid var(--border-subtle);
+  background: rgba(11, 20, 34, 0.55);
+  border-radius: 0.35rem;
+}
+
+.bg-diagram--release-lifecycle .bg-flow-arrow {
+  font-size: 1.25rem;
+  min-height: 1.15rem;
+}
+
+.bg-outcome-allow {
+  border-left: 3px solid var(--evidence-accent);
+}
+
+.bg-outcome-deny {
+  border-left: 3px solid var(--deny-accent);
+}
+
+.bg-outcome-evidence {
+  border-left: 3px solid var(--evidence-accent);
+}
+
+/* Mutually exclusive outcome fork */
+.bg-outcome-fork {
+  margin-top: 0.35rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.bg-outcome-fork-hub {
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  color: var(--brand-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  line-height: 1.1;
+  user-select: none;
+}
+
+.bg-outcome-fork-stem,
+.bg-outcome-fork-split {
+  display: block;
+  letter-spacing: 0.08em;
+}
+
+.bg-outcome-fork-caption {
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.bg-outcome-fork-arms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  align-items: start;
+}
+
+.bg-outcome-branch-label {
+  display: block;
+  color: var(--text-muted) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Runtime decision sequence — numbered step hierarchy */
+.diagram-step-number {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.diagram-step-title {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+.diagram-step-description {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.bg-planes {
+  display: grid;
+  gap: 0.85rem;
+  align-items: start;
+}
+
+.bg-plane {
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.65rem;
+  padding: 0.85rem 0.8rem 0.95rem;
+  background: var(--bg-panel);
+  min-width: 0;
+  height: auto;
+  align-self: start;
+}
+
+.bg-plane-title {
+  margin: 0 0 0.65rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.55rem;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.bg-plane-badge {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.bg-dep-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.bg-dep-list li {
+  margin-bottom: 0.3rem;
+}
+
+.bg-diagram-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  min-width: 0;
+  align-items: start;
+}
+
+.bg-diagram-column {
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.55rem;
+  padding: 0.75rem 0.75rem;
+  background: var(--bg-lift);
+  min-width: 0;
+  height: auto;
+  align-self: start;
+}
+
+.bg-diagram-column--accent {
+  border-left: 3px solid var(--brand-accent);
+}
+
+.bg-diagram-column-title {
+  margin: 0 0 0.45rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.bg-diagram-column ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.bg-diagram-column li {
+  margin-bottom: 0.28rem;
+}
+
+.bg-anatomy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.65rem;
+  align-items: start;
+}
+
+.bg-anatomy-group {
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.55rem;
+  padding: 0.7rem 0.7rem;
+  background: var(--bg-lift);
+  min-width: 0;
+  height: auto;
+  align-self: start;
+}
+
+.bg-anatomy-title {
+  margin: 0 0 0.35rem;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.bg-anatomy-group ul {
+  margin: 0;
+  padding-left: 1.05rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.bg-anatomy-group li {
+  margin-bottom: 0.25rem;
+}
+
+/* Fail-closed security gate — three-region desktop layout */
+.bg-fail-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.5fr)
+    minmax(6.75rem, 7.75rem)
+    minmax(280px, 1.15fr);
+  column-gap: 0.45rem;
+  row-gap: 0.75rem;
+  /* Tall left sequence sets row height; bridge + rail center to its midpoint */
+  align-items: center;
+  align-content: start;
+}
+
+.bg-fail-column {
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.65rem;
+  padding: 0.9rem 0.85rem 1rem;
+  background: var(--bg-panel);
+  min-width: 0;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+
+.bg-fail-column--gates {
+  align-self: stretch;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right-color: transparent;
+  padding-right: 0.45rem;
+}
+
+.bg-fail-column-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.bg-fail-gates-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 0.75rem;
+  gap: 0.35rem;
+  align-items: stretch;
+  flex: 1;
+}
+
+.bg-fail-bracket {
+  border: 2px solid var(--deny-accent);
+  border-left: none;
+  border-radius: 0 0.4rem 0.4rem 0;
+  margin: 0.15rem 0;
+  min-height: 100%;
+  opacity: 0.95;
+}
+
+.bg-fail-gate {
+  min-height: 3.1rem;
+  display: grid;
+  align-content: center;
+  justify-items: stretch;
+}
+
+.bg-fail-gate-name {
+  display: block;
+  color: var(--text-primary) !important;
+  font-size: 0.98rem !important;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.bg-fail-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  min-height: 1.75rem;
+  line-height: 1;
+  color: var(--brand-accent);
+  opacity: 1;
+  font-weight: 700;
+}
+
+.bg-fail-arrow--rail {
+  color: var(--text-muted);
+  font-size: 1.45rem;
+  min-height: 1.4rem;
+}
+
+.bg-fail-bridge {
+  /* Stretch to full left-stack height so midpoint anchors are geometry-driven */
+  position: relative;
+  align-self: stretch;
+  min-width: 0;
+  width: 100%;
+  min-height: 4rem;
+  padding: 0;
+  z-index: 1;
+}
+
+.failure-bridge-label {
+  /* Sit above the midpoint connector (~10px gap); never on the line */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-100% - 12px));
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--deny-accent);
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.failure-bridge-line {
+  /* Horizontal connector through vertical midpoint of both panels */
+  position: absolute;
+  left: 0;
+  right: 0.35rem;
+  top: 50%;
+  width: auto;
+  min-width: 4.5rem;
+  height: 0;
+  border: 0;
+  border-top: 2px solid var(--deny-accent);
+  margin: 0;
+  transform: translateY(-50%);
+}
+
+.failure-bridge-line::after {
+  content: "→";
+  position: absolute;
+  right: -0.2rem;
+  top: 50%;
+  transform: translateY(-55%);
+  font-size: 1.25rem;
+  color: var(--deny-accent);
+  font-weight: 700;
+  line-height: 1;
+  background: transparent;
+}
+
+.bg-fail-mobile-bridge {
+  display: none;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.bg-fail-mobile-bridge-arrow {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--deny-accent);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.bg-fail-column--rail,
+.bg-fail-rail {
+  align-self: center;
+  height: fit-content;
+  border: 1px solid rgba(182, 90, 98, 0.45);
+  background: rgba(182, 90, 98, 0.04);
+}
+
+.bg-fail-rail-title {
+  margin: 0;
+  color: var(--deny-accent);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bg-fail-rail-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 0 0 auto;
+  gap: 0.75rem;
+}
+
+.bg-fail-rail-flow {
+  margin-top: 0.15rem;
+}
+
+.bg-fail-rail-step {
+  min-height: 2.85rem;
+  display: grid;
+  align-content: center;
+}
+
+.bg-fail-rail-step-name {
+  display: block;
+  color: var(--text-primary) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.bg-fail-rail-step--neutral {
+  border-left-color: var(--border-subtle);
+}
+
+.bg-fail-rail-step--deny,
+.bg-fail-rail-step--stop {
+  border-left-width: 3px;
+  border-left-color: var(--deny-accent);
+}
+
+.bg-fail-rail-step--deny .bg-fail-rail-step-name,
+.bg-fail-rail-step--stop .bg-fail-rail-step-name {
+  color: var(--text-primary) !important;
+  font-weight: 700;
+}
+
+/* Architecture desktop/mobile split — never scale-down the desktop canvas */
+.bg-arch-desktop {
+  display: none;
+}
+
+.bg-arch-mobile {
+  display: grid;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.bg-arch-mobile .bg-flow-step,
+.bg-arch-mobile .bg-plane-title,
+.bg-diagram--architecture .bg-flow-step {
+  font-size: 0.95rem;
+}
+
+/* DFD connected HTML flow */
+.bg-dfd-flow {
+  display: grid;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.bg-dfd-zone {
+  border: 1px dashed var(--border-subtle);
+  border-radius: 0.6rem;
+  padding: 0.75rem 0.7rem;
+  background: rgba(11, 18, 32, 0.55);
+}
+
+.bg-dfd-zone--runtime {
+  border-color: rgba(91, 158, 232, 0.55);
+}
+
+.bg-dfd-zone--evidence {
+  border-color: rgba(79, 143, 112, 0.65);
+  background: rgba(12, 28, 22, 0.45);
+}
+
+.bg-dfd-zone--governed {
+  border-color: rgba(79, 143, 112, 0.55);
+}
+
+.bg-dfd-zone--mgmt {
+  border-color: rgba(91, 158, 232, 0.4);
+}
+
+.bg-dfd-zone-title {
+  margin: 0 0 0.55rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.bg-dfd-flow-label {
+  margin: 0;
+  color: var(--brand-accent);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.bg-dfd-side-in {
+  margin-bottom: 0.55rem;
+  padding: 0.55rem 0.6rem;
+  border-left: 2px solid var(--border-subtle);
+  background: rgba(13, 22, 36, 0.7);
+  border-radius: 0.4rem;
+}
+
+.bg-dfd-store-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+  margin: 0.55rem 0;
+  align-items: start;
+}
+
+.bg-dfd-store-link {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+}
+
+@media (min-width: 901px) {
+  .bg-planes,
+  .bg-planes--responsive {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .bg-arch-mobile {
+    display: none;
+  }
+
+  .bg-arch-desktop {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+    align-items: start;
+  }
+}
+
+@media (max-width: 900px) {
+  .bg-diagram {
+    padding: 1rem 0.85rem 1.1rem;
+  }
+
+  .bg-diagram-columns,
+  .bg-outcome-fork-arms,
+  .bg-dfd-store-row,
+  .bg-planes,
+  .bg-planes--responsive,
+  .bg-planes--architecture {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .bg-fail-layout {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    align-items: stretch;
+  }
+
+  .bg-fail-column--gates {
+    border-right-color: var(--border-subtle);
+    border-radius: 0.65rem;
+    padding-right: 0.85rem;
+    align-self: stretch;
+    order: -1;
+  }
+
+  .bg-fail-gates-body {
+    grid-template-columns: 1fr;
+    flex: 0 0 auto;
+  }
+
+  .bg-fail-bracket {
+    display: none;
+  }
+
+  .bg-fail-bridge {
+    display: none;
+  }
+
+  .bg-fail-mobile-bridge {
+    display: block;
+    order: 0;
+  }
+
+  .bg-fail-column--rail,
+  .bg-fail-rail {
+    order: 1;
+    align-self: stretch;
+    border-radius: 0.65rem;
+  }
+
+  .bg-fail-rail-title {
+    white-space: normal;
+  }
+
+  .bg-fail-rail-body {
+    justify-content: flex-start;
+  }
+
+  .bg-diagram--architecture,
+  .bg-diagram--architecture .bg-diagram-canvas,
+  .bg-planes--architecture,
+  .bg-planes--architecture .bg-plane,
+  .bg-planes--architecture .bg-flow-step {
+    max-width: 100%;
+    width: 100%;
+    transform: none;
+    zoom: 1;
+  }
+
+  .bg-arch-mobile {
+    display: grid;
+  }
+
+  .bg-arch-desktop {
+    display: none !important;
+  }
+
+  .bg-diagram .bg-flow-step,
+  .bg-diagram .bg-flow-step-label,
+  .bg-diagram .bg-plane-title,
+  .bg-diagram .bg-diagram-title,
+  .bg-diagram--architecture .bg-flow-step,
+  .bg-arch-mobile .bg-flow-step {
+    font-size: 0.95rem; /* ~15.2px at 16px root — do not scale desktop canvas */
+  }
+
+  .bg-outcome-fork-arms {
+    gap: 0.55rem;
+  }
+
+  .bg-diagram-text-details > summary {
+    font-size: 0.95rem;
+    min-height: 2rem;
+  }
+}

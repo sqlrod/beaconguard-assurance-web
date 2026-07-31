@@ -1,0 +1,113 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+import OutcomeFork from "./OutcomeFork.astro";
+
+const originalPath = [
+  "Original Request",
+  "Independent Evaluation",
+  "DENY with REVIEW_REQUIRED",
+  "Original Request Finalized",
+  "Verifiable Decision Record",
+];
+
+const reviewPath = [
+  "Reviewer Step-Up",
+  "Bounded Single-Use Authorization",
+  "New Application Request",
+  "Independent Evaluation of New Request",
+];
+---
+
+<DiagramShell
+  title="Privileged review authorization flow"
+  caption="Review does not change the original DENY. Any later execution requires a new request. The new request is independently evaluated. The authorization is bounded and single-use. Reuse is denied."
+  className="bg-diagram--review-auth"
+>
+  <p class="bg-diagram-banner">
+    Phase 1 — Original request remains final after DENY
+  </p>
+  <div class="bg-flow" role="list">
+    {
+      originalPath.map((step, index) => (
+        <>
+          <div
+            class:list={[
+              "bg-flow-step",
+              step.startsWith("DENY") && "bg-outcome-deny",
+              step === "Verifiable Decision Record" && "bg-outcome-evidence",
+              step === "Original Request Finalized" && "bg-flow-step--boundary",
+            ]}
+            role="listitem"
+          >
+            {step}
+          </div>
+          {index < originalPath.length - 1 && (
+            <div class="bg-flow-arrow" aria-hidden="true">
+              ↓
+            </div>
+          )}
+        </>
+      ))
+    }
+  </div>
+
+  <p class="bg-diagram-banner">
+    Phase 2 — Separate governed review path (does not resume the original request)
+  </p>
+  <div class="bg-flow" role="list">
+    {
+      reviewPath.map((step, index) => (
+        <>
+          <div
+            class:list={[
+              "bg-flow-step",
+              step.includes("Independent Evaluation") &&
+                "bg-flow-step--decision",
+              step.includes("Authorization") && "bg-outcome-evidence",
+            ]}
+            role="listitem"
+          >
+            {step}
+          </div>
+          {index < reviewPath.length - 1 && (
+            <div class="bg-flow-arrow" aria-hidden="true">
+              ↓
+            </div>
+          )}
+        </>
+      ))
+    }
+  </div>
+
+  <OutcomeFork
+    allowLabel="New request permitted for this evaluation only — bounded authorization is consumed; reuse attempt is DENIED"
+    denyLabel="New request blocked — no execution; the bounded authorization cannot be reused"
+    forkLabel="Mutually exclusive outcomes for the new request evaluation"
+  />
+
+  <p class="bg-flow-note">
+    Single-use authorization is no longer reusable after the new evaluation
+    attempt.
+  </p>
+
+  <div slot="text">
+    <p>
+      Phase 1: Original Request → Independent Evaluation → DENY with
+      REVIEW_REQUIRED → Original Request Finalized → Verifiable Decision Record.
+      The original DENY is final; review does not convert it to ALLOW or resume
+      the original request.
+    </p>
+    <p>
+      Phase 2: Reviewer Step-Up → Bounded Single-Use Authorization → New
+      Application Request → Independent Evaluation of New Request → mutually
+      exclusive fork. Branch ALLOW → new request permitted for this evaluation
+      only; bounded authorization is consumed; reuse attempt is DENIED. Branch
+      DENY → new request blocked; no execution; the bounded authorization cannot
+      be reused.
+    </p>
+    <p>
+      Single-use authorization is no longer reusable after the new evaluation
+      attempt. Review itself is not permission.
+    </p>
+  </div>
+</DiagramShell>

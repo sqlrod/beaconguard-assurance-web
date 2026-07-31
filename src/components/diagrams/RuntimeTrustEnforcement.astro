@@ -1,0 +1,68 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+import OutcomeFork from "./OutcomeFork.astro";
+
+const stages = [
+  "Enterprise Request",
+  "Authenticity",
+  "Tenant and Environment",
+  "Freshness and Replay",
+  "Active Verified Release",
+  "Deterministic Evaluation",
+  "Persist Verifiable Decision Record",
+];
+---
+
+<DiagramShell
+  title="Runtime trust and enforcement"
+  caption="Trust gates complete before deterministic evaluation. Evidence is persisted before outcomes fork: ALLOW may proceed; DENY is a hard stop with no downstream execution."
+  className="bg-diagram--runtime-trust"
+>
+  <div class="bg-flow" role="list">
+    {
+      stages.map((stage, index) => (
+        <>
+          <div
+            class:list={[
+              "bg-flow-step",
+              stage === "Persist Verifiable Decision Record" &&
+                "bg-outcome-evidence",
+              stage === "Deterministic Evaluation" && "bg-flow-step--decision",
+              stage === "Active Verified Release" && "bg-flow-step--boundary",
+            ]}
+            role="listitem"
+          >
+            {stage === "Persist Verifiable Decision Record" ? (
+              <>
+                <strong>{stage}</strong>
+                <span>Required before any downstream effect</span>
+              </>
+            ) : (
+              stage
+            )}
+          </div>
+          {index < stages.length - 1 && (
+            <div class="bg-flow-arrow" aria-hidden="true">
+              ↓
+            </div>
+          )}
+        </>
+      ))
+    }
+  </div>
+
+  <OutcomeFork
+    allowLabel="Governed execution may proceed"
+    denyLabel="Hard stop — no downstream execution"
+  />
+
+  <div slot="text">
+    <p>
+      Enterprise Request → Authenticity → Tenant and Environment → Freshness and
+      Replay → Active Verified Release → Deterministic Evaluation → Persist
+      Verifiable Decision Record → mutually exclusive fork. Branch ALLOW →
+      governed execution may proceed. Branch DENY → hard stop — no downstream
+      execution.
+    </p>
+  </div>
+</DiagramShell>

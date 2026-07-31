@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import IndustryControlFlow from "../components/diagrams/IndustryControlFlow.astro";
 ---
 
 <BaseLayout
@@ -11,6 +12,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <p class="lead">
       BeaconGuard deploys alongside existing healthcare applications as a Runtime Control Boundary. It evaluates trusted request context against the Active Verified Release and returns ALLOW or DENY before governed execution, preserving Verifiable Decision Records for privacy, security, compliance, risk, and architecture teams.
     </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Healthcare control-boundary workflow</h2>
+    <p>
+      One reusable control-boundary sequence: evaluate trusted context, return ALLOW or DENY, record evidence, then apply the effect. Review obligations sit outside the runtime permission path.
+    </p>
+    <IndustryControlFlow industry="healthcare" />
   </section>
 
   <section class="stack-section">

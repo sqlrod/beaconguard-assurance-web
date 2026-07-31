@@ -1,0 +1,87 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+
+const groups = [
+  {
+    title: "Decision outcome and reason",
+    fields: [
+      "Decision outcome (ALLOW or DENY)",
+      "Reason code / decision reason (illustrative)",
+    ],
+  },
+  {
+    title: "Request and correlation identity",
+    fields: ["Request action / correlation identity", "Request identifiers"],
+  },
+  {
+    title: "Actor, tenant, environment, and workflow",
+    fields: [
+      "Actor type",
+      "Tenant and environment context",
+      "Workflow identity",
+    ],
+  },
+  {
+    title: "Active release and playbook identity",
+    fields: ["release_identity", "playbook_identity"],
+  },
+  {
+    title: "Trust, freshness, and replay results",
+    fields: [
+      "Authenticity / trust check results",
+      "Freshness result",
+      "Replay resistance result",
+    ],
+  },
+  {
+    title: "Evidence identity and integrity",
+    fields: [
+      "Evidence / record identity",
+      "Integrity-verification information",
+    ],
+  },
+  {
+    title: "Optional review obligation",
+    fields: [
+      "Review obligation (does not change permission)",
+      "Governance notification context",
+    ],
+  },
+];
+---
+
+<DiagramShell
+  title="Verifiable Decision Record anatomy"
+  caption="Illustrative field groups for reviewer orientation. Not a normative public schema."
+  className="bg-diagram--record-anatomy"
+>
+  <p class="bg-diagram-banner">
+    Illustrative sample — field names and grouping are for reviewer orientation
+    only, not a published public schema.
+  </p>
+  <div class="bg-anatomy-grid" role="list">
+    {
+      groups.map((group) => (
+        <section class="bg-anatomy-group" role="listitem">
+          <h4 class="bg-anatomy-title">{group.title}</h4>
+          <ul>
+            {group.fields.map((field) => (
+              <li>{field}</li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+
+  <div slot="text">
+    <p>
+      Annotated groups: decision outcome and reason; request and correlation
+      identity; actor, tenant, environment, and workflow context; active release
+      and playbook identity; trust, freshness, and replay results; evidence
+      identity and integrity-verification information; optional review
+      obligation that does not change permission. Labelled illustrative — not a
+      normative public schema.
+    </p>
+  </div>
+</DiagramShell>

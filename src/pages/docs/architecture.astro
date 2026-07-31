@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArchitecturePlanes from "../../components/diagrams/ArchitecturePlanes.astro";
 ---
 
 <BaseLayout
@@ -13,23 +14,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       BeaconGuard inserts a deterministic control and evidence boundary between enterprise workflows and governed AI, APIs, or automated systems. Release management is separated from runtime enforcement so every request is evaluated against an approved control set before execution, with verifiable evidence produced for every decision.
     </p>
 
-    <figure class="system-architecture-section">
-      <div class="system-architecture-scroll" tabindex="0" aria-label="Architecture diagram: scroll horizontally to inspect">
-        <img
-          src="/system-architecture.svg"
-          alt="BeaconGuard architecture showing governed release management, deterministic runtime enforcement, allow and deny outcomes, and verifiable decision evidence"
-          class="system-architecture-img"
-          width="1600"
-          height="900"
-          loading="eager"
-          decoding="async"
-        />
-        <span class="system-architecture-scroll-hint">Scroll horizontally to inspect the architecture diagram</span>
-      </div>
-      <figcaption class="system-architecture-caption">
-        Separation of governed release management, deterministic runtime enforcement, and verifiable evidence.
-      </figcaption>
-    </figure>
+    <ArchitecturePlanes />
 
     <section class="doc-architecture-section">
       <h2>What this diagram shows</h2>
@@ -37,23 +22,23 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         The architecture separates BeaconGuard into two governed operating planes.
       </p>
       <p>
-        The management plane defines, validates, compiles, approves, signs, and distributes immutable release artifacts through the BeaconGuard Control Plane.
+        The management plane (BeaconGuard Control Plane) defines, validates, compiles, approves, signs, and distributes immutable release artifacts. It operates outside the per-request path.
       </p>
       <p>
-        The runtime data plane validates and normalizes request context, performs trust, freshness, and replay checks, and evaluates each request deterministically against the active verified release before downstream execution.
+        The runtime data plane validates and normalizes request context, performs trust, freshness, and replay checks, and evaluates each request deterministically against the Active Verified Release before downstream execution.
       </p>
       <p>
-        Every deterministic decision produces a verifiable decision record. Allowed requests proceed to the governed AI, API, or automated system. Denied requests fail closed and do not execute downstream.
+        Every deterministic decision produces a Verifiable Decision Record. Evidence persists before ALLOW proceeds to the governed AI, API, or automated system. DENY is a hard stop with no downstream execution.
       </p>
     </section>
 
     <section class="doc-architecture-section">
       <h2>BeaconGuard Control Plane</h2>
       <p>
-        The BeaconGuard Control Plane manages the governed release lifecycle for Compliance Playbooks. It separates control definition from runtime enforcement through validation, compilation, approval, immutable release creation, and controlled distribution.
+        The BeaconGuard Control Plane manages the governed release lifecycle for Compliance Playbooks. It separates control definition from runtime enforcement through validation, compilation, approval, immutable release creation, and controlled distribution. The Control Plane is not part of the per-request execution path.
       </p>
       <p>
-        A distributed release is not automatically active. It must pass release verification and activation before it becomes the active verified release used by the runtime.
+        A distributed release is not automatically active. It must pass release verification and activation before it becomes the Active Verified Release used by the runtime.
       </p>
     </section>
 
@@ -68,36 +53,64 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <ul>
         <li>request validation and context normalization;</li>
         <li>trust, freshness, and replay checks;</li>
-        <li>deterministic Compliance Playbook evaluation against the active verified release;</li>
-        <li>explicit allow or deny enforcement;</li>
+        <li>deterministic Compliance Playbook evaluation against the Active Verified Release;</li>
+        <li>explicit ALLOW or DENY enforcement;</li>
+        <li>evidence persistence before ALLOW proceeds;</li>
         <li>fail-closed handling when required controls or trusted context are invalid, missing, stale, replayed, or outside approved bounds.</li>
       </ul>
       <p>
-        Only an allowed request proceeds to the governed AI, API, or automated system.
+        Only an ALLOW result may proceed to the governed AI, API, or automated system after the decision record is persisted. DENY hard-stops with no downstream execution.
       </p>
     </section>
 
     <section class="doc-architecture-section">
       <h2>Evidence, replay, and verification</h2>
       <p>
-        BeaconGuard emits a verifiable decision record for every deterministic result, including allowed and denied requests.
+        BeaconGuard emits a Verifiable Decision Record for every deterministic result, including ALLOW and DENY.
       </p>
       <p>
         The record identifies the decision context, active release identity, control result, and outcome. This evidence supports reconstruction, replay, verification, audit review, incident analysis, and governance reporting.
       </p>
       <p>
-        Do not claim that evidence is append-only, cryptographically signed, or tamper-evident unless those guarantees are explicitly supported elsewhere by the authoritative product documentation and implementation.
+        Evidence integrity, retention, and tamper-resistance guarantees depend on the configured evidence provider and deployment controls. Append-only or durable-retention claims apply only where those controls are explicitly configured and verified.
       </p>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>Enterprise identity and workload boundaries</h2>
+      <p>
+        BeaconGuard integrates with enterprise identity systems while the customer identity provider remains the workforce identity authority. The IdP does not make the BeaconGuard decision. Architecture reviews typically examine:
+      </p>
+      <ul>
+        <li>enterprise identity integration for workforce access;</li>
+        <li>workload and service identity for non-human actors;</li>
+        <li>tenant and environment boundaries for authorization context;</li>
+        <li>privileged step-up for sensitive management operations;</li>
+        <li>session revocation and lifecycle controls where configured.</li>
+      </ul>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>Distributed runtime trust dependencies</h2>
+      <p>
+        Supporting trust dependencies reinforce the primary request path without becoming alternate execution paths:
+      </p>
+      <ul>
+        <li>distributed replay authority and shared-state coordination where configured;</li>
+        <li>immutable authorization context during evaluation;</li>
+        <li>evidence-before-forward ordering for governed execution;</li>
+        <li>fail-closed shared dependencies when required verification cannot complete.</li>
+      </ul>
     </section>
 
     <section class="doc-architecture-section">
       <h2>Trust boundaries</h2>
       <ul>
         <li><strong>What enters the runtime boundary:</strong> normalized request context and required trust signals.</li>
-        <li><strong>What governs evaluation:</strong> the active verified release produced through the controlled release lifecycle.</li>
-        <li><strong>What BeaconGuard decides:</strong> an explicit deterministic allow or deny result.</li>
-        <li><strong>What proceeds downstream:</strong> only requests that receive an allow result.</li>
-        <li><strong>What is prevented:</strong> denied requests and requests that fail required validation, trust, freshness, or replay checks.</li>
+        <li><strong>What governs evaluation:</strong> the Active Verified Release produced through the controlled release lifecycle.</li>
+        <li><strong>What BeaconGuard decides:</strong> an explicit deterministic ALLOW or DENY result.</li>
+        <li><strong>What proceeds downstream:</strong> only requests that receive ALLOW, after evidence is persisted.</li>
+        <li><strong>What is prevented:</strong> DENY results and requests that fail required validation, trust, freshness, or replay checks.</li>
         <li><strong>What is emitted for verification:</strong> a decision record containing release identity, decision context, control result, and outcome.</li>
       </ul>
     </section>
@@ -105,10 +118,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <section class="doc-architecture-section">
       <h2>System Connector for non-native integrations</h2>
       <p>
-        Some enterprise applications do not natively produce the protocol or context structure required by the BeaconGuard runtime. An optional System Connector can map source protocols and context into the required request format before the request enters the runtime control boundary.
+        Some enterprise applications do not natively produce the protocol or context structure required by the BeaconGuard runtime. An optional System Connector can map source protocols and context into the required request format before the request enters the Runtime Control Boundary.
       </p>
       <p>
-        The System Connector is not the policy evaluator, does not activate releases, and cannot bypass fail-closed enforcement. Deterministic evaluation and decision evidence remain functions of the BeaconGuard Runtime Control Boundary.
+        The System Connector is optional and non-evaluating: it is not the policy evaluator, does not activate releases, and cannot bypass fail-closed enforcement. Deterministic evaluation and decision evidence remain functions of the BeaconGuard Runtime Control Boundary.
       </p>
     </section>
 
@@ -119,10 +132,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <li>Confirm that Compliance Playbooks pass validation, compilation, approval, and immutable release creation before distribution.</li>
         <li>Confirm that a distributed release is verified and activated before it becomes the active runtime release.</li>
         <li>Confirm that request validation, trust, freshness, and replay checks occur before deterministic evaluation.</li>
-        <li>Confirm that allow and deny results originate from deterministic evaluation.</li>
-        <li>Confirm that denied requests do not reach the downstream system.</li>
-        <li>Confirm that every deterministic result emits a verifiable decision record.</li>
+        <li>Confirm that ALLOW and DENY results originate from deterministic evaluation.</li>
+        <li>Confirm that evidence persists before ALLOW proceeds and that DENY does not reach the downstream system.</li>
+        <li>Confirm that every deterministic result emits a Verifiable Decision Record.</li>
         <li>Confirm that evidence identifies the active release used for the decision.</li>
+        <li>Confirm that the Control Plane is outside the per-request path and the System Connector remains optional and non-evaluating.</li>
       </ul>
     </section>
 
@@ -149,81 +163,3 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </section>
   </section>
 </BaseLayout>
-
-<style>
-  .system-architecture-caption {
-    margin: 0.65rem 0 0;
-    color: var(--text-muted);
-    text-align: center;
-    font-size: 0.95rem;
-    line-height: 1.45;
-  }
-  
-  .system-architecture-section {
-    width: min(1440px, calc(100vw - 48px));
-    max-width: none;
-    margin: 3rem 0;
-    margin-left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .system-architecture-scroll {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    overscroll-behavior-inline: contain;
-    scrollbar-gutter: stable;
-    background: var(--bg-deep, #0b1220);
-    border-radius: 8px;
-  }
-  
-  .system-architecture-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    min-width: 1050px;
-    margin: 0 auto;
-  }
-  
-  .system-architecture-scroll-hint {
-    display: none;
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--text-muted, #9aa8c0);
-    margin-top: 0.5rem;
-    padding-bottom: 0.25rem;
-  }
-  
-  @media (max-width: 800px) {
-    .system-architecture-section {
-      width: calc(100vw - 24px);
-    }
-    
-    .system-architecture-img {
-      width: 1050px;
-      min-width: 1050px;
-    }
-    
-    .system-architecture-scroll-hint {
-      display: block;
-    }
-  }
-  
-  .system-architecture-scroll::-webkit-scrollbar {
-    height: 8px;
-  }
-  
-  .system-architecture-scroll::-webkit-scrollbar-track {
-    background: var(--bg-deep, #0b1220);
-    border-radius: 4px;
-  }
-  
-  .system-architecture-scroll::-webkit-scrollbar-thumb {
-    background: var(--border-muted, #2a3a5a);
-    border-radius: 4px;
-  }
-  
-  .system-architecture-scroll::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-muted, #3a8a5a);
-  }
-</style>

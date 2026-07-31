@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import IndustryControlFlow from "../components/diagrams/IndustryControlFlow.astro";
 ---
 
 <BaseLayout
@@ -11,6 +12,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <p class="lead">
       BeaconGuard deploys alongside existing financial applications as a Runtime Control Boundary. It evaluates trusted request context against the Active Verified Release and returns ALLOW or DENY before governed execution for AML, KYC, fraud, dispute review, and customer-impacting recommendation paths.
     </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Financial control-boundary workflow</h2>
+    <p>
+      One reusable control-boundary sequence across AML, KYC, fraud, and dispute paths. Runtime results are ALLOW or DENY only; escalation and governance review occur from evidence outside the permission path.
+    </p>
+    <IndustryControlFlow industry="financial" />
   </section>
 
   <section class="stack-section">

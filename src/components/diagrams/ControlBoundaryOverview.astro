@@ -1,0 +1,45 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+import OutcomeFork from "./OutcomeFork.astro";
+---
+
+<DiagramShell
+  title="Control boundary at a glance"
+  caption="Enterprise requests pass through the Runtime Control Boundary. After ALLOW or DENY is determined, a Verifiable Decision Record is persisted, then outcomes fork: ALLOW may proceed; DENY hard-stops."
+  className="bg-diagram--control-boundary"
+>
+  <div class="bg-flow" role="list">
+    <div class="bg-flow-step" role="listitem">Enterprise Application</div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-flow-step--optional" role="listitem">
+      Optional System Connector
+    </div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-flow-step--boundary" role="listitem">
+      Runtime Control Boundary
+    </div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-flow-step--decision" role="listitem">
+      Determine ALLOW or DENY
+    </div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-outcome-evidence" role="listitem">
+      <strong>Persist Verifiable Decision Record</strong>
+      <span>Required before any downstream effect</span>
+    </div>
+  </div>
+
+  <OutcomeFork
+    allowLabel="Governed AI / API / Automated System"
+    denyLabel="Hard Stop / No Downstream Execution"
+  />
+
+  <div slot="text">
+    <p>
+      Enterprise Application → Optional System Connector → Runtime Control
+      Boundary → Determine ALLOW or DENY → Persist Verifiable Decision Record.
+      Then fork: ALLOW → governed AI / API / automated system; DENY → hard stop
+      with no downstream execution.
+    </p>
+  </div>
+</DiagramShell>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ReviewAuthorizationFlow from "../components/diagrams/ReviewAuthorizationFlow.astro";
 
 const allowRecord = `{
   "decision": "ALLOW",
@@ -123,6 +124,8 @@ const denyTrustRecord = `{
       Review does not convert the original DENY into ALLOW. Any later execution requires a new request that independently satisfies the applicable authorization conditions.
     </p>
 
+    <ReviewAuthorizationFlow />
+
     <p class="sample-note">
       Controlled laboratory demonstration using synthetic data. This is not a customer deployment, customer endorsement, external security certification, production qualification, or evidence of commercial traction.
     </p>
@@ -131,6 +134,51 @@ const denyTrustRecord = `{
       <a class="btn-primary" href="/sample-decision-record">Review the Decision Evidence</a>
       <a class="btn-secondary" href="/reviewer-kit">Open the Reviewer Kit</a>
     </div>
+  </section>
+
+  <section class="stack-section" aria-labelledby="qualification-coverage-title">
+    <p class="section-label">INTERNAL QUALIFICATION COVERAGE</p>
+    <h2 id="qualification-coverage-title">Control behaviors evaluated under governed conditions</h2>
+    <p>
+      BeaconGuard’s internal qualification program evaluates the control boundary under normal operation, security failure, restart, recovery, and distributed-runtime conditions. These qualification categories support technical review but do not represent customer production evidence or third-party certification.
+    </p>
+    <div class="section-grid section-grid--scenarios">
+      <div class="content-card">
+        <h3>Request-authentication failure</h3>
+        <p>Missing or invalid authenticated request context fails closed as DENY.</p>
+      </div>
+      <div class="content-card">
+        <h3>Replay rejection</h3>
+        <p>Duplicate or previously consumed request authority is denied rather than accepted.</p>
+      </div>
+      <div class="content-card">
+        <h3>Tenant and environment mismatch</h3>
+        <p>Authority established for one boundary is not silently accepted in another.</p>
+      </div>
+      <div class="content-card">
+        <h3>Evidence integrity and tamper detection</h3>
+        <p>Decision evidence supports integrity verification, tamper detection, and reconstruction.</p>
+      </div>
+      <div class="content-card">
+        <h3>Restart continuity</h3>
+        <p>Restart behavior is evaluated while preserving fail-closed control assumptions.</p>
+      </div>
+      <div class="content-card">
+        <h3>Single-use authorization enforcement</h3>
+        <p>Bounded authorization is consumed after successful use; reuse attempts are denied.</p>
+      </div>
+      <div class="content-card">
+        <h3>Fail-closed dependency behavior</h3>
+        <p>Unavailable or unverifiable required dependencies do not fall back to permissive execution.</p>
+      </div>
+      <div class="content-card">
+        <h3>Installation, recovery, and packaging paths</h3>
+        <p>Installation, recovery, rollback, reinstall, and Windows and Linux packaging paths are evaluated in controlled environments.</p>
+      </div>
+    </div>
+    <p class="sample-note">
+      Qualification coverage describes controlled laboratory and internal evaluation categories using synthetic or non-customer material. It is not customer deployment evidence, external certification, or commercial traction.
+    </p>
   </section>
 
   <section class="stack-section">

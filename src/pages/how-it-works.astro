@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import RuntimeDecisionSequence from "../components/diagrams/RuntimeDecisionSequence.astro";
 ---
 
 <BaseLayout
@@ -17,31 +18,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <p class="section-label">Runtime sequence</p>
     <h2>Runtime Decision Sequence</h2>
     <p>
-      Each request moves through six deterministic stages: request intake, validation, trust verification, control evaluation, enforcement, and evidence recording. The sequence completes before governed execution proceeds.
+      Each request moves through six deterministic stages: Request, Validate, Verify, Evaluate, Enforce, and Record. Evidence is persisted before ALLOW may proceed; DENY remains a hard stop.
     </p>
-    <figure class="runtime-sequence-section">
-      <div
-        class="runtime-sequence-scroll"
-        tabindex="0"
-        aria-label="Runtime decision sequence diagram; scroll horizontally to inspect"
-      >
-        <img
-          src="/runtime-decision-sequence.svg"
-          alt="BeaconGuard six-stage request lifecycle showing Request, Validate, Verify, Evaluate, Enforce, and Record, with ALLOW or DENY enforcement and verifiable decision evidence"
-          class="runtime-sequence-img"
-          width="1600"
-          height="400"
-          loading="eager"
-          decoding="async"
-        />
-      </div>
-      <p class="runtime-sequence-scroll-hint">
-        Scroll horizontally to inspect the runtime sequence.
-      </p>
-      <figcaption class="runtime-sequence-caption">
-        One request. Six deterministic stages. Evidence for every result.
-      </figcaption>
-    </figure>
+    <RuntimeDecisionSequence />
   </section>
 
   <section>
@@ -58,7 +37,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>Deterministic enforcement outcomes</h2>
     <h3>ALLOW</h3>
     <p>
-      An allowed request satisfies the active control requirements and may proceed to governed execution.
+      An allowed request satisfies the active control requirements. After the Verifiable Decision Record is persisted, governed execution may proceed.
     </p>
     <h3>DENY</h3>
     <p>
@@ -67,12 +46,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section>
+    <h2>Stage clarifications</h2>
+    <ul>
+      <li><strong>Validate</strong> — required structure, normalization, and required context.</li>
+      <li><strong>Verify</strong> — request authenticity; identity context; tenant and environment binding; freshness; replay resistance; active release verification.</li>
+      <li><strong>Evaluate</strong> — deterministic Compliance Playbook evaluation against the Active Verified Release.</li>
+      <li><strong>Enforce</strong> — decision calculated as ALLOW or DENY only.</li>
+      <li><strong>Record</strong> — Verifiable Decision Record persisted before ALLOW may proceed to a governed system.</li>
+      <li>Shared dependencies fail closed when required verification cannot complete.</li>
+    </ul>
+  </section>
+
+  <section>
     <h2>Decision evidence and review</h2>
     <p>
       Every ALLOW or DENY result produces verifiable decision evidence containing the decision context, active release identity, control result, and outcome.
     </p>
     <p>
-      Evidence may be routed for governance or human review without changing the runtime enforcement result that was already returned.
+      Evidence may be routed for governance or human review without changing the runtime enforcement result that was already returned. Review does not permit execution.
     </p>
   </section>
 
@@ -92,81 +83,4 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a class="btn-secondary" href="/trust-assurance">Review Trust Center evidence surfaces</a>
     </div>
   </section>
-
-  <style>
-    .runtime-sequence-section {
-      width: min(1440px, calc(100vw - 48px));
-      max-width: none;
-      margin: 3rem 0;
-      margin-left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .runtime-sequence-scroll {
-      width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
-      overscroll-behavior-inline: contain;
-      scrollbar-gutter: stable;
-      background: var(--bg-deep, #0b1220);
-      border-radius: 8px;
-    }
-
-    .runtime-sequence-img {
-      display: block;
-      width: 100%;
-      height: auto;
-      margin: 0 auto;
-    }
-
-    .runtime-sequence-scroll-hint {
-      display: none;
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--text-muted, #9aa8c0);
-      margin-top: 0.5rem;
-      padding-bottom: 0.25rem;
-    }
-
-    .runtime-sequence-caption {
-      margin: 0.65rem 0 0;
-      color: var(--text-muted);
-      text-align: center;
-      font-size: 0.95rem;
-      line-height: 1.45;
-    }
-
-    .runtime-sequence-scroll::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .runtime-sequence-scroll::-webkit-scrollbar-track {
-      background: var(--bg-deep, #0b1220);
-      border-radius: 4px;
-    }
-
-    .runtime-sequence-scroll::-webkit-scrollbar-thumb {
-      background: var(--border-muted, #2a3a5a);
-      border-radius: 4px;
-    }
-
-    .runtime-sequence-scroll::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-muted, #3a8a5a);
-    }
-
-    @media (max-width: 800px) {
-      .runtime-sequence-section {
-        width: calc(100vw - 24px);
-      }
-
-      .runtime-sequence-img {
-        width: 900px;
-        min-width: 900px;
-      }
-
-      .runtime-sequence-scroll-hint {
-        display: block;
-      }
-    }
-  </style>
 </BaseLayout>

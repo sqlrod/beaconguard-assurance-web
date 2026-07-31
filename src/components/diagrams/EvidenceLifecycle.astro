@@ -1,0 +1,48 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+---
+
+<DiagramShell
+  title="Evidence lifecycle"
+  caption="Every deterministic ALLOW or DENY produces a Verifiable Decision Record that can be integrity-checked, stored via the configured evidence provider, and used for replay, reconstruction, and audit review."
+  className="bg-diagram--evidence"
+>
+  <div class="bg-flow" role="list">
+    <div class="bg-flow-step bg-flow-step--inputs" role="listitem">
+      <strong>Inputs</strong>
+      <ul class="bg-inline-list">
+        <li>Normalized Request Context</li>
+        <li>Active Release Identity</li>
+        <li>Control Evaluation</li>
+      </ul>
+    </div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-flow-step--decision" role="listitem">
+      ALLOW or DENY
+    </div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-outcome-evidence" role="listitem">
+      Verifiable Decision Record
+    </div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step" role="listitem">Integrity Verification</div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step" role="listitem">Configured Evidence Provider</div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-outcome-evidence" role="listitem">
+      Replay / Reconstruction / Audit Review
+    </div>
+  </div>
+
+  <div slot="text">
+    <p>
+      Normalized Request Context + Active Release Identity + Control Evaluation →
+      ALLOW or DENY → Verifiable Decision Record → Integrity Verification →
+      Configured Evidence Provider → Replay / Reconstruction / Audit Review.
+    </p>
+    <p>
+      Retention, append-only behavior, durability, and storage integrity depend
+      on the configured evidence provider and deployment controls.
+    </p>
+  </div>
+</DiagramShell>

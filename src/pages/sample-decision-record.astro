@@ -1,17 +1,27 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import RecordAnatomy from "../components/diagrams/RecordAnatomy.astro";
 ---
 
 <BaseLayout
   title="Sample Decision Record | BeaconGuard Assurance"
-  description="A sanitized BeaconGuard Verifiable Decision Record sample showing DENY with APPROVAL_REQUIRED, release identity, and playbook identity."
+  description="A sanitized BeaconGuard Verifiable Decision Record sample showing DENY when a required precondition approval is absent, with release identity and playbook identity."
 >
   <section class="stack-section">
     <h1>Sample Decision Record</h1>
     <p class="lead">
       This sample illustrates the kinds of decision context BeaconGuard emits for reviewer analysis.
-      It is an example Verifiable Decision Record, not a real customer record and not a claim that every deployment will expose fields in identical presentation form.
+      It is an illustrative Verifiable Decision Record, not a real customer record and not a claim that every deployment will expose fields in identical presentation form.
+      The illustrative reason <code>APPROVAL_REQUIRED</code> means a required precondition approval is absent at request time. It is not the privileged-review reason <code>REVIEW_REQUIRED</code> shown in The BeaconGuard Review Process demonstration.
     </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Record anatomy</h2>
+    <p>
+      Annotated field groups for an illustrative Verifiable Decision Record. This is anatomy of the evidence artifact, not a process diagram.
+    </p>
+    <RecordAnatomy />
   </section>
 
   <section class="stack-section">
@@ -24,7 +34,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section">
-    <h2>Sample fields</h2>
+    <h2>Sample fields (illustrative)</h2>
     <div class="sample-record sample-record--compact">
       <div class="sample-record-row">
         <span class="sample-record-label">Decision outcome</span>
@@ -44,7 +54,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Decision reason</span>
-        <span class="sample-record-value">Required approval absent; governed execution prevented</span>
+        <span class="sample-record-value">Required precondition approval absent; governed execution prevented</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Request action</span>

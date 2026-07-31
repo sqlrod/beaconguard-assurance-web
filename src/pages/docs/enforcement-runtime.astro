@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FailClosedSecurityGate from "../../components/diagrams/FailClosedSecurityGate.astro";
+---
+
+<BaseLayout
+  title="Enforcement Runtime"
+  description="BeaconGuard Runtime Control Boundary evaluates trusted request context against the Active Verified Release and returns ALLOW or DENY before governed execution."
+>
+  <section class="stack-section">
+    <h1>Enforcement Runtime</h1>
+
+    <p>
+      The BeaconGuard <strong>Runtime Control Boundary</strong> (enforcement runtime) evaluates
+      trusted request context against the <strong>Active Verified Release</strong> and produces a
+      Deterministic Decision Result—<strong>ALLOW</strong> or <strong>DENY</strong>—before governed execution.
+    </p>
+
+    <p>It is designed to be:</p>
+    <ul>
+      <li>Deterministic</li>
+      <li>Fail closed</li>
+      <li>Independently deployable on the runtime data plane</li>
+      <li>Auditable by construction via Verifiable Decision Records</li>
+    </ul>
+
+    <FailClosedSecurityGate />
+
+    <h2>Role in the System</h2>
+
+    <p>
+      The Runtime Control Boundary sits on the path to a <strong>Governed AI / API /
+      Automated System</strong>. Its responsibility is to decide whether governed execution
+      is permitted or prevented under the Active Verified Release, persist a
+      Verifiable Decision Record, and then apply the effect.
+    </p>
+
+    <p>It does not:</p>
+    <ul>
+      <li>Modify prompts or rewrite application payloads as a product function</li>
+      <li>Inspect model internals</li>
+      <li>Perform heuristic or probabilistic authorization</li>
+      <li>Replace systems of record or workflow applications</li>
+      <li>Treat human review as a permission to execute</li>
+    </ul>
+
+    <h3>Optional System Connector</h3>
+
+    <p>
+      Some applications do not natively produce the required request format. The
+      optional <strong>System Connector</strong> maps source protocols and context into the
+      required structure before Request Validation and Context Normalization.
+    </p>
+
+    <p>
+      The System Connector does not evaluate controls, activate releases, or bypass
+      enforcement.
+    </p>
+
+    <h2>Evaluation Path</h2>
+
+    <ol>
+      <li><strong>Request Validation and Context Normalization</strong></li>
+      <li><strong>Trust, Freshness, and Replay Checks</strong></li>
+      <li><strong>Deterministic Playbook Evaluation</strong> against the Active Verified Release</li>
+      <li><strong>Determine ALLOW or DENY</strong></li>
+      <li><strong>Persist Decision Record</strong> (Verifiable Decision Record)</li>
+      <li><strong>Apply Effect</strong> — ALLOW may proceed to governed execution; DENY hard-stops</li>
+    </ol>
+
+    <p>
+      Given the same Active Verified Release and the same trusted normalized inputs,
+      the runtime produces the same decision. Externalized shared replay state and
+      the configured evidence provider are deployment dependencies that reinforce
+      fail-closed admission and evidence persistence; they are not alternate
+      evaluation authorities.
+    </p>
+
+    <h2>Runtime Source of Truth</h2>
+
+    <p>
+      At evaluation time, the <strong>Active Verified Release</strong> is the source of truth for
+      control semantics. Management-plane playbook drafts and unsigned artifacts do
+      not govern runtime decisions until they pass Release Verification and
+      Activation.
+    </p>
+
+    <h2>Decision Contract</h2>
+
+    <div class="docs-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Result</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ALLOW</td>
+            <td>Required controls are satisfied; after evidence persistence, governed execution may proceed.</td>
+          </tr>
+          <tr>
+            <td>DENY</td>
+            <td>Execution is prevented; no downstream execution occurs.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      When required approval is absent, BeaconGuard returns DENY with a deterministic reason indicating that approval is required. An illustrative reason style is <code>APPROVAL_REQUIRED</code>. Any governance or human-review obligation remains separate from the runtime permission result.
+    </p>
+
+    <h2>Failure Semantics</h2>
+
+    <p>The runtime operates under <strong>fail-closed</strong> semantics.</p>
+
+    <p>If any of the following occur:</p>
+    <ul>
+      <li>Active Verified Release cannot be verified or is not activated</li>
+      <li>Required artifacts or trust signals are missing or invalid</li>
+      <li>Approved-pathway status is missing or invalid when required</li>
+      <li>Freshness or replay checks fail</li>
+      <li>Input normalization fails</li>
+      <li>Internal evaluation error occurs</li>
+      <li>Required shared replay state or evidence dependency cannot be verified</li>
+    </ul>
+
+    <p>The runtime must:</p>
+    <ul>
+      <li>Return <strong>DENY</strong></li>
+      <li>Emit a Verifiable Decision Record describing the failure category</li>
+    </ul>
+
+    <p>Silent fallback or permissive behavior is prohibited.</p>
+
+    <h2>Evidence Emission</h2>
+
+    <p>
+      For every evaluation the runtime emits integrity-protected decision evidence
+      designed for replay and verification. Records preserve release identity,
+      playbook identity, decision context, check outcomes, and the ALLOW or DENY
+      result. Storage durability and append-only behavior depend on the configured
+      evidence provider and shared customer deployment responsibilities.
+    </p>
+
+    <h2>Related Sections</h2>
+    <ul>
+      <li><a href="/docs/overview">Overview</a></li>
+      <li><a href="/docs/policy-model">Policy Model</a></li>
+      <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
+      <li><a href="/docs/architecture">System Architecture</a></li>
+      <li><a href="/how-it-works">How It Works</a></li>
+    </ul>
+  </section>
+</BaseLayout>

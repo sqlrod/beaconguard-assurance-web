@@ -1,0 +1,211 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Threat Model"
+  description="Explicit BeaconGuard threat model covering release lifecycle, runtime enforcement, evidence, and shared deployment responsibilities."
+>
+  <section class="stack-section">
+    <h1>Threat Model</h1>
+
+    <p>
+      This document describes the <strong>explicit threat model</strong> for BeaconGuard. It
+      enumerates assumptions, assets, and threat categories relevant to release
+      lifecycle, runtime enforcement, and evidence.
+    </p>
+
+    <p>
+      The goal is not to claim absolute security, but to make <strong>attack surfaces and
+      failure modes explicit and reviewable</strong>. Mitigations listed here are product
+      design intents already reflected in the architecture; they are not guarantees
+      against every deployment-specific failure.
+    </p>
+
+    <p>See also: <a href="/docs/dfd-threat-flow">DFD and Threat Flow</a>.</p>
+
+    <h2>Security Assumptions</h2>
+
+    <p>BeaconGuard operates under assumptions including:</p>
+    <ul>
+      <li>The Runtime Control Boundary executes in a controlled customer environment</li>
+      <li>Cryptographic primitives are correctly implemented and not broken</li>
+      <li>Compliance Playbooks are authored and Signed Immutable Release Artifacts are signed by parties trusted by the customer</li>
+      <li>Identity providers, network controls, secrets, and host hardening are operated by the customer</li>
+      <li>Transport-level security (for example TLS) is provided by the deployment environment</li>
+      <li>Evidence-provider configuration and operational monitoring are customer responsibilities when durability or append-only behavior is required</li>
+    </ul>
+
+    <p>If these assumptions do not hold, BeaconGuard control assertions may not apply.</p>
+
+    <h2>Protected Assets</h2>
+    <ul>
+      <li>Compliance Playbooks and compiled control representations</li>
+      <li>Signed Immutable Release Artifacts and Active Verified Release integrity</li>
+      <li>Authorization decision semantics (ALLOW / DENY only)</li>
+      <li>Verifiable Decision Records and reconstructable decision context</li>
+      <li>Deterministic replay capability when evidence and releases are available</li>
+      <li>Provenance via release_identity and playbook_identity</li>
+    </ul>
+
+    <h2>Threat Categories</h2>
+
+    <h3>Release Tampering or Unauthorized Activation</h3>
+    <p>
+      <strong>Threat:</strong> An attacker modifies playbook content, substitutes a release, or
+      activates an unverified artifact so runtime evaluation uses unapproved
+      controls.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Signing of release packages before distribution</li>
+      <li>Release Verification and Activation before an Active Verified Release governs evaluation</li>
+      <li>Recording of release_identity on Verifiable Decision Records</li>
+    </ul>
+
+    <h3>System Connector Compromise</h3>
+    <p>
+      <strong>Threat:</strong> A compromised System Connector injects false context, strips
+      required trust signals, or presents malformed normalized inputs.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Connector does not evaluate controls or activate releases</li>
+      <li>Runtime still performs Request Validation and Context Normalization plus Trust, Freshness, and Replay Checks</li>
+      <li>Fail-closed DENY when required signals are missing or invalid</li>
+    </ul>
+    <p>
+      Customer hardening of connector hosts and credentials remains in scope for the
+      deployment environment.
+    </p>
+
+    <h3>Control-Plane Compromise</h3>
+    <p>
+      <strong>Threat:</strong> Compromise of the BeaconGuard Control Plane / management plane
+      allows unauthorized playbook changes, signing, or distribution.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Separation of management plane from runtime data plane — Control Plane is outside the per-request path</li>
+      <li>Runtime accepts only verified, activated releases</li>
+      <li>Explicit activation rather than silent draft evaluation</li>
+    </ul>
+    <p>
+      Key management, access control, and operational monitoring of the control plane
+      are shared deployment responsibilities.
+    </p>
+
+    <h3>Identity Provider (IdP) Compromise or Misbinding</h3>
+    <p>
+      <strong>Threat:</strong> Compromised or misconfigured identity signals cause incorrect role
+      or actor attributes to reach evaluation.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>BeaconGuard evaluates attributes as provided in trusted request context; the customer IdP does not make the BeaconGuard decision</li>
+      <li>Missing or invalid required attributes fail closed as DENY</li>
+    </ul>
+    <p>IdP integrity and attribute binding remain customer-owned.</p>
+
+    <h3>Replay-State Provider Failure or Manipulation</h3>
+    <p>
+      <strong>Threat:</strong> When a replay-state provider is used, an attacker suppresses,
+      forges, or desynchronizes replay state to force incorrect admission outcomes.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Replay-state providers, when used, are external to core decision evaluation and must be configured for fail-closed operation</li>
+      <li>Failed freshness or replay checks return DENY</li>
+    </ul>
+    <p>Provider availability and integrity are deployment-dependent.</p>
+
+    <h3>Evidence Suppression or Alteration</h3>
+    <p>
+      <strong>Threat:</strong> An attacker deletes, alters, or suppresses Verifiable Decision
+      Records to hide DENY/ALLOW history.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Integrity-protected decision evidence designed for replay and verification</li>
+      <li>Support for append-only retention when configured with a required evidence provider</li>
+      <li>release_identity and decision context embedded in records</li>
+    </ul>
+    <p>
+      Universal append-only or immutable-store guarantees are not claimed without the configured evidence
+      provider and customer operational controls.
+    </p>
+
+    <h3>Signing Key Compromise</h3>
+    <p>
+      <strong>Threat:</strong> Compromise of release-signing or related keys allows forged
+      Signed Immutable Release Artifacts.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Runtime verification of release signatures before activation</li>
+      <li>Explicit rollback and re-activation processes after key events</li>
+    </ul>
+    <p>
+      Key custody, rotation, and HSM or KMS choices are customer / deployment
+      responsibilities.
+    </p>
+
+    <h3>Unauthorized Authorization Bypass</h3>
+    <p>
+      <strong>Threat:</strong> An attacker attempts to force ALLOW through malformed inputs or
+      permissive fallbacks.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Fail-closed semantics</li>
+      <li>Explicit input normalization</li>
+      <li>No review-as-permission path</li>
+      <li>Deterministic evaluation with ALLOW / DENY only</li>
+    </ul>
+
+    <h3>Downstream Bypass of the Control Boundary</h3>
+    <p>
+      <strong>Threat:</strong> Applications call governed systems without presenting requests to
+      the Runtime Control Boundary.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Product placement assumes the boundary is on the governed execution path</li>
+      <li>Network and application architecture must prevent silent bypass</li>
+    </ul>
+    <p>
+      Bypass prevention outside BeaconGuard’s process boundary is a customer
+      deployment responsibility.
+    </p>
+
+    <h2>Non-Goals and Explicit Exclusions</h2>
+
+    <p>BeaconGuard does <strong>not</strong> claim to mitigate:</p>
+    <ul>
+      <li>Compromise of the underlying operating system or hypervisor</li>
+      <li>Insider threats with legitimate signing authority</li>
+      <li>Vulnerabilities in AI model training data or model internals</li>
+      <li>Downstream misuse of outputs after an ALLOW decision</li>
+      <li>Replacement of SIEM, IAM, GRC, or customer security programs</li>
+    </ul>
+
+    <h2>Residual Risk</h2>
+    <ul>
+      <li>Misconfiguration can DENY legitimate governed execution</li>
+      <li>Playbook authoring errors can encode incorrect intent</li>
+      <li>Key management failures undermine release integrity assertions</li>
+      <li>Evidence durability depends on provider configuration and operations</li>
+    </ul>
+
+    <p>BeaconGuard prioritizes <strong>visibility and determinism</strong> over silent tolerance.</p>
+
+    <h2>Related Sections</h2>
+    <ul>
+      <li><a href="/docs/architecture">System Architecture</a></li>
+      <li><a href="/docs/dfd-threat-flow">DFD and Threat Flow</a></li>
+      <li><a href="/docs/policy-model">Policy Model</a></li>
+      <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
+      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
+    </ul>
+  </section>
+</BaseLayout>

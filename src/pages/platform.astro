@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ReleaseLifecycle from "../components/diagrams/ReleaseLifecycle.astro";
+import RuntimeTrustEnforcement from "../components/diagrams/RuntimeTrustEnforcement.astro";
 ---
 
 <BaseLayout
@@ -21,10 +23,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section">
-    <h2>BeaconGuard Control Plane</h2>
+    <h2>Governed release lifecycle</h2>
     <p>
       The management plane defines, validates, compiles, approves, signs, and distributes immutable release artifacts. A distributed release is not automatically active. It must pass Release Verification and Activation before it becomes the Active Verified Release used by the runtime.
     </p>
+    <ReleaseLifecycle />
   </section>
 
   <section class="stack-section">
@@ -56,10 +59,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section">
-    <h2>BeaconGuard Runtime Control Boundary</h2>
+    <h2>Runtime Trust and Enforcement</h2>
     <p>
-      The runtime data plane validates and normalizes request context; performs trust, freshness, and replay checks; evaluates each request against the Active Verified Release; and returns ALLOW or DENY before downstream execution. Admission failures fail closed as DENY.
+      The runtime data plane validates and normalizes request context; performs trust, freshness, and replay checks; evaluates each request against the Active Verified Release; persists evidence; and returns ALLOW or DENY before downstream execution. Admission failures fail closed as DENY.
     </p>
+    <RuntimeTrustEnforcement />
   </section>
 
   <section class="stack-section">
@@ -74,7 +78,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="section-grid section-grid--compact">
       <div class="content-card">
         <h3>ALLOW</h3>
-        <p>The request satisfies Active Verified Release requirements and may proceed to governed execution.</p>
+        <p>The request satisfies Active Verified Release requirements. After evidence persistence, governed execution may proceed.</p>
       </div>
       <div class="content-card">
         <h3>DENY</h3>
@@ -94,9 +98,63 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section">
+    <h2>Enterprise Identity and Privileged Access</h2>
+    <p>
+      BeaconGuard integrates with enterprise identity systems while preserving the customer identity provider as the workforce identity authority. Governed management operations can use federated identity, lifecycle provisioning, role and tenant boundaries, privileged step-up, session revocation, and controlled administrative access.
+    </p>
+    <ul>
+      <li>OIDC and SAML workforce federation</li>
+      <li>SCIM lifecycle integration where configured</li>
+      <li>Workload and service identities</li>
+      <li>Tenant-scoped and delegated administration</li>
+      <li>Privileged step-up for sensitive operations</li>
+      <li>Session revocation and offboarding controls</li>
+      <li>Controlled break-glass and support-access boundaries</li>
+    </ul>
+    <p>
+      BeaconGuard does not replace IAM, the customer directory, or the customer identity provider.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Distributed Runtime Security</h2>
+    <p>
+      The Runtime Control Boundary applies authorization and trust controls consistently across distributed operation. Request authenticity, replay resistance, tenant and environment binding, and immutable authorization context prevent one request, identity, environment, or runtime instance from silently inheriting authority from another.
+    </p>
+    <ul>
+      <li>Cryptographically authenticated request context</li>
+      <li>Replay resistance across distributed runtime instances</li>
+      <li>Tenant- and environment-bound authorization</li>
+      <li>Immutable authorization context during evaluation</li>
+      <li>Atomic single-use authorization consumption</li>
+      <li>Fail-closed handling when required shared state is unavailable</li>
+      <li>Production-oriented trust profiles that do not rely on development-header identity</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Evidence Ordering and Integrity</h2>
+    <p>
+      BeaconGuard is designed to preserve the decision record before permitted downstream forwarding. Evidence identifies the request context, active release, control result, decision outcome, and verification state required for reconstruction and governance review.
+    </p>
+    <ul>
+      <li>Evidence-before-forward ordering for governed execution</li>
+      <li>Decision and release identity</li>
+      <li>Integrity verification</li>
+      <li>Restart continuity</li>
+      <li>Tamper detection</li>
+      <li>Replay and reconstruction support</li>
+      <li>Key-identified verification where configured</li>
+    </ul>
+    <p>
+      Evidence retention, storage durability, and append-only guarantees depend on the configured evidence provider and deployment controls. Legal certification and universal append-only storage are not implied.
+    </p>
+  </section>
+
+  <section class="stack-section">
     <h2>Evidence, Replay, and Verification</h2>
     <p>
-      Evidence is designed for replay and verification. Retention, integrity protection, and storage durability depend on the configured evidence provider and customer deployment. Do not treat evidence claims as legal certification or universal append-only storage.
+      Evidence is designed for replay and verification. Retention, integrity protection, and storage durability depend on the configured evidence provider and customer deployment.
     </p>
   </section>
 

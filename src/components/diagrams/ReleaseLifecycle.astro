@@ -1,0 +1,65 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+
+const stages = [
+  "Compliance Playbook",
+  "Validate",
+  "Compile",
+  "Approve",
+  "Sign",
+  "Distribute",
+  "Verify",
+  "Activate",
+  "Active Verified Release",
+];
+---
+
+<DiagramShell
+  title="Governed release lifecycle"
+  caption="Compliance Playbooks become Active Verified Releases through validation, compilation, approval, signing, distribution, verification, and activation. Distribution alone does not activate a release."
+  className="bg-diagram--release-lifecycle"
+>
+  <div class="bg-flow bg-flow--lifecycle" role="list">
+    {
+      stages.map((stage, index) => (
+        <>
+          <div
+            class:list={[
+              "bg-flow-step",
+              stage === "Active Verified Release" && "bg-outcome-evidence",
+            ]}
+            role="listitem"
+          >
+            <span class="bg-flow-step-label">{stage}</span>
+          </div>
+          {stage === "Distribute" && (
+            <p class="bg-flow-note bg-flow-note--sibling">
+              Distribution alone does not activate a release.
+            </p>
+          )}
+          {index < stages.length - 1 && (
+            <div class="bg-flow-arrow" aria-hidden="true">
+              ↓
+            </div>
+          )}
+        </>
+      ))
+    }
+
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+
+    <div class="bg-flow-step bg-flow-step--decision" role="listitem">
+      Feeds deterministic ALLOW or DENY evaluation at runtime
+    </div>
+  </div>
+
+  <div slot="text">
+    <p>
+      Compliance Playbook → Validate → Compile → Approve → Sign → Distribute →
+      Verify → Activate → Active Verified Release. Distribution alone does not
+      activate a release. Verification and activation remain separate. The Active
+      Verified Release is the runtime source of truth and feeds deterministic
+      ALLOW or DENY evaluation at runtime.
+    </p>
+  </div>
+</DiagramShell>

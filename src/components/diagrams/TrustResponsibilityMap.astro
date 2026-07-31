@@ -1,0 +1,92 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+
+const customer = [
+  "Identity provider",
+  "Network controls",
+  "Host hardening",
+  "Secrets and key custody",
+  "Evidence-provider configuration",
+  "Monitoring and incident response",
+];
+
+const shared = [
+  "Identity mapping",
+  "Request context",
+  "Environment separation",
+  "Retention design",
+  "Recovery procedures",
+  "Operational acceptance",
+];
+
+const beacon = [
+  "Release verification",
+  "Deterministic evaluation",
+  "Binary enforcement",
+  "Decision-record generation",
+  "Fail-closed behavior",
+];
+---
+
+<DiagramShell
+  title="Trust and shared responsibility map"
+  caption="Customer, shared, and BeaconGuard-controlled domains. Certification and legal compliance status remain separate from this control boundary model."
+  className="bg-diagram--trust-map"
+>
+  <div class="bg-diagram-columns" role="list">
+    <section
+      class="bg-diagram-column"
+      role="listitem"
+      aria-labelledby="trust-customer"
+    >
+      <h4 id="trust-customer" class="bg-diagram-column-title">
+        Customer-Controlled
+      </h4>
+      <ul>
+        {customer.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+    <section
+      class="bg-diagram-column"
+      role="listitem"
+      aria-labelledby="trust-shared"
+    >
+      <h4 id="trust-shared" class="bg-diagram-column-title">
+        Shared Integration Boundary
+      </h4>
+      <ul>
+        {shared.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+    <section
+      class="bg-diagram-column bg-diagram-column--accent"
+      role="listitem"
+      aria-labelledby="trust-beacon"
+    >
+      <h4 id="trust-beacon" class="bg-diagram-column-title">
+        BeaconGuard-Controlled
+      </h4>
+      <ul>
+        {beacon.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+  </div>
+
+  <div slot="text">
+    <p>
+      <strong>Customer-Controlled:</strong> Identity provider; Network controls;
+      Host hardening; Secrets and key custody; Evidence-provider configuration;
+      Monitoring and incident response.
+    </p>
+    <p>
+      <strong>Shared Integration Boundary:</strong> Identity mapping; Request
+      context; Environment separation; Retention design; Recovery procedures;
+      Operational acceptance.
+    </p>
+    <p>
+      <strong>BeaconGuard-Controlled:</strong> Release verification; Deterministic
+      evaluation; Binary enforcement; Decision-record generation; Fail-closed
+      behavior.
+    </p>
+  </div>
+</DiagramShell>

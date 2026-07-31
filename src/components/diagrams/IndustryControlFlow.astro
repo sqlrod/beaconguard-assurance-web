@@ -1,0 +1,100 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+import OutcomeFork from "./OutcomeFork.astro";
+
+interface Props {
+  industry: "healthcare" | "financial" | "automation";
+  title?: string;
+}
+
+const { industry, title } = Astro.props;
+
+const configs = {
+  healthcare: {
+    defaultTitle: "Healthcare control flow",
+    caption:
+      "PHI-sensitive healthcare requests are evaluated at the Runtime Control Boundary. Evidence persists before outcomes fork: only ALLOW may reach an approved model pathway; DENY hard-stops with no model execution.",
+    application: "Healthcare Application",
+    context: "Required trusted context (role, workflow, approved pathway, source trust, context tags)",
+    allow: "Approved model pathway",
+    deny: "Hard stop — no model execution",
+    note: "A review obligation may follow a DENY record outside the runtime permission path.",
+    text: "Healthcare Application → Required trusted context → Optional System Connector → Runtime Control Boundary → Determine ALLOW or DENY → Persist Verifiable Decision Record → mutually exclusive fork. Branch ALLOW → Approved model pathway. Branch DENY → Hard stop — no model execution. Review or escalation remains outside the permission path.",
+  },
+  financial: {
+    defaultTitle: "Financial control flow",
+    caption:
+      "AML, KYC, fraud, and dispute requests are evaluated before governed services execute. Evidence persists before outcomes fork; escalation and governance review occur from evidence outside the permission path.",
+    application: "AML / KYC / Fraud / Dispute Application",
+    context: "Required trusted context (analyst or service identity, case and transaction context, source trust, requested action)",
+    allow: "Approved governed service",
+    deny: "Hard stop — no downstream execution",
+    note: "Escalation or governance review occurs from the evidence record outside the permission path.",
+    text: "AML / KYC / Fraud / Dispute Application → Required trusted context → Optional System Connector → Runtime Control Boundary → Determine ALLOW or DENY → Persist Verifiable Decision Record → mutually exclusive fork. Branch ALLOW → Approved governed service. Branch DENY → Hard stop — no downstream execution.",
+  },
+  automation: {
+    defaultTitle: "Regulated automation control flow",
+    caption:
+      "Existing applications submit trusted context through an optional connector. The Runtime Control Boundary determines ALLOW or DENY, persists evidence, then forks the effect.",
+    application: "Existing Application",
+    context: "Required trusted context",
+    allow: "Governed automation may proceed",
+    deny: "Hard stop — no downstream execution",
+    note: "One reusable control-boundary sequence across regulated internal automation.",
+    text: "Existing Application → Required trusted context → Optional System Connector → Runtime Control Boundary → Determine ALLOW or DENY → Persist Verifiable Decision Record → mutually exclusive fork. Branch ALLOW → governed automation may proceed. Branch DENY → hard stop with no downstream execution.",
+  },
+} as const;
+
+const config = configs[industry];
+const diagramTitle = title ?? config.defaultTitle;
+
+const steps = [
+  { label: config.application, className: "" },
+  { label: config.context, className: "" },
+  { label: "Optional System Connector", className: "bg-flow-step--optional" },
+  { label: "Runtime Control Boundary", className: "bg-flow-step--boundary" },
+  { label: "Determine ALLOW or DENY", className: "bg-flow-step--decision" },
+  {
+    label: "Persist Verifiable Decision Record",
+    detail: "Required before any downstream effect",
+    className: "bg-outcome-evidence",
+  },
+];
+---
+
+<DiagramShell
+  title={diagramTitle}
+  caption={config.caption}
+  className={`bg-diagram--industry bg-diagram--industry-${industry}`}
+>
+  <div class="bg-flow" role="list">
+    {
+      steps.map((step, index) => (
+        <>
+          <div class:list={["bg-flow-step", step.className]} role="listitem">
+            {step.detail ? (
+              <>
+                <strong>{step.label}</strong>
+                <span>{step.detail}</span>
+              </>
+            ) : (
+              step.label
+            )}
+          </div>
+          {index < steps.length - 1 && (
+            <div class="bg-flow-arrow" aria-hidden="true">
+              ↓
+            </div>
+          )}
+        </>
+      ))
+    }
+  </div>
+
+  <OutcomeFork allowLabel={config.allow} denyLabel={config.deny} />
+  <p class="bg-flow-note">{config.note}</p>
+
+  <div slot="text">
+    <p>{config.text}</p>
+  </div>
+</DiagramShell>

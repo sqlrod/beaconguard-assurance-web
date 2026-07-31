@@ -1,0 +1,122 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+
+const gates = [
+  { name: "Authenticated Request", className: "" },
+  { name: "Normalize", className: "" },
+  { name: "Bind Tenant and Environment", className: "" },
+  { name: "Check Freshness and Replay", className: "" },
+  { name: "Verify Active Release", className: "" },
+  { name: "Deterministic Evaluation", className: "" },
+  { name: "Persist Evidence", className: "bg-outcome-evidence" },
+  { name: "Apply Deterministic Result", className: "bg-flow-step--decision" },
+];
+
+const failureSteps = [
+  { name: "DENY", className: "bg-outcome-deny bg-fail-rail-step--deny" },
+  { name: "Record failure category", className: "bg-fail-rail-step--neutral" },
+  { name: "No permissive fallback", className: "bg-fail-rail-step--neutral" },
+  {
+    name: "No downstream execution",
+    className: "bg-outcome-deny bg-fail-rail-step--stop",
+  },
+];
+---
+
+<DiagramShell
+  title="Fail-closed security gate"
+  caption="Any required gate failure returns DENY, records the failure category, permits no fallback, and blocks downstream execution."
+  className="bg-diagram--fail-closed"
+>
+  <div class="bg-fail-layout">
+    <section
+      class="bg-fail-column bg-fail-column--gates"
+      aria-labelledby="fail-gates-heading"
+    >
+      <h4 id="fail-gates-heading" class="bg-fail-column-title">
+        REQUIRED CONTROL SEQUENCE
+      </h4>
+      <div class="bg-fail-gates-body">
+        <div class="bg-flow" role="list">
+          {
+            gates.map((gate, index) => (
+              <>
+                <div
+                  class:list={["bg-flow-step", "bg-fail-gate", gate.className]}
+                  role="listitem"
+                >
+                  <span class="bg-fail-gate-name">{gate.name}</span>
+                </div>
+                {index < gates.length - 1 && (
+                  <div class="bg-flow-arrow bg-fail-arrow" aria-hidden="true">
+                    ↓
+                  </div>
+                )}
+              </>
+            ))
+          }
+        </div>
+        <div class="bg-fail-bracket" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <div class="bg-fail-bridge" aria-hidden="true">
+      <span class="failure-bridge-label">ANY GATE FAILURE</span>
+      <div class="failure-bridge-line"></div>
+    </div>
+
+    <p class="bg-fail-mobile-bridge">
+      Any required-stage failure follows the shared fail-closed path below.
+      <span class="bg-fail-mobile-bridge-arrow" aria-hidden="true">↓</span>
+    </p>
+
+    <aside
+      class="bg-fail-column bg-fail-column--rail bg-fail-rail"
+      aria-labelledby="fail-rail-heading"
+    >
+      <h4 id="fail-rail-heading" class="bg-fail-column-title bg-fail-rail-title">
+        SHARED FAIL-CLOSED PATH
+      </h4>
+      <div class="bg-fail-rail-body">
+        <div class="bg-flow bg-fail-rail-flow" role="list">
+          {
+            failureSteps.map((step, index) => (
+              <>
+                <div
+                  class:list={[
+                    "bg-flow-step",
+                    "bg-fail-rail-step",
+                    step.className,
+                  ]}
+                  role="listitem"
+                >
+                  <span class="bg-fail-rail-step-name">{step.name}</span>
+                </div>
+                {index < failureSteps.length - 1 && (
+                  <div
+                    class="bg-flow-arrow bg-fail-arrow bg-fail-arrow--rail"
+                    aria-hidden="true"
+                  >
+                    ↓
+                  </div>
+                )}
+              </>
+            ))
+          }
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div slot="text">
+    <p>
+      Required Control Sequence: Authenticated Request → Normalize → Bind Tenant
+      and Environment → Check Freshness and Replay → Verify Active Release →
+      Deterministic Evaluation → Persist Evidence → Apply Deterministic Result.
+    </p>
+    <p>
+      Shared Fail-Closed Path: Any gate failure → DENY → Record failure category →
+      No permissive fallback → No downstream execution.
+    </p>
+  </div>
+</DiagramShell>

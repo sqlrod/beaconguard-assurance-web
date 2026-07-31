@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ControlBoundaryOverview from "../components/diagrams/ControlBoundaryOverview.astro";
 ---
 
 <BaseLayout
   title="BeaconGuard Assurance | Runtime Control and Evidence Boundary"
-  description="BeaconGuard is a deterministic control and evidence boundary for high-risk enterprise workflows across healthcare, financial services, and regulated internal automation. It returns explicit ALLOW or DENY results before governed execution."
+  description="BeaconGuard provides deterministic runtime control and verifiable decision evidence for regulated enterprise AI, API, and automation workflows."
 >
   <section class="landing">
     <p class="hero-eyebrow">BeaconGuard Runtime Control Boundary</p>
@@ -77,10 +78,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section homepage-block">
     <h2>Control boundary at a glance</h2>
     <p>
-      Compliance Playbooks are validated, compiled, approved, signed, and distributed through the BeaconGuard Control Plane. Only an Active Verified Release governs runtime evaluation. The BeaconGuard Runtime Control Boundary validates request context, performs trust, freshness, and replay checks, evaluates the request deterministically, and returns ALLOW or DENY before downstream execution.
+      The Runtime Control Boundary evaluates trusted request context and returns ALLOW or DENY before governed execution. Evidence is recorded for both outcomes; only ALLOW may proceed.
     </p>
     <p>
       When required approvals or trust conditions are absent, BeaconGuard returns DENY with an explicit deterministic reason. An illustrative reason style is <code>APPROVAL_REQUIRED</code>. Human or governance review may follow from the Verifiable Decision Record; review does not permit execution.
+    </p>
+    <ControlBoundaryOverview />
+    <p>
+      For the full management and runtime planes—including Compliance Playbook release lifecycle—see <a href="/docs/architecture">System Architecture</a>.
     </p>
   </section>
 
@@ -128,6 +133,32 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a class="btn-secondary" href="/how-it-works">How It Works</a>
       <a class="btn-secondary" href="/proof-evidence">Proof and Evidence</a>
       <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
+    </div>
+  </section>
+
+  <section class="stack-section homepage-block" aria-labelledby="product-maturity-title">
+    <p class="section-label">PRODUCT MATURITY</p>
+    <h2 id="product-maturity-title">Controlled internal qualification</h2>
+    <p>
+      BeaconGuard is currently in controlled internal qualification across enterprise security, identity, evidence integrity, deployment operations, recovery, and cross-platform packaging. Customer-specific architecture and deployment-fit reviews are available through a bounded Controlled Evaluation.
+    </p>
+    <div class="section-grid section-grid--scenarios">
+      <div class="content-card">
+        <h3>Enterprise identity boundaries</h3>
+        <p>Federated workforce identity, service identity, privileged step-up, delegated administration, and lifecycle controls.</p>
+      </div>
+      <div class="content-card">
+        <h3>Distributed runtime protection</h3>
+        <p>Request authenticity, replay resistance, tenant and environment isolation, and fail-closed dependency handling.</p>
+      </div>
+      <div class="content-card">
+        <h3>Verifiable evidence integrity</h3>
+        <p>Decision context, release identity, control results, integrity verification, and reconstruction support.</p>
+      </div>
+      <div class="content-card">
+        <h3>Controlled deployment qualification</h3>
+        <p>Installation, operation, recovery, rollback, removal, reinstall, and Windows and Linux packaging paths evaluated in controlled environments.</p>
+      </div>
     </div>
   </section>
 
