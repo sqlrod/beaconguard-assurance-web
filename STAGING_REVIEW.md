@@ -24,7 +24,7 @@
 | 01B | Unified enterprise diagram system validation | `472b9197e4a4ac3b990db82ab06a5030418716f5` | [pass-01b-unified-diagram-system](review-artifacts/pass-01b-unified-diagram-system/README.md) |
 | 01B-R1 | Enterprise diagram art-direction refinement | `16a892202eb33c506154e4633110eaf907775a8f` | [pass-01b-r1-enterprise-diagram-refinement](review-artifacts/pass-01b-r1-enterprise-diagram-refinement/README.md) |
 | 01B-R2 | Pure-SVG production-candidate diagram rebuild | `72d96ada95319fd90d6c777d0c95a506cb8f4b2d` | [pass-01b-r2-pure-svg-diagram-rebuild](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/README.md) |
-| 01B-R3A | Control Fabric homepage art-direction gate | *(pending commit)* | [pass-01b-r3a-control-fabric-art-direction](review-artifacts/pass-01b-r3a-control-fabric-art-direction/README.md) |
+| 01B-R3A | Control Fabric homepage art-direction gate | `877fe20d2cb0d694faf30ea820e2f11dade6d67e` | [pass-01b-r3a-control-fabric-art-direction](review-artifacts/pass-01b-r3a-control-fabric-art-direction/README.md) |
 
 ## Pass 01B-R3A — Control Fabric Art-Direction Gate
 
