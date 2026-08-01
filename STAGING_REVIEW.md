@@ -19,7 +19,7 @@
 | 00 | Pre-redesign visual baseline | `da49187` | [pass-00-baseline](review-artifacts/pass-00-baseline/README.md) |
 | 01 | Transaction cycle and visual foundation | `0532fae` | [pass-01-foundation](review-artifacts/pass-01-foundation/README.md) |
 | 01A | Commercial hierarchy and diagram system | `7c661ed94e17555c3f1d319a3ee9e54c567dab83` | [pass-01a-commercial-hierarchy](review-artifacts/pass-01a-commercial-hierarchy/README.md) |
-| 01B | Enterprise diagram visual-direction gate | *(pending commit)* | [pass-01b-diagram-direction](review-artifacts/pass-01b-diagram-direction/README.md) |
+| 01B | Enterprise diagram visual-direction gate | `a0af658ebc388226a793109afabc365ce1475ef1` | [pass-01b-diagram-direction](review-artifacts/pass-01b-diagram-direction/README.md) |
 
 ## Pass 01B — Enterprise Diagram Visual-Direction Gate
 

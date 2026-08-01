@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Starting staging HEAD | `62de5e91576bb5d727a4d976bfb1032de25fd1f9` |
-| Final staging commit | *(filled after commit)* |
+| Final staging commit | `a0af658ebc388226a793109afabc365ce1475ef1` |
 | Preview port | `4332` |
 | Build result | Pass (`npm run build`, 28 pages including staging route) |
 | Public route count | 27 (sitemap unchanged) |
