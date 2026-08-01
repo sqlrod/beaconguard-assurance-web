@@ -18,7 +18,7 @@
 | --- | --- | --- | --- |
 | 00 | Pre-redesign visual baseline | `da49187` | [pass-00-baseline](review-artifacts/pass-00-baseline/README.md) |
 | 01 | Transaction cycle and visual foundation | `0532fae` | [pass-01-foundation](review-artifacts/pass-01-foundation/README.md) |
-| 01A | Commercial hierarchy and diagram system | *(pending)* | [pass-01a-commercial-hierarchy](review-artifacts/pass-01a-commercial-hierarchy/README.md) |
+| 01A | Commercial hierarchy and diagram system | `7c661ed94e17555c3f1d319a3ee9e54c567dab83` | [pass-01a-commercial-hierarchy](review-artifacts/pass-01a-commercial-hierarchy/README.md) |
 
 ## Pass 01A screenshot index
 
