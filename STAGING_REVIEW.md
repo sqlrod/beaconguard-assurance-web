@@ -18,7 +18,7 @@ This staging branch holds the current website reframe snapshot and subsequent vi
 | Pass | Purpose | Commit | Artifacts |
 | --- | --- | --- | --- |
 | 00 | Pre-redesign visual baseline | `da49187fc8b513a10df447bce188790887198c0b` (index update `1de043d92e1d6e5d410dbf38a31bae5ade3fd12e`) | [pass-00-baseline](review-artifacts/pass-00-baseline/README.md) |
-| 01 | Transaction cycle and visual foundation | *(pending Pass 01 commit)* | [pass-01-foundation](review-artifacts/pass-01-foundation/README.md) |
+| 01 | Transaction cycle and visual foundation | `0532fae31c1c41ee7dfb917a228a42435ec4225d` | [pass-01-foundation](review-artifacts/pass-01-foundation/README.md) |
 
 ## Pass 01 screenshot index
 
