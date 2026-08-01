@@ -1,0 +1,68 @@
+---
+/**
+ * Compact executive verification relationship for Verification hero.
+ */
+import DiagramIcon from "./primitives/DiagramIcon.astro";
+
+interface Props {
+  title?: string;
+  idPrefix?: string;
+}
+
+const { title = "Verification evidence relationship", idPrefix = "ves" } = Astro.props;
+const mid = `${idPrefix}-m`;
+---
+
+<figure class="ves" aria-labelledby={`${idPrefix}-title`}>
+  <h3 id={`${idPrefix}-title`} class="ves-title visually-hidden">{title}</h3>
+  <p class="osc-boundary osc-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
+
+  <div class="ves-desktop" aria-hidden="true">
+    <svg class="ves-svg" viewBox="0 0 640 200" focusable="false">
+      <defs>
+        <marker id={`${mid}-e`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-evidence)"></path>
+        </marker>
+      </defs>
+      <path class="ves-path" d="M130 80 H190" marker-end={`url(#${mid}-e)`}></path>
+      <path class="ves-path" d="M330 80 H390" marker-end={`url(#${mid}-e)`}></path>
+      <path class="ves-path" d="M490 80 H540" marker-end={`url(#${mid}-e)`}></path>
+    </svg>
+    <ol class="ves-nodes">
+      <li class="ves-node">
+        <span class="ves-role"><DiagramIcon name="shield" /> DECISIONS</span>
+        <strong>Request + action</strong>
+      </li>
+      <li class="ves-node ves-node--canonical">
+        <span class="ves-role"><DiagramIcon name="evidence" /> CANONICAL EVIDENCE</span>
+        <strong>Verifiable Decision Records</strong>
+      </li>
+      <li class="ves-node">
+        <span class="ves-role"><DiagramIcon name="verify" /> RECONSTRUCT</span>
+        <strong>Deterministic reconstruction</strong>
+      </li>
+      <li class="ves-node">
+        <span class="ves-role">REVIEW</span>
+        <strong>Explorer · reporting</strong>
+      </li>
+    </ol>
+  </div>
+
+  <ol class="ves-mobile" aria-hidden="true">
+    <li><strong>Decisions</strong> · Request + action</li>
+    <li class="ves-mobile-canonical"><strong>Canonical evidence</strong> · VDRs</li>
+    <li><strong>Reconstruct</strong> · Deterministic</li>
+    <li><strong>Review</strong> · Explorer · reporting</li>
+  </ol>
+
+  <aside class="ves-insights">
+    <span class="ves-role">AI-assisted insights</span>
+    <strong>Non-authoritative</strong>
+  </aside>
+
+  <figcaption class="visually-hidden">
+    Read-only verification relationship: request and action decisions flow into
+    canonical Verifiable Decision Records, then deterministic reconstruction and
+    review outputs. AI-assisted insights remain non-authoritative.
+  </figcaption>
+</figure>

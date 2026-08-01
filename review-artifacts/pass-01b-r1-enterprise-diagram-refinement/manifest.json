@@ -1,0 +1,311 @@
+{
+  "pass": "01b-r1-enterprise-diagram-refinement",
+  "purpose": "enterprise diagram art-direction refinement",
+  "starting_staging_head": "d51ce347efaa40a299b3a7cb7c9401869f1bde7a",
+  "preview_port": "4334",
+  "build_result": "pass",
+  "public_sitemap_count": 27,
+  "fullpage_count": 27,
+  "responsive_count": 5,
+  "crop_count": 10,
+  "graph_library_installed": false,
+  "sitewide_deployment": false,
+  "pass_01c_authorized": false,
+  "visual_acceptance": "IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW",
+  "screenshots": [
+    {
+      "route": "/",
+      "filename": "home.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "f6cd3133091caad6615fb5db29890ab2dc671da55de00ecd04a8ce6c50fd19da"
+    },
+    {
+      "route": "/platform",
+      "filename": "platform.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "4bae563a46064665ee1863acab3e6f20ce2a843b177eee03ecdef6477ab528a9"
+    },
+    {
+      "route": "/healthcare",
+      "filename": "healthcare.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "1ed989500ea68a9e2d7ed185e4230afa74ff5a343f406103ee93a716a9948ad2"
+    },
+    {
+      "route": "/fintech",
+      "filename": "financial-services.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "0938d9c668e666b25ddd4e05a30b00019e233a546b36b403ddfaff977a5c802f"
+    },
+    {
+      "route": "/verification",
+      "filename": "verification.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "0e9955d6684263b7800e279486ee06ab2f574c829ce39c730979462bd591fc73"
+    },
+    {
+      "route": "/security",
+      "filename": "security.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "2d2601d689a8b55531d4bd1aac1be5d9a2effcd70be6e207c13abe7f5598deb8"
+    },
+    {
+      "route": "/design-partner-program",
+      "filename": "controlled-evaluation.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "33dcb6217c17eb3b06871b07681f1ecd02883d464a6bf888be55efdd69c4d848"
+    },
+    {
+      "route": "/docs",
+      "filename": "documentation.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "d15beb274130fff1199f1050fca0807ccba8fe47f8a74f9e7e841fc001d3700f"
+    },
+    {
+      "route": "/contact",
+      "filename": "contact.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "4bc35de20fc4e8a1e20454fc3c41d172f8b063319f9b7ba417784ccbbd295969"
+    },
+    {
+      "route": "/how-it-works",
+      "filename": "how-it-works.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "2408d6a9a05aee3a935ebaa9baf53bc0b43dd2a54ef9c079ab3fe446efbf472d"
+    },
+    {
+      "route": "/proof-evidence",
+      "filename": "proof-and-evidence.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "e7adccfd741b8ee6aeec9d899ccbc6688c80703cdb19dcba6e01f9474eb690bc"
+    },
+    {
+      "route": "/canonical-workflow",
+      "filename": "canonical-workflow.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "0d57c0d6ac3802c725052df0793d0c55c43869883574e73c728cbb250e801385"
+    },
+    {
+      "route": "/trust-assurance",
+      "filename": "trust-center.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "292c7d900622fdfc45174c9dc881d8e7433374221f6f71a277a3b6dc1348d062"
+    },
+    {
+      "route": "/company",
+      "filename": "company.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "76a50450c0c6857d9359828a47354d19a78c233921f17208888e11c0ff747e4a"
+    },
+    {
+      "route": "/reviewer-kit",
+      "filename": "reviewer-kit.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "4275242ee3268171211f355b48e80ec9fe4de89a5706886979e762e91a625e82"
+    },
+    {
+      "route": "/control-responsibility-matrix",
+      "filename": "control-responsibility-matrix.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "32bb5b2eb696200c0bc097c93315e4888dcd0fe2b6bccf5ce8329b823990b3fc"
+    },
+    {
+      "route": "/deployment",
+      "filename": "deployment.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "6c80f14395e03776e1dff115b5083875525a62250b66b6959322949610bc30ca"
+    },
+    {
+      "route": "/use-cases",
+      "filename": "use-cases.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "629588717ef9e74dde2e04db258d1fefc8900e7f5a67bccb4cc16443ee9d5a47"
+    },
+    {
+      "route": "/sample-decision-record",
+      "filename": "sample-decision-record.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "5c25158f519a9bec668c279b1baeee5b69a83f4c3977cbe2f9f0869c7d18a19a"
+    },
+    {
+      "route": "/docs/overview",
+      "filename": "docs-overview.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "dcda69eaf9c5d17c8fe20a758387de1af2a2183f9cdf70e1b698eef621868313"
+    },
+    {
+      "route": "/docs/architecture",
+      "filename": "docs-architecture.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "233d63e476c883dabd64b1f651fc9d758bf91c5d68701c66bb68d5386dba1bc1"
+    },
+    {
+      "route": "/docs/policy-model",
+      "filename": "docs-policy-model.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "e361a6b48e1d3958342ea8ce8c75ce2ede7f68175fc9d0b1865151bf729fb423"
+    },
+    {
+      "route": "/docs/enforcement-runtime",
+      "filename": "docs-enforcement-runtime.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "94d10bf12586e03c490c202f6ab2a191508caf3133c7ffafafaaaf05a70e0d1b"
+    },
+    {
+      "route": "/docs/compliance-audit",
+      "filename": "docs-compliance-audit.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "fa5163f4770eaa66ca38e4009cf4d41ae575bd894e05385a3fa82b20ef35cc47"
+    },
+    {
+      "route": "/docs/deployment-integration",
+      "filename": "docs-deployment-integration.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "318f957e53d419a902d9c2d155c8e2934df6ec6f85e463a0d0664f5ff74010fc"
+    },
+    {
+      "route": "/docs/threat-model",
+      "filename": "docs-threat-model.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "2ed63407353c2197e26f7d69c63b87cbde6ac4048fd7cb3e70279bd7c75c87df"
+    },
+    {
+      "route": "/docs/dfd-threat-flow",
+      "filename": "docs-dfd-threat-flow.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "sha256": "ec1b5d89a3e3dc01be8974e9c783760c3c7e9bb78fb064388f47d29da12c13b1"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "staging-diagram-system__390x844.png",
+      "viewport": "390x844",
+      "kind": "responsive",
+      "sha256": "474ef6fd762a1a7c77e21f29236edf31239142d75b821545f4b2b29461e60293"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "staging-diagram-system__768x1024.png",
+      "viewport": "768x1024",
+      "kind": "responsive",
+      "sha256": "ecc881bc8d7d0b4f5844d85db9cad63da3d8bea1fd17bbdfe74743360e0048e0"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "staging-diagram-system__1024x768.png",
+      "viewport": "1024x768",
+      "kind": "responsive",
+      "sha256": "421a5c309d8d8750ab072d4c492803b7f52ed36eb1cd45024e034e2e358050a4"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "staging-diagram-system__1440x900.png",
+      "viewport": "1440x900",
+      "kind": "responsive",
+      "sha256": "a911e45f989bfbb378d78ccbdb1ccd90aa9d8cd6e2c2a5bf1b8a80e476be2427"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "staging-diagram-system__1920x1080.png",
+      "viewport": "1920x1080",
+      "kind": "responsive",
+      "sha256": "4e6e655f73c812525006849fb9d8ab521d7cead7a3293754d22c39aa828eebbe"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "direction-a-r1-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "3a767ddc0ec3d8f249c89ce7a7e18a6d58ae539067c22391721688efccdbf0e3"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "direction-a-r1-390.png",
+      "viewport": "390x844",
+      "kind": "crop",
+      "sha256": "61785e28f2f50d1464ba3db2dc9de93602d46bf4cf49eee7d8a399af5cdad5e9"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "direction-b-r1-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "3c2919dcb0ee1f564ae9a3e9e48719413ef8afbd6412e340e104a6e7ab49aded"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "direction-b-r1-390.png",
+      "viewport": "390x844",
+      "kind": "crop",
+      "sha256": "60a31b57e822d140a09d4accffc944a69ad627e77bc20caa7518b47d43e9fd12"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "direction-c-r1-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "58b39dc09116da559846a846dff64d5805c433ac77b63cc63de30a70a92f316d"
+    },
+    {
+      "route": "/staging-diagram-system",
+      "filename": "direction-c-r1-390.png",
+      "viewport": "390x844",
+      "kind": "crop",
+      "sha256": "6d7eba55e7858ba45c1d6ee642a3bc4f7364a9de9d6e54ebf29ca2f7873c54c4"
+    },
+    {
+      "route": "/",
+      "filename": "home-executive-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "97417a20c13c1552fa37d25638d214fe528177b2cd38d8fc612fd9e9478b4561"
+    },
+    {
+      "route": "/",
+      "filename": "home-executive-390.png",
+      "viewport": "390x844",
+      "kind": "crop",
+      "sha256": "6c9f40fbd98380d4f8f83b75026756029cd30817f49e802f9859e922ab55a9d8"
+    },
+    {
+      "route": "/verification",
+      "filename": "verification-executive-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "6c1b24f00039ac33cf2508109e14f560b636766982d627df6aeb41fb7e9a5405"
+    },
+    {
+      "route": "/verification",
+      "filename": "verification-executive-390.png",
+      "viewport": "390x844",
+      "kind": "crop",
+      "sha256": "888084781b69a8bc6e33be00572e780b87940211f243487859c8e16e896c7791"
+    }
+  ]
+}

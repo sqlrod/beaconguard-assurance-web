@@ -1,74 +1,155 @@
 ---
 /**
- * Direction B — Layered Control Architecture
- * Candidate for Platform / executive architecture. Functional domains only.
+ * Layered Control Architecture — platform functional domains.
+ * Production-candidate reusable diagram (no staging review headings).
  */
 import DiagramIcon from "../primitives/DiagramIcon.astro";
 
 interface Props {
+  title?: string;
+  ariaLabel?: string;
+  variant?: "detailed" | "compact";
+  compact?: boolean;
   idPrefix?: string;
 }
 
-const { idPrefix = "dir-b" } = Astro.props;
+const {
+  title = "Govern · Authorize · Verify",
+  ariaLabel,
+  variant = "detailed",
+  compact = false,
+  idPrefix = "lca",
+} = Astro.props;
+
+const isCompact = compact || variant === "compact";
+const mid = `${idPrefix}-m`;
+const labelledBy = `${idPrefix}-title`;
 ---
 
-<figure class="dir-b" data-diagram-direction="B" aria-labelledby={`${idPrefix}-title`}>
-  <h3 id={`${idPrefix}-title`} class="dir-title">
-    View B · Layered Control Architecture
-  </h3>
-  <p class="dir-subtitle">
-    Specialized platform functional-domain view. Authorize is foregrounded.
-    Functional domains only — no physical-host or network-isolation claim.
-  </p>
+<figure
+  class:list={["lca", isCompact && "lca--compact"]}
+  data-diagram-direction="B"
+  aria-labelledby={labelledBy}
+  aria-label={ariaLabel}
+>
+  <h3 id={labelledBy} class="lca-title">{title}</h3>
 
-  <div class="dir-b-stack" aria-hidden="true">
-    <section class="dir-b-layer dir-b-layer--govern">
-      <p class="dir-role">GOVERN · Management and release lifecycle</p>
-      <h4 class="dir-b-heading"><DiagramIcon name="release" /> Govern</h4>
-      <ul class="dir-b-list">
-        <li>Compliance Playbooks</li>
-        <li>Validation and approval</li>
-        <li>Signed release</li>
-        <li>Active Verified Release</li>
-      </ul>
-      <p class="dir-flow-label dir-flow-label--down">Verified release supplies Authorize ↓</p>
+  <div class="lca-stage" aria-hidden="true">
+    <svg class="lca-svg" viewBox="0 0 1000 420" focusable="false">
+      <defs>
+        <marker id={`${mid}-n`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
+          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-neutral)"></path>
+        </marker>
+        <marker id={`${mid}-e`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
+          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-evidence)"></path>
+        </marker>
+      </defs>
+      <path class="lca-path lca-path--release" d="M250 180 H360" marker-end={`url(#${mid}-n)`}></path>
+      <path class="lca-path lca-path--evidence" d="M640 210 H750" marker-end={`url(#${mid}-e)`}></path>
+      <g class="osc-label-plate">
+        <rect x="270" y="156" width="100" height="20" rx="4"></rect>
+        <text x="320" y="170">Verified release</text>
+      </g>
+      <g class="osc-label-plate osc-label-plate--evidence">
+        <rect x="650" y="186" width="110" height="20" rx="4"></rect>
+        <text x="705" y="200">Decision evidence</text>
+      </g>
+      <g class="lca-blocked">
+        <path d="M700 280 H560" stroke="var(--diagram-text-label)" stroke-width="2" stroke-dasharray="4 4"></path>
+        <circle cx="560" cy="280" r="10" fill="none" stroke="var(--decision-deny)" stroke-width="2"></circle>
+        <path d="M555 275 L565 285 M565 275 L555 285" stroke="var(--decision-deny)" stroke-width="2"></path>
+      </g>
+      <g class="osc-label-plate">
+        <rect x="575" y="292" width="150" height="20" rx="4"></rect>
+        <text x="650" y="306">No runtime permission path</text>
+      </g>
+    </svg>
+
+    <section class="lca-domain lca-domain--govern">
+      <p class="lca-role">GOVERN · Functional domain</p>
+      <h4 class="lca-heading"><DiagramIcon name="release" /> Govern</h4>
+      <ol class="lca-rail">
+        <li>Playbook</li>
+        <li>Validate</li>
+        <li>Sign</li>
+        <li class="lca-rail-active">Active Verified Release</li>
+      </ol>
     </section>
 
-    <section class="dir-b-layer dir-b-layer--authorize">
-      <p class="dir-boundary">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</p>
-      <p class="dir-role">AUTHORIZE · Runtime prevention</p>
-      <h4 class="dir-b-heading"><DiagramIcon name="shield" /> Authorize</h4>
-      <ul class="dir-b-list">
+    <section class="lca-domain lca-domain--authorize">
+      <p class="osc-boundary">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</p>
+      <p class="lca-role">AUTHORIZE · Runtime prevention</p>
+      <h4 class="lca-heading"><DiagramIcon name="shield" /> Authorize</h4>
+      <ol class="lca-spine">
         <li>Request Admission</li>
-        <li>Provider return (untrusted)</li>
+        <li>AI result — untrusted</li>
         <li>Declared action</li>
-        <li>Result-to-Action Authorization</li>
-        <li>ALLOW or DENY</li>
-      </ul>
-      <p class="dir-flow-label dir-flow-label--out">Evidence emitted outward → Verify</p>
+        <li>Result-to-Action</li>
+        <li class="lca-spine-outcome"><span class="lca-allow">ALLOW</span> / <span class="lca-deny">DENY</span></li>
+      </ol>
     </section>
 
-    <section class="dir-b-layer dir-b-layer--verify">
-      <p class="dir-boundary dir-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
-      <p class="dir-role">VERIFY · Investigation without runtime authority</p>
-      <h4 class="dir-b-heading"><DiagramIcon name="verify" /> Verify</h4>
-      <ul class="dir-b-list">
-        <li>Decision Explorer</li>
-        <li>Reconstruction</li>
-        <li>Source evidence</li>
-        <li>Replay verification</li>
-        <li>Export</li>
-        <li>Non-authoritative insights</li>
-      </ul>
-      <p class="dir-note">Verify does not feed runtime permission back into Authorize.</p>
+    <section class="lca-domain lca-domain--verify">
+      <p class="osc-boundary osc-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
+      <p class="lca-role">VERIFY · Investigation</p>
+      <h4 class="lca-heading"><DiagramIcon name="verify" /> Verify</h4>
+      <div class="lca-caps">
+        <span>Decision Explorer</span>
+        <span>Reconstruction</span>
+        <span>Source Evidence</span>
+        <span>Replay</span>
+        <span>Export</span>
+      </div>
+      <aside class="lca-insights">
+        <span class="lca-role">AI-assisted insights</span>
+        <strong>Non-authoritative</strong>
+      </aside>
+    </section>
+  </div>
+
+  {/* Mobile preserves Govern → Authorize → Verify */}
+  <div class="lca-mobile" aria-hidden="true">
+    <section class="lca-domain lca-domain--govern">
+      <h4 class="lca-heading"><DiagramIcon name="release" /> Govern</h4>
+      <ol class="lca-rail">
+        <li>Playbook</li>
+        <li>Validate</li>
+        <li>Sign</li>
+        <li class="lca-rail-active">Active Verified Release</li>
+      </ol>
+    </section>
+    <p class="lca-flow">↓ Verified release</p>
+    <section class="lca-domain lca-domain--authorize">
+      <p class="osc-boundary">RUNTIME AUTHORIZATION</p>
+      <h4 class="lca-heading"><DiagramIcon name="shield" /> Authorize</h4>
+      <ol class="lca-spine">
+        <li>Request Admission</li>
+        <li>AI result — untrusted</li>
+        <li>Declared action</li>
+        <li>Result-to-Action</li>
+        <li class="lca-spine-outcome"><span class="lca-allow">ALLOW</span> / <span class="lca-deny">DENY</span></li>
+      </ol>
+    </section>
+    <p class="lca-flow lca-flow--evidence">↓ Decision evidence</p>
+    <section class="lca-domain lca-domain--verify">
+      <p class="osc-boundary osc-boundary--verify">READ-ONLY VERIFY</p>
+      <h4 class="lca-heading"><DiagramIcon name="verify" /> Verify</h4>
+      <div class="lca-caps">
+        <span>Explorer</span>
+        <span>Reconstruction</span>
+        <span>Source Evidence</span>
+        <span>Replay</span>
+        <span>Export</span>
+      </div>
+      <p class="lca-note">No runtime permission path</p>
     </section>
   </div>
 
   <figcaption class="visually-hidden">
     Govern supplies an Active Verified Release into Authorize. Authorize owns
-    Request Admission and Result-to-Action Authorization with binary ALLOW or
-    DENY and emits evidence to Verify. Verify is a read-only functional domain
-    and cannot return permission into Authorize. These are functional domains,
-    not separate physical hosts or networks.
+    Request Admission and Result-to-Action with binary ALLOW or DENY and emits
+    decision evidence to Verify. Verify is a read-only functional domain with no
+    runtime permission path back to Authorize. These are functional domains, not
+    separate physical hosts or networks.
   </figcaption>
 </figure>

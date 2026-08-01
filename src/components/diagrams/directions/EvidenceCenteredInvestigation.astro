@@ -1,102 +1,168 @@
 ---
 /**
- * Direction C — Evidence-Centered Investigation
- * Candidate for Verification / Proof / Compliance. Not a menu-tile grid.
+ * Evidence-Centered Investigation — verification and evidence view.
+ * Production-candidate reusable diagram (no staging review headings).
  */
 import DiagramIcon from "../primitives/DiagramIcon.astro";
 
 interface Props {
-  idPrefix?: string;
+  title?: string;
+  ariaLabel?: string;
+  variant?: "detailed" | "compact";
   compact?: boolean;
+  idPrefix?: string;
 }
 
-const { idPrefix = "dir-c", compact = false } = Astro.props;
+const {
+  title = "Evidence-centered investigation",
+  ariaLabel,
+  variant = "detailed",
+  compact = false,
+  idPrefix = "eci",
+} = Astro.props;
+
+const isCompact = compact || variant === "compact";
+const mid = `${idPrefix}-m`;
+const labelledBy = `${idPrefix}-title`;
 ---
 
 <figure
-  class:list={["dir-c", compact && "dir-c--compact"]}
+  class:list={["eci", isCompact && "eci--compact"]}
   data-diagram-direction="C"
-  aria-labelledby={`${idPrefix}-title`}
+  aria-labelledby={labelledBy}
+  aria-label={ariaLabel}
 >
-  <div class="dir-c-meta">
-    <h3 id={`${idPrefix}-title`} class="dir-title">
-      View C · Evidence-Centered Investigation
-    </h3>
-    <p class="dir-illustrative">Illustrative verification model</p>
+  <div class="eci-meta">
+    <h3 id={labelledBy} class="eci-title">{title}</h3>
+    <p class="eci-illustrative">Illustrative verification model</p>
   </div>
-  <p class="dir-subtitle">
-    Specialized verification and evidence view. Selected transaction flows from
-    decision context through canonical evidence into review outputs. AI insights
-    remain outside the trusted reconstruction path.
-  </p>
 
-  <div class="dir-c-board" aria-hidden="true">
-    <p class="dir-boundary dir-boundary--verify dir-c-boundary">
+  <div class="eci-board" aria-hidden="true">
+    <p class="osc-boundary osc-boundary--verify eci-boundary">
       READ-ONLY VERIFICATION BOUNDARY · BeaconGuard Verify
     </p>
 
-    <section class="dir-c-col dir-c-col--context">
-      <p class="dir-role">LEFT · Decision context</p>
-      <div class="dir-node">
-        <span class="dir-role"><DiagramIcon name="shield" /> Selected transaction</span>
-        <strong>Request Admission decision</strong>
+    <svg class="eci-svg" viewBox="0 0 1100 460" focusable="false">
+      <defs>
+        <marker id={`${mid}-e`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
+          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-evidence)"></path>
+        </marker>
+      </defs>
+      <!-- Decision → records -->
+      <path class="eci-path" d="M250 120 H340" marker-end={`url(#${mid}-e)`}></path>
+      <path class="eci-path" d="M250 220 H340" marker-end={`url(#${mid}-e)`}></path>
+      <!-- Records → source / reconstruct -->
+      <path class="eci-path" d="M560 170 H640" marker-end={`url(#${mid}-e)`}></path>
+      <path class="eci-path" d="M720 200 H820" marker-end={`url(#${mid}-e)`}></path>
+      <!-- Evidence → export -->
+      <path class="eci-path" d="M560 320 H820" marker-end={`url(#${mid}-e)`}></path>
+      <g class="osc-label-plate osc-label-plate--evidence">
+        <rect x="860" y="300" width="120" height="20" rx="4"></rect>
+        <text x="920" y="314">From evidence</text>
+      </g>
+    </svg>
+
+    <section class="eci-col eci-col--context">
+      <p class="eci-role">Selected transaction</p>
+      <div class="eci-identity">
+        <span>Transaction correlation</span>
+        <span>Release identity</span>
+        <span>Playbook identity</span>
       </div>
-      <div class="dir-node">
-        <strong>Result-to-Action decision</strong>
+      <div class="eci-decision" data-decision="request">
+        <span class="eci-role"><DiagramIcon name="shield" /> Request Admission</span>
+        <strong class="eci-outcome eci-outcome--allow">ALLOW</strong>
       </div>
-      <div class="dir-node dir-node--meta">
-        <span class="dir-desc">Release identity</span>
-        <span class="dir-desc">Playbook identity</span>
-        <span class="dir-desc">Transaction correlation</span>
+      <div class="eci-corr" aria-hidden="true"></div>
+      <div class="eci-decision" data-decision="action">
+        <span class="eci-role"><DiagramIcon name="shield" /> Result-to-Action</span>
+        <strong class="eci-outcome eci-outcome--allow">ALLOW</strong>
       </div>
     </section>
 
-    <div class="dir-c-flow" aria-hidden="true">→</div>
-
-    <section class="dir-c-col dir-c-col--spine">
-      <p class="dir-role">CENTER · Canonical evidence spine</p>
-      <div class="dir-node dir-node--spine">
-        <span class="dir-role"><DiagramIcon name="evidence" /> Canonical</span>
-        <strong>Verifiable Decision Records</strong>
+    <section class="eci-col eci-col--ledger">
+      <p class="eci-role">Canonical evidence ledger</p>
+      <div class="eci-record">
+        <span class="eci-role"><DiagramIcon name="evidence" /> Decision Record — Request</span>
+        <span class="eci-field">Outcome · Integrity</span>
       </div>
-      <div class="dir-node dir-node--spine">
-        <strong>Source evidence</strong>
-        <span class="dir-desc">Supports reconstruction</span>
+      <div class="eci-record">
+        <span class="eci-role"><DiagramIcon name="evidence" /> Decision Record — Action</span>
+        <span class="eci-field">Outcome · Integrity</span>
       </div>
-      <div class="dir-c-status">
-        <span>Integrity status</span>
-        <span>Replay status</span>
-        <span>Reconstruction status</span>
+      <div class="eci-source">
+        <strong>Source Evidence</strong>
+        <span>Integrity verified · Replay available · Reconstruction available</span>
       </div>
     </section>
 
-    <div class="dir-c-flow" aria-hidden="true">→</div>
-
-    <section class="dir-c-col dir-c-col--outputs">
-      <p class="dir-role">RIGHT · Review outputs</p>
-      <div class="dir-node"><strong>Decision Explorer</strong></div>
-      <div class="dir-node"><strong>Deterministic Reconstruction</strong></div>
-      <div class="dir-node"><strong>Executive Reporting</strong></div>
-      <div class="dir-node"><DiagramIcon name="export" /> <strong>Verifiable Export</strong></div>
+    <section class="eci-col eci-col--review">
+      <p class="eci-role">Review surface</p>
+      <div class="eci-tabs" role="presentation">
+        <span>Decision Explorer</span>
+        <span class="eci-tab-active">Reconstruction</span>
+        <span>Reporting</span>
+        <span>Replay</span>
+      </div>
+      <div class="eci-selected">
+        <strong>Deterministic Reconstruction</strong>
+        <ol>
+          <li>Trusted context</li>
+          <li>Applied release</li>
+          <li>Control result</li>
+          <li>Final outcome</li>
+        </ol>
+      </div>
+      <div class="eci-export">
+        <DiagramIcon name="export" />
+        <strong>Verifiable Export</strong>
+        <span>Derived from evidence ledger</span>
+      </div>
     </section>
 
-    <aside class="dir-c-insights">
-      <p class="dir-role"><DiagramIcon name="provider" /> AI-ASSISTED INSIGHTS</p>
+    <aside class="eci-insights">
+      <p class="eci-role"><DiagramIcon name="provider" /> AI-Assisted Insights</p>
       <strong>Non-authoritative</strong>
-      <span class="dir-desc">
-        Outside the trusted reconstruction and authorization path. No return to
-        runtime authority.
-      </span>
+      <span>No runtime or evidence authority</span>
+    </aside>
+  </div>
+
+  <div class="eci-mobile" aria-hidden="true">
+    <p class="osc-boundary osc-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
+    <div class="eci-mobile-step">
+      <span class="eci-role">Selected transaction</span>
+      <strong>Request + Action decisions</strong>
+    </div>
+    <p class="eci-mobile-arrow">↓</p>
+    <div class="eci-mobile-step eci-mobile-step--ledger">
+      <span class="eci-role">Related decision records</span>
+      <strong>Verifiable Decision Records</strong>
+    </div>
+    <p class="eci-mobile-arrow">↓</p>
+    <div class="eci-mobile-step">
+      <span class="eci-role">Source evidence</span>
+      <strong>Supports reconstruction</strong>
+    </div>
+    <p class="eci-mobile-arrow">↓</p>
+    <div class="eci-mobile-step eci-mobile-step--selected">
+      <span class="eci-role">Deterministic reconstruction</span>
+      <strong>Trusted context → Final outcome</strong>
+    </div>
+    <p class="eci-mobile-arrow">↓</p>
+    <div class="eci-mobile-step">
+      <span class="eci-role">Review / Export</span>
+      <strong>Derived from evidence</strong>
+    </div>
+    <aside class="eci-insights">
+      <strong>AI-Assisted Insights · Non-authoritative</strong>
     </aside>
   </div>
 
   <figcaption class="visually-hidden">
     Inside a read-only verification boundary, a selected transaction’s Request
-    Admission and Result-to-Action decisions flow into a canonical evidence spine
-    of Verifiable Decision Records and source evidence with integrity, replay,
-    and reconstruction status. Review outputs include Decision Explorer,
-    Deterministic Reconstruction, Executive Reporting, and Verifiable Export.
-    AI-Assisted Insights remain separate and non-authoritative with no path back
-    to runtime authorization.
+    Admission and Result-to-Action decisions map to related Verifiable Decision
+    Records. Source evidence supports deterministic reconstruction. Export
+    derives from the canonical evidence ledger. AI-Assisted Insights remain
+    non-authoritative with no path to runtime authorization.
   </figcaption>
 </figure>
