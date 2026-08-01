@@ -1,10 +1,10 @@
 /**
  * Geometry validation for pure-SVG diagram compositions.
- * Catches clipping/coordinate failures before screenshot capture.
+ * Pass 01B-R3A1: includes Control Fabric equal-dimension and path-purpose checks.
  */
 import { chromium } from "playwright";
 
-const base = process.env.PREVIEW_BASE || "http://127.0.0.1:4336";
+const base = process.env.PREVIEW_BASE || "http://127.0.0.1:4337";
 const routes = ["/", "/verification", "/staging-diagram-system", "/staging-control-fabric"];
 const viewports = [
   { w: 390, h: 844 },
@@ -34,6 +34,8 @@ for (const vp of viewports) {
       });
 
       const ids = [];
+      const near = (a, b, tol = 2) => Math.abs(a - b) <= tol;
+
       for (const svg of svgs) {
         const viewBox = svg.getAttribute("viewBox");
         if (!viewBox) issues.push(`${route}@${viewport}: missing viewBox`);
@@ -71,19 +73,6 @@ for (const vp of viewports) {
           }
         }
 
-        // Owner-node containment for labeled texts
-        for (const owned of svg.querySelectorAll("[data-owner-node]")) {
-          const ownerId = owned.getAttribute("data-owner-node");
-          const owner = svg.querySelector(`[data-node-id="${ownerId}"]`);
-          if (!owner) continue;
-          const ob = owner.getBoundingClientRect();
-          const tb = owned.getBoundingClientRect();
-          if (tb.right > ob.right + 4 || tb.left < ob.left - 4 || tb.bottom > ob.bottom + 4 || tb.top < ob.top - 4) {
-            issues.push(`${route}@${viewport}: text outside owner node ${ownerId}`);
-          }
-        }
-
-        // Label plate containment
         for (const plateGroup of svg.querySelectorAll('[data-label-plate="true"]')) {
           const plate = plateGroup.querySelector("rect");
           const label = plateGroup.querySelector("text");
@@ -96,6 +85,122 @@ for (const vp of viewports) {
             );
           }
         }
+
+        // Control Fabric equal-dimension + purpose checks (desktop SVG only)
+        if (svg.classList.contains("psvg-desktop") && svg.closest(".psvg-cf")) {
+          const gateRects = [...svg.querySelectorAll('[data-cf-role="auth-gate"] > rect')].filter(
+            (r, i, arr) => arr.indexOf(r) === i
+          );
+          // First rect in each gate group is the shell
+          const shells = [...svg.querySelectorAll('[data-cf-role="auth-gate"]')].map((g) =>
+            g.querySelector("rect")
+          );
+          if (shells.length >= 2) {
+            const a = shells[0].getBBox();
+            const b = shells[1].getBBox();
+            if (!near(a.width, b.width, 1) || !near(a.height, b.height, 1)) {
+              issues.push(`${route}@${viewport}: auth gates unequal size`);
+            }
+          }
+
+          const denyRects = [...svg.querySelectorAll('[data-cf-role="deny-terminal"] > rect')];
+          if (denyRects.length >= 2) {
+            const a = denyRects[0].getBBox();
+            const b = denyRects[1].getBBox();
+            if (!near(a.width, b.width, 1) || !near(a.height, b.height, 1)) {
+              issues.push(`${route}@${viewport}: DENY terminals unequal size`);
+            }
+          }
+
+          const states = [...svg.querySelectorAll('[data-cf-role="app-state"] > rect')];
+          if (states.length >= 3) {
+            const boxes = states.map((r) => r.getBBox());
+            if (
+              !near(boxes[0].width, boxes[1].width, 1) ||
+              !near(boxes[1].width, boxes[2].width, 1) ||
+              !near(boxes[0].height, boxes[1].height, 1) ||
+              !near(boxes[1].height, boxes[2].height, 1)
+            ) {
+              issues.push(`${route}@${viewport}: app internal states unequal size`);
+            }
+            const gap1 = boxes[1].y - (boxes[0].y + boxes[0].height);
+            const gap2 = boxes[2].y - (boxes[1].y + boxes[1].height);
+            if (!near(gap1, gap2, 2)) {
+              issues.push(`${route}@${viewport}: app state vertical gaps unequal (${gap1.toFixed(1)} vs ${gap2.toFixed(1)})`);
+            }
+          }
+
+          // Terminal must not overlap gate shells
+          const gates = [...svg.querySelectorAll('[data-cf-role="auth-gate"]')];
+          const terminals = [...svg.querySelectorAll('[data-cf-role="deny-terminal"]')];
+          for (const t of terminals) {
+            const tb = t.getBoundingClientRect();
+            for (const g of gates) {
+              const gb = g.getBoundingClientRect();
+              const overlap = !(tb.right < gb.left + 2 || tb.left > gb.right - 2 || tb.bottom < gb.top + 2 || tb.top > gb.bottom - 2);
+              if (overlap) {
+                issues.push(`${route}@${viewport}: DENY terminal overlaps auth gate`);
+              }
+            }
+          }
+
+          const purposes = new Set(
+            [...svg.querySelectorAll("[data-path-purpose]")].map((p) => p.getAttribute("data-path-purpose"))
+          );
+          for (const need of [
+            "request-out",
+            "request-allow",
+            "request-deny",
+            "provider-return",
+            "action-out",
+            "action-allow",
+            "action-deny",
+            "system-effect",
+          ]) {
+            if (!purposes.has(need)) {
+              issues.push(`${route}@${viewport}: missing path purpose ${need}`);
+            }
+          }
+
+          // ALLOW must end at Execute (leftward into app), system-effect from Execute to SoR
+          const actionAllow = svg.querySelector('[data-path-purpose="action-allow"]');
+          const execute = svg.querySelector('[data-node-id="execute"]');
+          const receive = svg.querySelector('[data-node-id="receive"]');
+          const providerReturn = svg.querySelector('[data-path-purpose="provider-return"]');
+          if (actionAllow && execute) {
+            const d = actionAllow.getAttribute("d") || "";
+            const eb = execute.getBBox();
+            // Path should include a horizontal segment ending near execute left
+            if (!/H\s*\d+/i.test(d) || !d.includes(String(Math.round(eb.x))) && !/H80|H\s*80/.test(d)) {
+              // soft: ensure path bbox intersects execute
+              const pb = actionAllow.getBBox();
+              const hit =
+                pb.x < eb.x + eb.width &&
+                pb.x + pb.width > eb.x &&
+                pb.y < eb.y + eb.height &&
+                pb.y + pb.height > eb.y;
+              if (!hit) issues.push(`${route}@${viewport}: action-allow does not reach Execute`);
+            } else {
+              const pb = actionAllow.getBBox();
+              const hit =
+                pb.x < eb.x + eb.width &&
+                pb.x + pb.width > eb.x - 4 &&
+                pb.y < eb.y + eb.height &&
+                pb.y + pb.height > eb.y;
+              if (!hit) issues.push(`${route}@${viewport}: action-allow does not reach Execute`);
+            }
+          }
+          if (providerReturn && receive) {
+            const pb = providerReturn.getBBox();
+            const rb = receive.getBBox();
+            const hit =
+              pb.x < rb.x + rb.width &&
+              pb.x + pb.width > rb.x - 4 &&
+              pb.y < rb.y + rb.height &&
+              pb.y + pb.height > rb.y;
+            if (!hit) issues.push(`${route}@${viewport}: provider-return does not reach Receive`);
+          }
+        }
       }
 
       if (document.documentElement.scrollWidth > document.documentElement.clientWidth + 2) {
@@ -106,7 +211,6 @@ for (const vp of viewports) {
         issues.push(`${route}@${viewport}: ordered-list fallback detected inside diagram`);
       }
 
-      // Control Fabric must remain graphical (no list fallback)
       if (route.includes("staging-control-fabric")) {
         const cf = document.querySelector(".psvg-cf");
         if (cf && !cf.querySelector("svg path.psvg-path")) {

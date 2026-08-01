@@ -1,8 +1,7 @@
 ---
 /**
- * Pass 01B-R3A — BeaconGuard Control Fabric hero visual.
- * Pure inline SVG (desktop + compact). Art-direction candidate only.
- * Icons: Lucide-style paths (ISC license); inlined, no icon-package dependency.
+ * Pass 01B-R3A1 — Control Fabric geometry correction.
+ * Strict SVG grid; BeaconGuard authorizes; Enterprise Application executes.
  */
 interface Props {
   title?: string;
@@ -20,6 +19,33 @@ const {
 
 const mid = `${idPrefix}-m`;
 const labelledBy = `${idPrefix}-title`;
+
+/** Desktop grid constants (SVG units) — keep in sync with validator expectations */
+const G = {
+  vbW: 1280,
+  vbH: 680,
+  col1: { x: 60, w: 270 },
+  col2: { x: 430, w: 330 },
+  col3: { x: 860, w: 350 },
+  state: { x: 80, w: 230, h: 80, gap: 56 },
+  prepareY: 148,
+  receiveY: 284,
+  executeY: 420,
+  gate: { w: 180, h: 96 },
+  gateX: 505,
+  admissionY: 148,
+  r2aY: 420,
+  deny: { w: 180, h: 48 },
+  denyReqY: 16,
+  denyActY: 548,
+  providerY: 148,
+  providerH: 96,
+  sorY: 420,
+  sorH: 96,
+  evidenceY: 616,
+  boundY: 96,
+  boundH: 430,
+};
 ---
 
 <figure
@@ -30,27 +56,28 @@ const labelledBy = `${idPrefix}-title`;
     forceDesktop && "psvg--desktop",
   ]}
   data-diagram="control-fabric"
+  data-cf-pass="r3a1"
   aria-labelledby={labelledBy}
 >
   <h3 id={labelledBy} class="psvg-title">{title}</h3>
 
-  <!-- ===================== DESKTOP 1280×720 ===================== -->
+  <!-- ===================== DESKTOP 1280×680 — strict grid ===================== -->
   <svg
     class="psvg-desktop"
-    viewBox="0 0 1280 720"
+    viewBox={`0 0 ${G.vbW} ${G.vbH}`}
     preserveAspectRatio="xMidYMin meet"
     role="img"
     aria-hidden="true"
     focusable="false"
+    data-grid="cf-desktop-r3a1"
   >
     <title>{title}</title>
     <desc>
-      Closed-loop control fabric. Enterprise Application prepares a request through
-      Request Admission. REQUEST DENY terminates before provider invocation. ALLOW
-      reaches AI Provider. Untrusted result returns to the same application. Declared
-      action passes Result-to-Action. ACTION DENY terminates. ALLOW enters Execute,
-      then System of Record. Both gates emit evidence to Verifiable Decision Records
-      and read-only BeaconGuard Verify outside runtime authority.
+      Strict-grid control fabric. Enterprise Application prepares a request through
+      Request Admission. REQUEST DENY terminates. ALLOW reaches AI Provider. Untrusted
+      result returns into Receive and Declare. Result-to-Action ALLOW returns into
+      Enterprise Application Execute. ACTION DENY terminates. Execute sends authorized
+      effect to System of Record. Evidence feeds read-only Verify outside runtime authority.
     </desc>
     <defs>
       <marker id={`${mid}-n`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
@@ -66,10 +93,10 @@ const labelledBy = `${idPrefix}-title`;
         <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-evidence)"></path>
       </marker>
       <filter id={`${mid}-depth`} x="-8%" y="-8%" width="116%" height="116%">
-        <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.35"></feDropShadow>
+        <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.32"></feDropShadow>
       </filter>
       <filter id={`${mid}-gate`} x="-10%" y="-10%" width="120%" height="120%">
-        <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000" flood-opacity="0.45"></feDropShadow>
+        <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.4"></feDropShadow>
       </filter>
       <linearGradient id={`${mid}-bg-fill`} x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" stop-color="rgba(14, 32, 58, 0.55)"></stop>
@@ -81,128 +108,171 @@ const labelledBy = `${idPrefix}-title`;
       </linearGradient>
     </defs>
 
-    <!-- BeaconGuard authorization boundary (dominant) -->
+    <!-- COL 2 — BeaconGuard (dominant surface) -->
     <g data-node-id="bg-boundary" data-collision-check="true" filter={`url(#${mid}-depth)`}>
       <rect
-        x="400"
-        y="48"
-        width="430"
-        height="560"
-        rx="18"
+        x={G.col2.x}
+        y={G.boundY}
+        width={G.col2.w}
+        height={G.boundH}
+        rx="16"
         fill={`url(#${mid}-bg-fill)`}
         class="psvg-bound psvg-bound--runtime psvg-cf-bg"
       ></rect>
-      <!-- security icon -->
-      <g transform="translate(420, 64)" fill="none" stroke="var(--diagram-boundary-runtime)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <g transform={`translate(${G.col2.x + 16}, ${G.boundY + 10})`} fill="none" stroke="var(--diagram-boundary-runtime)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 2l8 4v6c0 5.25-3.4 9.74-8 11-4.6-1.26-8-5.75-8-11V6l8-4z"></path>
       </g>
-      <text x="452" y="78" class="psvg-bound-label psvg-bound-label--runtime">BEACONGUARD</text>
-      <text x="452" y="98" class="psvg-cf-sublabel">INDEPENDENT AUTHORIZATION BOUNDARY</text>
+      <text x={G.col2.x + 48} y={G.boundY + 24} class="psvg-bound-label psvg-bound-label--runtime">BEACONGUARD</text>
+      <text x={G.col2.x + 16} y={G.boundY + 42} class="psvg-cf-sublabel">AUTHORIZES — DOES NOT EXECUTE</text>
     </g>
 
-    <!-- Enterprise Application -->
+    <!-- COL 1 — Enterprise Application (persistent participant) -->
     <g data-node-id="enterprise-app" data-collision-check="true">
-      <rect x="48" y="88" width="302" height="512" rx="16" class="psvg-bound psvg-bound--enterprise"></rect>
-      <g transform="translate(64, 104)" fill="none" stroke="var(--diagram-boundary-enterprise)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect
+        x={G.col1.x}
+        y={G.boundY}
+        width={G.col1.w}
+        height={G.boundH}
+        rx="16"
+        class="psvg-bound psvg-bound--enterprise"
+      ></rect>
+      <g transform={`translate(${G.col1.x + 14}, ${G.boundY + 10})`} fill="none" stroke="var(--diagram-boundary-enterprise)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="4" width="20" height="16" rx="2"></rect>
         <path d="M2 8h20"></path>
       </g>
-      <text x="96" y="120" class="psvg-bound-label">ENTERPRISE APPLICATION</text>
+      <text x={G.col1.x + 44} y={G.boundY + 28} class="psvg-bound-label">ENTERPRISE APPLICATION</text>
 
-      <g data-node-id="prepare" data-collision-check="true">
-        <rect x="68" y="148" width="252" height="88" rx="12" class="psvg-node"></rect>
-        <text x="84" y="178" class="psvg-role">PREPARE REQUEST</text>
-        <text x="84" y="204" class="psvg-strong">Governed outbound request</text>
-        <circle cx="320" cy="192" r="6" class="psvg-port" data-port="REQUEST OUT"></circle>
-        <text x="236" y="178" class="psvg-port-label" text-anchor="end">REQUEST OUT</text>
+      <g data-node-id="prepare" data-cf-role="app-state" data-collision-check="true">
+        <rect x={G.state.x} y={G.prepareY} width={G.state.w} height={G.state.h} rx="12" class="psvg-node"></rect>
+        <text x={G.state.x + 16} y={G.prepareY + 32} class="psvg-role">PREPARE REQUEST</text>
+        <text x={G.state.x + 16} y={G.prepareY + 58} class="psvg-strong">Governed outbound request</text>
+        <circle cx={G.state.x + G.state.w} cy={G.prepareY + G.state.h / 2} r="6" class="psvg-port" data-port="REQUEST OUT"></circle>
       </g>
 
-      <g data-node-id="receive" data-collision-check="true">
-        <rect x="68" y="300" width="252" height="112" rx="12" class="psvg-node"></rect>
-        <text x="84" y="330" class="psvg-role">RECEIVE + DECLARE</text>
-        <text x="84" y="356" class="psvg-strong">Untrusted result</text>
-        <text x="84" y="380" class="psvg-desc">Intended enterprise action</text>
-        <circle cx="68" cy="348" r="6" class="psvg-port" data-port="RESULT IN"></circle>
-        <text x="84" y="294" class="psvg-port-label">RESULT IN</text>
-        <circle cx="320" cy="372" r="6" class="psvg-port" data-port="ACTION OUT"></circle>
-        <text x="236" y="400" class="psvg-port-label" text-anchor="end">ACTION OUT</text>
+      <g data-node-id="receive" data-cf-role="app-state" data-collision-check="true">
+        <rect x={G.state.x} y={G.receiveY} width={G.state.w} height={G.state.h} rx="12" class="psvg-node"></rect>
+        <text x={G.state.x + 16} y={G.receiveY + 28} class="psvg-role">RECEIVE + DECLARE</text>
+        <text x={G.state.x + 16} y={G.receiveY + 52} class="psvg-strong">Untrusted result</text>
+        <text x={G.state.x + 16} y={G.receiveY + 72} class="psvg-desc">Intended enterprise action</text>
+        <circle cx={G.state.x} cy={G.receiveY + 36} r="6" class="psvg-port" data-port="RESULT IN"></circle>
+        <circle cx={G.state.x + G.state.w} cy={G.receiveY + 60} r="6" class="psvg-port" data-port="ACTION OUT"></circle>
       </g>
 
-      <g data-node-id="execute" data-collision-check="true">
-        <rect x="68" y="468" width="252" height="96" rx="12" class="psvg-node psvg-node--allow"></rect>
-        <text x="84" y="500" class="psvg-role">EXECUTE</text>
-        <text x="84" y="528" class="psvg-strong">Authorized action only</text>
-        <circle cx="68" cy="508" r="6" class="psvg-port" data-port="EXECUTION IN"></circle>
-        <text x="84" y="460" class="psvg-port-label">EXECUTION IN</text>
-        <circle cx="320" cy="528" r="6" class="psvg-port" data-port="SYSTEM EFFECT OUT"></circle>
-        <text x="200" y="548" class="psvg-port-label" text-anchor="end">SYSTEM EFFECT OUT</text>
+      <g data-node-id="execute" data-cf-role="app-state" data-collision-check="true">
+        <rect x={G.state.x} y={G.executeY} width={G.state.w} height={G.state.h} rx="12" class="psvg-node psvg-node--allow"></rect>
+        <text x={G.state.x + 16} y={G.executeY + 32} class="psvg-role">EXECUTE</text>
+        <text x={G.state.x + 16} y={G.executeY + 58} class="psvg-strong">Authorized action only</text>
+        <circle cx={G.state.x} cy={G.executeY + G.state.h / 2} r="6" class="psvg-port" data-port="EXECUTION IN"></circle>
+        <circle cx={G.state.x + G.state.w} cy={G.executeY + G.state.h / 2} r="6" class="psvg-port" data-port="SYSTEM EFFECT OUT"></circle>
       </g>
     </g>
 
-    <!-- AI Provider -->
+    <!-- COL 3 — AI Provider (top lane, aligned with Request Admission) -->
     <g data-node-id="ai-provider" data-collision-check="true">
-      <rect x="900" y="100" width="320" height="168" rx="14" class="psvg-bound psvg-bound--provider"></rect>
-      <g transform="translate(920, 118)" fill="none" stroke="var(--diagram-boundary-provider)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect
+        x={G.col3.x}
+        y={G.providerY}
+        width={G.col3.w}
+        height={G.providerH}
+        rx="14"
+        class="psvg-bound psvg-bound--provider"
+      ></rect>
+      <g transform={`translate(${G.col3.x + 16}, ${G.providerY + 14})`} fill="none" stroke="var(--diagram-boundary-provider)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 16a6 6 0 0 0-11.2-3A5 5 0 0 0 7 22h11a4 4 0 0 0 0-8z"></path>
       </g>
-      <text x="956" y="136" class="psvg-bound-label psvg-bound-label--provider">AI PROVIDER</text>
-      <text x="920" y="164" class="psvg-cf-sublabel psvg-cf-sublabel--provider">UNTRUSTED EXTERNAL SERVICE</text>
-      <text x="920" y="204" class="psvg-strong">Returned result</text>
-      <text x="920" y="228" class="psvg-desc">Untrusted proposal</text>
-      <circle cx="900" cy="192" r="6" class="psvg-port" data-port="PROVIDER IN"></circle>
-      <circle cx="900" cy="236" r="6" class="psvg-port" data-port="PROVIDER OUT"></circle>
+      <text x={G.col3.x + 52} y={G.providerY + 32} class="psvg-bound-label psvg-bound-label--provider">AI PROVIDER</text>
+      <text x={G.col3.x + 16} y={G.providerY + 56} class="psvg-cf-sublabel psvg-cf-sublabel--provider">UNTRUSTED EXTERNAL SERVICE</text>
+      <text x={G.col3.x + 16} y={G.providerY + 86} class="psvg-strong">UNTRUSTED RESULT</text>
+      <circle cx={G.col3.x} cy={G.providerY + G.providerH / 2} r="6" class="psvg-port" data-port="PROVIDER IN"></circle>
+      <circle cx={G.col3.x + G.col3.w / 2} cy={G.providerY + G.providerH} r="6" class="psvg-port" data-port="PROVIDER OUT"></circle>
     </g>
 
-    <!-- System of Record -->
+    <!-- COL 3 — System of Record (bottom lane, aligned with Execute) -->
     <g data-node-id="sor" data-collision-check="true">
-      <rect x="900" y="390" width="320" height="152" rx="14" class="psvg-bound psvg-bound--enterprise psvg-cf-sor"></rect>
-      <g transform="translate(920, 408)" fill="none" stroke="var(--diagram-boundary-enterprise)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect
+        x={G.col3.x}
+        y={G.sorY}
+        width={G.col3.w}
+        height={G.sorH}
+        rx="14"
+        class="psvg-bound psvg-bound--enterprise psvg-cf-sor"
+      ></rect>
+      <g transform={`translate(${G.col3.x + 16}, ${G.sorY + 14})`} fill="none" stroke="var(--diagram-boundary-enterprise)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
         <ellipse cx="12" cy="5" rx="10" ry="3"></ellipse>
         <path d="M2 5v12c0 1.7 4.5 3 10 3s10-1.3 10-3V5"></path>
         <path d="M2 11c0 1.7 4.5 3 10 3s10-1.3 10-3"></path>
       </g>
-      <text x="956" y="426" class="psvg-bound-label">ENTERPRISE SYSTEM OF RECORD</text>
-      <text x="920" y="454" class="psvg-cf-sublabel">AUTHORITATIVE BUSINESS STATE</text>
-      <text x="920" y="500" class="psvg-strong">Authorized enterprise effect</text>
-      <circle cx="900" cy="500" r="6" class="psvg-port" data-port="SOR IN"></circle>
+      <text x={G.col3.x + 52} y={G.sorY + 32} class="psvg-bound-label">ENTERPRISE SYSTEM OF RECORD</text>
+      <text x={G.col3.x + 16} y={G.sorY + 56} class="psvg-cf-sublabel">AUTHORITATIVE BUSINESS STATE</text>
+      <text x={G.col3.x + 16} y={G.sorY + 86} class="psvg-desc">Application executes; SoR retains state</text>
+      <circle cx={G.col3.x} cy={G.sorY + G.sorH / 2} r="6" class="psvg-port" data-port="SOR IN"></circle>
     </g>
 
-    <!-- Request Admission chokepoint -->
-    <g data-node-id="request-admission" data-collision-check="true" filter={`url(#${mid}-gate)`}>
-      <rect x="512" y="112" width="156" height="168" rx="10" fill={`url(#${mid}-gate-fill)`} class="psvg-cf-gate-shell"></rect>
-      <rect x="528" y="128" width="124" height="136" rx="6" class="psvg-gate psvg-cf-gate"></rect>
-      <!-- aperture / controlled passage -->
-      <rect x="528" y="176" width="124" height="40" class="psvg-cf-aperture"></rect>
-      <path d="M536 136 V252 M644 136 V252" class="psvg-cf-rib"></path>
-      <text x="590" y="156" class="psvg-cf-gate-title" text-anchor="middle">REQUEST</text>
-      <text x="590" y="176" class="psvg-cf-gate-title" text-anchor="middle">ADMISSION</text>
-      <text x="590" y="236" class="psvg-cf-gate-hint" text-anchor="middle">Authorization</text>
-      <text x="590" y="252" class="psvg-cf-gate-hint" text-anchor="middle">checkpoint</text>
+    <!-- Request Admission gate (equal to Result-to-Action) -->
+    <g data-node-id="request-admission" data-cf-role="auth-gate" data-collision-check="true" filter={`url(#${mid}-gate)`}>
+      <rect x={G.gateX} y={G.admissionY} width={G.gate.w} height={G.gate.h} rx="10" fill={`url(#${mid}-gate-fill)`} class="psvg-cf-gate-shell"></rect>
+      <rect x={G.gateX + 10} y={G.admissionY + 10} width={G.gate.w - 20} height={G.gate.h - 20} rx="6" class="psvg-gate psvg-cf-gate"></rect>
+      <rect x={G.gateX + 10} y={G.admissionY + 46} width={G.gate.w - 20} height={32} class="psvg-cf-aperture"></rect>
+      <path d={`M${G.gateX + 22} ${G.admissionY + 18} V${G.admissionY + G.gate.h - 18} M${G.gateX + G.gate.w - 22} ${G.admissionY + 18} V${G.admissionY + G.gate.h - 18}`} class="psvg-cf-rib"></path>
+      <text x={G.gateX + G.gate.w / 2} y={G.admissionY + 34} class="psvg-cf-gate-title" text-anchor="middle">REQUEST ADMISSION</text>
+      <text x={G.gateX + G.gate.w / 2} y={G.admissionY + 96} class="psvg-cf-gate-hint" text-anchor="middle">Authorization checkpoint</text>
     </g>
 
-    <!-- Result-to-Action chokepoint -->
-    <g data-node-id="result-to-action" data-collision-check="true" filter={`url(#${mid}-gate)`}>
-      <rect x="512" y="340" width="156" height="168" rx="10" fill={`url(#${mid}-gate-fill)`} class="psvg-cf-gate-shell"></rect>
-      <rect x="528" y="356" width="124" height="136" rx="6" class="psvg-gate psvg-cf-gate"></rect>
-      <rect x="528" y="404" width="124" height="40" class="psvg-cf-aperture"></rect>
-      <path d="M536 364 V480 M644 364 V480" class="psvg-cf-rib"></path>
-      <text x="590" y="384" class="psvg-cf-gate-title" text-anchor="middle">RESULT-TO-</text>
-      <text x="590" y="404" class="psvg-cf-gate-title" text-anchor="middle">ACTION</text>
-      <text x="590" y="464" class="psvg-cf-gate-hint" text-anchor="middle">Authorization</text>
-      <text x="590" y="480" class="psvg-cf-gate-hint" text-anchor="middle">checkpoint</text>
+    <!-- Result-to-Action gate -->
+    <g data-node-id="result-to-action" data-cf-role="auth-gate" data-collision-check="true" filter={`url(#${mid}-gate)`}>
+      <rect x={G.gateX} y={G.r2aY} width={G.gate.w} height={G.gate.h} rx="10" fill={`url(#${mid}-gate-fill)`} class="psvg-cf-gate-shell"></rect>
+      <rect x={G.gateX + 10} y={G.r2aY + 10} width={G.gate.w - 20} height={G.gate.h - 20} rx="6" class="psvg-gate psvg-cf-gate"></rect>
+      <rect x={G.gateX + 10} y={G.r2aY + 46} width={G.gate.w - 20} height={32} class="psvg-cf-aperture"></rect>
+      <path d={`M${G.gateX + 22} ${G.r2aY + 18} V${G.r2aY + G.gate.h - 18} M${G.gateX + G.gate.w - 22} ${G.r2aY + 18} V${G.r2aY + G.gate.h - 18}`} class="psvg-cf-rib"></path>
+      <text x={G.gateX + G.gate.w / 2} y={G.r2aY + 34} class="psvg-cf-gate-title" text-anchor="middle">RESULT-TO-ACTION</text>
+      <text x={G.gateX + G.gate.w / 2} y={G.r2aY + 96} class="psvg-cf-gate-hint" text-anchor="middle">Authorization checkpoint</text>
     </g>
 
-    <!-- REQUEST RAIL -->
+    <!-- REQUEST DENY — above gate, cleared from transaction rails -->
+    <path
+      class="psvg-path psvg-path--deny"
+      data-path-purpose="request-deny"
+      d={`M${G.gateX + G.gate.w / 2} ${G.admissionY} V${G.denyReqY + G.deny.h}`}
+      marker-end={`url(#${mid}-d)`}
+    ></path>
+    <g data-terminal="request-deny" data-cf-role="deny-terminal" data-collision-check="true">
+      <rect x={G.gateX} y={G.denyReqY} width={G.deny.w} height={G.deny.h} rx="10" class="psvg-deny"></rect>
+      <g transform={`translate(${G.gateX + 12}, ${G.denyReqY + 10})`}>
+        <circle cx="12" cy="12" r="11" class="psvg-deny-x"></circle>
+        <path d="M7 7 L17 17 M17 7 L7 17" class="psvg-deny-x-line"></path>
+      </g>
+      <text x={G.gateX + 42} y={G.denyReqY + 24} class="psvg-deny-strong">REQUEST DENY</text>
+      <text x={G.gateX + 42} y={G.denyReqY + 44} class="psvg-deny-desc">No provider invocation</text>
+    </g>
+
+    <!-- ACTION DENY — below gate, cleared from ALLOW and SoR -->
+    <path
+      class="psvg-path psvg-path--deny"
+      data-path-purpose="action-deny"
+      d={`M${G.gateX + G.gate.w / 2} ${G.r2aY + G.gate.h} V${G.denyActY}`}
+      marker-end={`url(#${mid}-d)`}
+    ></path>
+    <g data-terminal="action-deny" data-cf-role="deny-terminal" data-collision-check="true">
+      <rect x={G.gateX} y={G.denyActY} width={G.deny.w} height={G.deny.h} rx="10" class="psvg-deny"></rect>
+      <g transform={`translate(${G.gateX + 12}, ${G.denyActY + 10})`}>
+        <circle cx="12" cy="12" r="11" class="psvg-deny-x"></circle>
+        <path d="M7 7 L17 17 M17 7 L7 17" class="psvg-deny-x-line"></path>
+      </g>
+      <text x={G.gateX + 42} y={G.denyActY + 24} class="psvg-deny-strong">ACTION DENY</text>
+      <text x={G.gateX + 42} y={G.denyActY + 44} class="psvg-deny-desc">No enterprise effect</text>
+    </g>
+
+    <!-- TOP RAIL: Prepare → Request Admission → ALLOW → AI Provider -->
     <path
       class="psvg-path psvg-path--neutral"
       data-path-purpose="request-out"
-      d="M320 192 H528"
+      d={`M${G.state.x + G.state.w} ${G.prepareY + G.state.h / 2} H${G.gateX}`}
       marker-end={`url(#${mid}-n)`}
     ></path>
     <path
       class="psvg-path psvg-path--allow"
       data-path-purpose="request-allow"
-      d="M652 196 H900"
+      d={`M${G.gateX + G.gate.w} ${G.admissionY + 62} H${G.col3.x}`}
       marker-end={`url(#${mid}-a)`}
     ></path>
     <g data-label-plate="true">
@@ -210,119 +280,84 @@ const labelledBy = `${idPrefix}-title`;
       <text x="756" y="184" class="psvg-plate-text psvg-plate-text--allow">ALLOW</text>
     </g>
 
-    <!-- REQUEST DENY terminal -->
-    <path
-      class="psvg-path psvg-path--deny"
-      data-path-purpose="request-deny"
-      d="M590 112 V72 H760"
-      marker-end={`url(#${mid}-d)`}
-    ></path>
-    <g data-terminal="request-deny" data-collision-check="true">
-      <rect x="760" y="40" width="200" height="64" rx="10" class="psvg-deny"></rect>
-      <g transform="translate(776, 52)">
-        <circle cx="12" cy="12" r="11" class="psvg-deny-x"></circle>
-        <path d="M7 7 L17 17 M17 7 L7 17" class="psvg-deny-x-line"></path>
-      </g>
-      <text x="808" y="64" class="psvg-deny-strong">REQUEST DENY</text>
-      <text x="808" y="86" class="psvg-deny-desc">No provider invocation</text>
-    </g>
-
-    <!-- PROVIDER RETURN RAIL (outside admission lane; clears both gates) -->
+    <!-- MIDDLE RETURN: AI Provider → RECEIVE + DECLARE (not into Result-to-Action) -->
     <path
       class="psvg-path psvg-path--neutral"
       data-path-purpose="provider-return"
-      d="M900 236 H848 V292 H40 V348 H68"
+      d={`M${G.col3.x + G.col3.w / 2} ${G.providerY + G.providerH} V280 H40 V${G.receiveY + 36} H${G.state.x}`}
       marker-end={`url(#${mid}-n)`}
     ></path>
     <g data-label-plate="true">
-      <rect x="96" y="264" width="168" height="24" rx="4" class="psvg-plate"></rect>
-      <text x="180" y="281" class="psvg-plate-text">UNTRUSTED RESULT</text>
+      <rect x="200" y="248" width="168" height="24" rx="4" class="psvg-plate"></rect>
+      <text x="284" y="265" class="psvg-plate-text">UNTRUSTED RESULT</text>
     </g>
 
-    <!-- ACTION RAIL into Result-to-Action -->
+    <!-- BOTTOM RAIL: Receive → Result-to-Action → ALLOW returns into Execute (not SoR) -->
     <path
       class="psvg-path psvg-path--neutral"
       data-path-purpose="action-out"
-      d="M320 372 H528"
+      d={`M${G.state.x + G.state.w} ${G.receiveY + 60} H${G.gateX} V${G.r2aY + 62}`}
       marker-end={`url(#${mid}-n)`}
     ></path>
-
-    <!-- ACTION DENY (below aperture; does not share evidence lane) -->
-    <path
-      class="psvg-path psvg-path--deny"
-      data-path-purpose="action-deny"
-      d="M590 444 V456 H760"
-      marker-end={`url(#${mid}-d)`}
-    ></path>
-    <g data-terminal="action-deny" data-collision-check="true">
-      <rect x="760" y="424" width="120" height="64" rx="10" class="psvg-deny"></rect>
-      <g transform="translate(776, 436)">
-        <circle cx="12" cy="12" r="11" class="psvg-deny-x"></circle>
-        <path d="M7 7 L17 17 M17 7 L7 17" class="psvg-deny-x-line"></path>
-      </g>
-      <text x="808" y="448" class="psvg-deny-strong">ACTION DENY</text>
-      <text x="776" y="472" class="psvg-deny-desc">No enterprise effect</text>
-    </g>
-
-    <!-- ACTION ALLOW crosses aperture, then returns into Execute → SoR -->
     <path
       class="psvg-path psvg-path--allow"
       data-path-purpose="action-allow"
-      d="M528 424 H652 H680 V508 H68"
+      d={`M${G.gateX + G.gate.w / 2} ${G.r2aY + 62} H${G.gateX} H${G.state.x}`}
       marker-end={`url(#${mid}-a)`}
     ></path>
     <g data-label-plate="true">
-      <rect x="300" y="480" width="72" height="22" rx="4" class="psvg-plate psvg-plate--allow"></rect>
-      <text x="336" y="496" class="psvg-plate-text psvg-plate-text--allow">ALLOW</text>
+      <rect x="340" y={G.r2aY + 48} width="72" height="22" rx="4" class="psvg-plate psvg-plate--allow"></rect>
+      <text x="376" y={G.r2aY + 64} class="psvg-plate-text psvg-plate-text--allow">ALLOW</text>
     </g>
+
+    <!-- Execute → System of Record (routes below Result-to-Action; app executes) -->
     <path
       class="psvg-path psvg-path--allow"
       data-path-purpose="system-effect"
-      d="M320 528 H900"
+      d={`M${G.state.x + G.state.w} ${G.executeY + G.state.h - 10} H${G.col1.x + G.col1.w + 36} V${G.r2aY + G.gate.h + 14} H${G.col3.x} V${G.sorY + G.sorH / 2}`}
       marker-end={`url(#${mid}-a)`}
     ></path>
+    <g data-label-plate="true">
+      <rect x="720" y={G.r2aY + G.gate.h + 2} width="120" height="20" rx="4" class="psvg-plate psvg-plate--allow"></rect>
+      <text x="780" y={G.r2aY + G.gate.h + 16} class="psvg-plate-text psvg-plate-text--allow">App executes</text>
+    </g>
 
-    <!-- Evidence spine (routes around gates; no return to runtime) -->
+    <!-- Evidence lane (separate; no return to gates) -->
     <g data-node-id="evidence-spine">
       <path
         class="psvg-path psvg-path--evidence"
         data-path-purpose="evidence-from-admission"
-        d="M668 196 H720 V620"
+        d={`M${G.gateX + G.gate.w + 8} ${G.admissionY + 62} H790 V${G.evidenceY + 24}`}
         marker-end={`url(#${mid}-e)`}
       ></path>
       <path
         class="psvg-path psvg-path--evidence"
         data-path-purpose="evidence-from-action"
-        d="M668 404 H720 V620"
+        d={`M${G.gateX + G.gate.w + 8} ${G.r2aY + 62} H790 V${G.evidenceY + 24}`}
         marker-end={`url(#${mid}-e)`}
       ></path>
       <g data-node-id="decision-records" data-collision-check="true">
-        <rect x="420" y="620" width="280" height="56" rx="10" class="psvg-evidence"></rect>
-        <g transform="translate(436, 636)" fill="none" stroke="var(--decision-evidence)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-          <path d="M14 2v6h6"></path>
-        </g>
-        <text x="468" y="654" class="psvg-strong">Verifiable Decision Records</text>
+        <rect x="430" y={G.evidenceY} width="300" height="48" rx="10" class="psvg-evidence"></rect>
+        <text x="448" y={G.evidenceY + 30} class="psvg-strong">VERIFIABLE DECISION RECORDS</text>
       </g>
       <path
         class="psvg-path psvg-path--evidence"
         data-path-purpose="evidence-to-verify"
-        d="M700 648 H860"
+        d={`M730 ${G.evidenceY + 24} H860`}
         marker-end={`url(#${mid}-e)`}
       ></path>
       <g data-node-id="verify" data-collision-check="true">
-        <rect x="860" y="620" width="360" height="56" rx="10" class="psvg-bound psvg-bound--verify"></rect>
-        <text x="880" y="644" class="psvg-bound-label psvg-bound-label--verify">BEACONGUARD VERIFY</text>
-        <text x="1088" y="644" class="psvg-cf-sublabel psvg-cf-sublabel--verify">READ-ONLY</text>
-        <text x="880" y="664" class="psvg-desc">Outside runtime authority</text>
+        <rect x="860" y={G.evidenceY} width="350" height="48" rx="10" class="psvg-bound psvg-bound--verify"></rect>
+        <text x="878" y={G.evidenceY + 20} class="psvg-bound-label psvg-bound-label--verify">BEACONGUARD VERIFY — READ-ONLY</text>
+        <text x="878" y={G.evidenceY + 38} class="psvg-desc">Outside runtime authority</text>
       </g>
     </g>
   </svg>
 
-  <!-- ===================== COMPACT 440×1040 ===================== -->
+  <!-- ===================== COMPACT 440×1080 ===================== -->
   <svg
     class="psvg-compact"
-    viewBox="0 0 440 1040"
+    viewBox="0 0 440 1080"
     preserveAspectRatio="xMidYMin meet"
     role="img"
     aria-hidden="true"
@@ -330,8 +365,8 @@ const labelledBy = `${idPrefix}-title`;
   >
     <title>{title} — compact</title>
     <desc>
-      Vertical control fabric. Same enterprise application prepares, receives,
-      declares, and executes. Dual DENY terminals. Evidence side rail to Verify.
+      Vertical control fabric. Persistent Enterprise Application prepares, receives,
+      and executes. Dual DENY side terminals. Evidence rail to read-only Verify.
     </desc>
     <defs>
       <marker id={`${mid}-cn`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
@@ -348,101 +383,99 @@ const labelledBy = `${idPrefix}-title`;
       </marker>
     </defs>
 
-    <!-- Shared enterprise identity rail (does not enclose provider or SoR) -->
-    <path d="M28 64 V820" class="psvg-cf-app-spine"></path>
-    <text x="40" y="44" class="psvg-bound-label">ENTERPRISE APPLICATION</text>
+    <!-- Persistent Enterprise Application boundary -->
+    <rect x="24" y="40" width="280" height="820" rx="16" class="psvg-bound psvg-bound--enterprise"></rect>
+    <text x="40" y="68" class="psvg-bound-label">ENTERPRISE APPLICATION</text>
 
-    <g data-node-id="c-prepare" data-collision-check="true">
-      <rect x="40" y="64" width="248" height="72" rx="12" class="psvg-node psvg-cf-app-state"></rect>
-      <text x="56" y="92" class="psvg-role">PREPARE</text>
-      <text x="56" y="116" class="psvg-strong">Governed request</text>
+    <g data-node-id="c-prepare" data-cf-role="app-state" data-collision-check="true">
+      <rect x="44" y="88" width="240" height="80" rx="12" class="psvg-node"></rect>
+      <text x="60" y="118" class="psvg-role">PREPARE</text>
+      <text x="60" y="144" class="psvg-strong">Governed request</text>
     </g>
-    <path class="psvg-path psvg-path--neutral" data-path-purpose="c-to-admission" d="M164 136 V168" marker-end={`url(#${mid}-cn)`}></path>
+    <path class="psvg-path psvg-path--neutral" data-path-purpose="c-to-admission" d="M164 168 V200" marker-end={`url(#${mid}-cn)`}></path>
 
-    <!-- Request Admission (BeaconGuard gate) -->
-    <g data-node-id="c-admission" data-collision-check="true">
-      <rect x="40" y="168" width="248" height="88" rx="8" class="psvg-gate psvg-cf-gate"></rect>
-      <rect x="40" y="200" width="248" height="28" class="psvg-cf-aperture"></rect>
-      <text x="164" y="192" class="psvg-cf-gate-title" text-anchor="middle">REQUEST ADMISSION</text>
-      <text x="164" y="236" class="psvg-cf-gate-hint" text-anchor="middle">Authorization checkpoint</text>
+    <g data-node-id="c-admission" data-cf-role="auth-gate" data-collision-check="true">
+      <rect x="52" y="200" width="224" height="88" rx="8" class="psvg-gate psvg-cf-gate"></rect>
+      <rect x="52" y="232" width="224" height="28" class="psvg-cf-aperture"></rect>
+      <text x="164" y="224" class="psvg-cf-gate-title" text-anchor="middle">REQUEST ADMISSION</text>
+      <text x="164" y="268" class="psvg-cf-gate-hint" text-anchor="middle">Authorization checkpoint</text>
     </g>
-    <path class="psvg-path psvg-path--deny" data-path-purpose="c-req-deny" d="M288 214 H320" marker-end={`url(#${mid}-cd)`}></path>
-    <g data-terminal="c-request-deny" data-collision-check="true">
-      <rect x="320" y="186" width="104" height="64" rx="10" class="psvg-deny"></rect>
-      <text x="332" y="212" class="psvg-deny-strong">REQUEST</text>
-      <text x="332" y="230" class="psvg-deny-strong">DENY</text>
+    <path class="psvg-path psvg-path--deny" data-path-purpose="c-req-deny" d="M276 244 H308" marker-end={`url(#${mid}-cd)`}></path>
+    <g data-terminal="c-request-deny" data-cf-role="deny-terminal" data-collision-check="true">
+      <rect x="308" y="216" width="116" height="56" rx="10" class="psvg-deny"></rect>
+      <text x="320" y="240" class="psvg-deny-strong">REQUEST DENY</text>
+      <text x="320" y="258" class="psvg-deny-desc">No invoke</text>
     </g>
-    <path class="psvg-path psvg-path--allow" data-path-purpose="c-req-allow" d="M164 256 V288" marker-end={`url(#${mid}-ca)`}></path>
+    <path class="psvg-path psvg-path--allow" data-path-purpose="c-req-allow" d="M164 288 V320" marker-end={`url(#${mid}-ca)`}></path>
     <g data-label-plate="true">
-      <rect x="128" y="260" width="72" height="20" rx="4" class="psvg-plate psvg-plate--allow"></rect>
-      <text x="164" y="275" class="psvg-plate-text psvg-plate-text--allow">ALLOW</text>
+      <rect x="128" y="292" width="72" height="20" rx="4" class="psvg-plate psvg-plate--allow"></rect>
+      <text x="164" y="307" class="psvg-plate-text psvg-plate-text--allow">ALLOW</text>
     </g>
 
-    <!-- AI Provider outside enterprise identity -->
+    <!-- Provider outside app fill — dashed, sits in flow but labeled external -->
     <g data-node-id="c-provider" data-collision-check="true">
-      <rect x="40" y="288" width="248" height="80" rx="12" class="psvg-bound psvg-bound--provider"></rect>
-      <text x="56" y="316" class="psvg-bound-label psvg-bound-label--provider">AI PROVIDER</text>
-      <text x="56" y="344" class="psvg-desc">Untrusted external service</text>
+      <rect x="44" y="320" width="240" height="80" rx="12" class="psvg-bound psvg-bound--provider"></rect>
+      <text x="60" y="348" class="psvg-bound-label psvg-bound-label--provider">AI PROVIDER</text>
+      <text x="60" y="376" class="psvg-desc">Untrusted external service</text>
     </g>
-    <path class="psvg-path psvg-path--neutral" data-path-purpose="c-return" d="M164 368 V400" marker-end={`url(#${mid}-cn)`}></path>
+    <path class="psvg-path psvg-path--neutral" data-path-purpose="c-return" d="M164 400 V432" marker-end={`url(#${mid}-cn)`}></path>
     <g data-label-plate="true">
-      <rect x="80" y="372" width="168" height="22" rx="4" class="psvg-plate"></rect>
-      <text x="164" y="388" class="psvg-plate-text">Untrusted result returns</text>
+      <rect x="76" y="404" width="176" height="22" rx="4" class="psvg-plate"></rect>
+      <text x="164" y="420" class="psvg-plate-text">UNTRUSTED RESULT</text>
     </g>
 
-    <g data-node-id="c-receive" data-collision-check="true">
-      <rect x="40" y="400" width="248" height="88" rx="12" class="psvg-node psvg-cf-app-state"></rect>
-      <text x="56" y="428" class="psvg-role">RECEIVE + DECLARE</text>
-      <text x="56" y="456" class="psvg-strong">Same application</text>
-      <text x="56" y="476" class="psvg-desc">Intended action</text>
+    <g data-node-id="c-receive" data-cf-role="app-state" data-collision-check="true">
+      <rect x="44" y="432" width="240" height="88" rx="12" class="psvg-node"></rect>
+      <text x="60" y="460" class="psvg-role">RECEIVE + DECLARE</text>
+      <text x="60" y="486" class="psvg-strong">Same application</text>
+      <text x="60" y="506" class="psvg-desc">Intended action</text>
     </g>
-    <path class="psvg-path psvg-path--neutral" data-path-purpose="c-to-r2a" d="M164 488 V520" marker-end={`url(#${mid}-cn)`}></path>
+    <path class="psvg-path psvg-path--neutral" data-path-purpose="c-to-r2a" d="M164 520 V552" marker-end={`url(#${mid}-cn)`}></path>
 
-    <!-- Result-to-Action -->
-    <g data-node-id="c-r2a" data-collision-check="true">
-      <rect x="40" y="520" width="248" height="88" rx="8" class="psvg-gate psvg-cf-gate"></rect>
-      <rect x="40" y="552" width="248" height="28" class="psvg-cf-aperture"></rect>
-      <text x="164" y="544" class="psvg-cf-gate-title" text-anchor="middle">RESULT-TO-ACTION</text>
-      <text x="164" y="588" class="psvg-cf-gate-hint" text-anchor="middle">Authorization checkpoint</text>
+    <g data-node-id="c-r2a" data-cf-role="auth-gate" data-collision-check="true">
+      <rect x="52" y="552" width="224" height="88" rx="8" class="psvg-gate psvg-cf-gate"></rect>
+      <rect x="52" y="584" width="224" height="28" class="psvg-cf-aperture"></rect>
+      <text x="164" y="576" class="psvg-cf-gate-title" text-anchor="middle">RESULT-TO-ACTION</text>
+      <text x="164" y="620" class="psvg-cf-gate-hint" text-anchor="middle">Authorization checkpoint</text>
     </g>
-    <path class="psvg-path psvg-path--deny" data-path-purpose="c-act-deny" d="M288 566 H320" marker-end={`url(#${mid}-cd)`}></path>
-    <g data-terminal="c-action-deny" data-collision-check="true">
-      <rect x="320" y="538" width="104" height="64" rx="10" class="psvg-deny"></rect>
-      <text x="332" y="564" class="psvg-deny-strong">ACTION</text>
-      <text x="332" y="582" class="psvg-deny-strong">DENY</text>
+    <path class="psvg-path psvg-path--deny" data-path-purpose="c-act-deny" d="M276 596 H308" marker-end={`url(#${mid}-cd)`}></path>
+    <g data-terminal="c-action-deny" data-cf-role="deny-terminal" data-collision-check="true">
+      <rect x="308" y="568" width="116" height="56" rx="10" class="psvg-deny"></rect>
+      <text x="320" y="592" class="psvg-deny-strong">ACTION DENY</text>
+      <text x="320" y="610" class="psvg-deny-desc">No effect</text>
     </g>
-    <path class="psvg-path psvg-path--allow" data-path-purpose="c-act-allow" d="M164 608 V640" marker-end={`url(#${mid}-ca)`}></path>
+    <path class="psvg-path psvg-path--allow" data-path-purpose="c-act-allow" d="M164 640 V672" marker-end={`url(#${mid}-ca)`}></path>
     <g data-label-plate="true">
-      <rect x="128" y="612" width="72" height="20" rx="4" class="psvg-plate psvg-plate--allow"></rect>
-      <text x="164" y="627" class="psvg-plate-text psvg-plate-text--allow">ALLOW</text>
+      <rect x="128" y="644" width="72" height="20" rx="4" class="psvg-plate psvg-plate--allow"></rect>
+      <text x="164" y="659" class="psvg-plate-text psvg-plate-text--allow">ALLOW</text>
     </g>
 
-    <g data-node-id="c-execute" data-collision-check="true">
-      <rect x="40" y="640" width="248" height="72" rx="12" class="psvg-node psvg-node--allow psvg-cf-app-state"></rect>
-      <text x="56" y="668" class="psvg-role">EXECUTE</text>
-      <text x="56" y="692" class="psvg-strong">Authorized action only</text>
+    <g data-node-id="c-execute" data-cf-role="app-state" data-collision-check="true">
+      <rect x="44" y="672" width="240" height="80" rx="12" class="psvg-node psvg-node--allow"></rect>
+      <text x="60" y="702" class="psvg-role">EXECUTE</text>
+      <text x="60" y="728" class="psvg-strong">Authorized action only</text>
     </g>
-    <path class="psvg-path psvg-path--allow" data-path-purpose="c-to-sor" d="M164 712 V744" marker-end={`url(#${mid}-ca)`}></path>
+    <path class="psvg-path psvg-path--allow" data-path-purpose="c-to-sor" d="M164 752 V784" marker-end={`url(#${mid}-ca)`}></path>
 
     <g data-node-id="c-sor" data-collision-check="true">
-      <rect x="40" y="744" width="248" height="88" rx="12" class="psvg-bound psvg-bound--enterprise psvg-cf-sor"></rect>
-      <text x="56" y="776" class="psvg-bound-label">SYSTEM OF RECORD</text>
-      <text x="56" y="804" class="psvg-desc">Authoritative business state</text>
+      <rect x="44" y="784" width="240" height="80" rx="12" class="psvg-bound psvg-bound--enterprise psvg-cf-sor"></rect>
+      <text x="60" y="814" class="psvg-bound-label">SYSTEM OF RECORD</text>
+      <text x="60" y="840" class="psvg-desc">Authoritative business state</text>
     </g>
 
-    <!-- Evidence side rail (from gates, not from DENY terminals) -->
-    <path class="psvg-path psvg-path--evidence" data-path-purpose="c-ev-adm" d="M288 214 H360 V860"></path>
-    <path class="psvg-path psvg-path--evidence" data-path-purpose="c-ev-r2a" d="M288 566 H360"></path>
+    <!-- Evidence side rail -->
+    <path class="psvg-path psvg-path--evidence" data-path-purpose="c-ev-adm" d="M276 244 H360 V900"></path>
+    <path class="psvg-path psvg-path--evidence" data-path-purpose="c-ev-r2a" d="M276 596 H360"></path>
     <g data-node-id="c-evidence" data-collision-check="true">
-      <rect x="312" y="820" width="112" height="72" rx="10" class="psvg-evidence"></rect>
-      <text x="324" y="848" class="psvg-cf-ev-label">Decision</text>
-      <text x="324" y="868" class="psvg-cf-ev-label">Records</text>
+      <rect x="304" y="860" width="120" height="64" rx="10" class="psvg-evidence"></rect>
+      <text x="316" y="888" class="psvg-cf-ev-label">Decision</text>
+      <text x="316" y="908" class="psvg-cf-ev-label">Records</text>
     </g>
-    <path class="psvg-path psvg-path--evidence" data-path-purpose="c-to-verify" d="M368 892 V920" marker-end={`url(#${mid}-ce)`}></path>
+    <path class="psvg-path psvg-path--evidence" data-path-purpose="c-to-verify" d="M364 924 V956" marker-end={`url(#${mid}-ce)`}></path>
     <g data-node-id="c-verify" data-collision-check="true">
-      <rect x="24" y="920" width="400" height="72" rx="10" class="psvg-bound psvg-bound--verify"></rect>
-      <text x="40" y="948" class="psvg-bound-label psvg-bound-label--verify">BEACONGUARD VERIFY · READ-ONLY</text>
-      <text x="40" y="972" class="psvg-desc">Evidence spine — no runtime authority</text>
+      <rect x="24" y="956" width="400" height="72" rx="10" class="psvg-bound psvg-bound--verify"></rect>
+      <text x="40" y="984" class="psvg-bound-label psvg-bound-label--verify">BEACONGUARD VERIFY · READ-ONLY</text>
+      <text x="40" y="1008" class="psvg-desc">Evidence spine — no runtime authority</text>
     </g>
   </svg>
 
@@ -450,7 +483,7 @@ const labelledBy = `${idPrefix}-title`;
     BeaconGuard Control Fabric: one enterprise application prepares a request,
     Request Admission authorizes or denies provider invocation, an untrusted AI
     result returns to the same application, Result-to-Action authorizes or denies
-    enterprise effect, Execute updates the system of record only when allowed,
-    and both decisions emit evidence to read-only Verify.
+    the declared action, Execute runs only when allowed, and the system of record
+    retains authoritative state. Evidence feeds read-only Verify.
   </figcaption>
 </figure>

@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Staging branch | `staging/website-visual-redesign-20260801` |
-| Current / latest pass | **01B-R3A — Control Fabric art-direction gate** |
+| Current / latest pass | **01B-R3A1 — Control Fabric geometry correction** |
 | Latest pass pointer | [review-artifacts/LATEST_PASS.txt](review-artifacts/LATEST_PASS.txt) |
 | Source website HEAD (baseline) | `1b80a59261b99d3e0bf5cf1900fd8e4e8b17d810` |
-| Preview port (Pass 01B-R3A) | `4336` |
+| Preview port (Pass 01B-R3A1) | `4337` |
 | Production deployment | Not authorized |
 | Merge to main | Not authorized |
 | Pass 01C | Unauthorized pending independent visual review |
@@ -25,10 +25,11 @@
 | 01B-R1 | Enterprise diagram art-direction refinement | `16a892202eb33c506154e4633110eaf907775a8f` | [pass-01b-r1-enterprise-diagram-refinement](review-artifacts/pass-01b-r1-enterprise-diagram-refinement/README.md) |
 | 01B-R2 | Pure-SVG production-candidate diagram rebuild | `72d96ada95319fd90d6c777d0c95a506cb8f4b2d` | [pass-01b-r2-pure-svg-diagram-rebuild](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/README.md) |
 | 01B-R3A | Control Fabric homepage art-direction gate | `877fe20d2cb0d694faf30ea820e2f11dade6d67e` | [pass-01b-r3a-control-fabric-art-direction](review-artifacts/pass-01b-r3a-control-fabric-art-direction/README.md) |
+| 01B-R3A1 | Control Fabric geometry correction | *(pending commit)* | [pass-01b-r3a1-control-fabric-geometry-correction](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/README.md) |
 
-## Pass 01B-R3A — Control Fabric Art-Direction Gate
+## Pass 01B-R3A1 — Control Fabric Geometry Correction
 
-Latest review pass. New `ControlFabricHero` production-candidate for homepage transaction visual. Staging-only route `/staging-control-fabric`. Public homepage unchanged. R2 `GovernedTransactionSummary` retained for comparison.
+Latest review pass. Bounded geometry correction of `ControlFabricHero`: strict grid, DENY clearance, ALLOW return into Execute, persistent Enterprise Application. Staging route `/staging-control-fabric`. Public homepage unchanged.
 
 ```
 IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW
@@ -36,8 +37,8 @@ IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW
 
 Primary artifacts:
 
-- [Pass 01B-R3A README](review-artifacts/pass-01b-r3a-control-fabric-art-direction/README.md)
-- [Control Fabric 1440](review-artifacts/pass-01b-r3a-control-fabric-art-direction/crops/control-fabric-1440.png)
-- [Control Fabric in hero 1440](review-artifacts/pass-01b-r3a-control-fabric-art-direction/crops/control-fabric-in-hero-1440.png)
-- [Control Fabric 390](review-artifacts/pass-01b-r3a-control-fabric-art-direction/crops/control-fabric-390.png)
-- [R2 vs R3A 1440](review-artifacts/pass-01b-r3a-control-fabric-art-direction/comparisons/r2-vs-r3a-1440.png)
+- [Pass 01B-R3A1 README](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/README.md)
+- [Corrected 1440](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/crops/control-fabric-corrected-1440.png)
+- [Corrected in hero 1440](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/crops/control-fabric-corrected-in-hero-1440.png)
+- [Corrected 390](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/crops/control-fabric-corrected-390.png)
+- [R3A vs R3A1](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/comparisons/r3a-vs-r3a1-1440.png)
