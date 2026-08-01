@@ -7,18 +7,25 @@ import VerificationHierarchy from "../components/diagrams/VerificationHierarchy.
   title="Verification | BeaconGuard Verify"
   description="BeaconGuard Verify is a read-only investigation surface for executive reporting, Decision Explorer, deterministic reconstruction, source evidence, replay verification, verifiable export, and non-authoritative AI-assisted insights."
 >
-  <section class="landing">
-    <p class="hero-eyebrow">BEACONGUARD VERIFY</p>
-    <h1>Verify every decision without changing authority.</h1>
-    <p class="hero-subheadline">
-      BeaconGuard Verify exists so security, privacy, compliance, risk, and
-      audit reviewers can inspect governed AI transaction evidence without
-      issuing runtime permission.
-    </p>
-    <div class="page-actions">
-      <a class="btn-primary" href="/proof-evidence">Inspect Proof and Evidence</a>
-      <a class="btn-secondary" href="/sample-decision-record">Sample Decision Record</a>
-      <a class="btn-secondary" href="/docs/compliance-audit">Compliance and Audit</a>
+  <section class="hero-split hero-split--verify">
+    <div class="hero-split-copy">
+      <p class="hero-eyebrow">BEACONGUARD VERIFY</p>
+      <h1>Investigate decisions without changing authority.</h1>
+      <p class="hero-subheadline">
+        BeaconGuard Verify gives security, privacy, compliance, risk, and audit
+        reviewers a read-only surface for inspecting governed AI transaction
+        evidence without granting runtime permission.
+      </p>
+      <div class="page-actions page-actions--hero page-actions--hero-split">
+        <a class="btn-primary" href="/proof-evidence">Inspect Proof and Evidence</a>
+        <a class="btn-secondary" href="/sample-decision-record">View Sample Decision Record</a>
+      </div>
+    </div>
+    <div class="hero-split-visual">
+      <div class="verify-hero-panel">
+        <p class="bg-boundary-label">READ-ONLY VERIFICATION BOUNDARY</p>
+        <VerificationHierarchy />
+      </div>
     </div>
   </section>
 
@@ -43,11 +50,6 @@ import VerificationHierarchy from "../components/diagrams/VerificationHierarchy.
       <li>Browser-side claims are untrusted for integrity conclusions.</li>
       <li>Export signing and reconstruction remain server-side responsibilities.</li>
     </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Verification hierarchy</h2>
-    <VerificationHierarchy />
   </section>
 
   <section class="stack-section">

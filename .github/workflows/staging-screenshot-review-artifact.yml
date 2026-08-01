@@ -1,0 +1,71 @@
+name: Staging screenshot review artifact
+
+on:
+  push:
+    branches:
+      - staging/website-visual-redesign-20260801
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package-latest-pass:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve and validate latest pass directory
+        id: pass
+        shell: bash
+        run: |
+          set -euo pipefail
+          pointer="review-artifacts/LATEST_PASS.txt"
+          test -f "$pointer"
+          dir="$(tr -d '\r' < "$pointer" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+          echo "Resolved latest pass: $dir"
+          case "$dir" in
+            review-artifacts/pass-*) ;;
+            *)
+              echo "Rejected: latest pass must begin with review-artifacts/pass-"
+              exit 1
+              ;;
+          esac
+          if [[ "$dir" == *".."* || "$dir" == /* || "$dir" == *:* ]]; then
+            echo "Rejected absolute path or path traversal"
+            exit 1
+          fi
+          test -d "$dir"
+          for required in README.md manifest.json capture-summary.json fullpage responsive; do
+            test -e "$dir/$required"
+          done
+          echo "dir=$dir" >> "$GITHUB_OUTPUT"
+
+      - name: Assemble artifact contents
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifact-out
+          cp STAGING_REVIEW.md artifact-out/
+          cp review-artifacts/LATEST_PASS.txt artifact-out/
+          if [[ -f review-artifacts/ARTIFACT_POLICY.md ]]; then
+            cp review-artifacts/ARTIFACT_POLICY.md artifact-out/
+          fi
+          mkdir -p "artifact-out/$(dirname "${{ steps.pass.outputs.dir }}")"
+          cp -a "${{ steps.pass.outputs.dir }}" "artifact-out/${{ steps.pass.outputs.dir }}"
+          # Ensure website source is not packaged
+          find artifact-out -maxdepth 3 -type f \( -name package.json -o -name '*.astro' -o -name 'astro.config.*' \) | tee /tmp/forbidden.txt
+          if [[ -s /tmp/forbidden.txt ]]; then
+            echo "Forbidden website source found in artifact package"
+            cat /tmp/forbidden.txt
+            exit 1
+          fi
+
+      - name: Upload screenshot review artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: beaconguard-website-${{ github.ref_name }}-${{ github.sha }}
+          path: artifact-out
+          if-no-files-found: error
+          retention-days: 30

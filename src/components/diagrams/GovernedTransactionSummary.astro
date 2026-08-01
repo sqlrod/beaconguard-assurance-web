@@ -1,0 +1,82 @@
+---
+/**
+ * Compact governed-transaction summary for homepage hero.
+ * Accessible text equivalent included; decorative SVG connectors are aria-hidden.
+ */
+import DiagramIcon from "./primitives/DiagramIcon.astro";
+---
+
+<figure class="bg-txn-summary" aria-labelledby="bg-txn-summary-title">
+  <h3 id="bg-txn-summary-title" class="bg-txn-summary-title">Governed transaction</h3>
+  <div class="bg-txn-summary-canvas" aria-hidden="true">
+    <svg class="bg-txn-summary-svg" viewBox="0 0 360 280" focusable="false">
+      <defs>
+        <marker id="sum-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="var(--decision-neutral)"></path>
+        </marker>
+        <marker id="sum-arrow-allow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="var(--decision-allow)"></path>
+        </marker>
+        <marker id="sum-arrow-deny" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="var(--decision-deny)"></path>
+        </marker>
+      </defs>
+      <!-- outbound -->
+      <path class="bg-path-neutral" d="M70 58 H150" marker-end="url(#sum-arrow)"></path>
+      <path class="bg-path-allow" d="M210 58 H250" marker-end="url(#sum-arrow-allow)"></path>
+      <!-- provider return -->
+      <path class="bg-path-neutral" d="M290 90 V130 H70 V150" marker-end="url(#sum-arrow)"></path>
+      <!-- to action auth -->
+      <path class="bg-path-neutral" d="M150 175 H210" marker-end="url(#sum-arrow)"></path>
+      <!-- allow to execute -->
+      <path class="bg-path-allow" d="M210 210 H120 V230" marker-end="url(#sum-arrow-allow)"></path>
+      <!-- deny stubs -->
+      <path class="bg-path-deny" d="M180 78 V102" marker-end="url(#sum-arrow-deny)"></path>
+      <path class="bg-path-deny" d="M250 198 V222" marker-end="url(#sum-arrow-deny)"></path>
+    </svg>
+
+    <div class="bg-txn-summary-app">
+      <p class="bg-boundary-label">ENTERPRISE APPLICATION</p>
+      <div class="bg-txn-summary-node" data-role="prepare">
+        <DiagramIcon name="app" />
+        <strong>Prepare</strong>
+      </div>
+      <div class="bg-txn-summary-node" data-role="receive">
+        <strong>Receive &amp; declare</strong>
+        <span>Untrusted proposal</span>
+      </div>
+      <div class="bg-txn-summary-node" data-role="execute">
+        <strong>Execute</strong>
+        <span>After ALLOW only</span>
+      </div>
+    </div>
+
+    <div class="bg-txn-summary-node bg-txn-summary-node--gate" data-role="request">
+      <DiagramIcon name="shield" />
+      <strong>Request Admission</strong>
+      <span class="bg-hardstop bg-hardstop--deny">REQUEST DENY · No provider invocation</span>
+    </div>
+
+    <div class="bg-txn-summary-node bg-txn-summary-node--provider" data-role="provider">
+      <DiagramIcon name="provider" />
+      <strong>AI Provider</strong>
+      <span class="bg-boundary-label bg-boundary-label--untrusted">UNTRUSTED</span>
+    </div>
+
+    <div class="bg-txn-summary-node bg-txn-summary-node--gate" data-role="action">
+      <DiagramIcon name="shield" />
+      <strong>Result-to-Action</strong>
+      <span class="bg-hardstop bg-hardstop--deny">ACTION DENY · No enterprise effect</span>
+      <span class="bg-hardstop bg-hardstop--allow">ALLOW · Execute declared action</span>
+    </div>
+  </div>
+
+  <figcaption class="visually-hidden">
+    Enterprise Application prepares a governed request. Request Admission
+    Authorization either DENYs with no provider invocation or ALLOWs AI Provider
+    invocation. The AI-generated result returns as an untrusted proposal into the
+    same Enterprise Application, which declares the intended action.
+    Result-to-Action Authorization either DENYs with no enterprise effect or
+    ALLOWs the application to execute the declared action.
+  </figcaption>
+</figure>

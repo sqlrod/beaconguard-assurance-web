@@ -22,8 +22,8 @@ import GovernedTransactionLoop from "../components/diagrams/GovernedTransactionL
     <h2>Authoritative transaction loop</h2>
     <p>
       The complete sequence separates provider invocation from enterprise
-      effect and returns authority to the same enterprise application before
-      system-of-record change.
+      effect. After action ALLOW, the same enterprise application executes the
+      declared action before system-of-record change.
     </p>
     <GovernedTransactionLoop
       variant="complete"

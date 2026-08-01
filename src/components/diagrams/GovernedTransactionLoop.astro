@@ -1,12 +1,13 @@
 ---
 /**
- * Closed-loop governed AI transaction diagram.
- * Variants: simplified (homepage), detailed (how-it-works), complete (canonical workflow).
+ * High-fidelity governed AI transaction circuit with visible SVG connectors.
+ * Variants: detailed | complete (homepage uses GovernedTransactionSummary + disclosure).
  */
 import DiagramShell from "./DiagramShell.astro";
+import DiagramIcon from "./primitives/DiagramIcon.astro";
 
 interface Props {
-  variant?: "simplified" | "detailed" | "complete";
+  variant?: "detailed" | "complete";
   title?: string;
   caption?: string;
 }
@@ -14,113 +15,218 @@ interface Props {
 const {
   variant = "detailed",
   title = "Governed AI transaction loop",
-  caption = "BeaconGuard authorizes provider invocation and, separately, the declared enterprise action. The path returns to the same enterprise application. AI output remains an untrusted proposal.",
+  caption = "Visible closed-loop transaction: outbound request, provider return into the same enterprise application, independent action authorization, and system-of-record effect only after ALLOW.",
 } = Astro.props;
 
-const showStages = variant !== "simplified";
 const className = `bg-diagram--txn-loop bg-diagram--txn-loop-${variant}`;
+const svgId = `txn-loop-${variant}`;
 ---
 
 <DiagramShell title={title} caption={caption} className={className}>
-  <div class={`bg-loop bg-loop--${variant}`} aria-hidden="true">
-    <div class="bg-loop-circuit">
-      <div class="bg-loop-app" data-node="app">
-        <p class="bg-loop-app-title">Enterprise Application</p>
-        <div class="bg-loop-app-states">
-          <div class="bg-loop-node bg-loop-node--state" data-node="prepare">
-            <span class="bg-loop-kicker">1 · Prepare</span>
-            <strong>Prepare governed request</strong>
-          </div>
-          <div class="bg-loop-node bg-loop-node--state" data-node="execute">
-            <span class="bg-loop-kicker">7 · Execute</span>
-            <strong>Execute authorized action</strong>
-          </div>
+  <div class={`bg-circuit bg-circuit--${variant}`}>
+    <svg
+      class="bg-circuit-svg"
+      viewBox="0 0 1100 760"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <marker id={`${svgId}-n`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--decision-neutral)"></path>
+        </marker>
+        <marker id={`${svgId}-a`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--decision-allow)"></path>
+        </marker>
+        <marker id={`${svgId}-d`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--decision-deny)"></path>
+        </marker>
+      </defs>
+
+      <!-- Prepare -> Request Admission -->
+      <path
+        class="bg-path-neutral"
+        vector-effect="non-scaling-stroke"
+        d="M310 120 H430"
+        marker-end={`url(#${svgId}-n)`}></path>
+      <!-- Request ALLOW -> Provider -->
+      <path
+        class="bg-path-allow"
+        vector-effect="non-scaling-stroke"
+        d="M620 120 H760"
+        marker-end={`url(#${svgId}-a)`}></path>
+      <!-- Request DENY terminal -->
+      <path
+        class="bg-path-deny"
+        vector-effect="non-scaling-stroke"
+        d="M525 168 V230"
+        marker-end={`url(#${svgId}-d)`}></path>
+      <!-- Provider return into Enterprise Application Receive -->
+      <path
+        class="bg-path-neutral"
+        vector-effect="non-scaling-stroke"
+        d="M860 170 V280 H250 V340"
+        marker-end={`url(#${svgId}-n)`}></path>
+      <!-- Receive/Declare -> Result-to-Action -->
+      <path
+        class="bg-path-neutral"
+        vector-effect="non-scaling-stroke"
+        d="M310 390 H430"
+        marker-end={`url(#${svgId}-n)`}></path>
+      <!-- Action DENY terminal -->
+      <path
+        class="bg-path-deny"
+        vector-effect="non-scaling-stroke"
+        d="M525 448 V510"
+        marker-end={`url(#${svgId}-d)`}></path>
+      <!-- Action ALLOW -> Execute inside application -->
+      <path
+        class="bg-path-allow"
+        vector-effect="non-scaling-stroke"
+        d="M430 420 H360 V500"
+        marker-end={`url(#${svgId}-a)`}></path>
+      <!-- Execute -> System of Record -->
+      <path
+        class="bg-path-allow"
+        vector-effect="non-scaling-stroke"
+        d="M310 560 H760"
+        marker-end={`url(#${svgId}-a)`}></path>
+      <!-- Evidence from request gate -->
+      <path
+        class="bg-path-evidence"
+        vector-effect="non-scaling-stroke"
+        d="M525 250 V640"
+        marker-end={`url(#${svgId}-n)`}></path>
+      <!-- Evidence from action gate -->
+      <path
+        class="bg-path-evidence"
+        vector-effect="non-scaling-stroke"
+        d="M525 520 V640"
+        marker-end={`url(#${svgId}-n)`}></path>
+      <!-- Evidence -> Verify -->
+      <path
+        class="bg-path-evidence"
+        vector-effect="non-scaling-stroke"
+        d="M620 680 H780"
+        marker-end={`url(#${svgId}-n)`}></path>
+
+      <text class="bg-path-label" x="350" y="108">Outbound request</text>
+      <text class="bg-path-label" x="680" y="108">Provider invocation</text>
+      <text class="bg-path-label" x="700" y="250">Provider return</text>
+      <text class="bg-path-label" x="340" y="378">Declared action</text>
+      <text class="bg-path-label bg-path-label--allow" x="340" y="470">ALLOW · execute</text>
+      <text class="bg-path-label bg-path-label--allow" x="480" y="548">Authorized effect</text>
+    </svg>
+
+    <div class="bg-circuit-nodes" aria-hidden="true">
+      <div class="bg-circuit-app" data-node="app">
+        <p class="bg-boundary-label">
+          <DiagramIcon name="app" />
+          ENTERPRISE CONTROLLED BOUNDARY · Enterprise Application
+        </p>
+        <div class="bg-circuit-node bg-circuit-node--state" data-node="prepare">
+          <span class="bg-node-role">PREPARE</span>
+          <strong>Prepare governed request</strong>
+        </div>
+        <div class="bg-circuit-node bg-circuit-node--state" data-node="receive">
+          <span class="bg-node-role">RECEIVE AND DECLARE</span>
+          <strong>Receive AI-generated result as an untrusted proposal</strong>
+          <span class="bg-node-desc">Bind to governed transaction context · Declare intended enterprise action</span>
+        </div>
+        <div class="bg-circuit-node bg-circuit-node--state" data-node="execute">
+          <span class="bg-node-role">EXECUTE</span>
+          <strong>Execute authorized declared action</strong>
         </div>
       </div>
 
-      <div class="bg-loop-node bg-loop-node--gate" data-node="request-auth">
-        <span class="bg-loop-kicker">2 · Request</span>
+      <div class="bg-circuit-node bg-circuit-node--gate" data-node="request-auth">
+        <p class="bg-boundary-label">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</p>
+        <span class="bg-node-role"><DiagramIcon name="shield" /> AUTHORIZE · REQUEST</span>
         <strong>Request Admission Authorization</strong>
-        <div class="bg-loop-stops">
-          <span class="bg-loop-deny">REQUEST DENY · No provider invocation</span>
+        <div class="bg-hardstop bg-hardstop--deny">
+          <DiagramIcon name="deny" />
+          <div>
+            <strong>REQUEST DENY</strong>
+            <span>No provider invocation</span>
+          </div>
         </div>
       </div>
 
-      <div class="bg-loop-node bg-loop-node--provider" data-node="provider">
-        <span class="bg-loop-kicker">3 · Provider</span>
+      <div class="bg-circuit-node bg-circuit-node--provider" data-node="provider">
+        <p class="bg-boundary-label bg-boundary-label--untrusted">
+          AI PROVIDER — UNTRUSTED EXTERNAL BOUNDARY
+        </p>
+        <span class="bg-node-role"><DiagramIcon name="provider" /> PROVIDER</span>
         <strong>AI Provider</strong>
+        <span class="bg-node-desc">Invocation only after request ALLOW</span>
       </div>
 
-      <div class="bg-loop-node bg-loop-node--result" data-node="result">
-        <span class="bg-loop-kicker">4 · Return</span>
-        <strong>AI-generated result</strong>
-        <span class="bg-loop-sub">Untrusted proposal · bind to same transaction</span>
-      </div>
-
-      <div class="bg-loop-node bg-loop-node--declare" data-node="declare">
-        <span class="bg-loop-kicker">5 · Declare</span>
-        <strong>Enterprise Application declares intended action</strong>
-      </div>
-
-      <div class="bg-loop-node bg-loop-node--gate" data-node="action-auth">
-        <span class="bg-loop-kicker">6 · Action</span>
+      <div class="bg-circuit-node bg-circuit-node--gate" data-node="action-auth">
+        <p class="bg-boundary-label">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</p>
+        <span class="bg-node-role"><DiagramIcon name="shield" /> AUTHORIZE · ACTION</span>
         <strong>Result-to-Action Authorization</strong>
-        <div class="bg-loop-stops">
-          <span class="bg-loop-deny">ACTION DENY · No enterprise effect</span>
-          <span class="bg-loop-allow">ALLOW returns authority to the Enterprise Application</span>
+        <div class="bg-hardstop bg-hardstop--deny">
+          <DiagramIcon name="deny" />
+          <div>
+            <strong>ACTION DENY</strong>
+            <span>No enterprise effect</span>
+          </div>
+        </div>
+        <div class="bg-hardstop bg-hardstop--allow">
+          <strong>ALLOW</strong>
+          <span>Permits the application to execute the declared action</span>
         </div>
       </div>
 
-      <div class="bg-loop-node bg-loop-node--sor" data-node="sor">
-        <span class="bg-loop-kicker">8 · Record</span>
+      <div class="bg-circuit-node bg-circuit-node--sor" data-node="sor">
+        <p class="bg-boundary-label">ENTERPRISE SYSTEM-OF-RECORD BOUNDARY</p>
+        <span class="bg-node-role"><DiagramIcon name="database" /> RECORD</span>
         <strong>Enterprise System of Record</strong>
-        <span class="bg-loop-sub">Remains authoritative</span>
+        <span class="bg-node-desc">Remains authoritative</span>
       </div>
 
-      <div class="bg-loop-rail" data-node="evidence">
-        <strong>Verifiable Decision Records</strong>
-        <span class="bg-loop-sub">Separate evidence rail from both decisions</span>
-        <span class="bg-loop-arrow-label">→ BeaconGuard Verify (read-only)</span>
+      <div class="bg-circuit-evidence" data-node="evidence">
+        <p class="bg-boundary-label">READ-ONLY VERIFICATION BOUNDARY</p>
+        <div class="bg-circuit-node bg-circuit-node--evidence">
+          <span class="bg-node-role"><DiagramIcon name="evidence" /> EVIDENCE RAIL</span>
+          <strong>Verifiable Decision Records</strong>
+          <span class="bg-node-desc">Connected to both authorization decisions</span>
+        </div>
+        <div class="bg-circuit-node bg-circuit-node--verify">
+          <span class="bg-node-role"><DiagramIcon name="verify" /> VERIFY</span>
+          <strong>BeaconGuard Verify — read-only</strong>
+          <span class="bg-node-desc">Outside runtime authority · AI-assisted insights remain non-authoritative</span>
+        </div>
       </div>
 
-      {
-        showStages && (
-          <ol class="bg-loop-stage-strip" aria-hidden="true">
-            <li>Govern the release</li>
-            <li>Authorize the request</li>
-            <li>Invoke the provider</li>
-            <li>Receive an untrusted result</li>
-            <li>Authorize the intended action</li>
-            <li>Record and verify</li>
-          </ol>
-        )
-      }
-
-      <!-- Explicit connector labels for the circuit -->
-      <span class="bg-loop-edge bg-loop-edge--out" data-edge="out">Outbound request</span>
-      <span class="bg-loop-edge bg-loop-edge--return" data-edge="return">Return to application</span>
-      <span class="bg-loop-edge bg-loop-edge--effect" data-edge="effect">Authorized effect</span>
+      <ol class="bg-circuit-stages">
+        <li>Govern the release</li>
+        <li>Authorize the request</li>
+        <li>Invoke the provider</li>
+        <li>Receive an untrusted result</li>
+        <li>Authorize the intended action</li>
+        <li>Record and verify</li>
+      </ol>
     </div>
   </div>
 
   <div slot="text">
     <p>
-      Enterprise Application (Prepare governed request) → Request Admission
-      Authorization. REQUEST DENY hard-stops with no provider invocation.
-      ALLOW permits AI Provider invocation. The AI-generated result returns as
-      an untrusted proposal, bound to the same governed transaction context.
-      The Enterprise Application declares the intended action → Result-to-Action
-      Authorization. ACTION DENY hard-stops with no enterprise effect. ALLOW
-      returns authority to the same Enterprise Application, which executes the
-      authorized action into the Enterprise System of Record. Verifiable Decision
-      Records from both decisions feed BeaconGuard Verify (read-only; outside
-      runtime authority).
+      Enterprise Application (Prepare) → Request Admission Authorization.
+      REQUEST DENY terminates with no provider invocation. ALLOW permits AI
+      Provider invocation. The AI-generated result returns into the same
+      Enterprise Application boundary (Receive and Declare), where the
+      application binds transaction context and declares the intended enterprise
+      action → Result-to-Action Authorization. ACTION DENY terminates with no
+      enterprise effect. ALLOW permits the application to execute the declared
+      action (Execute) into the Enterprise System of Record. Verifiable Decision
+      Records from both decisions feed BeaconGuard Verify, which remains
+      read-only and outside runtime authority.
     </p>
     <p>
       Result-to-Action Authorization authorizes the declared intended enterprise
       action under the Active Verified Release. It does not score model content,
       certify response correctness, resume a prior DENY, or execute the
-      enterprise action. The provider is not the enterprise system of record.
+      enterprise action.
     </p>
   </div>
 </DiagramShell>
