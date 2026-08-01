@@ -43,6 +43,7 @@ jobs:
           echo "dir=$dir" >> "$GITHUB_OUTPUT"
 
       - name: Assemble artifact contents
+        id: assemble
         shell: bash
         run: |
           set -euo pipefail
@@ -61,11 +62,14 @@ jobs:
             cat /tmp/forbidden.txt
             exit 1
           fi
+          # Artifact names cannot contain '/' from branch refs
+          safe_ref="$(echo "${GITHUB_REF_NAME}" | tr '/' '-')"
+          echo "artifact_name=beaconguard-website-${safe_ref}-${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Upload screenshot review artifact
         uses: actions/upload-artifact@v4
         with:
-          name: beaconguard-website-${{ github.ref_name }}-${{ github.sha }}
+          name: ${{ steps.assemble.outputs.artifact_name }}
           path: artifact-out
           if-no-files-found: error
           retention-days: 30
