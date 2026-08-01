@@ -3528,6 +3528,11 @@ body.docs-surface main#content {
   margin: var(--diagram-space-1) 0 0;
 }
 
+.stack-section code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .dir-section {
   margin-bottom: var(--diagram-space-8);
 }
@@ -4884,5 +4889,136 @@ body.docs-surface main#content {
   }
   .hero-split--home .hero-line {
     white-space: normal;
+  }
+}
+
+/* =========================
+   PASS 01B-R3A — CONTROL FABRIC
+   ========================= */
+
+.psvg--desktop .psvg-desktop { display: block !important; }
+.psvg--desktop .psvg-compact { display: none !important; }
+
+.psvg-cf {
+  padding: 12px;
+  border: 1px solid var(--diagram-border);
+  border-radius: 16px;
+  background: var(--diagram-surface);
+}
+
+.psvg-cf .psvg-bound-label { font-size: 16px; }
+.psvg-cf .psvg-strong { font-size: 15px; }
+.psvg-cf .psvg-role { font-size: 13px; }
+.psvg-cf .psvg-desc { font-size: 13px; }
+.psvg-cf .psvg-port-label { font-size: 12px; }
+.psvg-cf .psvg-deny-strong { font-size: 14px; }
+.psvg-cf .psvg-deny-desc { font-size: 12px; }
+.psvg-cf .psvg-plate-text { font-size: 13px; }
+
+.psvg-cf-bg { stroke-width: 2.75; }
+.psvg-cf-sor { fill: rgba(12, 28, 52, 0.72); stroke-width: 2.25; }
+.psvg-cf-gate-shell {
+  fill: rgba(10, 22, 40, 0.55);
+  stroke: rgba(125, 211, 252, 0.35);
+  stroke-width: 1;
+}
+.psvg-cf-gate {
+  stroke-width: 2.75;
+}
+.psvg-cf .psvg-cf-gate {
+  fill: rgba(8, 18, 36, 0.98);
+}
+.psvg-cf-aperture {
+  fill: rgba(0, 0, 0, 0.42);
+  stroke: rgba(125, 211, 252, 0.55);
+  stroke-width: 1.5;
+}
+.psvg-cf-rib {
+  fill: none;
+  stroke: rgba(125, 211, 252, 0.4);
+  stroke-width: 2;
+}
+.psvg-cf-gate-title {
+  fill: var(--diagram-text-primary);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.psvg-cf-gate-hint {
+  fill: var(--diagram-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+.psvg-cf-sublabel {
+  fill: var(--diagram-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.psvg-cf-sublabel--provider { fill: var(--diagram-boundary-provider); }
+.psvg-cf-sublabel--verify { fill: var(--diagram-boundary-verify); }
+.psvg-cf-ev-label {
+  fill: var(--decision-evidence);
+  font-size: 13px;
+  font-weight: 700;
+}
+.psvg-cf-app-spine {
+  fill: none;
+  stroke: var(--diagram-boundary-enterprise);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.psvg-cf-app-state {
+  stroke: var(--diagram-boundary-enterprise);
+  stroke-width: 2;
+}
+
+.staging-cf-defects,
+.staging-cf-checklist {
+  color: var(--diagram-text-secondary);
+  line-height: 1.55;
+}
+.staging-cf-panel,
+.staging-cf-canvas,
+.staging-cf-hero-slot,
+.staging-cf-mobile {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--diagram-border);
+  border-radius: 16px;
+  background: rgba(8, 14, 28, 0.55);
+}
+.staging-cf-canvas { max-width: 1180px; }
+.staging-cf-hero-slot { max-width: 640px; }
+.staging-cf-mobile { max-width: 440px; }
+.staging-cf-hero {
+  margin-top: 16px;
+  padding: 24px;
+  border: 1px solid var(--diagram-border);
+  border-radius: 16px;
+  background: var(--diagram-surface);
+}
+.staging-cf-hero .hero-split-visual {
+  min-width: 0;
+  max-width: none;
+  width: 100%;
+}
+.staging-cf-hero-title {
+  margin: 0 0 12px;
+  font: inherit;
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  font-weight: 750;
+  line-height: 1.15;
+  color: inherit;
+}
+.staging-cf-hero .btn-primary,
+.staging-cf-hero .btn-secondary {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+@media (min-width: 1100px) {
+  .staging-cf-hero.hero-split--home {
+    grid-template-columns: minmax(0, 1.05fr) minmax(520px, 1.15fr);
   }
 }

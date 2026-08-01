@@ -4,8 +4,8 @@
  */
 import { chromium } from "playwright";
 
-const base = process.env.PREVIEW_BASE || "http://127.0.0.1:4335";
-const routes = ["/", "/verification", "/staging-diagram-system"];
+const base = process.env.PREVIEW_BASE || "http://127.0.0.1:4336";
+const routes = ["/", "/verification", "/staging-diagram-system", "/staging-control-fabric"];
 const viewports = [
   { w: 390, h: 844 },
   { w: 768, h: 1024 },
@@ -57,14 +57,12 @@ for (const vp of viewports) {
         }
         for (const text of svg.querySelectorAll("text")) {
           const fs = parseFloat(getComputedStyle(text).fontSize || "0");
-          // SVG CSS font sizes may be absolute; skip tiny port labels intentionally under 12
-          if (fs > 0 && fs < 11) {
-            issues.push(`${route}@${viewport}: text font-size ${fs}px below threshold`);
+          if (fs > 0 && fs < 12) {
+            issues.push(`${route}@${viewport}: text font-size ${fs}px below 12px (${(text.textContent || "").slice(0, 32)})`);
           }
           const tb = text.getBoundingClientRect();
           const sb = svg.getBoundingClientRect();
-          if (tb.right > sb.right + 2 || tb.left < sb.left - 2 || tb.bottom > sb.bottom + 2) {
-            // soft warn only for major overflow
+          if (tb.right > sb.right + 3 || tb.left < sb.left - 3 || tb.bottom > sb.bottom + 3) {
             if (tb.width > 4 && tb.height > 4) {
               issues.push(
                 `${route}@${viewport}: text may extend outside SVG (${(text.textContent || "").slice(0, 40)})`
@@ -72,10 +70,48 @@ for (const vp of viewports) {
             }
           }
         }
+
+        // Owner-node containment for labeled texts
+        for (const owned of svg.querySelectorAll("[data-owner-node]")) {
+          const ownerId = owned.getAttribute("data-owner-node");
+          const owner = svg.querySelector(`[data-node-id="${ownerId}"]`);
+          if (!owner) continue;
+          const ob = owner.getBoundingClientRect();
+          const tb = owned.getBoundingClientRect();
+          if (tb.right > ob.right + 4 || tb.left < ob.left - 4 || tb.bottom > ob.bottom + 4 || tb.top < ob.top - 4) {
+            issues.push(`${route}@${viewport}: text outside owner node ${ownerId}`);
+          }
+        }
+
+        // Label plate containment
+        for (const plateGroup of svg.querySelectorAll('[data-label-plate="true"]')) {
+          const plate = plateGroup.querySelector("rect");
+          const label = plateGroup.querySelector("text");
+          if (!plate || !label) continue;
+          const pb = plate.getBoundingClientRect();
+          const lb = label.getBoundingClientRect();
+          if (lb.right > pb.right + 3 || lb.left < pb.left - 3 || lb.bottom > pb.bottom + 3 || lb.top < pb.top - 3) {
+            issues.push(
+              `${route}@${viewport}: label plate overflow (${(label.textContent || "").slice(0, 32)})`
+            );
+          }
+        }
       }
 
-      if (document.querySelector(".psvg-gts ol, .psvg-ves ol, .psvg-osc ol.hero-interim-flow")) {
+      if (document.documentElement.scrollWidth > document.documentElement.clientWidth + 2) {
+        issues.push(`${route}@${viewport}: horizontal page overflow`);
+      }
+
+      if (document.querySelector(".psvg-gts ol, .psvg-ves ol, .psvg-cf ol, .psvg-osc ol.hero-interim-flow")) {
         issues.push(`${route}@${viewport}: ordered-list fallback detected inside diagram`);
+      }
+
+      // Control Fabric must remain graphical (no list fallback)
+      if (route.includes("staging-control-fabric")) {
+        const cf = document.querySelector(".psvg-cf");
+        if (cf && !cf.querySelector("svg path.psvg-path")) {
+          issues.push(`${route}@${viewport}: control fabric missing path geometry`);
+        }
       }
 
       return {

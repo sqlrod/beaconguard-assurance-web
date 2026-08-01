@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Staging branch | `staging/website-visual-redesign-20260801` |
-| Current / latest pass | **01B-R2 — pure-SVG production-candidate diagram rebuild** |
+| Current / latest pass | **01B-R3A — Control Fabric art-direction gate** |
 | Latest pass pointer | [review-artifacts/LATEST_PASS.txt](review-artifacts/LATEST_PASS.txt) |
 | Source website HEAD (baseline) | `1b80a59261b99d3e0bf5cf1900fd8e4e8b17d810` |
-| Preview port (Pass 01B-R2) | `4335` |
+| Preview port (Pass 01B-R3A) | `4336` |
 | Production deployment | Not authorized |
 | Merge to main | Not authorized |
 | Pass 01C | Unauthorized pending independent visual review |
@@ -24,10 +24,11 @@
 | 01B | Unified enterprise diagram system validation | `472b9197e4a4ac3b990db82ab06a5030418716f5` | [pass-01b-unified-diagram-system](review-artifacts/pass-01b-unified-diagram-system/README.md) |
 | 01B-R1 | Enterprise diagram art-direction refinement | `16a892202eb33c506154e4633110eaf907775a8f` | [pass-01b-r1-enterprise-diagram-refinement](review-artifacts/pass-01b-r1-enterprise-diagram-refinement/README.md) |
 | 01B-R2 | Pure-SVG production-candidate diagram rebuild | `72d96ada95319fd90d6c777d0c95a506cb8f4b2d` | [pass-01b-r2-pure-svg-diagram-rebuild](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/README.md) |
+| 01B-R3A | Control Fabric homepage art-direction gate | *(pending commit)* | [pass-01b-r3a-control-fabric-art-direction](review-artifacts/pass-01b-r3a-control-fabric-art-direction/README.md) |
 
-## Pass 01B-R2 — Pure-SVG Production-Candidate Diagram Rebuild
+## Pass 01B-R3A — Control Fabric Art-Direction Gate
 
-Latest review pass. Mixed HTML/SVG positioning removed. Desktop and compact variants are separately authored pure SVG diagrams.
+Latest review pass. New `ControlFabricHero` production-candidate for homepage transaction visual. Staging-only route `/staging-control-fabric`. Public homepage unchanged. R2 `GovernedTransactionSummary` retained for comparison.
 
 ```
 IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW
@@ -35,9 +36,8 @@ IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW
 
 Primary artifacts:
 
-- [Pass 01B-R2 README](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/README.md)
-- [View A R2](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/crops/direction-a-r2-1440.png)
-- [View B R2](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/crops/direction-b-r2-1440.png)
-- [View C R2](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/crops/direction-c-r2-1440.png)
-- [Home pure SVG](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/crops/home-pure-svg-1440.png)
-- [Verification pure SVG](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/crops/verification-pure-svg-1440.png)
+- [Pass 01B-R3A README](review-artifacts/pass-01b-r3a-control-fabric-art-direction/README.md)
+- [Control Fabric 1440](review-artifacts/pass-01b-r3a-control-fabric-art-direction/crops/control-fabric-1440.png)
+- [Control Fabric in hero 1440](review-artifacts/pass-01b-r3a-control-fabric-art-direction/crops/control-fabric-in-hero-1440.png)
+- [Control Fabric 390](review-artifacts/pass-01b-r3a-control-fabric-art-direction/crops/control-fabric-390.png)
+- [R2 vs R3A 1440](review-artifacts/pass-01b-r3a-control-fabric-art-direction/comparisons/r2-vs-r3a-1440.png)
