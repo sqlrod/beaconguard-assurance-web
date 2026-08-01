@@ -4973,6 +4973,59 @@ body.docs-surface main#content {
   stroke-width: 2;
 }
 
+/* Pass 01B-R3A2 — orthographic circuit */
+.psvg-cf--r3a2 {
+  --cf-return: #a8b4c8;
+  --cf-provider-stroke: rgba(180, 160, 120, 0.85);
+  --cf-provider-fill: rgba(40, 36, 28, 0.35);
+}
+.psvg-cf-spine {
+  stroke: rgba(125, 211, 252, 0.28);
+  stroke-width: 1.5;
+}
+.psvg-cf-provider {
+  fill: var(--cf-provider-fill);
+  stroke: var(--cf-provider-stroke);
+  stroke-width: 2;
+  stroke-dasharray: 7 5;
+}
+.psvg-cf-provider-label {
+  fill: #cbb892;
+}
+.psvg-path--return {
+  stroke: var(--cf-return);
+  stroke-width: 3;
+  fill: none;
+}
+.psvg-plate--return {
+  stroke: rgba(168, 180, 200, 0.55);
+}
+.psvg-plate-text--return {
+  fill: #c5d0e0;
+}
+.psvg-cf-barrier {
+  stroke: var(--decision-deny);
+  stroke-width: 5;
+  stroke-linecap: square;
+  fill: none;
+}
+.psvg-port--evidence {
+  fill: var(--decision-evidence);
+}
+.psvg-cf-evidence-bus {
+  stroke: var(--decision-evidence);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  fill: none;
+}
+.psvg-cf--r3a2 .psvg-cf-gate-title {
+  font-size: 15px;
+}
+.psvg-cf--r3a2 .psvg-bound-label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
 .staging-cf-defects,
 .staging-cf-checklist {
   color: var(--diagram-text-secondary);
@@ -4987,6 +5040,12 @@ body.docs-surface main#content {
   border: 1px solid var(--diagram-border);
   border-radius: 16px;
   background: rgba(8, 14, 28, 0.55);
+}
+.staging-cf-panel img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 .staging-cf-canvas { max-width: 1180px; }
 .staging-cf-hero-slot { max-width: 520px; }

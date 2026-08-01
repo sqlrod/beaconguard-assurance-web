@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Staging branch | `staging/website-visual-redesign-20260801` |
-| Current / latest pass | **01B-R3A1 — Control Fabric geometry correction** |
+| Current / latest pass | **01B-R3A2 — Orthographic closed-loop circuit reconstruction** |
 | Latest pass pointer | [review-artifacts/LATEST_PASS.txt](review-artifacts/LATEST_PASS.txt) |
 | Source website HEAD (baseline) | `1b80a59261b99d3e0bf5cf1900fd8e4e8b17d810` |
-| Preview port (Pass 01B-R3A1) | `4337` |
+| Preview port (Pass 01B-R3A2) | `4338` |
 | Production deployment | Not authorized |
 | Merge to main | Not authorized |
 | Pass 01C | Unauthorized pending independent visual review |
@@ -26,10 +26,11 @@
 | 01B-R2 | Pure-SVG production-candidate diagram rebuild | `72d96ada95319fd90d6c777d0c95a506cb8f4b2d` | [pass-01b-r2-pure-svg-diagram-rebuild](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/README.md) |
 | 01B-R3A | Control Fabric homepage art-direction gate | `877fe20d2cb0d694faf30ea820e2f11dade6d67e` | [pass-01b-r3a-control-fabric-art-direction](review-artifacts/pass-01b-r3a-control-fabric-art-direction/README.md) |
 | 01B-R3A1 | Control Fabric geometry correction | `9ade9606406718cf408646ab419544dec0f45576` | [pass-01b-r3a1-control-fabric-geometry-correction](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/README.md) |
+| 01B-R3A2 | Orthographic closed-loop circuit reconstruction | *(pending commit)* | [pass-01b-r3a2-orthographic-circuit-reconstruction](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/README.md) |
 
-## Pass 01B-R3A1 — Control Fabric Geometry Correction
+## Pass 01B-R3A2 — Orthographic Closed-Loop Circuit Reconstruction
 
-Latest review pass. Bounded geometry correction of `ControlFabricHero`: strict grid, DENY clearance, ALLOW return into Execute, persistent Enterprise Application. Staging route `/staging-control-fabric`. Public homepage unchanged.
+Latest review pass. Full rebuild of `ControlFabricHero` from first principles. George-supplied code was not copied. DENY barrier terminals. ALLOW returns into Execute. Staging route `/staging-control-fabric`. Public homepage unchanged.
 
 ```
 IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW
@@ -37,8 +38,8 @@ IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW
 
 Primary artifacts:
 
-- [Pass 01B-R3A1 README](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/README.md)
-- [Corrected 1440](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/crops/control-fabric-corrected-1440.png)
-- [Corrected in hero 1440](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/crops/control-fabric-corrected-in-hero-1440.png)
-- [Corrected 390](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/crops/control-fabric-corrected-390.png)
-- [R3A vs R3A1](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/comparisons/r3a-vs-r3a1-1440.png)
+- [Pass 01B-R3A2 README](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/README.md)
+- [R3A2 1440](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/crops/control-fabric-r3a2-1440.png)
+- [R3A2 hero size](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/crops/control-fabric-r3a2-hero-size-1440.png)
+- [R3A2 390](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/crops/control-fabric-r3a2-390.png)
+- [R3A1 vs R3A2](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/comparisons/r3a1-vs-r3a2-1440.png)

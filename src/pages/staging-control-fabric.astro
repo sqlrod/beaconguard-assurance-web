@@ -1,123 +1,101 @@
 ---
 /**
- * Staging-only Pass 01B-R3A1 — Control Fabric geometry correction.
+ * Staging-only Pass 01B-R3A2 — Orthographic closed-loop circuit reconstruction.
  * noindex, nofollow, excluded from sitemap, not linked from nav/footer.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
-import GovernedTransactionSummary from "../components/diagrams/GovernedTransactionSummary.astro";
 import ControlFabricHero from "../components/diagrams/ControlFabricHero.astro";
 ---
 
 <BaseLayout
-  title="Staging · Control Fabric geometry | BeaconGuard"
-  description="Staging-only Pass 01B-R3A1 Control Fabric geometry correction."
+  title="Staging · Control Fabric R3A2 | BeaconGuard"
+  description="Staging-only Pass 01B-R3A2 orthographic closed-loop circuit reconstruction."
   noindex={true}
 >
   <section class="staging-banner" role="note">
-    <strong>STAGING ONLY · PASS 01B-R3A1</strong>
+    <strong>STAGING ONLY · PASS 01B-R3A2</strong>
     <p>
-      Control Fabric geometry correction. Strict grid; DENY terminals cleared;
-      Result-to-Action ALLOW returns to Enterprise Application Execute. noindex,
-      excluded from sitemap, not linked from navigation or footer. Public homepage
-      unchanged. Pass 01C remains unauthorized.
+      Orthographic closed-loop circuit reconstruction. George-supplied code was
+      not copied. noindex, excluded from sitemap, not linked from navigation or
+      footer. Public homepage unchanged. Pass 01C remains unauthorized.
     </p>
   </section>
 
   <section class="stack-section">
-    <h1>Control Fabric geometry correction</h1>
+    <h1>Orthographic closed-loop circuit reconstruction</h1>
     <p class="lead">
-      Bounded correction of the R3A Control Fabric candidate. Even column/lane
-      grid, persistent Enterprise Application, DENY clearance, and ALLOW return
-      into Execute before System of Record.
+      Rebuilt from first principles: persistent Enterprise Application, aperture
+      authorization gates, DENY barrier terminals outside the circuit, ALLOW
+      return into Execute, then application execution to System of Record.
     </p>
     <p><code>IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW</code></p>
   </section>
 
-  <section class="stack-section" id="r2-rejected" data-crop="r2-rejected">
-    <h2>1. Rejected R2 homepage diagram</h2>
+  <section class="stack-section" id="r3a1-rejected">
+    <h2>1. R3A1 rejected reference</h2>
     <ul class="staging-cf-defects">
-      <li>Small five-node flowchart that does not balance the hero headline</li>
-      <li>BeaconGuard authorization boundary not visually dominant</li>
-      <li>Request Admission and Result-to-Action resemble ordinary boxes</li>
-      <li>Transaction does not clearly return to the same application</li>
-      <li>Provider and system of record insufficiently differentiated</li>
-      <li>DENY outcomes are small labels rather than terminal barriers</li>
-      <li>Evidence relationship absent; lacks architectural scale and depth</li>
+      <li>Decision content still overlaps or crowds the transaction</li>
+      <li>DENY outcomes too close to authorization gates</li>
+      <li>Decision labels compete with normal transaction labels</li>
+      <li>Lacks evenly distributed negative space</li>
+      <li>Enterprise Application not sufficiently dominant as one persistent participant</li>
+      <li>ALLOW must visibly return to Execute; execution must continue to SoR</li>
+      <li>DENY must be barrier terminals, not rectangular decision boxes</li>
     </ul>
-    <div class="staging-cf-panel" data-crop="r2-visual">
-      <GovernedTransactionSummary idPrefix="r2-gts" title="Rejected R2 — GovernedTransactionSummary" />
+    <figure class="staging-cf-panel">
+      <img
+        src="/staging-review/r3a1-control-fabric-rejected-1440.png"
+        alt="Rejected R3A1 Control Fabric desktop crop"
+        width="1100"
+        height="620"
+        loading="lazy"
+      />
+      <figcaption>
+        Rejected R3A1 reference (also in
+        <code>review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/crops/</code>).
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="stack-section" id="r3a2-desktop" data-crop="control-fabric">
+    <h2>2. R3A2 desktop candidate</h2>
+    <p>Independent-review status: <strong>PENDING</strong></p>
+    <div class="staging-cf-canvas">
+      <ControlFabricHero idPrefix="cf-r3a2" forceDesktop={true} title="Control Fabric — R3A2 desktop" />
     </div>
   </section>
 
-  <section class="stack-section" id="r3a-candidate" data-crop="r3a-candidate">
-    <h2>2. R3A Control Fabric candidate</h2>
-    <p>
-      Two-rail closed transaction fabric with a dominant BeaconGuard authorization
-      boundary, chokepoint gates, provider return into the same enterprise
-      application, DENY terminals, and a separate evidence spine to read-only Verify.
-    </p>
-    <div class="staging-cf-canvas" data-crop="control-fabric">
-      <ControlFabricHero idPrefix="cf-full" forceDesktop={true} title="Control Fabric — desktop candidate" />
+  <section class="stack-section" id="r3a2-hero-size" data-crop="control-fabric-hero-size">
+    <h2>3. Candidate at homepage visual-column size</h2>
+    <div class="staging-cf-hero-slot">
+      <ControlFabricHero idPrefix="cf-r3a2-slot" forceDesktop={true} title="Control Fabric — hero column" />
     </div>
   </section>
 
-  <section class="stack-section" id="r3a-hero-size" data-crop="r3a-hero-size">
-    <h2>3. Desktop candidate at intended hero size</h2>
-    <p>Rendered in a hero-column width representative of the homepage visual slot.</p>
-    <div class="staging-cf-hero-slot" data-crop="control-fabric-hero-slot">
-      <ControlFabricHero idPrefix="cf-slot" forceDesktop={true} title="Control Fabric — hero column" />
+  <section class="stack-section" id="r3a2-compact" data-crop="control-fabric-mobile">
+    <h2>4. R3A2 compact candidate</h2>
+    <div class="staging-cf-mobile">
+      <ControlFabricHero idPrefix="cf-r3a2-m" compact={true} title="Control Fabric — compact" />
     </div>
   </section>
 
-  <section class="stack-section" id="r3a-in-hero" data-crop="r3a-in-hero">
-    <h2>4. Candidate inside homepage hero layout</h2>
-    <p>Copy of the homepage hero split for composition review only — public index unchanged.</p>
-    <section class="hero-split hero-split--home staging-cf-hero" data-crop="control-fabric-in-hero">
-      <div class="hero-split-copy">
-        <p class="hero-eyebrow">INDEPENDENT AI ACTION AUTHORIZATION</p>
-        <h2 class="staging-cf-hero-title">
-          <span class="hero-line">Control before execution.</span>
-          <span class="hero-line">Evidence after every decision.</span>
-        </h2>
-        <p class="hero-subheadline">
-          BeaconGuard governs whether an enterprise application may invoke AI and
-          whether a declared action based on the returned result may affect an
-          enterprise system.
-        </p>
-        <div class="page-actions page-actions--hero page-actions--hero-split">
-          <span class="btn-primary" aria-disabled="true">Request Controlled Evaluation</span>
-          <span class="btn-secondary" aria-disabled="true">See How It Works</span>
-        </div>
-      </div>
-      <div class="hero-split-visual">
-        <ControlFabricHero idPrefix="cf-hero" forceDesktop={true} title="Control Fabric in hero" />
-      </div>
-    </section>
-  </section>
-
-  <section class="stack-section" id="r3a-mobile" data-crop="r3a-mobile">
-    <h2>5. Mobile / compact candidate</h2>
-    <p>Separately authored vertical circuit — not a scaled desktop or ordered list.</p>
-    <div class="staging-cf-mobile" data-crop="control-fabric-mobile">
-      <ControlFabricHero idPrefix="cf-m" compact={true} title="Control Fabric — compact" />
-    </div>
-  </section>
-
-  <section class="stack-section" id="checklist">
-    <h2>6. Visual acceptance checklist</h2>
-    <p>Independent review only. Do not self-issue PASS.</p>
+  <section class="stack-section" id="geometry">
+    <h2>5. Geometry measurements</h2>
     <ul class="staging-cf-checklist">
-      <li>Independent-review status: <strong>PENDING</strong></li>
-      <li>□ Does not resemble a collection of equal boxes / Mermaid / draw.io</li>
-      <li>□ BeaconGuard boundary is visually dominant</li>
-      <li>□ Same application visibly receives the provider result</li>
-      <li>□ Two authorization gates are immediately visible as chokepoints</li>
-      <li>□ DENY paths clearly terminate</li>
-      <li>□ Evidence does not grant runtime authority</li>
-      <li>□ Text readable without zooming at 100% scale</li>
-      <li>□ Hero composition balances headline and visual</li>
-      <li>□ Diagram fills ~85% of intended visual column</li>
+      <li>Desktop viewBox: <code>0 0 1200 760</code></li>
+      <li>Enterprise Application: x40 y64 · 300×600 · states 236×88 at y 120 / 320 / 520</li>
+      <li>Gates: x440 · 250×104 · Admission y112 · Result-to-Action y336</li>
+      <li>AI Provider: x840 y112 · 300×144 (muted untrusted boundary)</li>
+      <li>System of Record: x840 y520 · 300×104</li>
+      <li>REQUEST DENY barrier pocket: ≈ x510–620 / y32–88</li>
+      <li>ACTION DENY barrier pocket: ≈ x510–620 / y456–512</li>
+      <li>Return lane y≈284 · ALLOW return lane y≈564 · Evidence y≈672–728</li>
+      <li>Compact viewBox: <code>0 0 440 1140</code></li>
     </ul>
-    <p>No site-wide diagram adoption. Pass 01C unauthorized.</p>
+  </section>
+
+  <section class="stack-section" id="status">
+    <h2>6. Independent-review status</h2>
+    <p><strong>PENDING</strong> — do not self-issue visual acceptance. Pass 01C unauthorized.</p>
   </section>
 </BaseLayout>

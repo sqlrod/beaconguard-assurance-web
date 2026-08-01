@@ -1,0 +1,260 @@
+{
+  "pass": "01B-R3A2",
+  "title": "Orthographic Closed-Loop Circuit Reconstruction",
+  "status": "IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW",
+  "starting_staging_head": "3626bd3ac2b2d9b6b8b14df92350f12a681ec4d7",
+  "preview_port": 4338,
+  "george_code_copied": false,
+  "screenshots": [
+    {
+      "route": "/",
+      "filename": "home.png",
+      "kind": "fullpage",
+      "sha256": "f25a1b7e317af3e9320c6a70abb506d3af4502fa02f9c3ae697528b88ece7dd1"
+    },
+    {
+      "route": "/platform",
+      "filename": "platform.png",
+      "kind": "fullpage",
+      "sha256": "4bae563a46064665ee1863acab3e6f20ce2a843b177eee03ecdef6477ab528a9"
+    },
+    {
+      "route": "/healthcare",
+      "filename": "healthcare.png",
+      "kind": "fullpage",
+      "sha256": "1ed989500ea68a9e2d7ed185e4230afa74ff5a343f406103ee93a716a9948ad2"
+    },
+    {
+      "route": "/fintech",
+      "filename": "financial-services.png",
+      "kind": "fullpage",
+      "sha256": "0938d9c668e666b25ddd4e05a30b00019e233a546b36b403ddfaff977a5c802f"
+    },
+    {
+      "route": "/verification",
+      "filename": "verification.png",
+      "kind": "fullpage",
+      "sha256": "64376c0d84ef7525546c0ac18e5036430cdb4ca56451025e1f3f9f588b615f4e"
+    },
+    {
+      "route": "/security",
+      "filename": "security.png",
+      "kind": "fullpage",
+      "sha256": "2d2601d689a8b55531d4bd1aac1be5d9a2effcd70be6e207c13abe7f5598deb8"
+    },
+    {
+      "route": "/design-partner-program",
+      "filename": "controlled-evaluation.png",
+      "kind": "fullpage",
+      "sha256": "33dcb6217c17eb3b06871b07681f1ecd02883d464a6bf888be55efdd69c4d848"
+    },
+    {
+      "route": "/docs",
+      "filename": "documentation.png",
+      "kind": "fullpage",
+      "sha256": "d15beb274130fff1199f1050fca0807ccba8fe47f8a74f9e7e841fc001d3700f"
+    },
+    {
+      "route": "/contact",
+      "filename": "contact.png",
+      "kind": "fullpage",
+      "sha256": "4bc35de20fc4e8a1e20454fc3c41d172f8b063319f9b7ba417784ccbbd295969"
+    },
+    {
+      "route": "/how-it-works",
+      "filename": "how-it-works.png",
+      "kind": "fullpage",
+      "sha256": "2408d6a9a05aee3a935ebaa9baf53bc0b43dd2a54ef9c079ab3fe446efbf472d"
+    },
+    {
+      "route": "/proof-evidence",
+      "filename": "proof-and-evidence.png",
+      "kind": "fullpage",
+      "sha256": "e7adccfd741b8ee6aeec9d899ccbc6688c80703cdb19dcba6e01f9474eb690bc"
+    },
+    {
+      "route": "/canonical-workflow",
+      "filename": "canonical-workflow.png",
+      "kind": "fullpage",
+      "sha256": "0d57c0d6ac3802c725052df0793d0c55c43869883574e73c728cbb250e801385"
+    },
+    {
+      "route": "/trust-assurance",
+      "filename": "trust-center.png",
+      "kind": "fullpage",
+      "sha256": "292c7d900622fdfc45174c9dc881d8e7433374221f6f71a277a3b6dc1348d062"
+    },
+    {
+      "route": "/company",
+      "filename": "company.png",
+      "kind": "fullpage",
+      "sha256": "76a50450c0c6857d9359828a47354d19a78c233921f17208888e11c0ff747e4a"
+    },
+    {
+      "route": "/reviewer-kit",
+      "filename": "reviewer-kit.png",
+      "kind": "fullpage",
+      "sha256": "4275242ee3268171211f355b48e80ec9fe4de89a5706886979e762e91a625e82"
+    },
+    {
+      "route": "/control-responsibility-matrix",
+      "filename": "control-responsibility-matrix.png",
+      "kind": "fullpage",
+      "sha256": "32bb5b2eb696200c0bc097c93315e4888dcd0fe2b6bccf5ce8329b823990b3fc"
+    },
+    {
+      "route": "/deployment",
+      "filename": "deployment.png",
+      "kind": "fullpage",
+      "sha256": "6c80f14395e03776e1dff115b5083875525a62250b66b6959322949610bc30ca"
+    },
+    {
+      "route": "/use-cases",
+      "filename": "use-cases.png",
+      "kind": "fullpage",
+      "sha256": "629588717ef9e74dde2e04db258d1fefc8900e7f5a67bccb4cc16443ee9d5a47"
+    },
+    {
+      "route": "/sample-decision-record",
+      "filename": "sample-decision-record.png",
+      "kind": "fullpage",
+      "sha256": "5c25158f519a9bec668c279b1baeee5b69a83f4c3977cbe2f9f0869c7d18a19a"
+    },
+    {
+      "route": "/docs/overview",
+      "filename": "docs-overview.png",
+      "kind": "fullpage",
+      "sha256": "dcda69eaf9c5d17c8fe20a758387de1af2a2183f9cdf70e1b698eef621868313"
+    },
+    {
+      "route": "/docs/architecture",
+      "filename": "docs-architecture.png",
+      "kind": "fullpage",
+      "sha256": "233d63e476c883dabd64b1f651fc9d758bf91c5d68701c66bb68d5386dba1bc1"
+    },
+    {
+      "route": "/docs/policy-model",
+      "filename": "docs-policy-model.png",
+      "kind": "fullpage",
+      "sha256": "e361a6b48e1d3958342ea8ce8c75ce2ede7f68175fc9d0b1865151bf729fb423"
+    },
+    {
+      "route": "/docs/enforcement-runtime",
+      "filename": "docs-enforcement-runtime.png",
+      "kind": "fullpage",
+      "sha256": "94d10bf12586e03c490c202f6ab2a191508caf3133c7ffafafaaaf05a70e0d1b"
+    },
+    {
+      "route": "/docs/compliance-audit",
+      "filename": "docs-compliance-audit.png",
+      "kind": "fullpage",
+      "sha256": "fa5163f4770eaa66ca38e4009cf4d41ae575bd894e05385a3fa82b20ef35cc47"
+    },
+    {
+      "route": "/docs/deployment-integration",
+      "filename": "docs-deployment-integration.png",
+      "kind": "fullpage",
+      "sha256": "318f957e53d419a902d9c2d155c8e2934df6ec6f85e463a0d0664f5ff74010fc"
+    },
+    {
+      "route": "/docs/threat-model",
+      "filename": "docs-threat-model.png",
+      "kind": "fullpage",
+      "sha256": "2ed63407353c2197e26f7d69c63b87cbde6ac4048fd7cb3e70279bd7c75c87df"
+    },
+    {
+      "route": "/docs/dfd-threat-flow",
+      "filename": "docs-dfd-threat-flow.png",
+      "kind": "fullpage",
+      "sha256": "ec1b5d89a3e3dc01be8974e9c783760c3c7e9bb78fb064388f47d29da12c13b1"
+    },
+    {
+      "route": "/staging-control-fabric",
+      "filename": "staging-control-fabric__390x844.png",
+      "kind": "responsive",
+      "viewport": "390x844",
+      "sha256": "2cea1729d81c5a64e4fb0b413435f7482aad644b26003aedf50ae56d385161df"
+    },
+    {
+      "route": "/staging-control-fabric",
+      "filename": "staging-control-fabric__768x1024.png",
+      "kind": "responsive",
+      "viewport": "768x1024",
+      "sha256": "597ac778ac6d1b3e2cda4f89ca8125f081d464f22c297432eb13402242ef09e4"
+    },
+    {
+      "route": "/staging-control-fabric",
+      "filename": "staging-control-fabric__1024x768.png",
+      "kind": "responsive",
+      "viewport": "1024x768",
+      "sha256": "a3f66b65310c76346e3b5e1aa8ca25cf5f164832ca2282e87ea115f86d597e50"
+    },
+    {
+      "route": "/staging-control-fabric",
+      "filename": "staging-control-fabric__1440x900.png",
+      "kind": "responsive",
+      "viewport": "1440x900",
+      "sha256": "ed41e682dae1119e3c6fd5b8943070cbd997422bb03116b778ec3e9c518d40e2"
+    },
+    {
+      "route": "/staging-control-fabric",
+      "filename": "staging-control-fabric__1920x1080.png",
+      "kind": "responsive",
+      "viewport": "1920x1080",
+      "sha256": "dbc0b3422a635aea48d7c9171d3713042fb8781655eb8a75e2a79ed22223e42c"
+    },
+    {
+      "filename": "control-fabric-r3a2-1440.png",
+      "kind": "crop",
+      "viewport": "1440x900",
+      "sha256": "84259c148620a31dc4d25c481cecf9955ffe01873d00bc2cea98520fc052cc1f"
+    },
+    {
+      "filename": "control-fabric-r3a2-1920.png",
+      "kind": "crop",
+      "viewport": "1920x1080",
+      "sha256": "5809b084102e52c4d1bbff03cbe3a683f5fd18e7c3e0c35856d5cc7d7f74347c"
+    },
+    {
+      "filename": "control-fabric-r3a2-1024.png",
+      "kind": "crop",
+      "viewport": "1024x768",
+      "sha256": "947a0672fa36f66e77d9487a6236f0b6a2dfe8ebd49f377d6d9d9f237e0145b9"
+    },
+    {
+      "filename": "control-fabric-r3a2-768.png",
+      "kind": "crop",
+      "viewport": "768x1024",
+      "sha256": "7831c7951ddc28cef3f642f780fc6d4b0463f2fcb0aacb06ae6c50468e8cf154"
+    },
+    {
+      "filename": "control-fabric-r3a2-390.png",
+      "kind": "crop",
+      "viewport": "390x844",
+      "sha256": "4e439850e3c6022b315b54ad1b08fe97a02827aaec5c477dfa801889c19b1e7f"
+    },
+    {
+      "filename": "control-fabric-r3a2-hero-size-1440.png",
+      "kind": "crop",
+      "viewport": "1440x900",
+      "sha256": "ed603e2f9c53d3c312edc42a2ef85db5e6c77d5c680068b9cf514ed1e2ae00d6"
+    },
+    {
+      "filename": "control-fabric-r3a2-hero-size-390.png",
+      "kind": "crop",
+      "viewport": "390x844",
+      "sha256": "1c92a757d642595edeb6d66f24205862773e7d4bedb1f95e4888235852ece687"
+    },
+    {
+      "filename": "r3a1-vs-r3a2-1440.png",
+      "kind": "compare",
+      "sha256": "56bb6811ce3288118343775b3fc4143781c6d22af79272effc6c8c5cc39d1be4"
+    },
+    {
+      "filename": "r3a1-vs-r3a2-390.png",
+      "kind": "compare",
+      "sha256": "561e8d339436ad53d4272523ec824409ab14f37314cf6474284b467cc43ee25a"
+    }
+  ],
+  "errors": []
+}
