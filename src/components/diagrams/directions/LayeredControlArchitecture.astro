@@ -1,0 +1,74 @@
+---
+/**
+ * Direction B — Layered Control Architecture
+ * Candidate for Platform / executive architecture. Functional domains only.
+ */
+import DiagramIcon from "../primitives/DiagramIcon.astro";
+
+interface Props {
+  idPrefix?: string;
+}
+
+const { idPrefix = "dir-b" } = Astro.props;
+---
+
+<figure class="dir-b" data-diagram-direction="B" aria-labelledby={`${idPrefix}-title`}>
+  <h3 id={`${idPrefix}-title`} class="dir-title">
+    Direction B · Layered Control Architecture
+  </h3>
+  <p class="dir-subtitle">
+    Restrained layered functional domains. Authorize is foregrounded. No
+    physical-host or network-isolation claim.
+  </p>
+
+  <div class="dir-b-stack" aria-hidden="true">
+    <section class="dir-b-layer dir-b-layer--govern">
+      <p class="dir-role">GOVERN · Management and release lifecycle</p>
+      <h4 class="dir-b-heading"><DiagramIcon name="identity" /> Govern</h4>
+      <ul class="dir-b-list">
+        <li>Compliance Playbooks</li>
+        <li>Validation and approval</li>
+        <li>Signed release</li>
+        <li>Active Verified Release</li>
+      </ul>
+      <p class="dir-flow-label dir-flow-label--down">Verified release supplies Authorize ↓</p>
+    </section>
+
+    <section class="dir-b-layer dir-b-layer--authorize">
+      <p class="dir-boundary">RUNTIME AUTHORIZATION DOMAIN</p>
+      <p class="dir-role">AUTHORIZE · Runtime prevention</p>
+      <h4 class="dir-b-heading"><DiagramIcon name="shield" /> Authorize</h4>
+      <ul class="dir-b-list">
+        <li>Request Admission</li>
+        <li>Provider return (untrusted)</li>
+        <li>Declared action</li>
+        <li>Result-to-Action Authorization</li>
+        <li>ALLOW or DENY</li>
+      </ul>
+      <p class="dir-flow-label dir-flow-label--out">Evidence emitted outward → Verify</p>
+    </section>
+
+    <section class="dir-b-layer dir-b-layer--verify">
+      <p class="dir-boundary dir-boundary--verify">READ-ONLY VERIFICATION DOMAIN</p>
+      <p class="dir-role">VERIFY · Investigation without runtime authority</p>
+      <h4 class="dir-b-heading"><DiagramIcon name="verify" /> Verify</h4>
+      <ul class="dir-b-list">
+        <li>Decision Explorer</li>
+        <li>Reconstruction</li>
+        <li>Source evidence</li>
+        <li>Replay verification</li>
+        <li>Export</li>
+        <li>Non-authoritative insights</li>
+      </ul>
+      <p class="dir-note">Verify does not feed runtime permission back into Authorize.</p>
+    </section>
+  </div>
+
+  <figcaption class="visually-hidden">
+    Govern supplies an Active Verified Release into Authorize. Authorize owns
+    Request Admission and Result-to-Action Authorization with binary ALLOW or
+    DENY and emits evidence to Verify. Verify is a read-only functional domain
+    and cannot return permission into Authorize. These are functional domains,
+    not separate physical hosts or networks.
+  </figcaption>
+</figure>

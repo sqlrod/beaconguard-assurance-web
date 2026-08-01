@@ -1,0 +1,165 @@
+---
+/**
+ * Direction A — Orthographic Security Circuit
+ * High-fidelity candidate for homepage summary, How It Works, Canonical Workflow.
+ * Authored HTML + SVG only. No graph runtime.
+ */
+import DiagramIcon from "../primitives/DiagramIcon.astro";
+
+interface Props {
+  compact?: boolean;
+  idPrefix?: string;
+}
+
+const { compact = false, idPrefix = "dir-a" } = Astro.props;
+const mid = `${idPrefix}-m`;
+---
+
+<figure
+  class:list={["dir-a", compact && "dir-a--compact"]}
+  data-diagram-direction="A"
+  aria-labelledby={`${idPrefix}-title`}
+>
+  <h3 id={`${idPrefix}-title`} class="dir-title">
+    Direction A · Orthographic Security Circuit
+  </h3>
+  <p class="dir-subtitle">
+    Security-infrastructure style closed transaction with visible ports, DENY
+    terminals, and a separate evidence rail.
+  </p>
+
+  <div class="dir-a-canvas">
+    <svg class="dir-a-svg" viewBox="0 0 1120 640" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id={`${mid}-n`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--diagram-neutral)"></path>
+        </marker>
+        <marker id={`${mid}-a`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--decision-allow)"></path>
+        </marker>
+        <marker id={`${mid}-d`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--decision-deny)"></path>
+        </marker>
+        <marker id={`${mid}-e`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--decision-evidence)"></path>
+        </marker>
+      </defs>
+
+      <!-- Prepare -> Request -->
+      <path class="dir-path dir-path--neutral" d="M336 96 H456" marker-end={`url(#${mid}-n)`}></path>
+      <!-- Request ALLOW -> Provider -->
+      <path class="dir-path dir-path--allow" d="M656 96 H784" marker-end={`url(#${mid}-a)`}></path>
+      <!-- Request DENY terminal -->
+      <path class="dir-path dir-path--deny" d="M556 152 V216" marker-end={`url(#${mid}-d)`}></path>
+      <!-- Provider return into Receive -->
+      <path class="dir-path dir-path--neutral" d="M880 152 V272 H248 V304" marker-end={`url(#${mid}-n)`}></path>
+      <!-- Receive -> Action -->
+      <path class="dir-path dir-path--neutral" d="M336 352 H456" marker-end={`url(#${mid}-n)`}></path>
+      <!-- Action DENY terminal -->
+      <path class="dir-path dir-path--deny" d="M556 408 V472" marker-end={`url(#${mid}-d)`}></path>
+      <!-- Action ALLOW -> Execute -->
+      <path class="dir-path dir-path--allow" d="M456 384 H360 V456" marker-end={`url(#${mid}-a)`}></path>
+      <!-- Execute -> SoR -->
+      <path class="dir-path dir-path--allow" d="M336 520 H784" marker-end={`url(#${mid}-a)`}></path>
+      <!-- Evidence from request -->
+      <path class="dir-path dir-path--evidence" d="M556 240 V560" marker-end={`url(#${mid}-e)`}></path>
+      <!-- Evidence from action -->
+      <path class="dir-path dir-path--evidence" d="M556 488 V560" marker-end={`url(#${mid}-e)`}></path>
+      <!-- Evidence -> Verify -->
+      <path class="dir-path dir-path--evidence" d="M640 592 H784" marker-end={`url(#${mid}-e)`}></path>
+
+      <text class="dir-path-label" x="360" y="84">Outbound</text>
+      <text class="dir-path-label" x="700" y="84">Invoke</text>
+      <text class="dir-path-label" x="700" y="240">Return into application</text>
+      <text class="dir-path-label" x="360" y="340">Declared action</text>
+      <text class="dir-path-label dir-path-label--allow" x="380" y="440">ALLOW → execute</text>
+      <text class="dir-path-label dir-path-label--allow" x="500" y="508">Authorized effect</text>
+    </svg>
+
+    <div class="dir-a-nodes" aria-hidden="true">
+      <div class="dir-a-app">
+        <p class="dir-boundary">
+          <DiagramIcon name="app" />
+          ENTERPRISE CONTROLLED BOUNDARY
+        </p>
+        <div class="dir-node" data-state="prepare">
+          <span class="dir-role">PREPARE</span>
+          <strong>Governed request</strong>
+        </div>
+        <div class="dir-node" data-state="receive">
+          <span class="dir-role">RECEIVE + DECLARE</span>
+          <strong>Untrusted result</strong>
+          <span class="dir-desc">Declared action</span>
+        </div>
+        <div class="dir-node" data-state="execute">
+          <span class="dir-role">EXECUTE</span>
+          <strong>Authorized action only</strong>
+        </div>
+      </div>
+
+      <div class="dir-node dir-node--gate" data-node="request">
+        <p class="dir-boundary">RUNTIME AUTHORIZATION</p>
+        <span class="dir-role"><DiagramIcon name="shield" /> REQUEST ADMISSION</span>
+        <strong>Authorization checkpoint</strong>
+        <div class="dir-stop dir-stop--deny">
+          <DiagramIcon name="deny" />
+          <div>
+            <strong>REQUEST DENY</strong>
+            <span>No provider invocation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dir-node dir-node--provider" data-node="provider">
+        <p class="dir-boundary dir-boundary--provider">UNTRUSTED EXTERNAL</p>
+        <span class="dir-role"><DiagramIcon name="provider" /> AI PROVIDER</span>
+        <strong>Untrusted external service</strong>
+      </div>
+
+      <div class="dir-node dir-node--gate" data-node="action">
+        <p class="dir-boundary">RUNTIME AUTHORIZATION</p>
+        <span class="dir-role"><DiagramIcon name="shield" /> RESULT-TO-ACTION</span>
+        <strong>Authorization checkpoint</strong>
+        <div class="dir-stop dir-stop--deny">
+          <DiagramIcon name="deny" />
+          <div>
+            <strong>ACTION DENY</strong>
+            <span>No enterprise effect</span>
+          </div>
+        </div>
+        <div class="dir-stop dir-stop--allow">
+          <strong>ALLOW</strong>
+          <span>Permits application execution</span>
+        </div>
+      </div>
+
+      <div class="dir-node dir-node--sor" data-node="sor">
+        <p class="dir-boundary">SYSTEM-OF-RECORD BOUNDARY</p>
+        <span class="dir-role"><DiagramIcon name="database" /> ENTERPRISE SYSTEM OF RECORD</span>
+        <strong>Authoritative business state</strong>
+      </div>
+
+      <div class="dir-a-evidence">
+        <div class="dir-node dir-node--evidence">
+          <span class="dir-role"><DiagramIcon name="evidence" /> EVIDENCE RAIL</span>
+          <strong>Verifiable Decision Records</strong>
+        </div>
+        <div class="dir-node dir-node--verify">
+          <p class="dir-boundary dir-boundary--verify">READ-ONLY VERIFICATION</p>
+          <span class="dir-role"><DiagramIcon name="verify" /> BEACONGUARD VERIFY</span>
+          <strong>Read-only</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <figcaption class="visually-hidden">
+    Prepare governed request leaves the Enterprise Application into Request
+    Admission Authorization. REQUEST DENY terminates with no provider
+    invocation. ALLOW invokes the untrusted AI Provider. The returned result
+    enters Receive and Declare inside the same Enterprise Application. Result-
+    to-Action Authorization either DENYs with no enterprise effect or ALLOWs
+    Execute, then the Enterprise System of Record. Evidence from both
+    checkpoints feeds BeaconGuard Verify outside runtime authority.
+  </figcaption>
+</figure>

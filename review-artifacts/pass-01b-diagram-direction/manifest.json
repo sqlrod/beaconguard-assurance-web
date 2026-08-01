@@ -1,0 +1,358 @@
+{
+  "pass": "01b",
+  "purpose": "enterprise diagram visual-direction gate",
+  "starting_staging_head": "62de5e91576bb5d727a4d976bfb1032de25fd1f9",
+  "preview_port": "4332",
+  "build_result": "pass",
+  "route_count": 28,
+  "public_sitemap_count": 27,
+  "fullpage_count": 27,
+  "responsive_count": 5,
+  "crop_count": 8,
+  "framework": "astro-html-css-authored-svg",
+  "graph_library_installed": false,
+  "production_deployment_authorized": false,
+  "merge_to_main_authorized": false,
+  "direction_approved": false,
+  "screenshots": [
+    {
+      "route": "/",
+      "filename": "home.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 3445,
+      "sha256": "477392bf005b8ed4facc70168dac42f68539e47965a4954f714af7ec04ee6568"
+    },
+    {
+      "route": "/platform",
+      "filename": "platform.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 3225,
+      "sha256": "4bae563a46064665ee1863acab3e6f20ce2a843b177eee03ecdef6477ab528a9"
+    },
+    {
+      "route": "/healthcare",
+      "filename": "healthcare.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 3829,
+      "sha256": "1ed989500ea68a9e2d7ed185e4230afa74ff5a343f406103ee93a716a9948ad2"
+    },
+    {
+      "route": "/fintech",
+      "filename": "financial-services.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 4160,
+      "sha256": "0938d9c668e666b25ddd4e05a30b00019e233a546b36b403ddfaff977a5c802f"
+    },
+    {
+      "route": "/verification",
+      "filename": "verification.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 3688,
+      "sha256": "ca59c293de639453da723b2fee3aea45ba2e51349e6f4c25ee482727c75fc565"
+    },
+    {
+      "route": "/security",
+      "filename": "security.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 4738,
+      "sha256": "2d2601d689a8b55531d4bd1aac1be5d9a2effcd70be6e207c13abe7f5598deb8"
+    },
+    {
+      "route": "/design-partner-program",
+      "filename": "controlled-evaluation.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 4154,
+      "sha256": "33dcb6217c17eb3b06871b07681f1ecd02883d464a6bf888be55efdd69c4d848"
+    },
+    {
+      "route": "/docs",
+      "filename": "documentation.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 1665,
+      "sha256": "d15beb274130fff1199f1050fca0807ccba8fe47f8a74f9e7e841fc001d3700f"
+    },
+    {
+      "route": "/contact",
+      "filename": "contact.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 2387,
+      "sha256": "4bc35de20fc4e8a1e20454fc3c41d172f8b063319f9b7ba417784ccbbd295969"
+    },
+    {
+      "route": "/how-it-works",
+      "filename": "how-it-works.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 3224,
+      "sha256": "17ba92c1eb32ba9a2e6c9d35d0e7c767d7ea7c4ec08506fefee86a4995331d3e"
+    },
+    {
+      "route": "/proof-evidence",
+      "filename": "proof-and-evidence.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 6980,
+      "sha256": "e7adccfd741b8ee6aeec9d899ccbc6688c80703cdb19dcba6e01f9474eb690bc"
+    },
+    {
+      "route": "/canonical-workflow",
+      "filename": "canonical-workflow.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 2560,
+      "sha256": "31af976f5dd9f9aaf49de3eeb54be8f56e7afec81c97b4293127f8d49432cd6c"
+    },
+    {
+      "route": "/trust-assurance",
+      "filename": "trust-center.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 6349,
+      "sha256": "292c7d900622fdfc45174c9dc881d8e7433374221f6f71a277a3b6dc1348d062"
+    },
+    {
+      "route": "/company",
+      "filename": "company.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 1802,
+      "sha256": "76a50450c0c6857d9359828a47354d19a78c233921f17208888e11c0ff747e4a"
+    },
+    {
+      "route": "/reviewer-kit",
+      "filename": "reviewer-kit.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 2967,
+      "sha256": "4275242ee3268171211f355b48e80ec9fe4de89a5706886979e762e91a625e82"
+    },
+    {
+      "route": "/control-responsibility-matrix",
+      "filename": "control-responsibility-matrix.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 2704,
+      "sha256": "32bb5b2eb696200c0bc097c93315e4888dcd0fe2b6bccf5ce8329b823990b3fc"
+    },
+    {
+      "route": "/deployment",
+      "filename": "deployment.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 5201,
+      "sha256": "6c80f14395e03776e1dff115b5083875525a62250b66b6959322949610bc30ca"
+    },
+    {
+      "route": "/use-cases",
+      "filename": "use-cases.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 2296,
+      "sha256": "629588717ef9e74dde2e04db258d1fefc8900e7f5a67bccb4cc16443ee9d5a47"
+    },
+    {
+      "route": "/sample-decision-record",
+      "filename": "sample-decision-record.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 3728,
+      "sha256": "5c25158f519a9bec668c279b1baeee5b69a83f4c3977cbe2f9f0869c7d18a19a"
+    },
+    {
+      "route": "/docs/overview",
+      "filename": "docs-overview.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 4572,
+      "sha256": "dcda69eaf9c5d17c8fe20a758387de1af2a2183f9cdf70e1b698eef621868313"
+    },
+    {
+      "route": "/docs/architecture",
+      "filename": "docs-architecture.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 6806,
+      "sha256": "233d63e476c883dabd64b1f651fc9d758bf91c5d68701c66bb68d5386dba1bc1"
+    },
+    {
+      "route": "/docs/policy-model",
+      "filename": "docs-policy-model.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 5138,
+      "sha256": "e361a6b48e1d3958342ea8ce8c75ce2ede7f68175fc9d0b1865151bf729fb423"
+    },
+    {
+      "route": "/docs/enforcement-runtime",
+      "filename": "docs-enforcement-runtime.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 5494,
+      "sha256": "94d10bf12586e03c490c202f6ab2a191508caf3133c7ffafafaaaf05a70e0d1b"
+    },
+    {
+      "route": "/docs/compliance-audit",
+      "filename": "docs-compliance-audit.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 5227,
+      "sha256": "fa5163f4770eaa66ca38e4009cf4d41ae575bd894e05385a3fa82b20ef35cc47"
+    },
+    {
+      "route": "/docs/deployment-integration",
+      "filename": "docs-deployment-integration.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 6090,
+      "sha256": "318f957e53d419a902d9c2d155c8e2934df6ec6f85e463a0d0664f5ff74010fc"
+    },
+    {
+      "route": "/docs/threat-model",
+      "filename": "docs-threat-model.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 7119,
+      "sha256": "2ed63407353c2197e26f7d69c63b87cbde6ac4048fd7cb3e70279bd7c75c87df"
+    },
+    {
+      "route": "/docs/dfd-threat-flow",
+      "filename": "docs-dfd-threat-flow.png",
+      "viewport": "1440x900",
+      "kind": "fullpage",
+      "image_width": 1440,
+      "image_height": 6944,
+      "sha256": "ec1b5d89a3e3dc01be8974e9c783760c3c7e9bb78fb064388f47d29da12c13b1"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "staging-diagram-direction__390x844.png",
+      "viewport": "390x844",
+      "kind": "responsive",
+      "image_width": 390,
+      "sha256": "cbad23bcc7ff9a8b7c43459bda28b21589d5c7bac2c9d607086fc0bc86942a3f"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "staging-diagram-direction__768x1024.png",
+      "viewport": "768x1024",
+      "kind": "responsive",
+      "image_width": 768,
+      "sha256": "456a7d94ccb3bd98725f7f332b1b76f5dd5852cdad1ec0f303baf6a73eee069b"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "staging-diagram-direction__1024x768.png",
+      "viewport": "1024x768",
+      "kind": "responsive",
+      "image_width": 1024,
+      "sha256": "87ea171098a295554eaa99e5e427f344fc769aa10169af4ffc46e76c1a9308f7"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "staging-diagram-direction__1440x900.png",
+      "viewport": "1440x900",
+      "kind": "responsive",
+      "image_width": 1440,
+      "sha256": "6a9a0772ba65950fe04619667b85c8bea0f388336abbccbacc8586ebf3e7ffdf"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "staging-diagram-direction__1920x1080.png",
+      "viewport": "1920x1080",
+      "kind": "responsive",
+      "image_width": 1920,
+      "sha256": "8935f10f0e66106bb476ed2f8496222fd9f4a87555756fa4cd570ef654023086"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "direction-a-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "dfafbb349574996cc1725f1da84c8226e95ee80c654ad78807e6799e94ec84da"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "direction-b-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "dc33de5da890250e732522474193399df4688c02dc47a34bf78a6a55c8206f2b"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "direction-c-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "75371b1ccc40459ff88bb27ff50f77139e526a9bdcdd2550a90cf72d4c268795"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "direction-a-390.png",
+      "viewport": "390x844",
+      "kind": "crop",
+      "sha256": "6441315f781ef0356b13664a53f277f09fc184ba80d2cfa29c461b421422e022"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "direction-b-390.png",
+      "viewport": "390x844",
+      "kind": "crop",
+      "sha256": "5dd90c45985b4ce0b9aeb854e6aa0a3bc216cdff2ea5715eaee3ec57ea9070cc"
+    },
+    {
+      "route": "/staging-diagram-direction",
+      "filename": "direction-c-390.png",
+      "viewport": "390x844",
+      "kind": "crop",
+      "sha256": "2609de2acb8cc0b1622d33f17235352498557ea796dce88749737442beda3e6e"
+    },
+    {
+      "route": "/",
+      "filename": "home-interim-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "187fdb3dda3bd56d83086d91b1df0a5b3476c0bc1b5c221d91628012afc22dc6"
+    },
+    {
+      "route": "/verification",
+      "filename": "verification-interim-1440.png",
+      "viewport": "1440x900",
+      "kind": "crop",
+      "sha256": "40ce9079f1a16acb5ad0de5a43164ff642afced43cbd2dd1322577b1e3061c17"
+    }
+  ]
+}

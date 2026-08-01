@@ -1,0 +1,34 @@
+---
+/**
+ * Interim Verification hero visual — reduces equal-tile density.
+ * Not a final Direction C deployment.
+ */
+import DiagramIcon from "./primitives/DiagramIcon.astro";
+---
+
+<figure class="verify-interim" aria-label="Interim verification hierarchy">
+  <p class="dir-boundary dir-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
+  <p class="dir-illustrative">Interim visual · under review</p>
+  <div class="verify-interim-stack">
+    <div class="dir-node dir-node--spine">
+      <span class="dir-role"><DiagramIcon name="evidence" /> Canonical first</span>
+      <strong>Verifiable Decision Records</strong>
+    </div>
+    <div class="dir-node">
+      <span class="dir-role"><DiagramIcon name="verify" /> Read-only Verify</span>
+      <strong>Investigation surface</strong>
+    </div>
+    <div class="verify-interim-group">
+      <p class="dir-role">Investigation outputs</p>
+      <ul>
+        <li>Decision Explorer</li>
+        <li>Reconstruction · Source evidence</li>
+        <li>Reporting · Replay · Export</li>
+      </ul>
+    </div>
+    <aside class="dir-c-insights">
+      <p class="dir-role">AI-ASSISTED INSIGHTS</p>
+      <span class="dir-desc">Separate · non-authoritative · not in trusted path</span>
+    </aside>
+  </div>
+</figure>

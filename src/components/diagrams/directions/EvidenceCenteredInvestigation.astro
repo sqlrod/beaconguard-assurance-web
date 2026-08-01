@@ -1,0 +1,101 @@
+---
+/**
+ * Direction C — Evidence-Centered Investigation
+ * Candidate for Verification / Proof / Compliance. Not a menu-tile grid.
+ */
+import DiagramIcon from "../primitives/DiagramIcon.astro";
+
+interface Props {
+  idPrefix?: string;
+  compact?: boolean;
+}
+
+const { idPrefix = "dir-c", compact = false } = Astro.props;
+---
+
+<figure
+  class:list={["dir-c", compact && "dir-c--compact"]}
+  data-diagram-direction="C"
+  aria-labelledby={`${idPrefix}-title`}
+>
+  <div class="dir-c-meta">
+    <h3 id={`${idPrefix}-title`} class="dir-title">
+      Direction C · Evidence-Centered Investigation
+    </h3>
+    <p class="dir-illustrative">Illustrative verification model</p>
+  </div>
+  <p class="dir-subtitle">
+    Selected transaction flows from decision context through a canonical evidence
+    spine into review outputs. AI insights remain outside the trusted path.
+  </p>
+
+  <div class="dir-c-board" aria-hidden="true">
+    <p class="dir-boundary dir-boundary--verify dir-c-boundary">
+      READ-ONLY VERIFICATION BOUNDARY · BeaconGuard Verify
+    </p>
+
+    <section class="dir-c-col dir-c-col--context">
+      <p class="dir-role">LEFT · Decision context</p>
+      <div class="dir-node">
+        <span class="dir-role"><DiagramIcon name="shield" /> Selected transaction</span>
+        <strong>Request Admission decision</strong>
+      </div>
+      <div class="dir-node">
+        <strong>Result-to-Action decision</strong>
+      </div>
+      <div class="dir-node dir-node--meta">
+        <span class="dir-desc">Release identity</span>
+        <span class="dir-desc">Playbook identity</span>
+        <span class="dir-desc">Transaction correlation</span>
+      </div>
+    </section>
+
+    <div class="dir-c-flow" aria-hidden="true">→</div>
+
+    <section class="dir-c-col dir-c-col--spine">
+      <p class="dir-role">CENTER · Canonical evidence spine</p>
+      <div class="dir-node dir-node--spine">
+        <span class="dir-role"><DiagramIcon name="evidence" /> Canonical</span>
+        <strong>Verifiable Decision Records</strong>
+      </div>
+      <div class="dir-node dir-node--spine">
+        <strong>Source evidence</strong>
+        <span class="dir-desc">Supports reconstruction</span>
+      </div>
+      <div class="dir-c-status">
+        <span>Integrity status</span>
+        <span>Replay status</span>
+        <span>Reconstruction status</span>
+      </div>
+    </section>
+
+    <div class="dir-c-flow" aria-hidden="true">→</div>
+
+    <section class="dir-c-col dir-c-col--outputs">
+      <p class="dir-role">RIGHT · Review outputs</p>
+      <div class="dir-node"><strong>Decision Explorer</strong></div>
+      <div class="dir-node"><strong>Deterministic Reconstruction</strong></div>
+      <div class="dir-node"><strong>Executive Reporting</strong></div>
+      <div class="dir-node"><DiagramIcon name="evidence" /> <strong>Verifiable Export</strong></div>
+    </section>
+
+    <aside class="dir-c-insights">
+      <p class="dir-role"><DiagramIcon name="provider" /> AI-ASSISTED INSIGHTS</p>
+      <strong>Non-authoritative</strong>
+      <span class="dir-desc">
+        Outside the trusted reconstruction and authorization path. No return to
+        runtime authority.
+      </span>
+    </aside>
+  </div>
+
+  <figcaption class="visually-hidden">
+    Inside a read-only verification boundary, a selected transaction’s Request
+    Admission and Result-to-Action decisions flow into a canonical evidence spine
+    of Verifiable Decision Records and source evidence with integrity, replay,
+    and reconstruction status. Review outputs include Decision Explorer,
+    Deterministic Reconstruction, Executive Reporting, and Verifiable Export.
+    AI-Assisted Insights remain separate and non-authoritative with no path back
+    to runtime authorization.
+  </figcaption>
+</figure>

@@ -1,0 +1,226 @@
+---
+/**
+ * Staging-only visual-direction comparison. Not for production indexing.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import OrthographicSecurityCircuit from "../components/diagrams/directions/OrthographicSecurityCircuit.astro";
+import LayeredControlArchitecture from "../components/diagrams/directions/LayeredControlArchitecture.astro";
+import EvidenceCenteredInvestigation from "../components/diagrams/directions/EvidenceCenteredInvestigation.astro";
+---
+
+<BaseLayout
+  title="Staging · Diagram visual-direction gate | BeaconGuard"
+  description="Staging-only comparison of three enterprise diagram visual directions. Not a production page."
+  noindex={true}
+>
+  <section class="staging-banner" role="note">
+    <strong>STAGING ONLY</strong>
+    <p>
+      This route exists only on the staging redesign branch for visual-direction
+      review. It is noindex, excluded from the sitemap, and not linked from
+      primary navigation or the footer. No direction is approved yet.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h1>Enterprise diagram visual-direction gate</h1>
+    <p class="lead">
+      Compare three materially different, code-based visual directions before a
+      site-wide diagram implementation pass is authorized. Framework: Astro,
+      semantic HTML, CSS, and authored SVG — no graph editor runtime.
+    </p>
+  </section>
+
+  <section class="stack-section dir-section" id="direction-a" data-crop="direction-a">
+    <OrthographicSecurityCircuit idPrefix="cmp-a" />
+    <div class="dir-compact-wrap">
+      <h4 class="dir-compact-label">Compact / stacked preview</h4>
+      <OrthographicSecurityCircuit compact={true} idPrefix="cmp-a-c" />
+    </div>
+    <details class="bg-disclose">
+      <summary>Inspect technical structure — Direction A</summary>
+      <div class="bg-disclose-body">
+        <p>
+          <strong>Executive summary:</strong> Orthographic security circuit with
+          one Enterprise Application boundary, dual authorization checkpoints,
+          visible DENY terminals, and a separate evidence rail.
+        </p>
+        <p>
+          <strong>Intended pages:</strong> Homepage summary, How It Works,
+          Canonical Workflow, industry transaction diagrams.
+        </p>
+        <p>
+          <strong>Components:</strong> Prepare, Receive+Declare, Execute, Request
+          Admission, AI Provider, Result-to-Action, System of Record, Evidence,
+          Verify.
+        </p>
+        <p>
+          <strong>Paths:</strong> Outbound, invoke, return-into-application,
+          declared action, ALLOW→execute, authorized effect, dual DENY
+          terminals, evidence to Verify.
+        </p>
+        <p>
+          <strong>Known limitations:</strong> Dense at very narrow widths without
+          vertical stacking; path labels need careful responsive hiding.
+        </p>
+      </div>
+    </details>
+    <table class="dir-eval">
+      <caption>Direction A evaluation cues</caption>
+      <thead>
+        <tr><th>Criterion</th><th>Observation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Precision</td><td>High — orthographic ports and terminals</td></tr>
+        <tr><td>Transaction clarity</td><td>Primary strength</td></tr>
+        <tr><td>Trust-boundary clarity</td><td>Labeled enterprise / runtime / provider / verify</td></tr>
+        <tr><td>Evidence clarity</td><td>Separate rail outside runtime</td></tr>
+        <tr><td>Mobile</td><td>Stacks to vertical transaction</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="stack-section dir-section" id="direction-b" data-crop="direction-b">
+    <LayeredControlArchitecture idPrefix="cmp-b" />
+    <details class="bg-disclose">
+      <summary>Inspect technical structure — Direction B</summary>
+      <div class="bg-disclose-body">
+        <p>
+          <strong>Executive summary:</strong> Layered Govern / Authorize / Verify
+          with Authorize foregrounded. Functional domains only.
+        </p>
+        <p>
+          <strong>Intended pages:</strong> Platform, executive architecture,
+          company overview, pitch-deck summary.
+        </p>
+        <p>
+          <strong>Flows:</strong> Verified release into Authorize; evidence out to
+          Verify; no permission return path.
+        </p>
+        <p>
+          <strong>Known limitations:</strong> Does not communicate full
+          transaction geometry; must not be read as physical plane separation.
+        </p>
+      </div>
+    </details>
+    <table class="dir-eval">
+      <caption>Direction B evaluation cues</caption>
+      <thead>
+        <tr><th>Criterion</th><th>Observation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Executive comprehension</td><td>Primary strength</td></tr>
+        <tr><td>Precision</td><td>Medium — domain map, not topology</td></tr>
+        <tr><td>Trust-boundary clarity</td><td>Runtime and verify labeled</td></tr>
+        <tr><td>Transaction clarity</td><td>Not intended for full loop</td></tr>
+        <tr><td>Mobile</td><td>Stacks with Authorize dominant</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="stack-section dir-section" id="direction-c" data-crop="direction-c">
+    <EvidenceCenteredInvestigation idPrefix="cmp-c" />
+    <div class="dir-compact-wrap">
+      <h4 class="dir-compact-label">Compact / stacked preview</h4>
+      <EvidenceCenteredInvestigation compact={true} idPrefix="cmp-c-c" />
+    </div>
+    <details class="bg-disclose">
+      <summary>Inspect technical structure — Direction C</summary>
+      <div class="bg-disclose-body">
+        <p>
+          <strong>Executive summary:</strong> Evidence-centered investigation
+          surface: decision context → canonical spine → review outputs, with AI
+          insights separated.
+        </p>
+        <p>
+          <strong>Intended pages:</strong> Verification, Proof and Evidence,
+          Compliance and Audit, Reviewer Kit.
+        </p>
+        <p>
+          <strong>Known limitations:</strong> Illustrative model only; not a live
+          product screenshot; requires careful density control on mobile.
+        </p>
+      </div>
+    </details>
+    <table class="dir-eval">
+      <caption>Direction C evaluation cues</caption>
+      <thead>
+        <tr><th>Criterion</th><th>Observation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Evidence clarity</td><td>Primary strength</td></tr>
+        <tr><td>Executive comprehension</td><td>Strong for audit/review audiences</td></tr>
+        <tr><td>Transaction clarity</td><td>Assumes decisions already exist</td></tr>
+        <tr><td>Trust-boundary clarity</td><td>Read-only Verify boundary</td></tr>
+        <tr><td>Mobile</td><td>Stacks context → spine → outputs → insights</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="stack-section">
+    <h2>Comparison matrix</h2>
+    <p>No automatic winner. Scores are qualitative review cues only.</p>
+    <div class="docs-table-wrap">
+      <table class="dir-eval dir-eval--wide">
+        <thead>
+          <tr>
+            <th>Criterion</th>
+            <th>Direction A</th>
+            <th>Direction B</th>
+            <th>Direction C</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Precision</td>
+            <td>High</td>
+            <td>Medium</td>
+            <td>High for evidence provenance</td>
+          </tr>
+          <tr>
+            <td>Executive comprehension</td>
+            <td>Medium–High</td>
+            <td>High</td>
+            <td>High for reviewers</td>
+          </tr>
+          <tr>
+            <td>Trust-boundary clarity</td>
+            <td>High</td>
+            <td>Medium–High</td>
+            <td>High (read-only)</td>
+          </tr>
+          <tr>
+            <td>Transaction clarity</td>
+            <td>Highest</td>
+            <td>Not primary</td>
+            <td>Assumed upstream</td>
+          </tr>
+          <tr>
+            <td>Evidence clarity</td>
+            <td>Medium–High</td>
+            <td>Medium</td>
+            <td>Highest</td>
+          </tr>
+          <tr>
+            <td>Mobile behavior</td>
+            <td>Vertical circuit</td>
+            <td>Stacked domains</td>
+            <td>Stacked investigation</td>
+          </tr>
+          <tr>
+            <td>Intended pages</td>
+            <td>Home / How It Works / Canonical</td>
+            <td>Platform / overview</td>
+            <td>Verify / Proof / Audit</td>
+          </tr>
+          <tr>
+            <td>Known limitations</td>
+            <td>Dense labels</td>
+            <td>No full loop</td>
+            <td>Illustrative only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</BaseLayout>

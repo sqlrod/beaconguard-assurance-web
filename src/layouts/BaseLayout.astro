@@ -3,13 +3,19 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  robots?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "BeaconGuard Assurance",
   description = "Control before execution. Evidence after every decision. BeaconGuard governs whether an enterprise application may invoke AI and whether a declared action based on the returned result may affect an enterprise system.",
   ogImage = "/beaconguard-master-logo.png",
+  robots,
+  noindex = false,
 } = Astro.props;
+
+const robotsContent = robots || (noindex ? "noindex, nofollow" : undefined);
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 const siteOrigin = "https://beaconguardassurance.com";
@@ -45,6 +51,7 @@ import "../styles/global.css";
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {robotsContent && <meta name="robots" content={robotsContent} />}
     <link rel="canonical" href={canonicalUrl} />
 
     <meta property="og:type" content="website" />

@@ -1,0 +1,46 @@
+{
+  "pass": "01b",
+  "preview_base": "http://127.0.0.1:4332",
+  "preview_port": "4332",
+  "public_fullpage_count": 27,
+  "responsive_count": 5,
+  "crop_count": 8,
+  "sitemap_has_staging": false,
+  "sitemap_status": 200,
+  "sitemap_url_count": 27,
+  "staging_checks": {
+    "route": "/staging-diagram-direction",
+    "status": 200,
+    "h1": 1,
+    "robots": "noindex, nofollow",
+    "navHasStaging": false,
+    "footerHasStaging": false,
+    "overflowX": false,
+    "markerIds": [
+      "cmp-a-m-n",
+      "cmp-a-m-a",
+      "cmp-a-m-d",
+      "cmp-a-m-e",
+      "cmp-a-c-m-n",
+      "cmp-a-c-m-a",
+      "cmp-a-c-m-d",
+      "cmp-a-c-m-e"
+    ],
+    "svgIds": [
+      "cmp-a-m-n",
+      "cmp-a-m-a",
+      "cmp-a-m-d",
+      "cmp-a-m-e",
+      "cmp-a-c-m-n",
+      "cmp-a-c-m-a",
+      "cmp-a-c-m-d",
+      "cmp-a-c-m-e"
+    ],
+    "dupMarkers": [],
+    "dupSvg": []
+  },
+  "validation_errors": [],
+  "overflow_routes": [],
+  "nav_footer_staging_leak": false,
+  "captured_at": "2026-08-01T17:01:47.250Z"
+}

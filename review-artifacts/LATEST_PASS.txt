@@ -1,1 +1,1 @@
-review-artifacts/pass-01a-commercial-hierarchy
+review-artifacts/pass-01b-diagram-direction
