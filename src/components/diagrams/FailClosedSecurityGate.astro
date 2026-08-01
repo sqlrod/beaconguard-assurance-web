@@ -2,14 +2,17 @@
 import DiagramShell from "./DiagramShell.astro";
 
 const gates = [
-  { name: "Authenticated Request", className: "" },
+  { name: "Authenticated Request / Action Context", className: "" },
   { name: "Normalize", className: "" },
   { name: "Bind Tenant and Environment", className: "" },
   { name: "Check Freshness and Replay", className: "" },
   { name: "Verify Active Release", className: "" },
   { name: "Deterministic Evaluation", className: "" },
   { name: "Persist Evidence", className: "bg-outcome-evidence" },
-  { name: "Apply Deterministic Result", className: "bg-flow-step--decision" },
+  {
+    name: "Apply ALLOW or DENY (admission or action)",
+    className: "bg-flow-step--decision",
+  },
 ];
 
 const failureSteps = [
@@ -17,7 +20,7 @@ const failureSteps = [
   { name: "Record failure category", className: "bg-fail-rail-step--neutral" },
   { name: "No permissive fallback", className: "bg-fail-rail-step--neutral" },
   {
-    name: "No downstream execution",
+    name: "No provider invoke / no enterprise effect",
     className: "bg-outcome-deny bg-fail-rail-step--stop",
   },
 ];
@@ -25,7 +28,7 @@ const failureSteps = [
 
 <DiagramShell
   title="Fail-closed security gate"
-  caption="Any required gate failure returns DENY, records the failure category, permits no fallback, and blocks downstream execution."
+  caption="Shared fail-closed path for Request Admission and Result-to-Action. Any required gate failure returns DENY, records the failure category, permits no fallback, and blocks provider invocation or enterprise effect as applicable."
   className="bg-diagram--fail-closed"
 >
   <div class="bg-fail-layout">
@@ -110,13 +113,16 @@ const failureSteps = [
 
   <div slot="text">
     <p>
-      Required Control Sequence: Authenticated Request → Normalize → Bind Tenant
-      and Environment → Check Freshness and Replay → Verify Active Release →
-      Deterministic Evaluation → Persist Evidence → Apply Deterministic Result.
+      Required Control Sequence (applies at Request Admission and at
+      Result-to-Action where enforcement is configured): Authenticated Request /
+      Action Context → Normalize → Bind Tenant and Environment → Check Freshness
+      and Replay → Verify Active Release → Deterministic Evaluation → Persist
+      Evidence → Apply ALLOW or DENY.
     </p>
     <p>
-      Shared Fail-Closed Path: Any gate failure → DENY → Record failure category →
-      No permissive fallback → No downstream execution.
+      Shared Fail-Closed Path: Any gate failure → DENY → Record failure category
+      → No permissive fallback → No provider invocation or no enterprise effect,
+      as applicable.
     </p>
   </div>
 </DiagramShell>

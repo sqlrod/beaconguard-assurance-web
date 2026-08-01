@@ -1,12 +1,10 @@
 ---
 import DiagramShell from "./DiagramShell.astro";
-import OutcomeFork from "./OutcomeFork.astro";
 
 const management = [
   "Control Plane",
   "Compliance Playbook lifecycle",
-  "Signing",
-  "Distribution",
+  "Signing and distribution",
   "Verification and Activation",
   "Active Verified Release",
 ];
@@ -14,31 +12,56 @@ const management = [
 const runtime = [
   "Enterprise Application",
   "Optional System Connector",
-  "BeaconGuard Runtime Control Boundary",
-  "Determine ALLOW or DENY",
-  "Persist Verifiable Decision Record",
+  "Request Admission Authorization",
+  "AI Provider (separate trust boundary)",
+  "AI-Generated Result (untrusted)",
+  "Result-to-Action Authorization",
+  "Persist Verifiable Decision Records",
+  "Enterprise Application executes authorized action",
+  "Enterprise System of Record",
+];
+
+const contracts = [
+  "1. Request and identity contract",
+  "2. Provider-result and transaction-correlation contract",
+  "3. Intended enterprise-action contract",
+];
+
+const bypassProhibitions = [
+  "No provider invoke without required request authorization",
+  "No apply result without required action authorization",
+  "No reuse of prior authority",
+  "Provider success ≠ BeaconGuard authorization",
+  "No report/insight into runtime permission path",
+  "No return-path bypass of BeaconGuard",
 ];
 
 const dependencies = [
   "Customer IdP / workforce identity",
   "Service / workload identity",
-  "Shared replay authority",
+  "Key and secret custody",
+  "Shared replay / security state (where configured)",
   "Evidence provider",
   "Monitoring",
+  "BeaconGuard Verify (read-only)",
 ];
 
-const capabilityPaths = ["Windows", "Linux", "OCI-oriented deployment"];
+const capabilityPaths = [
+  "Windows controlled deployment paths",
+  "Linux controlled deployment paths",
+  "Linux OCI-oriented packaging paths",
+];
 ---
 
 <DiagramShell
-  title="Deployment and trust topology"
-  caption="Management plane is outside the request path. Runtime evaluates, persists evidence, then forks to ALLOW (governed execution) or DENY (hard stop). Supporting dependencies are not alternate execution paths."
+  title="Deployment and bypass prevention"
+  caption="Three integration contracts bind request identity, provider-result correlation, and intended enterprise action. Bypass of BeaconGuard on the outbound or return path is prohibited. Packaging remains under controlled internal qualification."
   className="bg-diagram--deployment"
 >
   <div class="bg-planes bg-planes--responsive">
     <section class="bg-plane" aria-labelledby="deploy-mgmt-title">
       <h4 id="deploy-mgmt-title" class="bg-plane-title">
-        A) Management plane
+        A) Govern / management
         <span class="bg-plane-badge">Outside request path</span>
       </h4>
       <div class="bg-flow" role="list">
@@ -63,13 +86,12 @@ const capabilityPaths = ["Windows", "Linux", "OCI-oriented deployment"];
           ))
         }
       </div>
-      <p class="bg-flow-note">
-        Active Verified Release feeds the runtime control boundary.
-      </p>
     </section>
 
     <section class="bg-plane" aria-labelledby="deploy-runtime-title">
-      <h4 id="deploy-runtime-title" class="bg-plane-title">B) Runtime path</h4>
+      <h4 id="deploy-runtime-title" class="bg-plane-title">
+        B) Runtime authorization path
+      </h4>
       <div class="bg-flow" role="list">
         {
           runtime.map((step, index) => (
@@ -77,10 +99,13 @@ const capabilityPaths = ["Windows", "Linux", "OCI-oriented deployment"];
               <div
                 class:list={[
                   "bg-flow-step",
-                  step.includes("Runtime Control") && "bg-flow-step--boundary",
-                  step.includes("ALLOW or DENY") && "bg-flow-step--decision",
+                  step.includes("Admission") && "bg-flow-step--boundary",
+                  step.includes("Result-to-Action") && "bg-flow-step--boundary",
                   step.includes("Persist") && "bg-outcome-evidence",
                   step.includes("System Connector") && "bg-flow-step--optional",
+                  step.includes("AI Provider") && "bg-txn-provider",
+                  step.includes("untrusted") && "bg-txn-result",
+                  step.includes("System of Record") && "bg-txn-sor",
                 ]}
                 role="listitem"
               >
@@ -95,33 +120,53 @@ const capabilityPaths = ["Windows", "Linux", "OCI-oriented deployment"];
           ))
         }
       </div>
-      <OutcomeFork
-        allowLabel="Governed AI / API / Automated System"
-        denyLabel="Hard Stop / No Downstream Execution"
-      />
+    </section>
+
+    <section class="bg-plane" aria-labelledby="deploy-contracts-title">
+      <h4 id="deploy-contracts-title" class="bg-plane-title">
+        C) Integration contracts
+      </h4>
+      <ul class="bg-dep-list">
+        {contracts.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="bg-flow-note"><strong>Bypass prohibitions</strong></p>
+      <ul class="bg-dep-list">
+        {bypassProhibitions.map((item) => <li>{item}</li>)}
+      </ul>
     </section>
 
     <section class="bg-plane" aria-labelledby="deploy-deps-title">
       <h4 id="deploy-deps-title" class="bg-plane-title">
-        C) Supporting dependencies
-        <span class="bg-plane-badge">Side list — not an alternate path</span>
+        D) Supporting dependencies
+        <span class="bg-plane-badge">Not alternate paths</span>
       </h4>
       <ul class="bg-dep-list">
         {dependencies.map((item) => <li>{item}</li>)}
       </ul>
       <p class="bg-flow-note">
-        Capability-level operating paths (no public download claims):{" "}
-        {capabilityPaths.join(" · ")}
+        Capability-level operating paths under controlled internal qualification
+        (no public download claims): {capabilityPaths.join(" · ")}. Native
+        Windows OCI is not claimed as a proven packaging path.
       </p>
     </section>
   </div>
 
   <div slot="text">
     <p>
-      Runtime path: Enterprise Application → Optional System Connector → Runtime
-      Control Boundary → Determine ALLOW or DENY → Persist Verifiable Decision
-      Record → fork ALLOW (governed system) or DENY (hard stop). Management
-      plane remains outside the request path.
+      Govern produces the Active Verified Release outside the request path.
+      Runtime: Enterprise Application → optional System Connector → Request
+      Admission Authorization → AI Provider → untrusted AI-Generated Result →
+      Result-to-Action Authorization → Verifiable Decision Records → enterprise
+      application executes only authorized actions into the System of Record.
+    </p>
+    <p>
+      Integration contracts: (1) request and identity; (2) provider-result and
+      transaction correlation; (3) intended enterprise action. Applications must
+      not invoke the provider without required request authorization, apply a
+      result without required action authorization, reuse prior authority, treat
+      provider success as BeaconGuard authorization, feed reports or AI insights
+      into the runtime permission path, or bypass BeaconGuard on the return
+      path.
     </p>
   </div>
 </DiagramShell>

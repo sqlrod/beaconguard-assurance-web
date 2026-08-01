@@ -1,55 +1,70 @@
 ---
 import DiagramShell from "./DiagramShell.astro";
-import OutcomeFork from "./OutcomeFork.astro";
 
-const management = [
+const govern = [
   "Compliance Playbook",
-  "Validation and Compilation",
-  "Governance Approval",
-  "Signing",
+  "Validation, approval, and signing",
   "Signed Immutable Release Artifact",
   "Controlled Distribution",
   "Release Verification and Activation",
   "Active Verified Release",
 ];
 
-const runtime = [
+const authorizeRequest = [
   "Enterprise Application",
   "Optional System Connector",
   "Request Validation and Context Normalization",
-  "Request Authenticity Verification",
-  "Tenant and Environment Binding",
-  "Freshness and Distributed Replay Checks",
-  "Deterministic Compliance Playbook Evaluation",
-  "Determine ALLOW or DENY",
+  "Trust, Freshness, and Replay Checks",
+  "Request Admission Authorization",
   "Persist Verifiable Decision Record",
+];
+
+const authorizeAction = [
+  "AI Provider (trust boundary)",
+  "AI-Generated Result (untrusted)",
+  "Declare Intended Enterprise Action",
+  "Result-to-Action Authorization",
+  "Persist Verifiable Decision Record",
+  "Enterprise Application executes authorized action",
+  "Enterprise System of Record",
+];
+
+const verify = [
+  "Executive Reporting",
+  "Decision Explorer",
+  "Deterministic Reconstruction",
+  "Source Evidence / field traceability",
+  "Replay Verification",
+  "Verifiable Export",
+  "AI-Assisted Insights (non-authoritative)",
 ];
 
 const dependencies = [
   "Customer identity provider",
   "Workforce identity",
   "Service and workload identity",
-  "Shared replay authority",
-  "Evidence provider",
   "Key and secret custody",
+  "Replay / shared security state (where configured)",
+  "Evidence provider",
   "Operational monitoring",
+  "Customer deployment responsibilities",
 ];
 ---
 
 <DiagramShell
-  title="BeaconGuard architecture planes"
-  caption="Management plane is outside the per-request path. Runtime data plane evaluates, persists evidence, then forks to ALLOW or DENY. Supporting trust dependencies reinforce the path without becoming alternate execution routes."
+  title="BeaconGuard functional architecture"
+  caption="Govern builds the Active Verified Release. Authorize covers Request Admission and Result-to-Action. Verify is a read-only functional domain—not an assumed independent network plane. The AI provider and enterprise system of record are separate trust boundaries."
   className="bg-diagram--architecture"
 >
   <div class="bg-planes bg-planes--architecture bg-planes--responsive">
-    <section class="bg-plane" aria-labelledby="arch-mgmt-title">
-      <h4 id="arch-mgmt-title" class="bg-plane-title">
-        Management plane
-        <span class="bg-plane-badge">Outside per-request path</span>
+    <section class="bg-plane" aria-labelledby="arch-govern-title">
+      <h4 id="arch-govern-title" class="bg-plane-title">
+        Govern
+        <span class="bg-plane-badge">Management / control</span>
       </h4>
       <div class="bg-flow" role="list">
         {
-          management.map((step, index) => (
+          govern.map((step, index) => (
             <>
               <div
                 class:list={[
@@ -60,7 +75,7 @@ const dependencies = [
               >
                 {step}
               </div>
-              {index < management.length - 1 && (
+              {index < govern.length - 1 && (
                 <div class="bg-flow-arrow" aria-hidden="true">
                   ↓
                 </div>
@@ -70,38 +85,33 @@ const dependencies = [
         }
       </div>
       <p class="bg-flow-note">
-        Active Verified Release feeds deterministic runtime evaluation.
+        Outside the per-request path. Active Verified Release feeds Authorize.
       </p>
     </section>
 
-    <section class="bg-plane" aria-labelledby="arch-runtime-title">
-      <h4 id="arch-runtime-title" class="bg-plane-title">
-        Runtime data plane
-        <span class="bg-plane-badge">Evidence before forward</span>
+    <section class="bg-plane" aria-labelledby="arch-auth-title">
+      <h4 id="arch-auth-title" class="bg-plane-title">
+        Authorize
+        <span class="bg-plane-badge">Runtime authorization domain</span>
       </h4>
+
+      <p class="bg-flow-note"><strong>Request Admission</strong></p>
       <div class="bg-flow" role="list">
         {
-          runtime.map((step, index) => (
+          authorizeRequest.map((step, index) => (
             <>
               <div
                 class:list={[
                   "bg-flow-step",
-                  step.includes("Determine ALLOW") && "bg-flow-step--decision",
+                  step.includes("Request Admission") && "bg-flow-step--decision",
                   step.includes("Persist") && "bg-outcome-evidence",
                   step.includes("System Connector") && "bg-flow-step--optional",
                 ]}
                 role="listitem"
               >
-                {step.includes("Persist") ? (
-                  <>
-                    <strong>{step}</strong>
-                    <span>Required before any downstream effect</span>
-                  </>
-                ) : (
-                  step
-                )}
+                {step}
               </div>
-              {index < runtime.length - 1 && (
+              {index < authorizeRequest.length - 1 && (
                 <div class="bg-flow-arrow" aria-hidden="true">
                   ↓
                 </div>
@@ -111,48 +121,104 @@ const dependencies = [
         }
       </div>
 
-      <OutcomeFork
-        allowLabel="Governed AI / API / Automated System"
-        denyLabel="Hard Stop / No Downstream Execution"
-      />
+      <div class="bg-txn-fork" aria-label="Request admission outcomes">
+        <div class="bg-txn-arm bg-txn-arm--deny">
+          <div class="bg-flow-step bg-outcome-deny">
+            <strong>DENY</strong>
+            <span>No provider invocation</span>
+          </div>
+        </div>
+        <div class="bg-txn-arm bg-txn-arm--allow">
+          <div class="bg-flow-step bg-outcome-allow">
+            <strong>ALLOW</strong>
+            <span>May invoke provider</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="bg-flow-note"><strong>Provider · result · action</strong></p>
+      <div class="bg-flow" role="list">
+        {
+          authorizeAction.map((step, index) => (
+            <>
+              <div
+                class:list={[
+                  "bg-flow-step",
+                  step.includes("Result-to-Action") && "bg-flow-step--decision",
+                  step.includes("Persist") && "bg-outcome-evidence",
+                  step.includes("AI Provider") && "bg-txn-provider",
+                  step.includes("untrusted") && "bg-txn-result",
+                  step.includes("System of Record") && "bg-txn-sor",
+                ]}
+                role="listitem"
+              >
+                {step.includes("untrusted") ? (
+                  <>
+                    <strong>AI-Generated Result</strong>
+                    <span>Untrusted proposal</span>
+                  </>
+                ) : (
+                  step
+                )}
+              </div>
+              {index < authorizeAction.length - 1 && (
+                <div class="bg-flow-arrow" aria-hidden="true">
+                  ↓
+                </div>
+              )}
+            </>
+          ))
+        }
+      </div>
+      <p class="bg-flow-note">
+        Provider success is not enterprise authorization. BeaconGuard authorizes;
+        the enterprise application executes.
+      </p>
+    </section>
+
+    <section class="bg-plane" aria-labelledby="arch-verify-title">
+      <h4 id="arch-verify-title" class="bg-plane-title">
+        Verify
+        <span class="bg-plane-badge">Read-only functional domain</span>
+      </h4>
+      <ul class="bg-dep-list">
+        {verify.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="bg-flow-note">
+        Verify cannot modify evidence, change a historical decision, activate a
+        release, alter a Compliance Playbook, grant runtime authority, or
+        authorize an enterprise action.
+      </p>
     </section>
 
     <section class="bg-plane" aria-labelledby="arch-deps-title">
       <h4 id="arch-deps-title" class="bg-plane-title">
-        Supporting trust dependencies
-        <span class="bg-plane-badge">Side list — not alternate paths</span>
+        Supporting dependencies
+        <span class="bg-plane-badge">Not alternate execution paths</span>
       </h4>
       <ul class="bg-dep-list">
         {dependencies.map((item) => <li>{item}</li>)}
       </ul>
-      <p class="bg-flow-note">
-        The System Connector does not evaluate controls, activate releases, issue
-        permission, or bypass enforcement. The Control Plane is not on the
-        per-request execution path.
-      </p>
     </section>
   </div>
 
   <div slot="text">
     <p>
-      Management plane: Compliance Playbook → Validation and Compilation →
-      Governance Approval → Signing → Signed Immutable Release Artifact →
-      Controlled Distribution → Release Verification and Activation → Active
-      Verified Release (feeds runtime).
+      Govern (management/control): Compliance Playbook through Active Verified
+      Release, outside the per-request path.
     </p>
     <p>
-      Runtime data plane: Enterprise Application → Optional System Connector →
-      Request Validation and Context Normalization → Request Authenticity
-      Verification → Tenant and Environment Binding → Freshness and Distributed
-      Replay Checks → Deterministic Compliance Playbook Evaluation → Determine
-      ALLOW or DENY → Persist Verifiable Decision Record → mutually exclusive
-      fork. Branch ALLOW → governed AI, API, or automated system; Branch DENY →
-      hard stop with no downstream execution.
+      Authorize (runtime): Request Admission Authorization records evidence and
+      either DENYs provider invocation or ALLOWs the enterprise application to
+      invoke the AI provider. The AI-Generated Result is an untrusted proposal.
+      The application declares an Intended Enterprise Action; Result-to-Action
+      Authorization records evidence and either hard-stops or permits the
+      enterprise application to execute into the Enterprise System of Record.
     </p>
     <p>
-      Supporting dependencies: Customer identity provider; Workforce identity;
-      Service and workload identity; Shared replay authority; Evidence provider;
-      Key and secret custody; Operational monitoring.
+      Verify is a read-only functional domain for reporting, Decision Explorer,
+      reconstruction, source evidence, replay, export, and non-authoritative
+      AI-assisted insights—not an assumed independent network plane.
     </p>
   </div>
 </DiagramShell>

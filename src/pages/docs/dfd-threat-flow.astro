@@ -5,13 +5,17 @@ import DataFlowThreatDiagram from "../../components/diagrams/DataFlowThreatDiagr
 
 <BaseLayout
   title="Data-Flow Threat Analysis"
-  description="Trust boundaries, data flows, threat conditions, and deterministic ALLOW or DENY enforcement responses for BeaconGuard-governed requests."
+  description="Eighteen-step governed AI transaction data flow across Request Admission, AI provider, Result-to-Action Authorization, enterprise system of record, evidence, and BeaconGuard Verify."
 >
   <section class="stack-section">
     <h1>Data-Flow Threat Analysis</h1>
 
     <p>
-      This page identifies the trust boundaries, data flows, threat conditions, and deterministic enforcement responses associated with a BeaconGuard-governed request. It supplements the <a href="/docs/architecture">System Architecture</a> and <a href="/docs/threat-model">Threat Model</a> documentation.
+      This page identifies the trust boundaries, numbered data flows, threat
+      conditions, and deterministic enforcement responses associated with a
+      BeaconGuard-governed AI transaction. It supplements the
+      <a href="/docs/architecture">System Architecture</a> and
+      <a href="/docs/threat-model">Threat Model</a> documentation.
     </p>
 
     <DataFlowThreatDiagram />
@@ -19,33 +23,59 @@ import DataFlowThreatDiagram from "../../components/diagrams/DataFlowThreatDiagr
     <h2>1. Scope and trust boundary</h2>
 
     <p>
-      BeaconGuard inserts a Runtime Control Boundary between an enterprise application or workflow and a governed AI, API, or automated system. The management plane produces releases; the runtime data plane evaluates each request against an Active Verified Release and returns ALLOW or DENY before governed execution. The Control Plane is outside the per-request path. The customer IdP does not make the BeaconGuard decision.
+      BeaconGuard authorizes whether an enterprise application may invoke an AI
+      provider (Request Admission Authorization) and whether a declared intended
+      enterprise action may proceed (Result-to-Action Authorization). AI-generated
+      results remain untrusted proposals. The AI provider and the enterprise
+      system of record are separate trust boundaries. BeaconGuard Verify is a
+      read-only functional domain. The Control Plane (Govern) is outside the
+      per-request path. The customer IdP does not make the BeaconGuard decision.
     </p>
 
     <p>Out of scope for this page:</p>
     <ul>
       <li>Product marketing claims</li>
-      <li>Legal compliance certification</li>
+      <li>Legal compliance certification or legal admissibility</li>
       <li>Replacement of customer systems of record</li>
+      <li>Semantic AI-response content authorization</li>
     </ul>
 
-    <h2>2. Data-flow sequence</h2>
+    <h2>2. Eighteen-step data-flow sequence</h2>
     <ol>
-      <li>Enterprise Application / Workflow submits a request.</li>
-      <li>Optional System Connector maps source protocol and context.</li>
-      <li>Request Validation and Context Normalization checks required structure.</li>
-      <li>Trust, Freshness, and Replay Checks validate admission conditions.</li>
-      <li>Deterministic Playbook Evaluation applies the Active Verified Release.</li>
-      <li>BeaconGuard determines ALLOW or DENY.</li>
-      <li>A Verifiable Decision Record is persisted.</li>
-      <li>ALLOW may proceed to governed execution; DENY hard-stops.</li>
-      <li>Evidence supports replay, verification, and governance review via the configured evidence provider.</li>
+      <li>Enterprise application creates governed request.</li>
+      <li>Identity and tenant context enter BeaconGuard.</li>
+      <li>Request is normalized.</li>
+      <li>Request admission is evaluated.</li>
+      <li>Request decision evidence is recorded.</li>
+      <li>Authorized request reaches the AI provider.</li>
+      <li>Provider returns an AI-generated result.</li>
+      <li>Result is bound to the governed transaction context.</li>
+      <li>Intended enterprise action is declared and normalized.</li>
+      <li>Result-to-action authorization is evaluated.</li>
+      <li>Result decision evidence is recorded.</li>
+      <li>Enterprise action is allowed or hard-stopped.</li>
+      <li>Canonical evidence enters the verification path.</li>
+      <li>Reviewer accesses Decision Explorer.</li>
+      <li>Reconstruction traces source evidence.</li>
+      <li>Replay verifies the recorded decision.</li>
+      <li>Export produces verification material.</li>
+      <li>AI-assisted insight remains outside authority.</li>
     </ol>
+
+    <p>
+      Steps 6–7 occur only after admission ALLOW. Steps 12 enterprise-effect
+      paths occur only after action ALLOW. DENY at steps 4 or 10 hard-stops the
+      corresponding next effect.
+    </p>
 
     <h2>3. Trust inputs</h2>
 
     <p>
-      Typical trusted inputs include signed or otherwise verified request metadata, workflow identity, user role, source-system trust, approved-pathway status, request identifiers, timestamps, freshness windows, and the Active Verified Release selected for evaluation.
+      Typical trusted inputs include signed or otherwise verified request
+      metadata, workflow identity, user role, source-system trust,
+      approved-pathway status, request identifiers, timestamps, freshness
+      windows, the Active Verified Release, provider-result binding / correlation
+      context, and the declared intended enterprise action.
     </p>
 
     <p>Missing or invalid required inputs fail closed as DENY.</p>
@@ -65,53 +95,67 @@ import DataFlowThreatDiagram from "../../components/diagrams/DataFlowThreatDiagr
         </thead>
         <tbody>
           <tr>
-            <td>Malformed request</td>
-            <td>Runtime Control Boundary</td>
-            <td>Request Validation and Context Normalization</td>
+            <td>Malformed request or action context</td>
+            <td>Authorize</td>
+            <td>Validation and Context Normalization</td>
             <td>DENY because required structure is missing or invalid</td>
-            <td>Application request construction</td>
+            <td>Application request / action construction</td>
           </tr>
           <tr>
             <td>Missing trusted context</td>
-            <td>Runtime Control Boundary</td>
+            <td>Authorize</td>
             <td>Trust checks and playbook requirements</td>
             <td>DENY because required context is missing</td>
             <td>Identity and source-system trust configuration</td>
           </tr>
           <tr>
             <td>Invalid signature or trust signal</td>
-            <td>Runtime Control Boundary</td>
+            <td>Authorize</td>
             <td>Trust and signature checks</td>
             <td>DENY because trust cannot be verified</td>
             <td>Key and identity-provider operations</td>
           </tr>
           <tr>
-            <td>Stale request</td>
-            <td>Runtime Control Boundary</td>
-            <td>Freshness checks</td>
-            <td>DENY because freshness cannot be verified</td>
-            <td>Clock and request-timing practices</td>
-          </tr>
-          <tr>
-            <td>Replayed request</td>
-            <td>Runtime Control Boundary</td>
-            <td>Replay checks</td>
-            <td>DENY because the request appears replayed</td>
-            <td>Replay-state provider and deployment configuration</td>
+            <td>Stale or replayed request</td>
+            <td>Authorize</td>
+            <td>Freshness and replay checks</td>
+            <td>DENY because freshness or replay cannot be verified</td>
+            <td>Clock practices; replay-state provider configuration</td>
           </tr>
           <tr>
             <td>Inactive or unverified release</td>
-            <td>Release Verification and Activation</td>
+            <td>Govern / activation</td>
             <td>Release verification before activation</td>
             <td>DENY because no verified active release is available</td>
             <td>Release distribution and activation operations</td>
           </tr>
           <tr>
-            <td>Unauthorized pathway</td>
-            <td>Deterministic Playbook Evaluation</td>
-            <td>Active Verified Release pathway controls</td>
-            <td>DENY because the pathway is not approved</td>
+            <td>Unauthorized pathway or action</td>
+            <td>Authorize</td>
+            <td>Active Verified Release controls</td>
+            <td>DENY because pathway or declared action is not approved</td>
             <td>Pathway governance and playbook authoring</td>
+          </tr>
+          <tr>
+            <td>Provider invoke without admission ALLOW</td>
+            <td>Customer / network</td>
+            <td>Boundary placement; bypass prohibitions</td>
+            <td>Outside BeaconGuard process if bypassed; design requires admission first</td>
+            <td>Application and network path controls</td>
+          </tr>
+          <tr>
+            <td>Treating provider success as authorization</td>
+            <td>Enterprise application</td>
+            <td>Result-to-Action Authorization required for declared action</td>
+            <td>Provider OK is not ALLOW for enterprise effect</td>
+            <td>Application integration contract</td>
+          </tr>
+          <tr>
+            <td>Return-path bypass</td>
+            <td>Customer / network</td>
+            <td>Result-to-Action on return / action path</td>
+            <td>Hard stop when authorization is enforced; otherwise customer residual</td>
+            <td>Deployment architecture</td>
           </tr>
           <tr>
             <td>System Connector manipulation</td>
@@ -121,17 +165,31 @@ import DataFlowThreatDiagram from "../../components/diagrams/DataFlowThreatDiagr
             <td>Connector hardening and monitoring</td>
           </tr>
           <tr>
-            <td>Downstream execution misuse</td>
-            <td>After ALLOW</td>
-            <td>BeaconGuard does not own post-ALLOW business logic</td>
-            <td>Not a runtime permission bypass; ALLOW only permits governed execution</td>
-            <td>Customer application and model-risk controls</td>
+            <td>Misuse after authorized action</td>
+            <td>Outside declared action / outside BeaconGuard path</td>
+            <td>BeaconGuard authorizes declared action only</td>
+            <td>Not a runtime permission bypass of BeaconGuard</td>
+            <td>Customer application and operational controls</td>
+          </tr>
+          <tr>
+            <td>Missing or inconsistent source evidence</td>
+            <td>Verify</td>
+            <td>Honest unavailable-field reporting; integrity checks</td>
+            <td>Reconstruction reports gaps; does not fabricate</td>
+            <td>Evidence-provider and retention operations</td>
+          </tr>
+          <tr>
+            <td>AI insight used as authority</td>
+            <td>Verify side path</td>
+            <td>Insights non-authoritative; outside trusted path</td>
+            <td>No runtime permission from insights</td>
+            <td>Reviewer process controls</td>
           </tr>
           <tr>
             <td>Evidence-provider failure</td>
             <td>Evidence path</td>
-            <td>Verifiable Decision Record emission; storage durability is deployment-dependent</td>
-            <td>Runtime permission remains ALLOW or DENY; retention and integrity depend on provider configuration</td>
+            <td>Verifiable Decision Record emission; durability deployment-dependent</td>
+            <td>Runtime permission remains ALLOW or DENY; retention depends on provider</td>
             <td>Evidence-provider and customer infrastructure</td>
           </tr>
         </tbody>
@@ -142,18 +200,27 @@ import DataFlowThreatDiagram from "../../components/diagrams/DataFlowThreatDiagr
 
     <p>Runtime permission results are binary:</p>
     <ul>
-      <li><strong>ALLOW</strong> — required controls are satisfied; after evidence persistence, governed execution may proceed.</li>
-      <li><strong>DENY</strong> — execution is prevented; no downstream execution occurs.</li>
+      <li><strong>ALLOW</strong> — required controls are satisfied; after evidence requirements are met, the permitted next step may proceed.</li>
+      <li><strong>DENY</strong> — hard stop; no provider invocation or no enterprise effect, as applicable.</li>
     </ul>
 
     <p>
-      When required approval is absent, BeaconGuard returns DENY with a deterministic reason indicating that approval is required. An illustrative reason style is <code>APPROVAL_REQUIRED</code>. Governance or human review may follow from the Verifiable Decision Record; review does not permit execution.
+      When required approval is absent, BeaconGuard returns DENY with a
+      deterministic reason indicating that approval is required. An illustrative
+      reason style is <code>APPROVAL_REQUIRED</code>. Governance or human review may
+      follow from the Verifiable Decision Record; review does not permit
+      execution.
     </p>
 
-    <h2>6. Evidence and review</h2>
+    <h2>6. Evidence and Verify</h2>
 
     <p>
-      Every deterministic result produces a Verifiable Decision Record that preserves decision context, release identity, control result, and outcome. Evidence is designed for replay and verification and supports audit and governance review. Retention and integrity protection depend on the configured evidence provider and shared customer deployment responsibilities. Append-only or immutable storage is not assumed unconditionally.
+      Every deterministic result produces a Verifiable Decision Record that
+      preserves decision context, release identity, control result, and outcome.
+      Canonical evidence feeds BeaconGuard Verify for Decision Explorer,
+      reconstruction, replay, and export. AI-assisted insights remain outside
+      authority. Retention and integrity protection depend on the configured
+      evidence provider and shared customer deployment responsibilities.
     </p>
 
     <h2>7. Residual risks</h2>
@@ -164,11 +231,13 @@ import DataFlowThreatDiagram from "../../components/diagrams/DataFlowThreatDiagr
       <li>Incorrect Compliance Playbook authoring</li>
       <li>Compromised signing keys</li>
       <li>Evidence-provider outages or misconfiguration</li>
-      <li>Misuse of allowed outputs after an ALLOW result</li>
+      <li>Application bypass outside BeaconGuard’s process boundary</li>
+      <li>Misuse after an authorized action, outside the declared action contract, or outside the BeaconGuard-controlled path</li>
     </ul>
 
     <p>
-      Those risks remain shared with customer operations and are addressed in the broader <a href="/docs/threat-model">Threat Model</a>.
+      Those risks remain shared with customer operations and are addressed in the
+      broader <a href="/docs/threat-model">Threat Model</a>.
     </p>
 
     <h2>8. Related documentation</h2>
@@ -180,6 +249,7 @@ import DataFlowThreatDiagram from "../../components/diagrams/DataFlowThreatDiagr
       <li><a href="/how-it-works">How It Works</a></li>
       <li><a href="/security">Security</a></li>
       <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
+      <li><a href="/verification">Verification</a></li>
     </ul>
   </section>
 </BaseLayout>

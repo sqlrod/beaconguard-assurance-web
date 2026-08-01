@@ -1,0 +1,51 @@
+---
+/**
+ * Shared maturity / qualification disclaimer.
+ * variant: short | full | technical
+ */
+interface Props {
+  variant?: "short" | "full" | "technical";
+  /** @deprecated use variant="short" or "full" */
+  compact?: boolean;
+}
+
+const { variant, compact = false } = Astro.props;
+const mode = variant ?? (compact ? "short" : "full");
+---
+
+<aside
+  class:list={[
+    "bg-qualify",
+    mode !== "technical" && "bg-qualify--compact",
+    mode === "technical" && "bg-qualify--technical",
+  ]}
+  aria-label="Qualification"
+>
+  {
+    mode === "short" && (
+      <p>BeaconGuard is currently offered through controlled evaluation.</p>
+    )
+  }
+  {
+    mode === "full" && (
+      <p>
+        BeaconGuard is currently offered through controlled evaluation.
+        Production deployment requires customer-specific qualification.
+      </p>
+    )
+  }
+  {
+    mode === "technical" && (
+      <>
+        <h2 class="bg-qualify-title">Qualification</h2>
+        <p>
+          Public materials describe controlled evaluation and internal
+          qualification. They do not establish customer production
+          authorization, certified production scale, clinical correctness,
+          legal admissibility, or third-party certification unless separately
+          evidenced.
+        </p>
+      </>
+    )
+  }
+</aside>

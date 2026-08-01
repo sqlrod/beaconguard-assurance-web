@@ -4,93 +4,182 @@ import IndustryControlFlow from "../components/diagrams/IndustryControlFlow.astr
 ---
 
 <BaseLayout
-  title="Healthcare | BeaconGuard for PHI-Sensitive Workflows"
-  description="BeaconGuard enforces ALLOW or DENY decisions for PHI-sensitive healthcare workflows before governed execution, with Verifiable Decision Records for privacy and compliance review."
+  title="Healthcare | BeaconGuard for Regulated Healthcare AI Actions"
+  description="BeaconGuard is the initial-market authorization layer for healthcare AI workflows: Request Admission before provider invocation and Result-to-Action before enterprise effect. AI output remains untrusted; the EHR remains authoritative."
 >
   <section class="stack-section">
-    <h1>Deterministic control for PHI-sensitive AI workflows</h1>
+    <p class="section-label">INITIAL MARKET</p>
+    <h1>
+      Control AI-assisted healthcare actions before they affect clinical
+      workflows.
+    </h1>
     <p class="lead">
-      BeaconGuard deploys alongside existing healthcare applications as a Runtime Control Boundary. It evaluates trusted request context against the Active Verified Release and returns ALLOW or DENY before governed execution, preserving Verifiable Decision Records for privacy, security, compliance, risk, and architecture teams.
+      Healthcare is BeaconGuard’s primary initial market. The lead wedge is
+      AI-assisted patient communication—governing whether outreach may be
+      invoked and whether a declared send, queue, or status update may proceed.
+      BeaconGuard also applies to documentation assistance and care-operations
+      pathways. AI output remains an untrusted proposal. BeaconGuard authorizes;
+      the application executes; the EHR and other systems of record remain
+      authoritative.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Healthcare control-boundary workflow</h2>
+    <h2>Healthcare governed AI transaction</h2>
     <p>
-      One reusable control-boundary sequence: evaluate trusted context, return ALLOW or DENY, record evidence, then apply the effect. Review obligations sit outside the runtime permission path.
+      Reaching an AI provider is not the complete governed outcome. Enterprise
+      effect still requires independent Result-to-Action Authorization of the
+      declared intended action under the Active Verified Release.
     </p>
     <IndustryControlFlow industry="healthcare" />
   </section>
 
   <section class="stack-section">
-    <h2>Existing healthcare systems remain in place</h2>
+    <h2>Dual authorization points</h2>
+    <ul>
+      <li>
+        <strong>Request Admission Authorization</strong> — may the application
+        invoke the AI provider?
+      </li>
+      <li>
+        <strong>Result-to-Action Authorization</strong> — may the declared
+        intended enterprise action proceed?
+      </li>
+    </ul>
     <p>
-      BeaconGuard does not replace the EHR, privacy office, clinical governance process, care-management platform, or other systems of record. Those systems remain authoritative. BeaconGuard enforces the request boundary before governed AI, APIs, or automated systems execute.
+      Runtime outcomes are <strong>ALLOW</strong> or <strong>DENY</strong> only.
+      Provider success is not enterprise authorization. Review does not convert
+      a recorded DENY into ALLOW.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Scenario structure</h2>
+    <h2>Existing healthcare systems remain in place</h2>
     <p>
-      Each scenario below follows the same review pattern: existing workflow, required trusted context, control evaluated, ALLOW or DENY result, why or when denied, evidence produced, and the system that remains authoritative.
+      BeaconGuard does not replace the EHR, privacy office, clinical governance
+      process, care-management platform, or other systems of record. Those
+      systems remain authoritative for clinical and operational state. Customer
+      governance retains clinical, privacy, and compliance judgment.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Healthcare scenarios</h2>
-    <div class="section-grid section-grid--scenarios">
-      <div class="content-card">
-        <h3>Unapproved pathway for PHI-heavy summary</h3>
-        <p><strong>Existing workflow:</strong> Operational summarization over PHI-bearing records.</p>
-        <p><strong>Required trusted context:</strong> Approved pathway, role, source-system trust, freshness.</p>
-        <p><strong>Control evaluated:</strong> Pathway approval against the Active Verified Release.</p>
-        <p><strong>Result:</strong> DENY</p>
-        <p><strong>Why / When denied:</strong> The pathway is not approved for this workflow.</p>
-        <p><strong>Evidence:</strong> Verifiable Decision Record with release identity and decision context.</p>
-        <p><strong>Authoritative system:</strong> EHR and clinical operations remain systems of record.</p>
+    <p>
+      <strong>Illustrative controlled example.</strong> The lead scenario is
+      patient communication. Documentation assistance and care-operations
+      pathways are secondary illustrations of the same governed transaction
+      pattern: admission, optional provider result, declared action, action
+      authorization, and evidence — without claiming clinical correctness or
+      production healthcare validation.
+    </p>
+    <div class="scenario-grid">
+      <div class="scenario-card scenario-card--lead">
+        <p class="section-label">LEAD SCENARIO</p>
+        <h3>Patient communication</h3>
+        <p>
+          <strong>Existing workflow:</strong> Care operations drafts patient
+          outreach or follow-up messaging with AI assistance.
+        </p>
+        <p>
+          <strong>Request Admission:</strong> ALLOW only when pathway, role,
+          trust, and freshness satisfy the Active Verified Release.
+        </p>
+        <p>
+          <strong>AI-Generated Result:</strong> Proposed message content —
+          untrusted proposal.
+        </p>
+        <p>
+          <strong>Intended action examples:</strong> Send outreach, queue
+          follow-up, update communication status.
+        </p>
+        <p>
+          <strong>Result-to-Action:</strong> Independent ALLOW or DENY for the
+          declared action. DENY prevents enterprise effect.
+        </p>
+        <p>
+          <strong>Authoritative system:</strong> Care operations and EHR remain
+          systems of record.
+        </p>
       </div>
-      <div class="content-card">
-        <h3>Required privacy approval absent</h3>
-        <p><strong>Existing workflow:</strong> Privacy-gated operational AI assist.</p>
-        <p><strong>Required trusted context:</strong> Privacy approval status and role boundaries.</p>
-        <p><strong>Control evaluated:</strong> Approval requirement in the Compliance Playbook.</p>
-        <p><strong>Result:</strong> DENY</p>
-        <p><strong>Why / When denied:</strong> Required privacy approval is absent. An illustrative reason style is <code>APPROVAL_REQUIRED</code>.</p>
-        <p><strong>Evidence:</strong> Verifiable Decision Record; governance review may follow without permitting execution.</p>
-        <p><strong>Authoritative system:</strong> Privacy office and EHR remain authoritative.</p>
+      <div class="scenario-card">
+        <h3>Clinical documentation assistance</h3>
+        <p>
+          <strong>Existing workflow:</strong> Clinician or scribe tooling
+          requests AI assistance for documentation drafting.
+        </p>
+        <p>
+          <strong>Request Admission:</strong> DENY when required privacy
+          approval, pathway, or trust context is absent.
+        </p>
+        <p>
+          <strong>AI-Generated Result:</strong> Draft documentation text —
+          untrusted proposal, not clinical authority.
+        </p>
+        <p>
+          <strong>Intended action examples:</strong> Insert draft into chart
+          workflow, submit for clinician review, update documentation state.
+        </p>
+        <p>
+          <strong>Result-to-Action:</strong> Authorizes the declared use of the
+          draft — not medical correctness of the content.
+        </p>
+        <p>
+          <strong>Authoritative system:</strong> EHR and clinical documentation
+          systems remain authoritative.
+        </p>
       </div>
-      <div class="content-card">
-        <h3>Stale or replayed request</h3>
-        <p><strong>Existing workflow:</strong> Patient outreach or operational follow-up assistance.</p>
-        <p><strong>Required trusted context:</strong> Request identity, timestamps, freshness window.</p>
-        <p><strong>Control evaluated:</strong> Trust, freshness, and replay checks.</p>
-        <p><strong>Result:</strong> DENY</p>
-        <p><strong>Why / When denied:</strong> The request is stale or appears replayed.</p>
-        <p><strong>Evidence:</strong> Verifiable Decision Record capturing check outcomes.</p>
-        <p><strong>Authoritative system:</strong> Care operations systems remain authoritative.</p>
-      </div>
-      <div class="content-card">
-        <h3>Approved operational request</h3>
-        <p><strong>Existing workflow:</strong> Approved pathway with valid role and trust context.</p>
-        <p><strong>Required trusted context:</strong> Signed/trusted metadata, pathway, freshness, role.</p>
-        <p><strong>Control evaluated:</strong> Deterministic Playbook Evaluation against the Active Verified Release.</p>
-        <p><strong>Result:</strong> ALLOW</p>
-        <p><strong>Evidence:</strong> Verifiable Decision Record for later audit and reconstruction.</p>
-        <p><strong>Authoritative system:</strong> EHR and workflow application remain systems of record.</p>
+      <div class="scenario-card">
+        <h3>Care-operations workflow</h3>
+        <p>
+          <strong>Existing workflow:</strong> Operational summarization or
+          routing over PHI-bearing records to support care operations.
+        </p>
+        <p>
+          <strong>Request Admission:</strong> DENY for unapproved pathways,
+          stale or replayed requests, or missing required context.
+        </p>
+        <p>
+          <strong>AI-Generated Result:</strong> Proposed summary or routing
+          recommendation — untrusted proposal.
+        </p>
+        <p>
+          <strong>Intended action examples:</strong> Route a case, update
+          operational status, create a follow-up task.
+        </p>
+        <p>
+          <strong>Result-to-Action:</strong> ALLOW permits the application to
+          execute the declared action; DENY hard-stops enterprise effect.
+        </p>
+        <p>
+          <strong>Authoritative system:</strong> Care-management platforms and
+          the EHR remain authoritative.
+        </p>
       </div>
     </div>
   </section>
 
   <section class="stack-section">
-    <h2>What BeaconGuard does not replace</h2>
-    <ul>
-      <li>Electronic health records or clinical documentation systems</li>
-      <li>Privacy office judgment or clinical governance</li>
+    <h2>What BeaconGuard does not claim</h2>
+    <ul class="bg-nonclaim-list">
+      <li>Clinical correctness or medical certification of AI output</li>
+      <li>Replacement of clinician judgment or privacy-office decisions</li>
+      <li>Replacement of the EHR or other systems of record</li>
       <li>Independent HIPAA certification or legal compliance attestation</li>
-      <li>Probabilistic clinical diagnosis or model-hosted clinical reasoning</li>
+      <li>Customer healthcare production validation or production-ready status</li>
+      <li>Authorization of model content as semantic truth</li>
     </ul>
+  </section>
+
+  <section class="stack-section">
     <div class="page-actions">
-      <a class="btn-primary" href="mailto:architecture@beaconguardassurance.com?subject=Healthcare%20Workflow%20Review">Request a Healthcare Workflow Review</a>
+      <a
+        class="btn-primary"
+        href="mailto:architecture@beaconguardassurance.com?subject=Healthcare%20Workflow%20Review"
+      >
+        Request a Healthcare Workflow Review
+      </a>
+      <a class="btn-secondary" href="/canonical-workflow">Review Governed Transaction</a>
       <a class="btn-secondary" href="/docs/architecture">Review System Architecture</a>
     </div>
   </section>

@@ -4,22 +4,23 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Threat Model"
-  description="Explicit BeaconGuard threat model covering release lifecycle, runtime enforcement, evidence, and shared deployment responsibilities."
+  description="Explicit BeaconGuard threat model covering release lifecycle, dual authorization, AI provider and enterprise boundaries, evidence, and verification threats."
 >
   <section class="stack-section">
     <h1>Threat Model</h1>
 
     <p>
-      This document describes the <strong>explicit threat model</strong> for BeaconGuard. It
-      enumerates assumptions, assets, and threat categories relevant to release
-      lifecycle, runtime enforcement, and evidence.
+      This document describes the <strong>explicit threat model</strong> for
+      BeaconGuard. It enumerates assumptions, assets, and threat categories
+      relevant to release lifecycle, Request Admission Authorization,
+      Result-to-Action Authorization, evidence, and BeaconGuard Verify.
     </p>
 
     <p>
-      The goal is not to claim absolute security, but to make <strong>attack surfaces and
-      failure modes explicit and reviewable</strong>. Mitigations listed here are product
-      design intents already reflected in the architecture; they are not guarantees
-      against every deployment-specific failure.
+      The goal is not to claim absolute security, but to make <strong>attack surfaces
+      and failure modes explicit and reviewable</strong>. Mitigations listed here are
+      product design intents already reflected in the architecture; they are not
+      guarantees against every deployment-specific failure.
     </p>
 
     <p>See also: <a href="/docs/dfd-threat-flow">DFD and Threat Flow</a>.</p>
@@ -28,12 +29,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     <p>BeaconGuard operates under assumptions including:</p>
     <ul>
-      <li>The Runtime Control Boundary executes in a controlled customer environment</li>
+      <li>Runtime authorization executes in a controlled customer environment</li>
       <li>Cryptographic primitives are correctly implemented and not broken</li>
       <li>Compliance Playbooks are authored and Signed Immutable Release Artifacts are signed by parties trusted by the customer</li>
       <li>Identity providers, network controls, secrets, and host hardening are operated by the customer</li>
       <li>Transport-level security (for example TLS) is provided by the deployment environment</li>
       <li>Evidence-provider configuration and operational monitoring are customer responsibilities when durability or append-only behavior is required</li>
+      <li>Applications honor ALLOW/DENY and do not bypass BeaconGuard on outbound or return paths</li>
     </ul>
 
     <p>If these assumptions do not hold, BeaconGuard control assertions may not apply.</p>
@@ -44,7 +46,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <li>Signed Immutable Release Artifacts and Active Verified Release integrity</li>
       <li>Authorization decision semantics (ALLOW / DENY only)</li>
       <li>Verifiable Decision Records and reconstructable decision context</li>
-      <li>Deterministic replay capability when evidence and releases are available</li>
+      <li>Request–result–action correlation identifiers for investigation</li>
+      <li>Investigation replay, reconstruction, and verifiable export integrity</li>
       <li>Provenance via release_identity and playbook_identity</li>
     </ul>
 
@@ -52,9 +55,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     <h3>Release Tampering or Unauthorized Activation</h3>
     <p>
-      <strong>Threat:</strong> An attacker modifies playbook content, substitutes a release, or
-      activates an unverified artifact so runtime evaluation uses unapproved
-      controls.
+      <strong>Threat:</strong> An attacker modifies playbook content, substitutes a
+      release, or activates an unverified artifact so runtime evaluation uses
+      unapproved controls.
     </p>
     <p><strong>Relevant controls / design intent:</strong></p>
     <ul>
@@ -65,8 +68,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     <h3>System Connector Compromise</h3>
     <p>
-      <strong>Threat:</strong> A compromised System Connector injects false context, strips
-      required trust signals, or presents malformed normalized inputs.
+      <strong>Threat:</strong> A compromised System Connector injects false context,
+      strips required trust signals, or presents malformed normalized inputs.
     </p>
     <p><strong>Relevant controls / design intent:</strong></p>
     <ul>
@@ -75,30 +78,31 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <li>Fail-closed DENY when required signals are missing or invalid</li>
     </ul>
     <p>
-      Customer hardening of connector hosts and credentials remains in scope for the
-      deployment environment.
+      Customer hardening of connector hosts and credentials remains in scope for
+      the deployment environment.
     </p>
 
     <h3>Control-Plane Compromise</h3>
     <p>
-      <strong>Threat:</strong> Compromise of the BeaconGuard Control Plane / management plane
-      allows unauthorized playbook changes, signing, or distribution.
+      <strong>Threat:</strong> Compromise of the BeaconGuard Control Plane /
+      management plane allows unauthorized playbook changes, signing, or
+      distribution.
     </p>
     <p><strong>Relevant controls / design intent:</strong></p>
     <ul>
-      <li>Separation of management plane from runtime data plane — Control Plane is outside the per-request path</li>
+      <li>Separation of Govern from Authorize — Control Plane is outside the per-request path</li>
       <li>Runtime accepts only verified, activated releases</li>
       <li>Explicit activation rather than silent draft evaluation</li>
     </ul>
     <p>
-      Key management, access control, and operational monitoring of the control plane
-      are shared deployment responsibilities.
+      Key management, access control, and operational monitoring of the control
+      plane are shared deployment responsibilities.
     </p>
 
     <h3>Identity Provider (IdP) Compromise or Misbinding</h3>
     <p>
-      <strong>Threat:</strong> Compromised or misconfigured identity signals cause incorrect role
-      or actor attributes to reach evaluation.
+      <strong>Threat:</strong> Compromised or misconfigured identity signals cause
+      incorrect role or actor attributes to reach evaluation.
     </p>
     <p><strong>Relevant controls / design intent:</strong></p>
     <ul>
@@ -109,8 +113,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     <h3>Replay-State Provider Failure or Manipulation</h3>
     <p>
-      <strong>Threat:</strong> When a replay-state provider is used, an attacker suppresses,
-      forges, or desynchronizes replay state to force incorrect admission outcomes.
+      <strong>Threat:</strong> When a replay-state provider is used, an attacker
+      suppresses, forges, or desynchronizes replay state to force incorrect
+      admission outcomes.
     </p>
     <p><strong>Relevant controls / design intent:</strong></p>
     <ul>
@@ -121,24 +126,24 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     <h3>Evidence Suppression or Alteration</h3>
     <p>
-      <strong>Threat:</strong> An attacker deletes, alters, or suppresses Verifiable Decision
-      Records to hide DENY/ALLOW history.
+      <strong>Threat:</strong> An attacker deletes, alters, or suppresses Verifiable
+      Decision Records to hide DENY/ALLOW history.
     </p>
     <p><strong>Relevant controls / design intent:</strong></p>
     <ul>
-      <li>Integrity-protected decision evidence designed for replay and verification</li>
+      <li>Integrity-protected decision evidence designed for investigation replay and verification</li>
       <li>Support for append-only retention when configured with a required evidence provider</li>
       <li>release_identity and decision context embedded in records</li>
     </ul>
     <p>
-      Universal append-only or immutable-store guarantees are not claimed without the configured evidence
-      provider and customer operational controls.
+      Universal append-only or immutable-store guarantees are not claimed without
+      the configured evidence provider and customer operational controls.
     </p>
 
     <h3>Signing Key Compromise</h3>
     <p>
-      <strong>Threat:</strong> Compromise of release-signing or related keys allows forged
-      Signed Immutable Release Artifacts.
+      <strong>Threat:</strong> Compromise of release-signing or related keys allows
+      forged Signed Immutable Release Artifacts.
     </p>
     <p><strong>Relevant controls / design intent:</strong></p>
     <ul>
@@ -152,31 +157,127 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     <h3>Unauthorized Authorization Bypass</h3>
     <p>
-      <strong>Threat:</strong> An attacker attempts to force ALLOW through malformed inputs or
-      permissive fallbacks.
+      <strong>Threat:</strong> An attacker attempts to force ALLOW through malformed
+      inputs, reused prior authority, or permissive fallbacks.
     </p>
     <p><strong>Relevant controls / design intent:</strong></p>
     <ul>
       <li>Fail-closed semantics</li>
       <li>Explicit input normalization</li>
       <li>No review-as-permission path</li>
+      <li>No reuse of prior authority as a substitute for new governed authorization</li>
       <li>Deterministic evaluation with ALLOW / DENY only</li>
     </ul>
 
-    <h3>Downstream Bypass of the Control Boundary</h3>
+    <h3>Bypass of Request Admission or Return-Path Controls</h3>
     <p>
-      <strong>Threat:</strong> Applications call governed systems without presenting requests to
-      the Runtime Control Boundary.
+      <strong>Threat:</strong> Applications invoke the AI provider without required
+      request authorization, or apply a provider result / execute an enterprise
+      action without required Result-to-Action Authorization.
     </p>
     <p><strong>Relevant controls / design intent:</strong></p>
     <ul>
-      <li>Product placement assumes the boundary is on the governed execution path</li>
+      <li>Product placement assumes BeaconGuard is on both the outbound provider path and the return/action path where enforcement is configured</li>
       <li>Network and application architecture must prevent silent bypass</li>
+      <li>Provider success must not be treated as BeaconGuard authorization</li>
     </ul>
     <p>
       Bypass prevention outside BeaconGuard’s process boundary is a customer
       deployment responsibility.
     </p>
+
+    <h3>Treating AI Output as Authority</h3>
+    <p>
+      <strong>Threat:</strong> An application or operator treats an AI-generated
+      result, tool proposal, report, or AI-assisted insight as sufficient
+      authorization for enterprise effect.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>AI-generated results are untrusted proposals</li>
+      <li>Declared intended enterprise actions require independent authorization where configured</li>
+      <li>AI-Assisted Insights are non-authoritative and outside the trusted path</li>
+    </ul>
+
+    <h2>Verification and Investigation Threats</h2>
+
+    <h3>Missing Source Evidence</h3>
+    <p>
+      <strong>Threat:</strong> Required source artifacts or fields are absent, so
+      reconstruction cannot complete honestly.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Missing fields reported as unavailable</li>
+      <li>No fabrication of missing artifacts or model reasoning</li>
+    </ul>
+
+    <h3>Inconsistent Evidence</h3>
+    <p>
+      <strong>Threat:</strong> Related decision records, hashes, or bindings disagree
+      across a governed transaction.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Integrity checks on evidence and export packages where configured</li>
+      <li>Investigation surfaces must surface inconsistency rather than silently reconcile</li>
+    </ul>
+
+    <h3>Reconstruction from Noncanonical Data</h3>
+    <p>
+      <strong>Threat:</strong> Reviewers reconstruct decisions from untrusted browser
+      state, demo fixtures, or noncanonical copies.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Canonical evidence and server-side reconstruction authority</li>
+      <li>Browser-side claims are untrusted for integrity conclusions</li>
+    </ul>
+
+    <h3>Cross-Tenant Reconstruction</h3>
+    <p>
+      <strong>Threat:</strong> Investigation access crosses tenant boundaries
+      incorrectly.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Tenant isolation controls (lab-proven; customer-live residual risk remains)</li>
+      <li>Access control and tenant binding for Verify surfaces</li>
+    </ul>
+
+    <h3>Report Provenance Loss</h3>
+    <p>
+      <strong>Threat:</strong> Executive or investigation reports lose linkage to
+      underlying decision evidence.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Report provenance to Verifiable Decision Records</li>
+      <li>Reports do not grant runtime authority</li>
+    </ul>
+
+    <h3>Export Tampering</h3>
+    <p>
+      <strong>Threat:</strong> An attacker alters a verifiable export package after
+      generation.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>Integrity checks on export packages where configured</li>
+      <li>Export signing and verification remain server-side responsibilities; keys are not browser-held</li>
+    </ul>
+
+    <h3>AI-Generated Explanation Used as Authority</h3>
+    <p>
+      <strong>Threat:</strong> An AI-assisted insight or generated explanation is
+      treated as authoritative reconstruction or as runtime permission.
+    </p>
+    <p><strong>Relevant controls / design intent:</strong></p>
+    <ul>
+      <li>AI-Assisted Insights labeled non-authoritative</li>
+      <li>Insights remain outside trusted reconstruction and authorization paths</li>
+      <li>Verify cannot grant runtime authority</li>
+    </ul>
 
     <h2>Non-Goals and Explicit Exclusions</h2>
 
@@ -185,9 +286,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <li>Compromise of the underlying operating system or hypervisor</li>
       <li>Insider threats with legitimate signing authority</li>
       <li>Vulnerabilities in AI model training data or model internals</li>
-      <li>Downstream misuse of outputs after an ALLOW decision</li>
+      <li>Misuse after an authorized action, outside the declared action contract, or outside the BeaconGuard-controlled path</li>
       <li>Replacement of SIEM, IAM, GRC, or customer security programs</li>
     </ul>
+
+    <p>
+      BeaconGuard governs whether a returned AI result is authorized for the
+      declared enterprise action. Misuse after an authorized action, outside the
+      declared action contract, or outside the BeaconGuard-controlled path remains
+      a customer responsibility.
+    </p>
 
     <h2>Residual Risk</h2>
     <ul>
@@ -195,6 +303,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <li>Playbook authoring errors can encode incorrect intent</li>
       <li>Key management failures undermine release integrity assertions</li>
       <li>Evidence durability depends on provider configuration and operations</li>
+      <li>Application bypass outside BeaconGuard’s process boundary remains customer-owned</li>
     </ul>
 
     <p>BeaconGuard prioritizes <strong>visibility and determinism</strong> over silent tolerance.</p>
@@ -206,6 +315,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <li><a href="/docs/policy-model">Policy Model</a></li>
       <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
       <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
+      <li><a href="/verification">Verification</a></li>
     </ul>
   </section>
 </BaseLayout>

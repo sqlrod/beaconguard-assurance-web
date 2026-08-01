@@ -5,19 +5,22 @@ import ReleaseLifecycle from "../../components/diagrams/ReleaseLifecycle.astro";
 
 <BaseLayout
   title="Policy Model"
-  description="BeaconGuard Compliance Playbook hierarchy, Signed Immutable Release Artifacts, Active Verified Releases, and binary ALLOW or DENY decision outputs."
+  description="BeaconGuard Compliance Playbook hierarchy and control scopes for Request Admission, Result-to-Action Authorization, shared transaction controls, and evidence obligations."
 >
   <section class="stack-section">
     <h1>Policy Model</h1>
 
     <p>
-      BeaconGuard control intent is expressed as a <strong>Compliance Playbook</strong> that is
-      validated, compiled, approved, signed, and activated before runtime use.
+      BeaconGuard control intent is expressed as a <strong>Compliance Playbook</strong>
+      that is validated, compiled, approved, signed, and activated before runtime
+      use. Only an <strong>Active Verified Release</strong> governs runtime
+      evaluation at configured authorization points.
     </p>
 
     <p>
-      The model is designed so that the same trusted inputs and the same
-      <strong>Active Verified Release</strong> produce the same Deterministic Decision Result.
+      The model is designed so that the same trusted inputs and the same Active
+      Verified Release produce the same Deterministic Decision Result: <strong>ALLOW</strong>
+      or <strong>DENY</strong>.
     </p>
 
     <ReleaseLifecycle />
@@ -66,7 +69,60 @@ import ReleaseLifecycle from "../../components/diagrams/ReleaseLifecycle.astro";
     </div>
 
     <p>
-      “Policy Snapshot” may appear in historical or internal material to describe a compiled deterministic control representation. It is not a separate runtime permission model and should not replace the current release-hierarchy terminology.
+      Historical or internal material may use “policy snapshot” to describe a
+      compiled deterministic control representation. That phrasing is not a
+      current public noun and should not replace Active Verified Release /
+      Compliance Playbook hierarchy terminology.
+    </p>
+
+    <h2>Control Scopes</h2>
+
+    <p>
+      Public policy documentation separates control scopes in human-readable
+      language. Do not invent public API enum values beyond verified
+      implementation vocabulary.
+    </p>
+
+    <h3>Request admission controls</h3>
+    <p>
+      Decide whether the enterprise application may invoke an AI provider under
+      the Active Verified Release. Typical concerns include trusted identity and
+      tenant context, workflow identity, approved pathway status, freshness and
+      replay conditions where configured, and required request attributes.
+    </p>
+    <p>
+      DENY prevents provider invocation. ALLOW permits invocation only; it does
+      not authorize later enterprise effect.
+    </p>
+
+    <h3>Result-to-action controls</h3>
+    <p>
+      Decide whether a declared intended enterprise action—based on an
+      AI-generated result treated as an untrusted proposal—may proceed. This is
+      authorization of the declared action, typically as an independent governed
+      authorization where required. It is not semantic scoring of model content
+      and does not resume an original AI response.
+    </p>
+    <p>
+      DENY prevents enterprise effect. ALLOW permits the enterprise application
+      to execute the authorized action.
+    </p>
+
+    <h3>Shared transaction controls</h3>
+    <p>
+      Shared obligations across a governed AI transaction include release
+      identity binding, playbook identity, correlation of related request and
+      action decisions, tenant and environment binding, and fail-closed behavior
+      when required trust signals cannot be verified.
+    </p>
+
+    <h3>Evidence and verification obligations</h3>
+    <p>
+      Authorization decisions produce Verifiable Decision Records. Evidence
+      supports investigation through BeaconGuard Verify: Decision Explorer,
+      Deterministic Reconstruction, Source Evidence, Replay Verification, and
+      Verifiable Export. AI-Assisted Insights are non-authoritative and must not
+      enter the runtime permission path.
     </p>
 
     <h2>Identities</h2>
@@ -78,18 +134,22 @@ import ReleaseLifecycle from "../../components/diagrams/ReleaseLifecycle.astro";
     </ul>
 
     <p>
-      Both identities should appear in Verifiable Decision Records so decisions can
-      be reconstructed against the correct release.
+      Both identities should appear in Verifiable Decision Records so decisions
+      can be reconstructed against the correct release. Related decision and
+      evidence identifiers support investigation of request and action
+      relationships.
     </p>
 
     <h2>Inputs and Normalization</h2>
 
     <p>
-      Deterministic Playbook Evaluation requires <strong>Request Validation and Context
-      Normalization</strong>. Typical inputs include signed request metadata, workflow
+      Deterministic Playbook Evaluation requires <strong>Request Validation and
+      Context Normalization</strong> (and equivalent normalization for declared
+      action context). Typical inputs include signed request metadata, workflow
       identity, user role, source-system trust, approved-pathway status,
-      deterministic context tags, request IDs, timestamps, freshness windows, and
-      requested action.
+      deterministic context tags, request IDs, timestamps, freshness windows,
+      and—for action authorization—the declared intended enterprise action and
+      required correlation context.
     </p>
 
     <p>Normalization ensures:</p>
@@ -97,23 +157,24 @@ import ReleaseLifecycle from "../../components/diagrams/ReleaseLifecycle.astro";
       <li>Stable field names and types</li>
       <li>Stable ordering for deterministic hashing and audit reconstruction</li>
       <li>Rejection or explicit mapping of unknown or invalid inputs</li>
-      <li>No reliance on probabilistic or model-provided interpretations</li>
+      <li>No reliance on probabilistic or model-provided interpretations as authority</li>
     </ul>
 
     <h2>Decision Outputs</h2>
 
     <p>Runtime permission results are binary:</p>
     <ul>
-      <li><strong>ALLOW</strong> — governed execution may proceed after evidence persistence</li>
-      <li><strong>DENY</strong> — Execution Prevented; no downstream execution</li>
+      <li><strong>ALLOW</strong> — required controls are satisfied; after evidence requirements are met, the permitted next step may proceed (provider invocation or enterprise action execution, as applicable)</li>
+      <li><strong>DENY</strong> — hard stop; no provider invocation or no enterprise effect, as applicable</li>
     </ul>
 
     <p>
-      When required approval is absent, the result is <strong>DENY</strong> with a deterministic
-      reason indicating that approval is required. An illustrative reason style is
-      <code>APPROVAL_REQUIRED</code>. Any governance or human-review obligation remains
-      separate from the runtime permission result; <strong>review does not permit
-      execution</strong>.
+      When required approval is absent, the result is <strong>DENY</strong> with a
+      deterministic reason indicating that approval is required. An illustrative
+      reason style is <code>APPROVAL_REQUIRED</code>. Any governance or human-review
+      obligation remains separate from the runtime permission result; <strong>review
+      does not permit execution</strong> and does not convert a recorded DENY into
+      ALLOW.
     </p>
 
     <p>Outputs also include:</p>
@@ -128,14 +189,14 @@ import ReleaseLifecycle from "../../components/diagrams/ReleaseLifecycle.astro";
     <h2>Provenance and Integrity</h2>
     <ul>
       <li>Releases are signed before use (Signed Immutable Release Artifact)</li>
-      <li>The Runtime Control Boundary accepts only an Active Verified Release</li>
-      <li>release_identity is recorded on every Verifiable Decision Record</li>
+      <li>Runtime authorization accepts only an Active Verified Release</li>
+      <li>release_identity is recorded on Verifiable Decision Records</li>
       <li>Rollback and activation are explicit (no silent edits to active controls)</li>
     </ul>
 
     <h2>Failure Semantics</h2>
 
-    <p>Evaluation is <strong>fail closed</strong>.</p>
+    <p>Evaluation is <strong>fail closed</strong> where enforcement is configured.</p>
 
     <p>
       If required release artifacts are missing, invalid, or unverifiable, or if
@@ -153,6 +214,7 @@ import ReleaseLifecycle from "../../components/diagrams/ReleaseLifecycle.astro";
       <li><a href="/docs/overview">Overview</a></li>
       <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
       <li><a href="/docs/architecture">System Architecture</a></li>
+      <li><a href="/verification">Verification</a></li>
     </ul>
   </section>
 </BaseLayout>

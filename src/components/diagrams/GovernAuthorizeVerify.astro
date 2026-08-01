@@ -1,0 +1,56 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+---
+
+<DiagramShell
+  title="Govern · Authorize · Verify"
+  caption="Three functional domains. Verify is read-only and cannot grant runtime authority."
+  className="bg-diagram--gav"
+>
+  <div class="bg-gav" role="list">
+    <section class="bg-gav-column" aria-labelledby="gav-govern" role="listitem">
+      <h4 id="gav-govern" class="bg-gav-title">Govern</h4>
+      <ul class="bg-gav-list">
+        <li>Compliance Playbooks</li>
+        <li>Validation and approval</li>
+        <li>Signing and distribution</li>
+        <li>Active Verified Release</li>
+        <li>Runtime topology and trust</li>
+      </ul>
+    </section>
+
+    <section class="bg-gav-column bg-gav-column--authorize" aria-labelledby="gav-authorize" role="listitem">
+      <h4 id="gav-authorize" class="bg-gav-title">Authorize</h4>
+      <ul class="bg-gav-list">
+        <li>Request Admission Authorization</li>
+        <li>AI result treated as untrusted proposal</li>
+        <li>Result-to-Action Authorization</li>
+        <li>Binary ALLOW or DENY</li>
+        <li>Verifiable Decision Records</li>
+      </ul>
+    </section>
+
+    <section class="bg-gav-column bg-gav-column--verify" aria-labelledby="gav-verify" role="listitem">
+      <h4 id="gav-verify" class="bg-gav-title">Verify</h4>
+      <ul class="bg-gav-list">
+        <li>Executive Reporting</li>
+        <li>Decision Explorer</li>
+        <li>Deterministic Reconstruction</li>
+        <li>Source Evidence and replay</li>
+        <li>Verifiable Export</li>
+        <li>AI-Assisted Insights (non-authoritative)</li>
+      </ul>
+    </section>
+  </div>
+
+  <div slot="text">
+    <p>
+      Govern: build and activate Compliance Playbooks as an Active Verified
+      Release. Authorize: Request Admission Authorization and Result-to-Action
+      Authorization with binary ALLOW or DENY and Verifiable Decision Records.
+      Verify: read-only investigation through reporting, Decision Explorer,
+      reconstruction, source evidence, replay, export, and non-authoritative
+      AI-assisted insights.
+    </p>
+  </div>
+</DiagramShell>

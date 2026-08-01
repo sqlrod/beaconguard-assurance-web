@@ -4,44 +4,85 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Company | BeaconGuard Assurance"
-  description="BeaconGuard builds Runtime Control Boundary infrastructure for governed AI, API, and automated systems across healthcare operations, financial services workflows, and regulated internal automation."
+  description="BeaconGuard builds the independent authorization and verification layer for complete governed AI transactions, with healthcare as the initial market focus and broader regulated-industry expansion."
 >
-  <section>
-    <h1>Company</h1>
+  <section class="stack-section">
+    <h1>The authorization layer between AI output and enterprise action</h1>
     <p class="lead">
-      BeaconGuard builds runtime control infrastructure for AI-assisted and automated regulated operations. The product deploys alongside existing enterprise applications as a BeaconGuard Runtime Control Boundary, focusing on deterministic ALLOW or DENY enforcement before governed execution and Verifiable Decision Records after every decision.
+      BeaconGuard is the independent authorization and verification layer for
+      regulated AI actions. It governs whether an enterprise application may
+      invoke AI and whether a declared enterprise action based on an
+      AI-generated result may proceed. Control before execution. Evidence after
+      every decision.
     </p>
   </section>
 
-  <section>
+  <section class="stack-section">
     <h2>Mission</h2>
     <p>
-      BeaconGuard exists to make execution-boundary authorization dependable, reviewable, and operationally practical for high-risk enterprise workflows—without treating probabilistic model behavior as the authorization authority.
+      BeaconGuard exists to make complete AI transaction authorization
+      dependable, reviewable, and operationally practical for high-risk
+      enterprise workflows—without treating probabilistic model behavior as the
+      authorization authority.
     </p>
   </section>
 
-  <section>
-    <h2>Initial Focus</h2>
+  <section class="stack-section">
+    <h2>Initial focus</h2>
     <p>
-      BeaconGuard is initially focused on healthcare operations, financial services workflows, and regulated internal automation.
+      Healthcare is the initial market wedge: PHI-sensitive operational AI
+      pathways—led by AI-assisted patient communication—where request admission
+      and declared-action authorization must be explicit, and where Verify
+      investigation supports privacy, security, and compliance review.
+    </p>
+    <p>
+      Broader regulated-industry expansion includes financial services workflows
+      and regulated internal automation. Industry pages describe illustrative
+      scenarios, not customer production validation.
     </p>
   </section>
 
-  <section>
+  <section class="stack-section">
     <h2>Why BeaconGuard exists</h2>
     <p>
-      Enterprises want to adopt AI and automation in sensitive workflows, but model behavior is probabilistic. Control ownership, auditability, and enforcement cannot be left to prompt design alone. BeaconGuard provides a fail-closed Runtime Control Boundary and integrity-protected decision evidence around governed requests while existing systems continue to own workflow logic and records. When approval is absent, the result is DENY; human review does not permit execution.
+      Enterprises want to adopt AI in sensitive workflows, but model behavior is
+      probabilistic. Control ownership, auditability, and enforcement cannot be
+      left to prompt design alone. An AI-generated result remains an untrusted
+      proposal until BeaconGuard authorizes its intended use. Provider success
+      is not enterprise authorization. BeaconGuard authorizes; the enterprise
+      application executes; the enterprise system of record remains
+      authoritative.
     </p>
   </section>
 
-  <section>
+  <section class="stack-section">
+    <h2>What we do not claim</h2>
+    <ul>
+      <li>
+        This site does not represent healthcare employers, healthcare systems,
+        accelerators, or contacts as customers, design partners, sponsors, or
+        endorsers.
+      </li>
+      <li>
+        BeaconGuard is currently offered through controlled evaluation.
+        Production deployment requires customer-specific qualification.
+      </li>
+      <li>
+        BeaconGuard does not certify clinical correctness, legal admissibility,
+        or third-party compliance attestations unless separately evidenced.
+      </li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
     <h2>Learn more</h2>
     <ul>
       <li><a href="/platform">Platform</a></li>
       <li><a href="/healthcare">Healthcare AI control</a></li>
       <li><a href="/fintech">Financial workflow control</a></li>
+      <li><a href="/verification">Verification</a></li>
       <li><a href="/trust-assurance">Trust Center</a></li>
-      <li><a href="/design-partner-program">Controlled Architecture Evaluation</a></li>
+      <li><a href="/design-partner-program">Controlled Evaluation</a></li>
     </ul>
   </section>
 </BaseLayout>

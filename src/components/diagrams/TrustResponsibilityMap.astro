@@ -8,29 +8,33 @@ const customer = [
   "Secrets and key custody",
   "Evidence-provider configuration",
   "Monitoring and incident response",
+  "Clinical, legal, and business judgment",
 ];
 
 const shared = [
-  "Identity mapping",
-  "Request context",
+  "Identity and tenant mapping",
+  "Request and action context",
   "Environment separation",
+  "Correlation requirements",
   "Retention design",
   "Recovery procedures",
   "Operational acceptance",
 ];
 
 const beacon = [
-  "Release verification",
-  "Deterministic evaluation",
-  "Binary enforcement",
-  "Decision-record generation",
-  "Fail-closed behavior",
+  "Active Verified Release verification",
+  "Request Admission Authorization",
+  "Result-to-Action Authorization",
+  "Binary ALLOW or DENY enforcement",
+  "Verifiable Decision Records",
+  "Fail-closed behavior where configured",
+  "Verify read-only investigation surface",
 ];
 ---
 
 <DiagramShell
   title="Trust and shared responsibility map"
-  caption="Customer, shared, and BeaconGuard-controlled domains. Certification and legal compliance status remain separate from this control boundary model."
+  caption="Customer-controlled deployment, shared integration, and BeaconGuard authorization and Verify domains. AI-assisted insights are non-authoritative. Certification and legal compliance status remain separate."
   className="bg-diagram--trust-map"
 >
   <div class="bg-diagram-columns" role="list">
@@ -74,19 +78,23 @@ const beacon = [
 
   <div slot="text">
     <p>
-      <strong>Customer-Controlled:</strong> Identity provider; Network controls;
-      Host hardening; Secrets and key custody; Evidence-provider configuration;
-      Monitoring and incident response.
+      <strong>Customer-Controlled:</strong> Identity provider; network controls;
+      host hardening; secrets and key custody; evidence-provider configuration;
+      monitoring and incident response; clinical, legal, and business judgment.
     </p>
     <p>
-      <strong>Shared Integration Boundary:</strong> Identity mapping; Request
-      context; Environment separation; Retention design; Recovery procedures;
-      Operational acceptance.
+      <strong>Shared Integration Boundary:</strong> Identity and tenant mapping;
+      request and action context; environment separation; correlation
+      requirements; retention design; recovery procedures; operational
+      acceptance.
     </p>
     <p>
-      <strong>BeaconGuard-Controlled:</strong> Release verification; Deterministic
-      evaluation; Binary enforcement; Decision-record generation; Fail-closed
-      behavior.
+      <strong>BeaconGuard-Controlled:</strong> Active Verified Release
+      verification; Request Admission Authorization; Result-to-Action
+      Authorization; binary ALLOW or DENY; Verifiable Decision Records;
+      fail-closed behavior where configured; Verify as a read-only investigation
+      surface. AI-assisted insights remain non-authoritative and outside the
+      trusted reconstruction path.
     </p>
   </div>
 </DiagramShell>

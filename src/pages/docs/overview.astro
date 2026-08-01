@@ -1,0 +1,174 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GovernedAITransaction from "../../components/diagrams/GovernedAITransaction.astro";
+import QualificationNotice from "../../components/QualificationNotice.astro";
+---
+
+<BaseLayout
+  title="BeaconGuard Overview"
+  description="BeaconGuard is the independent authorization and verification layer for regulated AI actions: Request Admission before provider invocation and Result-to-Action before enterprise effect."
+>
+  <section class="stack-section">
+    <h1>BeaconGuard Overview</h1>
+    <p class="lead">
+      BeaconGuard is the independent authorization and verification layer for
+      regulated AI actions. It governs whether an enterprise application may
+      invoke an AI provider, and whether a later declared enterprise action
+      based on an AI-generated result may proceed under an
+      <strong>Active Verified Release</strong>.
+    </p>
+    <p>
+      An AI-generated result remains an <strong>untrusted proposal</strong>.
+      Provider success is not enterprise authorization. BeaconGuard authorizes;
+      the enterprise application executes. The enterprise system of record
+      remains authoritative for resulting business state.
+    </p>
+    <p>
+      Runtime permission outcomes are <strong>ALLOW</strong> or
+      <strong>DENY</strong> only.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Dual Authorization Model</h2>
+    <p>
+      BeaconGuard evaluates two independent authorization points in a complete
+      governed AI transaction. For the full lifecycle walkthrough and workflow
+      examples, see
+      <a href="/how-it-works">How It Works</a>
+      and
+      <a href="/canonical-workflow">Canonical Workflow</a>.
+    </p>
+    <GovernedAITransaction />
+    <p>
+      <strong>Result-to-Action Authorization</strong> means authorization of the
+      declared intended enterprise action—typically as an independent governed
+      authorization with new request identity where required. It does
+      <strong>not</strong> mean semantic scoring of model content, and it does
+      not resume or mutate a prior DENY.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Core Objectives</h2>
+    <ul>
+      <li>Request Admission Authorization before provider invocation</li>
+      <li>Independent authorization of the declared intended enterprise action</li>
+      <li>Fail-closed enforcement where configured</li>
+      <li>Deterministic evaluation against an Active Verified Release</li>
+      <li>Binary runtime outcomes: <strong>ALLOW</strong> or <strong>DENY</strong> only</li>
+      <li>Verifiable Decision Records for request and action decisions</li>
+      <li>BeaconGuard Verify for read-only investigation</li>
+      <li>Existing systems remain authoritative for workflow logic and records</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Functional Domains</h2>
+
+    <h3>Govern</h3>
+    <p>
+      Compliance Playbooks, validation, approval, signing, distribution, and
+      activation of the Active Verified Release.
+    </p>
+
+    <h3>Authorize</h3>
+    <ul>
+      <li>
+        <strong>Request Admission Authorization</strong> — may the application
+        invoke the AI provider?
+      </li>
+      <li>
+        <strong>Result-to-Action Authorization</strong> — may the declared
+        intended enterprise action proceed?
+      </li>
+    </ul>
+
+    <h3>Verify</h3>
+    <p>
+      Executive Reporting, Decision Explorer, Deterministic Reconstruction,
+      Source Evidence, Replay Verification, Verifiable Export, and AI-Assisted
+      Insights (non-authoritative).
+    </p>
+    <blockquote>
+      <p>
+        BeaconGuard Verify is read-only. It cannot modify evidence, change a
+        historical decision, activate a release, alter a Compliance Playbook,
+        grant runtime authority, or authorize an enterprise action.
+      </p>
+    </blockquote>
+  </section>
+
+  <section class="stack-section">
+    <h2>Release Hierarchy (summary)</h2>
+    <ol>
+      <li><strong>Compliance Playbook</strong> — governed control intent</li>
+      <li>
+        <strong>Validation and Compilation</strong> — deterministic compiled
+        control representation
+      </li>
+      <li>
+        <strong>Signed Immutable Release Artifact</strong> — signed release
+        package
+      </li>
+      <li>
+        <strong>Controlled Release Distribution</strong> and
+        <strong>Release Verification and Activation</strong>
+      </li>
+      <li>
+        <strong>Active Verified Release</strong> — the only release that governs
+        runtime evaluation
+      </li>
+      <li>
+        <strong>Deterministic Playbook Evaluation</strong> — ALLOW or DENY at
+        configured authorization points
+      </li>
+    </ol>
+  </section>
+
+  <section class="stack-section">
+    <h2>What BeaconGuard Is Not</h2>
+    <p>BeaconGuard is intentionally <strong>not</strong>:</p>
+    <ul>
+      <li>An AI model or model host</li>
+      <li>A prompt framework or heuristic safety filter</li>
+      <li>A semantic AI-response content authorization engine</li>
+      <li>An observability dashboard or GRC repository</li>
+      <li>
+        A replacement for EHR, AML, fraud, SIEM, IAM, GRC, case-management, or
+        workflow systems
+      </li>
+      <li>A source of probabilistic authorization for enforcement results</li>
+      <li>
+        Production-ready customer deployment without controlled qualification
+      </li>
+    </ul>
+    <p>
+      Review may produce obligations or grants; it does <strong>not</strong>
+      convert a recorded DENY into ALLOW. Later authorization uses a new
+      governed request where applicable.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Maturity</h2>
+    <p>
+      BeaconGuard remains under controlled internal qualification for customer
+      production use. Public materials must not claim production-ready or
+      production-proven status without separate formal evidence.
+    </p>
+    <QualificationNotice variant="technical" />
+  </section>
+
+  <section class="stack-section">
+    <h2>Next Sections</h2>
+    <ul>
+      <li><a href="/docs/architecture">System Architecture</a></li>
+      <li><a href="/how-it-works">How It Works</a></li>
+      <li><a href="/docs/policy-model">Policy Model</a></li>
+      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
+      <li><a href="/verification">Verification</a></li>
+      <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
+    </ul>
+  </section>
+</BaseLayout>

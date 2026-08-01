@@ -4,33 +4,89 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Reviewer Kit | BeaconGuard Due Diligence Materials"
-  description="BeaconGuard Reviewer Kit for executive, architecture, security, evidence, and deployment-responsibility reviews using ALLOW/DENY semantics and Verifiable Decision Records."
+  description="BeaconGuard Reviewer Kit: a 12-step sequence covering governed AI transactions, dual authorization, linked decision evidence, Verify capabilities, and shared responsibilities."
 >
   <section class="stack-section">
     <h1>Reviewer Kit</h1>
-    <p class="lead">Policy control before governed execution. Evidence after every decision.</p>
+    <p class="lead">
+      Control before execution. Evidence after every decision.
+    </p>
     <p>
-      Use this kit to review BeaconGuard as a Runtime Control Boundary that evaluates trusted request context against an Active Verified Release and returns ALLOW or DENY before governed execution. Runtime permission results are binary; review obligations do not permit execution.
+      Use this kit to review BeaconGuard as the independent authorization and
+      verification layer for regulated AI actions. Runtime permission results
+      are ALLOW or DENY only. An AI-generated result remains an untrusted
+      proposal. BeaconGuard Verify is read-only and cannot grant runtime
+      authority.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Reviewer path</h2>
+    <h2>12-step reviewer sequence</h2>
     <ol>
-      <li>Understand boundary placement — <a href="/docs/architecture">System Architecture</a></li>
-      <li>Inspect release governance — <a href="/docs/architecture">System Architecture</a> and <a href="/docs/policy-model">Policy Model</a></li>
-      <li>Inspect runtime sequence — <a href="/how-it-works">How It Works</a></li>
-      <li>Inspect evidence — <a href="/proof-evidence">Proof and Evidence</a></li>
-      <li>Confirm responsibility separation — <a href="/control-responsibility-matrix">Control Responsibility Matrix</a></li>
-      <li>Review deployment assumptions — <a href="/deployment">Deployment</a></li>
-      <li>Enter Controlled Evaluation — <a href="/design-partner-program">Controlled Evaluation</a></li>
+      <li>
+        Review the governed transaction —
+        <a href="/how-it-works">How It Works</a>,
+        <a href="/canonical-workflow">Workflow Examples</a>
+      </li>
+      <li>
+        Inspect request admission —
+        <a href="/platform">Platform</a>,
+        <a href="/security">Security</a>
+      </li>
+      <li>
+        Inspect result-to-action authorization —
+        <a href="/platform">Platform</a>,
+        <a href="/security">Security</a>
+      </li>
+      <li>
+        Review linked decision evidence —
+        <a href="/proof-evidence">Proof and Evidence</a>,
+        <a href="/sample-decision-record">Sample Decision Record</a>
+      </li>
+      <li>
+        Open Decision Explorer —
+        <a href="/verification">Verification</a>
+      </li>
+      <li>
+        Reconstruct the transaction —
+        <a href="/verification">Verification</a>,
+        <a href="/docs/compliance-audit">Compliance and Audit</a>
+      </li>
+      <li>
+        Inspect source evidence —
+        <a href="/verification">Verification</a>,
+        <a href="/proof-evidence">Proof and Evidence</a>
+      </li>
+      <li>
+        Verify replay —
+        <a href="/verification">Verification</a>
+      </li>
+      <li>
+        Validate export —
+        <a href="/verification">Verification</a>
+      </li>
+      <li>
+        Inspect report provenance —
+        <a href="/verification">Verification</a>,
+        <a href="/docs/compliance-audit">Compliance and Audit</a>
+      </li>
+      <li>
+        Confirm AI insights are non-authoritative —
+        <a href="/verification">Verification</a>,
+        <a href="/trust-assurance">Trust Center</a>
+      </li>
+      <li>
+        Review shared responsibilities —
+        <a href="/control-responsibility-matrix">Control Responsibility Matrix</a>,
+        <a href="/trust-assurance">Trust Center</a>
+      </li>
     </ol>
   </section>
 
   <section class="stack-section">
     <h2>10-minute executive review</h2>
     <ul>
-      <li><a href="/">Homepage business case and Product Overview</a> — available</li>
+      <li><a href="/">Homepage and product definition</a> — available</li>
       <li><a href="/platform">Platform capability overview</a> — available</li>
       <li><a href="/design-partner-program">Controlled Evaluation offer</a> — available</li>
     </ul>
@@ -40,7 +96,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>30-minute architecture review</h2>
     <ul>
       <li><a href="/docs/architecture">System Architecture</a> — available</li>
-      <li><a href="/how-it-works">How It Works runtime sequence</a> — available</li>
+      <li><a href="/how-it-works">How It Works transaction lifecycle</a> — available</li>
       <li><a href="/docs/overview">Documentation overview</a> — available</li>
     </ul>
   </section>
@@ -55,8 +111,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section">
-    <h2>Evidence review</h2>
+    <h2>Evidence and Verify review</h2>
     <ul>
+      <li><a href="/verification">Verification</a> — available</li>
       <li><a href="/proof-evidence">Proof and Evidence samples</a> — sample</li>
       <li><a href="/sample-decision-record">Sample Decision Record</a> — sample</li>
       <li><a href="/docs/compliance-audit">Compliance and Audit</a> — available</li>
@@ -75,22 +132,30 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h2>Controlled-evaluation prerequisites</h2>
     <ul>
-      <li>One bounded workflow</li>
-      <li>Representative request contract and required trust context</li>
-      <li>Desired Compliance Playbook controls</li>
+      <li>One bounded AI-assisted workflow</li>
+      <li>Representative outbound request and provider response</li>
+      <li>Intended enterprise action and correlation requirements</li>
+      <li>Request and result ALLOW/DENY cases</li>
+      <li>Evidence, reconstruction, replay, report, and export requirements</li>
       <li>Deployment assumptions and identity-provider context</li>
     </ul>
     <p>
-      Customer-specific architecture-fit memos and sample mappings are controlled-access outputs of a Controlled Evaluation.
+      Customer-specific architecture-fit memos and sample mappings are
+      controlled-access outputs of a Controlled Evaluation.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>What reviewers can assess</h2>
     <ul>
-      <li>How ALLOW and DENY decisions are returned (binary runtime outcomes only)</li>
+      <li>How Request Admission Authorization returns ALLOW or DENY</li>
+      <li>
+        How Result-to-Action Authorization applies to a declared intended action
+      </li>
       <li>How Active Verified Releases govern evaluation</li>
-      <li>What a Verifiable Decision Record contains</li>
+      <li>What related Verifiable Decision Records contain</li>
+      <li>That Verify is read-only and cannot grant runtime authority</li>
+      <li>That AI-assisted insights are non-authoritative</li>
       <li>Where customer and BeaconGuard responsibilities divide</li>
       <li>What remains out of scope for BeaconGuard</li>
     </ul>

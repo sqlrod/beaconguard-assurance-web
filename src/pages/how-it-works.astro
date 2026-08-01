@@ -1,86 +1,143 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import RuntimeDecisionSequence from "../components/diagrams/RuntimeDecisionSequence.astro";
+import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.astro";
 ---
 
 <BaseLayout
-  title="How It Works | BeaconGuard Regulated AI Runtime Control"
-  description="See how BeaconGuard validates request context, verifies trust conditions, applies deterministic controls, enforces ALLOW or DENY outcomes, and produces verifiable decision evidence before governed execution."
+  title="How It Works | BeaconGuard Governed AI Transaction"
+  description="See how BeaconGuard governs the release, authorizes provider invocation, treats AI results as untrusted proposals, authorizes the declared enterprise action, and records decisions for verification."
 >
-  <section>
+  <section class="stack-section">
     <h1>How It Works</h1>
     <p class="lead">
-      BeaconGuard evaluates enterprise requests before governed AI, APIs, or automated systems execute them. Each request passes through a deterministic runtime control boundary that validates context, verifies trust conditions, applies the active control set, enforces an explicit ALLOW or DENY result, and emits verifiable decision evidence.
+      A governed AI transaction spans release governance, request admission,
+      provider invocation, an untrusted AI-generated result, independent
+      authorization of the declared enterprise action, and verifiable decision
+      evidence. BeaconGuard authorizes; the enterprise application executes;
+      the system of record remains authoritative.
     </p>
   </section>
 
-  <section>
-    <p class="section-label">Runtime sequence</p>
-    <h2>Runtime Decision Sequence</h2>
+  <section class="stack-section">
+    <h2>Complete governed AI transaction</h2>
     <p>
-      Each request moves through six deterministic stages: Request, Validate, Verify, Evaluate, Enforce, and Record. Evidence is persisted before ALLOW may proceed; DENY remains a hard stop.
+      Reaching the AI provider is not the final governed outcome. Enterprise
+      effect requires independent authorization of the declared intended action.
+      Provider success is not enterprise authorization.
     </p>
-    <RuntimeDecisionSequence />
+    <GovernedAITransaction />
   </section>
 
-  <section>
+  <section class="stack-section">
+    <h2>1. Govern the release</h2>
+    <p>
+      Compliance Playbooks are validated, approved, signed, distributed, and
+      activated. Only an Active Verified Release governs later authorization
+      decisions. Distribution alone does not activate a release.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>2. Authorize the request</h2>
+    <p>
+      Request Admission Authorization decides whether the enterprise application
+      may invoke the AI provider under the Active Verified Release. Outcomes are
+      binary: <strong>ALLOW</strong> or <strong>DENY</strong>. DENY records the
+      decision and blocks provider invocation.
+    </p>
+    <p class="muted-copy">
+      Where admission enforcement is configured, the technical subflow may still
+      include Validate → Verify → Evaluate → Enforce → Record: normalize and
+      validate context, verify trust and freshness, evaluate against the Active
+      Verified Release, enforce ALLOW or DENY, and persist a Verifiable Decision
+      Record before an ALLOW may permit provider invocation for that request.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>3. Invoke the provider</h2>
+    <p>
+      Only after ALLOW may the enterprise application invoke the AI provider for
+      that governed request. BeaconGuard does not become the model host or
+      replace the customer's chosen provider.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>4. Receive an untrusted result</h2>
+    <p>
+      The AI-generated result—including any tool or action proposal—is an
+      untrusted proposal. It does not confer enterprise authority. Using the AI
+      response itself as authorization is not supported.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>5. Authorize the intended action</h2>
+    <p>
+      The enterprise application declares the intended enterprise action.
+      Result-to-Action Authorization is independent authorization of that
+      declared action under the Active Verified Release—not semantic scoring of
+      response content. DENY prevents enterprise effect. ALLOW authorizes the
+      enterprise application to execute the action.
+    </p>
+    <ul>
+      <li>Independent authorization uses a new governed request where required.</li>
+      <li>Approving a proposal does not resume the original AI response.</li>
+      <li>BeaconGuard authorizes; the enterprise application executes.</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>6. Record and verify</h2>
+    <p>
+      Each authorization decision produces a Verifiable Decision Record.
+      BeaconGuard Verify provides read-only investigation through reporting,
+      Decision Explorer, deterministic reconstruction, source evidence, replay
+      verification, and verifiable export.
+    </p>
+    <p>
+      BeaconGuard Verify is read-only. It cannot modify evidence, change a
+      historical decision, activate a release, alter a Compliance Playbook,
+      grant runtime authority, or authorize an enterprise action.
+    </p>
+  </section>
+
+  <section class="stack-section">
     <h2>Optional System Connector</h2>
     <p>
-      Some enterprise applications do not natively produce the protocol or context structure required by the BeaconGuard runtime. The optional System Connector maps source protocols and context into the required request format before request validation.
-    </p>
-    <p>
-      The System Connector does not evaluate controls, activate releases, or bypass enforcement.
+      Some enterprise applications do not natively produce the protocol or
+      context structure required for governed authorization. The optional System
+      Connector maps source protocols and context into the required request
+      format. It does not evaluate controls, activate releases, or bypass
+      enforcement.
     </p>
   </section>
 
-  <section>
-    <h2>Deterministic enforcement outcomes</h2>
+  <section class="stack-section">
+    <h2>Deterministic outcomes</h2>
     <h3>ALLOW</h3>
     <p>
-      An allowed request satisfies the active control requirements. After the Verifiable Decision Record is persisted, governed execution may proceed.
+      The governed request satisfies Active Verified Release requirements for
+      that authorization point. After evidence persistence where required,
+      provider invocation or enterprise execution may proceed as authorized.
     </p>
     <h3>DENY</h3>
     <p>
-      A denied request is blocked before downstream execution. BeaconGuard fails closed when required validation, trust, freshness, replay, or control conditions are not satisfied.
+      The request or declared action is blocked. BeaconGuard fails closed when
+      required validation, trust, freshness, replay, release, or control
+      conditions are not satisfied. Review does not convert DENY into ALLOW.
     </p>
   </section>
 
-  <section>
-    <h2>Stage clarifications</h2>
-    <ul>
-      <li><strong>Validate</strong> — required structure, normalization, and required context.</li>
-      <li><strong>Verify</strong> — request authenticity; identity context; tenant and environment binding; freshness; replay resistance; active release verification.</li>
-      <li><strong>Evaluate</strong> — deterministic Compliance Playbook evaluation against the Active Verified Release.</li>
-      <li><strong>Enforce</strong> — decision calculated as ALLOW or DENY only.</li>
-      <li><strong>Record</strong> — Verifiable Decision Record persisted before ALLOW may proceed to a governed system.</li>
-      <li>Shared dependencies fail closed when required verification cannot complete.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Decision evidence and review</h2>
-    <p>
-      Every ALLOW or DENY result produces verifiable decision evidence containing the decision context, active release identity, control result, and outcome.
-    </p>
-    <p>
-      Evidence may be routed for governance or human review without changing the runtime enforcement result that was already returned. Review does not permit execution.
-    </p>
-  </section>
-
-  <section>
-    <h2>Technical Deepening</h2>
-    <p>
-      See <a href="/docs/architecture">System Architecture</a> for the complete control-plane, release-verification, activation, and runtime-boundary model.
-    </p>
-    <ul>
-      <li><a href="/docs/architecture">System Architecture</a></li>
-      <li><a href="/docs/enforcement-runtime">Enforcement runtime</a></li>
-      <li><a href="/docs/policy-model">Policy model</a></li>
-      <li><a href="/docs/compliance-audit">Compliance and audit</a></li>
-    </ul>
+  <section class="stack-section">
+    <h2>Technical deepening</h2>
     <div class="page-actions">
-      <a class="btn-primary" href="/deployment">Review deployment expectations</a>
-      <a class="btn-secondary" href="/trust-assurance">Review Trust Center evidence surfaces</a>
+      <a class="btn-primary" href="/platform">Review Platform</a>
+      <a class="btn-secondary" href="/verification">Explore Verification</a>
+      <a class="btn-secondary" href="/docs/architecture">System Architecture</a>
+      <a class="btn-secondary" href="/docs/enforcement-runtime">Enforcement Runtime</a>
+      <a class="btn-secondary" href="/deployment">Deployment Expectations</a>
     </div>
   </section>
 </BaseLayout>

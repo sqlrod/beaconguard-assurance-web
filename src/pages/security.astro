@@ -4,71 +4,203 @@ import FailClosedSecurityGate from "../components/diagrams/FailClosedSecurityGat
 ---
 
 <BaseLayout
-  title="Security | BeaconGuard Runtime Admission and Fail-Closed Control"
-  description="BeaconGuard provides deterministic request admission, authenticated request context, tenant and environment isolation, distributed replay resistance, and fail-closed DENY behavior before governed execution."
+  title="Security | BeaconGuard Fail-Closed Authorization Boundaries"
+  description="BeaconGuard applies fail-closed authorization at request admission and declared enterprise actions, with controls against forgery, replay, misbinding, bypass, evidence failure, and verification privilege escalation."
 >
   <section class="stack-section">
-    <h1>Security at the Runtime Control Boundary</h1>
+    <h1>Security for governed AI transactions</h1>
     <p class="lead">
-      BeaconGuard admits requests only after deterministic validation against the Active Verified Release. Admission failures return DENY. Evidence supports reconstruction and governance review; it does not replace SIEM, IAM, GRC, or customer security programs.
+      BeaconGuard authorizes whether an enterprise application may invoke an AI
+      provider and whether a declared enterprise action may proceed. Runtime
+      outcomes are ALLOW or DENY only. Failures return DENY. Evidence supports
+      investigation; it does not replace SIEM, IAM, GRC, or customer security
+      programs.
+    </p>
+    <p>
+      No AI-generated result becomes authorized merely because the provider
+      returned it successfully.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Deterministic request admission</h2>
+    <h2>Two authorization boundaries</h2>
     <p>
-      The Runtime Control Boundary validates and normalizes request context, then evaluates trusted signals against the Active Verified Release. Runtime results are ALLOW or DENY only.
+      <strong>Request Admission Authorization</strong> decides whether the
+      application may invoke the AI provider. <strong>Result-to-Action
+      Authorization</strong> decides whether the declared intended enterprise
+      action may proceed. The AI-generated result remains an untrusted proposal.
+      Independent action authorization is not semantic response-content scoring.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Request authenticity</h2>
+    <h2>Fail-closed security gate</h2>
     <p>
-      BeaconGuard requires authenticated request context before governed evaluation. Missing, invalid, mismatched, or out-of-bounds trust material fails closed as DENY.
+      When a required trust, replay, authorization, release, or evidence
+      dependency is unavailable or cannot be verified, the governed operation
+      does not fall back to permissive execution. BeaconGuard returns DENY and
+      prevents provider invocation or enterprise effect as applicable. There is
+      no review-as-permission fallback.
     </p>
+    <FailClosedSecurityGate />
   </section>
 
   <section class="stack-section">
-    <h2>Signature and trust checks</h2>
+    <h2>Threat coverage</h2>
     <p>
-      Required trust signals and signature or integrity expectations for request context must be satisfied before evaluation proceeds. Missing or invalid trust conditions fail closed as DENY.
+      Controls are designed to address the following classes of risk across
+      request admission, result handling, action authorization, and
+      verification. Exact controls depend on configuration and deployment.
+      Tenant isolation claims reflect lab-validated controls with residual
+      customer-live risk.
+    </p>
+
+    <h3>Request admission</h3>
+    <ul>
+      <li>
+        <strong>Request forgery</strong> — authenticated request context is
+        required before governed evaluation; missing or invalid trust material
+        fails closed as DENY.
+      </li>
+      <li>
+        <strong>Replay</strong> — freshness and replay resistance apply where
+        shared operation is configured; previously consumed authority fails
+        closed rather than being accepted by another instance.
+      </li>
+      <li>
+        <strong>Cross-tenant request use</strong> — authorization context is
+        bound to tenant and environment; authority from one boundary is not
+        silently accepted in another.
+      </li>
+    </ul>
+
+    <h3>Provider result handling</h3>
+    <ul>
+      <li>
+        <strong>Provider-response substitution</strong> — a returned result does
+        not become enterprise authority; substitution cannot mint ALLOW for a
+        declared action without independent authorization.
+      </li>
+      <li>
+        <strong>Result-to-request misbinding</strong> — declared actions must be
+        authorized in governed transaction context; a result cannot silently
+        inherit authority from an unrelated request.
+      </li>
+      <li>
+        <strong>Wrong-tenant or wrong-environment result use</strong> — tenant
+        and environment binding constrains where a governed result may be used
+        for a later declared action.
+      </li>
+      <li>
+        <strong>Result reuse</strong> — reuse of a prior AI-generated result as
+        standing permission is not a supported authorization path; later effect
+        requires independent authorization of the declared action.
+      </li>
+      <li>
+        <strong>Malformed structured output</strong> — malformed or incomplete
+        structured proposals do not bypass authorization; invalid context fails
+        closed rather than permitting enterprise effect.
+      </li>
+    </ul>
+
+    <h3>Declared action authorization</h3>
+    <ul>
+      <li>
+        <strong>Action-contract substitution</strong> — authorization applies to
+        the declared intended enterprise action under the Active Verified
+        Release; substituting a different action contract requires a new
+        governed authorization.
+      </li>
+      <li>
+        <strong>Proposed-action replay</strong> — proposed or previously
+        considered actions do not create reusable standing permission; single-use
+        and freshness controls apply where configured.
+      </li>
+      <li>
+        <strong>Unauthorized action expansion</strong> — ALLOW for one declared
+        action does not expand into broader or different enterprise effects
+        without additional authorization.
+      </li>
+      <li>
+        <strong>Provider-to-application bypass</strong> — a successful provider
+        response does not authorize enterprise execution by itself.
+      </li>
+      <li>
+        <strong>Result-to-Action authorization bypass</strong> — enterprise effect must
+        pass Result-to-Action Authorization where configured; the untrusted
+        proposal path cannot skip that boundary by treating provider success as
+        ALLOW.
+      </li>
+      <li>
+        <strong>Evidence failure before enterprise effect</strong> — when
+        required evidence persistence cannot complete on the action path,
+        unauthorized or unverifiable effect is hard-stopped rather than allowed
+        to proceed without a decision record.
+      </li>
+    </ul>
+
+    <h3>Verification surface</h3>
+    <ul>
+      <li>
+        <strong>Verification privilege escalation</strong> — BeaconGuard Verify
+        is read-only; investigation access cannot grant runtime authority,
+        activate a release, alter a Compliance Playbook, or authorize an
+        enterprise action.
+      </li>
+      <li>
+        <strong>Cross-tenant report access</strong> — reporting and exploration
+        are subject to tenant isolation controls; investigation views are not a
+        path to cross-tenant runtime authority.
+      </li>
+      <li>
+        <strong>Export alteration</strong> — verifiable export supports integrity
+        checks for investigation packages; browser-side claims are untrusted for
+        integrity conclusions.
+      </li>
+      <li>
+        <strong>AI-insight contamination</strong> — AI-Assisted Insights are
+        non-authoritative and remain outside the trusted reconstruction and
+        runtime authorization path.
+      </li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Request authenticity and trust checks</h2>
+    <p>
+      BeaconGuard requires authenticated request context before governed
+      evaluation. Required trust signals and integrity expectations must be
+      satisfied. Missing, invalid, mismatched, or out-of-bounds trust material
+      fails closed as DENY.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Tenant and environment isolation</h2>
     <p>
-      Authorization context is bound to the applicable tenant and environment. Authority established for one boundary is not silently accepted in another.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Freshness and distributed replay resistance</h2>
-    <p>
-      Request identity, timestamps, and freshness windows support freshness detection. Replay protection is coordinated across distributed runtime instances where shared operation is configured. Duplicate or previously consumed request authority fails closed rather than being accepted by another instance.
+      Authorization context is bound to the applicable tenant and environment.
+      Lab-validated tenant isolation controls apply; residual risk remains for
+      customer-live deployments and shared infrastructure choices.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Release verification and activation</h2>
     <p>
-      Only an Active Verified Release governs runtime evaluation. Distributed releases must pass Release Verification and Activation before use. Mix-and-match or unverified artifacts are outside the approved runtime path.
+      Only an Active Verified Release governs runtime evaluation. Distributed
+      releases must pass Release Verification and Activation before use.
+      Mix-and-match or unverified artifacts are outside the approved path.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Bounded review authorization</h2>
+    <h2>Bounded review for a new governed request</h2>
     <p>
-      A privileged review may authorize a new, bounded request after step-up verification. It does not change the original DENY, resume the original request, or create reusable standing permission.
+      A privileged review may authorize a <em>new</em>, bounded request after
+      step-up verification. It does not change the original DENY, resume the
+      original request or provider response, convert the same decision to
+      ALLOW, or create reusable standing permission.
     </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Fail-closed dependency handling</h2>
-    <p>
-      When a required trust, replay, authorization, release, or evidence dependency is unavailable or cannot be verified, the governed operation does not fall back to permissive execution. BeaconGuard returns DENY and prevents downstream execution. There is no review-as-permission fallback.
-    </p>
-    <FailClosedSecurityGate />
   </section>
 
   <section class="stack-section">
@@ -76,8 +208,14 @@ import FailClosedSecurityGate from "../components/diagrams/FailClosedSecurityGat
     <ul>
       <li>Identity providers and source-system trust remain customer-controlled.</li>
       <li>Network, TLS, secrets, and host hardening remain deployment responsibilities.</li>
-      <li>Replay-state providers, when used, are external to the core decision evaluation and must be configured for fail-closed operation.</li>
-      <li>Evidence storage durability and integrity protection depend on the configured evidence provider and customer infrastructure.</li>
+      <li>
+        Replay-state providers, when used, are external to core decision
+        evaluation and must be configured for fail-closed operation.
+      </li>
+      <li>
+        Evidence storage durability and integrity protection depend on the
+        configured evidence provider and customer infrastructure.
+      </li>
       <li>Operational monitoring and incident response remain shared customer responsibilities.</li>
     </ul>
   </section>
@@ -86,11 +224,13 @@ import FailClosedSecurityGate from "../components/diagrams/FailClosedSecurityGat
     <h2>What BeaconGuard is not</h2>
     <ul>
       <li>Not a replacement for SIEM, IAM, GRC, WAF, or API gateway platforms</li>
-      <li>Not a probabilistic authorization engine</li>
-      <li>Not a certification or attestation of legal compliance</li>
+      <li>Not a probabilistic authorization engine or response-content scorer</li>
+      <li>Not a certification of clinical correctness, legal compliance, or legal admissibility</li>
+      <li>Not claimed here as customer-production authorized or third-party certified</li>
     </ul>
     <div class="page-actions">
       <a class="btn-primary" href="/proof-evidence">Review Proof and Evidence</a>
+      <a class="btn-secondary" href="/verification">Explore Verification</a>
       <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
       <a class="btn-secondary" href="/docs/threat-model">Threat Model</a>
     </div>

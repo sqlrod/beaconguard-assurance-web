@@ -24,7 +24,7 @@ const reviewPath = [
   className="bg-diagram--review-auth"
 >
   <p class="bg-diagram-banner">
-    Phase 1 — Original request remains final after DENY
+    Original request remains final after DENY
   </p>
   <div class="bg-flow" role="list">
     {
@@ -52,7 +52,7 @@ const reviewPath = [
   </div>
 
   <p class="bg-diagram-banner">
-    Phase 2 — Separate governed review path (does not resume the original request)
+    Part 2 — Separate governed review path (does not resume the original request)
   </p>
   <div class="bg-flow" role="list">
     {
@@ -92,13 +92,13 @@ const reviewPath = [
 
   <div slot="text">
     <p>
-      Phase 1: Original Request → Independent Evaluation → DENY with
+      Part 1: Original Request → Independent Evaluation → DENY with
       REVIEW_REQUIRED → Original Request Finalized → Verifiable Decision Record.
       The original DENY is final; review does not convert it to ALLOW or resume
       the original request.
     </p>
     <p>
-      Phase 2: Reviewer Step-Up → Bounded Single-Use Authorization → New
+      Part 2: Reviewer Step-Up → Bounded Single-Use Authorization → New
       Application Request → Independent Evaluation of New Request → mutually
       exclusive fork. Branch ALLOW → new request permitted for this evaluation
       only; bounded authorization is consumed; reuse attempt is DENIED. Branch

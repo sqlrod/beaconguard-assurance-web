@@ -5,22 +5,23 @@ import FailClosedSecurityGate from "../../components/diagrams/FailClosedSecurity
 
 <BaseLayout
   title="Enforcement Runtime"
-  description="BeaconGuard Runtime Control Boundary evaluates trusted request context against the Active Verified Release and returns ALLOW or DENY before governed execution."
+  description="BeaconGuard runtime authorization for Request Admission and Result-to-Action: fail-closed ALLOW or DENY, provider separation, decision evidence, and evidence-before-effect where configured."
 >
   <section class="stack-section">
     <h1>Enforcement Runtime</h1>
 
     <p>
-      The BeaconGuard <strong>Runtime Control Boundary</strong> (enforcement runtime) evaluates
-      trusted request context against the <strong>Active Verified Release</strong> and produces a
-      Deterministic Decision Result—<strong>ALLOW</strong> or <strong>DENY</strong>—before governed execution.
+      The BeaconGuard runtime authorization domain evaluates trusted context
+      against the <strong>Active Verified Release</strong> and produces a
+      Deterministic Decision Result—<strong>ALLOW</strong> or <strong>DENY</strong>—at
+      configured authorization points in a governed AI transaction.
     </p>
 
     <p>It is designed to be:</p>
     <ul>
       <li>Deterministic</li>
-      <li>Fail closed</li>
-      <li>Independently deployable on the runtime data plane</li>
+      <li>Fail closed where enforcement is configured</li>
+      <li>Separable from management-plane playbook lifecycle</li>
       <li>Auditable by construction via Verifiable Decision Records</li>
     </ul>
 
@@ -29,10 +30,11 @@ import FailClosedSecurityGate from "../../components/diagrams/FailClosedSecurity
     <h2>Role in the System</h2>
 
     <p>
-      The Runtime Control Boundary sits on the path to a <strong>Governed AI / API /
-      Automated System</strong>. Its responsibility is to decide whether governed execution
-      is permitted or prevented under the Active Verified Release, persist a
-      Verifiable Decision Record, and then apply the effect.
+      Enforcement runtime covers <strong>Request Admission Authorization</strong>
+      before AI provider invocation and <strong>Result-to-Action Authorization</strong>
+      for a declared intended enterprise action. AI-generated results remain
+      untrusted proposals. Provider success is not enterprise authorization.
+      BeaconGuard authorizes; the enterprise application executes.
     </p>
 
     <p>It does not:</p>
@@ -40,49 +42,90 @@ import FailClosedSecurityGate from "../../components/diagrams/FailClosedSecurity
       <li>Modify prompts or rewrite application payloads as a product function</li>
       <li>Inspect model internals</li>
       <li>Perform heuristic or probabilistic authorization</li>
+      <li>Authorize model-output content as semantic response scoring</li>
       <li>Replace systems of record or workflow applications</li>
       <li>Treat human review as a permission to execute</li>
+      <li>Treat reports or AI-assisted insights as runtime authority</li>
     </ul>
 
     <h3>Optional System Connector</h3>
 
     <p>
       Some applications do not natively produce the required request format. The
-      optional <strong>System Connector</strong> maps source protocols and context into the
-      required structure before Request Validation and Context Normalization.
+      optional <strong>System Connector</strong> maps source protocols and context
+      into the required structure before Request Validation and Context
+      Normalization.
     </p>
 
     <p>
-      The System Connector does not evaluate controls, activate releases, or bypass
-      enforcement.
+      The System Connector does not evaluate controls, activate releases, or
+      bypass enforcement.
     </p>
 
-    <h2>Evaluation Path</h2>
+    <h2>Request Admission</h2>
 
     <ol>
       <li><strong>Request Validation and Context Normalization</strong></li>
-      <li><strong>Trust, Freshness, and Replay Checks</strong></li>
+      <li><strong>Trust, Freshness, and Replay Checks</strong> where configured</li>
       <li><strong>Deterministic Playbook Evaluation</strong> against the Active Verified Release</li>
       <li><strong>Determine ALLOW or DENY</strong></li>
       <li><strong>Persist Decision Record</strong> (Verifiable Decision Record)</li>
-      <li><strong>Apply Effect</strong> — ALLOW may proceed to governed execution; DENY hard-stops</li>
+      <li><strong>Apply Effect</strong> — ALLOW may permit provider invocation; DENY hard-stops with no provider invocation</li>
+    </ol>
+
+    <h2>AI Provider Interaction</h2>
+
+    <p>
+      After admission ALLOW, the enterprise application may invoke the AI
+      provider. The provider is a separate trust boundary. The returned
+      AI-generated result—including tool or action proposals—is an untrusted
+      proposal requiring new governed authorization for any declared intended
+      enterprise action.
+    </p>
+
+    <p>
+      Approving a proposal does not resume the original AI response. Using the
+      AI response as authorization is prohibited and not implemented.
+    </p>
+
+    <h2>Result-to-Action Authorization</h2>
+
+    <ol>
+      <li>Bind the AI-generated result to governed transaction context</li>
+      <li>Enterprise application declares and normalizes the Intended Enterprise Action</li>
+      <li>Deterministic Playbook Evaluation against the Active Verified Release</li>
+      <li>Determine ALLOW or DENY</li>
+      <li>Persist Decision Record</li>
+      <li>ALLOW permits the enterprise application to execute the authorized action; DENY hard-stops with no enterprise effect</li>
     </ol>
 
     <p>
-      Given the same Active Verified Release and the same trusted normalized inputs,
-      the runtime produces the same decision. Externalized shared replay state and
-      the configured evidence provider are deployment dependencies that reinforce
-      fail-closed admission and evidence persistence; they are not alternate
-      evaluation authorities.
+      Do not claim identical playbooks, identical latency, or separately deployed
+      gateways at both points unless specifically verified for a given
+      deployment.
+    </p>
+
+    <h2>Correlation and Evidence</h2>
+
+    <p>
+      Related decision and evidence identifiers support investigation of the
+      request–result–action relationship. Correlation supports Verify and audit
+      review; it is not presented as a named distributed correlator product.
+    </p>
+
+    <p>
+      Where enforcement requires it, evidence is recorded before upstream forward
+      (admission path) or before enterprise effect (action path). Exact
+      evidence-before-effect ordering is mode- and configuration-dependent.
     </p>
 
     <h2>Runtime Source of Truth</h2>
 
     <p>
-      At evaluation time, the <strong>Active Verified Release</strong> is the source of truth for
-      control semantics. Management-plane playbook drafts and unsigned artifacts do
-      not govern runtime decisions until they pass Release Verification and
-      Activation.
+      At evaluation time, the <strong>Active Verified Release</strong> is the source
+      of truth for control semantics. Management-plane playbook drafts and
+      unsigned artifacts do not govern runtime decisions until they pass Release
+      Verification and Activation.
     </p>
 
     <h2>Decision Contract</h2>
@@ -97,24 +140,35 @@ import FailClosedSecurityGate from "../../components/diagrams/FailClosedSecurity
         </thead>
         <tbody>
           <tr>
-            <td>ALLOW</td>
-            <td>Required controls are satisfied; after evidence persistence, governed execution may proceed.</td>
+            <td>ALLOW (admission)</td>
+            <td>Required controls are satisfied; after evidence requirements are met, provider invocation may proceed.</td>
           </tr>
           <tr>
-            <td>DENY</td>
-            <td>Execution is prevented; no downstream execution occurs.</td>
+            <td>DENY (admission)</td>
+            <td>Provider invocation is prevented; no AI provider call occurs.</td>
+          </tr>
+          <tr>
+            <td>ALLOW (action)</td>
+            <td>Required controls are satisfied; after evidence requirements are met, the enterprise application may execute the authorized action.</td>
+          </tr>
+          <tr>
+            <td>DENY (action)</td>
+            <td>Enterprise effect is prevented; no authorized action execution occurs.</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <p>
-      When required approval is absent, BeaconGuard returns DENY with a deterministic reason indicating that approval is required. An illustrative reason style is <code>APPROVAL_REQUIRED</code>. Any governance or human-review obligation remains separate from the runtime permission result.
+      When required approval is absent, BeaconGuard returns DENY with a
+      deterministic reason indicating that approval is required. An illustrative
+      reason style is <code>APPROVAL_REQUIRED</code>. Any governance or human-review
+      obligation remains separate from the runtime permission result.
     </p>
 
     <h2>Failure Semantics</h2>
 
-    <p>The runtime operates under <strong>fail-closed</strong> semantics.</p>
+    <p>The runtime operates under <strong>fail-closed</strong> semantics where enforcement is configured.</p>
 
     <p>If any of the following occur:</p>
     <ul>
@@ -135,14 +189,32 @@ import FailClosedSecurityGate from "../../components/diagrams/FailClosedSecurity
 
     <p>Silent fallback or permissive behavior is prohibited.</p>
 
+    <h2>External Dependencies and Separation</h2>
+
+    <p>Explicit external dependencies reinforce enforcement without becoming alternate evaluators:</p>
+    <ul>
+      <li>Customer identity provider and workload identity</li>
+      <li>Evidence provider</li>
+      <li>Replay / shared security state where configured</li>
+      <li>Key and secret custody</li>
+      <li>Operational monitoring</li>
+    </ul>
+
+    <p>
+      Keep the <strong>AI provider</strong> and the <strong>enterprise system of
+      record</strong> as separate trust boundaries. Do not collapse them into a
+      single “downstream system.”
+    </p>
+
     <h2>Evidence Emission</h2>
 
     <p>
-      For every evaluation the runtime emits integrity-protected decision evidence
-      designed for replay and verification. Records preserve release identity,
-      playbook identity, decision context, check outcomes, and the ALLOW or DENY
-      result. Storage durability and append-only behavior depend on the configured
-      evidence provider and shared customer deployment responsibilities.
+      For every evaluation the runtime emits integrity-protected decision
+      evidence designed for replay and verification. Records preserve release
+      identity, playbook identity, decision context, check outcomes, and the
+      ALLOW or DENY result. Storage durability and append-only behavior depend
+      on the configured evidence provider and shared customer deployment
+      responsibilities.
     </p>
 
     <h2>Related Sections</h2>
@@ -152,6 +224,7 @@ import FailClosedSecurityGate from "../../components/diagrams/FailClosedSecurity
       <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
       <li><a href="/docs/architecture">System Architecture</a></li>
       <li><a href="/how-it-works">How It Works</a></li>
+      <li><a href="/verification">Verification</a></li>
     </ul>
   </section>
 </BaseLayout>

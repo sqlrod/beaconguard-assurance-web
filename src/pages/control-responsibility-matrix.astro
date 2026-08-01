@@ -4,22 +4,49 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Control Responsibility Matrix | BeaconGuard Assurance"
-  description="BeaconGuard responsibility boundaries for Deterministic Playbook Evaluation, application enforcement, governed systems, systems of record, and reviewers."
+  description="BeaconGuard responsibility boundaries across AI Provider, Enterprise Application, BeaconGuard authorization, Enterprise System of Record, and Customer Governance."
 >
   <section class="stack-section">
     <h1>Control Responsibility Matrix</h1>
     <p class="lead">
-      This page helps reviewers understand which responsibilities BeaconGuard owns, which remain with the application and system of record, and which stay outside BeaconGuard's control boundary. It is intended to reduce ambiguity during architecture, security, risk, and procurement review.
+      This page helps reviewers understand which responsibilities BeaconGuard
+      owns, which remain with the enterprise application and system of record,
+      and which stay with customer governance. It is intended to reduce
+      ambiguity during architecture, security, risk, and procurement review.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Responsibility model</h2>
     <p>
-      BeaconGuard governs whether a request may proceed to governed execution under an Active Verified Release, returning ALLOW or DENY only.
-      BeaconGuard does not replace transaction systems, systems of record, model or API providers,
-      or downstream operational ownership. Human review via a Verifiable Decision Record obligation does not permit execution.
+      BeaconGuard authorizes whether an enterprise application may invoke an AI
+      provider and whether a declared enterprise action based on an AI-generated
+      result may proceed under the Active Verified Release. Runtime outcomes are
+      ALLOW or DENY only. BeaconGuard does not replace transaction systems,
+      systems of record, or model providers. Review does not mutate a DENY into
+      ALLOW.
     </p>
+    <ul>
+      <li>
+        <strong>AI Provider:</strong> Produces the model result.
+      </li>
+      <li>
+        <strong>Enterprise Application:</strong> Declares the intended action
+        and provides required context; executes only an authorized action.
+      </li>
+      <li>
+        <strong>BeaconGuard:</strong> Authorizes or denies the proposed use
+        under the Active Verified Release; records evidence; provides Verify.
+      </li>
+      <li>
+        <strong>Enterprise System of Record:</strong> Remains authoritative for
+        resulting business state.
+      </li>
+      <li>
+        <strong>Customer Governance:</strong> Retains clinical, legal,
+        operational, compliance, and business judgment.
+      </li>
+    </ul>
   </section>
 
   <section class="stack-section">
@@ -29,61 +56,77 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <thead>
           <tr>
             <th>Responsibility</th>
+            <th>AI Provider</th>
+            <th>Enterprise Application</th>
             <th>BeaconGuard</th>
-            <th>Application</th>
-            <th>Governed system provider</th>
-            <th>System of record</th>
-            <th>Operations / reviewers</th>
+            <th>Enterprise System of Record</th>
+            <th>Customer Governance</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Authorization decision at the Runtime Control Boundary</td>
-            <td>Owns Deterministic Playbook Evaluation and explicit ALLOW or DENY decisioning</td>
-            <td>Submits trusted request context (or via System Connector) and enforces returned decision</td>
-            <td>Does not own authorization policy</td>
+            <td>Model result production</td>
+            <td>Owns serving and produces the AI-generated result</td>
+            <td>Invokes the provider only after Request Admission ALLOW</td>
+            <td>Does not produce model output</td>
+            <td>Does not produce model output</td>
+            <td>Evaluates suitability of provider use</td>
+          </tr>
+          <tr>
+            <td>Request Admission Authorization</td>
+            <td>Does not own admission policy</td>
+            <td>Submits trusted request context and enforces returned decision</td>
+            <td>Owns ALLOW or DENY for provider invocation under Active Verified Release</td>
             <td>Does not own request authorization</td>
-            <td>Review boundary correctness and Compliance Playbook fit</td>
+            <td>Reviews boundary correctness and playbook fit</td>
           </tr>
           <tr>
-            <td>Business transaction execution</td>
+            <td>Declare intended enterprise action</td>
+            <td>Does not declare enterprise actions</td>
+            <td>Declares the intended action and provides required context</td>
+            <td>Does not invent or guess the intended action</td>
+            <td>Does not declare the action</td>
+            <td>Defines acceptable action contracts</td>
+          </tr>
+          <tr>
+            <td>Result-to-Action Authorization</td>
+            <td>Does not authorize enterprise effect</td>
+            <td>Requests authorization for the declared action; respects DENY</td>
+            <td>Owns ALLOW or DENY for the declared intended action</td>
+            <td>Does not authorize the action</td>
+            <td>Reviews action-control fit and residual risk</td>
+          </tr>
+          <tr>
+            <td>Execute authorized action</td>
+            <td>Does not execute enterprise actions</td>
+            <td>Executes only an authorized action</td>
             <td>Does not execute business transactions</td>
-            <td>Orchestrates allowed workflow steps after ALLOW</td>
-            <td>Does not execute business transactions on BeaconGuard's behalf</td>
-            <td>Remains authoritative for transaction/state recording</td>
-            <td>Validate control separation and escalation paths</td>
+            <td>May receive resulting business updates</td>
+            <td>Validates control separation and escalation paths</td>
           </tr>
           <tr>
-            <td>Model / API / automation behavior and output quality</td>
-            <td>Does not claim quality or business correctness of governed systems</td>
-            <td>Determines how allowed outputs are used</td>
-            <td>Owns serving characteristics of the governed system</td>
-            <td>Does not determine model or API quality</td>
-            <td>Evaluate suitability and downstream control expectations</td>
+            <td>Business state authority</td>
+            <td>Out of scope</td>
+            <td>Orchestrates workflow against systems of record</td>
+            <td>Does not become the system of record</td>
+            <td>Remains authoritative for resulting business state</td>
+            <td>Owns clinical, legal, operational, and business judgment</td>
           </tr>
           <tr>
-            <td>Decision evidence and review context</td>
-            <td>Emits Verifiable Decision Records with release identity and decision context</td>
-            <td>Correlates BeaconGuard decisions with workflow context as needed</td>
+            <td>Decision evidence and Verify</td>
             <td>Does not provide BeaconGuard decision evidence</td>
-            <td>May hold downstream business records, not BeaconGuard decision evidence by default</td>
-            <td>Review evidence, reconstruct decisions, and assess control operation</td>
+            <td>Correlates decisions with workflow context as needed</td>
+            <td>Emits Verifiable Decision Records; Verify remains read-only</td>
+            <td>May hold downstream business records, not BeaconGuard evidence by default</td>
+            <td>Reviews evidence; must not treat AI insights as authority</td>
           </tr>
           <tr>
-            <td>Fail-closed behavior when required conditions are not met</td>
-            <td>Returns DENY when release, trust, approval, freshness, or replay conditions are missing, malformed, or out of bounds</td>
-            <td>Must respect and enforce DENY outcomes; must not treat review as permission</td>
+            <td>Fail-closed and non-AI fallback</td>
             <td>Does not control BeaconGuard fail-closed semantics</td>
-            <td>Not responsible for request gating</td>
-            <td>Validate that failure handling is explicit and reviewable</td>
-          </tr>
-          <tr>
-            <td>Active Verified Release and evidence provider operations</td>
-            <td>Defines release verification expectations and evidence record shape</td>
-            <td>Consumes only activated releases in the governed path</td>
-            <td>Out of scope</td>
-            <td>Out of scope</td>
-            <td>Customer configures evidence provider durability and monitors release activation</td>
+            <td>Must enforce DENY; owns non-AI fallback behavior</td>
+            <td>Returns DENY when required conditions are missing or out of bounds</td>
+            <td>Not responsible for request or action gating</td>
+            <td>Validates that failure handling is explicit and reviewable</td>
           </tr>
         </tbody>
       </table>
@@ -93,18 +136,41 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="stack-section">
     <h2>What reviewers should verify</h2>
     <ul>
-      <li>The application submits the trusted request context BeaconGuard requires (signed metadata, workflow identity, role, trust, pathway, freshness, and related inputs)</li>
-      <li>BeaconGuard's ALLOW or DENY response is enforced before governed execution</li>
-      <li>Absent approval yields DENY (for example APPROVAL_REQUIRED), not a permission-to-execute review state</li>
-      <li>Governed system behavior is not treated as the authorization boundary</li>
+      <li>
+        The application submits the trusted request context BeaconGuard requires
+      </li>
+      <li>
+        Request Admission ALLOW or DENY is enforced before provider invocation
+      </li>
+      <li>
+        The intended enterprise action is declared by the application, not
+        inferred from model content as authority
+      </li>
+      <li>
+        Result-to-Action ALLOW or DENY is enforced before enterprise effect
+      </li>
+      <li>
+        Review does not mutate a DENY into ALLOW; later authorization uses a new
+        governed request where applicable
+      </li>
+      <li>Provider success is not treated as enterprise authorization</li>
       <li>Systems of record remain authoritative for business state</li>
-      <li>Reviewers can distinguish Verifiable Decision Records from downstream business records</li>
+      <li>
+        Verify is read-only and AI-assisted insights are non-authoritative
+      </li>
+      <li>
+        Customer governance retains clinical, legal, operational, compliance,
+        and business judgment
+      </li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>Next step</h2>
-    <p>Reviewers can continue structured evaluation through the Reviewer Kit, Trust Center, and Contact path.</p>
+    <p>
+      Reviewers can continue structured evaluation through the Reviewer Kit,
+      Trust Center, and Contact path.
+    </p>
     <div class="page-actions">
       <a class="btn-primary" href="/reviewer-kit">Open Reviewer Kit</a>
       <a class="btn-secondary" href="/trust-assurance">Review Trust Center</a>

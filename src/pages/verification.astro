@@ -1,0 +1,143 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import VerificationHierarchy from "../components/diagrams/VerificationHierarchy.astro";
+---
+
+<BaseLayout
+  title="Verification | BeaconGuard Verify"
+  description="BeaconGuard Verify is a read-only investigation surface for executive reporting, Decision Explorer, deterministic reconstruction, source evidence, replay verification, verifiable export, and non-authoritative AI-assisted insights."
+>
+  <section class="landing">
+    <p class="hero-eyebrow">BEACONGUARD VERIFY</p>
+    <h1>Verify every decision without changing authority.</h1>
+    <p class="hero-subheadline">
+      BeaconGuard Verify exists so security, privacy, compliance, risk, and
+      audit reviewers can inspect governed AI transaction evidence without
+      issuing runtime permission.
+    </p>
+    <div class="page-actions">
+      <a class="btn-primary" href="/proof-evidence">Inspect Proof and Evidence</a>
+      <a class="btn-secondary" href="/sample-decision-record">Sample Decision Record</a>
+      <a class="btn-secondary" href="/docs/compliance-audit">Compliance and Audit</a>
+    </div>
+  </section>
+
+  <section class="stack-section">
+    <h2>Why the verification surface exists</h2>
+    <p>
+      Authorization decisions must be reconstructable after the fact. Verify
+      provides investigation, reporting, and export capabilities over canonical
+      evidence while remaining outside the runtime enforcement path.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Read-only trust boundary</h2>
+    <p>
+      BeaconGuard Verify is read-only. It cannot modify evidence, change a
+      historical decision, activate a release, alter a Compliance Playbook,
+      grant runtime authority, or authorize an enterprise action.
+    </p>
+    <ul>
+      <li>Verification does not participate in ALLOW or DENY.</li>
+      <li>Browser-side claims are untrusted for integrity conclusions.</li>
+      <li>Export signing and reconstruction remain server-side responsibilities.</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Verification hierarchy</h2>
+    <VerificationHierarchy />
+  </section>
+
+  <section class="stack-section">
+    <h2>Executive Reporting</h2>
+    <p>
+      Deterministic reporting summarizes investigation-relevant decision
+      evidence for review. Report views are for analysis and drill-down, not for
+      granting runtime authority.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Decision Explorer</h2>
+    <p>
+      Decision Explorer supports inspection of recorded authorization decisions
+      and linked investigation context for a governed transaction.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Deterministic Reconstruction</h2>
+    <p>
+      Reconstruction derives the logical decision path from canonical evidence.
+      Missing or unavailable fields are reported as such. Reconstruction does
+      not invent model reasoning or fabricate missing artifacts.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Source Evidence and field traceability</h2>
+    <p>
+      Source Evidence maps reconstructed fields back to underlying artifacts,
+      digests, and integrity status so reviewers can see what was verified,
+      unverified, invalid, or unavailable.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Replay Verification</h2>
+    <p>
+      Investigation replay verification checks recorded decisions against
+      governing artifacts. It is not a substitute for live provider calls and
+      is distinct from request-admission replay protection at runtime.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Verifiable Export</h2>
+    <p>
+      Verifiable Export produces investigation packages that can be checked for
+      integrity. Export material supports review workflows; it is not claimed
+      here as legal admissibility.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>AI-Assisted Insights</h2>
+    <p>
+      AI-Assisted Insights may help reviewers navigate or summarize, but they
+      are non-authoritative. Insights must not enter the trusted reconstruction
+      path, the evidence integrity path, or the runtime authorization path.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>What Verify cannot do</h2>
+    <ul class="bg-nonclaim-list">
+      <li>Modify or delete historical evidence.</li>
+      <li>Convert DENY into ALLOW.</li>
+      <li>Activate or replace an Active Verified Release.</li>
+      <li>Alter a Compliance Playbook.</li>
+      <li>Grant runtime authority or authorize an enterprise action.</li>
+      <li>Treat AI-assisted insight output as evidence authority.</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Responsibility separation</h2>
+    <ul>
+      <li>BeaconGuard records and exposes investigation evidence.</li>
+      <li>Enterprise applications execute only authorized actions.</li>
+      <li>Systems of record remain authoritative for business state.</li>
+      <li>Customer governance retains clinical, legal, and compliance judgment.</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <div class="page-actions">
+      <a class="btn-primary" href="/proof-evidence">Continue to Proof and Evidence</a>
+      <a class="btn-secondary" href="/reviewer-kit">Open Reviewer Kit</a>
+    </div>
+  </section>
+</BaseLayout>

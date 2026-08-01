@@ -2,43 +2,46 @@
 import DiagramShell from "./DiagramShell.astro";
 
 const inputs = [
-  "One bounded workflow",
-  "Request contract",
-  "Identity and trust context",
-  "Tenant and environment assumptions",
-  "Compliance controls",
-  "Evidence requirements",
-  "Deployment assumptions",
-  "Recovery expectations",
+  "Representative outbound request",
+  "Representative provider response",
+  "Intended enterprise action",
+  "Request–result–action correlation",
+  "Identity and tenant context",
+  "Active Verified Release",
+  "Request ALLOW and DENY cases",
+  "Result ALLOW and DENY cases",
+  "Evidence, reconstruction, replay",
+  "Report and export requirements",
+  "Deployment boundaries",
+  "Failure handling and non-AI fallback",
 ];
 
 const activities = [
-  "Boundary placement",
-  "Connector fit",
-  "Identity mapping",
-  "Playbook mapping",
-  "ALLOW and DENY case design",
-  "Replay and failure analysis",
-  "Evidence review",
-  "Deployment and recovery review",
-  "Responsibility review",
+  "Dual-boundary placement",
+  "Request admission case design",
+  "Result-to-action case design",
+  "Correlation and identity mapping",
+  "Playbook and release fit",
+  "Evidence and Verify review",
+  "Reconstruction and replay review",
+  "Export and report provenance",
+  "Deployment and failure analysis",
+  "Responsibility and residual-risk review",
 ];
 
 const outputs = [
-  "Architecture-fit memo",
-  "Responsibility matrix",
-  "Trust-boundary map",
-  "Playbook mapping",
-  "Sample decision records",
-  "Deployment qualification assessment",
-  "Recovery considerations",
-  "Blocker register",
+  "Governed Transaction Architecture Memo",
+  "Control Boundary Findings",
+  "Evidence and Verification Findings",
+  "Pilot Qualification Findings",
+  "Residual Risks",
+  "Unsupported Claims",
 ];
 ---
 
 <DiagramShell
   title="Controlled Evaluation workflow"
-  caption="A bounded architecture review: inputs, activities, and outputs. Not product deployment, certification, or production authorization."
+  caption="A bounded architecture review of one governed AI transaction: dual authorization inputs, evaluation activities, and qualification outputs. Not product deployment, certification, or production authorization."
   className="bg-diagram--controlled-eval"
 >
   <div class="bg-diagram-columns" role="list">
@@ -72,10 +75,13 @@ const outputs = [
 
   <div slot="text">
     <p>
-      Controlled Evaluation is a bounded review of one regulated workflow. It
-      maps boundary placement, identity and trust, Compliance Playbook controls,
-      ALLOW and DENY cases, evidence, and deployment-fit assumptions. It is not
-      product deployment, certification, or production authorization.
+      Controlled Evaluation reviews one regulated AI transaction across Request
+      Admission Authorization and Result-to-Action Authorization, plus Verify
+      evidence requirements and deployment-fit assumptions. Outputs include a
+      Governed Transaction Architecture Memo, Control Boundary Findings,
+      Evidence and Verification Findings, Pilot Qualification Findings,
+      Residual Risks, and Unsupported Claims. It is not product deployment,
+      certification, or production authorization.
     </p>
   </div>
 </DiagramShell>

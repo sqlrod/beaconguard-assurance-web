@@ -1,6 +1,5 @@
 ---
 import DiagramShell from "./DiagramShell.astro";
-import OutcomeFork from "./OutcomeFork.astro";
 
 interface Props {
   industry: "healthcare" | "financial" | "automation";
@@ -11,55 +10,59 @@ const { industry, title } = Astro.props;
 
 const configs = {
   healthcare: {
-    defaultTitle: "Healthcare control flow",
+    defaultTitle: "Healthcare governed AI transaction",
     caption:
-      "PHI-sensitive healthcare requests are evaluated at the Runtime Control Boundary. Evidence persists before outcomes fork: only ALLOW may reach an approved model pathway; DENY hard-stops with no model execution.",
+      "Healthcare applications may invoke an AI provider only after Request Admission Authorization. The returned result is an untrusted proposal. Enterprise effect requires independent Result-to-Action Authorization of the declared intended action. The EHR remains authoritative.",
     application: "Healthcare Application",
-    context: "Required trusted context (role, workflow, approved pathway, source trust, context tags)",
-    allow: "Approved model pathway",
-    deny: "Hard stop — no model execution",
-    note: "A review obligation may follow a DENY record outside the runtime permission path.",
-    text: "Healthcare Application → Required trusted context → Optional System Connector → Runtime Control Boundary → Determine ALLOW or DENY → Persist Verifiable Decision Record → mutually exclusive fork. Branch ALLOW → Approved model pathway. Branch DENY → Hard stop — no model execution. Review or escalation remains outside the permission path.",
+    context:
+      "Required trusted context (role, workflow, approved pathway, source trust, context tags)",
+    provider: "AI Provider (after admission ALLOW)",
+    result: "AI-Generated Result — untrusted proposal",
+    action: "Declare Intended Enterprise Action",
+    allowAction: "Application executes authorized action",
+    denyAdmission: "Hard stop — no provider invocation",
+    denyAction: "Hard stop — no enterprise effect",
+    sor: "EHR / System of Record remains authoritative",
+    note: "BeaconGuard authorizes; the healthcare application executes. Clinical judgment and the EHR are not replaced.",
+    text: "Healthcare Application → Required trusted context → Optional System Connector → Request Admission Authorization. DENY → hard stop, no provider invocation. ALLOW → AI Provider → AI-Generated Result (untrusted proposal) → Declare Intended Enterprise Action → Result-to-Action Authorization. DENY → hard stop, no enterprise effect. ALLOW → application executes authorized action → EHR / System of Record remains authoritative.",
   },
   financial: {
-    defaultTitle: "Financial control flow",
+    defaultTitle: "Financial governed AI transaction",
     caption:
-      "AML, KYC, fraud, and dispute requests are evaluated before governed services execute. Evidence persists before outcomes fork; escalation and governance review occur from evidence outside the permission path.",
+      "AML, KYC, fraud, and dispute applications may invoke an AI provider only after Request Admission Authorization. Proposed recommendations and actions remain untrusted until Result-to-Action Authorization. Case and transaction systems remain authoritative.",
     application: "AML / KYC / Fraud / Dispute Application",
-    context: "Required trusted context (analyst or service identity, case and transaction context, source trust, requested action)",
-    allow: "Approved governed service",
-    deny: "Hard stop — no downstream execution",
-    note: "Escalation or governance review occurs from the evidence record outside the permission path.",
-    text: "AML / KYC / Fraud / Dispute Application → Required trusted context → Optional System Connector → Runtime Control Boundary → Determine ALLOW or DENY → Persist Verifiable Decision Record → mutually exclusive fork. Branch ALLOW → Approved governed service. Branch DENY → Hard stop — no downstream execution.",
+    context:
+      "Required trusted context (analyst or service identity, case and transaction context, source trust, requested action)",
+    provider: "AI Provider (after admission ALLOW)",
+    result: "AI-Generated Result — untrusted proposal",
+    action: "Declare Intended Enterprise Action",
+    allowAction: "Application executes authorized action",
+    denyAdmission: "Hard stop — no provider invocation",
+    denyAction: "Hard stop — no enterprise effect",
+    sor: "Case / transaction systems remain authoritative",
+    note: "BeaconGuard authorizes use of a proposed result. It does not determine fraud, AML, credit, or legal outcomes.",
+    text: "AML / KYC / Fraud / Dispute Application → Required trusted context → Optional System Connector → Request Admission Authorization. DENY → hard stop, no provider invocation. ALLOW → AI Provider → AI-Generated Result (untrusted proposal) → Declare Intended Enterprise Action → Result-to-Action Authorization. DENY → hard stop, no enterprise effect. ALLOW → application executes authorized action → case and transaction systems remain authoritative.",
   },
   automation: {
-    defaultTitle: "Regulated automation control flow",
+    defaultTitle: "Regulated automation governed AI transaction",
     caption:
-      "Existing applications submit trusted context through an optional connector. The Runtime Control Boundary determines ALLOW or DENY, persists evidence, then forks the effect.",
+      "Existing applications may invoke an AI provider only after Request Admission Authorization. Automation proposals remain untrusted until Result-to-Action Authorization of the declared intended action.",
     application: "Existing Application",
     context: "Required trusted context",
-    allow: "Governed automation may proceed",
-    deny: "Hard stop — no downstream execution",
-    note: "One reusable control-boundary sequence across regulated internal automation.",
-    text: "Existing Application → Required trusted context → Optional System Connector → Runtime Control Boundary → Determine ALLOW or DENY → Persist Verifiable Decision Record → mutually exclusive fork. Branch ALLOW → governed automation may proceed. Branch DENY → hard stop with no downstream execution.",
+    provider: "AI Provider (after admission ALLOW)",
+    result: "AI-Generated Result — untrusted proposal",
+    action: "Declare Intended Enterprise Action",
+    allowAction: "Application executes authorized action",
+    denyAdmission: "Hard stop — no provider invocation",
+    denyAction: "Hard stop — no enterprise effect",
+    sor: "Production system of record remains authoritative",
+    note: "Provider success is not enterprise authorization. BeaconGuard authorizes; the application executes.",
+    text: "Existing Application → Required trusted context → Optional System Connector → Request Admission Authorization. DENY → hard stop, no provider invocation. ALLOW → AI Provider → AI-Generated Result (untrusted proposal) → Declare Intended Enterprise Action → Result-to-Action Authorization. DENY → hard stop, no enterprise effect. ALLOW → application executes authorized action → production system of record remains authoritative.",
   },
 } as const;
 
 const config = configs[industry];
 const diagramTitle = title ?? config.defaultTitle;
-
-const steps = [
-  { label: config.application, className: "" },
-  { label: config.context, className: "" },
-  { label: "Optional System Connector", className: "bg-flow-step--optional" },
-  { label: "Runtime Control Boundary", className: "bg-flow-step--boundary" },
-  { label: "Determine ALLOW or DENY", className: "bg-flow-step--decision" },
-  {
-    label: "Persist Verifiable Decision Record",
-    detail: "Required before any downstream effect",
-    className: "bg-outcome-evidence",
-  },
-];
 ---
 
 <DiagramShell
@@ -67,34 +70,77 @@ const steps = [
   caption={config.caption}
   className={`bg-diagram--industry bg-diagram--industry-${industry}`}
 >
-  <div class="bg-flow" role="list">
-    {
-      steps.map((step, index) => (
-        <>
-          <div class:list={["bg-flow-step", step.className]} role="listitem">
-            {step.detail ? (
-              <>
-                <strong>{step.label}</strong>
-                <span>{step.detail}</span>
-              </>
-            ) : (
-              step.label
-            )}
-          </div>
-          {index < steps.length - 1 && (
-            <div class="bg-flow-arrow" aria-hidden="true">
-              ↓
+  <div class="bg-txn" role="list">
+    <div class="bg-flow-step bg-txn-app" role="listitem">{config.application}</div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step" role="listitem">{config.context}</div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-flow-step--optional" role="listitem">
+      Optional System Connector
+    </div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-flow-step--boundary" role="listitem">
+      Request Admission Authorization
+    </div>
+
+    <div class="bg-txn-fork" aria-label="Request admission outcomes">
+      <div class="bg-txn-arm bg-txn-arm--deny">
+        <div class="bg-flow-step bg-outcome-deny">
+          <strong>DENY</strong>
+          <span>{config.denyAdmission}</span>
+        </div>
+      </div>
+      <div class="bg-txn-arm bg-txn-arm--allow">
+        <div class="bg-flow-step bg-outcome-allow">
+          <strong>ALLOW</strong>
+          <span>Provider invocation permitted</span>
+        </div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <div class="bg-flow-step bg-txn-provider" role="listitem">{config.provider}</div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <div class="bg-flow-step bg-txn-result" role="listitem">
+          {config.result}
+        </div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <div class="bg-flow-step" role="listitem">{config.action}</div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <div class="bg-flow-step bg-flow-step--boundary" role="listitem">
+          Result-to-Action Authorization
+        </div>
+        <div class="bg-txn-fork bg-txn-fork--nested" aria-label="Action authorization outcomes">
+          <div class="bg-txn-arm bg-txn-arm--deny">
+            <div class="bg-flow-step bg-outcome-deny">
+              <strong>DENY</strong>
+              <span>{config.denyAction}</span>
             </div>
-          )}
-        </>
-      ))
-    }
+          </div>
+          <div class="bg-txn-arm bg-txn-arm--allow">
+            <div class="bg-flow-step bg-outcome-allow">
+              <strong>ALLOW</strong>
+              <span>{config.allowAction}</span>
+            </div>
+            <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+            <div class="bg-flow-step bg-txn-sor" role="listitem">{config.sor}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-flow-step bg-outcome-evidence bg-txn-evidence" role="listitem">
+      <strong>Decision evidence</strong>
+      <span>Inspectable through BeaconGuard Verify</span>
+    </div>
   </div>
 
-  <OutcomeFork allowLabel={config.allow} denyLabel={config.deny} />
   <p class="bg-flow-note">{config.note}</p>
 
   <div slot="text">
     <p>{config.text}</p>
+    <p>
+      Result-to-Action Authorization means authorization of the declared
+      intended enterprise action under the Active Verified Release. It does not
+      mean semantic scoring of model content. Provider success is not enterprise
+      authorization.
+    </p>
   </div>
 </DiagramShell>

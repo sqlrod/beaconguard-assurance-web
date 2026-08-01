@@ -3,46 +3,61 @@ import DiagramShell from "./DiagramShell.astro";
 ---
 
 <DiagramShell
-  title="Evidence lifecycle"
-  caption="Every deterministic ALLOW or DENY produces a Verifiable Decision Record that can be integrity-checked, stored via the configured evidence provider, and used for replay, reconstruction, and audit review."
+  title="Evidence and verification flow"
+  caption="Request and action decisions each produce Verifiable Decision Records. Canonical evidence feeds BeaconGuard Verify. AI-assisted insights remain outside the trusted path."
   className="bg-diagram--evidence"
 >
   <div class="bg-flow" role="list">
     <div class="bg-flow-step bg-flow-step--inputs" role="listitem">
-      <strong>Inputs</strong>
+      <strong>Governed transaction inputs</strong>
       <ul class="bg-inline-list">
-        <li>Normalized Request Context</li>
-        <li>Active Release Identity</li>
-        <li>Control Evaluation</li>
+        <li>Request context and identity</li>
+        <li>Active Verified Release</li>
+        <li>AI-generated result binding (when present)</li>
+        <li>Declared intended enterprise action</li>
       </ul>
     </div>
     <div class="bg-flow-arrow" aria-hidden="true">↓</div>
     <div class="bg-flow-step bg-flow-step--decision" role="listitem">
-      ALLOW or DENY
+      Request Admission · Result-to-Action
+      <span>ALLOW or DENY</span>
     </div>
     <div class="bg-flow-arrow" aria-hidden="true">↓</div>
     <div class="bg-flow-step bg-outcome-evidence" role="listitem">
-      Verifiable Decision Record
+      <strong>Verifiable Decision Records</strong>
+      <span>Related request and action decisions</span>
     </div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step" role="listitem">Integrity Verification</div>
     <div class="bg-flow-arrow" aria-hidden="true">↓</div>
     <div class="bg-flow-step" role="listitem">Configured Evidence Provider</div>
     <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step bg-outcome-evidence" role="listitem">
-      Replay / Reconstruction / Audit Review
+    <div class="bg-flow-step bg-flow-step--boundary" role="listitem">
+      BeaconGuard Verify
+      <span>Read-only functional domain</span>
+    </div>
+    <div class="bg-verify-grid" role="list">
+      <div class="bg-flow-step" role="listitem">Executive Reporting</div>
+      <div class="bg-flow-step" role="listitem">Decision Explorer</div>
+      <div class="bg-flow-step" role="listitem">Deterministic Reconstruction</div>
+      <div class="bg-flow-step" role="listitem">Source Evidence</div>
+      <div class="bg-flow-step" role="listitem">Replay Verification</div>
+      <div class="bg-flow-step" role="listitem">Verifiable Export</div>
+    </div>
+    <div class="bg-flow-step bg-verify-insights" role="listitem">
+      AI-Assisted Insights
+      <span>Separate · non-authoritative · not in the trusted path</span>
     </div>
   </div>
 
   <div slot="text">
     <p>
-      Normalized Request Context + Active Release Identity + Control Evaluation →
-      ALLOW or DENY → Verifiable Decision Record → Integrity Verification →
-      Configured Evidence Provider → Replay / Reconstruction / Audit Review.
-    </p>
-    <p>
-      Retention, append-only behavior, durability, and storage integrity depend
-      on the configured evidence provider and deployment controls.
+      Governed transaction inputs feed Request Admission and Result-to-Action
+      decisions. Each decision produces a Verifiable Decision Record. Records
+      are stored via the configured evidence provider and inspected through
+      BeaconGuard Verify: Executive Reporting, Decision Explorer, Deterministic
+      Reconstruction, Source Evidence, Replay Verification, and Verifiable
+      Export. AI-Assisted Insights are non-authoritative and outside the trusted
+      path. Retention and integrity depend on the evidence provider and
+      deployment controls.
     </p>
   </div>
 </DiagramShell>

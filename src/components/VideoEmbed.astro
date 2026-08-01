@@ -1,0 +1,60 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+  watchLabel?: string;
+}
+
+const {
+  videoId,
+  title,
+  watchLabel = "Watch on YouTube",
+} = Astro.props;
+
+const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+const posterUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+---
+
+<figure class="media-embed">
+  <a
+    class="media-embed-poster"
+    href={watchUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-media-embed
+    data-video-id={videoId}
+    data-video-title={title}
+  >
+    <img src={posterUrl} alt="" width="480" height="360" loading="lazy" />
+    <span class="media-embed-play" aria-hidden="true">▶</span>
+    <span class="visually-hidden">{title} (opens YouTube in a new tab)</span>
+  </a>
+  <figcaption class="media-embed-caption">
+    <a href={watchUrl} target="_blank" rel="noopener noreferrer">
+      {watchLabel}
+      <span class="visually-hidden"> (opens in a new tab)</span>
+    </a>
+  </figcaption>
+</figure>
+
+<script is:inline>
+  document.querySelectorAll("[data-media-embed]").forEach(function (anchor) {
+    anchor.addEventListener("click", function (event) {
+      // Progressive enhancement: replace poster with iframe when possible.
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      event.preventDefault();
+      var id = anchor.getAttribute("data-video-id");
+      var titleText = anchor.getAttribute("data-video-title") || "Video";
+      if (!id) return;
+      var wrap = document.createElement("div");
+      wrap.className = "media-embed-frame";
+      wrap.innerHTML =
+        '<iframe src="https://www.youtube-nocookie.com/embed/' +
+        id +
+        '?autoplay=1" title="' +
+        titleText.replace(/"/g, "&quot;") +
+        '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="eager"></iframe>';
+      anchor.replaceWith(wrap);
+    });
+  });
+</script>

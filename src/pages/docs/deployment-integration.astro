@@ -5,22 +5,23 @@ import DeploymentTopology from "../../components/diagrams/DeploymentTopology.ast
 
 <BaseLayout
   title="Deployment and Integration"
-  description="How BeaconGuard is deployed and integrated into existing systems as a Runtime Control Boundary with evidence-before-forward ordering."
+  description="BeaconGuard deployment and integration using three contracts—request and identity, provider-result correlation, and intended enterprise action—with bypass prohibitions on outbound and return paths."
 >
   <section class="stack-section">
     <h1>Deployment and Integration</h1>
 
     <p>
-      This section describes how BeaconGuard is deployed and integrated into existing
-      systems. Guidance is conservative and environment-agnostic for regulated
-      enterprise settings.
+      This section describes how BeaconGuard is deployed and integrated into
+      existing systems. Guidance is conservative and environment-agnostic for
+      regulated enterprise settings under <strong>controlled internal
+      qualification</strong>.
     </p>
 
     <p>
-      BeaconGuard deploys alongside existing applications. Applications submit trusted
-      request context, enforce the returned <strong>ALLOW</strong> or <strong>DENY</strong> result before
-      governed execution, and rely on Verifiable Decision Records for governance
-      review. Deployment responsibilities are shared with the customer.
+      BeaconGuard deploys alongside existing applications. Applications submit
+      trusted request and action context, enforce returned <strong>ALLOW</strong> or
+      <strong>DENY</strong> results, and rely on Verifiable Decision Records for
+      governance review. Deployment responsibilities are shared with the customer.
     </p>
 
     <DeploymentTopology />
@@ -28,66 +29,107 @@ import DeploymentTopology from "../../components/diagrams/DeploymentTopology.ast
     <h2>Deployment Model</h2>
 
     <p>
-      BeaconGuard is deployed as a <strong>Runtime Control Boundary</strong> on the path to a
-      Governed AI / API / Automated System. An optional <strong>System Connector</strong> may map
-      source protocols into the required request format. The Control Plane operates
-      outside the per-request path.
+      BeaconGuard places runtime authorization on the path to the AI provider and
+      on the return / declared-action path where enforcement is configured. An
+      optional <strong>System Connector</strong> may map source protocols into the
+      required request format. The Control Plane (Govern) operates outside the
+      per-request path. BeaconGuard Verify is a read-only functional domain.
     </p>
 
     <p>Common characteristics:</p>
     <ul>
-      <li>Standalone process or container on the runtime data plane</li>
+      <li>Standalone process or container on the runtime authorization path</li>
       <li>Deterministic evaluation against an Active Verified Release</li>
-      <li>Horizontal scalability where the environment supports it</li>
       <li>Externalized configuration and secrets</li>
+      <li>Deployment-dependent scale characteristics (no universal horizontal-scaling or multi-region claim)</li>
     </ul>
 
     <p>The deployment environment (customer) is responsible for:</p>
     <ul>
       <li>Process isolation and host hardening</li>
-      <li>Network controls that keep the boundary on the governed path</li>
+      <li>Network controls that keep BeaconGuard on outbound and return paths</li>
       <li>Transport security (for example TLS)</li>
       <li>Secrets and signing-key management</li>
       <li>Identity provider integration</li>
       <li>Evidence-provider configuration and monitoring</li>
     </ul>
 
+    <h2>Three Integration Contracts</h2>
+
+    <h3>1. Request and identity contract</h3>
+    <p>
+      The enterprise application (or System Connector) supplies trusted request
+      context and identity/tenant attributes required for Request Admission
+      Authorization. Missing or malformed required inputs fail closed as DENY.
+    </p>
+
+    <h3>2. Provider-result and transaction-correlation contract</h3>
+    <p>
+      After admission ALLOW, the application may invoke the AI provider. The
+      returned AI-generated result must be bound to governed transaction context
+      with correlation identifiers that relate request and later action
+      decisions. Provider success is not BeaconGuard authorization.
+    </p>
+
+    <h3>3. Intended enterprise-action contract</h3>
+    <p>
+      The enterprise application declares the Intended Enterprise Action and
+      required context for Result-to-Action Authorization. Only after action
+      ALLOW may the application execute the authorized action into the enterprise
+      system of record.
+    </p>
+
+    <h2>Bypass Prohibitions</h2>
+
+    <p>An application must not:</p>
+    <ul>
+      <li>Invoke the provider without required request authorization</li>
+      <li>Apply a provider result without required result/action authorization</li>
+      <li>Reuse prior authority in place of a new governed authorization</li>
+      <li>Treat provider success as BeaconGuard authorization</li>
+      <li>Allow report or AI-insight output into the runtime permission path</li>
+      <li>Bypass BeaconGuard on the return path</li>
+    </ul>
+
     <h2>Integration Pattern</h2>
 
-    <p>Typical request flow (evidence before forward):</p>
     <ol>
       <li>Application (or System Connector) prepares trusted request context</li>
-      <li>Runtime performs Request Validation and Context Normalization</li>
-      <li>Trust, Freshness, and Replay Checks run as configured</li>
-      <li>Deterministic Playbook Evaluation uses the Active Verified Release</li>
-      <li>Runtime determines <strong>ALLOW</strong> or <strong>DENY</strong></li>
-      <li>Verifiable Decision Record is persisted</li>
-      <li>Application enforces the result; only after record persistence may ALLOW proceed to governed execution</li>
+      <li>Request Admission Authorization evaluates against the Active Verified Release</li>
+      <li>Verifiable Decision Record is persisted; DENY hard-stops with no provider invocation</li>
+      <li>On ALLOW, application invokes the AI provider</li>
+      <li>AI-generated result is bound to transaction context (untrusted proposal)</li>
+      <li>Application declares Intended Enterprise Action</li>
+      <li>Result-to-Action Authorization evaluates; Verifiable Decision Record is persisted</li>
+      <li>DENY hard-stops with no enterprise effect; ALLOW permits application execution into the system of record</li>
     </ol>
+
+    <p>
+      Where enforcement requires it, evidence is recorded before forward or before
+      enterprise effect. Exact ordering is mode- and configuration-dependent.
+      Timeout and retry behavior are deployment-specific; do not invent combined
+      dual-boundary latency figures.
+    </p>
 
     <p>BeaconGuard does not:</p>
     <ul>
       <li>Call back into applications to execute workflow steps</li>
       <li>Replace workflow logic or systems of record</li>
       <li>Treat review obligations as permission to execute</li>
-      <li>Treat human review as a permission to execute</li>
+      <li>Host or certify the AI provider</li>
     </ul>
 
-    <p>
-      When required approval is absent, the result is <strong>DENY</strong> (for example
-      <code>APPROVAL_REQUIRED</code>) with Execution Prevented.
-    </p>
-
-    <h2>Request Inputs</h2>
+    <h2>Request and Action Inputs</h2>
 
     <p>Integration requires explicit inputs, including as applicable:</p>
     <ul>
       <li>Actor identity (user, system, service)</li>
       <li>Signed request metadata</li>
-      <li>Workflow identity and requested action</li>
+      <li>Workflow identity and requested or declared action</li>
       <li>Source-system trust and approved-pathway status</li>
       <li>Deterministic context tags</li>
       <li>Request IDs, timestamps, and freshness windows</li>
+      <li>Provider-result binding / correlation context</li>
       <li>Attributes required by the Compliance Playbook</li>
     </ul>
 
@@ -105,28 +147,42 @@ import DeploymentTopology from "../../components/diagrams/DeploymentTopology.ast
       <li>release_identity is fixed for each evaluation and recorded in evidence</li>
     </ul>
 
-    <p>Draft playbooks and unsigned artifacts must not govern production evaluation.</p>
+    <p>Draft playbooks and unsigned artifacts must not govern evaluation.</p>
 
     <h2>Evidence Integration</h2>
 
     <p>
       BeaconGuard emits Verifiable Decision Records per evaluation, including
-      decision outcome, reason codes, release_identity, playbook_identity, and check
-      outcomes where applicable.
+      decision outcome, reason codes, release_identity, playbook_identity,
+      intended-action context where applicable, and check outcomes where
+      applicable.
     </p>
 
     <p>
-      Evidence is integrity-protected decision evidence designed for replay and
-      verification. Append-only retention is supported when configured with a
-      required evidence provider. Customers own provider selection, retention, and
-      operational monitoring.
+      Evidence is integrity-protected decision evidence designed for investigation
+      replay and verification. Append-only retention is supported when configured
+      with a required evidence provider. Customers own provider selection,
+      retention, and operational monitoring. Investigation surfaces are accessed
+      through BeaconGuard Verify (read-only).
+    </p>
+
+    <h2>Packaging Qualification</h2>
+
+    <p>
+      Windows and Linux controlled deployment paths are evaluated under
+      controlled internal qualification, including Linux OCI-oriented packaging
+      paths where supported by deployment documentation. Native Windows OCI is
+      not claimed as a proven packaging path. Public package downloads and general
+      installer distribution are not implied. Customer production deployment is
+      not authorized as a universal product claim.
     </p>
 
     <h2>Failure Handling</h2>
 
     <p>
-      Applications must enforce <strong>DENY</strong> outcomes and must not proceed with governed
-      execution on admission or evaluation failure.
+      Applications must enforce <strong>DENY</strong> outcomes and must not proceed with
+      provider invocation or enterprise effect on admission or action evaluation
+      failure.
     </p>
 
     <p>Failure cases include:</p>
@@ -139,8 +195,8 @@ import DeploymentTopology from "../../components/diagrams/DeploymentTopology.ast
     </ul>
 
     <p>
-      All blocking cases return deterministic <strong>DENY</strong>. Human review via a Verifiable
-      Decision Record obligation does not permit execution.
+      All blocking cases return deterministic <strong>DENY</strong>. Human review via a
+      Verifiable Decision Record obligation does not permit execution.
     </p>
 
     <h2>Environment Separation</h2>
@@ -158,6 +214,7 @@ import DeploymentTopology from "../../components/diagrams/DeploymentTopology.ast
       <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
       <li><a href="/docs/threat-model">Threat Model</a></li>
       <li><a href="/deployment">Deployment page</a></li>
+      <li><a href="/verification">Verification</a></li>
     </ul>
   </section>
 </BaseLayout>

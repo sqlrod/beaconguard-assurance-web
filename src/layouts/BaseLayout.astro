@@ -1,9 +1,38 @@
 ---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
 const {
   title = "BeaconGuard Assurance",
-  description = "BeaconGuard is a deterministic control and evidence boundary for high-risk enterprise workflows. It returns explicit ALLOW or DENY results before governed execution and produces Verifiable Decision Records.",
+  description = "Control before execution. Evidence after every decision. BeaconGuard governs whether an enterprise application may invoke AI and whether a declared action based on the returned result may affect an enterprise system.",
+  ogImage = "/beaconguard-master-logo.png",
 } = Astro.props;
-const currentPath = Astro.url.pathname;
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const siteOrigin = "https://beaconguardassurance.com";
+const canonicalPath = currentPath === "/" ? "/" : `${currentPath}/`;
+const canonicalUrl = `${siteOrigin}${canonicalPath === "/" ? "/" : canonicalPath}`;
+
+function isCurrent(href: string) {
+  const normalized = href.replace(/\/$/, "") || "/";
+  if (normalized === "/") return currentPath === "/";
+  if (normalized === "/docs") return currentPath === "/docs" || currentPath.startsWith("/docs/");
+  return currentPath === normalized || currentPath.startsWith(`${normalized}/`);
+}
+
+const navItems = [
+  { href: "/platform", label: "Platform" },
+  { href: "/healthcare", label: "Healthcare" },
+  { href: "/verification", label: "Verification" },
+  { href: "/security", label: "Security" },
+  { href: "/design-partner-program", label: "Controlled Evaluation" },
+  { href: "/docs", label: "Documentation" },
+  { href: "/contact", label: "Contact" },
+];
+
 import "../styles/global.css";
 ---
 
@@ -14,37 +43,67 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{title}</title>
-
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BeaconGuard Assurance" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={`${siteOrigin}${ogImage}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteOrigin}${ogImage}`} />
+
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
   </head>
 
   <body>
-    <!-- Skip link for keyboard users -->
     <a href="#content" class="skip-link">Skip to content</a>
 
     <header class="site-header" role="banner">
       <div class="header-inner">
         <a href="/" class="brand" aria-label="BeaconGuard Assurance home">
-            <img
-              class="brand-logo"
-              src="/beaconguard-master-logo.png"
-              alt="BeaconGuard Assurance"
-            />
+          <img
+            class="brand-logo"
+            src="/beaconguard-master-logo.png"
+            alt="BeaconGuard Assurance"
+          />
         </a>
 
-        <nav class="header-nav" aria-label="Primary navigation">
-          <a href="/platform" aria-current={currentPath === "/platform" ? "page" : undefined}>Platform</a>
-          <a href="/healthcare" aria-current={currentPath === "/healthcare" ? "page" : undefined}>Healthcare</a>
-          <a href="/fintech" aria-current={currentPath === "/fintech" ? "page" : undefined}>Financial</a>
-          <a href="/proof-evidence" aria-current={currentPath === "/proof-evidence" ? "page" : undefined}>Proof</a>
-          <a href="/security" aria-current={currentPath === "/security" ? "page" : undefined}>Security</a>
-          <a href="/design-partner-program" aria-current={currentPath === "/design-partner-program" ? "page" : undefined}>Controlled Evaluation</a>
-          <a href="/contact" aria-current={currentPath === "/contact" ? "page" : undefined}>Contact</a>
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-controls="primary-navigation"
+          aria-expanded="false"
+          data-nav-toggle
+        >
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          <span class="nav-toggle-label">Menu</span>
+        </button>
+
+        <nav
+          id="primary-navigation"
+          class="header-nav"
+          aria-label="Primary navigation"
+          data-nav-panel
+        >
+          {
+            navItems.map((item) => (
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
         </nav>
       </div>
     </header>
@@ -54,7 +113,7 @@ import "../styles/global.css";
     </main>
 
     <footer class="site-footer" role="contentinfo">
-      <div class="footer-inner">
+      <div class="footer-inner footer-inner--reframe">
         <div class="footer-left">
           <div class="footer-brand-lockup">
             <div class="footer-brand-mark">
@@ -62,18 +121,70 @@ import "../styles/global.css";
               <strong>BeaconGuard Assurance</strong>
             </div>
           </div>
+          <p class="footer-definition">
+            Independent authorization and verification for regulated AI actions.
+          </p>
         </div>
 
         <div class="footer-center">
-          <p class="footer-slogan-line">Deterministic Control. Verifiable Decisions.</p>
-          <p class="footer-slogan-line">The Control Boundary for AI Liability.</p>
+          <p class="footer-slogan-line">
+            Control before execution. Evidence after every decision.
+          </p>
+          <p class="footer-slogan-line footer-slogan-line--proof">
+            Provider success is not enterprise authorization.
+          </p>
         </div>
 
-        <div class="footer-right">
-          <a href="/contact">Contact</a><br />
-          <a href="/docs">Technical Reference</a>
+        <div class="footer-right footer-link-columns">
+          <div>
+            <a href="/verification">Verification</a><br />
+            <a href="/proof-evidence">Proof and Evidence</a><br />
+            <a href="/fintech">Financial Services</a><br />
+            <a href="/trust-assurance">Trust Center</a>
+          </div>
+          <div>
+            <a href="/docs">Documentation</a><br />
+            <a href="/company">Company</a><br />
+            <a href="/reviewer-kit">Reviewer Kit</a><br />
+            <a href="/contact">Contact</a>
+          </div>
         </div>
       </div>
     </footer>
+
+    <script is:inline>
+      (function () {
+        var toggle = document.querySelector("[data-nav-toggle]");
+        var panel = document.querySelector("[data-nav-panel]");
+        if (!toggle || !panel) return;
+
+        function setOpen(open) {
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          document.body.classList.toggle("nav-open", open);
+          if (open) {
+            var first = panel.querySelector("a");
+            if (first) first.focus();
+          } else {
+            toggle.focus();
+          }
+        }
+
+        toggle.addEventListener("click", function () {
+          setOpen(toggle.getAttribute("aria-expanded") !== "true");
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+            setOpen(false);
+          }
+        });
+
+        panel.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            if (window.matchMedia("(max-width: 900px)").matches) setOpen(false);
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

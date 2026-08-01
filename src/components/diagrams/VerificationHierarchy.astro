@@ -1,0 +1,45 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+---
+
+<DiagramShell
+  title="BeaconGuard Verify hierarchy"
+  caption="Verification is read-only. AI-assisted insights remain outside the trusted reconstruction and authorization path."
+  className="bg-diagram--verify-hierarchy"
+>
+  <div class="bg-verify-hierarchy" role="list">
+    <div class="bg-flow-step bg-outcome-evidence" role="listitem">
+      Verifiable Decision Records
+    </div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+    <div class="bg-flow-step bg-flow-step--boundary" role="listitem">
+      BeaconGuard Verify
+      <span>Read-only investigation surface</span>
+    </div>
+    <div class="bg-verify-grid" role="list">
+      <div class="bg-flow-step" role="listitem">Executive Reporting</div>
+      <div class="bg-flow-step" role="listitem">Decision Explorer</div>
+      <div class="bg-flow-step" role="listitem">Deterministic Reconstruction</div>
+      <div class="bg-flow-step" role="listitem">Source Evidence</div>
+      <div class="bg-flow-step" role="listitem">Replay Verification</div>
+      <div class="bg-flow-step" role="listitem">Verifiable Export</div>
+    </div>
+    <div class="bg-flow-step bg-verify-insights" role="listitem">
+      AI-Assisted Insights
+      <span>Separate · non-authoritative · not in the trusted path</span>
+    </div>
+  </div>
+
+  <div slot="text">
+    <p>
+      Verifiable Decision Records feed BeaconGuard Verify. Verify provides
+      Executive Reporting, Decision Explorer, Deterministic Reconstruction,
+      Source Evidence, Replay Verification, and Verifiable Export. AI-Assisted
+      Insights are a separate non-authoritative capability and must not enter
+      the trusted reconstruction or runtime authorization path. Verify cannot
+      modify evidence, change historical decisions, activate releases, alter
+      Compliance Playbooks, grant runtime authority, or authorize enterprise
+      actions.
+    </p>
+  </div>
+</DiagramShell>

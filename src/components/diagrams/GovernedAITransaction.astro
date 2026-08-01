@@ -1,0 +1,99 @@
+---
+import DiagramShell from "./DiagramShell.astro";
+---
+
+<DiagramShell
+  title="Complete governed AI transaction"
+  caption="BeaconGuard authorizes provider invocation and, separately, the declared enterprise action. AI output remains an untrusted proposal. BeaconGuard authorizes; the enterprise application executes."
+  className="bg-diagram--governed-transaction"
+>
+  <div class="bg-txn" role="list">
+    <div class="bg-flow-step bg-txn-app" role="listitem">Enterprise Application</div>
+    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+
+    <div class="bg-flow-step bg-flow-step--boundary" role="listitem">
+      Request Admission Authorization
+    </div>
+
+    <div class="bg-txn-fork" aria-label="Request admission outcomes">
+      <div class="bg-txn-arm bg-txn-arm--deny">
+        <div class="bg-flow-step bg-outcome-deny">
+          <strong>DENY</strong>
+          <span>Record decision · No provider invocation</span>
+        </div>
+      </div>
+      <div class="bg-txn-arm bg-txn-arm--allow">
+        <div class="bg-flow-step bg-outcome-allow">
+          <strong>ALLOW</strong>
+          <span>Provider invocation permitted</span>
+        </div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <div class="bg-flow-step bg-txn-provider" role="listitem">AI Provider</div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <div class="bg-flow-step bg-txn-result" role="listitem">
+          AI-Generated Result
+          <span>Untrusted proposal</span>
+        </div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <div class="bg-flow-step" role="listitem">
+          Bind to Governed Transaction Context
+        </div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <div class="bg-flow-step" role="listitem">
+          Declare Intended Enterprise Action
+        </div>
+        <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+        <div class="bg-flow-step bg-flow-step--boundary" role="listitem">
+          Result-to-Action Authorization
+        </div>
+        <div class="bg-txn-fork bg-txn-fork--nested" aria-label="Action authorization outcomes">
+          <div class="bg-txn-arm bg-txn-arm--deny">
+            <div class="bg-flow-step bg-outcome-deny">
+              <strong>DENY</strong>
+              <span>Record decision · No enterprise effect</span>
+            </div>
+          </div>
+          <div class="bg-txn-arm bg-txn-arm--allow">
+            <div class="bg-flow-step bg-outcome-allow">
+              <strong>ALLOW</strong>
+              <span>Authorized action may proceed</span>
+            </div>
+            <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+            <div class="bg-flow-step bg-txn-app" role="listitem">
+              Enterprise Application Executes Authorized Action
+            </div>
+            <div class="bg-flow-arrow" aria-hidden="true">↓</div>
+            <div class="bg-flow-step bg-txn-sor" role="listitem">
+              Enterprise System of Record
+              <span>Remains authoritative</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-flow-step bg-outcome-evidence bg-txn-evidence" role="listitem">
+      <strong>Decision evidence</strong>
+      <span>Inspectable through BeaconGuard Verify</span>
+    </div>
+  </div>
+
+  <div slot="text">
+    <p>
+      Enterprise Application → Request Admission Authorization. DENY records the
+      decision and blocks provider invocation. ALLOW permits AI Provider
+      invocation. The AI-Generated Result is an untrusted proposal. The
+      enterprise application binds transaction context, declares the Intended
+      Enterprise Action, and BeaconGuard evaluates Result-to-Action
+      Authorization. DENY blocks enterprise effect. ALLOW lets the enterprise
+      application execute the authorized action into the Enterprise System of
+      Record. Authorization decisions produce evidence for BeaconGuard Verify.
+    </p>
+    <p>
+      Result-to-Action Authorization means authorization of the declared
+      intended enterprise action under the Active Verified Release. It does not
+      mean semantic scoring of model content, and it does not resume or mutate
+      a prior DENY.
+    </p>
+  </div>
+</DiagramShell>

@@ -4,26 +4,30 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="BeaconGuard Documentation"
-  description="Technical reference for BeaconGuard Compliance Playbooks, Runtime Control Boundary, Active Verified Releases, Verifiable Decision Records, and regulated workflow integration."
+  description="Technical reference for BeaconGuard dual authorization, Compliance Playbooks, Active Verified Releases, Verifiable Decision Records, BeaconGuard Verify, and regulated AI transaction integration."
 >
   <section>
     <h1>Documentation</h1>
 
     <p>
-      This documentation describes how BeaconGuard governs execution at the Runtime
-      Control Boundary: Compliance Playbooks become Signed Immutable Release Artifacts,
-      only an Active Verified Release drives Deterministic Playbook Evaluation, and
-      runtime results are ALLOW or DENY before governed execution.
+      This documentation describes how BeaconGuard authorizes governed AI
+      transactions: whether an enterprise application may invoke an AI provider
+      (Request Admission Authorization), and whether a later declared enterprise
+      action based on an AI-generated result may proceed (Result-to-Action
+      Authorization). AI output remains an untrusted proposal. Runtime outcomes
+      are ALLOW or DENY only under an Active Verified Release.
     </p>
 
     <p>
-      Evidence is integrity-protected decision context designed for replay and
-      verification. Deployment responsibilities are shared with the customer.
+      BeaconGuard Verify is a read-only functional domain for investigation,
+      reconstruction, replay, and export. Deployment responsibilities are shared
+      with the customer. The product remains under controlled internal
+      qualification for customer production use.
     </p>
 
     <h2>Start Here</h2>
     <ul>
-      <li><a href="/docs/overview">Product Overview</a> — what BeaconGuard is and is not</li>
+      <li><a href="/docs/overview">Product Overview</a> — dual authorization model and what BeaconGuard is not</li>
     </ul>
 
     <h2>Product Overview</h2>
@@ -33,38 +37,40 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     <h2>System Architecture</h2>
     <ul>
-      <li><a href="/docs/architecture">System Architecture</a> — management plane, runtime data plane, and control boundary</li>
+      <li><a href="/docs/architecture">System Architecture</a> — Govern, Authorize, and Verify functional domains</li>
     </ul>
 
     <h2>How It Works</h2>
     <ul>
-      <li><a href="/how-it-works">How It Works</a> — request lifecycle from validation through enforce and record</li>
+      <li><a href="/how-it-works">How It Works</a> — governed AI transaction lifecycle</li>
     </ul>
 
     <h2>Compliance Playbooks / Policy Model</h2>
     <ul>
-      <li><a href="/docs/policy-model">Policy Model</a> — playbook hierarchy, release identity, ALLOW/DENY results</li>
+      <li><a href="/docs/policy-model">Policy Model</a> — request admission, result-to-action, shared controls, and evidence obligations</li>
     </ul>
 
     <h2>Enforcement Runtime</h2>
     <ul>
-      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a> — Runtime Control Boundary, fail-closed semantics, System Connector</li>
+      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a> — request admission, provider interaction, Result-to-Action Authorization of the declared intended enterprise action, fail-closed semantics</li>
     </ul>
 
-    <h2>Evidence</h2>
+    <h2>Evidence and Verification</h2>
     <ul>
-      <li><a href="/docs/compliance-audit">Compliance and Audit</a> — Verifiable Decision Records and qualified evidence claims</li>
+      <li><a href="/docs/compliance-audit">Compliance and Audit</a> — Verifiable Decision Records, reconstruction, replay, and export</li>
+      <li><a href="/verification">Verification</a> — BeaconGuard Verify read-only investigation surface</li>
     </ul>
 
     <h2>Deployment</h2>
     <ul>
-      <li><a href="/docs/deployment-integration">Deployment and Integration</a> — placement, customer responsibilities, Active Verified Release</li>
+      <li><a href="/docs/deployment-integration">Deployment and Integration</a> — three integration contracts and bypass prohibitions</li>
+      <li><a href="/deployment">Deployment</a> — controlled deployment qualification</li>
     </ul>
 
     <h2>Threat Model</h2>
     <ul>
-      <li><a href="/docs/threat-model">Threat Model</a> — release, connector, control-plane, and evidence threats</li>
-      <li><a href="/docs/dfd-threat-flow">DFD and Threat Flow</a> — data-flow view supporting threat review</li>
+      <li><a href="/docs/threat-model">Threat Model</a> — release, authorization, evidence, and verification threats</li>
+      <li><a href="/docs/dfd-threat-flow">DFD and Threat Flow</a> — eighteen-step data-flow view supporting threat review</li>
     </ul>
   </section>
 </BaseLayout>

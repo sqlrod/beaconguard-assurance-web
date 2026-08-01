@@ -1,9 +1,58 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ReviewAuthorizationFlow from "../components/diagrams/ReviewAuthorizationFlow.astro";
+import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.astro";
+import QualificationNotice from "../components/QualificationNotice.astro";
+import VideoEmbed from "../components/VideoEmbed.astro";
+
+const transactionExample = `{
+  "governed_transaction_id": "txn_careops_4412",
+  "stages": [
+    {
+      "stage": "request_admission",
+      "decision": "ALLOW",
+      "request_id": "req_admit_8f2a1c",
+      "release_identity": "release.healthcare.ops.v12",
+      "playbook_identity": "playbook.healthcare.ops.summarize.v12",
+      "trust_check": "PASS",
+      "freshness_check": "PASS",
+      "replay_check": "PASS",
+      "outcome": "provider_invocation_permitted",
+      "evidence_id": "vdr_admit_allow_8f2a1c"
+    },
+    {
+      "stage": "ai_provider_result",
+      "status": "received",
+      "result_binding_id": "result_bind_8f2a1c",
+      "result_classification": "untrusted_proposal",
+      "note": "Provider success is not enterprise authorization"
+    },
+    {
+      "stage": "result_to_action",
+      "decision": "DENY",
+      "request_id": "req_action_9b4e22",
+      "related_admission_request_id": "req_admit_8f2a1c",
+      "related_result_binding_id": "result_bind_8f2a1c",
+      "declared_intended_action": "update_care_ops_case_state",
+      "release_identity": "release.healthcare.ops.v12",
+      "playbook_identity": "playbook.healthcare.ops.action.v12",
+      "outcome": "enterprise_effect_prevented",
+      "evidence_id": "vdr_action_deny_9b4e22"
+    }
+  ],
+  "enterprise_effect": "prevented",
+  "verification": {
+    "related_decision_ids": [
+      "vdr_admit_allow_8f2a1c",
+      "vdr_action_deny_9b4e22"
+    ],
+    "inspectable_through": "BeaconGuard Verify"
+  }
+}`;
 
 const allowRecord = `{
   "decision": "ALLOW",
+  "authorization_point": "request_admission",
   "request_id": "req_8f2a1c",
   "timestamp": "2026-07-20T18:04:11Z",
   "release_identity": "release.healthcare.ops.v12",
@@ -16,12 +65,13 @@ const allowRecord = `{
   "trust_check": "PASS",
   "freshness_check": "PASS",
   "replay_check": "PASS",
-  "outcome": "governed_execution_permitted",
+  "outcome": "provider_invocation_permitted",
   "evidence_id": "vdr_allow_8f2a1c"
 }`;
 
 const denyPlaybookRecord = `{
   "decision": "DENY",
+  "authorization_point": "request_admission",
   "reason_code": "APPROVAL_REQUIRED",
   "request_id": "req_3c91de",
   "timestamp": "2026-07-20T18:06:02Z",
@@ -35,12 +85,13 @@ const denyPlaybookRecord = `{
   "trust_check": "PASS",
   "freshness_check": "PASS",
   "replay_check": "PASS",
-  "outcome": "execution_prevented",
+  "outcome": "provider_invocation_prevented",
   "evidence_id": "vdr_deny_3c91de"
 }`;
 
 const denyTrustRecord = `{
   "decision": "DENY",
+  "authorization_point": "request_admission",
   "request_id": "req_replay_77",
   "timestamp": "2026-07-20T18:09:44Z",
   "release_identity": "release.finops.dispute.v5",
@@ -53,20 +104,71 @@ const denyTrustRecord = `{
   "trust_check": "PASS",
   "freshness_check": "PASS",
   "replay_check": "FAIL",
-  "outcome": "execution_prevented",
+  "outcome": "provider_invocation_prevented",
   "evidence_id": "vdr_deny_replay_77"
 }`;
 ---
 
 <BaseLayout
-  title="Proof and Evidence | Verifiable Decision Records"
-  description="Review BeaconGuard decision evidence and watch The BeaconGuard Review Process, a controlled product demonstration showing deterministic denial, reviewer step-up authentication, bounded one-time authorization, and rejection of authorization reuse."
+  title="Proof and Evidence | Governed Transaction Evidence"
+  description="Inspect a complete governed AI transaction example and The BeaconGuard Review Process demonstration covering immutable denial, step-up reviewer authentication, new governed request, single-use authorization, and replay rejection."
 >
   <section class="stack-section">
     <h1>Proof and Evidence</h1>
     <p class="lead">
-      These sanitized samples illustrate how Verifiable Decision Records can present deterministic ALLOW or DENY results. They are illustrative review examples, not a normative API schema and not production evidence from a customer environment.
+      These sanitized samples illustrate how Verifiable Decision Records can
+      present deterministic ALLOW or DENY results across a governed AI
+      transaction. They are illustrative review examples, not a normative API
+      schema and not production evidence from a customer environment.
     </p>
+  </section>
+
+  <section class="stack-section" aria-labelledby="complete-transaction-title">
+    <p class="section-label">COMPLETE TRANSACTION EXAMPLE</p>
+    <h2 id="complete-transaction-title">
+      Admission ALLOW, result received, action DENY
+    </h2>
+    <p>
+      A complete governed transaction can include provider invocation without
+      permitting enterprise effect. In this illustrative path: Request Admission
+      returns ALLOW; the AI provider result is received as an untrusted
+      proposal; Result-to-Action returns DENY; enterprise effect is prevented.
+    </p>
+    <GovernedAITransaction />
+    <ol>
+      <li>
+        <strong>Request Admission — ALLOW</strong> — provider invocation
+        permitted under the Active Verified Release.
+      </li>
+      <li>
+        <strong>AI Provider Result Received</strong> — classified as an
+        untrusted proposal. Provider success is not enterprise authorization.
+      </li>
+      <li>
+        <strong>Result-to-Action — DENY</strong> — the declared intended
+        enterprise action is denied under independent authorization.
+      </li>
+      <li>
+        <strong>Enterprise Effect Prevented</strong> — the application must not
+        execute the declared action; systems of record are unchanged by that
+        action.
+      </li>
+    </ol>
+    <p>
+      Related evidence fields support investigation: governed transaction
+      identity, admission decision evidence, result binding identity, action
+      decision evidence, release and playbook identity, declared intended
+      action, and related decision identifiers inspectable through BeaconGuard
+      Verify.
+    </p>
+    <p class="sample-note">
+      Illustrative controlled example — field names and values are for reviewer
+      orientation only. Not a published API schema.
+    </p>
+    <details class="sample-details">
+      <summary>View illustrative raw sample</summary>
+      <pre class="code-block"><code>{transactionExample}</code></pre>
+    </details>
   </section>
 
   <section
@@ -77,57 +179,73 @@ const denyTrustRecord = `{
     <p class="section-label">CONTROLLED PRODUCT DEMONSTRATION</p>
     <h2 id="beaconguard-review-process-title">The BeaconGuard Review Process</h2>
     <p>
-      This controlled demonstration uses Northbridge CareOps, a synthetic enterprise application created for the laboratory scenario. It shows how BeaconGuard handles a governed request that requires privileged review while preserving a strictly binary runtime decision model.
+      This controlled demonstration uses Northbridge CareOps, a synthetic
+      enterprise application created for the laboratory scenario. It proves
+      specific review-path controls. It is <strong>not</strong> complete proof
+      of a new end-to-end governed transaction lifecycle covering provider
+      result binding and Result-to-Action Authorization.
     </p>
     <p>
-      BeaconGuard returns only ALLOW or DENY at runtime. In this scenario, <code>REVIEW_REQUIRED</code> is recorded as the structured reason for DENY. The original denied request remains final and does not automatically resume after review.
+      BeaconGuard returns only ALLOW or DENY at runtime. In this scenario,
+      <code>REVIEW_REQUIRED</code> is recorded as the structured reason for
+      DENY. The original denied request remains final and does not automatically
+      resume after review.
     </p>
 
     <div class="review-process-layout">
       <div class="review-process-media">
-        <div class="review-process-video">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/0fe3XB5X648"
-            title="The BeaconGuard Review Process — Controlled Product Demonstration"
-            loading="lazy"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-        </div>
-        <p class="review-process-fallback">
-          <a
-            href="https://youtu.be/0fe3XB5X648"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Watch The BeaconGuard Review Process on YouTube
-            <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </p>
+        <VideoEmbed
+          videoId="0fe3XB5X648"
+          title="The BeaconGuard Review Process — Controlled Product Demonstration"
+          watchLabel="Watch The BeaconGuard Review Process on YouTube"
+        />
       </div>
 
       <div class="review-process-summary">
-        <h3>What the demonstration shows</h3>
+        <h3>What this demonstration proves</h3>
         <ul>
-          <li>The original request returns DENY with <code>REVIEW_REQUIRED</code> recorded as the structured reason.</li>
-          <li>The original denial remains final and cannot be resumed or changed by the reviewer.</li>
-          <li>The reviewer completes step-up authentication before privileged authorization can be issued.</li>
-          <li>A bounded one-time authorization is created for a new application request.</li>
-          <li>The new request is independently evaluated, and the authorization is consumed after successful use.</li>
-          <li>A subsequent attempt to reuse the authorization is denied, with reviewable evidence retained for each decision.</li>
+          <li>
+            Immutable original denial — the recorded DENY is not mutated into
+            ALLOW.
+          </li>
+          <li>
+            Step-up reviewer authentication before privileged authorization can
+            be issued.
+          </li>
+          <li>
+            A new governed request is required for any later authorized
+            execution path.
+          </li>
+          <li>
+            Single-use authorization — the grant is consumed after successful
+            use.
+          </li>
+          <li>
+            Replay rejection — reuse of the consumed authorization is denied
+            with retained evidence.
+          </li>
         </ul>
+        <p>
+          It does <strong>not</strong> prove a complete new transaction
+          lifecycle from provider result through Result-to-Action Authorization
+          and enterprise effect.
+        </p>
       </div>
     </div>
 
     <p class="review-process-outcome">
-      Review does not convert the original DENY into ALLOW. Any later execution requires a new request that independently satisfies the applicable authorization conditions.
+      Review does not convert the original DENY into ALLOW. Any later execution
+      requires a new request that independently satisfies the applicable
+      authorization conditions.
     </p>
 
     <ReviewAuthorizationFlow />
 
     <p class="sample-note">
-      Controlled laboratory demonstration using synthetic data. This is not a customer deployment, customer endorsement, external security certification, production qualification, or evidence of commercial traction.
+      Controlled laboratory demonstration using synthetic data. This is not a
+      customer deployment, customer endorsement, external security
+      certification, production qualification, or evidence of commercial
+      traction.
     </p>
 
     <div class="page-actions">
@@ -138,94 +256,139 @@ const denyTrustRecord = `{
 
   <section class="stack-section" aria-labelledby="qualification-coverage-title">
     <p class="section-label">INTERNAL QUALIFICATION COVERAGE</p>
-    <h2 id="qualification-coverage-title">Control behaviors evaluated under governed conditions</h2>
+    <h2 id="qualification-coverage-title">
+      Control behaviors evaluated under governed conditions
+    </h2>
     <p>
-      BeaconGuard’s internal qualification program evaluates the control boundary under normal operation, security failure, restart, recovery, and distributed-runtime conditions. These qualification categories support technical review but do not represent customer production evidence or third-party certification.
+      BeaconGuard’s internal qualification program evaluates control behavior
+      under normal operation, security failure, restart, recovery, and
+      distributed-runtime conditions. These qualification categories support
+      technical review but do not represent customer production evidence or
+      third-party certification.
     </p>
-    <div class="section-grid section-grid--scenarios">
-      <div class="content-card">
+    <div class="scenario-grid">
+      <div class="scenario-card">
         <h3>Request-authentication failure</h3>
         <p>Missing or invalid authenticated request context fails closed as DENY.</p>
       </div>
-      <div class="content-card">
+      <div class="scenario-card">
         <h3>Replay rejection</h3>
         <p>Duplicate or previously consumed request authority is denied rather than accepted.</p>
       </div>
-      <div class="content-card">
+      <div class="scenario-card">
         <h3>Tenant and environment mismatch</h3>
         <p>Authority established for one boundary is not silently accepted in another.</p>
       </div>
-      <div class="content-card">
+      <div class="scenario-card">
         <h3>Evidence integrity and tamper detection</h3>
         <p>Decision evidence supports integrity verification, tamper detection, and reconstruction.</p>
       </div>
-      <div class="content-card">
+      <div class="scenario-card">
         <h3>Restart continuity</h3>
         <p>Restart behavior is evaluated while preserving fail-closed control assumptions.</p>
       </div>
-      <div class="content-card">
+      <div class="scenario-card">
         <h3>Single-use authorization enforcement</h3>
         <p>Bounded authorization is consumed after successful use; reuse attempts are denied.</p>
       </div>
-      <div class="content-card">
+      <div class="scenario-card">
         <h3>Fail-closed dependency behavior</h3>
         <p>Unavailable or unverifiable required dependencies do not fall back to permissive execution.</p>
       </div>
-      <div class="content-card">
+      <div class="scenario-card">
         <h3>Installation, recovery, and packaging paths</h3>
-        <p>Installation, recovery, rollback, reinstall, and Windows and Linux packaging paths are evaluated in controlled environments.</p>
+        <p>
+          Installation, recovery, rollback, reinstall, and Windows and Linux
+          packaging paths are evaluated in controlled environments.
+        </p>
       </div>
     </div>
     <p class="sample-note">
-      Qualification coverage describes controlled laboratory and internal evaluation categories using synthetic or non-customer material. It is not customer deployment evidence, external certification, or commercial traction.
+      Qualification coverage describes controlled laboratory and internal
+      evaluation categories using synthetic or non-customer material. It is not
+      customer deployment evidence, external certification, or commercial
+      traction.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>ALLOW — controls satisfied</h2>
+    <h2>ALLOW — Request Admission controls satisfied</h2>
     <p>
-      Trusted context and Active Verified Release requirements are satisfied. Governed execution may proceed. The Verifiable Decision Record preserves release identity and decision context.
+      Trusted context and Active Verified Release requirements are satisfied.
+      Provider invocation may proceed. Enterprise effect still requires
+      Result-to-Action Authorization where configured. The Verifiable Decision
+      Record preserves release identity and decision context.
     </p>
-    <p class="sample-note">Illustrative sample — field names and values are for reviewer orientation only.</p>
-    <pre class="code-block"><code>{allowRecord}</code></pre>
+    <p class="sample-note">
+      Illustrative controlled example — field names and values are for reviewer
+      orientation only.
+    </p>
+    <details class="sample-details">
+      <summary>View illustrative raw sample</summary>
+      <pre class="code-block"><code>{allowRecord}</code></pre>
+    </details>
   </section>
 
   <section class="stack-section">
     <h2>DENY — playbook or control failure</h2>
     <p>
-      The request fails a Compliance Playbook control because a required precondition approval is absent before the request can be accepted. Downstream execution is prevented. This is distinct from the privileged review scenario above, where the structured DENY reason is <code>REVIEW_REQUIRED</code>.
+      The request fails a Compliance Playbook control because a required
+      precondition approval is absent before the request can be accepted.
+      Provider invocation is prevented. This is distinct from the privileged
+      review scenario above, where the structured DENY reason is
+      <code>REVIEW_REQUIRED</code>.
     </p>
     <p class="sample-note">
-      Illustrative sample — <code>APPROVAL_REQUIRED</code> here means a required external or precondition approval is missing at request time. It is not the BeaconGuard privileged-review reason <code>REVIEW_REQUIRED</code>, and it is not published as a complete public enum.
+      Illustrative controlled example — <code>APPROVAL_REQUIRED</code> here means
+      a required external or precondition approval is missing at request time.
+      It is not the BeaconGuard privileged-review reason
+      <code>REVIEW_REQUIRED</code>, and it is not published as a complete public
+      enum.
     </p>
-    <pre class="code-block"><code>{denyPlaybookRecord}</code></pre>
+    <details class="sample-details">
+      <summary>View illustrative raw sample</summary>
+      <pre class="code-block"><code>{denyPlaybookRecord}</code></pre>
+    </details>
   </section>
 
   <section class="stack-section">
     <h2>DENY — trust, freshness, or replay failure</h2>
     <p>
-      Admission checks fail closed. When a replay or freshness check fails, the result is DENY before governed execution. The record captures check outcomes for reconstruction and audit support. No machine-style reason enum is asserted here beyond the binary decision and check results.
+      Admission checks fail closed. When a replay or freshness check fails, the
+      result is DENY before provider invocation. The record captures check
+      outcomes for reconstruction and audit support. No machine-style reason
+      enum is asserted here beyond the binary decision and check results.
     </p>
-    <p class="sample-note">Illustrative sample — field names and values are for reviewer orientation only.</p>
-    <pre class="code-block"><code>{denyTrustRecord}</code></pre>
+    <p class="sample-note">
+      Illustrative controlled example — field names and values are for reviewer
+      orientation only.
+    </p>
+    <details class="sample-details">
+      <summary>View illustrative raw sample</summary>
+      <pre class="code-block"><code>{denyTrustRecord}</code></pre>
+    </details>
   </section>
 
   <section class="stack-section">
     <h2>What reviewers inspect</h2>
     <ul>
-      <li>Whether the decision is ALLOW or DENY</li>
-      <li>Whether explanatory reason text or an illustrative reason code clarifies the failure</li>
+      <li>Whether each decision is ALLOW or DENY</li>
+      <li>Whether the authorization point is admission or result-to-action</li>
+      <li>Whether related admission, result-binding, and action evidence identifiers are present</li>
       <li>Whether release identity and playbook identity are present</li>
       <li>Whether trust, freshness, and replay checks are recorded</li>
-      <li>Whether any follow-on governance review is separate from the permission result</li>
+      <li>Whether review remains separate from the permission result</li>
       <li>Whether evidence supports reconstruction without replacing systems of record</li>
     </ul>
   </section>
+
+  <QualificationNotice variant="full" />
 
   <section class="stack-section">
     <h2>Related review material</h2>
     <div class="page-actions">
       <a class="btn-primary" href="/sample-decision-record">Sample Decision Record page</a>
+      <a class="btn-secondary" href="/verification">BeaconGuard Verify</a>
       <a class="btn-secondary" href="/security">Security</a>
       <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
       <a class="btn-secondary" href="/docs/compliance-audit">Compliance and Audit</a>
@@ -238,6 +401,18 @@ const denyTrustRecord = `{
       margin: 0 0 0.85rem;
       font-size: 0.9rem;
       color: var(--text-muted);
+    }
+
+    .sample-details {
+      max-width: 100%;
+      margin: 0 0 1rem;
+    }
+
+    .sample-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
     }
 
     .code-block {
@@ -269,27 +444,6 @@ const denyTrustRecord = `{
       margin: 1.35rem 0 1.25rem;
     }
 
-    .review-process-video {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      border-radius: 0.6rem;
-      background: #0b1220;
-    }
-
-    .review-process-video iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .review-process-fallback {
-      margin: 0.7rem 0 0;
-      font-size: 0.92rem;
-    }
-
     .review-process-summary h3 {
       margin-bottom: 0.7rem;
     }
@@ -301,6 +455,11 @@ const denyTrustRecord = `{
 
     .review-process-summary li {
       margin-bottom: 0.55rem;
+      color: var(--text-secondary);
+    }
+
+    .review-process-summary p {
+      margin-top: 0.85rem;
       color: var(--text-secondary);
     }
 

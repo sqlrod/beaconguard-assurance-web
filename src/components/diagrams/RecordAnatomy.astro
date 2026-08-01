@@ -6,12 +6,25 @@ const groups = [
     title: "Decision outcome and reason",
     fields: [
       "Decision outcome (ALLOW or DENY)",
+      "Authorization point (request admission or result-to-action)",
       "Reason code / decision reason (illustrative)",
     ],
   },
   {
-    title: "Request and correlation identity",
-    fields: ["Request action / correlation identity", "Request identifiers"],
+    title: "Governed transaction correlation",
+    fields: [
+      "Related request and action decision identifiers",
+      "Request–result–action correlation context",
+      "Provider interaction reference (when applicable)",
+    ],
+  },
+  {
+    title: "Declared action and enterprise effect",
+    fields: [
+      "Intended enterprise action (declared)",
+      "AI-generated result status (untrusted proposal)",
+      "Enterprise-effect outcome (authorized or prevented)",
+    ],
   },
   {
     title: "Actor, tenant, environment, and workflow",
@@ -30,7 +43,7 @@ const groups = [
     fields: [
       "Authenticity / trust check results",
       "Freshness result",
-      "Replay resistance result",
+      "Replay resistance result (where configured)",
     ],
   },
   {
@@ -38,6 +51,7 @@ const groups = [
     fields: [
       "Evidence / record identity",
       "Integrity-verification information",
+      "Related source-evidence references",
     ],
   },
   {
@@ -52,12 +66,13 @@ const groups = [
 
 <DiagramShell
   title="Verifiable Decision Record anatomy"
-  caption="Illustrative field groups for reviewer orientation. Not a normative public schema."
+  caption="Illustrative field groups for related request-admission and result-to-action decisions. Not a normative public schema."
   className="bg-diagram--record-anatomy"
 >
   <p class="bg-diagram-banner">
     Illustrative sample — field names and grouping are for reviewer orientation
-    only, not a published public schema.
+    only, not a published public schema. Related request and action decisions
+    share correlation context; each retains its own immutable outcome.
   </p>
   <div class="bg-anatomy-grid" role="list">
     {
@@ -76,12 +91,13 @@ const groups = [
 
   <div slot="text">
     <p>
-      Annotated groups: decision outcome and reason; request and correlation
-      identity; actor, tenant, environment, and workflow context; active release
-      and playbook identity; trust, freshness, and replay results; evidence
-      identity and integrity-verification information; optional review
-      obligation that does not change permission. Labelled illustrative — not a
-      normative public schema.
+      Annotated groups: decision outcome and authorization point; governed
+      transaction correlation across related request and action decisions;
+      declared action and enterprise-effect outcome; actor, tenant, environment,
+      and workflow context; active release and playbook identity; trust,
+      freshness, and replay results; evidence identity and integrity; optional
+      review obligation that does not change permission. Labelled illustrative —
+      not a normative public schema.
     </p>
   </div>
 </DiagramShell>

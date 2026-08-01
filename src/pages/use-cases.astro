@@ -3,64 +3,117 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Use Cases | BeaconGuard Regulated AI Operations"
-  description="BeaconGuard workflow patterns for healthcare privacy review, financial services review, and regulated internal automation with ALLOW/DENY enforcement."
+  title="Use Cases | BeaconGuard Regulated AI Transactions"
+  description="BeaconGuard complete governed AI transaction scenarios for healthcare, financial services, and regulated internal automation with dual authorization and Verify."
 >
-  <section>
+  <section class="stack-section">
     <h1>Use Cases</h1>
-    <p>
-      BeaconGuard deploys alongside existing applications for regulated enterprise workflows where probabilistic model behavior cannot serve as the authorization boundary.
-      It evaluates trusted request context against an Active Verified Release and returns ALLOW or DENY before governed execution.
+    <p class="lead">
+      BeaconGuard supports complete governed AI transactions: Request Admission
+      Authorization before provider invocation, Result-to-Action Authorization
+      for the declared intended enterprise action, and read-only Verify for
+      decision evidence. An AI-generated result remains an untrusted proposal.
+      Provider success is not enterprise authorization.
     </p>
   </section>
 
-  <section>
-    <h2>Priority workflow patterns</h2>
+  <section class="stack-section">
+    <h2>Complete transaction pattern</h2>
+    <p>
+      Each use case follows the same transaction shape. What changes is the
+      source application, required context, declared action, and systems of
+      record—not the dual-authorization model.
+    </p>
+    <ol>
+      <li>Enterprise application prepares a governed outbound request</li>
+      <li>Request Admission Authorization returns ALLOW or DENY</li>
+      <li>On ALLOW, the AI provider returns an AI-generated result</li>
+      <li>Enterprise application declares the intended enterprise action</li>
+      <li>Result-to-Action Authorization returns ALLOW or DENY</li>
+      <li>On ALLOW, the enterprise application executes the authorized action</li>
+      <li>Enterprise system of record remains authoritative for business state</li>
+      <li>Verify supports investigation without granting runtime authority</li>
+    </ol>
+  </section>
+
+  <section class="stack-section">
+    <h2>Priority transaction scenarios</h2>
     <div class="section-grid">
       <div class="content-card">
-        <h3>Healthcare privacy and operational AI review</h3>
-        <p>Deterministic context tags, user role, source-system trust, and approved pathway requirements can be playbook-gated before AI-assisted work is allowed to proceed. Absent approval yields DENY with Execution Prevented.</p>
+        <h3>Healthcare operational AI</h3>
+        <p>
+          PHI-sensitive summarization, privacy-gated assist, and operational
+          follow-up pathways where provider invocation and declared clinical or
+          operational actions must be separately authorized. BeaconGuard does
+          not certify clinical correctness.
+        </p>
+        <p><a href="/healthcare">Healthcare scenarios →</a></p>
       </div>
       <div class="content-card">
         <h3>Financial crime, fraud, and dispute review</h3>
-        <p>AML, KYC, fraud, dispute, and account exception workflows can require approval before customer-impacting recommendations proceed. Missing approval is DENY, not permission via review.</p>
+        <p>
+          AML, KYC, fraud, dispute, and account-exception workflows where
+          customer-impacting recommendations remain untrusted proposals until
+          the declared enterprise action is authorized.
+        </p>
+        <p><a href="/fintech">Financial scenarios →</a></p>
       </div>
       <div class="content-card">
         <h3>Regulated internal automation</h3>
-        <p>Internal tools and agents touching regulated systems can be denied before action when controls or trust conditions fail. Verifiable Decision Records support governance follow-up without changing the DENY result.</p>
+        <p>
+          Internal tools and agents that propose changes against production
+          systems. DENY at request admission or at declared action prevents
+          unauthorized enterprise effect; Verifiable Decision Records support
+          governance follow-up.
+        </p>
+        <p><a href="/canonical-workflow">Workflow examples →</a></p>
       </div>
     </div>
   </section>
 
-  <section>
+  <section class="stack-section">
     <h2>Operational patterns</h2>
     <ul>
-      <li>Playbook-gated requests before governed execution</li>
-      <li>Deterministic ALLOW or DENY at the Runtime Control Boundary</li>
-      <li>DENY when approval is absent (illustrative reason style: <code>APPROVAL_REQUIRED</code>)</li>
-      <li>Verifiable Decision Records for Evidence, Replay, and Verification</li>
-      <li>Fail-closed handling when required release, trust, or freshness conditions are not met</li>
+      <li>Request Admission Authorization before provider invocation</li>
+      <li>
+        Result-to-Action Authorization for the declared intended enterprise
+        action
+      </li>
+      <li>Binary ALLOW or DENY at each authorization point</li>
+      <li>
+        Related Verifiable Decision Records for evidence, reconstruction, and
+        investigation replay
+      </li>
+      <li>
+        Fail-closed handling when required release, trust, or freshness
+        conditions are not met
+      </li>
+      <li>Non-AI fallback owned by the enterprise application</li>
     </ul>
   </section>
 
-  <section>
+  <section class="stack-section">
     <h2>Regulated workflow focus</h2>
     <p>
-      BeaconGuard is focused on regulated enterprise workflows where authorization, evidence, and control ownership remain explicit.
-      It is not a generic AI governance consulting service, chatbot, model host, or GRC repository.
+      BeaconGuard is focused on regulated enterprise workflows where
+      authorization, evidence, and control ownership remain explicit. It is not
+      a generic AI governance consulting service, chatbot, model host, or GRC
+      repository.
     </p>
   </section>
 
-  <section>
-    <h2>Explore by outcome</h2>
+  <section class="stack-section">
+    <h2>Explore by scenario</h2>
     <ul>
-      <li><a href="/platform">Understand platform coverage</a></li>
-      <li><a href="/trust-assurance">Review assurance model</a></li>
-      <li><a href="/deployment">Compare deployment posture</a></li>
-      <li><a href="/canonical-workflow">Review workflow examples</a></li>
+      <li><a href="/healthcare">Healthcare transaction scenarios</a></li>
+      <li><a href="/fintech">Financial transaction scenarios</a></li>
+      <li><a href="/canonical-workflow">Complete workflow examples</a></li>
+      <li><a href="/platform">Platform coverage</a></li>
+      <li><a href="/verification">Verification surface</a></li>
+      <li><a href="/trust-assurance">Trust Center</a></li>
     </ul>
     <div class="page-actions">
-      <a class="btn-primary" href="/design-partner-program">Request Controlled Architecture Evaluation</a>
+      <a class="btn-primary" href="/design-partner-program">Request Controlled Evaluation</a>
       <a class="btn-secondary" href="/contact">Start a platform discussion</a>
     </div>
   </section>

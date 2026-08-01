@@ -1,30 +1,73 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TrustResponsibilityMap from "../components/diagrams/TrustResponsibilityMap.astro";
+import QualificationNotice from "../components/QualificationNotice.astro";
 ---
 
 <BaseLayout
   title="Trust Center | BeaconGuard Assurance"
-  description="Review BeaconGuard’s identity, runtime isolation, release assurance, evidence integrity, and shared deployment responsibility model."
+  description="Review BeaconGuard Result-to-Action Authorization controls for declared enterprise actions, Verify read-only access, evidence provenance, reconstruction and export integrity, and shared deployment responsibility."
 >
   <section class="stack-section">
     <h1>Trust Center</h1>
     <p class="lead">
-      This Trust Center summarizes how BeaconGuard approaches product security, evidence, and shared deployment responsibility. It does not provide legal compliance guarantees and does not replace customer compliance, privacy, security, clinical, AML, fraud, SIEM, IAM, or GRC programs.
+      This Trust Center summarizes how BeaconGuard approaches product security,
+      dual authorization, Verify investigation, evidence integrity, and shared
+      deployment responsibility. It does not provide legal compliance guarantees
+      and does not replace customer compliance, privacy, security, clinical,
+      AML, fraud, SIEM, IAM, or GRC programs.
     </p>
   </section>
+
+  <QualificationNotice variant="full" />
 
   <section class="stack-section">
     <h2>Product security architecture</h2>
     <p>
-      BeaconGuard separates the management plane from the runtime data plane. Compliance Playbooks become Signed Immutable Release Artifacts. Only an Active Verified Release governs the Runtime Control Boundary, which returns ALLOW or DENY before governed execution.
+      BeaconGuard separates Govern, Authorize, and Verify as functional domains.
+      Compliance Playbooks become signed immutable release artifacts. Only an
+      Active Verified Release governs Request Admission Authorization and
+      Result-to-Action Authorization. Runtime outcomes are ALLOW or DENY only.
+      Provider success is not enterprise authorization.
     </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Result-to-Action Authorization controls</h2>
+    <p>
+      After an AI-generated result returns, the enterprise application declares
+      the intended enterprise action. BeaconGuard authorizes or denies that
+      declared action under the Active Verified Release. The AI-generated result
+      remains an untrusted proposal. This is not semantic scoring of model
+      response content.
+    </p>
+    <ul>
+      <li>Independent authorization of the declared intended action</li>
+      <li>Does not resume the original provider response as authority</li>
+      <li>DENY prevents enterprise effect for the declared action</li>
+      <li>ALLOW authorizes execution by the enterprise application only</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Verification access boundary</h2>
+    <p>
+      BeaconGuard Verify is read-only. It cannot modify evidence, change a
+      historical decision, activate a release, alter a Compliance Playbook,
+      grant runtime authority, or authorize an enterprise action.
+    </p>
+    <ul>
+      <li>Verification does not participate in ALLOW or DENY</li>
+      <li>Browser-side claims are untrusted for integrity conclusions</li>
+      <li>Export signing and reconstruction remain server-side responsibilities</li>
+    </ul>
   </section>
 
   <section class="stack-section">
     <h2>Identity and privileged access</h2>
     <p>
-      BeaconGuard integrates with enterprise identity systems while the customer identity provider remains the workforce identity authority.
+      BeaconGuard integrates with enterprise identity systems while the customer
+      identity provider remains the workforce identity authority.
     </p>
     <ul>
       <li>Federated workforce identity</li>
@@ -44,26 +87,81 @@ import TrustResponsibilityMap from "../components/diagrams/TrustResponsibilityMa
       <li>Request authenticity</li>
       <li>Tenant binding</li>
       <li>Environment binding</li>
-      <li>Distributed replay resistance</li>
-      <li>Single-use authorization</li>
+      <li>
+        Replay resistance for governed requests where shared operation is
+        configured
+      </li>
+      <li>Single-use authorization for review grants where applicable</li>
       <li>Fail-closed handling when required dependencies cannot be verified</li>
+    </ul>
+    <p>
+      Replay resistance and isolation characteristics are deployment- and
+      configuration-dependent. This site does not claim absolute multi-region
+      replay guarantees.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Evidence provenance and integrity</h2>
+    <p>
+      Authorization decisions produce Verifiable Decision Records containing
+      decision context, release identity, control result, and outcome. Related
+      request and action decisions support investigation through correlation
+      identifiers. Evidence supports governance and audit review; legal
+      evidentiary status and regulatory admissibility are not claimed.
+    </p>
+    <ul>
+      <li>
+        Evidence recorded before forward where enforcement requires it
+      </li>
+      <li>Decision and release identity</li>
+      <li>Integrity checks on evidence and export artifacts</li>
+      <li>
+        Signed release artifacts (distinct from export signing and evidence-chain
+        checks)
+      </li>
+      <li>Restart continuity where the configured evidence provider supports it</li>
+      <li>Deployment-dependent retention and durability</li>
     </ul>
   </section>
 
   <section class="stack-section">
-    <h2>Evidence integrity</h2>
+    <h2>Reconstruction integrity</h2>
     <p>
-      Every deterministic result produces a Verifiable Decision Record containing decision context, release identity, control result, and outcome. Evidence is designed for replay and verification and supports audit and governance review.
+      Deterministic reconstruction derives the logical decision path from
+      canonical evidence. Missing or unavailable fields are reported as such.
+      Reconstruction does not invent model reasoning or fabricate missing
+      artifacts. Capability status reflects lab and prevalidation qualification.
     </p>
-    <ul>
-      <li>Evidence-before-forward ordering</li>
-      <li>Decision and release identity</li>
-      <li>Integrity verification</li>
-      <li>Tamper detection</li>
-      <li>Restart continuity</li>
-      <li>Replay and reconstruction</li>
-      <li>Deployment-dependent retention and durability</li>
-    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Export integrity</h2>
+    <p>
+      Verifiable export packages investigation material for review. Export
+      signing and verification are server-side responsibilities. Keys are not
+      browser-held. Export supports investigation and audit review; court
+      admissibility is not claimed.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Investigation replay</h2>
+    <p>
+      Replay verification of recorded decisions supports investigation. It is
+      distinct from admission-path replay resistance and is not cryptographic
+      replay of model inference. Status reflects lab and prevalidation
+      qualification.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>AI-insight non-authority</h2>
+    <p>
+      AI-assisted insights are a separate non-authoritative side capability.
+      They must not appear inside the trusted reconstruction or runtime
+      authorization path and must not be treated as evidence authority.
+    </p>
   </section>
 
   <section class="stack-section">
@@ -74,7 +172,10 @@ import TrustResponsibilityMap from "../components/diagrams/TrustResponsibilityMa
       <li>Release verification</li>
       <li>Explicit activation</li>
       <li>Active Verified Release enforcement</li>
-      <li>Prevention of unverified or mixed release material entering the governed runtime path</li>
+      <li>
+        Prevention of unverified or mixed release material entering the governed
+        runtime path
+      </li>
     </ul>
   </section>
 
@@ -90,14 +191,30 @@ import TrustResponsibilityMap from "../components/diagrams/TrustResponsibilityMa
       <li>Controlled Windows and Linux deployment paths</li>
     </ul>
     <p>
-      These paths are evaluated under controlled internal qualification. Public package downloads and general installer distribution are not implied.
+      These paths are evaluated under controlled internal qualification. Public
+      package downloads and general installer distribution are not implied.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Deployment responsibilities</h2>
+    <h2>Responsibility separation</h2>
     <p>
-      Customers remain responsible for identity providers, network controls, secrets, host hardening, evidence-provider configuration, and operational monitoring. BeaconGuard provides the control and evidence boundary; deployment responsibilities are shared.
+      The AI provider produces the model result. The enterprise application
+      declares the intended action and executes only authorized actions.
+      BeaconGuard authorizes or denies under the Active Verified Release. The
+      enterprise system of record remains authoritative for business state.
+      Customer governance retains clinical, legal, operational, compliance, and
+      business judgment.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Customer-controlled deployment responsibilities</h2>
+    <p>
+      Customers remain responsible for identity providers, network controls,
+      secrets, host hardening, evidence-provider configuration, and operational
+      monitoring. BeaconGuard provides the authorization and verification
+      boundary; deployment responsibilities are shared.
     </p>
     <TrustResponsibilityMap />
   </section>
@@ -107,12 +224,16 @@ import TrustResponsibilityMap from "../components/diagrams/TrustResponsibilityMa
     <ul>
       <li><a href="/docs/architecture">System Architecture</a> — available</li>
       <li><a href="/how-it-works">How It Works</a> — available</li>
+      <li><a href="/verification">Verification</a> — available</li>
       <li><a href="/proof-evidence">Proof and Evidence samples</a> — sample</li>
       <li><a href="/sample-decision-record">Sample Decision Record</a> — sample</li>
       <li><a href="/control-responsibility-matrix">Control Responsibility Matrix</a> — available</li>
       <li><a href="/docs/threat-model">Threat Model</a> — available</li>
       <li><a href="/reviewer-kit">Reviewer Kit</a> — available</li>
-      <li>Customer-specific architecture-fit materials — controlled-access via Controlled Evaluation</li>
+      <li>
+        Customer-specific architecture-fit materials — controlled-access via
+        Controlled Evaluation
+      </li>
     </ul>
   </section>
 
@@ -127,17 +248,33 @@ import TrustResponsibilityMap from "../components/diagrams/TrustResponsibilityMa
   <section class="stack-section">
     <h2>Compliance and certification status</h2>
     <p>
-      BeaconGuard publishes technical architecture and controlled review materials for due diligence. This site does not claim SOC 2, ISO 27001, HITRUST, HIPAA certification, FedRAMP authorization, or similar attestation status. Ask during Controlled Evaluation for the current status of any formal assessment work.
+      BeaconGuard publishes technical architecture and controlled review
+      materials for due diligence. This site does not claim SOC 2, ISO 27001,
+      HITRUST, HIPAA certification, FedRAMP authorization, or similar
+      attestation status. Ask during Controlled Evaluation for the current
+      status of any formal assessment work.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Evidence and legal boundaries</h2>
     <ul>
-      <li>Evidence supports governance and audit review; legal evidentiary status and regulatory admissibility are not claimed.</li>
-      <li>Append-only or durable retention applies only where the configured evidence provider and operational controls provide those guarantees.</li>
-      <li>BeaconGuard does not replace customer systems of record or compliance programs.</li>
-      <li>BeaconGuard enforcement results are deterministic ALLOW or DENY outcomes, not probabilistic authorization.</li>
+      <li>
+        Evidence supports governance and audit review; legal evidentiary status
+        and regulatory admissibility are not claimed.
+      </li>
+      <li>
+        Append-only or durable retention applies only where the configured
+        evidence provider and operational controls provide those guarantees.
+      </li>
+      <li>
+        BeaconGuard does not replace customer systems of record or compliance
+        programs.
+      </li>
+      <li>
+        BeaconGuard enforcement results are deterministic ALLOW or DENY
+        outcomes, not probabilistic authorization.
+      </li>
     </ul>
     <div class="page-actions">
       <a class="btn-primary" href="/platform">Review platform assumptions</a>

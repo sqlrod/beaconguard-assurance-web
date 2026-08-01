@@ -1,31 +1,83 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import DeploymentTopology from "../components/diagrams/DeploymentTopology.astro";
+import QualificationNotice from "../components/QualificationNotice.astro";
 ---
 
 <BaseLayout
   title="Deployment | BeaconGuard Controlled Deployment Qualification"
-  description="Review BeaconGuard’s controlled deployment qualification model for regulated enterprise environments, including identity, recovery, evidence, and cross-platform operating paths."
+  description="BeaconGuard controlled deployment qualification for regulated environments: three integration contracts, bypass prevention, Windows and Linux paths, and Linux OCI-oriented packaging under internal qualification."
 >
   <section class="stack-section">
     <p class="section-label">DEPLOYMENT POSTURE</p>
     <h1>Controlled deployment qualification for regulated environments</h1>
     <p class="lead">
-      BeaconGuard deploys alongside existing enterprise applications and places a deterministic Runtime Control Boundary before governed AI, APIs, or automated systems execute. The platform is currently in controlled internal qualification across installation, operation, recovery, rollback, and cross-platform packaging.
+      BeaconGuard deploys alongside existing enterprise applications and
+      authorizes governed AI transactions: Request Admission before provider
+      invocation, and Result-to-Action Authorization for declared enterprise
+      actions. The platform is currently in controlled internal qualification
+      across installation, operation, recovery, rollback, and cross-platform
+      packaging.
     </p>
   </section>
+
+  <QualificationNotice variant="full" />
 
   <section class="stack-section">
     <h2>Deployment without system replacement</h2>
     <p>
-      BeaconGuard deploys alongside existing applications. Existing systems continue to own workflow logic, systems of record, identity, case management, logging, and compliance processes. BeaconGuard places a Runtime Control Boundary before governed AI, APIs, or automated systems execute, returns ALLOW or DENY, and emits Verifiable Decision Records.
+      BeaconGuard deploys alongside existing applications. Existing systems
+      continue to own workflow logic, systems of record, identity, case
+      management, logging, and compliance processes. BeaconGuard authorizes
+      whether an application may invoke an AI provider and whether a declared
+      enterprise action may proceed, returns ALLOW or DENY, and emits Verifiable
+      Decision Records. BeaconGuard authorizes; the enterprise application
+      executes. Provider success is not enterprise authorization.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Three integration contracts</h2>
+    <div class="section-grid section-grid--scenarios">
+      <div class="content-card">
+        <h3>1. Request and identity</h3>
+        <p>
+          Trusted request context and identity/tenant attributes for Request
+          Admission Authorization. Missing required inputs fail closed as DENY.
+        </p>
+      </div>
+      <div class="content-card">
+        <h3>2. Provider-result and correlation</h3>
+        <p>
+          Bind AI-generated results to governed transaction context. Provider
+          success is not BeaconGuard authorization.
+        </p>
+      </div>
+      <div class="content-card">
+        <h3>3. Intended enterprise action</h3>
+        <p>
+          Declare the intended action for Result-to-Action Authorization. Only
+          ALLOW permits enterprise application execution into the system of
+          record.
+        </p>
+      </div>
+    </div>
+    <p>
+      Applications must not invoke the provider without required request
+      authorization, apply a provider result without required action
+      authorization, reuse prior authority, treat provider success as BeaconGuard
+      authorization, feed reports or AI insights into the runtime permission path,
+      or bypass BeaconGuard on the return path.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Qualified operational paths</h2>
     <p>
-      The following operational paths are evaluated under controlled internal qualification. Public package downloads and general installer distribution are not implied.
+      The following operational paths are evaluated under controlled internal
+      qualification. Public package downloads and general installer distribution
+      are not implied. Customer production deployment is not authorized as a
+      universal product claim.
     </p>
     <div class="section-grid section-grid--scenarios">
       <div class="content-card">
@@ -34,7 +86,10 @@ import DeploymentTopology from "../components/diagrams/DeploymentTopology.astro"
       </div>
       <div class="content-card">
         <h3>Runtime operation</h3>
-        <p>Deterministic evaluation, ALLOW or DENY enforcement, and Verifiable Decision Record emission during governed requests.</p>
+        <p>
+          Deterministic Request Admission and Result-to-Action evaluation, ALLOW
+          or DENY enforcement, and Verifiable Decision Record emission.
+        </p>
       </div>
       <div class="content-card">
         <h3>Backup, restore, and rollback</h3>
@@ -46,11 +101,16 @@ import DeploymentTopology from "../components/diagrams/DeploymentTopology.astro"
       </div>
       <div class="content-card">
         <h3>Restart continuity</h3>
-        <p>Restart and continuity behavior for the control and evidence boundary under fail-closed assumptions.</p>
+        <p>Restart and continuity behavior for authorization and evidence under fail-closed assumptions.</p>
       </div>
       <div class="content-card">
         <h3>Windows and Linux paths</h3>
-        <p>Windows and Linux packaging paths evaluated in controlled environments, including container and OCI-oriented deployment compatibility where supported by the deployment documentation.</p>
+        <p>
+          Windows and Linux controlled deployment paths evaluated in controlled
+          environments, including Linux OCI-oriented packaging paths where
+          supported by deployment documentation. Native Windows OCI is not claimed
+          as a proven packaging path.
+        </p>
       </div>
     </div>
   </section>
@@ -60,7 +120,11 @@ import DeploymentTopology from "../components/diagrams/DeploymentTopology.astro"
     <div class="section-grid section-grid--scenarios">
       <div class="content-card">
         <h3>1. Architecture and workflow review</h3>
-        <p>Confirm boundary placement, request context, Compliance Playbook scope, identity dependencies, evidence requirements, and operating responsibilities.</p>
+        <p>
+          Confirm dual authorization placement, three integration contracts,
+          Compliance Playbook scope, identity dependencies, evidence
+          requirements, Verify access, and operating responsibilities.
+        </p>
       </div>
       <div class="content-card">
         <h3>2. Target-environment qualification</h3>
@@ -76,7 +140,14 @@ import DeploymentTopology from "../components/diagrams/DeploymentTopology.astro"
   <section class="stack-section">
     <h2>Placement and intent</h2>
     <p>
-      BeaconGuard belongs on the runtime path between existing application services and the governed AI, API, or automated system. An optional System Connector can map source protocols into the required request format. The connector does not evaluate controls or activate releases. Evidence persists before ALLOW proceeds; DENY hard-stops with no downstream execution. The Control Plane operates outside the per-request path.
+      BeaconGuard belongs on the runtime path between existing application
+      services and the AI provider, and on the return / declared-action path
+      before enterprise effect. An optional System Connector can map source
+      protocols into the required request format. The connector does not evaluate
+      controls or activate releases. Evidence persists according to enforcement
+      configuration; DENY hard-stops with no provider invocation or no enterprise
+      effect as applicable. The Control Plane operates outside the per-request
+      path.
     </p>
     <DeploymentTopology />
   </section>
@@ -84,11 +155,17 @@ import DeploymentTopology from "../components/diagrams/DeploymentTopology.astro"
   <section class="stack-section">
     <h2>Trust boundaries and responsibilities</h2>
     <p>
-      Only an Active Verified Release governs evaluation at the Runtime Control Boundary. Applications must enforce ALLOW and DENY outcomes and must not silently bypass the boundary. When required release material, signed metadata, trust signals, approved-pathway status, approvals, freshness, or replay inputs are missing or invalid, decisions fail closed as DENY. Human review via a Verifiable Decision Record obligation does not permit execution.
+      Only an Active Verified Release governs evaluation. Applications must
+      enforce ALLOW and DENY outcomes and must not silently bypass BeaconGuard.
+      When required release material, signed metadata, trust signals,
+      approved-pathway status, approvals, freshness, or replay inputs are missing
+      or invalid, decisions fail closed as DENY. Human review via a Verifiable
+      Decision Record obligation does not permit execution. BeaconGuard Verify is
+      read-only and cannot grant runtime authority.
     </p>
     <ul>
       <li>Customer IAM and identity authority</li>
-      <li>Network path controls</li>
+      <li>Network path controls (outbound and return)</li>
       <li>Host hardening</li>
       <li>Secret custody</li>
       <li>Release-signing custody</li>
@@ -101,12 +178,15 @@ import DeploymentTopology from "../components/diagrams/DeploymentTopology.astro"
   <section class="stack-section">
     <h2>Availability</h2>
     <p>
-      BeaconGuard is currently in controlled internal qualification. Deployment scope, environment assumptions, and evaluation access are reviewed through Controlled Evaluation.
+      BeaconGuard is currently in controlled internal qualification. Deployment
+      scope, environment assumptions, and evaluation access are reviewed through
+      Controlled Evaluation.
     </p>
     <ul>
       <li><a href="/docs/deployment-integration">Deployment and integration</a></li>
       <li><a href="/docs/compliance-audit">Compliance and audit</a></li>
-      <li><a href="/how-it-works">How BeaconGuard enforces decisions</a></li>
+      <li><a href="/verification">Verification</a></li>
+      <li><a href="/how-it-works">How BeaconGuard authorizes decisions</a></li>
     </ul>
     <div class="page-actions">
       <a class="btn-primary" href="/design-partner-program">Request Controlled Evaluation</a>
