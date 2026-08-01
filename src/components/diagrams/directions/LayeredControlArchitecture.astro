@@ -14,17 +14,17 @@ const { idPrefix = "dir-b" } = Astro.props;
 
 <figure class="dir-b" data-diagram-direction="B" aria-labelledby={`${idPrefix}-title`}>
   <h3 id={`${idPrefix}-title`} class="dir-title">
-    Direction B · Layered Control Architecture
+    View B · Layered Control Architecture
   </h3>
   <p class="dir-subtitle">
-    Restrained layered functional domains. Authorize is foregrounded. No
-    physical-host or network-isolation claim.
+    Specialized platform functional-domain view. Authorize is foregrounded.
+    Functional domains only — no physical-host or network-isolation claim.
   </p>
 
   <div class="dir-b-stack" aria-hidden="true">
     <section class="dir-b-layer dir-b-layer--govern">
       <p class="dir-role">GOVERN · Management and release lifecycle</p>
-      <h4 class="dir-b-heading"><DiagramIcon name="identity" /> Govern</h4>
+      <h4 class="dir-b-heading"><DiagramIcon name="release" /> Govern</h4>
       <ul class="dir-b-list">
         <li>Compliance Playbooks</li>
         <li>Validation and approval</li>
@@ -35,7 +35,7 @@ const { idPrefix = "dir-b" } = Astro.props;
     </section>
 
     <section class="dir-b-layer dir-b-layer--authorize">
-      <p class="dir-boundary">RUNTIME AUTHORIZATION DOMAIN</p>
+      <p class="dir-boundary">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</p>
       <p class="dir-role">AUTHORIZE · Runtime prevention</p>
       <h4 class="dir-b-heading"><DiagramIcon name="shield" /> Authorize</h4>
       <ul class="dir-b-list">
@@ -49,7 +49,7 @@ const { idPrefix = "dir-b" } = Astro.props;
     </section>
 
     <section class="dir-b-layer dir-b-layer--verify">
-      <p class="dir-boundary dir-boundary--verify">READ-ONLY VERIFICATION DOMAIN</p>
+      <p class="dir-boundary dir-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
       <p class="dir-role">VERIFY · Investigation without runtime authority</p>
       <h4 class="dir-b-heading"><DiagramIcon name="verify" /> Verify</h4>
       <ul class="dir-b-list">

@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Staging branch | `staging/website-visual-redesign-20260801` |
-| Current / latest pass | **01B — enterprise diagram visual-direction gate** |
+| Current / latest pass | **01B — unified enterprise diagram system validation** |
 | Latest pass pointer | [review-artifacts/LATEST_PASS.txt](review-artifacts/LATEST_PASS.txt) |
 | Source website HEAD (baseline) | `1b80a59261b99d3e0bf5cf1900fd8e4e8b17d810` |
-| Preview port (Pass 01B) | `4332` |
+| Preview port (Pass 01B unified) | `4333` |
 | Production deployment | Not authorized |
 | Merge to main | Not authorized |
 
@@ -19,20 +19,21 @@
 | 00 | Pre-redesign visual baseline | `da49187` | [pass-00-baseline](review-artifacts/pass-00-baseline/README.md) |
 | 01 | Transaction cycle and visual foundation | `0532fae` | [pass-01-foundation](review-artifacts/pass-01-foundation/README.md) |
 | 01A | Commercial hierarchy and diagram system | `7c661ed94e17555c3f1d319a3ee9e54c567dab83` | [pass-01a-commercial-hierarchy](review-artifacts/pass-01a-commercial-hierarchy/README.md) |
-| 01B | Enterprise diagram visual-direction gate | `a0af658ebc388226a793109afabc365ce1475ef1` | [pass-01b-diagram-direction](review-artifacts/pass-01b-diagram-direction/README.md) |
+| 01B (direction gate) | Enterprise diagram visual-direction gate | `a0af658ebc388226a793109afabc365ce1475ef1` | [pass-01b-diagram-direction](review-artifacts/pass-01b-diagram-direction/README.md) |
+| 01B | Unified enterprise diagram system validation | *(pending commit)* | [pass-01b-unified-diagram-system](review-artifacts/pass-01b-unified-diagram-system/README.md) |
 
-## Pass 01B — Enterprise Diagram Visual-Direction Gate
+## Pass 01B — Unified Enterprise Diagram System Validation
 
-Latest review pass. Three materially different diagram directions are staged for comparison at `/staging-diagram-direction`. **No direction is approved yet.**
+Latest review pass. Views A, B, and C are specialized architectural views in one visual language — not competing universal winners. Staging review route: `/staging-diagram-system`. **No site-wide diagram deployment.**
 
 Primary artifacts:
 
-- [Pass 01B README](review-artifacts/pass-01b-diagram-direction/README.md)
-- [Direction A crop](review-artifacts/pass-01b-diagram-direction/crops/direction-a-1440.png)
-- [Direction B crop](review-artifacts/pass-01b-diagram-direction/crops/direction-b-1440.png)
-- [Direction C crop](review-artifacts/pass-01b-diagram-direction/crops/direction-c-1440.png)
-- [Home interim](review-artifacts/pass-01b-diagram-direction/crops/home-interim-1440.png)
-- [Verification interim](review-artifacts/pass-01b-diagram-direction/crops/verification-interim-1440.png)
+- [Pass 01B README](review-artifacts/pass-01b-unified-diagram-system/README.md)
+- [View A crop](review-artifacts/pass-01b-unified-diagram-system/crops/direction-a-1440.png)
+- [View B crop](review-artifacts/pass-01b-unified-diagram-system/crops/direction-b-1440.png)
+- [View C crop](review-artifacts/pass-01b-unified-diagram-system/crops/direction-c-1440.png)
+- [Home interim](review-artifacts/pass-01b-unified-diagram-system/crops/home-interim-1440.png)
+- [Verification interim](review-artifacts/pass-01b-unified-diagram-system/crops/verification-interim-1440.png)
 
 ## Pass 01A screenshot index
 

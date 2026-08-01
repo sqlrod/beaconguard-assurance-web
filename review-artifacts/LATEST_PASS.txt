@@ -1,1 +1,1 @@
-review-artifacts/pass-01b-diagram-direction
+review-artifacts/pass-01b-unified-diagram-system

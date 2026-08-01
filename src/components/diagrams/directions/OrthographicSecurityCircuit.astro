@@ -21,27 +21,28 @@ const mid = `${idPrefix}-m`;
   aria-labelledby={`${idPrefix}-title`}
 >
   <h3 id={`${idPrefix}-title`} class="dir-title">
-    Direction A · Orthographic Security Circuit
+    View A · Orthographic Security Circuit
   </h3>
   <p class="dir-subtitle">
-    Security-infrastructure style closed transaction with visible ports, DENY
-    terminals, and a separate evidence rail.
+    Specialized transaction-authorization view. Closed orthographic circuit with
+    visible ports, DENY terminals, and a separate evidence rail — not a universal
+    website diagram.
   </p>
 
   <div class="dir-a-canvas">
     <svg class="dir-a-svg" viewBox="0 0 1120 640" aria-hidden="true" focusable="false">
       <defs>
         <marker id={`${mid}-n`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
-          <path d="M0,0 L8,4 L0,8 Z" fill="var(--diagram-neutral)"></path>
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--connector-neutral)"></path>
         </marker>
         <marker id={`${mid}-a`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
-          <path d="M0,0 L8,4 L0,8 Z" fill="var(--decision-allow)"></path>
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--connector-allow)"></path>
         </marker>
         <marker id={`${mid}-d`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
-          <path d="M0,0 L8,4 L0,8 Z" fill="var(--decision-deny)"></path>
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--connector-deny)"></path>
         </marker>
         <marker id={`${mid}-e`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
-          <path d="M0,0 L8,4 L0,8 Z" fill="var(--decision-evidence)"></path>
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--connector-evidence)"></path>
         </marker>
       </defs>
 
@@ -98,7 +99,7 @@ const mid = `${idPrefix}-m`;
       </div>
 
       <div class="dir-node dir-node--gate" data-node="request">
-        <p class="dir-boundary">RUNTIME AUTHORIZATION</p>
+        <p class="dir-boundary">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</p>
         <span class="dir-role"><DiagramIcon name="shield" /> REQUEST ADMISSION</span>
         <strong>Authorization checkpoint</strong>
         <div class="dir-stop dir-stop--deny">
@@ -111,13 +112,13 @@ const mid = `${idPrefix}-m`;
       </div>
 
       <div class="dir-node dir-node--provider" data-node="provider">
-        <p class="dir-boundary dir-boundary--provider">UNTRUSTED EXTERNAL</p>
+        <p class="dir-boundary dir-boundary--provider">AI PROVIDER — UNTRUSTED EXTERNAL BOUNDARY</p>
         <span class="dir-role"><DiagramIcon name="provider" /> AI PROVIDER</span>
         <strong>Untrusted external service</strong>
       </div>
 
       <div class="dir-node dir-node--gate" data-node="action">
-        <p class="dir-boundary">RUNTIME AUTHORIZATION</p>
+        <p class="dir-boundary">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</p>
         <span class="dir-role"><DiagramIcon name="shield" /> RESULT-TO-ACTION</span>
         <strong>Authorization checkpoint</strong>
         <div class="dir-stop dir-stop--deny">
@@ -134,7 +135,7 @@ const mid = `${idPrefix}-m`;
       </div>
 
       <div class="dir-node dir-node--sor" data-node="sor">
-        <p class="dir-boundary">SYSTEM-OF-RECORD BOUNDARY</p>
+        <p class="dir-boundary">ENTERPRISE SYSTEM-OF-RECORD BOUNDARY</p>
         <span class="dir-role"><DiagramIcon name="database" /> ENTERPRISE SYSTEM OF RECORD</span>
         <strong>Authoritative business state</strong>
       </div>
@@ -145,7 +146,7 @@ const mid = `${idPrefix}-m`;
           <strong>Verifiable Decision Records</strong>
         </div>
         <div class="dir-node dir-node--verify">
-          <p class="dir-boundary dir-boundary--verify">READ-ONLY VERIFICATION</p>
+          <p class="dir-boundary dir-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
           <span class="dir-role"><DiagramIcon name="verify" /> BEACONGUARD VERIFY</span>
           <strong>Read-only</strong>
         </div>

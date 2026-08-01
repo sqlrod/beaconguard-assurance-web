@@ -3379,7 +3379,7 @@ body.docs-surface main#content {
 }
 
 /* =========================
-   PASS 01B — DIAGRAM VISUAL-DIRECTION GATE
+   PASS 01B — UNIFIED ENTERPRISE DIAGRAM SYSTEM
    ========================= */
 
 :root {
@@ -3391,6 +3391,13 @@ body.docs-surface main#content {
   --diagram-space-6: 48px;
   --diagram-space-8: 64px;
 
+  --diagram-border: rgba(148, 163, 184, 0.28);
+  --diagram-border-strong: rgba(148, 163, 184, 0.48);
+  --diagram-radius: 8px;
+  --diagram-icon-size: 24px;
+  --diagram-connector-width: 3.5px;
+  --diagram-connector-width-strong: 4px;
+
   --diagram-neutral: #93c5fd;
   --diagram-neutral-surface: rgba(30, 58, 138, 0.28);
   --diagram-boundary-enterprise: rgba(96, 165, 250, 0.75);
@@ -3401,6 +3408,11 @@ body.docs-surface main#content {
   --diagram-text-primary: #e8eef8;
   --diagram-text-secondary: #9fb0c8;
   --diagram-text-label: #7f93ad;
+
+  --connector-neutral: var(--diagram-neutral);
+  --connector-allow: var(--decision-allow);
+  --connector-deny: var(--decision-deny);
+  --connector-evidence: var(--decision-evidence);
 }
 
 /* Hero interim overflow correction */
@@ -3681,29 +3693,34 @@ body.docs-surface main#content {
 
 .dir-path {
   fill: none;
-  stroke-width: 3.5;
+  stroke-width: var(--diagram-connector-width);
   stroke-linecap: square;
   stroke-linejoin: miter;
 }
 
 .dir-path--neutral {
-  stroke: var(--diagram-neutral);
+  stroke: var(--connector-neutral);
 }
 
 .dir-path--allow {
-  stroke: var(--decision-allow);
-  stroke-width: 4;
+  stroke: var(--connector-allow);
+  stroke-width: var(--diagram-connector-width-strong);
 }
 
 .dir-path--deny {
-  stroke: var(--decision-deny);
-  stroke-width: 4;
+  stroke: var(--connector-deny);
+  stroke-width: var(--diagram-connector-width-strong);
 }
 
 .dir-path--evidence {
-  stroke: var(--decision-evidence);
+  stroke: var(--connector-evidence);
   stroke-dasharray: 6 4;
   stroke-width: 2.5;
+}
+
+.bg-dicon svg {
+  width: var(--diagram-icon-size);
+  height: var(--diagram-icon-size);
 }
 
 .dir-path-label {
@@ -4147,4 +4164,34 @@ body.docs-surface main#content {
   .hero-split--home .hero-line {
     white-space: nowrap;
   }
+}
+
+.sys-token-list {
+  margin: var(--diagram-space-2) 0 0;
+  padding-left: var(--diagram-space-3);
+  color: var(--diagram-text-secondary);
+}
+
+.sys-token-list code {
+  color: var(--diagram-text-primary);
+  font-size: 0.9em;
+}
+
+.sys-icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--diagram-space-2);
+  margin: 0 0 var(--diagram-space-3);
+}
+
+.sys-icon-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--diagram-border);
+  border-radius: var(--diagram-radius);
+  background: var(--diagram-surface);
+  color: var(--diagram-text-secondary);
+  font-size: 0.85rem;
 }
