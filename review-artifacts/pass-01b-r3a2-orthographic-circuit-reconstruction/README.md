@@ -9,7 +9,7 @@ IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW
 | Field | Value |
 | --- | --- |
 | Starting staging HEAD | `3626bd3ac2b2d9b6b8b14df92350f12a681ec4d7` |
-| Final implementation commit | *(recorded after commit)* |
+| Final implementation commit | `a3c83b56e50ffd4288ecbf198017655f1fb3ad27` |
 | Preview port | `4338` |
 | Build | Pass |
 | Geometry validator | Pass |
