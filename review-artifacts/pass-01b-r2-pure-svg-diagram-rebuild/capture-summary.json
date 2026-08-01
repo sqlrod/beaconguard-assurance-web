@@ -1,0 +1,23 @@
+{
+  "pass": "01b-r2-pure-svg-diagram-rebuild",
+  "preview_port": "4335",
+  "public_fullpage_count": 27,
+  "responsive_count": 5,
+  "crop_count": 10,
+  "compare_count": 10,
+  "sitemap_url_count": 27,
+  "sitemap_has_staging": false,
+  "home_overlap": [
+    {
+      "text": "Control before execution.",
+      "overlaps": false
+    },
+    {
+      "text": "Evidence after every decision.",
+      "overlaps": false
+    }
+  ],
+  "validation_errors": [],
+  "visual_acceptance": "IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW",
+  "captured_at": "2026-08-01T18:24:58.164Z"
+}

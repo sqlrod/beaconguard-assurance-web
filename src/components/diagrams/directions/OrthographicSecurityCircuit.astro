@@ -1,14 +1,11 @@
 ---
 /**
- * Orthographic Security Circuit — transaction authorization view.
- * Production-candidate reusable diagram (no staging review headings).
+ * Orthographic Security Circuit — pure SVG (desktop + compact).
+ * No HTML-over-SVG positioning.
  */
-import DiagramIcon from "../primitives/DiagramIcon.astro";
-
 interface Props {
   title?: string;
   ariaLabel?: string;
-  variant?: "detailed" | "compact";
   compact?: boolean;
   showEvidence?: boolean;
   idPrefix?: string;
@@ -17,267 +14,280 @@ interface Props {
 const {
   title = "Governed AI transaction circuit",
   ariaLabel,
-  variant = "detailed",
   compact = false,
   showEvidence = true,
   idPrefix = "osc",
 } = Astro.props;
 
-const isCompact = compact || variant === "compact";
 const mid = `${idPrefix}-m`;
 const labelledBy = `${idPrefix}-title`;
 ---
 
 <figure
-  class:list={["osc", isCompact && "osc--compact"]}
+  class:list={["psvg", "psvg-osc", compact && "psvg--compact"]}
   data-diagram-direction="A"
   aria-labelledby={labelledBy}
   aria-label={ariaLabel}
 >
-  <h3 id={labelledBy} class="osc-title">{title}</h3>
+  <h3 id={labelledBy} class="psvg-title">{title}</h3>
 
-  {/* Desktop / landscape circuit */}
-  <div class="osc-desktop" aria-hidden="true">
-    <svg class="osc-svg" viewBox="0 0 1200 680" focusable="false">
-      <defs>
-        <marker id={`${mid}-n`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
-          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-neutral)"></path>
-        </marker>
-        <marker id={`${mid}-a`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
-          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-allow)"></path>
-        </marker>
-        <marker id={`${mid}-d`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
-          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-deny)"></path>
-        </marker>
-        <marker id={`${mid}-e`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
-          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-evidence)"></path>
-        </marker>
-      </defs>
+  <!-- DESKTOP -->
+  <svg
+    class="psvg-desktop"
+    viewBox="0 0 1200 720"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title}</title>
+    <desc>
+      Prepare exits to Request Admission. REQUEST DENY terminates. ALLOW invokes
+      AI Provider. Untrusted result returns into Receive and Declare. Result-to-
+      Action DENY terminates or ALLOW enters Execute, then System of Record.
+      Evidence joins Verify outside runtime authority.
+    </desc>
+    <defs>
+      <marker id={`${mid}-n`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-neutral)"></path>
+      </marker>
+      <marker id={`${mid}-a`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-allow)"></path>
+      </marker>
+      <marker id={`${mid}-d`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-deny)"></path>
+      </marker>
+      <marker id={`${mid}-e`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-evidence)"></path>
+      </marker>
+    </defs>
 
-      <!-- Runtime boundary around both gates -->
-      <rect
-        class="osc-runtime-frame"
-        x="420"
-        y="48"
-        width="280"
-        height="420"
-        rx="16"
-      ></rect>
+    <!-- Enterprise Application -->
+    <g data-node-id="app" data-collision-check="true">
+      <rect x="32" y="48" width="288" height="520" rx="16" class="psvg-bound psvg-bound--enterprise"></rect>
+      <text x="48" y="76" class="psvg-bound-label">ENTERPRISE CONTROLLED BOUNDARY</text>
 
-      <!-- Primary transaction paths -->
-      <path class="osc-path osc-path--neutral" d="M300 120 H460" marker-end={`url(#${mid}-n)`}></path>
-      <path class="osc-path osc-path--allow" d="M640 120 H820" marker-end={`url(#${mid}-a)`}></path>
-      <path class="osc-path osc-path--deny" d="M560 168 V250" marker-end={`url(#${mid}-d)`}></path>
-
-      <!-- Provider return lane into RESULT IN -->
-      <path
-        class="osc-path osc-path--neutral osc-path--return"
-        d="M920 168 H980 V320 H220 V360"
-        marker-end={`url(#${mid}-n)`}
-      ></path>
-
-      <path class="osc-path osc-path--neutral" d="M300 400 H460" marker-end={`url(#${mid}-n)`}></path>
-      <path class="osc-path osc-path--deny" d="M560 448 V530" marker-end={`url(#${mid}-d)`}></path>
-      <path class="osc-path osc-path--allow" d="M460 420 H360 V500" marker-end={`url(#${mid}-a)`}></path>
-      <path class="osc-path osc-path--allow" d="M300 540 H820" marker-end={`url(#${mid}-a)`}></path>
-
-      {
-        showEvidence && (
-          <>
-            <path class="osc-path osc-path--evidence" d="M560 280 V600" marker-end={`url(#${mid}-e)`}></path>
-            <path class="osc-path osc-path--evidence" d="M560 560 V600" marker-end={`url(#${mid}-e)`}></path>
-            <path class="osc-path osc-path--evidence" d="M640 620 H820" marker-end={`url(#${mid}-e)`}></path>
-          </>
-        )
-      }
-
-      <!-- Path labels with plates -->
-      <g class="osc-label-plate">
-        <rect x="330" y="96" width="88" height="20" rx="4"></rect>
-        <text x="374" y="110">Outbound</text>
+      <g data-node-id="prepare">
+        <rect x="56" y="96" width="240" height="88" rx="12" class="psvg-node"></rect>
+        <text x="72" y="126" class="psvg-role">PREPARE</text>
+        <text x="72" y="152" class="psvg-strong">Governed request</text>
+        <circle cx="296" cy="140" r="5" class="psvg-port" data-port="REQUEST OUT"></circle>
+        <text x="248" y="132" class="psvg-port-label">REQUEST OUT</text>
       </g>
-      <g class="osc-label-plate osc-label-plate--allow">
-        <rect x="700" y="96" width="64" height="20" rx="4"></rect>
-        <text x="732" y="110">Invoke</text>
+
+      <g data-node-id="receive">
+        <rect x="56" y="260" width="240" height="112" rx="12" class="psvg-node"></rect>
+        <text x="72" y="288" class="psvg-role">RECEIVE + DECLARE</text>
+        <text x="72" y="314" class="psvg-strong">Untrusted result</text>
+        <text x="72" y="338" class="psvg-desc">Declared action</text>
+        <circle cx="56" cy="300" r="5" class="psvg-port" data-port="RESULT IN"></circle>
+        <text x="68" y="252" class="psvg-port-label">RESULT IN</text>
+        <circle cx="296" cy="340" r="5" class="psvg-port" data-port="ACTION OUT"></circle>
+        <text x="250" y="360" class="psvg-port-label">ACTION OUT</text>
       </g>
-      <g class="osc-label-plate">
-        <rect x="760" y="286" width="180" height="20" rx="4"></rect>
-        <text x="850" y="300">Return into application</text>
+
+      <g data-node-id="execute">
+        <rect x="56" y="440" width="240" height="96" rx="12" class="psvg-node"></rect>
+        <text x="72" y="470" class="psvg-role">EXECUTE</text>
+        <text x="72" y="496" class="psvg-strong">Authorized action only</text>
+        <circle cx="56" cy="480" r="5" class="psvg-port" data-port="EXECUTION IN"></circle>
+        <text x="68" y="432" class="psvg-port-label">EXECUTION IN</text>
+        <circle cx="296" cy="500" r="5" class="psvg-port" data-port="SYSTEM EFFECT OUT"></circle>
+        <text x="220" y="520" class="psvg-port-label">SYSTEM EFFECT OUT</text>
       </g>
-      <g class="osc-label-plate">
-        <rect x="320" y="376" width="110" height="20" rx="4"></rect>
-        <text x="375" y="390">Declared action</text>
-      </g>
-      <g class="osc-label-plate osc-label-plate--allow">
-        <rect x="372" y="456" width="108" height="20" rx="4"></rect>
-        <text x="426" y="470">ALLOW → execute</text>
-      </g>
-      <g class="osc-label-plate osc-label-plate--allow">
-        <rect x="500" y="516" width="120" height="20" rx="4"></rect>
-        <text x="560" y="530">Authorized effect</text>
-      </g>
-    </svg>
+    </g>
 
-    <div class="osc-nodes">
-      <div class="osc-app">
-        <p class="osc-boundary"><DiagramIcon name="app" /> ENTERPRISE CONTROLLED BOUNDARY</p>
-        <div class="osc-state" data-state="prepare">
-          <span class="osc-role">PREPARE</span>
-          <strong>Governed request</strong>
-          <span class="osc-port osc-port--out" title="REQUEST OUT">REQUEST OUT</span>
-        </div>
-        <div class="osc-state" data-state="receive">
-          <span class="osc-role">RECEIVE + DECLARE</span>
-          <strong>Untrusted result</strong>
-          <span class="osc-desc">Declared action</span>
-          <span class="osc-port osc-port--in" title="RESULT IN">RESULT IN</span>
-          <span class="osc-port osc-port--out" title="ACTION OUT">ACTION OUT</span>
-        </div>
-        <div class="osc-state" data-state="execute">
-          <span class="osc-role">EXECUTE</span>
-          <strong>Authorized action only</strong>
-          <span class="osc-port osc-port--in" title="EXECUTION IN">EXECUTION IN</span>
-          <span class="osc-port osc-port--out" title="SYSTEM EFFECT OUT">SYSTEM EFFECT OUT</span>
-        </div>
-      </div>
+    <!-- Runtime boundary -->
+    <rect x="400" y="64" width="280" height="420" rx="16" class="psvg-bound psvg-bound--runtime"></rect>
+    <text x="416" y="88" class="psvg-bound-label psvg-bound-label--runtime">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</text>
 
-      <p class="osc-runtime-label">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</p>
+    <!-- Request gate -->
+    <g data-node-id="request-gate" data-collision-check="true">
+      <rect x="440" y="112" width="200" height="72" rx="10" class="psvg-gate"></rect>
+      <text x="456" y="140" class="psvg-role">REQUEST ADMISSION</text>
+      <text x="456" y="164" class="psvg-strong">Authorization checkpoint</text>
+    </g>
 
-      <div class="osc-gate" data-gate="request">
-        <span class="osc-role"><DiagramIcon name="shield" /> REQUEST ADMISSION</span>
-        <strong>Authorization checkpoint</strong>
-      </div>
+    <!-- Action gate -->
+    <g data-node-id="action-gate" data-collision-check="true">
+      <rect x="440" y="352" width="200" height="72" rx="10" class="psvg-gate"></rect>
+      <text x="456" y="380" class="psvg-role">RESULT-TO-ACTION</text>
+      <text x="456" y="404" class="psvg-strong">Authorization checkpoint</text>
+    </g>
 
-      <div class="osc-terminal osc-terminal--deny" data-terminal="request-deny">
-        <DiagramIcon name="deny" />
-        <div>
-          <strong>REQUEST DENY</strong>
-          <span>No provider invocation</span>
-        </div>
-      </div>
+    <!-- Provider -->
+    <g data-node-id="provider" data-collision-check="true">
+      <rect x="800" y="96" width="320" height="112" rx="14" class="psvg-bound psvg-bound--provider"></rect>
+      <text x="816" y="120" class="psvg-bound-label psvg-bound-label--provider">AI PROVIDER — UNTRUSTED EXTERNAL BOUNDARY</text>
+      <text x="816" y="152" class="psvg-role">AI PROVIDER</text>
+      <text x="816" y="178" class="psvg-strong">Untrusted external service</text>
+    </g>
 
-      <div class="osc-provider">
-        <p class="osc-boundary osc-boundary--provider">AI PROVIDER — UNTRUSTED EXTERNAL BOUNDARY</p>
-        <span class="osc-role"><DiagramIcon name="provider" /> AI PROVIDER</span>
-        <strong>Untrusted external service</strong>
-      </div>
+    <!-- SoR -->
+    <g data-node-id="sor" data-collision-check="true">
+      <rect x="800" y="456" width="320" height="96" rx="14" class="psvg-bound psvg-bound--enterprise"></rect>
+      <text x="816" y="480" class="psvg-bound-label">ENTERPRISE SYSTEM-OF-RECORD BOUNDARY</text>
+      <text x="816" y="510" class="psvg-role">ENTERPRISE SYSTEM OF RECORD</text>
+      <text x="816" y="534" class="psvg-strong">Authoritative business state</text>
+    </g>
 
-      <div class="osc-gate" data-gate="action">
-        <span class="osc-role"><DiagramIcon name="shield" /> RESULT-TO-ACTION</span>
-        <strong>Authorization checkpoint</strong>
-      </div>
+    <!-- DENY terminals -->
+    <g data-terminal="request-deny" data-collision-check="true">
+      <rect x="456" y="220" width="168" height="64" rx="10" class="psvg-deny"></rect>
+      <circle cx="480" cy="252" r="12" class="psvg-deny-x"></circle>
+      <path d="M474,246 L486,258 M486,246 L474,258" class="psvg-deny-x-line"></path>
+      <text x="502" y="246" class="psvg-deny-strong">REQUEST DENY</text>
+      <text x="502" y="266" class="psvg-deny-desc">No provider invocation</text>
+    </g>
+    <g data-terminal="action-deny" data-collision-check="true">
+      <rect x="700" y="360" width="168" height="64" rx="10" class="psvg-deny"></rect>
+      <circle cx="724" cy="392" r="12" class="psvg-deny-x"></circle>
+      <path d="M718,386 L730,398 M730,386 L718,398" class="psvg-deny-x-line"></path>
+      <text x="746" y="386" class="psvg-deny-strong">ACTION DENY</text>
+      <text x="746" y="406" class="psvg-deny-desc">No enterprise effect</text>
+    </g>
 
-      <div class="osc-terminal osc-terminal--deny" data-terminal="action-deny">
-        <DiagramIcon name="deny" />
-        <div>
-          <strong>ACTION DENY</strong>
-          <span>No enterprise effect</span>
-        </div>
-      </div>
+    <!-- Paths -->
+    <path class="psvg-path psvg-path--neutral" d="M296 140 H440" marker-end={`url(#${mid}-n)`} data-path-purpose="outbound"></path>
+    <path class="psvg-path psvg-path--deny" d="M540 184 V220" marker-end={`url(#${mid}-d)`} data-path-purpose="request-deny"></path>
+    <path class="psvg-path psvg-path--allow" d="M640 148 H800" marker-end={`url(#${mid}-a)`} data-path-purpose="invoke"></path>
+    <path class="psvg-path psvg-path--neutral" d="M960 208 V300 H48" marker-end={`url(#${mid}-n)`} data-path-purpose="return"></path>
+    <path class="psvg-path psvg-path--neutral" d="M48 300 H56" marker-end={`url(#${mid}-n)`} data-path-purpose="result-in"></path>
+    <path class="psvg-path psvg-path--neutral" d="M296 340 H440" marker-end={`url(#${mid}-n)`} data-path-purpose="action-out"></path>
+    <path class="psvg-path psvg-path--deny" d="M640 388 H700" marker-end={`url(#${mid}-d)`} data-path-purpose="action-deny"></path>
+    <path class="psvg-path psvg-path--allow" d="M440 388 H360 V480 H56" marker-end={`url(#${mid}-a)`} data-path-purpose="allow-execute"></path>
+    <path class="psvg-path psvg-path--allow" d="M296 500 H800" marker-end={`url(#${mid}-a)`} data-path-purpose="system-effect"></path>
 
-      <div class="osc-sor">
-        <p class="osc-boundary">ENTERPRISE SYSTEM-OF-RECORD BOUNDARY</p>
-        <span class="osc-role"><DiagramIcon name="database" /> ENTERPRISE SYSTEM OF RECORD</span>
-        <strong>Authoritative business state</strong>
-      </div>
+    <!-- Path labels with plates -->
+    <g data-label-plate="true"><rect x="330" y="116" width="78" height="20" rx="4" class="psvg-plate"></rect><text x="369" y="130" class="psvg-plate-text">Outbound</text></g>
+    <g data-label-plate="true"><rect x="700" y="124" width="56" height="20" rx="4" class="psvg-plate psvg-plate--allow"></rect><text x="728" y="138" class="psvg-plate-text psvg-plate-text--allow">Invoke</text></g>
+    <g data-label-plate="true"><rect x="680" y="268" width="220" height="20" rx="4" class="psvg-plate"></rect><text x="790" y="282" class="psvg-plate-text">Untrusted result returns to application</text></g>
+    <g data-label-plate="true"><rect x="320" y="316" width="100" height="20" rx="4" class="psvg-plate"></rect><text x="370" y="330" class="psvg-plate-text">Declared action</text></g>
+    <g data-label-plate="true"><rect x="200" y="448" width="110" height="20" rx="4" class="psvg-plate psvg-plate--allow"></rect><text x="255" y="462" class="psvg-plate-text psvg-plate-text--allow">ALLOW → Execute</text></g>
+    <g data-label-plate="true"><rect x="480" y="524" width="120" height="20" rx="4" class="psvg-plate psvg-plate--allow"></rect><text x="540" y="538" class="psvg-plate-text psvg-plate-text--allow">Authorized effect</text></g>
 
-      {
-        showEvidence && (
-          <div class="osc-evidence">
-            <div class="osc-evidence-bus">
-              <span class="osc-role"><DiagramIcon name="evidence" /> EVIDENCE BUS</span>
-              <strong>Verifiable Decision Records</strong>
-            </div>
-            <div class="osc-verify">
-              <p class="osc-boundary osc-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
-              <span class="osc-role"><DiagramIcon name="verify" /> BEACONGUARD VERIFY</span>
-              <strong>Read-only</strong>
-            </div>
-          </div>
-        )
-      }
-    </div>
-  </div>
-
-  {/* Mobile vertical transaction spine — preserves geometry */}
-  <div class="osc-mobile" aria-hidden="true">
-    <div class="osc-mobile-app">
-      <p class="osc-boundary"><DiagramIcon name="app" /> ENTERPRISE APPLICATION</p>
-      <div class="osc-mobile-step">
-        <span class="osc-role">PREPARE</span>
-        <strong>Governed request</strong>
-      </div>
-    </div>
-    <div class="osc-mobile-arrow" aria-hidden="true">↓ Outbound</div>
-    <div class="osc-mobile-row">
-      <div class="osc-gate osc-gate--mobile">
-        <span class="osc-role"><DiagramIcon name="shield" /> Request Admission</span>
-      </div>
-      <div class="osc-terminal osc-terminal--deny">
-        <DiagramIcon name="deny" />
-        <div>
-          <strong>REQUEST DENY</strong>
-          <span>No provider invocation</span>
-        </div>
-      </div>
-    </div>
-    <div class="osc-mobile-arrow osc-mobile-arrow--allow" aria-hidden="true">↓ ALLOW · Invoke</div>
-    <div class="osc-provider osc-provider--mobile">
-      <span class="osc-role"><DiagramIcon name="provider" /> AI Provider</span>
-      <strong>Untrusted external</strong>
-    </div>
-    <div class="osc-mobile-arrow" aria-hidden="true">↓ Return to same Enterprise Application</div>
-    <div class="osc-mobile-app">
-      <div class="osc-mobile-step">
-        <span class="osc-role">RECEIVE + DECLARE</span>
-        <strong>Untrusted result</strong>
-        <span class="osc-desc">Declared action</span>
-      </div>
-    </div>
-    <div class="osc-mobile-arrow" aria-hidden="true">↓ Declared action</div>
-    <div class="osc-mobile-row">
-      <div class="osc-gate osc-gate--mobile">
-        <span class="osc-role"><DiagramIcon name="shield" /> Result-to-Action</span>
-      </div>
-      <div class="osc-terminal osc-terminal--deny">
-        <DiagramIcon name="deny" />
-        <div>
-          <strong>ACTION DENY</strong>
-          <span>No enterprise effect</span>
-        </div>
-      </div>
-    </div>
-    <div class="osc-mobile-arrow osc-mobile-arrow--allow" aria-hidden="true">↓ ALLOW → Execute</div>
-    <div class="osc-mobile-app">
-      <div class="osc-mobile-step">
-        <span class="osc-role">EXECUTE</span>
-        <strong>Authorized action only</strong>
-      </div>
-    </div>
-    <div class="osc-mobile-arrow osc-mobile-arrow--allow" aria-hidden="true">↓ Authorized effect</div>
-    <div class="osc-sor osc-sor--mobile">
-      <span class="osc-role"><DiagramIcon name="database" /> System of Record</span>
-      <strong>Authoritative business state</strong>
-    </div>
     {
       showEvidence && (
-        <div class="osc-evidence osc-evidence--mobile">
-          <span class="osc-role"><DiagramIcon name="evidence" /> Evidence rail</span>
-          <strong>Verifiable Decision Records → Verify (read-only)</strong>
-        </div>
+        <>
+          <path class="psvg-path psvg-path--evidence" d="M540 184 V600" marker-end={`url(#${mid}-e)`} data-path-purpose="evidence-request"></path>
+          <path class="psvg-path psvg-path--evidence" d="M540 388 V600" marker-end={`url(#${mid}-e)`} data-path-purpose="evidence-action"></path>
+          <path class="psvg-path psvg-path--evidence" d="M620 620 H780" marker-end={`url(#${mid}-e)`} data-path-purpose="evidence-verify"></path>
+          <g data-node-id="evidence-bus" data-collision-check="true">
+            <rect x="400" y="600" width="220" height="72" rx="10" class="psvg-evidence"></rect>
+            <text x="416" y="628" class="psvg-role">EVIDENCE BUS</text>
+            <text x="416" y="652" class="psvg-strong">Verifiable Decision Records</text>
+          </g>
+          <g data-node-id="verify" data-collision-check="true">
+            <rect x="780" y="600" width="320" height="72" rx="10" class="psvg-bound psvg-bound--verify"></rect>
+            <text x="796" y="624" class="psvg-bound-label psvg-bound-label--verify">READ-ONLY VERIFICATION BOUNDARY</text>
+            <text x="796" y="652" class="psvg-strong">BeaconGuard Verify — read-only</text>
+          </g>
+        </>
       )
     }
-  </div>
+  </svg>
+
+  <!-- COMPACT -->
+  <svg
+    class="psvg-compact"
+    viewBox="0 0 440 1180"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title} — compact</title>
+    <defs>
+      <marker id={`${mid}-cn`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-neutral)"></path>
+      </marker>
+      <marker id={`${mid}-ca`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-allow)"></path>
+      </marker>
+      <marker id={`${mid}-cd`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-deny)"></path>
+      </marker>
+      <marker id={`${mid}-ce`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-evidence)"></path>
+      </marker>
+    </defs>
+
+    <rect x="24" y="24" width="280" height="80" rx="12" class="psvg-bound psvg-bound--enterprise"></rect>
+    <text x="40" y="52" class="psvg-bound-label">ENTERPRISE APPLICATION</text>
+    <text x="40" y="78" class="psvg-strong">Prepare · Governed request</text>
+
+    <path class="psvg-path psvg-path--neutral" d="M164 104 V132" marker-end={`url(#${mid}-cn)`}></path>
+
+    <rect x="48" y="132" width="232" height="64" rx="10" class="psvg-gate"></rect>
+    <text x="64" y="160" class="psvg-role">Request Admission</text>
+    <text x="64" y="180" class="psvg-strong">Authorization checkpoint</text>
+
+    <path class="psvg-path psvg-path--deny" d="M280 164 H340" marker-end={`url(#${mid}-cd)`}></path>
+    <rect x="340" y="140" width="84" height="56" rx="8" class="psvg-deny"></rect>
+    <text x="348" y="164" class="psvg-deny-strong">REQUEST</text>
+    <text x="348" y="182" class="psvg-deny-strong">DENY</text>
+
+    <path class="psvg-path psvg-path--allow" d="M164 196 V224" marker-end={`url(#${mid}-ca)`}></path>
+    <text x="176" y="216" class="psvg-plate-text psvg-plate-text--allow">ALLOW</text>
+
+    <rect x="48" y="224" width="232" height="64" rx="10" class="psvg-bound psvg-bound--provider"></rect>
+    <text x="64" y="252" class="psvg-role">AI Provider</text>
+    <text x="64" y="272" class="psvg-strong">Untrusted external</text>
+
+    <path class="psvg-path psvg-path--neutral" d="M164 288 V316" marker-end={`url(#${mid}-cn)`}></path>
+    <text x="176" y="308" class="psvg-plate-text">Return to same app</text>
+
+    <rect x="24" y="316" width="280" height="80" rx="12" class="psvg-bound psvg-bound--enterprise"></rect>
+    <text x="40" y="344" class="psvg-bound-label">ENTERPRISE APPLICATION</text>
+    <text x="40" y="370" class="psvg-strong">Receive + Declare</text>
+    <text x="40" y="388" class="psvg-desc">Untrusted result · Declared action</text>
+
+    <path class="psvg-path psvg-path--neutral" d="M164 396 V424" marker-end={`url(#${mid}-cn)`}></path>
+
+    <rect x="48" y="424" width="232" height="64" rx="10" class="psvg-gate"></rect>
+    <text x="64" y="452" class="psvg-role">Result-to-Action</text>
+    <text x="64" y="472" class="psvg-strong">Authorization checkpoint</text>
+
+    <path class="psvg-path psvg-path--deny" d="M280 456 H340" marker-end={`url(#${mid}-cd)`}></path>
+    <rect x="340" y="432" width="84" height="56" rx="8" class="psvg-deny"></rect>
+    <text x="352" y="456" class="psvg-deny-strong">ACTION</text>
+    <text x="352" y="474" class="psvg-deny-strong">DENY</text>
+
+    <path class="psvg-path psvg-path--allow" d="M164 488 V516" marker-end={`url(#${mid}-ca)`}></path>
+    <text x="176" y="508" class="psvg-plate-text psvg-plate-text--allow">ALLOW → Execute</text>
+
+    <rect x="24" y="516" width="280" height="72" rx="12" class="psvg-bound psvg-bound--enterprise"></rect>
+    <text x="40" y="544" class="psvg-bound-label">ENTERPRISE APPLICATION</text>
+    <text x="40" y="570" class="psvg-strong">Execute · Authorized only</text>
+
+    <path class="psvg-path psvg-path--allow" d="M164 588 V616" marker-end={`url(#${mid}-ca)`}></path>
+
+    <rect x="24" y="616" width="280" height="72" rx="12" class="psvg-bound psvg-bound--enterprise"></rect>
+    <text x="40" y="644" class="psvg-bound-label">SYSTEM OF RECORD</text>
+    <text x="40" y="670" class="psvg-strong">Authoritative business state</text>
+
+    {
+      showEvidence && (
+        <>
+          <path class="psvg-path psvg-path--evidence" d="M48 164 H16 V760 H120" marker-end={`url(#${mid}-ce)`}></path>
+          <path class="psvg-path psvg-path--evidence" d="M48 456 H16" marker-end={`url(#${mid}-ce)`}></path>
+          <rect x="24" y="760" width="280" height="64" rx="10" class="psvg-evidence"></rect>
+          <text x="40" y="788" class="psvg-role">Evidence rail</text>
+          <text x="40" y="808" class="psvg-strong">VDRs → Verify (read-only)</text>
+          <rect x="24" y="848" width="280" height="64" rx="10" class="psvg-bound psvg-bound--verify"></rect>
+          <text x="40" y="876" class="psvg-bound-label psvg-bound-label--verify">READ-ONLY VERIFY</text>
+          <text x="40" y="896" class="psvg-strong">Outside runtime authority</text>
+        </>
+      )
+    }
+  </svg>
 
   <figcaption class="visually-hidden">
-    Prepare exits the Enterprise Application through Request Out into Request
-    Admission. REQUEST DENY terminates with no provider invocation. ALLOW invokes
-    the AI Provider. The provider result returns through Result In into Receive
-    and Declare inside the same Enterprise Application. Declared action exits
-    through Action Out into Result-to-Action. ACTION DENY terminates with no
-    enterprise effect. ALLOW returns through Execution In into Execute, then
-    System Effect Out into the Enterprise System of Record. Evidence from both
-    gates joins a separate Verifiable Decision Records bus to BeaconGuard Verify
-    outside runtime authority.
+    Prepare exits the Enterprise Application into Request Admission. REQUEST DENY
+    terminates with no provider invocation. ALLOW invokes the AI Provider. The
+    untrusted result returns into Receive and Declare inside the same Enterprise
+    Application. Result-to-Action either DENYs with no enterprise effect or
+    ALLOWs Execute, then the Enterprise System of Record. Evidence from both
+    gates joins BeaconGuard Verify outside runtime authority.
   </figcaption>
 </figure>

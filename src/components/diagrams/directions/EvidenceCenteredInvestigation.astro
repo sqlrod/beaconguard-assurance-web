@@ -1,14 +1,10 @@
 ---
 /**
- * Evidence-Centered Investigation — verification and evidence view.
- * Production-candidate reusable diagram (no staging review headings).
+ * Evidence-Centered Investigation — pure SVG (desktop + compact).
  */
-import DiagramIcon from "../primitives/DiagramIcon.astro";
-
 interface Props {
   title?: string;
   ariaLabel?: string;
-  variant?: "detailed" | "compact";
   compact?: boolean;
   idPrefix?: string;
 }
@@ -16,153 +12,191 @@ interface Props {
 const {
   title = "Evidence-centered investigation",
   ariaLabel,
-  variant = "detailed",
   compact = false,
   idPrefix = "eci",
 } = Astro.props;
 
-const isCompact = compact || variant === "compact";
 const mid = `${idPrefix}-m`;
 const labelledBy = `${idPrefix}-title`;
 ---
 
 <figure
-  class:list={["eci", isCompact && "eci--compact"]}
+  class:list={["psvg", "psvg-eci", compact && "psvg--compact"]}
   data-diagram-direction="C"
   aria-labelledby={labelledBy}
   aria-label={ariaLabel}
 >
-  <div class="eci-meta">
-    <h3 id={labelledBy} class="eci-title">{title}</h3>
-    <p class="eci-illustrative">Illustrative verification model</p>
+  <div class="psvg-meta">
+    <h3 id={labelledBy} class="psvg-title">{title}</h3>
+    <p class="psvg-illustrative">Illustrative verification model</p>
   </div>
 
-  <div class="eci-board" aria-hidden="true">
-    <p class="osc-boundary osc-boundary--verify eci-boundary">
-      READ-ONLY VERIFICATION BOUNDARY · BeaconGuard Verify
-    </p>
+  <svg
+    class="psvg-desktop"
+    viewBox="0 0 1200 700"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title}</title>
+    <desc>
+      Selected transaction decisions map to related Verifiable Decision Records.
+      Source evidence supports deterministic reconstruction. Export derives from
+      the evidence ledger. AI-assisted insights remain non-authoritative with no
+      trusted path connector.
+    </desc>
+    <defs>
+      <marker id={`${mid}-e`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-evidence)"></path>
+      </marker>
+    </defs>
 
-    <svg class="eci-svg" viewBox="0 0 1100 460" focusable="false">
-      <defs>
-        <marker id={`${mid}-e`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
-          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-evidence)"></path>
-        </marker>
-      </defs>
-      <!-- Decision → records -->
-      <path class="eci-path" d="M250 120 H340" marker-end={`url(#${mid}-e)`}></path>
-      <path class="eci-path" d="M250 220 H340" marker-end={`url(#${mid}-e)`}></path>
-      <!-- Records → source / reconstruct -->
-      <path class="eci-path" d="M560 170 H640" marker-end={`url(#${mid}-e)`}></path>
-      <path class="eci-path" d="M720 200 H820" marker-end={`url(#${mid}-e)`}></path>
-      <!-- Evidence → export -->
-      <path class="eci-path" d="M560 320 H820" marker-end={`url(#${mid}-e)`}></path>
-      <g class="osc-label-plate osc-label-plate--evidence">
-        <rect x="860" y="300" width="120" height="20" rx="4"></rect>
-        <text x="920" y="314">From evidence</text>
-      </g>
-    </svg>
+    <rect x="24" y="24" width="1152" height="560" rx="16" class="psvg-bound psvg-bound--verify"></rect>
+    <text x="40" y="52" class="psvg-bound-label psvg-bound-label--verify">READ-ONLY VERIFICATION BOUNDARY · BeaconGuard Verify</text>
 
-    <section class="eci-col eci-col--context">
-      <p class="eci-role">Selected transaction</p>
-      <div class="eci-identity">
-        <span>Transaction correlation</span>
-        <span>Release identity</span>
-        <span>Playbook identity</span>
-      </div>
-      <div class="eci-decision" data-decision="request">
-        <span class="eci-role"><DiagramIcon name="shield" /> Request Admission</span>
-        <strong class="eci-outcome eci-outcome--allow">ALLOW</strong>
-      </div>
-      <div class="eci-corr" aria-hidden="true"></div>
-      <div class="eci-decision" data-decision="action">
-        <span class="eci-role"><DiagramIcon name="shield" /> Result-to-Action</span>
-        <strong class="eci-outcome eci-outcome--allow">ALLOW</strong>
-      </div>
-    </section>
+    <!-- LEFT selected transaction -->
+    <g data-node-id="selected-txn" data-collision-check="true">
+      <text x="56" y="96" class="psvg-role">SELECTED TRANSACTION</text>
+      <rect x="48" y="112" width="260" height="96" rx="12" class="psvg-node"></rect>
+      <text x="64" y="140" class="psvg-desc">Transaction correlation</text>
+      <text x="64" y="164" class="psvg-desc">Release identity</text>
+      <text x="64" y="188" class="psvg-desc">Playbook identity</text>
 
-    <section class="eci-col eci-col--ledger">
-      <p class="eci-role">Canonical evidence ledger</p>
-      <div class="eci-record">
-        <span class="eci-role"><DiagramIcon name="evidence" /> Decision Record — Request</span>
-        <span class="eci-field">Outcome · Integrity</span>
-      </div>
-      <div class="eci-record">
-        <span class="eci-role"><DiagramIcon name="evidence" /> Decision Record — Action</span>
-        <span class="eci-field">Outcome · Integrity</span>
-      </div>
-      <div class="eci-source">
-        <strong>Source Evidence</strong>
-        <span>Integrity verified · Replay available · Reconstruction available</span>
-      </div>
-    </section>
+      <rect x="48" y="232" width="260" height="72" rx="12" class="psvg-node"></rect>
+      <text x="64" y="260" class="psvg-role">Request Admission</text>
+      <text x="64" y="284" class="psvg-allow">ALLOW</text>
 
-    <section class="eci-col eci-col--review">
-      <p class="eci-role">Review surface</p>
-      <div class="eci-tabs" role="presentation">
-        <span>Decision Explorer</span>
-        <span class="eci-tab-active">Reconstruction</span>
-        <span>Reporting</span>
-        <span>Replay</span>
-      </div>
-      <div class="eci-selected">
-        <strong>Deterministic Reconstruction</strong>
-        <ol>
-          <li>Trusted context</li>
-          <li>Applied release</li>
-          <li>Control result</li>
-          <li>Final outcome</li>
-        </ol>
-      </div>
-      <div class="eci-export">
-        <DiagramIcon name="export" />
-        <strong>Verifiable Export</strong>
-        <span>Derived from evidence ledger</span>
-      </div>
-    </section>
+      <path class="psvg-path psvg-path--evidence" d="M178 304 V328"></path>
 
-    <aside class="eci-insights">
-      <p class="eci-role"><DiagramIcon name="provider" /> AI-Assisted Insights</p>
-      <strong>Non-authoritative</strong>
-      <span>No runtime or evidence authority</span>
-    </aside>
-  </div>
+      <rect x="48" y="328" width="260" height="72" rx="12" class="psvg-node"></rect>
+      <text x="64" y="356" class="psvg-role">Result-to-Action</text>
+      <text x="64" y="380" class="psvg-allow">ALLOW</text>
+    </g>
 
-  <div class="eci-mobile" aria-hidden="true">
-    <p class="osc-boundary osc-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
-    <div class="eci-mobile-step">
-      <span class="eci-role">Selected transaction</span>
-      <strong>Request + Action decisions</strong>
-    </div>
-    <p class="eci-mobile-arrow">↓</p>
-    <div class="eci-mobile-step eci-mobile-step--ledger">
-      <span class="eci-role">Related decision records</span>
-      <strong>Verifiable Decision Records</strong>
-    </div>
-    <p class="eci-mobile-arrow">↓</p>
-    <div class="eci-mobile-step">
-      <span class="eci-role">Source evidence</span>
-      <strong>Supports reconstruction</strong>
-    </div>
-    <p class="eci-mobile-arrow">↓</p>
-    <div class="eci-mobile-step eci-mobile-step--selected">
-      <span class="eci-role">Deterministic reconstruction</span>
-      <strong>Trusted context → Final outcome</strong>
-    </div>
-    <p class="eci-mobile-arrow">↓</p>
-    <div class="eci-mobile-step">
-      <span class="eci-role">Review / Export</span>
-      <strong>Derived from evidence</strong>
-    </div>
-    <aside class="eci-insights">
-      <strong>AI-Assisted Insights · Non-authoritative</strong>
-    </aside>
-  </div>
+    <!-- CENTER ledger -->
+    <g data-node-id="ledger" data-collision-check="true">
+      <rect x="360" y="88" width="400" height="440" rx="14" class="psvg-evidence"></rect>
+      <text x="376" y="120" class="psvg-role">CANONICAL EVIDENCE LEDGER</text>
+
+      <rect x="384" y="144" width="352" height="88" rx="10" class="psvg-node"></rect>
+      <text x="400" y="172" class="psvg-role">REQUEST DECISION RECORD</text>
+      <text x="400" y="196" class="psvg-strong">Outcome · Integrity</text>
+      <text x="400" y="216" class="psvg-desc">Linked to Request Admission</text>
+
+      <rect x="384" y="256" width="352" height="88" rx="10" class="psvg-node"></rect>
+      <text x="400" y="284" class="psvg-role">ACTION DECISION RECORD</text>
+      <text x="400" y="308" class="psvg-strong">Outcome · Integrity</text>
+      <text x="400" y="328" class="psvg-desc">Linked to Result-to-Action</text>
+
+      <rect x="384" y="372" width="352" height="112" rx="10" class="psvg-node"></rect>
+      <text x="400" y="404" class="psvg-strong">Source Evidence</text>
+      <text x="400" y="428" class="psvg-desc">Integrity verified</text>
+      <text x="400" y="452" class="psvg-desc">Replay available</text>
+    </g>
+
+    <!-- RIGHT review -->
+    <g data-node-id="review" data-collision-check="true">
+      <text x="812" y="112" class="psvg-role">REVIEW SURFACE</text>
+      <rect x="800" y="128" width="80" height="28" rx="6" class="psvg-tab"></rect>
+      <text x="808" y="148" class="psvg-tab-text">Explorer</text>
+      <rect x="888" y="128" width="120" height="28" rx="6" class="psvg-tab psvg-tab--active"></rect>
+      <text x="896" y="148" class="psvg-tab-text">Reconstruction</text>
+      <rect x="1016" y="128" width="72" height="28" rx="6" class="psvg-tab"></rect>
+      <text x="1028" y="148" class="psvg-tab-text">Replay</text>
+
+      <rect x="800" y="176" width="336" height="200" rx="12" class="psvg-selected"></rect>
+      <text x="816" y="208" class="psvg-strong">Deterministic Reconstruction</text>
+      <text x="816" y="240" class="psvg-desc">Trusted context</text>
+      <text x="816" y="264" class="psvg-desc">Applied release</text>
+      <text x="816" y="288" class="psvg-desc">Control result</text>
+      <text x="816" y="312" class="psvg-desc">Final outcome</text>
+      <text x="816" y="348" class="psvg-role">SELECTED OUTPUT</text>
+
+      <rect x="800" y="408" width="336" height="88" rx="12" class="psvg-node"></rect>
+      <text x="816" y="440" class="psvg-role">VERIFIABLE EXPORT</text>
+      <text x="816" y="464" class="psvg-strong">Derived from evidence ledger</text>
+      <text x="816" y="480" class="psvg-desc">Reporting available as secondary</text>
+    </g>
+
+    <!-- Provenance connectors (correct binding) -->
+    <path class="psvg-path psvg-path--evidence" d="M308 268 H384" marker-end={`url(#${mid}-e)`} data-path-purpose="request-to-record"></path>
+    <path class="psvg-path psvg-path--evidence" d="M308 364 H384" marker-end={`url(#${mid}-e)`} data-path-purpose="action-to-record"></path>
+    <path class="psvg-path psvg-path--evidence" d="M760 428 H800" marker-end={`url(#${mid}-e)`} data-path-purpose="source-to-reconstruct"></path>
+    <path class="psvg-path psvg-path--evidence" d="M760 276 H800 V276" marker-end={`url(#${mid}-e)`} data-path-purpose="ledger-to-reconstruct"></path>
+    <path class="psvg-path psvg-path--evidence" d="M760 452 H800" marker-end={`url(#${mid}-e)`} data-path-purpose="ledger-to-export"></path>
+
+    <g data-label-plate="true"><rect x="620" y="248" width="120" height="20" rx="4" class="psvg-plate psvg-plate--evidence"></rect><text x="680" y="262" class="psvg-plate-text psvg-plate-text--evidence">To reconstruction</text></g>
+    <g data-label-plate="true"><rect x="620" y="460" width="100" height="20" rx="4" class="psvg-plate psvg-plate--evidence"></rect><text x="670" y="474" class="psvg-plate-text psvg-plate-text--evidence">From evidence</text></g>
+
+    <!-- AI annex OUTSIDE trusted boundary / separate -->
+    <g data-node-id="ai-insights" data-collision-check="true">
+      <rect x="24" y="608" width="1152" height="72" rx="12" class="psvg-insights"></rect>
+      <text x="40" y="640" class="psvg-role">AI-ASSISTED INSIGHTS</text>
+      <text x="40" y="664" class="psvg-strong">Non-authoritative · No runtime or evidence authority · No trusted path connector</text>
+    </g>
+  </svg>
+
+  <svg
+    class="psvg-compact"
+    viewBox="0 0 440 1180"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title} — compact</title>
+    <defs>
+      <marker id={`${mid}-ce`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-evidence)"></path>
+      </marker>
+    </defs>
+
+    <rect x="24" y="24" width="392" height="900" rx="14" class="psvg-bound psvg-bound--verify"></rect>
+    <text x="40" y="56" class="psvg-bound-label psvg-bound-label--verify">READ-ONLY VERIFICATION BOUNDARY</text>
+
+    <rect x="48" y="80" width="344" height="72" rx="10" class="psvg-node"></rect>
+    <text x="64" y="108" class="psvg-role">Selected transaction</text>
+    <text x="64" y="132" class="psvg-strong">Request + Action decisions</text>
+    <path class="psvg-path psvg-path--evidence" d="M220 152 V176" marker-end={`url(#${mid}-ce)`}></path>
+
+    <rect x="48" y="176" width="344" height="80" rx="10" class="psvg-evidence"></rect>
+    <text x="64" y="208" class="psvg-role">Request Decision Record</text>
+    <text x="64" y="232" class="psvg-strong">Outcome · Integrity</text>
+    <path class="psvg-path psvg-path--evidence" d="M220 256 V280" marker-end={`url(#${mid}-ce)`}></path>
+
+    <rect x="48" y="280" width="344" height="80" rx="10" class="psvg-evidence"></rect>
+    <text x="64" y="312" class="psvg-role">Action Decision Record</text>
+    <text x="64" y="336" class="psvg-strong">Outcome · Integrity</text>
+    <path class="psvg-path psvg-path--evidence" d="M220 360 V384" marker-end={`url(#${mid}-ce)`}></path>
+
+    <rect x="48" y="384" width="344" height="80" rx="10" class="psvg-node"></rect>
+    <text x="64" y="416" class="psvg-role">Source Evidence</text>
+    <text x="64" y="440" class="psvg-strong">Supports reconstruction</text>
+    <path class="psvg-path psvg-path--evidence" d="M220 464 V488" marker-end={`url(#${mid}-ce)`}></path>
+
+    <rect x="48" y="488" width="344" height="112" rx="10" class="psvg-selected"></rect>
+    <text x="64" y="520" class="psvg-role">Deterministic Reconstruction</text>
+    <text x="64" y="544" class="psvg-strong">Trusted context → Final outcome</text>
+    <text x="64" y="572" class="psvg-desc">Selected review output</text>
+    <path class="psvg-path psvg-path--evidence" d="M220 600 V624" marker-end={`url(#${mid}-ce)`}></path>
+
+    <rect x="48" y="624" width="344" height="80" rx="10" class="psvg-node"></rect>
+    <text x="64" y="656" class="psvg-role">Review / Export</text>
+    <text x="64" y="680" class="psvg-strong">Derived from evidence</text>
+
+    <!-- AI annex AFTER / SEPARATE — not in provenance chain -->
+    <rect x="24" y="960" width="392" height="88" rx="12" class="psvg-insights"></rect>
+    <text x="40" y="996" class="psvg-role">AI-Assisted Insights</text>
+    <text x="40" y="1020" class="psvg-strong">Non-authoritative · no trusted path</text>
+  </svg>
 
   <figcaption class="visually-hidden">
-    Inside a read-only verification boundary, a selected transaction’s Request
-    Admission and Result-to-Action decisions map to related Verifiable Decision
-    Records. Source evidence supports deterministic reconstruction. Export
+    Inside a read-only verification boundary, Request Admission maps to the
+    Request Decision Record and Result-to-Action maps to the Action Decision
+    Record. Source evidence supports deterministic reconstruction. Export
     derives from the canonical evidence ledger. AI-Assisted Insights remain
-    non-authoritative with no path to runtime authorization.
+    non-authoritative with no connector into trusted provenance or runtime
+    authorization.
   </figcaption>
 </figure>

@@ -1,9 +1,8 @@
 ---
 /**
- * Compact executive verification relationship for Verification hero.
+ * Verification executive summary — pure SVG desktop + compact.
+ * No ordered-list mobile fallback.
  */
-import DiagramIcon from "./primitives/DiagramIcon.astro";
-
 interface Props {
   title?: string;
   idPrefix?: string;
@@ -11,58 +10,117 @@ interface Props {
 
 const { title = "Verification evidence relationship", idPrefix = "ves" } = Astro.props;
 const mid = `${idPrefix}-m`;
+const labelledBy = `${idPrefix}-title`;
 ---
 
-<figure class="ves" aria-labelledby={`${idPrefix}-title`}>
-  <h3 id={`${idPrefix}-title`} class="ves-title visually-hidden">{title}</h3>
-  <p class="osc-boundary osc-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
+<figure class:list={["psvg", "psvg-ves"]} aria-labelledby={labelledBy}>
+  <h3 id={labelledBy} class="psvg-title visually-hidden">{title}</h3>
 
-  <div class="ves-desktop" aria-hidden="true">
-    <svg class="ves-svg" viewBox="0 0 640 200" focusable="false">
-      <defs>
-        <marker id={`${mid}-e`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-          <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-evidence)"></path>
-        </marker>
-      </defs>
-      <path class="ves-path" d="M130 80 H190" marker-end={`url(#${mid}-e)`}></path>
-      <path class="ves-path" d="M330 80 H390" marker-end={`url(#${mid}-e)`}></path>
-      <path class="ves-path" d="M490 80 H540" marker-end={`url(#${mid}-e)`}></path>
-    </svg>
-    <ol class="ves-nodes">
-      <li class="ves-node">
-        <span class="ves-role"><DiagramIcon name="shield" /> DECISIONS</span>
-        <strong>Request + action</strong>
-      </li>
-      <li class="ves-node ves-node--canonical">
-        <span class="ves-role"><DiagramIcon name="evidence" /> CANONICAL EVIDENCE</span>
-        <strong>Verifiable Decision Records</strong>
-      </li>
-      <li class="ves-node">
-        <span class="ves-role"><DiagramIcon name="verify" /> RECONSTRUCT</span>
-        <strong>Deterministic reconstruction</strong>
-      </li>
-      <li class="ves-node">
-        <span class="ves-role">REVIEW</span>
-        <strong>Explorer · reporting</strong>
-      </li>
-    </ol>
-  </div>
+  <svg
+    class="psvg-desktop"
+    viewBox="0 0 440 320"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title}</title>
+    <desc>
+      Decisions flow to canonical evidence, then deterministic reconstruction and
+      review. AI-assisted insights remain non-authoritative with no trusted path.
+    </desc>
+    <defs>
+      <marker id={`${mid}-e`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-evidence)"></path>
+      </marker>
+    </defs>
 
-  <ol class="ves-mobile" aria-hidden="true">
-    <li><strong>Decisions</strong> · Request + action</li>
-    <li class="ves-mobile-canonical"><strong>Canonical evidence</strong> · VDRs</li>
-    <li><strong>Reconstruct</strong> · Deterministic</li>
-    <li><strong>Review</strong> · Explorer · reporting</li>
-  </ol>
+    <rect x="12" y="12" width="416" height="220" rx="14" class="psvg-bound psvg-bound--verify"></rect>
+    <text x="24" y="36" class="psvg-bound-label psvg-bound-label--verify">READ-ONLY VERIFICATION BOUNDARY</text>
 
-  <aside class="ves-insights">
-    <span class="ves-role">AI-assisted insights</span>
-    <strong>Non-authoritative</strong>
-  </aside>
+    <g data-node-id="decisions" data-collision-check="true">
+      <rect x="28" y="56" width="96" height="88" rx="12" class="psvg-node"></rect>
+      <text x="40" y="84" class="psvg-role">DECISIONS</text>
+      <text x="40" y="108" class="psvg-strong">Request +</text>
+      <text x="40" y="124" class="psvg-strong">action</text>
+    </g>
+    <path class="psvg-path psvg-path--evidence" d="M124 100 H148" marker-end={`url(#${mid}-e)`}></path>
+
+    <g data-node-id="canonical" data-collision-check="true">
+      <rect x="148" y="44" width="144" height="112" rx="14" class="psvg-evidence psvg-evidence--dominant"></rect>
+      <text x="160" y="76" class="psvg-role">CANONICAL</text>
+      <text x="160" y="96" class="psvg-role">EVIDENCE</text>
+      <text x="160" y="124" class="psvg-strong">Decision</text>
+      <text x="160" y="140" class="psvg-strong">records</text>
+    </g>
+    <path class="psvg-path psvg-path--evidence" d="M292 100 H316" marker-end={`url(#${mid}-e)`}></path>
+
+    <g data-node-id="reconstruct" data-collision-check="true">
+      <rect x="316" y="56" width="96" height="88" rx="12" class="psvg-node"></rect>
+      <text x="328" y="84" class="psvg-role">RECONSTRUCT</text>
+      <text x="328" y="112" class="psvg-strong">Deterministic</text>
+    </g>
+    <path class="psvg-path psvg-path--evidence" d="M364 144 V168" marker-end={`url(#${mid}-e)`}></path>
+
+    <g data-node-id="review" data-collision-check="true">
+      <rect x="280" y="168" width="132" height="48" rx="10" class="psvg-node"></rect>
+      <text x="292" y="188" class="psvg-role">REVIEW</text>
+      <text x="292" y="204" class="psvg-strong">Explorer + reporting</text>
+    </g>
+
+    <g data-node-id="ai" data-collision-check="true">
+      <rect x="12" y="252" width="416" height="56" rx="10" class="psvg-insights"></rect>
+      <text x="28" y="276" class="psvg-role">AI-ASSISTED INSIGHTS</text>
+      <text x="28" y="294" class="psvg-strong">Non-authoritative · no trusted path</text>
+    </g>
+  </svg>
+
+  <svg
+    class="psvg-compact"
+    viewBox="0 0 340 600"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title} — compact</title>
+    <defs>
+      <marker id={`${mid}-ce`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-evidence)"></path>
+      </marker>
+    </defs>
+
+    <rect x="16" y="16" width="308" height="460" rx="14" class="psvg-bound psvg-bound--verify"></rect>
+    <text x="32" y="44" class="psvg-bound-label psvg-bound-label--verify">READ-ONLY VERIFICATION BOUNDARY</text>
+
+    <rect x="40" y="64" width="260" height="64" rx="12" class="psvg-node"></rect>
+    <text x="56" y="92" class="psvg-role">DECISIONS</text>
+    <text x="56" y="112" class="psvg-strong">Request + action</text>
+    <path class="psvg-path psvg-path--evidence" d="M170 128 V152" marker-end={`url(#${mid}-ce)`}></path>
+
+    <rect x="40" y="152" width="260" height="96" rx="14" class="psvg-evidence psvg-evidence--dominant"></rect>
+    <text x="56" y="184" class="psvg-role">CANONICAL EVIDENCE</text>
+    <text x="56" y="212" class="psvg-strong">Verifiable Decision</text>
+    <text x="56" y="230" class="psvg-strong">Records</text>
+    <path class="psvg-path psvg-path--evidence" d="M170 248 V272" marker-end={`url(#${mid}-ce)`}></path>
+
+    <rect x="40" y="272" width="260" height="64" rx="12" class="psvg-node"></rect>
+    <text x="56" y="300" class="psvg-role">RECONSTRUCT</text>
+    <text x="56" y="320" class="psvg-strong">Deterministic</text>
+    <path class="psvg-path psvg-path--evidence" d="M170 336 V360" marker-end={`url(#${mid}-ce)`}></path>
+
+    <rect x="40" y="360" width="260" height="64" rx="12" class="psvg-node"></rect>
+    <text x="56" y="388" class="psvg-role">REVIEW</text>
+    <text x="56" y="408" class="psvg-strong">Explorer + reporting</text>
+
+    <rect x="16" y="500" width="308" height="72" rx="12" class="psvg-insights"></rect>
+    <text x="32" y="532" class="psvg-role">AI-ASSISTED INSIGHTS</text>
+    <text x="32" y="552" class="psvg-strong">Non-authoritative · no trusted path</text>
+  </svg>
 
   <figcaption class="visually-hidden">
     Read-only verification relationship: request and action decisions flow into
     canonical Verifiable Decision Records, then deterministic reconstruction and
-    review outputs. AI-assisted insights remain non-authoritative.
+    review. AI-assisted insights remain non-authoritative with no trusted path.
   </figcaption>
 </figure>

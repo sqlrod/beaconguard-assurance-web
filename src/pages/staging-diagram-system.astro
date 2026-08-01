@@ -1,199 +1,106 @@
 ---
 /**
- * Staging-only unified enterprise diagram system review (Pass 01B-R1).
- * Specialized views A/B/C — not competing universal candidates.
- * Review headings live on this page; reusable components stay pure.
+ * Staging-only unified diagram system — Pass 01B-R2 pure-SVG rebuild.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OrthographicSecurityCircuit from "../components/diagrams/directions/OrthographicSecurityCircuit.astro";
 import LayeredControlArchitecture from "../components/diagrams/directions/LayeredControlArchitecture.astro";
 import EvidenceCenteredInvestigation from "../components/diagrams/directions/EvidenceCenteredInvestigation.astro";
-import DiagramIcon from "../components/diagrams/primitives/DiagramIcon.astro";
 ---
 
 <BaseLayout
-  title="Staging · Unified enterprise diagram system | BeaconGuard"
-  description="Staging-only art-direction refinement of the BeaconGuard unified diagram system."
+  title="Staging · Pure-SVG diagram rebuild | BeaconGuard"
+  description="Staging-only Pass 01B-R2 pure-SVG production-candidate diagram rebuild."
   noindex={true}
 >
   <section class="staging-banner" role="note">
-    <strong>STAGING ONLY</strong>
+    <strong>STAGING ONLY · PASS 01B-R2</strong>
     <p>
-      Pass 01B-R1 art-direction refinement. noindex, excluded from sitemap, not
-      linked from navigation or footer. Views A, B, and C remain specialized
-      architectural views — not competing winners. No site-wide deployment.
-      Pass 01C remains unauthorized pending review.
+      Pure-SVG rebuild. noindex, excluded from sitemap, not linked from navigation
+      or footer. Mixed HTML/SVG positioning removed. No site-wide adoption. Pass
+      01C remains unauthorized pending independent visual review.
     </p>
   </section>
 
   <section class="stack-section">
-    <h1>Unified enterprise diagram system</h1>
+    <h1>Pure-SVG production-candidate diagram rebuild</h1>
     <p class="lead">
-      Production-candidate art direction for three specialized views sharing one
-      BeaconGuard visual language. Classification accepted; Pass 01B visual
-      execution refined in R1.
+      Self-contained SVG coordinate systems for Views A, B, and C plus homepage
+      and Verification executive visuals. Desktop and compact variants are
+      separately authored diagrams — not scaled-down desktops or list fallbacks.
     </p>
+    <p><code>IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW</code></p>
   </section>
 
-  <section class="stack-section" id="system-overview">
-    <h2>1. Unified visual-system overview</h2>
-    <p>
-      Shared 8-point grid, typography, icons, semantic colors, connector weights,
-      and trust-boundary language. Geometry and paths carry primary meaning.
-    </p>
-    <div class="sys-icon-row" aria-hidden="true">
-      <span class="sys-icon-chip"><DiagramIcon name="app" /> App</span>
-      <span class="sys-icon-chip"><DiagramIcon name="shield" /> Checkpoint</span>
-      <span class="sys-icon-chip"><DiagramIcon name="provider" /> Provider</span>
-      <span class="sys-icon-chip"><DiagramIcon name="database" /> SoR</span>
-      <span class="sys-icon-chip"><DiagramIcon name="evidence" /> Evidence</span>
-      <span class="sys-icon-chip"><DiagramIcon name="verify" /> Verify</span>
-      <span class="sys-icon-chip"><DiagramIcon name="export" /> Export</span>
-      <span class="sys-icon-chip"><DiagramIcon name="deny" /> Deny</span>
-      <span class="sys-icon-chip"><DiagramIcon name="release" /> Release</span>
-    </div>
+  <section class="stack-section" id="r2-architecture">
+    <h2>Rendering architecture</h2>
+    <ul>
+      <li>Nodes, connectors, boundaries, and labels share one SVG viewBox.</li>
+      <li>No HTML absolute positioning over SVG paths.</li>
+      <li>No ordered-list mobile replacement.</li>
+      <li>No foreignObject, React Flow, Mermaid, D3, Dagre, or ELK.</li>
+    </ul>
   </section>
 
   <section class="stack-section dir-section" id="direction-a" data-crop="direction-a">
-    <h2>2. View A — Orthographic Security Circuit</h2>
+    <h2>View A — Orthographic Security Circuit</h2>
     <p>
-      Purpose: transaction authorization and fail-closed control. Intended pages:
-      Homepage compact visual, How It Works, Canonical Workflow, Healthcare,
-      Financial Services, Use Cases, Controlled Evaluation summary.
+      Purpose: transaction authorization. R1 defect: HTML nodes over SVG paths
+      caused clipping, DENY overlap, and list-like mobile output. R2 correction:
+      pure-SVG desktop circuit + compact vertical circuit with DENY side
+      terminals. Independent-review status: <strong>PENDING</strong>.
     </p>
     <OrthographicSecurityCircuit idPrefix="sys-a" title="Governed AI transaction circuit" />
     <div class="dir-compact-wrap">
-      <h4 class="dir-compact-label">Compact / mobile transaction spine</h4>
-      <OrthographicSecurityCircuit compact={true} idPrefix="sys-a-c" title="Mobile transaction spine" />
+      <h4 class="dir-compact-label">Forced compact variant</h4>
+      <OrthographicSecurityCircuit compact={true} idPrefix="sys-a-c" title="Compact transaction circuit" />
     </div>
     <details class="bg-disclose">
       <summary>Inspect technical structure</summary>
       <div class="bg-disclose-body">
-        <p><strong>Architecture purpose:</strong> Closed governed AI transaction with dual authorization chokepoints.</p>
-        <p><strong>Component inventory:</strong> Prepare, Receive+Declare, Execute, Request Admission, AI Provider, Result-to-Action, System of Record, Evidence bus, Verify.</p>
-        <p><strong>Path inventory:</strong> REQUEST OUT → gate → Invoke → return RESULT IN → ACTION OUT → gate → EXECUTION IN → SYSTEM EFFECT OUT; dual DENY terminals; evidence bus.</p>
-        <p><strong>Known limitations:</strong> Dense at mid widths; evidence bus must remain below the runtime circuit.</p>
+        <p>Ports: REQUEST OUT, RESULT IN, ACTION OUT, EXECUTION IN, SYSTEM EFFECT OUT.</p>
+        <p>Paths: outbound, invoke, return-to-application, declared action, ALLOW→Execute, system effect, dual DENY terminals, evidence bus.</p>
       </div>
     </details>
   </section>
 
   <section class="stack-section dir-section" id="direction-b" data-crop="direction-b">
-    <h2>3. View B — Layered Control Architecture</h2>
+    <h2>View B — Layered Control Architecture</h2>
     <p>
-      Purpose: functional platform architecture. Intended pages: Platform,
-      executive architecture, company overview where appropriate, pitch-deck
-      summary. Not automatic detailed deployment topology.
+      Purpose: functional platform domains. R1 defect: three documentation cards
+      with list spines and hidden connectors. R2 correction: pure-SVG layered
+      composition with authored release and evidence connectors. Independent-review
+      status: <strong>PENDING</strong>.
     </p>
     <LayeredControlArchitecture idPrefix="sys-b" title="Govern · Authorize · Verify" />
     <div class="dir-compact-wrap">
-      <h4 class="dir-compact-label">Mobile logical sequence</h4>
-      <LayeredControlArchitecture compact={true} idPrefix="sys-b-c" title="Mobile functional sequence" />
+      <h4 class="dir-compact-label">Forced compact variant</h4>
+      <LayeredControlArchitecture compact={true} idPrefix="sys-b-c" title="Compact functional sequence" />
     </div>
-    <details class="bg-disclose">
-      <summary>Inspect technical structure</summary>
-      <div class="bg-disclose-body">
-        <p><strong>Architecture purpose:</strong> Govern → Authorize → Verify as functional domains with real connectors.</p>
-        <p><strong>Path inventory:</strong> Verified release into Authorize; decision evidence to Verify; blocked return (no runtime permission path).</p>
-        <p><strong>Known limitations:</strong> Does not communicate full transaction geometry; must not be read as physical isolation.</p>
-      </div>
-    </details>
   </section>
 
   <section class="stack-section dir-section" id="direction-c" data-crop="direction-c">
-    <h2>4. View C — Evidence-Centered Investigation</h2>
+    <h2>View C — Evidence-Centered Investigation</h2>
     <p>
-      Purpose: verification, investigation, audit, and evidence. Intended pages:
-      Verification, Proof and Evidence, Compliance and Audit, Reviewer Kit,
-      Sample Decision Record, Trust Center evidence summary where appropriate.
+      Purpose: verification and evidence. R1 defect: ambiguous decision-to-record
+      binding and AI insights inserted into provenance. R2 correction: pure-SVG
+      ledger with correct bindings and AI annex outside trusted sequence.
+      Independent-review status: <strong>PENDING</strong>.
     </p>
     <EvidenceCenteredInvestigation idPrefix="sys-c" title="Evidence-centered investigation" />
     <div class="dir-compact-wrap">
-      <h4 class="dir-compact-label">Mobile provenance spine</h4>
-      <EvidenceCenteredInvestigation compact={true} idPrefix="sys-c-c" title="Mobile evidence provenance" />
-    </div>
-    <details class="bg-disclose">
-      <summary>Inspect technical structure</summary>
-      <div class="bg-disclose-body">
-        <p><strong>Architecture purpose:</strong> Decision context → canonical evidence ledger → selected reconstruction / export.</p>
-        <p><strong>Known limitations:</strong> Illustrative model only — not a live product screenshot.</p>
-      </div>
-    </details>
-  </section>
-
-  <section class="stack-section" id="r1-acceptance">
-    <h2>5. Pass 01B-R1 visual acceptance criteria</h2>
-    <p>Automated checks confirm implementation completeness. Independent visual review is still required.</p>
-    <div class="docs-table-wrap">
-      <table class="dir-eval dir-eval--wide">
-        <thead>
-          <tr>
-            <th>Original Pass 01B defect</th>
-            <th>R1 correction</th>
-            <th>Validation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>A: Gates as forms with outcome cards</td>
-            <td>Chokepoint gates; ALLOW as continuous path; DENY terminals</td>
-            <td>PENDING_INDEPENDENT_VISUAL_REVIEW</td>
-          </tr>
-          <tr>
-            <td>A: Mobile becomes box stack</td>
-            <td>Dedicated mobile transaction spine with DENY branches</td>
-            <td>PENDING_INDEPENDENT_VISUAL_REVIEW</td>
-          </tr>
-          <tr>
-            <td>B: Three bullet panels / text-only flows</td>
-            <td>Layered domains + authored release/evidence connectors</td>
-            <td>PENDING_INDEPENDENT_VISUAL_REVIEW</td>
-          </tr>
-          <tr>
-            <td>B: Mobile reorders Authorize first</td>
-            <td>Govern → Authorize → Verify logical order retained</td>
-            <td>PENDING_INDEPENDENT_VISUAL_REVIEW</td>
-          </tr>
-          <tr>
-            <td>C: Equal menu cards / glyph arrows</td>
-            <td>Evidence ledger + selected reconstruction + provenance paths</td>
-            <td>PENDING_INDEPENDENT_VISUAL_REVIEW</td>
-          </tr>
-          <tr>
-            <td>Reusable components embed staging titles</td>
-            <td>Titles/descriptions moved to this staging page</td>
-            <td>IMPLEMENTATION_COMPLETE</td>
-          </tr>
-          <tr>
-            <td>Homepage checklist interim</td>
-            <td>Five-node executive sequence with dual DENY cues</td>
-            <td>PENDING_INDEPENDENT_VISUAL_REVIEW</td>
-          </tr>
-          <tr>
-            <td>Verification card stack interim</td>
-            <td>Decisions → evidence → reconstruct → review</td>
-            <td>PENDING_INDEPENDENT_VISUAL_REVIEW</td>
-          </tr>
-        </tbody>
-      </table>
+      <h4 class="dir-compact-label">Forced compact variant</h4>
+      <EvidenceCenteredInvestigation compact={true} idPrefix="sys-c-c" title="Compact evidence provenance" />
     </div>
   </section>
 
   <section class="stack-section" id="mapping">
-    <h2>6. Intended page mapping</h2>
+    <h2>Intended page mapping</h2>
     <ul>
       <li><strong>View A:</strong> Home compact, How It Works, Canonical, Healthcare, Financial, Use Cases, Controlled Evaluation.</li>
       <li><strong>View B:</strong> Platform, executive architecture, company overview, pitch deck.</li>
       <li><strong>View C:</strong> Verification, Proof, Compliance/Audit, Reviewer Kit, Sample Decision Record.</li>
     </ul>
-  </section>
-
-  <section class="stack-section" id="approval">
-    <h2>7. Approval boundary</h2>
-    <p>
-      All three views remain required specialized architecture views. No universal
-      winner. No site-wide diagram adoption occurred. Pass 01C remains unauthorized
-      pending independent visual review.
-    </p>
-    <p><code>IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW</code></p>
+    <p>No universal winner. No site-wide diagram adoption occurred. Pass 01C remains unauthorized pending independent visual review.</p>
   </section>
 </BaseLayout>

@@ -4768,3 +4768,121 @@ body.docs-surface main#content {
   max-width: 560px;
   justify-self: end;
 }
+
+/* =========================
+   PASS 01B-R2 — PURE SVG DIAGRAM SYSTEM
+   ========================= */
+
+.psvg { margin: 0; width: 100%; }
+.psvg-title { margin: 0 0 12px; font-size: 1.05rem; color: var(--diagram-text-primary); }
+.psvg-meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; justify-content: space-between; }
+.psvg-illustrative {
+  margin: 0 0 12px;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--diagram-text-label);
+  font-weight: 600;
+}
+
+.psvg-desktop,
+.psvg-compact {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.psvg-compact { display: none; }
+.psvg--compact .psvg-desktop { display: none; }
+.psvg--compact .psvg-compact { display: block; }
+
+@media (max-width: 1099px) {
+  .psvg:not(.psvg--compact) .psvg-desktop { display: none; }
+  .psvg:not(.psvg--compact) .psvg-compact { display: block; }
+}
+
+.psvg-bound { fill: rgba(15, 23, 42, 0.55); stroke-width: 2; }
+.psvg-bound--enterprise { stroke: var(--diagram-boundary-enterprise); }
+.psvg-bound--runtime { fill: rgba(14, 28, 48, 0.22); stroke: var(--diagram-boundary-runtime); }
+.psvg-bound--provider { fill: rgba(67, 20, 7, 0.2); stroke: var(--diagram-boundary-provider); stroke-dasharray: 6 4; }
+.psvg-bound--verify { fill: rgba(19, 78, 74, 0.18); stroke: var(--diagram-boundary-verify); }
+
+.psvg-bound-label { fill: var(--diagram-boundary-enterprise); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; }
+.psvg-bound-label--runtime { fill: var(--diagram-boundary-runtime); }
+.psvg-bound-label--provider { fill: var(--diagram-boundary-provider); }
+.psvg-bound-label--verify { fill: var(--diagram-boundary-verify); }
+
+.psvg-node { fill: var(--diagram-surface-raised); stroke: var(--diagram-border-strong); stroke-width: 1.5; }
+.psvg-node--allow { stroke: var(--decision-allow-border); }
+.psvg-gate { fill: rgba(12, 24, 42, 0.96); stroke: var(--diagram-boundary-runtime); stroke-width: 2; }
+.psvg-deny { fill: var(--decision-deny-surface); stroke: var(--decision-deny-border); stroke-width: 1.5; }
+.psvg-deny-x { fill: none; stroke: var(--decision-deny); stroke-width: 2; }
+.psvg-deny-x-line { stroke: var(--decision-deny); stroke-width: 2; fill: none; }
+.psvg-evidence { fill: var(--decision-evidence-surface); stroke: var(--decision-evidence-border); stroke-width: 1.5; }
+.psvg-evidence--dominant { stroke-width: 2.5; }
+.psvg-insights { fill: rgba(67, 20, 7, 0.28); stroke: var(--diagram-boundary-provider); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.psvg-selected { fill: var(--diagram-surface-raised); stroke: var(--decision-evidence-border); stroke-width: 2; }
+.psvg-port { fill: var(--diagram-neutral); stroke: #0b1220; stroke-width: 1; }
+.psvg-port-label { fill: var(--diagram-text-label); font-size: 12px; font-weight: 600; }
+
+.psvg-role { fill: var(--diagram-text-label); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+.psvg-strong { fill: var(--diagram-text-primary); font-size: 15px; font-weight: 700; }
+.psvg-desc { fill: var(--diagram-text-secondary); font-size: 14px; font-weight: 400; }
+.psvg-heading { fill: var(--diagram-text-primary); font-size: 18px; font-weight: 700; }
+.psvg-allow { fill: var(--decision-allow); font-weight: 700; }
+.psvg-deny-text { fill: var(--decision-deny); font-weight: 700; }
+.psvg-deny-strong { fill: var(--decision-deny); font-size: 12px; font-weight: 700; }
+.psvg-deny-desc { fill: var(--diagram-text-secondary); font-size: 12px; }
+
+.psvg-path { fill: none; stroke-linecap: square; stroke-linejoin: miter; }
+.psvg-path--neutral { stroke: var(--connector-neutral); stroke-width: 3; }
+.psvg-path--allow { stroke: var(--connector-allow); stroke-width: 4; }
+.psvg-path--deny { stroke: var(--connector-deny); stroke-width: 4; }
+.psvg-path--evidence { stroke: var(--connector-evidence); stroke-width: 3; stroke-dasharray: 6 4; }
+
+.psvg-plate { fill: rgba(8, 14, 28, 0.94); stroke: var(--diagram-border); stroke-width: 1; }
+.psvg-plate--allow { stroke: var(--decision-allow-border); }
+.psvg-plate--evidence { stroke: var(--decision-evidence-border); }
+.psvg-plate-text { fill: var(--diagram-text-secondary); font-size: 12px; font-weight: 600; text-anchor: middle; }
+.psvg-plate-text--allow { fill: var(--decision-allow); }
+.psvg-plate-text--evidence { fill: var(--decision-evidence); }
+
+.psvg-layer { fill: var(--diagram-surface-raised); stroke: var(--diagram-border); stroke-width: 1.5; }
+.psvg-layer--rear { fill: rgba(16, 28, 48, 0.88); }
+.psvg-layer--authorize { fill: rgba(12, 24, 42, 0.98); stroke: var(--diagram-boundary-runtime); stroke-width: 2.5; }
+.psvg-layer--verify { fill: rgba(16, 28, 48, 0.9); stroke: var(--diagram-boundary-verify); stroke-width: 2; }
+.psvg-chip, .psvg-cap, .psvg-spine { fill: rgba(8, 14, 28, 0.55); stroke: var(--diagram-border); stroke-width: 1; }
+.psvg-chip--active, .psvg-spine--outcome { stroke: var(--diagram-boundary-runtime); }
+.psvg-chip-text { fill: var(--diagram-text-secondary); font-size: 13px; font-weight: 600; }
+.psvg-tab { fill: rgba(8, 14, 28, 0.45); stroke: var(--diagram-border); }
+.psvg-tab--active { fill: rgba(45, 212, 191, 0.14); stroke: var(--decision-evidence-border); }
+.psvg-tab-text { fill: var(--diagram-text-secondary); font-size: 12px; font-weight: 600; }
+
+.hero-split--home {
+  grid-template-columns: minmax(0, 1.35fr) minmax(420px, 0.95fr);
+}
+.hero-split--home .hero-split-visual {
+  max-width: none;
+  min-width: 420px;
+  justify-self: stretch;
+}
+.psvg-gts, .psvg-ves {
+  padding: 8px;
+  border: 1px solid var(--diagram-border);
+  border-radius: 14px;
+  background: var(--diagram-surface);
+}
+.psvg-ves { border-color: var(--diagram-boundary-verify); border-width: 2px; }
+
+@media (max-width: 1099px) {
+  .hero-split--home {
+    grid-template-columns: 1fr;
+  }
+  .hero-split--home .hero-split-visual {
+    min-width: 0;
+  }
+  .hero-split--home .hero-line {
+    white-space: normal;
+  }
+}

@@ -1,10 +1,8 @@
 ---
 /**
- * Compact executive transaction summary for homepage hero.
- * Not the full Orthographic Security Circuit.
+ * Homepage executive transaction — pure SVG desktop + compact.
+ * No ordered-list mobile fallback.
  */
-import DiagramIcon from "./primitives/DiagramIcon.astro";
-
 interface Props {
   title?: string;
   idPrefix?: string;
@@ -12,70 +10,151 @@ interface Props {
 
 const { title = "Governed transaction", idPrefix = "gts" } = Astro.props;
 const mid = `${idPrefix}-m`;
+const labelledBy = `${idPrefix}-title`;
 ---
 
-<figure class="gts" aria-labelledby={`${idPrefix}-title`}>
-  <h3 id={`${idPrefix}-title`} class="gts-title visually-hidden">{title}</h3>
+<figure class:list={["psvg", "psvg-gts"]} aria-labelledby={labelledBy}>
+  <h3 id={labelledBy} class="psvg-title visually-hidden">{title}</h3>
 
-  <div class="gts-desktop" aria-hidden="true">
-    <svg class="gts-svg" viewBox="0 0 720 160" focusable="false">
-      <defs>
-        <marker id={`${mid}-n`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-          <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-neutral)"></path>
-        </marker>
-        <marker id={`${mid}-a`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-          <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-allow)"></path>
-        </marker>
-        <marker id={`${mid}-d`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-          <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-deny)"></path>
-        </marker>
-      </defs>
-      <path class="gts-path gts-path--neutral" d="M118 70 H168" marker-end={`url(#${mid}-n)`}></path>
-      <path class="gts-path gts-path--deny" d="M210 98 V130" marker-end={`url(#${mid}-d)`}></path>
-      <path class="gts-path gts-path--allow" d="M252 70 H302" marker-end={`url(#${mid}-a)`}></path>
-      <path class="gts-path gts-path--neutral" d="M386 70 H436" marker-end={`url(#${mid}-n)`}></path>
-      <path class="gts-path gts-path--deny" d="M478 98 V130" marker-end={`url(#${mid}-d)`}></path>
-      <path class="gts-path gts-path--allow" d="M520 70 H570" marker-end={`url(#${mid}-a)`}></path>
-    </svg>
+  <svg
+    class="psvg-desktop"
+    viewBox="0 0 440 300"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title}</title>
+    <desc>
+      Enterprise request through Request Admission with REQUEST DENY hard stop,
+      untrusted AI proposal, Action Authorization with ACTION DENY hard stop,
+      then authorized enterprise effect.
+    </desc>
+    <defs>
+      <marker id={`${mid}-n`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-neutral)"></path>
+      </marker>
+      <marker id={`${mid}-a`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-allow)"></path>
+      </marker>
+      <marker id={`${mid}-d`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-deny)"></path>
+      </marker>
+    </defs>
 
-    <ol class="gts-nodes">
-      <li class="gts-node">
-        <span class="gts-role"><DiagramIcon name="app" /> REQUEST</span>
-        <strong>Enterprise request</strong>
-      </li>
-      <li class="gts-node gts-node--gate">
-        <span class="gts-role"><DiagramIcon name="shield" /> SHIELD 1</span>
-        <strong>Request Admission</strong>
-        <span class="gts-stop">DENY</span>
-      </li>
-      <li class="gts-node gts-node--provider">
-        <span class="gts-role"><DiagramIcon name="provider" /> AI PROPOSAL</span>
-        <strong>Untrusted result</strong>
-      </li>
-      <li class="gts-node gts-node--gate">
-        <span class="gts-role"><DiagramIcon name="shield" /> SHIELD 2</span>
-        <strong>Action Authorization</strong>
-        <span class="gts-stop">DENY</span>
-      </li>
-      <li class="gts-node gts-node--action">
-        <span class="gts-role"><DiagramIcon name="database" /> ACTION</span>
-        <strong>Authorized effect</strong>
-      </li>
-    </ol>
-  </div>
+    <!-- Top row -->
+    <g data-node-id="request" data-collision-check="true">
+      <rect x="16" y="24" width="112" height="72" rx="12" class="psvg-node"></rect>
+      <text x="28" y="48" class="psvg-role">REQUEST</text>
+      <text x="28" y="72" class="psvg-strong">Enterprise</text>
+      <text x="28" y="88" class="psvg-strong">request</text>
+    </g>
+    <path class="psvg-path psvg-path--neutral" d="M128 60 H152" marker-end={`url(#${mid}-n)`}></path>
 
-  <ol class="gts-mobile" aria-hidden="true">
-    <li><strong>Request</strong> · Enterprise request</li>
-    <li><strong>Request Admission</strong> · DENY stop</li>
-    <li><strong>AI proposal</strong> · Untrusted</li>
-    <li><strong>Action Authorization</strong> · DENY stop</li>
-    <li><strong>Action</strong> · Authorized effect</li>
-  </ol>
+    <g data-node-id="shield1" data-collision-check="true">
+      <rect x="152" y="16" width="128" height="88" rx="12" class="psvg-gate"></rect>
+      <text x="164" y="44" class="psvg-role">SHIELD 1</text>
+      <text x="164" y="68" class="psvg-strong">Request</text>
+      <text x="164" y="86" class="psvg-strong">Admission</text>
+    </g>
+    <path class="psvg-path psvg-path--deny" d="M216 104 V128" marker-end={`url(#${mid}-d)`}></path>
+    <g data-terminal="request-deny">
+      <rect x="176" y="128" width="80" height="40" rx="8" class="psvg-deny"></rect>
+      <text x="184" y="146" class="psvg-deny-strong">REQUEST DENY</text>
+      <text x="184" y="160" class="psvg-deny-desc">No invoke</text>
+    </g>
+    <path class="psvg-path psvg-path--allow" d="M280 60 H304" marker-end={`url(#${mid}-a)`}></path>
+
+    <g data-node-id="ai" data-collision-check="true">
+      <rect x="304" y="24" width="120" height="72" rx="12" class="psvg-bound psvg-bound--provider"></rect>
+      <text x="316" y="48" class="psvg-role">AI PROPOSAL</text>
+      <text x="316" y="72" class="psvg-strong">Untrusted</text>
+      <text x="316" y="88" class="psvg-strong">result</text>
+    </g>
+
+    <!-- Bottom return into Action Authorization -->
+    <path class="psvg-path psvg-path--neutral" d="M364 96 V216 H280" marker-end={`url(#${mid}-n)`}></path>
+    <g data-label-plate="true"><rect x="288" y="148" width="100" height="18" rx="4" class="psvg-plate"></rect><text x="338" y="161" class="psvg-plate-text">Untrusted result</text></g>
+
+    <g data-node-id="shield2" data-collision-check="true">
+      <rect x="152" y="172" width="128" height="88" rx="12" class="psvg-gate"></rect>
+      <text x="164" y="200" class="psvg-role">SHIELD 2</text>
+      <text x="164" y="224" class="psvg-strong">Action</text>
+      <text x="164" y="242" class="psvg-strong">Authorization</text>
+    </g>
+    <path class="psvg-path psvg-path--deny" d="M152 216 H104" marker-end={`url(#${mid}-d)`}></path>
+    <g data-terminal="action-deny">
+      <rect x="16" y="196" width="88" height="48" rx="8" class="psvg-deny"></rect>
+      <text x="24" y="216" class="psvg-deny-strong">ACTION DENY</text>
+      <text x="24" y="232" class="psvg-deny-desc">No effect</text>
+    </g>
+    <path class="psvg-path psvg-path--allow" d="M280 216 H304" marker-end={`url(#${mid}-a)`}></path>
+
+    <g data-node-id="effect" data-collision-check="true">
+      <rect x="304" y="180" width="120" height="72" rx="12" class="psvg-node psvg-node--allow"></rect>
+      <text x="316" y="208" class="psvg-role">ACTION</text>
+      <text x="316" y="232" class="psvg-strong">Authorized</text>
+      <text x="316" y="248" class="psvg-strong">effect</text>
+    </g>
+  </svg>
+
+  <svg
+    class="psvg-compact"
+    viewBox="0 0 340 560"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title} — compact</title>
+    <defs>
+      <marker id={`${mid}-cn`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-neutral)"></path>
+      </marker>
+      <marker id={`${mid}-ca`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-allow)"></path>
+      </marker>
+      <marker id={`${mid}-cd`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="var(--connector-deny)"></path>
+      </marker>
+    </defs>
+
+    <rect x="24" y="16" width="200" height="64" rx="12" class="psvg-node"></rect>
+    <text x="40" y="44" class="psvg-role">REQUEST</text>
+    <text x="40" y="64" class="psvg-strong">Enterprise request</text>
+    <path class="psvg-path psvg-path--neutral" d="M124 80 V104" marker-end={`url(#${mid}-cn)`}></path>
+
+    <rect x="24" y="104" width="200" height="72" rx="12" class="psvg-gate"></rect>
+    <text x="40" y="132" class="psvg-role">SHIELD 1</text>
+    <text x="40" y="156" class="psvg-strong">Request Admission</text>
+    <path class="psvg-path psvg-path--deny" d="M224 140 H252" marker-end={`url(#${mid}-cd)`}></path>
+    <rect x="252" y="116" width="76" height="56" rx="8" class="psvg-deny"></rect>
+    <text x="260" y="140" class="psvg-deny-strong">DENY</text>
+    <text x="260" y="156" class="psvg-deny-desc">No invoke</text>
+
+    <path class="psvg-path psvg-path--allow" d="M124 176 V200" marker-end={`url(#${mid}-ca)`}></path>
+    <rect x="24" y="200" width="200" height="64" rx="12" class="psvg-bound psvg-bound--provider"></rect>
+    <text x="40" y="228" class="psvg-role">AI PROPOSAL</text>
+    <text x="40" y="248" class="psvg-strong">Untrusted result</text>
+
+    <path class="psvg-path psvg-path--neutral" d="M124 264 V288" marker-end={`url(#${mid}-cn)`}></path>
+    <rect x="24" y="288" width="200" height="72" rx="12" class="psvg-gate"></rect>
+    <text x="40" y="316" class="psvg-role">SHIELD 2</text>
+    <text x="40" y="340" class="psvg-strong">Action Authorization</text>
+    <path class="psvg-path psvg-path--deny" d="M224 324 H252" marker-end={`url(#${mid}-cd)`}></path>
+    <rect x="252" y="300" width="76" height="56" rx="8" class="psvg-deny"></rect>
+    <text x="260" y="324" class="psvg-deny-strong">DENY</text>
+    <text x="260" y="340" class="psvg-deny-desc">No effect</text>
+
+    <path class="psvg-path psvg-path--allow" d="M124 360 V384" marker-end={`url(#${mid}-ca)`}></path>
+    <rect x="24" y="384" width="200" height="64" rx="12" class="psvg-node psvg-node--allow"></rect>
+    <text x="40" y="412" class="psvg-role">ACTION</text>
+    <text x="40" y="432" class="psvg-strong">Authorized effect</text>
+  </svg>
 
   <figcaption class="visually-hidden">
-    Compact sequence: enterprise request through Request Admission, optional
-    REQUEST DENY hard stop, untrusted AI proposal, Result-to-Action
-    Authorization with optional ACTION DENY hard stop, then authorized
-    enterprise effect.
+    Compact governed transaction: enterprise request, Request Admission with
+    REQUEST DENY hard stop, untrusted AI proposal, Action Authorization with
+    ACTION DENY hard stop, then authorized enterprise effect.
   </figcaption>
 </figure>

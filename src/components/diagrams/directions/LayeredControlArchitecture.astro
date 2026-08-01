@@ -1,14 +1,10 @@
 ---
 /**
- * Layered Control Architecture — platform functional domains.
- * Production-candidate reusable diagram (no staging review headings).
+ * Layered Control Architecture — pure SVG (desktop + compact).
  */
-import DiagramIcon from "../primitives/DiagramIcon.astro";
-
 interface Props {
   title?: string;
   ariaLabel?: string;
-  variant?: "detailed" | "compact";
   compact?: boolean;
   idPrefix?: string;
 }
@@ -16,140 +12,178 @@ interface Props {
 const {
   title = "Govern · Authorize · Verify",
   ariaLabel,
-  variant = "detailed",
   compact = false,
   idPrefix = "lca",
 } = Astro.props;
 
-const isCompact = compact || variant === "compact";
 const mid = `${idPrefix}-m`;
 const labelledBy = `${idPrefix}-title`;
 ---
 
 <figure
-  class:list={["lca", isCompact && "lca--compact"]}
+  class:list={["psvg", "psvg-lca", compact && "psvg--compact"]}
   data-diagram-direction="B"
   aria-labelledby={labelledBy}
   aria-label={ariaLabel}
 >
-  <h3 id={labelledBy} class="lca-title">{title}</h3>
+  <h3 id={labelledBy} class="psvg-title">{title}</h3>
 
-  <div class="lca-stage" aria-hidden="true">
-    <svg class="lca-svg" viewBox="0 0 1000 420" focusable="false">
-      <defs>
-        <marker id={`${mid}-n`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
-          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-neutral)"></path>
-        </marker>
-        <marker id={`${mid}-e`} markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
-          <path d="M0,0 L8,3.5 L0,7 Z" fill="var(--connector-evidence)"></path>
-        </marker>
-      </defs>
-      <path class="lca-path lca-path--release" d="M250 180 H360" marker-end={`url(#${mid}-n)`}></path>
-      <path class="lca-path lca-path--evidence" d="M640 210 H750" marker-end={`url(#${mid}-e)`}></path>
-      <g class="osc-label-plate">
-        <rect x="270" y="156" width="100" height="20" rx="4"></rect>
-        <text x="320" y="170">Verified release</text>
-      </g>
-      <g class="osc-label-plate osc-label-plate--evidence">
-        <rect x="650" y="186" width="110" height="20" rx="4"></rect>
-        <text x="705" y="200">Decision evidence</text>
-      </g>
-      <g class="lca-blocked">
-        <path d="M700 280 H560" stroke="var(--diagram-text-label)" stroke-width="2" stroke-dasharray="4 4"></path>
-        <circle cx="560" cy="280" r="10" fill="none" stroke="var(--decision-deny)" stroke-width="2"></circle>
-        <path d="M555 275 L565 285 M565 275 L555 285" stroke="var(--decision-deny)" stroke-width="2"></path>
-      </g>
-      <g class="osc-label-plate">
-        <rect x="575" y="292" width="150" height="20" rx="4"></rect>
-        <text x="650" y="306">No runtime permission path</text>
-      </g>
-    </svg>
+  <svg
+    class="psvg-desktop"
+    viewBox="0 0 1200 620"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title}</title>
+    <desc>
+      Govern supplies an Active Verified Release into Authorize. Authorize emits
+      decision evidence to Verify. There is no runtime permission path from
+      Verify back to Authorize.
+    </desc>
+    <defs>
+      <marker id={`${mid}-n`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-neutral)"></path>
+      </marker>
+      <marker id={`${mid}-e`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-evidence)"></path>
+      </marker>
+      <filter id={`${mid}-shadow`} x="-5%" y="-5%" width="120%" height="120%">
+        <feDropShadow dx="10" dy="12" stdDeviation="0" flood-color="#000" flood-opacity="0.22"></feDropShadow>
+      </filter>
+    </defs>
 
-    <section class="lca-domain lca-domain--govern">
-      <p class="lca-role">GOVERN · Functional domain</p>
-      <h4 class="lca-heading"><DiagramIcon name="release" /> Govern</h4>
-      <ol class="lca-rail">
-        <li>Playbook</li>
-        <li>Validate</li>
-        <li>Sign</li>
-        <li class="lca-rail-active">Active Verified Release</li>
-      </ol>
-    </section>
+    <!-- Govern rear-left -->
+    <g data-node-id="govern" data-collision-check="true" filter={`url(#${mid}-shadow)`}>
+      <rect x="48" y="96" width="280" height="360" rx="16" class="psvg-layer psvg-layer--rear"></rect>
+      <text x="64" y="128" class="psvg-role">GOVERN · Functional domain</text>
+      <text x="64" y="160" class="psvg-heading">Govern</text>
+      <rect x="72" y="188" width="88" height="40" rx="8" class="psvg-chip"></rect>
+      <text x="84" y="214" class="psvg-chip-text">Playbook</text>
+      <path class="psvg-path psvg-path--neutral" d="M160 208 H184" marker-end={`url(#${mid}-n)`}></path>
+      <rect x="184" y="188" width="88" height="40" rx="8" class="psvg-chip"></rect>
+      <text x="196" y="214" class="psvg-chip-text">Validate</text>
+      <path class="psvg-path psvg-path--neutral" d="M116 228 V252" marker-end={`url(#${mid}-n)`}></path>
+      <rect x="72" y="252" width="88" height="40" rx="8" class="psvg-chip"></rect>
+      <text x="96" y="278" class="psvg-chip-text">Sign</text>
+      <path class="psvg-path psvg-path--neutral" d="M160 272 H184" marker-end={`url(#${mid}-n)`}></path>
+      <rect x="184" y="252" width="120" height="56" rx="8" class="psvg-chip psvg-chip--active"></rect>
+      <text x="196" y="276" class="psvg-chip-text">Active Verified</text>
+      <text x="196" y="296" class="psvg-chip-text">Release</text>
+    </g>
 
-    <section class="lca-domain lca-domain--authorize">
-      <p class="osc-boundary">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</p>
-      <p class="lca-role">AUTHORIZE · Runtime prevention</p>
-      <h4 class="lca-heading"><DiagramIcon name="shield" /> Authorize</h4>
-      <ol class="lca-spine">
-        <li>Request Admission</li>
-        <li>AI result — untrusted</li>
-        <li>Declared action</li>
-        <li>Result-to-Action</li>
-        <li class="lca-spine-outcome"><span class="lca-allow">ALLOW</span> / <span class="lca-deny">DENY</span></li>
-      </ol>
-    </section>
+    <!-- Authorize center foreground -->
+    <g data-node-id="authorize" data-collision-check="true" filter={`url(#${mid}-shadow)`}>
+      <rect x="380" y="56" width="420" height="440" rx="16" class="psvg-layer psvg-layer--authorize"></rect>
+      <text x="396" y="84" class="psvg-bound-label psvg-bound-label--runtime">BEACONGUARD RUNTIME AUTHORIZATION BOUNDARY</text>
+      <text x="396" y="112" class="psvg-role">AUTHORIZE · Runtime prevention</text>
+      <text x="396" y="148" class="psvg-heading">Authorize</text>
 
-    <section class="lca-domain lca-domain--verify">
-      <p class="osc-boundary osc-boundary--verify">READ-ONLY VERIFICATION BOUNDARY</p>
-      <p class="lca-role">VERIFY · Investigation</p>
-      <h4 class="lca-heading"><DiagramIcon name="verify" /> Verify</h4>
-      <div class="lca-caps">
-        <span>Decision Explorer</span>
-        <span>Reconstruction</span>
-        <span>Source Evidence</span>
-        <span>Replay</span>
-        <span>Export</span>
-      </div>
-      <aside class="lca-insights">
-        <span class="lca-role">AI-assisted insights</span>
-        <strong>Non-authoritative</strong>
-      </aside>
-    </section>
-  </div>
+      <rect x="420" y="176" width="340" height="44" rx="8" class="psvg-spine"></rect>
+      <text x="436" y="204" class="psvg-strong">Request Admission</text>
+      <path class="psvg-path psvg-path--neutral" d="M590 220 V240" marker-end={`url(#${mid}-n)`}></path>
+      <rect x="420" y="240" width="340" height="44" rx="8" class="psvg-spine"></rect>
+      <text x="436" y="268" class="psvg-strong">AI result — untrusted</text>
+      <path class="psvg-path psvg-path--neutral" d="M590 284 V304" marker-end={`url(#${mid}-n)`}></path>
+      <rect x="420" y="304" width="340" height="44" rx="8" class="psvg-spine"></rect>
+      <text x="436" y="332" class="psvg-strong">Declared action</text>
+      <path class="psvg-path psvg-path--neutral" d="M590 348 V368" marker-end={`url(#${mid}-n)`}></path>
+      <rect x="420" y="368" width="340" height="44" rx="8" class="psvg-spine"></rect>
+      <text x="436" y="396" class="psvg-strong">Result-to-Action</text>
+      <path class="psvg-path psvg-path--neutral" d="M590 412 V432" marker-end={`url(#${mid}-n)`}></path>
+      <rect x="420" y="432" width="340" height="44" rx="8" class="psvg-spine psvg-spine--outcome"></rect>
+      <text x="436" y="460" class="psvg-strong"><tspan class="psvg-allow">ALLOW</tspan> or <tspan class="psvg-deny-text">DENY</tspan></text>
+    </g>
 
-  {/* Mobile preserves Govern → Authorize → Verify */}
-  <div class="lca-mobile" aria-hidden="true">
-    <section class="lca-domain lca-domain--govern">
-      <h4 class="lca-heading"><DiagramIcon name="release" /> Govern</h4>
-      <ol class="lca-rail">
-        <li>Playbook</li>
-        <li>Validate</li>
-        <li>Sign</li>
-        <li class="lca-rail-active">Active Verified Release</li>
-      </ol>
-    </section>
-    <p class="lca-flow">↓ Verified release</p>
-    <section class="lca-domain lca-domain--authorize">
-      <p class="osc-boundary">RUNTIME AUTHORIZATION</p>
-      <h4 class="lca-heading"><DiagramIcon name="shield" /> Authorize</h4>
-      <ol class="lca-spine">
-        <li>Request Admission</li>
-        <li>AI result — untrusted</li>
-        <li>Declared action</li>
-        <li>Result-to-Action</li>
-        <li class="lca-spine-outcome"><span class="lca-allow">ALLOW</span> / <span class="lca-deny">DENY</span></li>
-      </ol>
-    </section>
-    <p class="lca-flow lca-flow--evidence">↓ Decision evidence</p>
-    <section class="lca-domain lca-domain--verify">
-      <p class="osc-boundary osc-boundary--verify">READ-ONLY VERIFY</p>
-      <h4 class="lca-heading"><DiagramIcon name="verify" /> Verify</h4>
-      <div class="lca-caps">
-        <span>Explorer</span>
-        <span>Reconstruction</span>
-        <span>Source Evidence</span>
-        <span>Replay</span>
-        <span>Export</span>
-      </div>
-      <p class="lca-note">No runtime permission path</p>
-    </section>
-  </div>
+    <!-- Verify rear-right -->
+    <g data-node-id="verify" data-collision-check="true" filter={`url(#${mid}-shadow)`}>
+      <rect x="860" y="96" width="292" height="360" rx="16" class="psvg-layer psvg-layer--verify"></rect>
+      <text x="876" y="124" class="psvg-bound-label psvg-bound-label--verify">READ-ONLY VERIFICATION BOUNDARY</text>
+      <text x="876" y="152" class="psvg-role">VERIFY · Investigation</text>
+      <text x="876" y="184" class="psvg-heading">Verify</text>
+      <rect x="884" y="208" width="244" height="36" rx="8" class="psvg-cap"></rect>
+      <text x="896" y="232" class="psvg-chip-text">Decision Explorer</text>
+      <rect x="884" y="252" width="244" height="36" rx="8" class="psvg-cap"></rect>
+      <text x="896" y="276" class="psvg-chip-text">Reconstruction</text>
+      <rect x="884" y="296" width="244" height="36" rx="8" class="psvg-cap"></rect>
+      <text x="896" y="320" class="psvg-chip-text">Source Evidence</text>
+      <rect x="884" y="340" width="116" height="36" rx="8" class="psvg-cap"></rect>
+      <text x="908" y="364" class="psvg-chip-text">Replay</text>
+      <rect x="1008" y="340" width="120" height="36" rx="8" class="psvg-cap"></rect>
+      <text x="1032" y="364" class="psvg-chip-text">Export</text>
+      <rect x="884" y="396" width="244" height="44" rx="8" class="psvg-insights"></rect>
+      <text x="896" y="416" class="psvg-role">AI-assisted insights</text>
+      <text x="896" y="432" class="psvg-desc">Non-authoritative</text>
+    </g>
+
+    <!-- Connectors -->
+    <path class="psvg-path psvg-path--neutral" d="M328 280 H380" marker-end={`url(#${mid}-n)`} data-path-purpose="verified-release"></path>
+    <g data-label-plate="true"><rect x="300" y="248" width="100" height="20" rx="4" class="psvg-plate"></rect><text x="350" y="262" class="psvg-plate-text">Verified release</text></g>
+
+    <path class="psvg-path psvg-path--evidence" d="M800 280 H860" marker-end={`url(#${mid}-e)`} data-path-purpose="decision-evidence"></path>
+    <g data-label-plate="true"><rect x="780" y="248" width="110" height="20" rx="4" class="psvg-plate psvg-plate--evidence"></rect><text x="835" y="262" class="psvg-plate-text psvg-plate-text--evidence">Decision evidence</text></g>
+
+    <!-- No return path -->
+    <circle cx="830" cy="520" r="12" class="psvg-deny-x"></circle>
+    <path d="M824,514 L836,526 M836,514 L824,526" class="psvg-deny-x-line"></path>
+    <g data-label-plate="true"><rect x="848" y="508" width="160" height="20" rx="4" class="psvg-plate"></rect><text x="928" y="522" class="psvg-plate-text">No runtime permission path</text></g>
+  </svg>
+
+  <svg
+    class="psvg-compact"
+    viewBox="0 0 440 1060"
+    preserveAspectRatio="xMidYMin meet"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <title>{title} — compact</title>
+    <defs>
+      <marker id={`${mid}-cn`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-neutral)"></path>
+      </marker>
+      <marker id={`${mid}-ce`} markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L9,4 L0,8 Z" fill="var(--connector-evidence)"></path>
+      </marker>
+    </defs>
+
+    <rect x="40" y="24" width="360" height="220" rx="14" class="psvg-layer psvg-layer--rear"></rect>
+    <text x="56" y="56" class="psvg-role">GOVERN</text>
+    <text x="56" y="88" class="psvg-heading">Govern</text>
+    <text x="56" y="124" class="psvg-strong">Playbook → Validate → Sign</text>
+    <text x="56" y="156" class="psvg-strong">Active Verified Release</text>
+
+    <path class="psvg-path psvg-path--neutral" d="M220 244 V276" marker-end={`url(#${mid}-cn)`}></path>
+    <text x="236" y="268" class="psvg-plate-text">Verified release</text>
+
+    <rect x="24" y="276" width="392" height="340" rx="16" class="psvg-layer psvg-layer--authorize"></rect>
+    <text x="40" y="308" class="psvg-bound-label psvg-bound-label--runtime">RUNTIME AUTHORIZATION</text>
+    <text x="40" y="340" class="psvg-heading">Authorize</text>
+    <text x="40" y="376" class="psvg-strong">Request Admission</text>
+    <text x="40" y="408" class="psvg-strong">AI result — untrusted</text>
+    <text x="40" y="440" class="psvg-strong">Declared action</text>
+    <text x="40" y="472" class="psvg-strong">Result-to-Action</text>
+    <text x="40" y="512" class="psvg-strong"><tspan class="psvg-allow">ALLOW</tspan> or <tspan class="psvg-deny-text">DENY</tspan></text>
+
+    <path class="psvg-path psvg-path--evidence" d="M220 616 V648" marker-end={`url(#${mid}-ce)`}></path>
+    <text x="236" y="640" class="psvg-plate-text psvg-plate-text--evidence">Decision evidence</text>
+
+    <rect x="40" y="648" width="360" height="280" rx="14" class="psvg-layer psvg-layer--verify"></rect>
+    <text x="56" y="680" class="psvg-bound-label psvg-bound-label--verify">READ-ONLY VERIFY</text>
+    <text x="56" y="712" class="psvg-heading">Verify</text>
+    <text x="56" y="748" class="psvg-strong">Explorer · Reconstruction</text>
+    <text x="56" y="780" class="psvg-strong">Source Evidence · Replay · Export</text>
+    <rect x="56" y="808" width="328" height="56" rx="8" class="psvg-insights"></rect>
+    <text x="72" y="832" class="psvg-role">AI-assisted insights</text>
+    <text x="72" y="850" class="psvg-desc">Non-authoritative · no runtime path</text>
+    <text x="56" y="900" class="psvg-desc">No runtime permission path</text>
+  </svg>
 
   <figcaption class="visually-hidden">
     Govern supplies an Active Verified Release into Authorize. Authorize owns
     Request Admission and Result-to-Action with binary ALLOW or DENY and emits
-    decision evidence to Verify. Verify is a read-only functional domain with no
-    runtime permission path back to Authorize. These are functional domains, not
-    separate physical hosts or networks.
+    decision evidence to Verify. Verify is read-only with no runtime permission
+    path back to Authorize. These are functional domains, not physical hosts.
   </figcaption>
 </figure>
