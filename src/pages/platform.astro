@@ -1,8 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import GovernAuthorizeVerify from "../components/diagrams/GovernAuthorizeVerify.astro";
-import ReleaseLifecycle from "../components/diagrams/ReleaseLifecycle.astro";
-import VerificationHierarchy from "../components/diagrams/VerificationHierarchy.astro";
 ---
 
 <BaseLayout
@@ -10,223 +8,127 @@ import VerificationHierarchy from "../components/diagrams/VerificationHierarchy.
   description="BeaconGuard provides Govern, Authorize, and Verify for regulated AI actions: Active Verified Releases, Request Admission Authorization, Result-to-Action Authorization, and read-only verification."
 >
   <section class="stack-section">
-    <h1>Platform capabilities for governed AI transactions</h1>
+    <h1>Platform product map</h1>
     <p class="lead">
       BeaconGuard is structured as three functional domains: Govern, Authorize,
       and Verify. It governs whether an enterprise application may invoke an AI
       provider and whether a declared enterprise action based on an AI-generated
-      result may proceed. AI output remains an untrusted proposal. Provider
-      success is not enterprise authorization.
+      result may proceed. Provider success is not enterprise authorization.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Govern · Authorize · Verify</h2>
     <p>
-      These are functional domains, not assumed network planes. Govern builds
-      and activates the control set. Authorize returns binary ALLOW or DENY at
-      request admission and at the declared intended action. Verify investigates
-      decision evidence without granting runtime authority.
+      Use this product map to orient. Technical depth lives in documentation.
     </p>
     <GovernAuthorizeVerify />
+  </section>
+
+  <section class="stack-section">
+    <h2>Govern</h2>
+    <ul class="platform-map-list">
+      <li>Compliance Playbooks</li>
+      <li>Validation</li>
+      <li>Approval</li>
+      <li>Signing</li>
+      <li>Distribution</li>
+      <li>Active Verified Release</li>
+    </ul>
+    <p>
+      Govern builds and activates the control set. Distribution alone does not
+      activate a release.
+    </p>
+    <p>
+      <a href="/docs/policy-model">Policy model documentation</a>
+      ·
+      <a href="/docs/deployment-integration">Deployment and integration</a>
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Authorize</h2>
+    <ul class="platform-map-list">
+      <li>Request Admission Authorization</li>
+      <li>Untrusted AI-generated result</li>
+      <li>Declared action</li>
+      <li>Result-to-Action Authorization</li>
+      <li>Binary ALLOW or DENY</li>
+    </ul>
+    <p>
+      Authorize returns binary ALLOW or DENY at request admission and at the
+      declared intended action. Review does not convert a recorded DENY into
+      ALLOW.
+    </p>
+    <p>
+      <a href="/how-it-works">How It Works</a>
+      ·
+      <a href="/canonical-workflow">Canonical Workflow</a>
+      ·
+      <a href="/docs/enforcement-runtime">Enforcement runtime</a>
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Verify</h2>
+    <ul class="platform-map-list">
+      <li>Executive Reporting</li>
+      <li>Decision Explorer</li>
+      <li>Deterministic Reconstruction</li>
+      <li>Source Evidence</li>
+      <li>Replay Verification</li>
+      <li>Verifiable Export</li>
+      <li>Non-authoritative AI-assisted insights</li>
+    </ul>
+    <p>
+      Verify is read-only. It cannot grant runtime authority, mutate historical
+      decisions, or authorize enterprise actions. AI-assisted insights are not
+      part of the trusted authorization path.
+    </p>
+    <div class="page-actions">
+      <a class="btn-primary" href="/verification">Explore Verification</a>
+      <a class="btn-secondary" href="/proof-evidence">Proof and Evidence</a>
+    </div>
   </section>
 
   <section class="stack-section">
     <h2>Existing systems remain in place</h2>
     <p>
       BeaconGuard does not replace the system of record, workflow application,
-      case-management platform, EHR, AML system, fraud system, SIEM, IAM, or GRC
-      tool. Those systems continue to own their existing functions. BeaconGuard
+      EHR, AML system, fraud system, SIEM, IAM, or GRC tool. BeaconGuard
       authorizes; the enterprise application executes; the enterprise system of
       record remains authoritative.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Govern</h2>
-    <p>
-      Govern covers environment and integration configuration, Integration
-      Policy, optional System Connector mapping, runtime topology and trust,
-      Compliance Playbooks, validation, approval, signing, distribution, and
-      activation of an Active Verified Release.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Governed release lifecycle</h2>
-    <p>
-      Compliance Playbooks are validated, compiled, approved, signed, and
-      distributed as immutable release artifacts. Distribution alone does not
-      activate a release. Release Verification and Activation must succeed
-      before the artifact becomes the Active Verified Release used for
-      authorization.
-    </p>
-    <ReleaseLifecycle />
-  </section>
-
-  <section class="stack-section">
-    <h2>Compliance Playbooks</h2>
-    <p>
-      Compliance Playbooks express governed control intent for regulated
-      workflows. They are governed artifacts packaged into releases—not legal
-      advice and not a guarantee of compliance.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Authorize</h2>
-    <p>
-      Authorize evaluates governed requests against the Active Verified Release
-      and returns <strong>ALLOW</strong> or <strong>DENY</strong> only. Review
-      may produce obligations or grants for a later request; it does not convert
-      a recorded DENY into ALLOW and does not resume an original provider
-      response as authority.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Request Admission Authorization</h2>
-    <p>
-      Determines whether an enterprise application may invoke the AI provider
-      under the Active Verified Release.
-    </p>
-    <ul>
-      <li>DENY records the decision and blocks provider invocation.</li>
-      <li>ALLOW permits provider invocation for that governed request.</li>
-      <li>
-        Where enforcement requires it, evidence is recorded before upstream
-        forward.
-      </li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Result-to-Action Authorization</h2>
-    <p>
-      After an AI-generated result returns, the enterprise application declares
-      the intended enterprise action. BeaconGuard authorizes or denies that
-      <em>declared</em> action under the Active Verified Release. This is
-      independent authorization of the intended enterprise action—not semantic
-      scoring of model-response content.
-    </p>
-    <ul>
-      <li>The AI-generated result remains an untrusted proposal.</li>
-      <li>DENY prevents enterprise effect for the declared action.</li>
-      <li>
-        ALLOW authorizes execution by the enterprise application; BeaconGuard
-        does not become the system of record.
-      </li>
-      <li>
-        Approving a proposal does not resume the original AI response as
-        authority.
-      </li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>System Connector</h2>
-    <p>
-      An optional System Connector maps source protocols and context into the
-      required request format when enterprise applications do not natively
-      produce that structure. The System Connector does not evaluate controls,
-      activate releases, or bypass fail-closed enforcement.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Verify</h2>
-    <p>
-      Authorization decisions produce Verifiable Decision Records that support
-      investigation through BeaconGuard Verify. Verify is a read-only surface
-      for reporting, exploration, reconstruction, source evidence, replay
-      verification, and verifiable export.
-    </p>
-    <VerificationHierarchy />
-    <p>
-      BeaconGuard Verify is read-only. It cannot modify evidence, change a
-      historical decision, activate a release, alter a Compliance Playbook,
-      grant runtime authority, or authorize an enterprise action.
-    </p>
-    <div class="page-actions">
-      <a class="btn-primary" href="/verification">Explore Verification</a>
-      <a class="btn-secondary" href="/proof-evidence">Inspect Proof and Evidence</a>
-    </div>
-  </section>
-
-  <section class="stack-section">
-    <h2>Enterprise Identity and Privileged Access</h2>
-    <p>
-      BeaconGuard integrates with enterprise identity systems while preserving
-      the customer identity provider as the workforce identity authority.
-      Governed management operations can use federated identity, lifecycle
-      provisioning, role and tenant boundaries, privileged step-up, session
-      revocation, and controlled administrative access.
-    </p>
-    <ul>
-      <li>OIDC and SAML workforce federation</li>
-      <li>SCIM lifecycle integration where configured</li>
-      <li>Workload and service identities</li>
-      <li>Tenant-scoped and delegated administration</li>
-      <li>Privileged step-up for sensitive operations</li>
-      <li>Session revocation and offboarding controls</li>
-      <li>Controlled break-glass and support-access boundaries</li>
-    </ul>
-    <p>
-      BeaconGuard does not replace IAM, the customer directory, or the customer
-      identity provider.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Evidence ordering and integrity</h2>
-    <p>
-      Unauthorized actions are hard-stopped. Decisions produce evidence for
-      investigation. Where enforcement requires it, evidence is recorded before
-      forward. Retention, durability, and integrity protection depend on the
-      configured evidence provider and customer deployment. Legal admissibility
-      is not claimed.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Industry capability surfaces</h2>
+    <h2>Priority regulated workflows</h2>
     <div class="section-grid section-grid--compact">
       <div class="content-card">
         <h3>Healthcare</h3>
-        <p>
-          Governed authorization for PHI-sensitive operational AI workflows.
-          BeaconGuard does not certify clinical correctness.
-        </p>
-        <p><a href="/healthcare">Review Healthcare</a></p>
+        <p>PHI-sensitive operational AI workflows.</p>
+        <p><a href="/healthcare">Healthcare workflows</a></p>
       </div>
       <div class="content-card">
-        <h3>Financial</h3>
-        <p>
-          Request admission and action authorization for AML, KYC, fraud,
-          dispute, and recommendation workflows.
-        </p>
-        <p><a href="/fintech">Review Financial</a></p>
+        <h3>Financial Services</h3>
+        <p>AML, KYC, fraud, dispute, and recommendation workflows.</p>
+        <p><a href="/fintech">Financial workflows</a></p>
       </div>
       <div class="content-card">
         <h3>Regulated automation</h3>
-        <p>
-          Fail-closed authorization before agents or automations produce
-          enterprise effect.
-        </p>
-        <p><a href="/canonical-workflow">Review Workflow Examples</a></p>
+        <p>Fail-closed authorization before enterprise effect.</p>
+        <p><a href="/canonical-workflow">Canonical workflow</a></p>
       </div>
     </div>
   </section>
 
   <section class="stack-section">
-    <h2>Deep technical paths</h2>
+    <h2>Technical documentation</h2>
     <div class="page-actions">
-      <a class="btn-primary" href="/how-it-works">See How It Works</a>
-      <a class="btn-secondary" href="/verification">Verification</a>
-      <a class="btn-secondary" href="/docs/architecture">System Architecture</a>
-      <a class="btn-secondary" href="/docs/enforcement-runtime">Enforcement Runtime</a>
-      <a class="btn-secondary" href="/healthcare">Healthcare path</a>
-      <a class="btn-secondary" href="/fintech">Financial path</a>
+      <a class="btn-secondary" href="/docs/architecture">Architecture</a>
+      <a class="btn-secondary" href="/docs/enforcement-runtime">Enforcement runtime</a>
+      <a class="btn-secondary" href="/docs/compliance-audit">Compliance and audit</a>
+      <a class="btn-secondary" href="/security">Security</a>
     </div>
   </section>
 </BaseLayout>

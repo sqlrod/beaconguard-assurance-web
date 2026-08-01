@@ -1,0 +1,126 @@
+---
+/**
+ * Closed-loop governed AI transaction diagram.
+ * Variants: simplified (homepage), detailed (how-it-works), complete (canonical workflow).
+ */
+import DiagramShell from "./DiagramShell.astro";
+
+interface Props {
+  variant?: "simplified" | "detailed" | "complete";
+  title?: string;
+  caption?: string;
+}
+
+const {
+  variant = "detailed",
+  title = "Governed AI transaction loop",
+  caption = "BeaconGuard authorizes provider invocation and, separately, the declared enterprise action. The path returns to the same enterprise application. AI output remains an untrusted proposal.",
+} = Astro.props;
+
+const showStages = variant !== "simplified";
+const className = `bg-diagram--txn-loop bg-diagram--txn-loop-${variant}`;
+---
+
+<DiagramShell title={title} caption={caption} className={className}>
+  <div class={`bg-loop bg-loop--${variant}`} aria-hidden="true">
+    <div class="bg-loop-circuit">
+      <div class="bg-loop-app" data-node="app">
+        <p class="bg-loop-app-title">Enterprise Application</p>
+        <div class="bg-loop-app-states">
+          <div class="bg-loop-node bg-loop-node--state" data-node="prepare">
+            <span class="bg-loop-kicker">1 · Prepare</span>
+            <strong>Prepare governed request</strong>
+          </div>
+          <div class="bg-loop-node bg-loop-node--state" data-node="execute">
+            <span class="bg-loop-kicker">7 · Execute</span>
+            <strong>Execute authorized action</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-loop-node bg-loop-node--gate" data-node="request-auth">
+        <span class="bg-loop-kicker">2 · Request</span>
+        <strong>Request Admission Authorization</strong>
+        <div class="bg-loop-stops">
+          <span class="bg-loop-deny">REQUEST DENY · No provider invocation</span>
+        </div>
+      </div>
+
+      <div class="bg-loop-node bg-loop-node--provider" data-node="provider">
+        <span class="bg-loop-kicker">3 · Provider</span>
+        <strong>AI Provider</strong>
+      </div>
+
+      <div class="bg-loop-node bg-loop-node--result" data-node="result">
+        <span class="bg-loop-kicker">4 · Return</span>
+        <strong>AI-generated result</strong>
+        <span class="bg-loop-sub">Untrusted proposal · bind to same transaction</span>
+      </div>
+
+      <div class="bg-loop-node bg-loop-node--declare" data-node="declare">
+        <span class="bg-loop-kicker">5 · Declare</span>
+        <strong>Enterprise Application declares intended action</strong>
+      </div>
+
+      <div class="bg-loop-node bg-loop-node--gate" data-node="action-auth">
+        <span class="bg-loop-kicker">6 · Action</span>
+        <strong>Result-to-Action Authorization</strong>
+        <div class="bg-loop-stops">
+          <span class="bg-loop-deny">ACTION DENY · No enterprise effect</span>
+          <span class="bg-loop-allow">ALLOW returns authority to the Enterprise Application</span>
+        </div>
+      </div>
+
+      <div class="bg-loop-node bg-loop-node--sor" data-node="sor">
+        <span class="bg-loop-kicker">8 · Record</span>
+        <strong>Enterprise System of Record</strong>
+        <span class="bg-loop-sub">Remains authoritative</span>
+      </div>
+
+      <div class="bg-loop-rail" data-node="evidence">
+        <strong>Verifiable Decision Records</strong>
+        <span class="bg-loop-sub">Separate evidence rail from both decisions</span>
+        <span class="bg-loop-arrow-label">→ BeaconGuard Verify (read-only)</span>
+      </div>
+
+      {
+        showStages && (
+          <ol class="bg-loop-stage-strip" aria-hidden="true">
+            <li>Govern the release</li>
+            <li>Authorize the request</li>
+            <li>Invoke the provider</li>
+            <li>Receive an untrusted result</li>
+            <li>Authorize the intended action</li>
+            <li>Record and verify</li>
+          </ol>
+        )
+      }
+
+      <!-- Explicit connector labels for the circuit -->
+      <span class="bg-loop-edge bg-loop-edge--out" data-edge="out">Outbound request</span>
+      <span class="bg-loop-edge bg-loop-edge--return" data-edge="return">Return to application</span>
+      <span class="bg-loop-edge bg-loop-edge--effect" data-edge="effect">Authorized effect</span>
+    </div>
+  </div>
+
+  <div slot="text">
+    <p>
+      Enterprise Application (Prepare governed request) → Request Admission
+      Authorization. REQUEST DENY hard-stops with no provider invocation.
+      ALLOW permits AI Provider invocation. The AI-generated result returns as
+      an untrusted proposal, bound to the same governed transaction context.
+      The Enterprise Application declares the intended action → Result-to-Action
+      Authorization. ACTION DENY hard-stops with no enterprise effect. ALLOW
+      returns authority to the same Enterprise Application, which executes the
+      authorized action into the Enterprise System of Record. Verifiable Decision
+      Records from both decisions feed BeaconGuard Verify (read-only; outside
+      runtime authority).
+    </p>
+    <p>
+      Result-to-Action Authorization authorizes the declared intended enterprise
+      action under the Active Verified Release. It does not score model content,
+      certify response correctness, resume a prior DENY, or execute the
+      enterprise action. The provider is not the enterprise system of record.
+    </p>
+  </div>
+</DiagramShell>

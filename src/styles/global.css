@@ -2433,3 +2433,362 @@ figcaption {
     font-size: 0.85rem;
   }
 }
+
+/* =========================
+   PASS 01 — VISUAL FOUNDATION
+   ========================= */
+
+:root {
+  --bg-marketing-max: 1200px;
+  --bg-docs-max: 1050px;
+  --bg-measure: 68ch;
+  --bg-body: 1rem;
+  --bg-support: 0.875rem;
+  --bg-nav: 0.9375rem;
+}
+
+main#content {
+  max-width: var(--bg-marketing-max);
+}
+
+body {
+  font-size: var(--bg-body);
+}
+
+.header-nav a {
+  font-size: var(--bg-nav);
+}
+
+.landing--brand h1,
+.landing h1 {
+  font-size: clamp(2.125rem, 4vw, 3.5rem);
+  line-height: 1.12;
+  max-width: 18ch;
+}
+
+.landing--brand .hero-subheadline,
+.lead {
+  max-width: var(--bg-measure);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.stack-section > p,
+.homepage-block > p {
+  max-width: var(--bg-measure);
+}
+
+.docs-layout main#content,
+body.docs-surface main#content {
+  max-width: var(--bg-docs-max);
+}
+
+.footer-inner--pass01 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) auto;
+  gap: 1.5rem 2rem;
+  align-items: start;
+  max-width: var(--bg-marketing-max);
+}
+
+.footer-brand-name {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+
+.footer-inner--pass01 .footer-definition {
+  margin-top: 0.45rem;
+  font-size: 0.95rem;
+  max-width: 28rem;
+}
+
+.footer-inner--pass01 .footer-slogan-line {
+  margin: 0 0 0.4rem;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.footer-nav-simple {
+  display: grid;
+  gap: 0.45rem;
+  text-align: left;
+}
+
+.footer-nav-simple a {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.footer-nav-simple a:hover {
+  color: var(--text-primary);
+}
+
+.feature-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.platform-map-list {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0 0 1rem;
+  padding-left: 1.15rem;
+  max-width: 36rem;
+}
+
+.platform-map-list li {
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+/* Closed-loop transaction — desktop circuit */
+.bg-loop {
+  width: 100%;
+}
+
+.bg-loop-circuit {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  grid-template-areas:
+    "app request provider"
+    "app result declare"
+    "app action sor"
+    "evidence evidence evidence"
+    "stages stages stages";
+  gap: 0.75rem 0.9rem;
+  padding: 0.85rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(56, 132, 255, 0.08), transparent 42%),
+    rgba(8, 14, 28, 0.55);
+}
+
+.bg-loop-app { grid-area: app; }
+.bg-loop-node[data-node="request-auth"] { grid-area: request; }
+.bg-loop-node[data-node="provider"] { grid-area: provider; }
+.bg-loop-node[data-node="result"] { grid-area: result; }
+.bg-loop-node[data-node="declare"] { grid-area: declare; }
+.bg-loop-node[data-node="action-auth"] { grid-area: action; }
+.bg-loop-node[data-node="sor"] { grid-area: sor; }
+.bg-loop-rail { grid-area: evidence; }
+.bg-loop-stage-strip { grid-area: stages; }
+
+.bg-loop-app {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(96, 165, 250, 0.45);
+  border-radius: 0.7rem;
+  background: rgba(15, 35, 70, 0.45);
+  min-height: 100%;
+}
+
+.bg-loop-app-title {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+
+.bg-loop-app-states {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.bg-loop-node,
+.bg-loop-rail {
+  padding: 0.75rem 0.8rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.6rem;
+  background: rgba(12, 20, 36, 0.85);
+}
+
+.bg-loop-node strong,
+.bg-loop-rail strong,
+.bg-loop-node--state strong {
+  display: block;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+.bg-loop-kicker {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.bg-loop-sub,
+.bg-loop-arrow-label {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+.bg-loop-stops {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.55rem;
+}
+
+.bg-loop-deny,
+.bg-loop-allow {
+  display: block;
+  font-size: 0.84rem;
+  line-height: 1.35;
+  padding: 0.35rem 0.45rem;
+  border-radius: 0.35rem;
+}
+
+.bg-loop-deny {
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.35);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+}
+
+.bg-loop-allow {
+  color: #bbf7d0;
+  background: rgba(20, 83, 45, 0.35);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.bg-loop-node--gate {
+  border-color: rgba(96, 165, 250, 0.4);
+}
+
+.bg-loop-node--provider {
+  border-color: rgba(167, 139, 250, 0.35);
+}
+
+.bg-loop-rail {
+  display: grid;
+  gap: 0.2rem;
+  border-left: 3px solid rgba(125, 211, 252, 0.55);
+}
+
+.bg-loop-stage-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.85rem;
+  margin: 0;
+  padding: 0.55rem 0.65rem;
+  list-style: none;
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.bg-loop-stage-strip li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.bg-loop-stage-strip li::before {
+  content: counter(item);
+  counter-increment: item;
+  position: absolute;
+  left: 0;
+  color: #93c5fd;
+  font-weight: 600;
+}
+
+.bg-loop-stage-strip {
+  counter-reset: item;
+}
+
+.bg-loop-edge {
+  position: absolute;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  background: rgba(8, 14, 28, 0.9);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+  pointer-events: none;
+}
+
+.bg-loop-edge--out {
+  top: 18%;
+  left: 36%;
+}
+
+.bg-loop-edge--return {
+  top: 58%;
+  left: 36%;
+}
+
+.bg-loop-edge--effect {
+  bottom: 28%;
+  right: 4%;
+}
+
+.bg-loop--simplified .bg-loop-stage-strip,
+.bg-loop--simplified .bg-loop-edge {
+  display: none;
+}
+
+.bg-loop--simplified .bg-loop-circuit {
+  grid-template-areas:
+    "app request provider"
+    "app result declare"
+    "app action sor"
+    "evidence evidence evidence";
+}
+
+@media (max-width: 900px) {
+  .footer-inner--pass01 {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid--three {
+    grid-template-columns: 1fr;
+  }
+
+  .bg-loop-circuit {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "app"
+      "request"
+      "provider"
+      "result"
+      "declare"
+      "action"
+      "sor"
+      "evidence"
+      "stages";
+  }
+
+  .bg-loop-edge {
+    position: static;
+    display: inline-block;
+    margin: 0.15rem 0.35rem 0.15rem 0;
+  }
+
+  .bg-loop-app-states {
+    grid-template-columns: 1fr;
+  }
+
+  .header-nav a {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .landing--brand h1,
+  .landing h1 {
+    font-size: clamp(2.125rem, 8vw, 2.625rem);
+    max-width: none;
+  }
+}

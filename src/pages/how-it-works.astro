@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.astro";
+import GovernedTransactionLoop from "../components/diagrams/GovernedTransactionLoop.astro";
 ---
 
 <BaseLayout
@@ -10,22 +10,24 @@ import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.
   <section class="stack-section">
     <h1>How It Works</h1>
     <p class="lead">
-      A governed AI transaction spans release governance, request admission,
-      provider invocation, an untrusted AI-generated result, independent
-      authorization of the declared enterprise action, and verifiable decision
-      evidence. BeaconGuard authorizes; the enterprise application executes;
-      the system of record remains authoritative.
+      A governed AI transaction is a closed cycle: the enterprise application
+      prepares a request, may invoke a provider after admission ALLOW, receives
+      an untrusted result, declares an intended action, and executes only after
+      independent action ALLOW—returning to the same application trust boundary.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Complete governed AI transaction</h2>
+    <h2>Complete governed cycle</h2>
     <p>
-      Reaching the AI provider is not the final governed outcome. Enterprise
-      effect requires independent authorization of the declared intended action.
-      Provider success is not enterprise authorization.
+      The diagram communicates the full loop before the numbered stages. Provider
+      success is not enterprise authorization.
     </p>
-    <GovernedAITransaction />
+    <GovernedTransactionLoop
+      variant="detailed"
+      title="Detailed governed transaction loop"
+      caption="Six lifecycle stages mapped onto one closed transaction that returns to the enterprise application."
+    />
   </section>
 
   <section class="stack-section">
@@ -44,13 +46,6 @@ import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.
       may invoke the AI provider under the Active Verified Release. Outcomes are
       binary: <strong>ALLOW</strong> or <strong>DENY</strong>. DENY records the
       decision and blocks provider invocation.
-    </p>
-    <p class="muted-copy">
-      Where admission enforcement is configured, the technical subflow may still
-      include Validate → Verify → Evaluate → Enforce → Record: normalize and
-      validate context, verify trust and freshness, evaluate against the Active
-      Verified Release, enforce ALLOW or DENY, and persist a Verifiable Decision
-      Record before an ALLOW may permit provider invocation for that request.
     </p>
   </section>
 
@@ -78,66 +73,33 @@ import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.
       The enterprise application declares the intended enterprise action.
       Result-to-Action Authorization is independent authorization of that
       declared action under the Active Verified Release—not semantic scoring of
-      response content. DENY prevents enterprise effect. ALLOW authorizes the
-      enterprise application to execute the action.
+      model content. DENY prevents enterprise effect. ALLOW returns authority to
+      the same enterprise application to execute.
     </p>
-    <ul>
-      <li>Independent authorization uses a new governed request where required.</li>
-      <li>Approving a proposal does not resume the original AI response.</li>
-      <li>BeaconGuard authorizes; the enterprise application executes.</li>
-    </ul>
   </section>
 
   <section class="stack-section">
     <h2>6. Record and verify</h2>
     <p>
-      Each authorization decision produces a Verifiable Decision Record.
-      BeaconGuard Verify provides read-only investigation through reporting,
-      Decision Explorer, deterministic reconstruction, source evidence, replay
-      verification, and verifiable export.
-    </p>
-    <p>
-      BeaconGuard Verify is read-only. It cannot modify evidence, change a
-      historical decision, activate a release, alter a Compliance Playbook,
-      grant runtime authority, or authorize an enterprise action.
+      Authorization decisions produce Verifiable Decision Records. BeaconGuard
+      Verify supports investigation, reconstruction, replay verification,
+      reporting, and export. Verify is read-only and cannot grant runtime
+      authority or mutate a historical DENY.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Optional System Connector</h2>
+    <h2>Fail closed</h2>
     <p>
-      Some enterprise applications do not natively produce the protocol or
-      context structure required for governed authorization. The optional System
-      Connector maps source protocols and context into the required request
-      format. It does not evaluate controls, activate releases, or bypass
-      enforcement.
+      The request or declared action is blocked when authorization cannot
+      complete safely. Review may produce obligations for a later request; it
+      does not convert a recorded DENY into ALLOW or resume an original provider
+      response as authority.
     </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Deterministic outcomes</h2>
-    <h3>ALLOW</h3>
-    <p>
-      The governed request satisfies Active Verified Release requirements for
-      that authorization point. After evidence persistence where required,
-      provider invocation or enterprise execution may proceed as authorized.
-    </p>
-    <h3>DENY</h3>
-    <p>
-      The request or declared action is blocked. BeaconGuard fails closed when
-      required validation, trust, freshness, replay, release, or control
-      conditions are not satisfied. Review does not convert DENY into ALLOW.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Technical deepening</h2>
     <div class="page-actions">
-      <a class="btn-primary" href="/platform">Review Platform</a>
-      <a class="btn-secondary" href="/verification">Explore Verification</a>
-      <a class="btn-secondary" href="/docs/architecture">System Architecture</a>
-      <a class="btn-secondary" href="/docs/enforcement-runtime">Enforcement Runtime</a>
-      <a class="btn-secondary" href="/deployment">Deployment Expectations</a>
+      <a class="btn-primary" href="/canonical-workflow">Canonical Workflow</a>
+      <a class="btn-secondary" href="/platform">Platform map</a>
+      <a class="btn-secondary" href="/verification">Verification</a>
     </div>
   </section>
 </BaseLayout>

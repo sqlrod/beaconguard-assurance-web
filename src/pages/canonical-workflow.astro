@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.astro";
+import GovernedTransactionLoop from "../components/diagrams/GovernedTransactionLoop.astro";
 ---
 
 <BaseLayout
@@ -10,23 +10,26 @@ import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.
   <section class="stack-section">
     <h1>Complete governed AI transaction</h1>
     <p class="lead">
-      BeaconGuard authorizes whether an enterprise application may invoke an AI
-      provider and whether a declared enterprise action based on the returned
-      result may proceed. AI output remains an untrusted proposal. BeaconGuard
-      authorizes; the enterprise application executes; systems of record remain
-      authoritative.
+      This is the authoritative reusable workflow. BeaconGuard authorizes whether
+      an enterprise application may invoke an AI provider and whether a declared
+      enterprise action based on the returned result may proceed. AI output
+      remains an untrusted proposal. BeaconGuard authorizes; the enterprise
+      application executes; systems of record remain authoritative.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Shared governed transaction sequence</h2>
+    <h2>Authoritative transaction loop</h2>
     <p>
       The complete sequence separates provider invocation from enterprise
-      effect. Request Admission ALLOW permits the provider call. Enterprise
-      effect still requires independent Result-to-Action Authorization of the
-      declared intended action.
+      effect and returns authority to the same enterprise application before
+      system-of-record change.
     </p>
-    <GovernedAITransaction />
+    <GovernedTransactionLoop
+      variant="complete"
+      title="Authoritative governed transaction loop"
+      caption="Complete closed-loop transaction with dual DENY hard stops, evidence rail, and system-of-record authority."
+    />
   </section>
 
   <section class="stack-section">
@@ -41,7 +44,7 @@ import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.
         </p>
       </div>
       <div class="scenario-card">
-        <h3>Provider result</h3>
+        <h3>Untrusted result</h3>
         <p>
           The AI-generated result is an untrusted proposal. Provider success is
           not enterprise authorization and does not grant permission to change
@@ -49,124 +52,49 @@ import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.
         </p>
       </div>
       <div class="scenario-card">
-        <h3>Enterprise action</h3>
+        <h3>Declared action</h3>
         <p>
-          The enterprise application declares the intended enterprise action —
-          for example, a communication, documentation update, escalation, or
-          case-state change — and submits it for Result-to-Action Authorization.
+          The enterprise application declares the intended enterprise action and
+          submits it for Result-to-Action Authorization.
         </p>
       </div>
       <div class="scenario-card">
-        <h3>Enterprise effect</h3>
+        <h3>Application execution</h3>
         <p>
-          Only after action ALLOW may the application execute the authorized
-          action. DENY hard-stops enterprise effect. The system of record
-          remains authoritative for resulting business state.
+          Only after action ALLOW may the same application execute the
+          authorized action. DENY hard-stops enterprise effect.
         </p>
       </div>
       <div class="scenario-card">
-        <h3>Verification</h3>
+        <h3>System of record</h3>
+        <p>
+          The enterprise system of record remains authoritative for resulting
+          business state. BeaconGuard does not become that system of record.
+        </p>
+      </div>
+      <div class="scenario-card">
+        <h3>Evidence and Verify</h3>
         <p>
           Related Verifiable Decision Records support investigation through
-          BeaconGuard Verify: reporting, Decision Explorer, reconstruction,
-          source evidence, replay verification, and verifiable export. Verify is
-          read-only and cannot grant runtime authority.
+          BeaconGuard Verify. Verify is read-only and cannot grant runtime
+          authority.
         </p>
       </div>
     </div>
   </section>
 
   <section class="stack-section">
-    <h2>Industry context panels</h2>
+    <h2>Where this applies</h2>
     <p>
-      The same governed transaction applies across industries. What changes is
-      the source application, required context, declared actions, and review
-      stakeholders — not the dual authorization model.
-    </p>
-    <div class="scenario-grid">
-      <div class="scenario-card">
-        <h3>Healthcare</h3>
-        <p>
-          <strong>Typical source application:</strong> Care operations,
-          privacy-gated assist, or EHR-adjacent workflow UI.
-        </p>
-        <p>
-          <strong>Required context:</strong> Role, workflow identity, approved
-          pathway, source-system trust, context tags, freshness.
-        </p>
-        <p>
-          <strong>Example declared actions:</strong> Patient communication,
-          documentation draft use, care-operations routing or status update.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> EHR and clinical operations.
-        </p>
-        <p>
-          <strong>Review stakeholders:</strong> Privacy, compliance, clinical
-          governance, security, architecture.
-        </p>
-      </div>
-      <div class="scenario-card">
-        <h3>Financial</h3>
-        <p>
-          <strong>Typical source application:</strong> AML, KYC, fraud, or
-          dispute analyst workflow.
-        </p>
-        <p>
-          <strong>Required context:</strong> Analyst or service identity, case
-          and transaction context, source trust, requested action, freshness.
-        </p>
-        <p>
-          <strong>Example declared actions:</strong> Case recommendation,
-          escalation, customer communication, case-state change, fraud or
-          dispute action.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> Case and transaction platforms.
-        </p>
-        <p>
-          <strong>Review stakeholders:</strong> Risk, compliance, fraud
-          operations, security, audit.
-        </p>
-      </div>
-      <div class="scenario-card">
-        <h3>Regulated Internal Automation</h3>
-        <p>
-          <strong>Typical source application:</strong> Existing internal agent
-          or automation orchestrator.
-        </p>
-        <p>
-          <strong>Required context:</strong> Role, environment, requested
-          action, change window, freshness.
-        </p>
-        <p>
-          <strong>Example declared actions:</strong> Governed automation steps
-          against production targets after independent action authorization.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> Production systems of record.
-        </p>
-        <p>
-          <strong>Review stakeholders:</strong> Security, operations, risk,
-          audit.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="stack-section">
-    <h2>Decision evidence</h2>
-    <p>
-      Admission and action decisions produce related Verifiable Decision
-      Records. Reviewers inspect the decision signal, authorization point,
-      request metadata, release identity, freshness and replay checks, result
-      binding where applicable, and declared intended action — without treating
-      review as a permission result.
+      The same governed transaction applies across priority regulated workflows.
+      Industry pages describe illustrative scenarios — not locked commercial
+      markets or customer production validation.
     </p>
     <div class="page-actions">
-      <a class="btn-primary" href="/proof-evidence">Review Decision Evidence</a>
-      <a class="btn-secondary" href="/healthcare">Healthcare Use Case</a>
-      <a class="btn-secondary" href="/fintech">Financial Use Case</a>
+      <a class="btn-primary" href="/how-it-works">See How It Works</a>
+      <a class="btn-secondary" href="/healthcare">Healthcare workflows</a>
+      <a class="btn-secondary" href="/fintech">Financial Services workflows</a>
+      <a class="btn-secondary" href="/use-cases">Use cases</a>
     </div>
   </section>
 </BaseLayout>

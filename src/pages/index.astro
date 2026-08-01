@@ -1,10 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import GovernedAITransaction from "../components/diagrams/GovernedAITransaction.astro";
+import GovernedTransactionLoop from "../components/diagrams/GovernedTransactionLoop.astro";
 import GovernAuthorizeVerify from "../components/diagrams/GovernAuthorizeVerify.astro";
-import VerificationHierarchy from "../components/diagrams/VerificationHierarchy.astro";
 import QualificationNotice from "../components/QualificationNotice.astro";
-import VideoEmbed from "../components/VideoEmbed.astro";
 ---
 
 <BaseLayout
@@ -20,8 +18,8 @@ import VideoEmbed from "../components/VideoEmbed.astro";
     <p class="hero-subheadline">
       BeaconGuard governs whether an enterprise application may invoke AI and
       whether a declared action based on the returned result may affect an
-      enterprise system. The AI-generated result remains an untrusted proposal
-      until that action is independently authorized.
+      enterprise system. The returned AI result remains an untrusted proposal
+      until its intended use is independently authorized.
     </p>
     <p class="hero-proof">
       Provider success is not enterprise authorization.
@@ -33,26 +31,23 @@ import VideoEmbed from "../components/VideoEmbed.astro";
     </div>
   </section>
 
-  <section class="stack-section homepage-block homepage-band">
-    <p class="section-label">Product category</p>
-    <h2>Independent authorization and verification for regulated AI actions</h2>
+  <section class="stack-section homepage-block">
+    <h2>Governed AI transaction</h2>
     <p>
-      BeaconGuard authorizes. The enterprise application executes. Systems of
-      record remain authoritative. Runtime outcomes are ALLOW or DENY only.
+      One complete cycle: the enterprise application prepares a request,
+      receives an untrusted AI result, declares an intended action, and only
+      then may execute after independent authorization—returning to the same
+      application trust boundary.
     </p>
+    <GovernedTransactionLoop
+      variant="simplified"
+      title="Simplified governed transaction loop"
+      caption="Outbound request authorization, untrusted provider return, and action authorization that returns authority to the same enterprise application."
+    />
   </section>
 
   <section class="stack-section homepage-block">
-    <h2>Complete governed AI transaction</h2>
-    <p>
-      Reaching the AI provider is not the final governed outcome. Enterprise
-      effect still requires independent action authorization.
-    </p>
-    <GovernedAITransaction />
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Two authorization points</h2>
+    <h2>Two authorization boundaries</h2>
     <div class="feature-grid">
       <article class="feature-card">
         <h3>Request Admission Authorization</h3>
@@ -79,63 +74,51 @@ import VideoEmbed from "../components/VideoEmbed.astro";
   </section>
 
   <section class="stack-section homepage-block">
-    <h2>BeaconGuard Verify</h2>
+    <p class="section-label">PRIORITY REGULATED WORKFLOWS</p>
+    <h2>Priority regulated workflows</h2>
     <p>
-      Inspect decisions without changing authority. Verify is read-only and
-      cannot grant runtime permission or mutate historical decisions.
+      BeaconGuard is evaluating bounded workflows across healthcare, financial
+      services, and regulated internal automation.
     </p>
-    <VerificationHierarchy />
+    <div class="feature-grid feature-grid--three">
+      <article class="feature-card">
+        <h3>Healthcare</h3>
+        <p>
+          PHI-sensitive operational pathways such as patient communication,
+          documentation assistance, and care-operations routing.
+        </p>
+        <p><a href="/healthcare">Review healthcare workflows</a></p>
+      </article>
+      <article class="feature-card">
+        <h3>Financial Services</h3>
+        <p>
+          AML, KYC, fraud, dispute, and recommendation workflows where declared
+          actions must be authorized before enterprise effect.
+        </p>
+        <p><a href="/fintech">Review financial workflows</a></p>
+      </article>
+      <article class="feature-card">
+        <h3>Regulated Internal Automation</h3>
+        <p>
+          Fail-closed authorization before agents or automations produce
+          enterprise effect.
+        </p>
+        <p><a href="/canonical-workflow">Review the canonical workflow</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section class="stack-section homepage-block">
+    <h2>Verification and evidence</h2>
+    <p>
+      Authorization decisions produce Verifiable Decision Records for
+      investigation, reconstruction, replay verification, reporting, and
+      export. Verify is read-only and cannot grant runtime permission.
+    </p>
     <div class="page-actions">
       <a class="btn-primary" href="/verification">Explore Verification</a>
       <a class="btn-secondary" href="/proof-evidence">Inspect Proof and Evidence</a>
     </div>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Healthcare is the initial market</h2>
-    <p>
-      Patient communication, clinical documentation assistance, and
-      care-operations workflows are the initial wedge. BeaconGuard does not
-      replace clinical judgment, certify medical accuracy, or replace an EHR.
-    </p>
-    <div class="page-actions">
-      <a class="btn-primary" href="/healthcare">Review Healthcare Scenarios</a>
-      <a class="btn-secondary" href="/fintech">Financial Services Expansion</a>
-    </div>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Proof and evidence</h2>
-    <p>
-      Authorization decisions produce Verifiable Decision Records for
-      investigation, reconstruction, replay verification, reporting, and
-      export — without turning verification into a runtime permission path.
-    </p>
-    <div class="page-actions">
-      <a class="btn-primary" href="/proof-evidence">Inspect Proof and Evidence</a>
-      <a class="btn-secondary" href="/sample-decision-record">View Sample Decision Record</a>
-    </div>
-  </section>
-
-  <section
-    class="stack-section homepage-block product-overview-section"
-    aria-labelledby="product-overview-title"
-  >
-    <div class="product-overview-heading">
-      <p class="section-label">Product Overview</p>
-      <h2 id="product-overview-title">
-        Runtime assurance for AI in regulated industries
-      </h2>
-      <p>
-        This overview explains BeaconGuard’s purpose and operating model. It is
-        not a live product demonstration.
-      </p>
-    </div>
-    <VideoEmbed
-      videoId="OzPMIQ_NHho"
-      title="BeaconGuard product overview: Runtime assurance for AI in regulated industries"
-      watchLabel="Watch the product overview on YouTube"
-    />
   </section>
 
   <section class="stack-section homepage-block cta-band">

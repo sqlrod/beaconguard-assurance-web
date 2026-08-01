@@ -1,0 +1,412 @@
+{
+  "pass": "01",
+  "purpose": "visual foundation correction",
+  "source_commit_before": "1de043d92e1d6e5d410dbf38a31bae5ade3fd12e",
+  "preview_port": "4330",
+  "build_result": "pass",
+  "route_count": 27,
+  "fullpage_count": 27,
+  "responsive_count": 30,
+  "production_deployment_authorized": false,
+  "merge_to_main_authorized": false,
+  "screenshots": [
+    {
+      "route": "/",
+      "filename": "home.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 4068,
+      "sha256": "8477cdadb48578db718b51b5f224eb7d4a404f9ba82775cd5b54e1485256e831"
+    },
+    {
+      "route": "/platform",
+      "filename": "platform.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 3218,
+      "sha256": "e96bed09d3ad173d721f26db21aa6f451481fa82e218be635c5f365f5fcab059"
+    },
+    {
+      "route": "/healthcare",
+      "filename": "healthcare.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 3871,
+      "sha256": "a0d9ca8b7dfc225509f3dc9da00797f4a2290bad5159e042d2bf6a0abb2fb932"
+    },
+    {
+      "route": "/fintech",
+      "filename": "financial-services.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 4202,
+      "sha256": "3cf5b31f352cd38058b3a6348145bdde947a69edc498cde7dd1fe1b82bff77db"
+    },
+    {
+      "route": "/verification",
+      "filename": "verification.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 4061,
+      "sha256": "5f0ca2462da660921a61c728926b86e85c50e2bf5f2b67ed3090b939a4826ef9"
+    },
+    {
+      "route": "/security",
+      "filename": "security.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 4780,
+      "sha256": "435fd3094df2fd0dc1033c3f5df2dc36e284e4644ef06414f2b77eedb4b60e05"
+    },
+    {
+      "route": "/design-partner-program",
+      "filename": "controlled-evaluation.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 4196,
+      "sha256": "7356c33cc03de7dd56c35ddf56af7560334f82b3b253e2feae57d572555037e6"
+    },
+    {
+      "route": "/docs",
+      "filename": "documentation.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 1707,
+      "sha256": "af48a68901c4c6fa6629b3c2598bc73adb0d2e0e211dbc7cc956a632235dcb87"
+    },
+    {
+      "route": "/contact",
+      "filename": "contact.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 2429,
+      "sha256": "8e1802f994d8052249614e77ac54d7d944e654db6d3a538cfc22d6c1ed87d801"
+    },
+    {
+      "route": "/how-it-works",
+      "filename": "how-it-works.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 3042,
+      "sha256": "c132d4fd7b6b5bb8f7e6028a4ee1a588c490834dca66b2935e8fe581e7c84c7e"
+    },
+    {
+      "route": "/proof-evidence",
+      "filename": "proof-and-evidence.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 7020,
+      "sha256": "4a53e20137056da39564cdb101b36265bc11895b7f6f6576853ac6196b23dbc9"
+    },
+    {
+      "route": "/canonical-workflow",
+      "filename": "canonical-workflow.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 2353,
+      "sha256": "7d1958348fe36481e51742e8b34b6b14e7db64f1517f657b48ca1708df8c5e04"
+    },
+    {
+      "route": "/trust-assurance",
+      "filename": "trust-center.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 6391,
+      "sha256": "8218edcd236b13849df055d473b403db7dec499f207b2d7ff4069debe7460d8b"
+    },
+    {
+      "route": "/company",
+      "filename": "company.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 1844,
+      "sha256": "abc3c62ce163b6a44620f666d20163b714538988bf5240ace06e6fb063687054"
+    },
+    {
+      "route": "/reviewer-kit",
+      "filename": "reviewer-kit.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 3009,
+      "sha256": "cf48641fdd4bdd0b4aee02596485db286a8abdbe4b7d6994b9f1e7f2f6a93124"
+    },
+    {
+      "route": "/control-responsibility-matrix",
+      "filename": "control-responsibility-matrix.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 2746,
+      "sha256": "c07ffa2772f7cdc203ea21f314e21a647f624071285e9b9568409fcf3f617e86"
+    },
+    {
+      "route": "/deployment",
+      "filename": "deployment.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 5243,
+      "sha256": "3ebd74ec916df928673e0ddbdc451eee8772b6998cf36ec9f8e07c86e5a9f5e0"
+    },
+    {
+      "route": "/use-cases",
+      "filename": "use-cases.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 2338,
+      "sha256": "764348f4dc21cfd5adb598bba91cf7fdd23748bc8f9d320533aaa19523f26135"
+    },
+    {
+      "route": "/sample-decision-record",
+      "filename": "sample-decision-record.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 3768,
+      "sha256": "8c244b3a0247dee14393db339f84a90583df5449671696ba39d43f812d65d412"
+    },
+    {
+      "route": "/docs/overview",
+      "filename": "docs-overview.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 4614,
+      "sha256": "db57f15b81d6a93c703e4c4fd99059131ff613cf477931a5233d321d9bb91543"
+    },
+    {
+      "route": "/docs/architecture",
+      "filename": "docs-architecture.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 6848,
+      "sha256": "f6bda1f08008cb94b7d805ee89e11b7d42765a9d3945d8e2d0e5cc6f02657ad9"
+    },
+    {
+      "route": "/docs/policy-model",
+      "filename": "docs-policy-model.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 5179,
+      "sha256": "77ecc6166a91f1d6422bcb36a58307d6a5d4a5e7b4327466c1720cf5c72a7780"
+    },
+    {
+      "route": "/docs/enforcement-runtime",
+      "filename": "docs-enforcement-runtime.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 5535,
+      "sha256": "a30ac3b20571725809c0972d61008fa7f01cb87c81482a064f7bd9485d4d07b3"
+    },
+    {
+      "route": "/docs/compliance-audit",
+      "filename": "docs-compliance-audit.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 5268,
+      "sha256": "8aaf03e79e8a4449551de7e586a4ccb796606731641806fc1562b08529f1941a"
+    },
+    {
+      "route": "/docs/deployment-integration",
+      "filename": "docs-deployment-integration.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 6131,
+      "sha256": "6ffc7a28f4d5b93c25abe1401b31de821d9c5fde0890965fefd91309d9a451a8"
+    },
+    {
+      "route": "/docs/threat-model",
+      "filename": "docs-threat-model.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 7161,
+      "sha256": "0082063d491519428b6aa8d7bcac94ccd80f954b2b43f998c5d8573c60a8db0c"
+    },
+    {
+      "route": "/docs/dfd-threat-flow",
+      "filename": "docs-dfd-threat-flow.png",
+      "viewport": "1440x900",
+      "image_width": 1440,
+      "image_height": 6985,
+      "sha256": "d3e8e652b53fbf545ff04f1f18de5f0bcfe3c84d1974e8c54cd923c1a81a23cf"
+    }
+  ],
+  "responsive": [
+    {
+      "filename": "canonical-workflow-1440.png",
+      "image_width": 1440,
+      "image_height": 2353,
+      "sha256": "7d1958348fe36481e51742e8b34b6b14e7db64f1517f657b48ca1708df8c5e04"
+    },
+    {
+      "filename": "canonical-workflow-390.png",
+      "image_width": 390,
+      "image_height": 4547,
+      "sha256": "d314c4d3114eda0907eda47a76128134e52b16cbb0405b93647e78c2383fbad7"
+    },
+    {
+      "filename": "canonical-workflow-768.png",
+      "image_width": 768,
+      "image_height": 3583,
+      "sha256": "b18810e1821f65ec4b535713f963f4d07456d78790f29764e46d87b7aa24335c"
+    },
+    {
+      "filename": "docs-architecture-1440.png",
+      "image_width": 1440,
+      "image_height": 6848,
+      "sha256": "f6bda1f08008cb94b7d805ee89e11b7d42765a9d3945d8e2d0e5cc6f02657ad9"
+    },
+    {
+      "filename": "docs-architecture-390.png",
+      "image_width": 390,
+      "image_height": 11520,
+      "sha256": "8f140fa468e2d76799ff91facf1699e2df71b42c7231e63ef815946594a592dd"
+    },
+    {
+      "filename": "docs-architecture-768.png",
+      "image_width": 768,
+      "image_height": 8147,
+      "sha256": "2eae69b341f7869cea06eb2a5ceeb1677d37d9925695853751dce14996d38f9f"
+    },
+    {
+      "filename": "docs-dfd-threat-flow-1440.png",
+      "image_width": 1440,
+      "image_height": 6985,
+      "sha256": "d3e8e652b53fbf545ff04f1f18de5f0bcfe3c84d1974e8c54cd923c1a81a23cf"
+    },
+    {
+      "filename": "docs-dfd-threat-flow-390.png",
+      "image_width": 390,
+      "image_height": 10729,
+      "sha256": "8f7ab4db051b46a933e66feb2d4bfd477be457bc136847d4afcc9497c57fafc3"
+    },
+    {
+      "filename": "docs-dfd-threat-flow-768.png",
+      "image_width": 768,
+      "image_height": 8270,
+      "sha256": "0fd37c19fb37abe447ea196bb54630a4bc5e7e58ae21923a5a4e15ea957c0515"
+    },
+    {
+      "filename": "fintech-1440.png",
+      "image_width": 1440,
+      "image_height": 4202,
+      "sha256": "3cf5b31f352cd38058b3a6348145bdde947a69edc498cde7dd1fe1b82bff77db"
+    },
+    {
+      "filename": "fintech-390.png",
+      "image_width": 390,
+      "image_height": 7366,
+      "sha256": "6988e0fe57434250237a6b82249df4a4dea2fa0e637357387ca1cbf2fe5f708f"
+    },
+    {
+      "filename": "fintech-768.png",
+      "image_width": 768,
+      "image_height": 5356,
+      "sha256": "6d24c3d1fb58355567541dde0536cbee1e6e98da4930a9e5224626745a7f807a"
+    },
+    {
+      "filename": "healthcare-1440.png",
+      "image_width": 1440,
+      "image_height": 3871,
+      "sha256": "a0d9ca8b7dfc225509f3dc9da00797f4a2290bad5159e042d2bf6a0abb2fb932"
+    },
+    {
+      "filename": "healthcare-390.png",
+      "image_width": 390,
+      "image_height": 6858,
+      "sha256": "1a80a2de55abc723004e06cd92747efda4ae3f8f4ecd0b5c229d9a928f9c2a4f"
+    },
+    {
+      "filename": "healthcare-768.png",
+      "image_width": 768,
+      "image_height": 4956,
+      "sha256": "7e9f74e1600191dac62de4de28e35fd6f7ff579749f7a765f550be62f77626cc"
+    },
+    {
+      "filename": "home-1440.png",
+      "image_width": 1440,
+      "image_height": 4068,
+      "sha256": "8477cdadb48578db718b51b5f224eb7d4a404f9ba82775cd5b54e1485256e831"
+    },
+    {
+      "filename": "home-390.png",
+      "image_width": 390,
+      "image_height": 6882,
+      "sha256": "0d1a9eff85742fbb8f73e7cbcb332318ea4089c72553628df6eed5ed52fc9d6d"
+    },
+    {
+      "filename": "home-768.png",
+      "image_width": 768,
+      "image_height": 5236,
+      "sha256": "10fe944423730f55aa4b90936feb46b155848832eeca102338c4c78e97f818ce"
+    },
+    {
+      "filename": "how-it-works-1440.png",
+      "image_width": 1440,
+      "image_height": 3042,
+      "sha256": "c132d4fd7b6b5bb8f7e6028a4ee1a588c490834dca66b2935e8fe581e7c84c7e"
+    },
+    {
+      "filename": "how-it-works-390.png",
+      "image_width": 390,
+      "image_height": 4767,
+      "sha256": "74c4c235b77dd1df85a5d63a7ef7bf6b36a12dab83567d4d5b7b80584e8e589b"
+    },
+    {
+      "filename": "how-it-works-768.png",
+      "image_width": 768,
+      "image_height": 3809,
+      "sha256": "04a013df872c6ae39d7a18b532e8db197471f1318f8abf02c5d805c0caebcb86"
+    },
+    {
+      "filename": "platform-1440.png",
+      "image_width": 1440,
+      "image_height": 3218,
+      "sha256": "e96bed09d3ad173d721f26db21aa6f451481fa82e218be635c5f365f5fcab059"
+    },
+    {
+      "filename": "platform-390.png",
+      "image_width": 390,
+      "image_height": 4643,
+      "sha256": "50e58ed35400cac36e6ec1f32ce5eb7f0b497f780f49a532a5ff328bbd6306ab"
+    },
+    {
+      "filename": "platform-768.png",
+      "image_width": 768,
+      "image_height": 3847,
+      "sha256": "b8dcc9f84a2808449608d477b23c8d31f4d05961eedbed6a66bd972f1ce06ef2"
+    },
+    {
+      "filename": "proof-evidence-1440.png",
+      "image_width": 1440,
+      "image_height": 7020,
+      "sha256": "4a53e20137056da39564cdb101b36265bc11895b7f6f6576853ac6196b23dbc9"
+    },
+    {
+      "filename": "proof-evidence-390.png",
+      "image_width": 390,
+      "image_height": 10652,
+      "sha256": "ac69a4a85c3f638f00532555d918b3b3d590f3f678234873c1894ecf4b55c3dd"
+    },
+    {
+      "filename": "proof-evidence-768.png",
+      "image_width": 768,
+      "image_height": 8418,
+      "sha256": "99ff61aaba31eaa03eb9c1225ccf7985c3bb728bb0d1b6c9c0c40549a476cad7"
+    },
+    {
+      "filename": "verification-1440.png",
+      "image_width": 1440,
+      "image_height": 4061,
+      "sha256": "5f0ca2462da660921a61c728926b86e85c50e2bf5f2b67ed3090b939a4826ef9"
+    },
+    {
+      "filename": "verification-390.png",
+      "image_width": 390,
+      "image_height": 5379,
+      "sha256": "b13ccd0d372e9b5ddeba8b0bd9055211705528248e917a33c7fc6f2460055a0f"
+    },
+    {
+      "filename": "verification-768.png",
+      "image_width": 768,
+      "image_height": 4369,
+      "sha256": "a0bae8c92496a4eb9e853802d2334a977e0803618e805c8c37eac5a1e59bb0fd"
+    }
+  ]
+}
