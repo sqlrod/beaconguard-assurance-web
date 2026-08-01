@@ -23,7 +23,7 @@
 | 01B (direction gate) | Enterprise diagram visual-direction gate | `a0af658ebc388226a793109afabc365ce1475ef1` | [pass-01b-diagram-direction](review-artifacts/pass-01b-diagram-direction/README.md) |
 | 01B | Unified enterprise diagram system validation | `472b9197e4a4ac3b990db82ab06a5030418716f5` | [pass-01b-unified-diagram-system](review-artifacts/pass-01b-unified-diagram-system/README.md) |
 | 01B-R1 | Enterprise diagram art-direction refinement | `16a892202eb33c506154e4633110eaf907775a8f` | [pass-01b-r1-enterprise-diagram-refinement](review-artifacts/pass-01b-r1-enterprise-diagram-refinement/README.md) |
-| 01B-R2 | Pure-SVG production-candidate diagram rebuild | *(pending commit)* | [pass-01b-r2-pure-svg-diagram-rebuild](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/README.md) |
+| 01B-R2 | Pure-SVG production-candidate diagram rebuild | `72d96ada95319fd90d6c777d0c95a506cb8f4b2d` | [pass-01b-r2-pure-svg-diagram-rebuild](review-artifacts/pass-01b-r2-pure-svg-diagram-rebuild/README.md) |
 
 ## Pass 01B-R2 — Pure-SVG Production-Candidate Diagram Rebuild
 

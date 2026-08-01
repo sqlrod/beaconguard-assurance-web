@@ -7,7 +7,7 @@ IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW
 | Field | Value |
 | --- | --- |
 | Starting staging HEAD | `c357056756c5cbe361aa066270bcbc05690478a7` |
-| Final implementation commit | *(filled after commit)* |
+| Final implementation commit | `72d96ada95319fd90d6c777d0c95a506cb8f4b2d` |
 | Preview port | `4335` |
 | Build result | Pass |
 | Geometry validator | Pass (`scripts/validate-diagram-geometry.mjs`) |
