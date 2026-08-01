@@ -27,7 +27,7 @@
 | 01B-R3A | Control Fabric homepage art-direction gate | `877fe20d2cb0d694faf30ea820e2f11dade6d67e` | [pass-01b-r3a-control-fabric-art-direction](review-artifacts/pass-01b-r3a-control-fabric-art-direction/README.md) |
 | 01B-R3A1 | Control Fabric geometry correction | `9ade9606406718cf408646ab419544dec0f45576` | [pass-01b-r3a1-control-fabric-geometry-correction](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/README.md) |
 | 01B-R3A2 | Orthographic closed-loop circuit reconstruction | `a3c83b56e50ffd4288ecbf198017655f1fb3ad27` | [pass-01b-r3a2-orthographic-circuit-reconstruction](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/README.md) |
-| 01B (approved diagram) | Approved generated diagram — homepage integration | _(recorded after commit)_ | [pass-01b-approved-diagram-homepage-integration](review-artifacts/pass-01b-approved-diagram-homepage-integration/README.md) |
+| 01B (approved diagram) | Approved generated diagram — homepage integration | `b98ee0fe9279ae304de17b76998f877c6d919b3e` | [pass-01b-approved-diagram-homepage-integration](review-artifacts/pass-01b-approved-diagram-homepage-integration/README.md) |
 
 ## Approved Generated Diagram — Homepage Integration
 
