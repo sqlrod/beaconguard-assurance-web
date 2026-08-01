@@ -22,7 +22,7 @@
 | 01A | Commercial hierarchy and diagram system | `7c661ed94e17555c3f1d319a3ee9e54c567dab83` | [pass-01a-commercial-hierarchy](review-artifacts/pass-01a-commercial-hierarchy/README.md) |
 | 01B (direction gate) | Enterprise diagram visual-direction gate | `a0af658ebc388226a793109afabc365ce1475ef1` | [pass-01b-diagram-direction](review-artifacts/pass-01b-diagram-direction/README.md) |
 | 01B | Unified enterprise diagram system validation | `472b9197e4a4ac3b990db82ab06a5030418716f5` | [pass-01b-unified-diagram-system](review-artifacts/pass-01b-unified-diagram-system/README.md) |
-| 01B-R1 | Enterprise diagram art-direction refinement | *(pending commit)* | [pass-01b-r1-enterprise-diagram-refinement](review-artifacts/pass-01b-r1-enterprise-diagram-refinement/README.md) |
+| 01B-R1 | Enterprise diagram art-direction refinement | `16a892202eb33c506154e4633110eaf907775a8f` | [pass-01b-r1-enterprise-diagram-refinement](review-artifacts/pass-01b-r1-enterprise-diagram-refinement/README.md) |
 
 ## Pass 01B-R1 — Enterprise Diagram Art-Direction Refinement
 
