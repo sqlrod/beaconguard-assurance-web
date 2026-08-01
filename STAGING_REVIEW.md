@@ -20,7 +20,7 @@
 | 01 | Transaction cycle and visual foundation | `0532fae` | [pass-01-foundation](review-artifacts/pass-01-foundation/README.md) |
 | 01A | Commercial hierarchy and diagram system | `7c661ed94e17555c3f1d319a3ee9e54c567dab83` | [pass-01a-commercial-hierarchy](review-artifacts/pass-01a-commercial-hierarchy/README.md) |
 | 01B (direction gate) | Enterprise diagram visual-direction gate | `a0af658ebc388226a793109afabc365ce1475ef1` | [pass-01b-diagram-direction](review-artifacts/pass-01b-diagram-direction/README.md) |
-| 01B | Unified enterprise diagram system validation | *(pending commit)* | [pass-01b-unified-diagram-system](review-artifacts/pass-01b-unified-diagram-system/README.md) |
+| 01B | Unified enterprise diagram system validation | `472b9197e4a4ac3b990db82ab06a5030418716f5` | [pass-01b-unified-diagram-system](review-artifacts/pass-01b-unified-diagram-system/README.md) |
 
 ## Pass 01B — Unified Enterprise Diagram System Validation
 

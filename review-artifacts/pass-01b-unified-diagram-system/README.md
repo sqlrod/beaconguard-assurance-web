@@ -7,7 +7,7 @@
 | Field | Value |
 | --- | --- |
 | Starting staging HEAD | `4f6f09b767a7ddd79cbc662a146f42a34c2e9ec4` |
-| Final staging commit | *(filled after commit)* |
+| Final staging commit | `472b9197e4a4ac3b990db82ab06a5030418716f5` |
 | Preview port | `4333` |
 | Build result | Pass (`npm run build`; public sitemap remains 27 URLs) |
 | Staging review route | `/staging-diagram-system` (noindex, nofollow, not in nav/footer/sitemap) |
