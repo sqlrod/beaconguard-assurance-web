@@ -5,13 +5,13 @@
 | Field | Value |
 | --- | --- |
 | Staging branch | `staging/website-visual-redesign-20260801` |
-| Current / latest pass | **01B-R3A2 — Orthographic closed-loop circuit reconstruction** |
+| Current / latest pass | **01B — Approved Generated Diagram Homepage Integration** |
 | Latest pass pointer | [review-artifacts/LATEST_PASS.txt](review-artifacts/LATEST_PASS.txt) |
 | Source website HEAD (baseline) | `1b80a59261b99d3e0bf5cf1900fd8e4e8b17d810` |
-| Preview port (Pass 01B-R3A2) | `4338` |
+| Preview port (approved diagram homepage) | `4339` |
 | Production deployment | Not authorized |
 | Merge to main | Not authorized |
-| Pass 01C | Unauthorized pending independent visual review |
+| Pass 01C | Unauthorized pending independent homepage review |
 
 ## Pass history
 
@@ -27,14 +27,27 @@
 | 01B-R3A | Control Fabric homepage art-direction gate | `877fe20d2cb0d694faf30ea820e2f11dade6d67e` | [pass-01b-r3a-control-fabric-art-direction](review-artifacts/pass-01b-r3a-control-fabric-art-direction/README.md) |
 | 01B-R3A1 | Control Fabric geometry correction | `9ade9606406718cf408646ab419544dec0f45576` | [pass-01b-r3a1-control-fabric-geometry-correction](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/README.md) |
 | 01B-R3A2 | Orthographic closed-loop circuit reconstruction | `a3c83b56e50ffd4288ecbf198017655f1fb3ad27` | [pass-01b-r3a2-orthographic-circuit-reconstruction](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/README.md) |
+| 01B (approved diagram) | Approved generated diagram — homepage integration | _(recorded after commit)_ | [pass-01b-approved-diagram-homepage-integration](review-artifacts/pass-01b-approved-diagram-homepage-integration/README.md) |
+
+## Approved Generated Diagram — Homepage Integration
+
+Latest review pass. Homepage hero uses the approved static governed-transaction PNG (exact binary copy). Intrinsic size 1672×941. `GovernedTransactionSummary` removed from homepage hero only; component source retained. Staging route `/staging-approved-homepage-diagram`.
+
+```
+IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_HOMEPAGE_REVIEW
+```
+
+Primary artifacts:
+
+- [Pass README](review-artifacts/pass-01b-approved-diagram-homepage-integration/README.md)
+- [Hero 1440](review-artifacts/pass-01b-approved-diagram-homepage-integration/crops/homepage-hero-approved-diagram-1440.png)
+- [Hero 390](review-artifacts/pass-01b-approved-diagram-homepage-integration/crops/homepage-hero-approved-diagram-390.png)
+- [Approved diagram 1440](review-artifacts/pass-01b-approved-diagram-homepage-integration/crops/homepage-approved-diagram-1440.png)
+- [Homepage 1440 full](review-artifacts/pass-01b-approved-diagram-homepage-integration/responsive/homepage__1440x900.png)
 
 ## Pass 01B-R3A2 — Orthographic Closed-Loop Circuit Reconstruction
 
-Latest review pass. Full rebuild of `ControlFabricHero` from first principles. George-supplied code was not copied. DENY barrier terminals. ALLOW returns into Execute. Staging route `/staging-control-fabric`. Public homepage unchanged.
-
-```
-IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VISUAL_REVIEW
-```
+Prior pass. Full rebuild of `ControlFabricHero` from first principles. Staging route `/staging-control-fabric`. Superseded on the public homepage by the approved static diagram pass above.
 
 Primary artifacts:
 

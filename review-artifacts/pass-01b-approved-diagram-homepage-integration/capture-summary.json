@@ -1,0 +1,125 @@
+{
+  "preview_port": 4339,
+  "errors": [],
+  "sitemap_url_count": 27,
+  "sitemap_has_staging": false,
+  "image_sha256": "1F3B5EC10431787D1D51C65AF88B94AF82838E7E0C1746F1FA7EFB1932616371",
+  "intrinsic": {
+    "width": 1672,
+    "height": 941
+  },
+  "screenshots": [
+    {
+      "kind": "responsive",
+      "filename": "homepage__390x844.png",
+      "viewport": "390x844",
+      "sha256": "451624d13019cc9a201a86d50f0ac352c18c41d4a6354d856c9296dc5eab80f8",
+      "overflow": false,
+      "overlap": false,
+      "twoLinesDesktop": true,
+      "imgW": 305,
+      "imgH": 172,
+      "visualW": 305,
+      "consoleNote": "ok"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage__768x1024.png",
+      "viewport": "768x1024",
+      "sha256": "501bc95b7e1c499838b515467d2869fef2d19de2959b9835c0d9c2fa23b152ef",
+      "overflow": false,
+      "overlap": false,
+      "twoLinesDesktop": true,
+      "imgW": 670,
+      "imgH": 377,
+      "visualW": 670,
+      "consoleNote": "ok"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage__1024x768.png",
+      "viewport": "1024x768",
+      "sha256": "1d5276aba27c5bdaacfa39bbfd700a2a0561a47b059120a210cf504b02647a41",
+      "overflow": false,
+      "overlap": false,
+      "twoLinesDesktop": true,
+      "imgW": 862,
+      "imgH": 485,
+      "visualW": 862,
+      "consoleNote": "ok"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage__1440x900.png",
+      "viewport": "1440x900",
+      "sha256": "279d70650179ea775c84e30b90b9dd3ca4ca7adc91da5a05a9e94dfccf007528",
+      "overflow": false,
+      "overlap": false,
+      "twoLinesDesktop": true,
+      "imgW": 560,
+      "imgH": 315,
+      "visualW": 560,
+      "consoleNote": "ok"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage__1920x1080.png",
+      "viewport": "1920x1080",
+      "sha256": "d6660ad8adddb579a1a14191c50fefd8ac1dc92de66753b96e90a4db52377b03",
+      "overflow": false,
+      "overlap": false,
+      "twoLinesDesktop": true,
+      "imgW": 560,
+      "imgH": 315,
+      "visualW": 560,
+      "consoleNote": "ok"
+    },
+    {
+      "kind": "fullpage",
+      "filename": "home.png",
+      "sha256": "279d70650179ea775c84e30b90b9dd3ca4ca7adc91da5a05a9e94dfccf007528"
+    },
+    {
+      "kind": "crop",
+      "filename": "homepage-approved-diagram-1440.png",
+      "viewport": "1440x900",
+      "sha256": "9f0dc6aa53d6e5ce575d50dc4ec8119779c6efe9d9f2d94aa307346c2258921b"
+    },
+    {
+      "kind": "crop",
+      "filename": "homepage-approved-diagram-1920.png",
+      "viewport": "1920x1080",
+      "sha256": "af87b122e8823ce0667b4cb8639a257e59458e6415954a800ef61fbf27e3c5a7"
+    },
+    {
+      "kind": "crop",
+      "filename": "homepage-approved-diagram-1024.png",
+      "viewport": "1024x768",
+      "sha256": "5b4ab2085adcdd09c783d5a76a8e3961800329352b804c27f06571e17644040a"
+    },
+    {
+      "kind": "crop",
+      "filename": "homepage-approved-diagram-768.png",
+      "viewport": "768x1024",
+      "sha256": "3580bd8ddbfda6f822e2610c091775745aa9e6f4104f324b429306de6cba6e91"
+    },
+    {
+      "kind": "crop",
+      "filename": "homepage-approved-diagram-390.png",
+      "viewport": "390x844",
+      "sha256": "09d94a571d60ebc47e4e5479d7bcd254ba379c0a39def5eef7b66ece6c3a65e9"
+    },
+    {
+      "kind": "crop",
+      "filename": "homepage-hero-approved-diagram-1440.png",
+      "viewport": "1440x900",
+      "sha256": "9f0dc6aa53d6e5ce575d50dc4ec8119779c6efe9d9f2d94aa307346c2258921b"
+    },
+    {
+      "kind": "crop",
+      "filename": "homepage-hero-approved-diagram-390.png",
+      "viewport": "390x844",
+      "sha256": "09d94a571d60ebc47e4e5479d7bcd254ba379c0a39def5eef7b66ece6c3a65e9"
+    }
+  ]
+}

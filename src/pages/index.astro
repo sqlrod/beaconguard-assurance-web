@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import GovernedTransactionSummary from "../components/diagrams/GovernedTransactionSummary.astro";
 import GovernedTransactionLoop from "../components/diagrams/GovernedTransactionLoop.astro";
 import GovernAuthorizeVerify from "../components/diagrams/GovernAuthorizeVerify.astro";
 import QualificationNotice from "../components/QualificationNotice.astro";
@@ -33,7 +32,17 @@ import QualificationNotice from "../components/QualificationNotice.astro";
       </div>
     </div>
     <div class="hero-split-visual">
-      <GovernedTransactionSummary />
+      <figure class="hero-approved-diagram">
+        <img
+          src="/images/diagrams/beaconguard-governed-transaction.png"
+          alt="BeaconGuard governed AI transaction architecture. The enterprise application prepares a governed request, Request Admission Authorization controls access to the AI provider, the untrusted result returns to the application, Result-to-Action Authorization controls the declared action, the application executes the authorized action, and the enterprise system of record remains authoritative. Both authorization decisions produce Verifiable Decision Records."
+          width="1672"
+          height="941"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </figure>
     </div>
   </section>
 

@@ -3419,8 +3419,11 @@ body.docs-surface main#content {
 .hero-split--home,
 .hero-split--verify {
   overflow: visible;
-  grid-template-columns: minmax(0, 1.85fr) minmax(220px, 0.78fr);
   column-gap: var(--diagram-space-6);
+}
+
+.hero-split--verify {
+  grid-template-columns: minmax(0, 1.85fr) minmax(220px, 0.78fr);
 }
 
 .hero-split--home .hero-split-copy {
@@ -3437,11 +3440,6 @@ body.docs-surface main#content {
 
 .hero-split--home .hero-line {
   white-space: nowrap;
-}
-
-.hero-split--home .hero-split-visual {
-  max-width: 320px;
-  justify-self: end;
 }
 
 .hero-split-visual {
@@ -4769,11 +4767,6 @@ body.docs-surface main#content {
   .ves-mobile { display: grid; gap: 6px; }
 }
 
-.hero-split--home .hero-split-visual {
-  max-width: 560px;
-  justify-self: end;
-}
-
 /* =========================
    PASS 01B-R2 — PURE SVG DIAGRAM SYSTEM
    ========================= */
@@ -4865,12 +4858,26 @@ body.docs-surface main#content {
 .psvg-tab-text { fill: var(--diagram-text-secondary); font-size: 12px; font-weight: 600; }
 
 .hero-split--home {
-  grid-template-columns: minmax(0, 1.35fr) minmax(420px, 0.95fr);
+  grid-template-columns: minmax(0, 0.92fr) minmax(560px, 1.15fr);
+  align-items: start;
+  column-gap: clamp(1.5rem, 3vw, 2.75rem);
 }
 .hero-split--home .hero-split-visual {
   max-width: none;
-  min-width: 420px;
+  min-width: 0;
+  width: 100%;
   justify-self: stretch;
+  align-self: start;
+}
+.hero-approved-diagram {
+  margin: 0;
+  width: 100%;
+}
+.hero-approved-diagram img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 .psvg-gts, .psvg-ves {
   padding: 8px;
@@ -4886,9 +4893,13 @@ body.docs-surface main#content {
   }
   .hero-split--home .hero-split-visual {
     min-width: 0;
+    max-width: none;
   }
   .hero-split--home .hero-line {
     white-space: normal;
+  }
+  .hero-approved-diagram {
+    margin-top: 0.5rem;
   }
 }
 
