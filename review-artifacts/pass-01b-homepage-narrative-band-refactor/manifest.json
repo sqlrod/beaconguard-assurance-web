@@ -83,5 +83,6 @@
       "sha256": "d306dd94b8168fcbbb1aac7fa92e0f0c7058f2a4da1e6343da7e870eaadd3ed1",
       "prior_used": true
     }
-  ]
+  ],
+  "final_implementation_commit": "3012e8965c4f603181be8ad292ab6c5eb672ad6d"
 }

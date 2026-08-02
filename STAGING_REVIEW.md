@@ -28,7 +28,7 @@
 | 01B-R3A1 | Control Fabric geometry correction | `9ade9606406718cf408646ab419544dec0f45576` | [pass-01b-r3a1-control-fabric-geometry-correction](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/README.md) |
 | 01B-R3A2 | Orthographic closed-loop circuit reconstruction | `a3c83b56e50ffd4288ecbf198017655f1fb3ad27` | [pass-01b-r3a2-orthographic-circuit-reconstruction](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/README.md) |
 | 01B (approved diagram) | Approved generated diagram — homepage integration | `b98ee0fe9279ae304de17b76998f877c6d919b3e` | [pass-01b-approved-diagram-homepage-integration](review-artifacts/pass-01b-approved-diagram-homepage-integration/README.md) |
-| 01B (narrative bands) | Homepage narrative band refactor | _(recorded after commit)_ | [pass-01b-homepage-narrative-band-refactor](review-artifacts/pass-01b-homepage-narrative-band-refactor/README.md) |
+| 01B (narrative bands) | Homepage narrative band refactor | `3012e8965c4f603181be8ad292ab6c5eb672ad6d` | [pass-01b-homepage-narrative-band-refactor](review-artifacts/pass-01b-homepage-narrative-band-refactor/README.md) |
 
 ## Homepage Narrative Band Refactor
 
