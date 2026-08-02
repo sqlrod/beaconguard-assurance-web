@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Staging branch | `staging/website-visual-redesign-20260801` |
-| Current / latest pass | **01B — Approved Generated Diagram Homepage Integration** |
+| Current / latest pass | **01B — Homepage Narrative Band Refactor** |
 | Latest pass pointer | [review-artifacts/LATEST_PASS.txt](review-artifacts/LATEST_PASS.txt) |
 | Source website HEAD (baseline) | `1b80a59261b99d3e0bf5cf1900fd8e4e8b17d810` |
-| Preview port (approved diagram homepage) | `4339` |
+| Preview port (narrative bands) | `4341` |
 | Production deployment | Not authorized |
 | Merge to main | Not authorized |
 | Pass 01C | Unauthorized pending independent homepage review |
@@ -28,14 +28,26 @@
 | 01B-R3A1 | Control Fabric geometry correction | `9ade9606406718cf408646ab419544dec0f45576` | [pass-01b-r3a1-control-fabric-geometry-correction](review-artifacts/pass-01b-r3a1-control-fabric-geometry-correction/README.md) |
 | 01B-R3A2 | Orthographic closed-loop circuit reconstruction | `a3c83b56e50ffd4288ecbf198017655f1fb3ad27` | [pass-01b-r3a2-orthographic-circuit-reconstruction](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/README.md) |
 | 01B (approved diagram) | Approved generated diagram — homepage integration | `b98ee0fe9279ae304de17b76998f877c6d919b3e` | [pass-01b-approved-diagram-homepage-integration](review-artifacts/pass-01b-approved-diagram-homepage-integration/README.md) |
+| 01B (narrative bands) | Homepage narrative band refactor | _(recorded after commit)_ | [pass-01b-homepage-narrative-band-refactor](review-artifacts/pass-01b-homepage-narrative-band-refactor/README.md) |
 
-## Approved Generated Diagram — Homepage Integration
+## Homepage Narrative Band Refactor
 
-Latest review pass. Homepage hero uses the approved static governed-transaction PNG (exact binary copy). Intrinsic size 1672×941. `GovernedTransactionSummary` removed from homepage hero only; component source retained. Staging route `/staging-approved-homepage-diagram`.
+Latest review pass. Post-hero homepage sections converted from floating widget panels to full-bleed horizontal narrative bands. Approved diagram and hero slogan retained. Hero CTAs reduced to two; Explore Verification moved to the Verification band. `GovernAuthorizeVerify` homepage variant removes duplicate title and emphasizes Authorize. No tabs.
 
 ```
 IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_HOMEPAGE_REVIEW
 ```
+
+Primary artifacts:
+
+- [Pass README](review-artifacts/pass-01b-homepage-narrative-band-refactor/README.md)
+- [Homepage 1440](review-artifacts/pass-01b-homepage-narrative-band-refactor/responsive/homepage-band-refactor-1440.png)
+- [GAV band 1440](review-artifacts/pass-01b-homepage-narrative-band-refactor/crops/govern-authorize-verify-band-1440.png)
+- [Widget vs band comparison](review-artifacts/pass-01b-homepage-narrative-band-refactor/comparisons/homepage-widget-vs-band-1440.png)
+
+## Approved Generated Diagram — Homepage Integration
+
+Prior pass. Homepage hero uses the approved static governed-transaction PNG (exact binary copy). Intrinsic size 1672×941. Staging route `/staging-approved-homepage-diagram`.
 
 Primary artifacts:
 

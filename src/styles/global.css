@@ -3368,15 +3368,7 @@ body.docs-surface main#content {
   }
 }
 
-@media (min-width: 1440px) {
-  .hero-split--home h1 {
-    font-size: 3.05rem;
-  }
-
-  .hero-split--home .hero-line {
-    white-space: nowrap;
-  }
-}
+/* Homepage H1 sizing owned by APPROVED DIAGRAM — HOMEPAGE HERO GEOMETRY */
 
 /* =========================
    PASS 01B — UNIFIED ENTERPRISE DIAGRAM SYSTEM
@@ -3416,30 +3408,10 @@ body.docs-surface main#content {
 }
 
 /* Hero interim overflow correction */
-.hero-split--home,
 .hero-split--verify {
   overflow: visible;
   column-gap: var(--diagram-space-6);
-}
-
-.hero-split--verify {
   grid-template-columns: minmax(0, 1.85fr) minmax(220px, 0.78fr);
-}
-
-.hero-split--home .hero-split-copy {
-  position: relative;
-  z-index: 2;
-  overflow: visible;
-  padding-right: var(--diagram-space-2);
-}
-
-.hero-split--home h1 {
-  overflow: visible;
-  max-width: 18.5ch;
-}
-
-.hero-split--home .hero-line {
-  white-space: nowrap;
 }
 
 .hero-split-visual {
@@ -4163,11 +4135,6 @@ body.docs-surface main#content {
   }
 }
 
-@media (min-width: 1440px) {
-  .hero-split--home .hero-line {
-    white-space: nowrap;
-  }
-}
 
 .sys-token-list {
   margin: var(--diagram-space-2) 0 0;
@@ -4714,7 +4681,6 @@ body.docs-surface main#content {
 @media (max-width: 1023px) {
   .gts-desktop { display: none; }
   .gts-mobile { display: grid; gap: 6px; padding-left: 18px; }
-  .hero-split--home .hero-split-visual { max-width: none; justify-self: stretch; }
 }
 
 /* Verification executive summary */
@@ -4857,28 +4823,97 @@ body.docs-surface main#content {
 .psvg-tab--active { fill: rgba(45, 212, 191, 0.14); stroke: var(--decision-evidence-border); }
 .psvg-tab-text { fill: var(--diagram-text-secondary); font-size: 12px; font-weight: 600; }
 
+/* =========================
+   APPROVED DIAGRAM — HOMEPAGE HERO GEOMETRY
+   Homepage-only wider main + non-overlapping split.
+   ========================= */
+
+main#content.page-home {
+  width: min(100%, 1360px);
+  max-width: 1360px;
+  padding-inline: 2rem;
+}
+
+@media (min-width: 1600px) {
+  main#content.page-home {
+    padding-inline: 2.5rem;
+  }
+}
+
 .hero-split--home {
-  grid-template-columns: minmax(0, 0.92fr) minmax(560px, 1.15fr);
-  align-items: start;
-  column-gap: clamp(1.5rem, 3vw, 2.75rem);
-}
-.hero-split--home .hero-split-visual {
+  display: grid;
+  /*
+   * Desktop geometry (~1296px hero at 1440):
+   * text takes remaining space; diagram track is a fixed 600px readable column.
+   * A max of 720px on the figure is allowed, but the track stays 600px so the
+   * nowrap slogan cannot be crushed into the image.
+   */
+  grid-template-columns: minmax(0, 1fr) 600px;
+  column-gap: clamp(2rem, 3vw, 3.5rem);
+  align-items: center;
+  width: 100%;
   max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-inline: 0;
+  overflow: visible;
+}
+
+.hero-split--home .hero-split-copy,
+.hero-split--home .hero-split-visual {
   min-width: 0;
+}
+
+.hero-split--home .hero-split-copy {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  padding-right: 0;
+}
+
+.hero-split--home h1 {
+  margin: 0 0 1.35rem;
+  max-width: none;
+  overflow: visible;
+  /* Sized so both nowrap slogan lines stay inside the text column at 1280–1920. */
+  font-size: clamp(2.75rem, 3.1vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.hero-split--home .hero-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero-split--home .hero-subheadline {
+  max-width: 35rem;
+}
+
+.hero-split--home .hero-split-visual {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
   width: 100%;
+  max-width: none;
   justify-self: stretch;
-  align-self: start;
+  align-self: center;
 }
+
 .hero-approved-diagram {
-  margin: 0;
   width: 100%;
+  max-width: none;
+  margin: 0;
 }
+
 .hero-approved-diagram img {
   display: block;
   width: 100%;
   height: auto;
+  max-width: none;
   object-fit: contain;
 }
+
 .psvg-gts, .psvg-ves {
   padding: 8px;
   border: 1px solid var(--diagram-border);
@@ -4887,19 +4922,380 @@ body.docs-surface main#content {
 }
 .psvg-ves { border-color: var(--diagram-boundary-verify); border-width: 2px; }
 
-@media (max-width: 1099px) {
+@media (max-width: 1279px) {
   .hero-split--home {
     grid-template-columns: 1fr;
+    padding-inline: clamp(1.25rem, 3vw, 1.75rem);
   }
+
   .hero-split--home .hero-split-visual {
     min-width: 0;
     max-width: none;
+    justify-content: flex-start;
   }
+
+  .hero-split--home h1 {
+    font-size: clamp(2.125rem, 6vw, 3rem);
+  }
+
   .hero-split--home .hero-line {
     white-space: normal;
   }
+
   .hero-approved-diagram {
     margin-top: 0.5rem;
+    max-width: none;
+  }
+}
+
+/* =========================
+   PASS 01B — HOMEPAGE NARRATIVE BANDS
+   ========================= */
+
+main#content.page-home {
+  overflow-x: clip;
+}
+
+.page-home .home-hero-shell {
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+}
+
+.page-home .home-band {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: 0;
+  margin-block: 0;
+  padding-block: clamp(3.5rem, 7vw, 7rem);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.page-home .home-band--base {
+  background: transparent;
+}
+
+.page-home .home-band--soft {
+  background: rgba(13, 22, 36, 0.55);
+  border-top: 1px solid rgba(38, 55, 80, 0.45);
+}
+
+.page-home .home-band--emphasis {
+  background: rgba(16, 28, 46, 0.68);
+  border-top: 1px solid rgba(91, 158, 232, 0.28);
+}
+
+.page-home .home-band-inner {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.page-home .home-band h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 2.5vw, 2.35rem);
+  line-height: 1.2;
+  max-width: none;
+}
+
+.page-home .home-band-lead {
+  margin: 0 0 2rem;
+  max-width: 680px;
+  font-size: 1.075rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.page-home .home-band .section-label {
+  margin: 0 0 0.65rem;
+}
+
+.page-home .section-label--evidence {
+  color: var(--decision-evidence);
+}
+
+/* Neutralize legacy widget wrappers if present on homepage */
+.page-home .homepage-block,
+.page-home .marketing-section,
+.page-home .cta-band {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.page-home .home-auth-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 0 0 1.75rem;
+}
+
+.page-home .home-auth-card {
+  margin: 0;
+  padding: 1.5rem 1.35rem 1.6rem;
+  border: 1px solid rgba(38, 55, 80, 0.55);
+  border-top: 3px solid var(--brand-accent);
+  border-radius: 0.35rem;
+  background: rgba(8, 14, 28, 0.28);
+}
+
+.page-home .home-auth-card h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+}
+
+.page-home .home-auth-card p {
+  margin: 0;
+  max-width: none;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.page-home .home-disclose {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid rgba(38, 55, 80, 0.55);
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.page-home .home-disclose > summary {
+  cursor: pointer;
+  list-style: none;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 0.35rem 0;
+}
+
+.page-home .home-disclose > summary::-webkit-details-marker {
+  display: none;
+}
+
+.page-home .home-disclose > summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 0.55rem;
+  color: var(--brand-accent);
+}
+
+.page-home .home-disclose[open] > summary::before {
+  content: "▾";
+}
+
+.page-home .home-disclose-body {
+  padding: 0.75rem 0 0.25rem;
+}
+
+/* Homepage GAV hierarchy: Authorize dominant */
+.page-home .bg-gav--homepage {
+  display: grid;
+  grid-template-columns: 0.85fr 1.3fr 0.85fr;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.page-home .bg-gav--homepage .bg-gav-column {
+  margin: 0;
+  padding: 1.35rem 1.25rem 1.5rem;
+  border: 1px solid rgba(38, 55, 80, 0.55);
+  border-radius: 0.35rem;
+  background: rgba(8, 14, 28, 0.32);
+  box-shadow: none;
+  transform: none;
+}
+
+.page-home .bg-gav--homepage .bg-gav-column--authorize {
+  border-color: rgba(91, 158, 232, 0.55);
+  border-top: 3px solid var(--brand-accent);
+  background: rgba(14, 26, 44, 0.55);
+  padding: 1.65rem 1.4rem 1.75rem;
+  z-index: 1;
+}
+
+.page-home .bg-gav--homepage .bg-gav-column--govern,
+.page-home .bg-gav--homepage .bg-gav-column--verify {
+  border-top: 3px solid rgba(38, 55, 80, 0.85);
+}
+
+.page-home .bg-gav--homepage .bg-gav-summary {
+  margin: 0 0 1rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.page-home .bg-gav--homepage .bg-gav-title {
+  font-size: 1.05rem;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+.page-home .bg-gav--homepage .bg-gav-column--authorize .bg-gav-title {
+  font-size: 1.2rem;
+}
+
+.page-home .bg-gav--homepage .bg-gav-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.page-home .home-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.35rem;
+  align-items: stretch;
+}
+
+.page-home .home-workflow-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 1.55rem 1.35rem 1.4rem;
+  border: 1px solid rgba(38, 55, 80, 0.5);
+  border-top: 3px solid var(--brand-accent);
+  border-radius: 0.35rem;
+  background: rgba(8, 14, 28, 0.22);
+  box-shadow: none;
+}
+
+.page-home .home-workflow-card h3 {
+  margin: 0 0 0.75rem;
+}
+
+.page-home .home-workflow-card > p {
+  margin: 0;
+  max-width: none;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.page-home .home-workflow-link {
+  margin-top: auto !important;
+  padding-top: 1.25rem;
+}
+
+.page-home .home-workflow-link a {
+  font-weight: 600;
+  color: var(--brand-accent);
+  text-decoration: none;
+}
+
+.page-home .home-workflow-link a:hover,
+.page-home .home-workflow-link a:focus-visible {
+  text-decoration: underline;
+}
+
+.page-home .home-verify-editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.75fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.page-home .home-verify-copy .home-band-lead {
+  margin-bottom: 0;
+}
+
+.page-home .home-verify-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.85rem;
+}
+
+.page-home .home-verify-actions .btn-secondary {
+  min-height: 2.75rem;
+  justify-content: center;
+  text-align: center;
+}
+
+.page-home .home-cta-actions {
+  gap: 1rem;
+}
+
+.page-home .home-qualify-wrap {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem clamp(1.25rem, 3vw, 2.5rem) 2.5rem;
+}
+
+.page-home .home-qualify-wrap .bg-qualify {
+  margin: 0;
+  max-width: 760px;
+  border: 0;
+  border-left: 3px solid rgba(38, 55, 80, 0.85);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.35rem 0 0.35rem 1rem;
+  box-shadow: none;
+}
+
+.page-home .home-qualify-wrap .bg-qualify p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  opacity: 0.9;
+}
+
+.page-home .page-actions--hero-split {
+  gap: 1rem;
+}
+
+@media (max-width: 1099px) {
+  .page-home .bg-gav--homepage {
+    grid-template-columns: 1fr;
+  }
+
+  .page-home .home-workflow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-home .home-workflow-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .page-home .home-verify-editorial {
+    grid-template-columns: 1fr;
+  }
+
+  .page-home .home-verify-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-home .home-band {
+    padding-block: clamp(3.5rem, 10vw, 4.5rem);
+  }
+
+  .page-home .home-auth-pair,
+  .page-home .home-workflow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-home .home-workflow-card:last-child {
+    grid-column: auto;
+  }
+
+  .page-home .home-verify-actions {
+    flex-direction: column;
   }
 }
 

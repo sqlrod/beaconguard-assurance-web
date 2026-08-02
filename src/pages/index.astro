@@ -8,150 +8,179 @@ import QualificationNotice from "../components/QualificationNotice.astro";
 <BaseLayout
   title="BeaconGuard Assurance | Control before execution"
   description="Control before execution. Evidence after every decision. BeaconGuard governs whether an enterprise application may invoke AI and whether a declared action based on the returned result may affect an enterprise system."
+  pageClass="page-home"
 >
-  <section class="hero-split hero-split--home">
-    <div class="hero-split-copy">
-      <p class="hero-eyebrow">INDEPENDENT AI ACTION AUTHORIZATION</p>
-      <h1>
-        <span class="hero-line">Control before execution.</span>
-        <span class="hero-line">Evidence after every decision.</span>
-      </h1>
-      <p class="hero-subheadline">
-        BeaconGuard governs whether an enterprise application may invoke AI and
-        whether a declared action based on the returned result may affect an
-        enterprise system. The returned AI result remains an untrusted proposal
-        until its intended use is independently authorized.
-      </p>
-      <p class="hero-proof">
-        Provider success is not enterprise authorization.
-      </p>
-      <div class="page-actions page-actions--hero page-actions--hero-split">
-        <a class="btn-primary" href="/design-partner-program">Request Controlled Evaluation</a>
-        <a class="btn-secondary" href="/how-it-works">See How It Works</a>
-        <a class="text-link" href="/verification">Explore Verification</a>
-      </div>
-    </div>
-    <div class="hero-split-visual">
-      <figure class="hero-approved-diagram">
-        <img
-          src="/images/diagrams/beaconguard-governed-transaction.png"
-          alt="BeaconGuard governed AI transaction architecture. The enterprise application prepares a governed request, Request Admission Authorization controls access to the AI provider, the untrusted result returns to the application, Result-to-Action Authorization controls the declared action, the application executes the authorized action, and the enterprise system of record remains authoritative. Both authorization decisions produce Verifiable Decision Records."
-          width="1672"
-          height="941"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-      </figure>
-    </div>
-  </section>
-
-  <section class="stack-section homepage-block marketing-section">
-    <h2>Governed AI transaction</h2>
-    <p>
-      One complete cycle: the enterprise application prepares a request,
-      receives an untrusted AI result inside the same application boundary,
-      declares an intended action, and executes only after independent
-      authorization.
-    </p>
-    <div class="feature-grid">
-      <article class="feature-card">
-        <h3>Request Admission Authorization</h3>
-        <p>
-          Determines whether an application may invoke the AI provider under
-          the Active Verified Release. DENY blocks provider invocation.
+  <div class="home-hero-shell">
+    <section class="hero-split hero-split--home">
+      <div class="hero-split-copy">
+        <p class="hero-eyebrow">INDEPENDENT AI ACTION AUTHORIZATION</p>
+        <h1>
+          <span class="hero-line">Control before execution.</span>
+          <span class="hero-line">Evidence after every decision.</span>
+        </h1>
+        <p class="hero-subheadline">
+          BeaconGuard governs whether an enterprise application may invoke AI and
+          whether a declared action based on the returned result may affect an
+          enterprise system. The returned AI result remains an untrusted proposal
+          until its intended use is independently authorized.
         </p>
-      </article>
-      <article class="feature-card">
-        <h3>Result-to-Action Authorization</h3>
-        <p>
-          After the AI result returns as an untrusted proposal, the application
-          declares the intended action. BeaconGuard authorizes or denies that
-          declared action — not model-content correctness.
+        <p class="hero-proof">
+          Provider success is not enterprise authorization.
         </p>
-      </article>
-    </div>
-    <details class="bg-disclose">
-      <summary>View Transaction Architecture</summary>
-      <div class="bg-disclose-body">
-        <GovernedTransactionLoop
-          variant="detailed"
-          title="Governed transaction architecture"
-          caption="Detailed closed-loop geometry with labeled trust boundaries, dual DENY hard stops, and a separate evidence rail."
-        />
-        <div class="page-actions">
+        <div class="page-actions page-actions--hero page-actions--hero-split">
+          <a class="btn-primary" href="/design-partner-program">Request Controlled Evaluation</a>
           <a class="btn-secondary" href="/how-it-works">See How It Works</a>
-          <a class="btn-secondary" href="/canonical-workflow">Canonical Workflow</a>
         </div>
       </div>
-    </details>
-  </section>
+      <div class="hero-split-visual">
+        <figure class="hero-approved-diagram">
+          <img
+            src="/images/diagrams/beaconguard-governed-transaction.png"
+            alt="BeaconGuard governed AI transaction architecture. The enterprise application prepares a governed request, Request Admission Authorization controls access to the AI provider, the untrusted result returns to the application, Result-to-Action Authorization controls the declared action, the application executes the authorized action, and the enterprise system of record remains authoritative. Both authorization decisions produce Verifiable Decision Records."
+            width="1672"
+            height="941"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </figure>
+      </div>
+    </section>
+  </div>
 
-  <section class="stack-section homepage-block marketing-section">
-    <h2>Govern · Authorize · Verify</h2>
-    <GovernAuthorizeVerify />
-  </section>
-
-  <section class="stack-section homepage-block marketing-section">
-    <p class="section-label">PRIORITY REGULATED WORKFLOWS</p>
-    <h2>Priority regulated workflows</h2>
-    <p>
-      BeaconGuard is evaluating bounded workflows across healthcare, financial
-      services, and regulated internal automation.
-    </p>
-    <div class="feature-grid feature-grid--three">
-      <article class="feature-card">
-        <h3>Healthcare</h3>
-        <p>
-          PHI-sensitive operational pathways such as patient communication,
-          documentation assistance, and care-operations routing.
-        </p>
-        <p><a href="/healthcare">Review healthcare workflows</a></p>
-      </article>
-      <article class="feature-card">
-        <h3>Financial Services</h3>
-        <p>
-          AML, KYC, fraud, dispute, and recommendation workflows where declared
-          actions must be authorized before enterprise effect.
-        </p>
-        <p><a href="/fintech">Review financial workflows</a></p>
-      </article>
-      <article class="feature-card">
-        <h3>Regulated Internal Automation</h3>
-        <p>
-          Fail-closed authorization before agents or automations produce
-          enterprise effect.
-        </p>
-        <p><a href="/canonical-workflow">Review the canonical workflow</a></p>
-      </article>
+  <section class="home-band home-band--base" data-home-band="governed-transaction">
+    <div class="home-band-inner">
+      <h2>Governed AI transaction</h2>
+      <p class="home-band-lead">
+        One complete cycle: the enterprise application prepares a request,
+        receives an untrusted AI result inside the same application boundary,
+        declares an intended action, and executes only after independent
+        authorization.
+      </p>
+      <div class="home-auth-pair">
+        <article class="home-auth-card">
+          <h3>Request Admission Authorization</h3>
+          <p>
+            Determines whether an application may invoke the AI provider under
+            the Active Verified Release. DENY blocks provider invocation.
+          </p>
+        </article>
+        <article class="home-auth-card">
+          <h3>Result-to-Action Authorization</h3>
+          <p>
+            After the AI result returns as an untrusted proposal, the application
+            declares the intended action. BeaconGuard authorizes or denies that
+            declared action — not model-content correctness.
+          </p>
+        </article>
+      </div>
+      <details class="home-disclose">
+        <summary>View Transaction Architecture</summary>
+        <div class="home-disclose-body">
+          <GovernedTransactionLoop
+            variant="detailed"
+            title="Governed transaction architecture"
+            caption="Detailed closed-loop geometry with labeled trust boundaries, dual DENY hard stops, and a separate evidence rail."
+          />
+          <div class="page-actions">
+            <a class="btn-secondary" href="/how-it-works">See How It Works</a>
+            <a class="btn-secondary" href="/canonical-workflow">Canonical Workflow</a>
+          </div>
+        </div>
+      </details>
     </div>
   </section>
 
-  <section class="stack-section homepage-block marketing-section">
-    <h2>Verification and evidence</h2>
-    <p>
-      Authorization decisions produce Verifiable Decision Records for
-      investigation, reconstruction, replay verification, reporting, and
-      export. Verify is read-only and cannot grant runtime permission.
-    </p>
-    <div class="page-actions">
-      <a class="btn-secondary" href="/verification">Explore Verification</a>
-      <a class="btn-secondary" href="/proof-evidence">Inspect Proof and Evidence</a>
+  <section class="home-band home-band--soft" data-home-band="gav">
+    <div class="home-band-inner">
+      <h2>Govern · Authorize · Verify</h2>
+      <p class="home-band-lead">
+        Three functional domains. Authorize is the runtime prevention path.
+        Govern prepares the verified release. Verify remains read-only.
+      </p>
+      <GovernAuthorizeVerify showTitle={false} variant="homepage" />
     </div>
   </section>
 
-  <section class="stack-section homepage-block cta-band marketing-section">
-    <h2>Controlled Evaluation</h2>
-    <p>
-      Review representative requests, provider results, intended actions,
-      evidence, reconstruction, replay, export, and deployment boundaries
-      before production claims.
-    </p>
-    <div class="page-actions">
-      <a class="btn-primary" href="/design-partner-program">Request Controlled Evaluation</a>
-      <a class="btn-secondary" href="/contact">Contact</a>
+  <section class="home-band home-band--base" data-home-band="workflows">
+    <div class="home-band-inner">
+      <p class="section-label">PRIORITY REGULATED WORKFLOWS</p>
+      <h2>Priority regulated workflows</h2>
+      <p class="home-band-lead">
+        BeaconGuard is evaluating bounded workflows across healthcare, financial
+        services, and regulated internal automation.
+      </p>
+      <div class="home-workflow-grid">
+        <article class="home-workflow-card">
+          <h3>Healthcare</h3>
+          <p>
+            PHI-sensitive operational pathways such as patient communication,
+            documentation assistance, and care-operations routing.
+          </p>
+          <p class="home-workflow-link">
+            <a href="/healthcare">Review healthcare workflows</a>
+          </p>
+        </article>
+        <article class="home-workflow-card">
+          <h3>Financial Services</h3>
+          <p>
+            AML, KYC, fraud, dispute, and recommendation workflows where declared
+            actions must be authorized before enterprise effect.
+          </p>
+          <p class="home-workflow-link">
+            <a href="/fintech">Review financial workflows</a>
+          </p>
+        </article>
+        <article class="home-workflow-card">
+          <h3>Regulated Internal Automation</h3>
+          <p>
+            Fail-closed authorization before agents or automations produce
+            enterprise effect.
+          </p>
+          <p class="home-workflow-link">
+            <a href="/canonical-workflow">Review the canonical workflow</a>
+          </p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <QualificationNotice variant="full" />
+  <section class="home-band home-band--soft" data-home-band="verification" id="verification-evidence">
+    <div class="home-band-inner">
+      <div class="home-verify-editorial">
+        <div class="home-verify-copy">
+          <p class="section-label section-label--evidence">EVIDENCE</p>
+          <h2>Verification and evidence</h2>
+          <p class="home-band-lead">
+            Authorization decisions produce Verifiable Decision Records for
+            investigation, reconstruction, replay verification, reporting, and
+            export. Verify is read-only and cannot grant runtime permission.
+          </p>
+        </div>
+        <div class="home-verify-actions">
+          <a class="btn-secondary" href="/verification">Explore Verification</a>
+          <a class="btn-secondary" href="/proof-evidence">Inspect Proof and Evidence</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-band home-band--emphasis" data-home-band="controlled-evaluation">
+    <div class="home-band-inner">
+      <h2>Controlled Evaluation</h2>
+      <p class="home-band-lead">
+        Review representative requests, provider results, intended actions,
+        evidence, reconstruction, replay, export, and deployment boundaries
+        before production claims.
+      </p>
+      <div class="page-actions home-cta-actions">
+        <a class="btn-primary" href="/design-partner-program">Request Controlled Evaluation</a>
+        <a class="btn-secondary" href="/contact">Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="home-qualify-wrap">
+    <QualificationNotice variant="full" />
+  </div>
 </BaseLayout>

@@ -1,0 +1,87 @@
+{
+  "pass": "01B-homepage-narrative-band-refactor",
+  "status": "IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_HOMEPAGE_REVIEW",
+  "starting_staging_head": "e0295e92f0a4bd5f96178e093a2b045e295c497c",
+  "preview_port": 4341,
+  "png_sha256": "1F3B5EC10431787D1D51C65AF88B94AF82838E7E0C1746F1FA7EFB1932616371",
+  "image_modified": false,
+  "screenshots": [
+    {
+      "kind": "responsive",
+      "filename": "homepage-band-refactor-390.png",
+      "viewport": "390x844",
+      "sha256": "a0344ad53a51d09bf02aa560cc9b34198249567d533936e40ff1b5099617a214"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-band-refactor-768.png",
+      "viewport": "768x1024",
+      "sha256": "0a78f94fda794fc3c95ae185c43308d48d3590ed1a1d0b2f80b59f5aef8348aa"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-band-refactor-1024.png",
+      "viewport": "1024x768",
+      "sha256": "0e17bef359210ab4b90e8483f033cc2a34c26f6f94321f03bd2e2b935bfc3faa"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-band-refactor-1280.png",
+      "viewport": "1280x900",
+      "sha256": "f37859a47516df0400610b8e98fe80484641c8212496dd009d9558a4fa3517b5"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-band-refactor-1440.png",
+      "viewport": "1440x900",
+      "sha256": "e5899633b0f332df16bb32a3c93f8043d9d1f3261b69cd65faa6697beb22b558"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-band-refactor-1920.png",
+      "viewport": "1920x1080",
+      "sha256": "a077478c9c1413c32640c43524d12f22dfbab264da4221c8a86654d719ecee75"
+    },
+    {
+      "kind": "fullpage",
+      "filename": "home.png",
+      "sha256": "e5899633b0f332df16bb32a3c93f8043d9d1f3261b69cd65faa6697beb22b558"
+    },
+    {
+      "kind": "crop",
+      "filename": "hero-1440.png",
+      "sha256": "87d7a7a47a8aaa57ee42373783d4eadf6325da3aaff8d5050a4d12a930beeec2"
+    },
+    {
+      "kind": "crop",
+      "filename": "governed-transaction-band-1440.png",
+      "sha256": "e242bf13b9e69378e2eb63b495fc86e308d9aa04e6196fe4a4c859cb8b232e90"
+    },
+    {
+      "kind": "crop",
+      "filename": "govern-authorize-verify-band-1440.png",
+      "sha256": "b653a6b20dd5cf049ec0671a7f40a62c6dc1337cef77cc5dbca6bcdc9567c4fe"
+    },
+    {
+      "kind": "crop",
+      "filename": "priority-workflows-band-1440.png",
+      "sha256": "7fca316bed879f5fd04db63acb0a97918042e572ee27dfa6693883c68fe4ca5b"
+    },
+    {
+      "kind": "crop",
+      "filename": "verification-band-1440.png",
+      "sha256": "3ec0a1002df9df2d9356c2382a6aad7f035feac3d2ea2e991d4ad9c846d115c3"
+    },
+    {
+      "kind": "crop",
+      "filename": "controlled-evaluation-band-1440.png",
+      "sha256": "2a60a347c3740b54141e0cdffac34bdffd630f5a4d56427e5b96379ce32aa0fa"
+    },
+    {
+      "kind": "comparison",
+      "filename": "homepage-widget-vs-band-1440.png",
+      "sha256": "d306dd94b8168fcbbb1aac7fa92e0f0c7058f2a4da1e6343da7e870eaadd3ed1",
+      "prior_used": true
+    }
+  ]
+}

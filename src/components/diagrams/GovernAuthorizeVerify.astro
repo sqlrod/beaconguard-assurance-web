@@ -1,59 +1,157 @@
 ---
 import DiagramShell from "./DiagramShell.astro";
+
+interface Props {
+  /** When false, omit the component-owned title (page owns the H2). Default true. */
+  showTitle?: boolean;
+  variant?: "default" | "homepage";
+}
+
+const { showTitle = true, variant = "default" } = Astro.props;
+const isHomepage = variant === "homepage" || showTitle === false;
 ---
 
-<DiagramShell
-  title="Govern · Authorize · Verify"
-  caption="Three functional domains. Authorize owns runtime prevention. Verify is read-only and cannot grant runtime authority. Domain layers do not claim separate physical hosts or networks."
-  className="bg-diagram--gav bg-diagram--gav-layered"
->
-  <div class="bg-gav bg-gav--layered" role="list">
-    <section class="bg-gav-column bg-gav-column--govern" aria-labelledby="gav-govern" role="listitem">
-      <p class="bg-gav-kicker">GOVERN</p>
-      <h4 id="gav-govern" class="bg-gav-title">Management and release lifecycle</h4>
-      <ul class="bg-gav-list">
-        <li>Compliance Playbooks</li>
-        <li>Validation and approval</li>
-        <li>Signing and distribution</li>
-        <li>Active Verified Release</li>
-        <li>Runtime topology and trust</li>
-      </ul>
-    </section>
+{
+  isHomepage ? (
+    <div class="bg-gav bg-gav--layered bg-gav--homepage" role="list">
+      <section
+        class="bg-gav-column bg-gav-column--govern"
+        aria-labelledby="gav-home-govern"
+        role="listitem"
+      >
+        <p class="bg-gav-kicker">GOVERN</p>
+        <h3 id="gav-home-govern" class="bg-gav-title">
+          Management and release lifecycle
+        </h3>
+        <p class="bg-gav-summary">
+          Creates and activates the Active Verified Release that runtime
+          authorization evaluates against.
+        </p>
+        <ul class="bg-gav-list">
+          <li>Compliance Playbooks</li>
+          <li>Validation and approval</li>
+          <li>Signing and distribution</li>
+          <li>Active Verified Release</li>
+        </ul>
+      </section>
 
-    <section class="bg-gav-column bg-gav-column--authorize" aria-labelledby="gav-authorize" role="listitem">
-      <p class="bg-gav-kicker">AUTHORIZE</p>
-      <h4 id="gav-authorize" class="bg-gav-title">Runtime authorization domain</h4>
-      <ul class="bg-gav-list">
-        <li>Request Admission Authorization</li>
-        <li>Untrusted AI-generated result</li>
-        <li>Declared action</li>
-        <li>Result-to-Action Authorization</li>
-        <li>Binary ALLOW or DENY</li>
-      </ul>
-    </section>
+      <section
+        class="bg-gav-column bg-gav-column--authorize"
+        aria-labelledby="gav-home-authorize"
+        role="listitem"
+      >
+        <p class="bg-gav-kicker">AUTHORIZE</p>
+        <h3 id="gav-home-authorize" class="bg-gav-title">
+          Runtime authorization domain
+        </h3>
+        <p class="bg-gav-summary">
+          Returns deterministic ALLOW or DENY for request admission and
+          result-to-action decisions before enterprise effect.
+        </p>
+        <ul class="bg-gav-list">
+          <li>Request Admission Authorization</li>
+          <li>Untrusted AI-generated result</li>
+          <li>Declared action</li>
+          <li>Result-to-Action Authorization</li>
+          <li>Binary ALLOW or DENY</li>
+        </ul>
+      </section>
 
-    <section class="bg-gav-column bg-gav-column--verify" aria-labelledby="gav-verify" role="listitem">
-      <p class="bg-gav-kicker">VERIFY</p>
-      <h4 id="gav-verify" class="bg-gav-title">Read-only verification domain</h4>
-      <ul class="bg-gav-list">
-        <li>Executive Reporting</li>
-        <li>Decision Explorer</li>
-        <li>Deterministic Reconstruction</li>
-        <li>Source Evidence and replay</li>
-        <li>Verifiable Export</li>
-        <li>AI-Assisted Insights (non-authoritative)</li>
-      </ul>
-    </section>
-  </div>
+      <section
+        class="bg-gav-column bg-gav-column--verify"
+        aria-labelledby="gav-home-verify"
+        role="listitem"
+      >
+        <p class="bg-gav-kicker">VERIFY</p>
+        <h3 id="gav-home-verify" class="bg-gav-title">
+          Read-only verification domain
+        </h3>
+        <p class="bg-gav-summary">
+          Read-only evidence and investigation. Cannot grant runtime authority.
+        </p>
+        <ul class="bg-gav-list">
+          <li>Executive Reporting</li>
+          <li>Decision Explorer</li>
+          <li>Deterministic Reconstruction</li>
+          <li>Source Evidence and replay</li>
+          <li>Verifiable Export</li>
+        </ul>
+      </section>
+    </div>
+  ) : (
+    <DiagramShell
+      title="Govern · Authorize · Verify"
+      caption="Three functional domains. Authorize owns runtime prevention. Verify is read-only and cannot grant runtime authority. Domain layers do not claim separate physical hosts or networks."
+      className="bg-diagram--gav bg-diagram--gav-layered"
+    >
+      <div class="bg-gav bg-gav--layered" role="list">
+        <section
+          class="bg-gav-column bg-gav-column--govern"
+          aria-labelledby="gav-govern"
+          role="listitem"
+        >
+          <p class="bg-gav-kicker">GOVERN</p>
+          <h4 id="gav-govern" class="bg-gav-title">
+            Management and release lifecycle
+          </h4>
+          <ul class="bg-gav-list">
+            <li>Compliance Playbooks</li>
+            <li>Validation and approval</li>
+            <li>Signing and distribution</li>
+            <li>Active Verified Release</li>
+            <li>Runtime topology and trust</li>
+          </ul>
+        </section>
 
-  <div slot="text">
-    <p>
-      Govern: management and release lifecycle through an Active Verified
-      Release. Authorize: runtime Request Admission Authorization and
-      Result-to-Action Authorization with binary ALLOW or DENY. Verify: read-only
-      investigation through reporting, Decision Explorer, reconstruction, source
-      evidence, replay, export, and non-authoritative AI-assisted insights.
-      These are functional domains, not claimed physical separation.
-    </p>
-  </div>
-</DiagramShell>
+        <section
+          class="bg-gav-column bg-gav-column--authorize"
+          aria-labelledby="gav-authorize"
+          role="listitem"
+        >
+          <p class="bg-gav-kicker">AUTHORIZE</p>
+          <h4 id="gav-authorize" class="bg-gav-title">
+            Runtime authorization domain
+          </h4>
+          <ul class="bg-gav-list">
+            <li>Request Admission Authorization</li>
+            <li>Untrusted AI-generated result</li>
+            <li>Declared action</li>
+            <li>Result-to-Action Authorization</li>
+            <li>Binary ALLOW or DENY</li>
+          </ul>
+        </section>
+
+        <section
+          class="bg-gav-column bg-gav-column--verify"
+          aria-labelledby="gav-verify"
+          role="listitem"
+        >
+          <p class="bg-gav-kicker">VERIFY</p>
+          <h4 id="gav-verify" class="bg-gav-title">
+            Read-only verification domain
+          </h4>
+          <ul class="bg-gav-list">
+            <li>Executive Reporting</li>
+            <li>Decision Explorer</li>
+            <li>Deterministic Reconstruction</li>
+            <li>Source Evidence and replay</li>
+            <li>Verifiable Export</li>
+            <li>AI-Assisted Insights (non-authoritative)</li>
+          </ul>
+        </section>
+      </div>
+
+      <div slot="text">
+        <p>
+          Govern: management and release lifecycle through an Active Verified
+          Release. Authorize: runtime Request Admission Authorization and
+          Result-to-Action Authorization with binary ALLOW or DENY. Verify:
+          read-only investigation through reporting, Decision Explorer,
+          reconstruction, source evidence, replay, export, and non-authoritative
+          AI-assisted insights. These are functional domains, not claimed
+          physical separation.
+        </p>
+      </div>
+    </DiagramShell>
+  )
+}
