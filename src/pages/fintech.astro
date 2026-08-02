@@ -1,195 +1,143 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import IndustryControlFlow from "../components/diagrams/IndustryControlFlow.astro";
+import QualificationNotice from "../components/QualificationNotice.astro";
 ---
 
 <BaseLayout
   title="Financial Services | BeaconGuard for Regulated Financial AI Actions"
-  description="BeaconGuard authorizes whether financial applications may invoke AI and whether declared actions based on AI proposals may proceed. It does not determine fraud, AML, credit, or legal outcomes."
+  description="BeaconGuard independently authorizes AI provider invocation and declared financial actions. The AI result remains untrusted; analysts, models, and financial systems of record retain decision authority."
 >
-  <section class="stack-section">
+  <section class="stack-section industry-hero">
     <p class="section-label">FINANCIAL SERVICES WORKFLOWS</p>
-    <h1>
-      Control proposed financial AI actions before they affect regulated
-      systems.
-    </h1>
+    <h1>Govern financial AI actions before they execute.</h1>
     <p class="lead">
-      BeaconGuard governs whether an application may invoke an AI provider and
-      whether a declared enterprise action based on an AI-generated result may
-      proceed in financial services workflows. BeaconGuard authorizes use of a
-      proposed result; customer analysts, models, and systems of record retain
-      fraud, AML, credit, and legal determination ownership.
+      BeaconGuard independently authorizes AI provider invocation and declared
+      financial actions. The returned AI result remains an untrusted proposal,
+      while customer analysis, risk models, and financial systems of record
+      retain decision authority.
     </p>
+
+    <figure class="industry-diagram">
+      <img
+        src="/images/diagrams/industries/beaconguard-financial-governed-ai-transaction.png"
+        alt="Financial governed AI transaction. A financial enterprise application prepares a governed request, Request Admission controls whether the AI provider may be invoked, the returned AI result remains untrusted, Result-to-Action controls the intended financial action, the enterprise application executes only an authorized action, the financial system of record remains authoritative, and both authorization decisions produce Verifiable Decision Records."
+        width="1536"
+        height="512"
+        loading="eager"
+        decoding="async"
+      />
+    </figure>
   </section>
 
   <section class="stack-section">
-    <h2>Financial governed AI transaction</h2>
+    <h2>The financial authorization boundary</h2>
     <p>
-      Provider invocation is not the complete governed outcome. Case
-      recommendations, escalations, customer communications, case-state
-      changes, and fraud or dispute actions still require independent
-      Result-to-Action Authorization of the declared intended action.
+      Request Admission DENY prevents provider invocation. Result-to-Action DENY
+      prevents enterprise effect. Verify is read-only and cannot grant runtime
+      permission.
     </p>
-    <IndustryControlFlow industry="financial" />
   </section>
 
   <section class="stack-section">
-    <h2>What BeaconGuard authorizes — and what it does not</h2>
+    <h2>Authorization scope</h2>
     <ul>
       <li>
-        <strong>Authorizes:</strong> whether the application may invoke the AI
+        BeaconGuard authorizes whether the application may invoke the AI
         provider under the Active Verified Release.
       </li>
       <li>
-        <strong>Authorizes:</strong> whether the declared intended enterprise
-        action may proceed — for example, using a proposed recommendation,
+        BeaconGuard authorizes whether a declared financial action based on an
+        untrusted AI proposal may proceed — for example, a recommendation,
         escalation, communication, or case-state change.
       </li>
       <li>
-        <strong>Does not determine:</strong> fraud, AML, KYC, credit, dispute,
-        or legal outcomes. Customer analysts, models, and systems of record
-        retain those judgments.
+        The financial application executes an authorized action. Systems of
+        record remain authoritative.
+      </li>
+      <li>
+        BeaconGuard does not determine fraud, AML, KYC, credit, dispute, or
+        legal outcomes. Customer analysts, models, and systems of record retain
+        those judgments.
       </li>
     </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Existing systems remain in place</h2>
     <p>
-      AI-generated results remain untrusted proposals. Provider success is not
-      enterprise authorization. Runtime outcomes are ALLOW or DENY only.
+      BeaconGuard does not replace case management, transaction systems, analyst
+      authorization, model risk management, or compliance judgment. BeaconGuard
+      authorizes; the enterprise application executes.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Existing financial systems remain in place</h2>
+    <h2>Financial action-control scenarios</h2>
     <p>
-      BeaconGuard does not replace case management, transaction systems,
-      analyst authorization, model risk management, or compliance judgment.
-      Those systems remain authoritative. BeaconGuard authorizes; the
-      enterprise application executes.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Financial scenarios</h2>
-    <p>
-      <strong>Illustrative controlled example.</strong> Priority regulated workflow scenarios.
-      Each treats the AI result as an untrusted proposal whose declared use
-      requires independent authorization.
+      Illustrative controlled examples. Each treats the AI result as an
+      untrusted proposal whose declared use requires independent authorization.
     </p>
     <div class="scenario-grid">
-      <div class="scenario-card">
-        <h3>Proposed case recommendation</h3>
-        <p>
-          <strong>Existing workflow:</strong> Analyst-assist request over case
-          materials returns a recommended disposition.
+      <article class="scenario-card">
+        <h3>Route a case recommendation</h3>
+        <ul class="scenario-flow">
+          <li>AI proposes a case recommendation.</li>
+          <li>The application declares the intended disposition or queue action.</li>
+          <li>BeaconGuard evaluates the active controls.</li>
+          <li>ALLOW permits the application to proceed; DENY prevents enterprise effect.</li>
+        </ul>
+        <p class="scenario-authority">
+          Case-management systems remain authoritative.
         </p>
-        <p>
-          <strong>AI-Generated Result:</strong> Proposed recommendation —
-          untrusted proposal.
+      </article>
+      <article class="scenario-card">
+        <h3>Escalate a fraud review</h3>
+        <ul class="scenario-flow">
+          <li>AI proposes an escalation.</li>
+          <li>The application declares the intended escalation route.</li>
+          <li>BeaconGuard evaluates the active controls.</li>
+          <li>ALLOW permits the application to proceed; DENY prevents enterprise effect.</li>
+        </ul>
+        <p class="scenario-authority">
+          Case and escalation platforms remain authoritative.
         </p>
-        <p>
-          <strong>Intended action:</strong> Apply or queue the recommended
-          case disposition.
+      </article>
+      <article class="scenario-card">
+        <h3>Authorize customer communication</h3>
+        <ul class="scenario-flow">
+          <li>AI proposes a customer-facing message.</li>
+          <li>The application declares send, queue, or suppress.</li>
+          <li>BeaconGuard evaluates the active controls.</li>
+          <li>ALLOW permits the application to proceed; DENY prevents enterprise effect.</li>
+        </ul>
+        <p class="scenario-authority">
+          Customer operations and compliance remain authoritative.
         </p>
-        <p>
-          <strong>BeaconGuard role:</strong> Authorizes admission and the
-          declared use of the proposal — not the correctness of the AML or case
-          determination.
+      </article>
+      <article class="scenario-card">
+        <h3>Control a case-state change</h3>
+        <ul class="scenario-flow">
+          <li>AI proposes a case-status or ownership change.</li>
+          <li>The application declares the intended state update.</li>
+          <li>BeaconGuard evaluates the active controls.</li>
+          <li>ALLOW permits the application to proceed; DENY prevents enterprise effect.</li>
+        </ul>
+        <p class="scenario-authority">
+          Case management remains authoritative.
         </p>
-        <p>
-          <strong>Authoritative system:</strong> Case management remains
-          authoritative.
+      </article>
+      <article class="scenario-card">
+        <h3>Gate a dispute action</h3>
+        <ul class="scenario-flow">
+          <li>AI proposes an investigative or remediation action.</li>
+          <li>The application declares the intended dispute workflow action.</li>
+          <li>BeaconGuard evaluates the active controls.</li>
+          <li>ALLOW permits the application to proceed; DENY prevents enterprise effect.</li>
+        </ul>
+        <p class="scenario-authority">
+          Fraud and dispute platforms remain authoritative.
         </p>
-      </div>
-      <div class="scenario-card">
-        <h3>Escalation</h3>
-        <p>
-          <strong>Existing workflow:</strong> AI proposes escalating a case to
-          a higher-risk queue or senior reviewer.
-        </p>
-        <p>
-          <strong>AI-Generated Result:</strong> Escalation proposal — untrusted.
-        </p>
-        <p>
-          <strong>Intended action:</strong> Create or route the escalation.
-        </p>
-        <p>
-          <strong>Result-to-Action:</strong> ALLOW or DENY for the declared
-          escalation action under the Active Verified Release.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> Case and escalation platforms
-          remain authoritative.
-        </p>
-      </div>
-      <div class="scenario-card">
-        <h3>Customer communication</h3>
-        <p>
-          <strong>Existing workflow:</strong> Customer-impacting message draft
-          from an AI-assisted path.
-        </p>
-        <p>
-          <strong>AI-Generated Result:</strong> Proposed customer communication
-          — untrusted proposal.
-        </p>
-        <p>
-          <strong>Intended action:</strong> Send, queue, or suppress the
-          communication.
-        </p>
-        <p>
-          <strong>Result-to-Action:</strong> Independent authorization of the
-          declared communication action; DENY prevents enterprise effect.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> Customer operations and
-          compliance remain authoritative.
-        </p>
-      </div>
-      <div class="scenario-card">
-        <h3>Case-state change</h3>
-        <p>
-          <strong>Existing workflow:</strong> AI proposes updating case status,
-          ownership, or workflow stage.
-        </p>
-        <p>
-          <strong>AI-Generated Result:</strong> Proposed state change —
-          untrusted proposal.
-        </p>
-        <p>
-          <strong>Intended action:</strong> Update case state in the system of
-          record.
-        </p>
-        <p>
-          <strong>BeaconGuard role:</strong> Authorizes whether that declared
-          state change may proceed — not the underlying risk determination.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> Case management remains
-          authoritative.
-        </p>
-      </div>
-      <div class="scenario-card">
-        <h3>Fraud or dispute action</h3>
-        <p>
-          <strong>Existing workflow:</strong> Fraud or dispute investigation
-          assist returns a proposed investigative or remediation action.
-        </p>
-        <p>
-          <strong>Request Admission:</strong> DENY on replay, freshness, or
-          pathway failure before provider invocation.
-        </p>
-        <p>
-          <strong>Intended action:</strong> Execute a declared fraud or dispute
-          workflow action.
-        </p>
-        <p>
-          <strong>BeaconGuard role:</strong> Authorizes use of the proposed
-          result for the declared action — not the fraud, dispute, or legal
-          determination itself.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> Fraud and dispute platforms
-          remain authoritative.
-        </p>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -204,6 +152,8 @@ import IndustryControlFlow from "../components/diagrams/IndustryControlFlow.astr
       <li>Semantic authorization of model content as truth</li>
     </ul>
   </section>
+
+  <QualificationNotice variant="full" />
 
   <section class="stack-section">
     <div class="page-actions">

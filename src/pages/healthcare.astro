@@ -1,160 +1,119 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import IndustryControlFlow from "../components/diagrams/IndustryControlFlow.astro";
+import QualificationNotice from "../components/QualificationNotice.astro";
 ---
 
 <BaseLayout
   title="Healthcare | BeaconGuard for Regulated Healthcare AI Actions"
-  description="BeaconGuard authorization for healthcare AI workflows: Request Admission before provider invocation and Result-to-Action before enterprise effect. AI output remains untrusted; the EHR remains authoritative."
+  description="BeaconGuard independently authorizes AI provider invocation and declared healthcare actions. The AI result remains untrusted; clinical judgment and healthcare systems of record remain authoritative."
 >
-  <section class="stack-section">
+  <section class="stack-section industry-hero">
     <p class="section-label">HEALTHCARE WORKFLOWS</p>
-    <h1>
-      Control AI-assisted healthcare actions before they affect clinical
-      workflows.
-    </h1>
+    <h1>Govern healthcare AI actions before they execute.</h1>
     <p class="lead">
-      BeaconGuard applies to PHI-sensitive operational pathways such as
-      AI-assisted patient communication, documentation assistance, and
-      care-operations routing—governing whether outreach may be invoked and
-      whether a declared send, queue, or status update may proceed. AI output
-      remains an untrusted proposal. BeaconGuard authorizes; the application
-      executes; the EHR and other systems of record remain authoritative.
+      BeaconGuard independently authorizes AI provider invocation and declared
+      healthcare actions. The returned AI result remains an untrusted proposal,
+      while clinical judgment and healthcare systems of record remain
+      authoritative.
     </p>
+
+    <figure class="industry-diagram">
+      <img
+        src="/images/diagrams/industries/beaconguard-healthcare-governed-ai-transaction.png"
+        alt="Healthcare governed AI transaction. A clinical enterprise application prepares a governed request, Request Admission controls whether the AI provider may be invoked, the returned AI result remains untrusted, Result-to-Action controls the intended clinical or operational action, the enterprise application executes only an authorized action, the healthcare system of record remains authoritative, and both authorization decisions produce Verifiable Decision Records."
+        width="1536"
+        height="512"
+        loading="eager"
+        decoding="async"
+      />
+    </figure>
   </section>
 
   <section class="stack-section">
-    <h2>Healthcare governed AI transaction</h2>
+    <h2>The clinical authorization boundary</h2>
     <p>
-      Reaching an AI provider is not the complete governed outcome. Enterprise
-      effect still requires independent Result-to-Action Authorization of the
-      declared intended action under the Active Verified Release.
+      Request Admission DENY prevents provider invocation. Result-to-Action DENY
+      prevents enterprise effect. Verify remains read-only and cannot grant
+      runtime permission.
     </p>
-    <IndustryControlFlow industry="healthcare" />
   </section>
 
   <section class="stack-section">
-    <h2>Dual authorization points</h2>
+    <h2>Authorization scope</h2>
     <ul>
       <li>
-        <strong>Request Admission Authorization</strong> — may the application
-        invoke the AI provider?
+        BeaconGuard authorizes whether the application may invoke the AI
+        provider under the Active Verified Release.
       </li>
       <li>
-        <strong>Result-to-Action Authorization</strong> — may the declared
-        intended enterprise action proceed?
+        After an untrusted AI result returns, the application declares the
+        intended action. BeaconGuard authorizes or denies that declared action.
+      </li>
+      <li>
+        The enterprise application executes only an authorized action. The EHR
+        and other healthcare systems of record remain authoritative.
+      </li>
+      <li>
+        BeaconGuard does not replace the EHR, make clinical determinations, or
+        certify model-content correctness.
       </li>
     </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Existing systems remain in place</h2>
     <p>
-      Runtime outcomes are <strong>ALLOW</strong> or <strong>DENY</strong> only.
-      Provider success is not enterprise authorization. Review does not convert
-      a recorded DENY into ALLOW.
+      BeaconGuard does not replace the EHR, privacy office, clinical governance,
+      care-management platforms, or other systems of record. Customer governance
+      retains clinical, privacy, and compliance judgment.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Existing healthcare systems remain in place</h2>
+    <h2>Healthcare action-control scenarios</h2>
     <p>
-      BeaconGuard does not replace the EHR, privacy office, clinical governance
-      process, care-management platform, or other systems of record. Those
-      systems remain authoritative for clinical and operational state. Customer
-      governance retains clinical, privacy, and compliance judgment.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Healthcare scenarios</h2>
-    <p>
-      <strong>Illustrative controlled example.</strong> The lead scenario is
-      patient communication. Documentation assistance and care-operations
-      pathways are secondary illustrations of the same governed transaction
-      pattern: admission, optional provider result, declared action, action
-      authorization, and evidence — without claiming clinical correctness or
-      production healthcare validation.
+      Illustrative controlled examples of the same governed pattern: AI proposes,
+      the application declares, BeaconGuard authorizes, the application executes,
+      and the healthcare system of record remains authoritative.
     </p>
     <div class="scenario-grid">
-      <div class="scenario-card scenario-card--lead">
+      <article class="scenario-card scenario-card--lead">
         <p class="section-label">LEAD SCENARIO</p>
-        <h3>Patient communication</h3>
-        <p>
-          <strong>Existing workflow:</strong> Care operations drafts patient
-          outreach or follow-up messaging with AI assistance.
+        <h3>Send a patient communication</h3>
+        <ul class="scenario-flow">
+          <li>AI proposes outreach or follow-up messaging.</li>
+          <li>The application declares the intended send, queue, or status update.</li>
+          <li>BeaconGuard evaluates the active controls.</li>
+          <li>ALLOW permits the application to proceed; DENY prevents enterprise effect.</li>
+        </ul>
+        <p class="scenario-authority">
+          Care-operations platforms and the EHR remain authoritative.
         </p>
-        <p>
-          <strong>Request Admission:</strong> ALLOW only when pathway, role,
-          trust, and freshness satisfy the Active Verified Release.
+      </article>
+      <article class="scenario-card">
+        <h3>Draft clinical documentation</h3>
+        <ul class="scenario-flow">
+          <li>AI proposes draft documentation text.</li>
+          <li>The application declares insert, review, or documentation-state update.</li>
+          <li>BeaconGuard evaluates the active controls.</li>
+          <li>ALLOW permits the declared use of the draft; DENY prevents enterprise effect.</li>
+        </ul>
+        <p class="scenario-authority">
+          The EHR and clinical documentation systems remain authoritative.
         </p>
-        <p>
-          <strong>AI-Generated Result:</strong> Proposed message content —
-          untrusted proposal.
+      </article>
+      <article class="scenario-card">
+        <h3>Route a care-operations task</h3>
+        <ul class="scenario-flow">
+          <li>AI proposes a summary or routing recommendation.</li>
+          <li>The application declares the intended route, status, or follow-up task.</li>
+          <li>BeaconGuard evaluates the active controls.</li>
+          <li>ALLOW permits the application to proceed; DENY hard-stops enterprise effect.</li>
+        </ul>
+        <p class="scenario-authority">
+          Care-management platforms and the EHR remain authoritative.
         </p>
-        <p>
-          <strong>Intended action examples:</strong> Send outreach, queue
-          follow-up, update communication status.
-        </p>
-        <p>
-          <strong>Result-to-Action:</strong> Independent ALLOW or DENY for the
-          declared action. DENY prevents enterprise effect.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> Care operations and EHR remain
-          systems of record.
-        </p>
-      </div>
-      <div class="scenario-card">
-        <h3>Clinical documentation assistance</h3>
-        <p>
-          <strong>Existing workflow:</strong> Clinician or scribe tooling
-          requests AI assistance for documentation drafting.
-        </p>
-        <p>
-          <strong>Request Admission:</strong> DENY when required privacy
-          approval, pathway, or trust context is absent.
-        </p>
-        <p>
-          <strong>AI-Generated Result:</strong> Draft documentation text —
-          untrusted proposal, not clinical authority.
-        </p>
-        <p>
-          <strong>Intended action examples:</strong> Insert draft into chart
-          workflow, submit for clinician review, update documentation state.
-        </p>
-        <p>
-          <strong>Result-to-Action:</strong> Authorizes the declared use of the
-          draft — not medical correctness of the content.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> EHR and clinical documentation
-          systems remain authoritative.
-        </p>
-      </div>
-      <div class="scenario-card">
-        <h3>Care-operations workflow</h3>
-        <p>
-          <strong>Existing workflow:</strong> Operational summarization or
-          routing over PHI-bearing records to support care operations.
-        </p>
-        <p>
-          <strong>Request Admission:</strong> DENY for unapproved pathways,
-          stale or replayed requests, or missing required context.
-        </p>
-        <p>
-          <strong>AI-Generated Result:</strong> Proposed summary or routing
-          recommendation — untrusted proposal.
-        </p>
-        <p>
-          <strong>Intended action examples:</strong> Route a case, update
-          operational status, create a follow-up task.
-        </p>
-        <p>
-          <strong>Result-to-Action:</strong> ALLOW permits the application to
-          execute the declared action; DENY hard-stops enterprise effect.
-        </p>
-        <p>
-          <strong>Authoritative system:</strong> Care-management platforms and
-          the EHR remain authoritative.
-        </p>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -169,6 +128,8 @@ import IndustryControlFlow from "../components/diagrams/IndustryControlFlow.astr
       <li>Authorization of model content as semantic truth</li>
     </ul>
   </section>
+
+  <QualificationNotice variant="full" />
 
   <section class="stack-section">
     <div class="page-actions">

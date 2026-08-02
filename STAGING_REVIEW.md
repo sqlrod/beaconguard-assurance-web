@@ -5,13 +5,13 @@
 | Field | Value |
 | --- | --- |
 | Staging branch | `staging/website-visual-redesign-20260801` |
-| Current / latest pass | **01B — Homepage Vertical Hero (Full-Width Diagram)** |
+| Current / latest pass | **01B — Healthcare and Financial Approved Diagram Integration** |
 | Latest pass pointer | [review-artifacts/LATEST_PASS.txt](review-artifacts/LATEST_PASS.txt) |
 | Source website HEAD (baseline) | `1b80a59261b99d3e0bf5cf1900fd8e4e8b17d810` |
-| Preview port (vertical hero) | `4342` |
+| Preview port (industry diagrams) | `4343` |
 | Production deployment | Not authorized |
 | Merge to main | Not authorized |
-| Pass 01C | Unauthorized pending independent homepage review |
+| Pass 01C | Unauthorized pending independent industry page review |
 
 ## Pass history
 
@@ -30,14 +30,26 @@
 | 01B (approved diagram) | Approved generated diagram — homepage integration | `b98ee0fe9279ae304de17b76998f877c6d919b3e` | [pass-01b-approved-diagram-homepage-integration](review-artifacts/pass-01b-approved-diagram-homepage-integration/README.md) |
 | 01B (narrative bands) | Homepage narrative band refactor | `3012e8965c4f603181be8ad292ab6c5eb672ad6d` | [pass-01b-homepage-narrative-band-refactor](review-artifacts/pass-01b-homepage-narrative-band-refactor/README.md) |
 | 01B (vertical hero) | Homepage vertical hero — full-width diagram | `b772178bd171f9316556eb5a56f4cbefc528d5af` | [pass-01b-homepage-vertical-hero](review-artifacts/pass-01b-homepage-vertical-hero/README.md) |
+| 01B (industry diagrams) | Healthcare and Financial approved diagram + copy refinement | _(recorded after commit)_ | [pass-01b-industry-diagram-and-copy-refinement](review-artifacts/pass-01b-industry-diagram-and-copy-refinement/README.md) |
+
+## Healthcare and Financial Approved Diagram Integration
+
+Latest review pass. Healthcare and Financial routes use distinct approved industry PNGs (exact binary copies). Sentence-case headings. Compact scenario cards without repeated metadata labels. `IndustryControlFlow` removed from those routes only. Homepage diagram unchanged.
+
+```
+IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_INDUSTRY_PAGE_REVIEW
+```
+
+Primary artifacts:
+
+- [Pass README](review-artifacts/pass-01b-industry-diagram-and-copy-refinement/README.md)
+- [Healthcare diagram 1440](review-artifacts/pass-01b-industry-diagram-and-copy-refinement/crops/healthcare-diagram-1440.png)
+- [Financial diagram 1440](review-artifacts/pass-01b-industry-diagram-and-copy-refinement/crops/financial-diagram-1440.png)
+- [Healthcare comparison](review-artifacts/pass-01b-industry-diagram-and-copy-refinement/comparisons/healthcare-old-vs-new-1440.png)
 
 ## Homepage Vertical Hero — Full-Width Diagram
 
-Latest review pass. Rejected side-by-side hero replaced with vertical stack: left-aligned copy above the approved diagram at up to 1200px readable width. Hero widget border removed. Two CTAs only. PNG unchanged.
-
-```
-IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_HOMEPAGE_REVIEW
-```
+Prior pass. Vertical stack homepage hero with approved diagram at up to 1200px.
 
 Primary artifacts:
 

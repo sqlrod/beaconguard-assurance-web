@@ -2368,6 +2368,50 @@ figcaption {
   margin-bottom: 0;
 }
 
+/* Industry approved diagram + compact scenario cards */
+.industry-diagram {
+  width: 100%;
+  max-width: 1200px;
+  margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.industry-diagram img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.scenario-flow {
+  margin: 0 0 0.85rem;
+  padding-left: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.scenario-flow li {
+  margin-bottom: 0.4rem;
+}
+
+.scenario-flow li:last-child {
+  margin-bottom: 0;
+}
+
+.scenario-authority {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.industry-hero .lead {
+  max-width: 760px;
+}
+
 @media (max-width: 900px) {
   .footer-inner--reframe {
     display: grid;
