@@ -1,65 +1,65 @@
 ---
 /**
- * Staging-only — approved homepage diagram integration review.
+ * Staging-only — vertical homepage hero + approved diagram review.
  * noindex, nofollow, excluded from sitemap, not linked from nav/footer.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const sourceSha = "1F3B5EC10431787D1D51C65AF88B94AF82838E7E0C1746F1FA7EFB1932616371";
-const publicSha = sourceSha;
+const publicSha = "1F3B5EC10431787D1D51C65AF88B94AF82838E7E0C1746F1FA7EFB1932616371";
 const width = 1672;
 const height = 941;
 ---
 
 <BaseLayout
-  title="Staging · Approved homepage diagram | BeaconGuard"
-  description="Staging-only review of the approved governed-transaction diagram on the homepage hero."
+  title="Staging · Homepage vertical hero diagram | BeaconGuard"
+  description="Staging-only review of the vertical-stack homepage hero with the approved governed-transaction diagram."
   noindex={true}
+  pageClass="page-home"
 >
   <section class="staging-banner" role="note">
-    <strong>STAGING ONLY · APPROVED DIAGRAM HOMEPAGE INTEGRATION</strong>
+    <strong>STAGING ONLY · HOMEPAGE VERTICAL HERO</strong>
     <p>
-      Static approved diagram placed in the homepage hero. Image contents were not
-      modified. noindex, excluded from sitemap, not linked from navigation or
-      footer. Pass 01C remains unauthorized.
+      Side-by-side hero rejected. Approved static diagram now stacks below left-aligned
+      copy at full readable width. Image contents were not modified. noindex,
+      excluded from sitemap, not linked from navigation or footer. Pass 01C remains
+      unauthorized.
     </p>
   </section>
 
   <section class="stack-section">
-    <h1>Approved homepage diagram integration</h1>
+    <h1>Homepage vertical hero — full-width diagram</h1>
     <p class="lead">
-      Staging review of the approved governed-transaction image in the homepage
-      hero layout. Diagram source was copied exactly into the public asset path.
+      Review surface for the corrected homepage hero composition. Diagram PNG hash
+      and intrinsic ratio are unchanged.
     </p>
     <p><code>PENDING INDEPENDENT HOMEPAGE REVIEW</code></p>
   </section>
 
-  <section class="stack-section" id="source">
-    <h2>1. Approved source image</h2>
+  <section class="stack-section" id="rejected">
+    <h2>1. Rejected side-by-side layout</h2>
     <p>
-      Public path: <code>/images/diagrams/beaconguard-governed-transaction.png</code>
-      · Intrinsic size: {width} × {height}
-    </p>
-    <p>
-      SHA-256 (source = public): <code>{publicSha}</code>
+      Prior crop evidence (compressed diagram column competing with headline):
     </p>
     <figure class="staging-cf-panel">
       <img
-        class="hero-approved-diagram-source"
-        src="/images/diagrams/beaconguard-governed-transaction.png"
-        alt="Approved BeaconGuard governed transaction diagram at intrinsic aspect ratio"
-        width={width}
-        height={height}
+        src="/images/review/homepage-hero-side-by-side-1440.png"
+        alt="Rejected side-by-side homepage hero composition at 1440"
+        width="1200"
+        height="675"
         loading="lazy"
         decoding="async"
       />
     </figure>
+    <p>
+      Source artifact:
+      <code>review-artifacts/pass-01b-approved-diagram-homepage-integration/crops/homepage-hero-approved-diagram-1440.png</code>
+    </p>
   </section>
 
-  <section class="stack-section" id="in-hero" data-crop="approved-in-hero">
-    <h2>2. Approved image inside homepage hero layout</h2>
-    <section class="hero-split hero-split--home staging-approved-hero">
-      <div class="hero-split-copy">
+  <section class="stack-section" id="vertical-hero" data-crop="vertical-hero-live">
+    <h2>2. New vertical-stack hero</h2>
+    <section class="enterprise-hero staging-vertical-hero">
+      <div class="enterprise-hero-copy">
         <p class="hero-eyebrow">INDEPENDENT AI ACTION AUTHORIZATION</p>
         <h2 class="staging-cf-hero-title">
           <span class="hero-line">Control before execution.</span>
@@ -70,50 +70,56 @@ const height = 941;
           whether a declared action based on the returned result may affect an
           enterprise system.
         </p>
+        <p class="hero-proof">Provider success is not enterprise authorization.</p>
         <div class="page-actions page-actions--hero page-actions--hero-split">
           <span class="btn-primary" aria-disabled="true">Request Controlled Evaluation</span>
           <span class="btn-secondary" aria-disabled="true">See How It Works</span>
-          <span class="text-link" aria-disabled="true">Explore Verification</span>
         </div>
       </div>
-      <div class="hero-split-visual">
-        <figure class="hero-approved-diagram">
-          <img
-            src="/images/diagrams/beaconguard-governed-transaction.png"
-            alt="BeaconGuard governed AI transaction architecture in homepage hero layout."
-            width={width}
-            height={height}
-            loading="eager"
-            decoding="async"
-          />
-        </figure>
-      </div>
+      <figure class="enterprise-hero-diagram">
+        <img
+          src="/images/diagrams/beaconguard-governed-transaction.png"
+          alt="Approved BeaconGuard governed transaction diagram in vertical hero layout"
+          width={width}
+          height={height}
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
     </section>
   </section>
 
   <section class="stack-section">
-    <h2>3. Presentation notes</h2>
+    <h2>3. Composition notes</h2>
     <ul class="staging-cf-checklist">
-      <li>Desktop: copy left (~44–48%), diagram right (~52–56%), headline two lines at 1440.</li>
-      <li>Mobile: stacked copy above diagram; object-fit contain; no crop; no list fallback.</li>
-      <li>Image not modified; binary copy only into the public diagrams path.</li>
-      <li>Root upload filename is not committed; only the normalized public asset is staged.</li>
-      <li>Independent-review status: <strong>PENDING</strong></li>
+      <li>1440: copy above diagram; left-aligned; H1 two lines; diagram ~1000–1200px.</li>
+      <li>1024: same vertical sequence; diagram uses available content width.</li>
+      <li>390: natural wrapping; CTAs wrap; diagram full width; no crop.</li>
+      <li>Measured text max-width: copy 820px; paragraph/proof 760px.</li>
+      <li>Measured diagram max-width: 1200px.</li>
+      <li>PNG SHA-256: <code>{publicSha}</code></li>
+      <li>Intrinsic: {width} × {height}</li>
+      <li>Status: <strong>PENDING INDEPENDENT HOMEPAGE REVIEW</strong></li>
     </ul>
   </section>
 </BaseLayout>
 
 <style>
-  .hero-approved-diagram-source {
-    display: block;
-    width: 100%;
-    max-width: 1100px;
-    height: auto;
+  .staging-vertical-hero {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
-  .staging-approved-hero .btn-primary,
-  .staging-approved-hero .btn-secondary,
-  .staging-approved-hero .text-link {
+  .staging-vertical-hero .btn-primary,
+  .staging-vertical-hero .btn-secondary {
     pointer-events: none;
     opacity: 0.9;
+  }
+  .staging-cf-hero-title {
+    margin: 0 0 1.35rem;
+    font-size: clamp(2.35rem, 5vw, 3.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--brand-primary);
   }
 </style>

@@ -1,0 +1,76 @@
+{
+  "preview_port": 4342,
+  "starting_staging_head": "a0f5e043a78668ade986aeee6e45574b21df6360",
+  "png_sha256": "1F3B5EC10431787D1D51C65AF88B94AF82838E7E0C1746F1FA7EFB1932616371",
+  "diagram_width_1440": 1200,
+  "diagram_width_1920": 1200,
+  "copy_max_width": 820,
+  "screenshots": [
+    {
+      "kind": "responsive",
+      "filename": "homepage-vertical-hero-390.png",
+      "viewport": "390x844",
+      "sha256": "78dc9ed2a3a228fc857b878f2cdd2112b663372c2ed48e6edcd19f44c501801d"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-vertical-hero-768.png",
+      "viewport": "768x1024",
+      "sha256": "1080ad374d8089f3f5c3d949818e1d595c1ea6a89a075979fec262af1d1a8527"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-vertical-hero-1024.png",
+      "viewport": "1024x768",
+      "sha256": "42a67850ab36b8555a12fe8c26956e3dfc0fb86e029350ed4e2c23cca900a1d1"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-vertical-hero-1280.png",
+      "viewport": "1280x900",
+      "sha256": "d0f11530e69b649b9bf116ad6192b5c78aec9852192746465e3e0453869c7203"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-vertical-hero-1440.png",
+      "viewport": "1440x900",
+      "sha256": "19e0c0097393ea24faefc4d9586eb1aba289ccc0e34ef3bcb086397cb4d58945"
+    },
+    {
+      "kind": "responsive",
+      "filename": "homepage-vertical-hero-1920.png",
+      "viewport": "1920x1080",
+      "sha256": "f3d781653a80bdb8151beb6bfa78bb4e8dc0c9356018f95195dc2cbbe7ede3a6"
+    },
+    {
+      "kind": "fullpage",
+      "filename": "home.png",
+      "sha256": "19e0c0097393ea24faefc4d9586eb1aba289ccc0e34ef3bcb086397cb4d58945"
+    },
+    {
+      "kind": "crop",
+      "filename": "vertical-hero-copy-1440.png",
+      "sha256": "42ca7f3d5141b26b998511d83b5ffb1f4ac684fd166184299545281b4d43812f"
+    },
+    {
+      "kind": "crop",
+      "filename": "vertical-hero-diagram-1440.png",
+      "sha256": "c66033112d2b24aea1e8606d61ab2126382524d8daed3f080a9a01fcde918eed"
+    },
+    {
+      "kind": "crop",
+      "filename": "vertical-hero-complete-1440.png",
+      "sha256": "66cb30dd47bc3c9b68619dde0ff163adc218b486229dcbb8dffbed4871f7abdf"
+    },
+    {
+      "kind": "crop",
+      "filename": "vertical-hero-complete-390.png",
+      "sha256": "78545759254638282e48bc2072fcc0d32b56b838ff1f4f48c41e5fbc7019c6b7"
+    },
+    {
+      "kind": "comparison",
+      "filename": "side-by-side-vs-vertical-1440.png",
+      "sha256": "c7f922e589d4c3cb2e0084987c1e050bba240879df43db37259dbb842a812ef0"
+    }
+  ]
+}

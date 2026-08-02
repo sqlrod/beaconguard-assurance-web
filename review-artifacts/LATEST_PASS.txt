@@ -1,1 +1,1 @@
-review-artifacts/pass-01b-homepage-narrative-band-refactor
+review-artifacts/pass-01b-homepage-vertical-hero

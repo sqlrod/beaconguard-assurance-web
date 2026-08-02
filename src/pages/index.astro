@@ -10,43 +10,40 @@ import QualificationNotice from "../components/QualificationNotice.astro";
   description="Control before execution. Evidence after every decision. BeaconGuard governs whether an enterprise application may invoke AI and whether a declared action based on the returned result may affect an enterprise system."
   pageClass="page-home"
 >
-  <div class="home-hero-shell">
-    <section class="hero-split hero-split--home">
-      <div class="hero-split-copy">
-        <p class="hero-eyebrow">INDEPENDENT AI ACTION AUTHORIZATION</p>
-        <h1>
-          <span class="hero-line">Control before execution.</span>
-          <span class="hero-line">Evidence after every decision.</span>
-        </h1>
-        <p class="hero-subheadline">
-          BeaconGuard governs whether an enterprise application may invoke AI and
-          whether a declared action based on the returned result may affect an
-          enterprise system. The returned AI result remains an untrusted proposal
-          until its intended use is independently authorized.
-        </p>
-        <p class="hero-proof">
-          Provider success is not enterprise authorization.
-        </p>
-        <div class="page-actions page-actions--hero page-actions--hero-split">
-          <a class="btn-primary" href="/design-partner-program">Request Controlled Evaluation</a>
-          <a class="btn-secondary" href="/how-it-works">See How It Works</a>
-        </div>
+  <section class="enterprise-hero" data-home-hero="vertical">
+    <div class="enterprise-hero-copy">
+      <p class="hero-eyebrow">INDEPENDENT AI ACTION AUTHORIZATION</p>
+      <h1>
+        <span class="hero-line">Control before execution.</span>
+        <span class="hero-line">Evidence after every decision.</span>
+      </h1>
+      <p class="hero-subheadline">
+        BeaconGuard governs whether an enterprise application may invoke AI and
+        whether a declared action based on the returned result may affect an
+        enterprise system. The returned AI result remains an untrusted proposal
+        until its intended use is independently authorized.
+      </p>
+      <p class="hero-proof">
+        Provider success is not enterprise authorization.
+      </p>
+      <div class="page-actions page-actions--hero page-actions--hero-split">
+        <a class="btn-primary" href="/design-partner-program">Request Controlled Evaluation</a>
+        <a class="btn-secondary" href="/how-it-works">See How It Works</a>
       </div>
-      <div class="hero-split-visual">
-        <figure class="hero-approved-diagram">
-          <img
-            src="/images/diagrams/beaconguard-governed-transaction.png"
-            alt="BeaconGuard governed AI transaction architecture. The enterprise application prepares a governed request, Request Admission Authorization controls access to the AI provider, the untrusted result returns to the application, Result-to-Action Authorization controls the declared action, the application executes the authorized action, and the enterprise system of record remains authoritative. Both authorization decisions produce Verifiable Decision Records."
-            width="1672"
-            height="941"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
-        </figure>
-      </div>
-    </section>
-  </div>
+    </div>
+
+    <figure class="enterprise-hero-diagram">
+      <img
+        src="/images/diagrams/beaconguard-governed-transaction.png"
+        alt="BeaconGuard governed AI transaction architecture. The enterprise application prepares a governed request, Request Admission Authorization controls access to the AI provider, the untrusted result returns to the application, Result-to-Action Authorization controls the declared action, the application executes the authorized action, and the enterprise system of record remains authoritative. Both authorization decisions produce Verifiable Decision Records."
+        width="1672"
+        height="941"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </figure>
+  </section>
 
   <section class="home-band home-band--base" data-home-band="governed-transaction">
     <div class="home-band-inner">

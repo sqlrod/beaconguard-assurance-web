@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Staging branch | `staging/website-visual-redesign-20260801` |
-| Current / latest pass | **01B — Homepage Narrative Band Refactor** |
+| Current / latest pass | **01B — Homepage Vertical Hero (Full-Width Diagram)** |
 | Latest pass pointer | [review-artifacts/LATEST_PASS.txt](review-artifacts/LATEST_PASS.txt) |
 | Source website HEAD (baseline) | `1b80a59261b99d3e0bf5cf1900fd8e4e8b17d810` |
-| Preview port (narrative bands) | `4341` |
+| Preview port (vertical hero) | `4342` |
 | Production deployment | Not authorized |
 | Merge to main | Not authorized |
 | Pass 01C | Unauthorized pending independent homepage review |
@@ -29,14 +29,26 @@
 | 01B-R3A2 | Orthographic closed-loop circuit reconstruction | `a3c83b56e50ffd4288ecbf198017655f1fb3ad27` | [pass-01b-r3a2-orthographic-circuit-reconstruction](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/README.md) |
 | 01B (approved diagram) | Approved generated diagram — homepage integration | `b98ee0fe9279ae304de17b76998f877c6d919b3e` | [pass-01b-approved-diagram-homepage-integration](review-artifacts/pass-01b-approved-diagram-homepage-integration/README.md) |
 | 01B (narrative bands) | Homepage narrative band refactor | `3012e8965c4f603181be8ad292ab6c5eb672ad6d` | [pass-01b-homepage-narrative-band-refactor](review-artifacts/pass-01b-homepage-narrative-band-refactor/README.md) |
+| 01B (vertical hero) | Homepage vertical hero — full-width diagram | _(recorded after commit)_ | [pass-01b-homepage-vertical-hero](review-artifacts/pass-01b-homepage-vertical-hero/README.md) |
 
-## Homepage Narrative Band Refactor
+## Homepage Vertical Hero — Full-Width Diagram
 
-Latest review pass. Post-hero homepage sections converted from floating widget panels to full-bleed horizontal narrative bands. Approved diagram and hero slogan retained. Hero CTAs reduced to two; Explore Verification moved to the Verification band. `GovernAuthorizeVerify` homepage variant removes duplicate title and emphasizes Authorize. No tabs.
+Latest review pass. Rejected side-by-side hero replaced with vertical stack: left-aligned copy above the approved diagram at up to 1200px readable width. Hero widget border removed. Two CTAs only. PNG unchanged.
 
 ```
 IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_HOMEPAGE_REVIEW
 ```
+
+Primary artifacts:
+
+- [Pass README](review-artifacts/pass-01b-homepage-vertical-hero/README.md)
+- [Complete hero 1440](review-artifacts/pass-01b-homepage-vertical-hero/crops/vertical-hero-complete-1440.png)
+- [Diagram crop 1440](review-artifacts/pass-01b-homepage-vertical-hero/crops/vertical-hero-diagram-1440.png)
+- [Side-by-side vs vertical](review-artifacts/pass-01b-homepage-vertical-hero/comparisons/side-by-side-vs-vertical-1440.png)
+
+## Homepage Narrative Band Refactor
+
+Prior pass. Post-hero homepage sections converted from floating widget panels to full-bleed horizontal narrative bands.
 
 Primary artifacts:
 
