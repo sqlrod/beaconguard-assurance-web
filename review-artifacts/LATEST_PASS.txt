@@ -1,1 +1,1 @@
-review-artifacts/pass-01b-industry-diagram-and-copy-refinement
+review-artifacts/pass-01b-verification-diagram-and-page-refactor

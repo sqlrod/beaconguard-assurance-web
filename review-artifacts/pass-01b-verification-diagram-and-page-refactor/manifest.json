@@ -1,0 +1,29 @@
+{
+  "pass": "01B-verification-diagram-and-page-refactor",
+  "status": "IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VERIFICATION_PAGE_REVIEW",
+  "starting_staging_head": "7858573c0b8df38c81aa10bbaa01c9570918df16",
+  "preview_port": 4344,
+  "png_sha256": "EDA45754A655E61949F3D1A15C903416B6E1308E3D25EE922FB15A2FBD86E848",
+  "image_modified": false,
+  "intrinsic": {
+    "width": 1672,
+    "height": 941
+  },
+  "screenshots": [
+    "verification-390.png",
+    "verification-768.png",
+    "verification-1024.png",
+    "verification-1280.png",
+    "verification-1440.png",
+    "verification-1920.png",
+    "verification.png",
+    "verification-hero-copy-1440.png",
+    "verification-approved-diagram-1440.png",
+    "verification-hero-and-diagram-1440.png",
+    "verification-capability-grid-1440.png",
+    "verification-ai-insights-1440.png",
+    "verification-responsibility-separation-1440.png",
+    "verification-hero-and-diagram-390.png",
+    "verification-old-vs-new-1440.png"
+  ]
+}

@@ -5,13 +5,13 @@
 | Field | Value |
 | --- | --- |
 | Staging branch | `staging/website-visual-redesign-20260801` |
-| Current / latest pass | **01B — Healthcare and Financial Approved Diagram Integration** |
+| Current / latest pass | **01B — Verification Diagram and Page Refactor** |
 | Latest pass pointer | [review-artifacts/LATEST_PASS.txt](review-artifacts/LATEST_PASS.txt) |
 | Source website HEAD (baseline) | `1b80a59261b99d3e0bf5cf1900fd8e4e8b17d810` |
-| Preview port (industry diagrams) | `4343` |
+| Preview port (verification refactor) | `4344` |
 | Production deployment | Not authorized |
 | Merge to main | Not authorized |
-| Pass 01C | Unauthorized pending independent industry page review |
+| Pass 01C | Unauthorized pending independent verification page review |
 
 ## Pass history
 
@@ -31,10 +31,27 @@
 | 01B (narrative bands) | Homepage narrative band refactor | `3012e8965c4f603181be8ad292ab6c5eb672ad6d` | [pass-01b-homepage-narrative-band-refactor](review-artifacts/pass-01b-homepage-narrative-band-refactor/README.md) |
 | 01B (vertical hero) | Homepage vertical hero — full-width diagram | `b772178bd171f9316556eb5a56f4cbefc528d5af` | [pass-01b-homepage-vertical-hero](review-artifacts/pass-01b-homepage-vertical-hero/README.md) |
 | 01B (industry diagrams) | Healthcare and Financial approved diagram + copy refinement | `9db13a877c4e299b3259db697d345c0ed192ef99` | [pass-01b-industry-diagram-and-copy-refinement](review-artifacts/pass-01b-industry-diagram-and-copy-refinement/README.md) |
+| 01B (verification) | Verification diagram and page refactor | _(recorded after commit)_ | [pass-01b-verification-diagram-and-page-refactor](review-artifacts/pass-01b-verification-diagram-and-page-refactor/README.md) |
+
+## Verification Diagram and Page Refactor
+
+Latest review pass. Verification page uses a vertical hero with the approved evidence-centered investigation PNG beneath the copy and CTAs. Side-by-side hero widget removed. Capability content is a three-group grid; AI-Assisted Insights is explicitly non-authoritative.
+
+```
+IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VERIFICATION_PAGE_REVIEW
+```
+
+Primary artifacts:
+
+- [Pass README](review-artifacts/pass-01b-verification-diagram-and-page-refactor/README.md)
+- [Hero and diagram 1440](review-artifacts/pass-01b-verification-diagram-and-page-refactor/crops/verification-hero-and-diagram-1440.png)
+- [Approved diagram 1440](review-artifacts/pass-01b-verification-diagram-and-page-refactor/crops/verification-approved-diagram-1440.png)
+- [Capability grid 1440](review-artifacts/pass-01b-verification-diagram-and-page-refactor/crops/verification-capability-grid-1440.png)
+- [Old vs new 1440](review-artifacts/pass-01b-verification-diagram-and-page-refactor/comparisons/verification-old-vs-new-1440.png)
 
 ## Healthcare and Financial Approved Diagram Integration
 
-Latest review pass. Healthcare and Financial routes use distinct approved industry PNGs (exact binary copies). Sentence-case headings. Compact scenario cards without repeated metadata labels. `IndustryControlFlow` removed from those routes only. Homepage diagram unchanged.
+Healthcare and Financial routes use distinct approved industry PNGs (exact binary copies). Sentence-case headings. Compact scenario cards without repeated metadata labels. `IndustryControlFlow` removed from those routes only. Homepage diagram unchanged.
 
 ```
 IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_INDUSTRY_PAGE_REVIEW

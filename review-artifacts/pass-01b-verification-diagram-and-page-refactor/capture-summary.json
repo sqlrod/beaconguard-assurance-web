@@ -1,0 +1,133 @@
+{
+  "preview_port": 4344,
+  "starting_staging_head": "7858573c0b8df38c81aa10bbaa01c9570918df16",
+  "source_image": "Verification Diagram.png",
+  "public_image": "public/images/diagrams/verification/beaconguard-evidence-centered-investigation.png",
+  "png_sha256": "EDA45754A655E61949F3D1A15C903416B6E1308E3D25EE922FB15A2FBD86E848",
+  "intrinsic": {
+    "width": 1672,
+    "height": 941
+  },
+  "diagram_width_1440": 1200,
+  "diagram_width_1920": 1200,
+  "copy_max_width": 820,
+  "screenshots": [
+    {
+      "kind": "responsive",
+      "filename": "verification-390.png",
+      "viewport": "390x844",
+      "sha256": "f660dc738bd691d742f2581222c47b988face31dcd8e6806fb081c557a535fc4",
+      "h1": "Investigate decisions without changing authority.",
+      "imgSrc": "/images/diagrams/verification/beaconguard-evidence-centered-investigation.png",
+      "naturalW": 1672,
+      "naturalH": 941,
+      "renderedW": 350,
+      "overflow": false
+    },
+    {
+      "kind": "responsive",
+      "filename": "verification-768.png",
+      "viewport": "768x1024",
+      "sha256": "7fb836798f4e55af462b5e027b6f2698aeaad0d965c9d2605f7623416481e97b",
+      "h1": "Investigate decisions without changing authority.",
+      "imgSrc": "/images/diagrams/verification/beaconguard-evidence-centered-investigation.png",
+      "naturalW": 1672,
+      "naturalH": 941,
+      "renderedW": 722,
+      "overflow": false
+    },
+    {
+      "kind": "responsive",
+      "filename": "verification-1024.png",
+      "viewport": "1024x768",
+      "sha256": "111b0c4d2d39a5bb45d5ce0fb4a2254f11f2576da6c0adad78622253847e79e5",
+      "h1": "Investigate decisions without changing authority.",
+      "imgSrc": "/images/diagrams/verification/beaconguard-evidence-centered-investigation.png",
+      "naturalW": 1672,
+      "naturalH": 941,
+      "renderedW": 963,
+      "overflow": false
+    },
+    {
+      "kind": "responsive",
+      "filename": "verification-1280.png",
+      "viewport": "1280x900",
+      "sha256": "5ff7b5905532fa989f71a1d0243e104720e297efcaf6dd9f8bc993b34751d5e3",
+      "h1": "Investigate decisions without changing authority.",
+      "imgSrc": "/images/diagrams/verification/beaconguard-evidence-centered-investigation.png",
+      "naturalW": 1672,
+      "naturalH": 941,
+      "renderedW": 1200,
+      "overflow": false
+    },
+    {
+      "kind": "responsive",
+      "filename": "verification-1440.png",
+      "viewport": "1440x900",
+      "sha256": "595582ed68b5d0d35e3b32cd1cc4cca71ce8670996f8766ab05b0e106a926774",
+      "h1": "Investigate decisions without changing authority.",
+      "imgSrc": "/images/diagrams/verification/beaconguard-evidence-centered-investigation.png",
+      "naturalW": 1672,
+      "naturalH": 941,
+      "renderedW": 1200,
+      "overflow": false
+    },
+    {
+      "kind": "responsive",
+      "filename": "verification-1920.png",
+      "viewport": "1920x1080",
+      "sha256": "8076b9155dfe64731258504a6da3c03f1e02f49941789e58f202fc86b96b6456",
+      "h1": "Investigate decisions without changing authority.",
+      "imgSrc": "/images/diagrams/verification/beaconguard-evidence-centered-investigation.png",
+      "naturalW": 1672,
+      "naturalH": 941,
+      "renderedW": 1200,
+      "overflow": false
+    },
+    {
+      "kind": "fullpage",
+      "filename": "verification.png",
+      "sha256": "595582ed68b5d0d35e3b32cd1cc4cca71ce8670996f8766ab05b0e106a926774"
+    },
+    {
+      "kind": "crop",
+      "filename": "verification-hero-copy-1440.png",
+      "sha256": "b3b29abef0931a09b9051256da2c750e331099691b734a7030c501d282eb5e2d"
+    },
+    {
+      "kind": "crop",
+      "filename": "verification-approved-diagram-1440.png",
+      "sha256": "6766eba2725abd85ade89539341f115d28788e10710751402f935e74ddd71c36"
+    },
+    {
+      "kind": "crop",
+      "filename": "verification-hero-and-diagram-1440.png",
+      "sha256": "4390e2a7a742c85f8023cc43ae1a1e7344a33618b2e4cbc88fdfb9ac45292ff1"
+    },
+    {
+      "kind": "crop",
+      "filename": "verification-capability-grid-1440.png",
+      "sha256": "c11567083834d527d6676dd35b2b3f8c8c4befa7a9d57394dbb53608783611d4"
+    },
+    {
+      "kind": "crop",
+      "filename": "verification-ai-insights-1440.png",
+      "sha256": "103331e2db1e883e6133d5c5ef9c9b9f354d7483143b98d448a687975a4ce9de"
+    },
+    {
+      "kind": "crop",
+      "filename": "verification-responsibility-separation-1440.png",
+      "sha256": "5c87c6aec862f838fb90bcbdff0fd6feaeee5b3fa35918071c7016013fda1ff1"
+    },
+    {
+      "kind": "crop",
+      "filename": "verification-hero-and-diagram-390.png",
+      "sha256": "c1e4c77cd2559a66abfef175c5431968314f375ee82f352e73c6a45e6f6013f6"
+    },
+    {
+      "kind": "comparison",
+      "filename": "verification-old-vs-new-1440.png",
+      "sha256": "1a1164d4ae61bbe581f3372dc5a6fa44d1c07acf1e689f4147e537c8e337dca4"
+    }
+  ]
+}

@@ -1,141 +1,213 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import VerificationExecutiveSummary from "../components/diagrams/VerificationExecutiveSummary.astro";
+import QualificationNotice from "../components/QualificationNotice.astro";
 ---
 
 <BaseLayout
   title="Verification | BeaconGuard Verify"
   description="BeaconGuard Verify is a read-only investigation surface for executive reporting, Decision Explorer, deterministic reconstruction, source evidence, replay verification, verifiable export, and non-authoritative AI-assisted insights."
+  pageClass="page-verification"
 >
-  <section class="hero-split hero-split--verify">
-    <div class="hero-split-copy">
-      <p class="hero-eyebrow">BEACONGUARD VERIFY</p>
+  <section class="verification-hero">
+    <div class="verification-hero-copy">
+      <p class="eyebrow">BEACONGUARD VERIFY</p>
+
       <h1>Investigate decisions without changing authority.</h1>
-      <p class="hero-subheadline">
+
+      <p class="verification-hero-lead">
         BeaconGuard Verify gives security, privacy, compliance, risk, and audit
         reviewers a read-only surface for inspecting governed AI transaction
         evidence without granting runtime permission.
       </p>
-      <div class="page-actions page-actions--hero page-actions--hero-split">
+
+      <div class="page-actions verification-hero-actions">
         <a class="btn-primary" href="/proof-evidence">Inspect Proof and Evidence</a>
-        <a class="btn-secondary" href="/sample-decision-record">View Sample Decision Record</a>
+        <a class="btn-secondary" href="/sample-decision-record"
+          >View Sample Decision Record</a
+        >
       </div>
     </div>
-    <div class="hero-split-visual">
-      <VerificationExecutiveSummary />
+
+    <figure class="verification-hero-diagram">
+      <img
+        src="/images/diagrams/verification/beaconguard-evidence-centered-investigation.png"
+        alt="Evidence-centered investigation architecture. Request Admission and Result-to-Action decisions produce canonical evidence. BeaconGuard Verify provides a read-only boundary for decision exploration, deterministic reconstruction, source-evidence review, replay verification, executive reporting, and verifiable export. AI-assisted insights remain separate, non-authoritative, and outside the trusted reconstruction and runtime authorization paths."
+        width="1672"
+        height="941"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </figure>
+  </section>
+
+  <section class="verify-band" aria-labelledby="verify-boundary-heading">
+    <h2 id="verify-boundary-heading">The read-only verification boundary</h2>
+    <p class="verify-band-lead">
+      BeaconGuard Verify inspects recorded authorization evidence after the
+      decision. It cannot modify evidence, change a historical outcome, activate
+      a release, alter a Compliance Playbook, grant runtime authority, or
+      authorize an enterprise action.
+    </p>
+  </section>
+
+  <section class="verify-band" aria-labelledby="verify-capabilities-heading">
+    <h2 id="verify-capabilities-heading">Investigation capabilities</h2>
+    <div class="verify-capability-grid">
+      <div class="verify-capability-group">
+        <h3 class="verify-capability-group-title">Investigate</h3>
+        <article class="verify-capability-card">
+          <h4>Decision Explorer</h4>
+          <p>
+            Search and inspect recorded authorization decisions and their linked
+            transaction context.
+          </p>
+        </article>
+        <article class="verify-capability-card">
+          <h4>Executive Reporting</h4>
+          <p>
+            Summarize investigation-relevant decision evidence for review and
+            oversight without granting runtime authority.
+          </p>
+        </article>
+      </div>
+
+      <div class="verify-capability-group">
+        <h3 class="verify-capability-group-title">Reconstruct and verify</h3>
+        <article class="verify-capability-card">
+          <h4>Deterministic Reconstruction</h4>
+          <p>
+            Rebuild the recorded decision path from canonical evidence without
+            inventing missing fields or model reasoning.
+          </p>
+        </article>
+        <article class="verify-capability-card">
+          <h4>Source Evidence</h4>
+          <p>
+            Trace reconstructed fields to referenced artifacts, digests,
+            integrity status, and recorded provenance.
+          </p>
+        </article>
+        <article class="verify-capability-card">
+          <h4>Replay Verification</h4>
+          <p>
+            Check a recorded decision against its governing artifacts as an
+            investigation operation, not as a substitute for live runtime
+            enforcement.
+          </p>
+        </article>
+      </div>
+
+      <div class="verify-capability-group">
+        <h3 class="verify-capability-group-title">Package and interpret</h3>
+        <article class="verify-capability-card">
+          <h4>Verifiable Export</h4>
+          <p>
+            Produce an integrity-checkable investigation package for review.
+            Export does not establish legal admissibility.
+          </p>
+        </article>
+        <article
+          class="verify-capability-card verify-capability-card--non-authoritative"
+        >
+          <p class="verify-non-auth-label">Non-authoritative</p>
+          <h4>AI-Assisted Insights</h4>
+          <p>
+            Help reviewers navigate or summarize evidence while remaining
+            non-authoritative and outside the trusted reconstruction and runtime
+            authorization paths.
+          </p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section class="stack-section">
-    <h2>Why the verification surface exists</h2>
-    <p>
-      Authorization decisions must be reconstructable after the fact. Verify
-      provides investigation, reporting, and export capabilities over canonical
-      evidence while remaining outside the runtime enforcement path.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Read-only trust boundary</h2>
-    <p>
-      BeaconGuard Verify is read-only. It cannot modify evidence, change a
-      historical decision, activate a release, alter a Compliance Playbook,
-      grant runtime authority, or authorize an enterprise action.
-    </p>
-    <ul>
-      <li>Verification does not participate in ALLOW or DENY.</li>
-      <li>Browser-side claims are untrusted for integrity conclusions.</li>
-      <li>Export signing and reconstruction remain server-side responsibilities.</li>
+  <section class="verify-band" aria-labelledby="verify-provenance-heading">
+    <h2 id="verify-provenance-heading">Evidence provenance and reconstruction</h2>
+    <ul class="verify-provenance-list">
+      <li>
+        Authorization decisions produce Verifiable Decision Records that preserve
+        decision context and related identifiers.
+      </li>
+      <li>
+        Release and playbook identities support reconstruction of the governing
+        configuration used at decision time.
+      </li>
+      <li>
+        Request and action correlation links the transaction stages for
+        investigation.
+      </li>
+      <li>
+        Trust, freshness, and replay results are preserved where configured.
+      </li>
+      <li>
+        Source-evidence references support field-level traceability to artifacts
+        and digests.
+      </li>
+      <li>
+        Missing or unavailable evidence must remain visible rather than being
+        invented.
+      </li>
     </ul>
   </section>
 
-  <section class="stack-section">
-    <h2>Executive Reporting</h2>
-    <p>
-      Deterministic reporting summarizes investigation-relevant decision
-      evidence for review. Report views are for analysis and drill-down, not for
-      granting runtime authority.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Decision Explorer</h2>
-    <p>
-      Decision Explorer supports inspection of recorded authorization decisions
-      and linked investigation context for a governed transaction.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Deterministic Reconstruction</h2>
-    <p>
-      Reconstruction derives the logical decision path from canonical evidence.
-      Missing or unavailable fields are reported as such. Reconstruction does
-      not invent model reasoning or fabricate missing artifacts.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Source Evidence and field traceability</h2>
-    <p>
-      Source Evidence maps reconstructed fields back to underlying artifacts,
-      digests, and integrity status so reviewers can see what was verified,
-      unverified, invalid, or unavailable.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Replay Verification</h2>
-    <p>
-      Investigation replay verification checks recorded decisions against
-      governing artifacts. It is not a substitute for live provider calls and
-      is distinct from request-admission replay protection at runtime.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Verifiable Export</h2>
-    <p>
-      Verifiable Export produces investigation packages that can be checked for
-      integrity. Export material supports review workflows; it is not claimed
-      here as legal admissibility.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>AI-Assisted Insights</h2>
-    <p>
-      AI-Assisted Insights may help reviewers navigate or summarize, but they
-      are non-authoritative. Insights must not enter the trusted reconstruction
-      path, the evidence integrity path, or the runtime authorization path.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>What Verify cannot do</h2>
+  <section class="verify-band" aria-labelledby="verify-cannot-heading">
+    <h2 id="verify-cannot-heading">What Verify cannot do</h2>
     <ul class="bg-nonclaim-list">
       <li>Modify or delete historical evidence.</li>
       <li>Convert DENY into ALLOW.</li>
       <li>Activate or replace an Active Verified Release.</li>
       <li>Alter a Compliance Playbook.</li>
-      <li>Grant runtime authority or authorize an enterprise action.</li>
-      <li>Treat AI-assisted insight output as evidence authority.</li>
+      <li>Grant runtime authority.</li>
+      <li>Authorize an enterprise action.</li>
+      <li>Treat AI-assisted insight as evidence authority.</li>
     </ul>
   </section>
 
-  <section class="stack-section">
-    <h2>Responsibility separation</h2>
-    <ul>
-      <li>BeaconGuard records and exposes investigation evidence.</li>
-      <li>Enterprise applications execute only authorized actions.</li>
-      <li>Systems of record remain authoritative for business state.</li>
-      <li>Customer governance retains clinical, legal, and compliance judgment.</li>
-    </ul>
+  <section class="verify-band" aria-labelledby="verify-responsibility-heading">
+    <h2 id="verify-responsibility-heading">Responsibility separation</h2>
+    <div class="verify-responsibility-grid">
+      <div class="verify-responsibility-card">
+        <h3>BeaconGuard</h3>
+        <ul>
+          <li>Records and exposes authorization evidence.</li>
+          <li>Provides read-only investigation capabilities.</li>
+          <li>Does not execute enterprise actions.</li>
+        </ul>
+      </div>
+      <div class="verify-responsibility-card">
+        <h3>Enterprise application</h3>
+        <ul>
+          <li>Declares and executes authorized actions.</li>
+          <li>Correlates decisions with workflow context.</li>
+          <li>Enforces DENY and non-AI fallback behavior.</li>
+        </ul>
+      </div>
+      <div class="verify-responsibility-card">
+        <h3>Enterprise systems of record</h3>
+        <ul>
+          <li>Remain authoritative for resulting business state.</li>
+        </ul>
+      </div>
+      <div class="verify-responsibility-card">
+        <h3>Customer governance</h3>
+        <ul>
+          <li>
+            Retains legal, clinical, operational, compliance, and business
+            judgment.
+          </li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <section class="stack-section">
-    <div class="page-actions">
-      <a class="btn-primary" href="/proof-evidence">Continue to Proof and Evidence</a>
+  <section class="verify-band verify-band--qualify">
+    <QualificationNotice variant="full" />
+  </section>
+
+  <section class="verify-band verify-band--cta" aria-label="Next steps">
+    <div class="page-actions verification-final-actions">
+      <a class="btn-primary" href="/proof-evidence">Inspect Proof and Evidence</a>
       <a class="btn-secondary" href="/reviewer-kit">Open Reviewer Kit</a>
     </div>
   </section>
