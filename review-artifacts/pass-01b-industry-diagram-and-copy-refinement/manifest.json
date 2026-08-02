@@ -260,5 +260,6 @@
       "filename": "financial-old-vs-new-1440.png",
       "sha256": "ff3fd4306cc5025a473f1d05365d4e183a1af44d8f0f50b52f4a008e544d25ed"
     }
-  ]
+  ],
+  "final_implementation_commit": "9db13a877c4e299b3259db697d345c0ed192ef99"
 }
