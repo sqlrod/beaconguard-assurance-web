@@ -29,7 +29,7 @@
 | 01B-R3A2 | Orthographic closed-loop circuit reconstruction | `a3c83b56e50ffd4288ecbf198017655f1fb3ad27` | [pass-01b-r3a2-orthographic-circuit-reconstruction](review-artifacts/pass-01b-r3a2-orthographic-circuit-reconstruction/README.md) |
 | 01B (approved diagram) | Approved generated diagram — homepage integration | `b98ee0fe9279ae304de17b76998f877c6d919b3e` | [pass-01b-approved-diagram-homepage-integration](review-artifacts/pass-01b-approved-diagram-homepage-integration/README.md) |
 | 01B (narrative bands) | Homepage narrative band refactor | `3012e8965c4f603181be8ad292ab6c5eb672ad6d` | [pass-01b-homepage-narrative-band-refactor](review-artifacts/pass-01b-homepage-narrative-band-refactor/README.md) |
-| 01B (vertical hero) | Homepage vertical hero — full-width diagram | _(recorded after commit)_ | [pass-01b-homepage-vertical-hero](review-artifacts/pass-01b-homepage-vertical-hero/README.md) |
+| 01B (vertical hero) | Homepage vertical hero — full-width diagram | `b772178bd171f9316556eb5a56f4cbefc528d5af` | [pass-01b-homepage-vertical-hero](review-artifacts/pass-01b-homepage-vertical-hero/README.md) |
 
 ## Homepage Vertical Hero — Full-Width Diagram
 

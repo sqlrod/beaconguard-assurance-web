@@ -72,5 +72,6 @@
       "filename": "side-by-side-vs-vertical-1440.png",
       "sha256": "c7f922e589d4c3cb2e0084987c1e050bba240879df43db37259dbb842a812ef0"
     }
-  ]
+  ],
+  "final_implementation_commit": "b772178bd171f9316556eb5a56f4cbefc528d5af"
 }

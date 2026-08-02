@@ -7,7 +7,7 @@ IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_HOMEPAGE_REVIEW
 | Field | Value |
 | --- | --- |
 | Starting staging HEAD | `a0f5e043a78668ade986aeee6e45574b21df6360` |
-| Final implementation commit | _(recorded after commit)_ |
+| Final implementation commit | `b772178bd171f9316556eb5a56f4cbefc528d5af` |
 | Preview port | `4342` |
 | Status | `IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_HOMEPAGE_REVIEW` |
 | Approved PNG modified | **No** |
