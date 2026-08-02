@@ -7,7 +7,7 @@ IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VERIFICATION_PAGE_REVIEW
 | Field | Value |
 | --- | --- |
 | Starting staging HEAD | `7858573c0b8df38c81aa10bbaa01c9570918df16` |
-| Final implementation commit | _(recorded after commit)_ |
+| Final implementation commit | `9bced62a88c8ffebacf51f08032282657f317737` |
 | Preview port | `4344` |
 | Status | `IMPLEMENTATION_COMPLETE_PENDING_INDEPENDENT_VERIFICATION_PAGE_REVIEW` |
 | PNG modified | **No** — exact binary copy |

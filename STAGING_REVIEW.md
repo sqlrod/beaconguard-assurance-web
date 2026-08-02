@@ -31,7 +31,7 @@
 | 01B (narrative bands) | Homepage narrative band refactor | `3012e8965c4f603181be8ad292ab6c5eb672ad6d` | [pass-01b-homepage-narrative-band-refactor](review-artifacts/pass-01b-homepage-narrative-band-refactor/README.md) |
 | 01B (vertical hero) | Homepage vertical hero — full-width diagram | `b772178bd171f9316556eb5a56f4cbefc528d5af` | [pass-01b-homepage-vertical-hero](review-artifacts/pass-01b-homepage-vertical-hero/README.md) |
 | 01B (industry diagrams) | Healthcare and Financial approved diagram + copy refinement | `9db13a877c4e299b3259db697d345c0ed192ef99` | [pass-01b-industry-diagram-and-copy-refinement](review-artifacts/pass-01b-industry-diagram-and-copy-refinement/README.md) |
-| 01B (verification) | Verification diagram and page refactor | _(recorded after commit)_ | [pass-01b-verification-diagram-and-page-refactor](review-artifacts/pass-01b-verification-diagram-and-page-refactor/README.md) |
+| 01B (verification) | Verification diagram and page refactor | `9bced62a88c8ffebacf51f08032282657f317737` | [pass-01b-verification-diagram-and-page-refactor](review-artifacts/pass-01b-verification-diagram-and-page-refactor/README.md) |
 
 ## Verification Diagram and Page Refactor
 
