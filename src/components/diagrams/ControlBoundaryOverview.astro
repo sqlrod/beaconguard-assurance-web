@@ -7,6 +7,7 @@
       decoding="async"
     />
     <span class="hero-motion hero-motion--proposal" aria-hidden="true"></span>
+    <span class="hero-state hero-state--boundary" aria-hidden="true"></span>
     <span class="hero-motion hero-motion--allow" aria-hidden="true"></span>
     <span class="hero-motion hero-motion--deny" aria-hidden="true"></span>
     <span class="hero-state hero-state--allow" aria-hidden="true"></span>
@@ -32,6 +33,15 @@
   .hero-motion--deny { left: 60%; top: 67.2%; width: 10.8%; background: #f55c61; animation: bgFlow 4.8s ease-out 2.05s infinite; }
 
   .hero-state { width: 21.7%; height: 23%; border-radius: 1rem; opacity: 0; box-shadow: 0 0 0 0 transparent; }
+  .hero-state--boundary {
+    left: 33.4%;
+    top: 23.4%;
+    width: 26.6%;
+    height: 38.7%;
+    border: 1px solid rgba(112,207,255,.82);
+    background: rgba(46,171,237,.045);
+    animation: bgBoundaryPulse 4.8s ease-out .25s infinite;
+  }
   .hero-state--allow { left: 70.8%; top: 24.5%; border: 1px solid rgba(56,199,140,.75); animation: bgAllowPulse 4.8s ease-out 1.55s infinite; }
   .hero-state--deny { left: 70.8%; top: 55.7%; border: 1px solid rgba(245,92,97,.72); animation: bgDenyPulse 4.8s ease-out 2.45s infinite; }
 
@@ -49,6 +59,16 @@
     0%, 10% { opacity: 0; box-shadow: 0 0 0 0 rgba(245,92,97,0); }
     22%, 48% { opacity: 1; box-shadow: 0 0 26px 2px rgba(245,92,97,.15); }
     64%, 100% { opacity: 0; box-shadow: 0 0 0 0 rgba(245,92,97,0); }
+  }
+  @keyframes bgBoundaryPulse {
+    0%, 30% { opacity: 0; box-shadow: 0 0 0 0 rgba(46,171,237,0); }
+    34%, 48% {
+      opacity: 1;
+      box-shadow:
+        0 0 18px 1px rgba(46,171,237,.2),
+        inset 0 0 0 1px rgba(154,192,232,.18);
+    }
+    56%, 100% { opacity: 0; box-shadow: 0 0 0 0 rgba(46,171,237,0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
