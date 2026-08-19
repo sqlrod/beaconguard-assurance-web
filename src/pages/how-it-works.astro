@@ -4,83 +4,51 @@ import RuntimeDecisionSequence from "../components/diagrams/RuntimeDecisionSeque
 ---
 
 <BaseLayout
-  title="How It Works | BeaconGuard Regulated AI Runtime Control"
-  description="See how BeaconGuard validates request context, verifies trust conditions, applies deterministic controls, enforces ALLOW or DENY outcomes, and produces verifiable decision evidence before governed execution."
+  title="How It Works | BeaconGuard Exact-Action Authorization"
+  description="See how BeaconGuard separates invocation from exact-action authorization, binds one-time execution authority to the material action, and preserves decision evidence."
 >
-  <section>
-    <h1>How It Works</h1>
+  <section class="stack-section">
+    <p class="section-label">HOW IT WORKS</p>
+    <h1>From agent request to authorized side effect</h1>
     <p class="lead">
-      BeaconGuard evaluates enterprise requests before governed AI, APIs, or automated systems execute them. Each request passes through a deterministic runtime control boundary that validates context, verifies trust conditions, applies the active control set, enforces an explicit ALLOW or DENY result, and emits verifiable decision evidence.
+      BeaconGuard uses a two-boundary model: request and invocation context first, exact consequential-action authorization second.
     </p>
   </section>
 
-  <section>
-    <p class="section-label">Runtime sequence</p>
-    <h2>Runtime Decision Sequence</h2>
-    <p>
-      Each request moves through six deterministic stages: Request, Validate, Verify, Evaluate, Enforce, and Record. Evidence is persisted before ALLOW may proceed; DENY remains a hard stop.
-    </p>
+  <section class="stack-section">
+    <div class="section-grid section-grid--compact">
+      <div class="content-card">
+        <h3>Boundary 1: invocation</h3>
+        <p>Validate identity, delegation, freshness, replay state, tenant/environment, and capability access.</p>
+      </div>
+      <div class="content-card">
+        <h3>Boundary 2: action</h3>
+        <p>Evaluate the exact material side effect under the current verified customer policy authority.</p>
+      </div>
+    </div>
+    <p><strong>Passing the first boundary does not imply passing the second.</strong></p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Runtime sequence</h2>
     <RuntimeDecisionSequence />
   </section>
 
-  <section>
-    <h2>Optional System Connector</h2>
-    <p>
-      Some enterprise applications do not natively produce the protocol or context structure required by the BeaconGuard runtime. The optional System Connector maps source protocols and context into the required request format before request validation.
-    </p>
-    <p>
-      The System Connector does not evaluate controls, activate releases, or bypass enforcement.
-    </p>
-  </section>
-
-  <section>
-    <h2>Deterministic enforcement outcomes</h2>
-    <h3>ALLOW</h3>
-    <p>
-      An allowed request satisfies the active control requirements. After the Verifiable Decision Record is persisted, governed execution may proceed.
-    </p>
-    <h3>DENY</h3>
-    <p>
-      A denied request is blocked before downstream execution. BeaconGuard fails closed when required validation, trust, freshness, replay, or control conditions are not satisfied.
-    </p>
-  </section>
-
-  <section>
-    <h2>Stage clarifications</h2>
+  <section class="stack-section">
+    <h2>Key mechanics</h2>
     <ul>
-      <li><strong>Validate</strong> — required structure, normalization, and required context.</li>
-      <li><strong>Verify</strong> — request authenticity; identity context; tenant and environment binding; freshness; replay resistance; active release verification.</li>
-      <li><strong>Evaluate</strong> — deterministic Compliance Playbook evaluation against the Active Verified Release.</li>
-      <li><strong>Enforce</strong> — decision calculated as ALLOW or DENY only.</li>
-      <li><strong>Record</strong> — Verifiable Decision Record persisted before ALLOW may proceed to a governed system.</li>
-      <li>Shared dependencies fail closed when required verification cannot complete.</li>
+      <li><strong>Exact-action binding:</strong> authorization applies to the action that actually executes.</li>
+      <li><strong>One-time execution authority:</strong> a valid authorization is consumed once, not reused broadly.</li>
+      <li><strong>Verified policy authority:</strong> production decisions are governed by the current approved and activated release.</li>
+      <li><strong>Fail-closed behavior:</strong> invalid trust, mismatched action binding, or reuse attempts stop execution.</li>
     </ul>
   </section>
 
-  <section>
-    <h2>Decision evidence and review</h2>
-    <p>
-      Every ALLOW or DENY result produces verifiable decision evidence containing the decision context, active release identity, control result, and outcome.
-    </p>
-    <p>
-      Evidence may be routed for governance or human review without changing the runtime enforcement result that was already returned. Review does not permit execution.
-    </p>
-  </section>
-
-  <section>
-    <h2>Technical Deepening</h2>
-    <p>
-      See <a href="/docs/architecture">System Architecture</a> for the complete control-plane, release-verification, activation, and runtime-boundary model.
-    </p>
-    <ul>
-      <li><a href="/docs/architecture">System Architecture</a></li>
-      <li><a href="/docs/enforcement-runtime">Enforcement runtime</a></li>
-      <li><a href="/docs/policy-model">Policy model</a></li>
-      <li><a href="/docs/compliance-audit">Compliance and audit</a></li>
-    </ul>
+  <section class="stack-section">
     <div class="page-actions">
-      <a class="btn-primary" href="/deployment">Review deployment expectations</a>
-      <a class="btn-secondary" href="/trust-assurance">Review Trust Center evidence surfaces</a>
+      <a class="btn-primary" href="/platform">Back to Product</a>
+      <a class="btn-secondary" href="/docs/architecture">Technical Architecture</a>
+      <a class="btn-secondary" href="/trust-assurance">Assurance</a>
     </div>
   </section>
 </BaseLayout>

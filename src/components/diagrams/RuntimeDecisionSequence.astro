@@ -1,111 +1,15 @@
----
-import DiagramShell from "./DiagramShell.astro";
-import OutcomeFork from "./OutcomeFork.astro";
-
-const stages = [
-  {
-    step: "STEP 1",
-    title: "Request",
-    description: "Enterprise workflow submits decision context",
-    className: "",
-  },
-  {
-    step: "STEP 2",
-    title: "Validate",
-    description: "Required structure, normalization, required context",
-    className: "",
-  },
-  {
-    step: "STEP 3",
-    title: "Verify",
-    description:
-      "Request authenticity; identity context; tenant/environment binding; freshness; replay resistance; active release verification",
-    className: "",
-  },
-  {
-    step: "STEP 4",
-    title: "Evaluate",
-    description: "Deterministic Compliance Playbook evaluation",
-    className: "",
-  },
-  {
-    step: "STEP 5",
-    title: "Enforce",
-    description: "Decision calculated as ALLOW or DENY",
-    className: "bg-flow-step--decision",
-  },
-  {
-    step: "STEP 6",
-    title: "Record",
-    description: "Verifiable Decision Record persisted",
-    className: "bg-outcome-evidence",
-  },
-];
----
-
-<DiagramShell
-  title="Runtime decision sequence"
-  caption="Six deterministic stages complete before any downstream effect. After Record, outcomes fork: ALLOW may proceed only after evidence persistence; DENY remains a hard stop. No path exists from Enforce directly to a governed system before Record."
-  className="bg-diagram--runtime-sequence"
->
-  <div class="bg-flow" role="list">
-    {
-      stages.map((stage, index) => (
-        <>
-          <div
-            class:list={["bg-flow-step", "diagram-step", stage.className]}
-            role="listitem"
-          >
-            <span class="diagram-step-number">{stage.step}</span>
-            <strong class="diagram-step-title">{stage.title}</strong>
-            <span class="diagram-step-description">{stage.description}</span>
-          </div>
-          {index < stages.length - 1 && (
-            <div class="bg-flow-arrow" aria-hidden="true">
-              ↓
-            </div>
-          )}
-        </>
-      ))
-    }
-  </div>
-
-  <OutcomeFork
-    allowLabel="Governed execution may proceed"
-    denyLabel="Hard stop — no downstream execution"
+<figure class="figma-diagram">
+  <img
+    class="figma-diagram-image"
+    src="/diagrams/beaconguard-authorization-architecture.svg"
+    alt="Identity, delegation, invocation permission, and the proposed business action flow into BeaconGuard exact-action authorization. Request ALLOW is explicitly separated from Action ALLOW. A one-time grant proceeds to execute-side validation while DENY hard-stops; decision evidence records the action, release, and outcome."
+    loading="lazy"
+    decoding="async"
   />
-
-  <div slot="text">
-    <ol>
-      <li>
-        <strong>STEP 1 — Request</strong> — Enterprise workflow submits decision
-        context.
-      </li>
-      <li>
-        <strong>STEP 2 — Validate</strong> — Required structure, normalization,
-        required context.
-      </li>
-      <li>
-        <strong>STEP 3 — Verify</strong> — Request authenticity; identity
-        context; tenant/environment binding; freshness; replay resistance;
-        active release verification.
-      </li>
-      <li>
-        <strong>STEP 4 — Evaluate</strong> — Deterministic Compliance Playbook
-        evaluation.
-      </li>
-      <li>
-        <strong>STEP 5 — Enforce</strong> — Decision calculated as ALLOW or DENY.
-      </li>
-      <li>
-        <strong>STEP 6 — Record</strong> — Verifiable Decision Record persisted.
-      </li>
-    </ol>
-    <p>
-      All six stages complete before any downstream effect. After Record only:
-      Branch ALLOW → governed execution may proceed; Branch DENY → hard stop with
-      no downstream execution. There is no path from Enforce directly to a
-      governed system before Record.
-    </p>
-  </div>
-</DiagramShell>
+  <figcaption>Invocation permission establishes context. Consequential execution still requires a separate exact-action authorization decision.</figcaption>
+</figure>
+<style>
+  .figma-diagram { margin: 1.5rem 0; }
+  .figma-diagram-image { display:block; width:100%; height:auto; border-radius:1rem; }
+  figcaption { margin-top:.7rem; color:var(--text-muted); font-size:.9rem; }
+</style>

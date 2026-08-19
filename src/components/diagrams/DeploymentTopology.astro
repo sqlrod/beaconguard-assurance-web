@@ -1,127 +1,17 @@
----
-import DiagramShell from "./DiagramShell.astro";
-import OutcomeFork from "./OutcomeFork.astro";
-
-const management = [
-  "Control Plane",
-  "Compliance Playbook lifecycle",
-  "Signing",
-  "Distribution",
-  "Verification and Activation",
-  "Active Verified Release",
-];
-
-const runtime = [
-  "Enterprise Application",
-  "Optional System Connector",
-  "BeaconGuard Runtime Control Boundary",
-  "Determine ALLOW or DENY",
-  "Persist Verifiable Decision Record",
-];
-
-const dependencies = [
-  "Customer IdP / workforce identity",
-  "Service / workload identity",
-  "Shared replay authority",
-  "Evidence provider",
-  "Monitoring",
-];
-
-const capabilityPaths = ["Windows", "Linux", "OCI-oriented deployment"];
----
-
-<DiagramShell
-  title="Deployment and trust topology"
-  caption="Management plane is outside the request path. Runtime evaluates, persists evidence, then forks to ALLOW (governed execution) or DENY (hard stop). Supporting dependencies are not alternate execution paths."
-  className="bg-diagram--deployment"
->
-  <div class="bg-planes bg-planes--responsive">
-    <section class="bg-plane" aria-labelledby="deploy-mgmt-title">
-      <h4 id="deploy-mgmt-title" class="bg-plane-title">
-        A) Management plane
-        <span class="bg-plane-badge">Outside request path</span>
-      </h4>
-      <div class="bg-flow" role="list">
-        {
-          management.map((step, index) => (
-            <>
-              <div
-                class:list={[
-                  "bg-flow-step",
-                  step === "Active Verified Release" && "bg-outcome-evidence",
-                ]}
-                role="listitem"
-              >
-                {step}
-              </div>
-              {index < management.length - 1 && (
-                <div class="bg-flow-arrow" aria-hidden="true">
-                  ↓
-                </div>
-              )}
-            </>
-          ))
-        }
-      </div>
-      <p class="bg-flow-note">
-        Active Verified Release feeds the runtime control boundary.
-      </p>
-    </section>
-
-    <section class="bg-plane" aria-labelledby="deploy-runtime-title">
-      <h4 id="deploy-runtime-title" class="bg-plane-title">B) Runtime path</h4>
-      <div class="bg-flow" role="list">
-        {
-          runtime.map((step, index) => (
-            <>
-              <div
-                class:list={[
-                  "bg-flow-step",
-                  step.includes("Runtime Control") && "bg-flow-step--boundary",
-                  step.includes("ALLOW or DENY") && "bg-flow-step--decision",
-                  step.includes("Persist") && "bg-outcome-evidence",
-                  step.includes("System Connector") && "bg-flow-step--optional",
-                ]}
-                role="listitem"
-              >
-                {step}
-              </div>
-              {index < runtime.length - 1 && (
-                <div class="bg-flow-arrow" aria-hidden="true">
-                  ↓
-                </div>
-              )}
-            </>
-          ))
-        }
-      </div>
-      <OutcomeFork
-        allowLabel="Governed AI / API / Automated System"
-        denyLabel="Hard Stop / No Downstream Execution"
-      />
-    </section>
-
-    <section class="bg-plane" aria-labelledby="deploy-deps-title">
-      <h4 id="deploy-deps-title" class="bg-plane-title">
-        C) Supporting dependencies
-        <span class="bg-plane-badge">Side list — not an alternate path</span>
-      </h4>
-      <ul class="bg-dep-list">
-        {dependencies.map((item) => <li>{item}</li>)}
-      </ul>
-      <p class="bg-flow-note">
-        Capability-level operating paths (no public download claims):{" "}
-        {capabilityPaths.join(" · ")}
-      </p>
-    </section>
-  </div>
-
-  <div slot="text">
-    <p>
-      Runtime path: Enterprise Application → Optional System Connector → Runtime
-      Control Boundary → Determine ALLOW or DENY → Persist Verifiable Decision
-      Record → fork ALLOW (governed system) or DENY (hard stop). Management
-      plane remains outside the request path.
-    </p>
-  </div>
-</DiagramShell>
+<figure class="figma-diagram" aria-labelledby="deployment-topology-caption">
+  <img
+    class="figma-diagram-image"
+    src="/diagrams/beaconguard-deployment-topology.svg"
+    alt="BeaconGuard deployment topology showing a horizontal execution path from application or AI agent to proposed action, through the BeaconGuard exact-action authorization boundary, and to the executor. Separate lower cards show supporting trust services, the Active Verified Release, authorization evidence, and the no-bypass requirement."
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption id="deployment-topology-caption">
+    BeaconGuard remains on the consequential execution path. Identity, delegation, MCP/A2A, replay state, keys, and monitoring provide context and trust inputs; they do not create alternate action authority.
+  </figcaption>
+</figure>
+<style>
+  .figma-diagram { margin:1.5rem 0; }
+  .figma-diagram-image { display:block; width:100%; height:auto; border-radius:1rem; }
+  figcaption { margin-top:.7rem; color:var(--text-muted); font-size:.9rem; }
+</style>

@@ -4,182 +4,66 @@ import DataFlowThreatDiagram from "../../components/diagrams/DataFlowThreatDiagr
 ---
 
 <BaseLayout
-  title="Data-Flow Threat Analysis"
-  description="Trust boundaries, data flows, threat conditions, and deterministic ALLOW or DENY enforcement responses for BeaconGuard-governed requests."
+  title="Data-Flow Trust Analysis | BeaconGuard"
+  description="BeaconGuard trust-boundary analysis separating identity and delegation context, invocation access, AI proposals, exact-action authorization, execution authority, governing policy, evidence, and independent verification."
 >
   <section class="stack-section">
-    <h1>Data-Flow Threat Analysis</h1>
-
-    <p>
-      This page identifies the trust boundaries, data flows, threat conditions, and deterministic enforcement responses associated with a BeaconGuard-governed request. It supplements the <a href="/docs/architecture">System Architecture</a> and <a href="/docs/threat-model">Threat Model</a> documentation.
+    <p class="section-label">DATA FLOW / TRUST BOUNDARIES</p>
+    <h1>Each boundary establishes a different kind of authority</h1>
+    <p class="lead">
+      BeaconGuard separates context, proposal, authorization, execution, and evidence so permission in one layer cannot silently become authority in the next.
     </p>
 
     <DataFlowThreatDiagram />
+  </section>
 
-    <h2>1. Scope and trust boundary</h2>
-
-    <p>
-      BeaconGuard inserts a Runtime Control Boundary between an enterprise application or workflow and a governed AI, API, or automated system. The management plane produces releases; the runtime data plane evaluates each request against an Active Verified Release and returns ALLOW or DENY before governed execution. The Control Plane is outside the per-request path. The customer IdP does not make the BeaconGuard decision.
-    </p>
-
-    <p>Out of scope for this page:</p>
-    <ul>
-      <li>Product marketing claims</li>
-      <li>Legal compliance certification</li>
-      <li>Replacement of customer systems of record</li>
-    </ul>
-
-    <h2>2. Data-flow sequence</h2>
-    <ol>
-      <li>Enterprise Application / Workflow submits a request.</li>
-      <li>Optional System Connector maps source protocol and context.</li>
-      <li>Request Validation and Context Normalization checks required structure.</li>
-      <li>Trust, Freshness, and Replay Checks validate admission conditions.</li>
-      <li>Deterministic Playbook Evaluation applies the Active Verified Release.</li>
-      <li>BeaconGuard determines ALLOW or DENY.</li>
-      <li>A Verifiable Decision Record is persisted.</li>
-      <li>ALLOW may proceed to governed execution; DENY hard-stops.</li>
-      <li>Evidence supports replay, verification, and governance review via the configured evidence provider.</li>
-    </ol>
-
-    <h2>3. Trust inputs</h2>
-
-    <p>
-      Typical trusted inputs include signed or otherwise verified request metadata, workflow identity, user role, source-system trust, approved-pathway status, request identifiers, timestamps, freshness windows, and the Active Verified Release selected for evaluation.
-    </p>
-
-    <p>Missing or invalid required inputs fail closed as DENY.</p>
-
-    <h2>4. Threat conditions</h2>
-
+  <section class="stack-section">
+    <h2>Boundary contracts</h2>
     <div class="docs-table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Threat</th>
-            <th>Boundary</th>
-            <th>Control</th>
-            <th>Enforcement response</th>
-            <th>Residual responsibility</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Boundary</th><th>Establishes</th><th>Does not establish</th></tr></thead>
         <tbody>
-          <tr>
-            <td>Malformed request</td>
-            <td>Runtime Control Boundary</td>
-            <td>Request Validation and Context Normalization</td>
-            <td>DENY because required structure is missing or invalid</td>
-            <td>Application request construction</td>
-          </tr>
-          <tr>
-            <td>Missing trusted context</td>
-            <td>Runtime Control Boundary</td>
-            <td>Trust checks and playbook requirements</td>
-            <td>DENY because required context is missing</td>
-            <td>Identity and source-system trust configuration</td>
-          </tr>
-          <tr>
-            <td>Invalid signature or trust signal</td>
-            <td>Runtime Control Boundary</td>
-            <td>Trust and signature checks</td>
-            <td>DENY because trust cannot be verified</td>
-            <td>Key and identity-provider operations</td>
-          </tr>
-          <tr>
-            <td>Stale request</td>
-            <td>Runtime Control Boundary</td>
-            <td>Freshness checks</td>
-            <td>DENY because freshness cannot be verified</td>
-            <td>Clock and request-timing practices</td>
-          </tr>
-          <tr>
-            <td>Replayed request</td>
-            <td>Runtime Control Boundary</td>
-            <td>Replay checks</td>
-            <td>DENY because the request appears replayed</td>
-            <td>Replay-state provider and deployment configuration</td>
-          </tr>
-          <tr>
-            <td>Inactive or unverified release</td>
-            <td>Release Verification and Activation</td>
-            <td>Release verification before activation</td>
-            <td>DENY because no verified active release is available</td>
-            <td>Release distribution and activation operations</td>
-          </tr>
-          <tr>
-            <td>Unauthorized pathway</td>
-            <td>Deterministic Playbook Evaluation</td>
-            <td>Active Verified Release pathway controls</td>
-            <td>DENY because the pathway is not approved</td>
-            <td>Pathway governance and playbook authoring</td>
-          </tr>
-          <tr>
-            <td>System Connector manipulation</td>
-            <td>Optional System Connector</td>
-            <td>Connector cannot evaluate controls or bypass fail-closed enforcement</td>
-            <td>DENY when normalized context fails validation or trust checks</td>
-            <td>Connector hardening and monitoring</td>
-          </tr>
-          <tr>
-            <td>Downstream execution misuse</td>
-            <td>After ALLOW</td>
-            <td>BeaconGuard does not own post-ALLOW business logic</td>
-            <td>Not a runtime permission bypass; ALLOW only permits governed execution</td>
-            <td>Customer application and model-risk controls</td>
-          </tr>
-          <tr>
-            <td>Evidence-provider failure</td>
-            <td>Evidence path</td>
-            <td>Verifiable Decision Record emission; storage durability is deployment-dependent</td>
-            <td>Runtime permission remains ALLOW or DENY; retention and integrity depend on provider configuration</td>
-            <td>Evidence-provider and customer infrastructure</td>
-          </tr>
+          <tr><td>Identity / delegation</td><td>Who or what is acting, for whom, and within what bounds</td><td>Final permission for every consequential action</td></tr>
+          <tr><td>Invocation</td><td>Which MCP tool, A2A path, API, or application capability may be reached</td><td>Authority for every side effect that capability can produce</td></tr>
+          <tr><td>AI / agent proposal</td><td>The exact candidate result or action to be evaluated</td><td>Execution authority</td></tr>
+          <tr><td>BeaconGuard authorization</td><td>ALLOW or DENY for the exact material action under governing policy</td><td>Business-system execution</td></tr>
+          <tr><td>Executor / system of record</td><td>Validated side effect and resulting authoritative business state</td><td>Policy authority</td></tr>
+          <tr><td>Evidence / verification</td><td>Integrity, historical context, and reconstruction material</td><td>Runtime permission to execute</td></tr>
         </tbody>
       </table>
     </div>
+  </section>
 
-    <h2>5. Enforcement behavior</h2>
+  <section class="stack-section">
+    <h2>Core data flow</h2>
+    <ol>
+      <li>Validate required identity, delegation, tenant/environment, freshness, and replay context.</li>
+      <li>Admit the required invocation path; the AI or agent produces a proposed consequential action.</li>
+      <li>Canonicalize the exact material action and resolve the current governing policy authority.</li>
+      <li>BeaconGuard returns ALLOW or DENY and records authorization evidence.</li>
+      <li>ALLOW may issue one-time execution authority bound to the exact action; DENY issues none.</li>
+      <li>The executor recomputes the action identity, consumes valid authority once, and writes resulting business state.</li>
+    </ol>
+  </section>
 
-    <p>Runtime permission results are binary:</p>
+  <section class="stack-section">
+    <h2>Residual responsibilities</h2>
     <ul>
-      <li><strong>ALLOW</strong> — required controls are satisfied; after evidence persistence, governed execution may proceed.</li>
-      <li><strong>DENY</strong> — execution is prevented; no downstream execution occurs.</li>
+      <li>Customer identity and delegation-authority security</li>
+      <li>Network and host hardening and prevention of alternate execution paths</li>
+      <li>Executor enforcement and system-of-record integrity</li>
+      <li>Release-signing key custody and policy-governance correctness</li>
+      <li>Evidence-provider durability, retention, and any append-only controls</li>
     </ul>
+  </section>
 
-    <p>
-      When required approval is absent, BeaconGuard returns DENY with a deterministic reason indicating that approval is required. An illustrative reason style is <code>APPROVAL_REQUIRED</code>. Governance or human review may follow from the Verifiable Decision Record; review does not permit execution.
-    </p>
-
-    <h2>6. Evidence and review</h2>
-
-    <p>
-      Every deterministic result produces a Verifiable Decision Record that preserves decision context, release identity, control result, and outcome. Evidence is designed for replay and verification and supports audit and governance review. Retention and integrity protection depend on the configured evidence provider and shared customer deployment responsibilities. Append-only or immutable storage is not assumed unconditionally.
-    </p>
-
-    <h2>7. Residual risks</h2>
-
-    <p>BeaconGuard does not remove residual risk from:</p>
-    <ul>
-      <li>Misconfigured identity providers or trust sources</li>
-      <li>Incorrect Compliance Playbook authoring</li>
-      <li>Compromised signing keys</li>
-      <li>Evidence-provider outages or misconfiguration</li>
-      <li>Misuse of allowed outputs after an ALLOW result</li>
-    </ul>
-
-    <p>
-      Those risks remain shared with customer operations and are addressed in the broader <a href="/docs/threat-model">Threat Model</a>.
-    </p>
-
-    <h2>8. Related documentation</h2>
-    <ul>
-      <li><a href="/docs/architecture">System Architecture</a></li>
-      <li><a href="/docs/threat-model">Threat Model</a></li>
-      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
-      <li><a href="/docs/policy-model">Policy Model</a></li>
-      <li><a href="/how-it-works">How It Works</a></li>
-      <li><a href="/security">Security</a></li>
-      <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
-    </ul>
+  <section class="stack-section">
+    <h2>Related technical references</h2>
+    <div class="page-actions">
+      <a class="btn-primary" href="/docs/threat-model">Threat Model</a>
+      <a class="btn-secondary" href="/docs/architecture">System Architecture</a>
+      <a class="btn-secondary" href="/docs/enforcement-runtime">Enforcement Runtime</a>
+      <a class="btn-secondary" href="/docs/deployment-integration">Deployment and Integration</a>
+    </div>
   </section>
 </BaseLayout>

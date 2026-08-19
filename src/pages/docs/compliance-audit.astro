@@ -4,152 +4,91 @@ import EvidenceLifecycle from "../../components/diagrams/EvidenceLifecycle.astro
 ---
 
 <BaseLayout
-  title="Compliance and Audit"
-  description="BeaconGuard Verifiable Decision Records support auditability, governance review, and decision reconstruction for high-risk enterprise workflows."
+  title="Evidence, Verification, and Audit | BeaconGuard"
+  description="BeaconGuard preserves authorization evidence tying the exact material action to the governing verified release, actor/delegation context, decision result, and integrity information used for reconstruction."
 >
   <section class="stack-section">
-    <h1>Compliance and Audit</h1>
+    <h1>Evidence, Verification, and Audit</h1>
 
     <p>
-      BeaconGuard is designed to support <strong>auditability, governance review, and
-      decision reconstruction</strong> for high-risk enterprise workflows. It produces
-      <strong>Verifiable Decision Records</strong> from deterministic ALLOW or DENY results.
+      BeaconGuard produces authorization evidence for consequential-action decisions. The objective is not merely to record that an ALLOW or DENY occurred, but to preserve what exact action was evaluated, what verified policy authority governed it, and what context is required to check the decision afterward.
     </p>
 
     <p>
-      BeaconGuard does not make legal compliance guarantees and does not replace
-      customer privacy, security, clinical, AML, fraud, SIEM, IAM, or GRC programs.
+      BeaconGuard does not make legal compliance guarantees and does not replace customer privacy, security, clinical, AML, fraud, SIEM, IAM, GRC, or records-management programs.
     </p>
 
     <EvidenceLifecycle />
 
-    <p>
-      Retention, append-only behavior, durability, and storage integrity depend on the configured evidence provider and deployment controls.
-    </p>
-
-    <h2>Compliance Support Objectives</h2>
-
-    <p>BeaconGuard is designed to support common review needs:</p>
+    <h2>Evidence objectives</h2>
     <ul>
-      <li>Deterministic Decision Results: <strong>ALLOW</strong> or <strong>DENY</strong> before governed execution</li>
-      <li>Explicit reason codes (for example <code>APPROVAL_REQUIRED</code> when approval is absent)</li>
-      <li>Signed request metadata, workflow identity, trust signals, freshness windows, and replay-related inputs where configured</li>
-      <li>Explicit, versioned Compliance Playbook intent via release identity</li>
-      <li>Integrity-protected decision evidence designed for replay and verification</li>
-      <li>Separation of management plane (playbook lifecycle) from runtime data plane</li>
-      <li>Request-authenticity verification before governed evaluation</li>
-      <li>Tenant and environment identity in authorization context where configured</li>
+      <li>Preserve ACTION ALLOW or ACTION DENY and the reason / failed condition</li>
+      <li>Preserve the exact material-action identity</li>
+      <li>Preserve the actor, agent, and delegated-authority context</li>
+      <li>Preserve tenant and environment binding</li>
+      <li>Preserve Active Verified Release and policy / playbook identity</li>
+      <li>Preserve execution-grant identity and consumption state when applicable</li>
+      <li>Preserve integrity information required for verification</li>
+      <li>Support deterministic reconstruction using the recorded governing authority and normalized inputs</li>
     </ul>
 
+    <h2>What makes the evidence different from a conventional audit assertion</h2>
     <p>
-      These properties support post-hoc verification without probabilistic
-      authorization explanations.
+      A conventional audit event can state that a runtime used a particular policy version. BeaconGuard's assurance model is designed to connect the action decision to policy authority that was itself validated, signed, verified, and explicitly activated before it could govern production.
+    </p>
+    <p>
+      The evidence then preserves the release identity and exact-action identity required to verify and reconstruct the decision rather than relying only on a human-readable log message.
     </p>
 
-    <h2>Verifiable Decision Record</h2>
+    <h2>Illustrative Verifiable Decision Record content</h2>
+    <ul>
+      <li>Timestamp and correlation identity</li>
+      <li>Decision scope: consequential action</li>
+      <li>ACTION ALLOW or ACTION DENY</li>
+      <li>Material-action type and deterministic identity / digest</li>
+      <li>Target system or resource context</li>
+      <li>Actor / service / agent identity</li>
+      <li>Delegation context</li>
+      <li>Tenant and environment context</li>
+      <li>Active Verified Release / manifest identity</li>
+      <li>Policy / playbook identity</li>
+      <li>Trust, freshness, and replay outcomes</li>
+      <li>One-time execution-grant identity and consumption state when applicable</li>
+      <li>Integrity-verification and reconstruction references</li>
+    </ul>
 
+    <h2>Deterministic reconstruction</h2>
     <p>
-      Every evaluation produces a structured Verifiable Decision Record containing,
-      at minimum:
+      When the recorded normalized inputs, action identity, and governing release are available, reconstruction is intended to:
     </p>
     <ul>
-      <li>Timestamp and request / correlation identifiers</li>
-      <li>Decision outcome (<strong>ALLOW</strong> or <strong>DENY</strong>) and reason codes</li>
-      <li><strong>release_identity</strong> and <strong>playbook_identity</strong></li>
-      <li>Normalized decision context</li>
-      <li>Trust, Freshness, and Replay Check outcomes where applicable</li>
-      <li>Optional review obligations that do <strong>not</strong> change the permission result</li>
+      <li>Resolve the verified policy authority that governed the historical decision</li>
+      <li>Reconstruct the exact material action that was evaluated</li>
+      <li>Re-evaluate the action under the recorded release and context</li>
+      <li>Compare the reconstructed deterministic result with the recorded decision</li>
+      <li>Support incident investigation and independent technical review</li>
     </ul>
 
+    <h2>Qualified integrity and retention claims</h2>
     <p>
-      Records preserve release identity and decision context so reviewers can
-      reconstruct what was evaluated.
+      Evidence can include cryptographic integrity protection and key-identified verification. Storage durability, append-only behavior, retention, external anchoring, and legal evidentiary treatment depend on the configured evidence provider and deployment controls.
+    </p>
+    <p>
+      BeaconGuard does not imply a public blockchain, third-party timestamping service, external anchor, universal append-only storage, or legal admissibility unless such a mechanism is explicitly configured and documented.
     </p>
 
-    <h2>Evidence Claims (qualified)</h2>
-
+    <h2>Failure visibility</h2>
     <p>
-      BeaconGuard treats decision output as <strong>evidence for governance and audit
-      support</strong>, with these qualified properties:
-    </p>
-    <ul>
-      <li>Evidence is <strong>integrity-protected decision evidence</strong></li>
-      <li>It is <strong>designed for replay and verification</strong></li>
-      <li>It <strong>preserves release identity and decision context</strong></li>
-      <li>It <strong>supports audit and governance review</strong></li>
-      <li>It is designed for <strong>evidence-before-forward ordering</strong> for governed execution</li>
-      <li>It <strong>supports append-only retention when configured</strong> with a required evidence provider</li>
-      <li>It supports <strong>key-identified evidence verification</strong> where configured</li>
-      <li>It supports <strong>tamper detection</strong> and <strong>restart continuity</strong> where the configured evidence provider and deployment controls provide those properties</li>
-      <li>Retention, durability, and storage integrity controls are <strong>deployment-dependent</strong> and shared with the customer</li>
-    </ul>
-
-    <p>
-      Evidence integrity, retention, and tamper-resistance guarantees depend on the
-      configured evidence provider and deployment controls. Append-only or
-      durable-retention properties apply only where those controls are explicitly
-      configured and verified.
+      Missing authority, invalid trust state, action-binding failure, replay, grant reuse, evidence failure, or internal authorization failure must fail closed and remain visible in the evidence path rather than silently falling back to permissive execution.
     </p>
 
-    <h2>Deterministic Replay</h2>
-
-    <p>When release artifacts and recorded normalized inputs are available, replay supports:</p>
+    <h2>Related sections</h2>
     <ul>
-      <li>Re-evaluating a historical request against the recorded Active Verified Release / release identity</li>
-      <li>Obtaining the same Deterministic Decision Result</li>
-      <li>Supporting incident investigation and third-party technical review</li>
-    </ul>
-
-    <p>
-      Replay quality depends on preserved evidence, release availability, and
-      environment configuration.
-    </p>
-
-    <h2>Failure Visibility</h2>
-
-    <p>Failure conditions are explicitly recorded.</p>
-
-    <p>
-      If evaluation fails due to missing artifacts, verification errors, trust or
-      freshness failures, or internal faults:
-    </p>
-    <ul>
-      <li>The decision fails closed as <strong>DENY</strong></li>
-      <li>The failure category is recorded</li>
-      <li>No permissive fallback is allowed</li>
-    </ul>
-
-    <h2>Scope Boundaries</h2>
-
-    <p>BeaconGuard control assertions apply to:</p>
-    <ul>
-      <li>Authorization decisions at the Runtime Control Boundary</li>
-      <li>Deterministic Playbook Evaluation</li>
-      <li>Verifiable Decision Record generation</li>
-    </ul>
-
-    <p>They do not extend to:</p>
-    <ul>
-      <li>Model training data or model internal reasoning</li>
-      <li>Downstream application behavior beyond respecting ALLOW / DENY</li>
-      <li>Replacement of EHR, AML, fraud, SIEM, IAM, GRC, case-management, or workflow systems of record</li>
-      <li>Legal compliance certification or attestation status</li>
-    </ul>
-
-    <h2>Intended Reviewers</h2>
-    <ul>
-      <li>Compliance and risk teams</li>
-      <li>Internal and external auditors</li>
-      <li>Security and architecture reviewers</li>
-      <li>Governance stakeholders</li>
-    </ul>
-
-    <h2>Related Sections</h2>
-    <ul>
-      <li><a href="/docs/policy-model">Policy Model</a></li>
+      <li><a href="/proof-evidence">Proof and Evidence</a></li>
+      <li><a href="/sample-decision-record">Sample Decision Record</a></li>
+      <li><a href="/docs/architecture">System Architecture</a></li>
       <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
-      <li><a href="/docs/threat-model">Threat Model</a></li>
-      <li><a href="/proof-evidence">Proof and Evidence samples</a></li>
+      <li><a href="/trust-assurance">Assurance</a></li>
     </ul>
   </section>
 </BaseLayout>

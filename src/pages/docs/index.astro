@@ -3,68 +3,73 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="BeaconGuard Documentation"
-  description="Technical reference for BeaconGuard Compliance Playbooks, Runtime Control Boundary, Active Verified Releases, Verifiable Decision Records, and regulated workflow integration."
+  title="BeaconGuard Technical Documentation"
+  description="Technical documentation for BeaconGuard consequential-action authorization, governing policy authority, execution controls, deployment boundaries, and verifiable decision evidence."
 >
-  <section>
-    <h1>Documentation</h1>
-
+  <section class="stack-section docs-index">
+    <p class="section-label">TECHNICAL DOCUMENTATION</p>
+    <h1>BeaconGuard Technical Documentation</h1>
+    <p class="lead">
+      BeaconGuard independently authorizes consequential AI actions before execution. It evaluates the specific action being attempted under customer-approved governing policy and preserves the decision evidence needed for later verification.
+    </p>
     <p>
-      This documentation describes how BeaconGuard governs execution at the Runtime
-      Control Boundary: Compliance Playbooks become Signed Immutable Release Artifacts,
-      only an Active Verified Release drives Deterministic Playbook Evaluation, and
-      runtime results are ALLOW or DENY before governed execution.
+      The technical architecture is organized around <strong>Govern · Authorize · Verify</strong>. Start with the product boundary and system architecture, then go deeper only where needed.
     </p>
 
-    <p>
-      Evidence is integrity-protected decision context designed for replay and
-      verification. Deployment responsibilities are shared with the customer.
-    </p>
+    <div class="docs-index-grid">
+      <section class="content-card docs-index-card">
+        <p class="section-label">START HERE</p>
+        <h2>Orientation</h2>
+        <ul>
+          <li><a href="/platform"><strong>Product Overview</strong></a><br /><span>What BeaconGuard authorizes and where the boundary sits.</span></li>
+          <li><a href="/docs/architecture"><strong>System Architecture</strong></a><br /><span>Govern · Authorize · Verify.</span></li>
+        </ul>
+      </section>
 
-    <h2>Start Here</h2>
-    <ul>
-      <li><a href="/docs/overview">Product Overview</a> — what BeaconGuard is and is not</li>
-    </ul>
+      <section class="content-card docs-index-card">
+        <p class="section-label">AUTHORIZATION</p>
+        <h2>Policy and runtime</h2>
+        <ul>
+          <li><a href="/docs/policy-model"><strong>Policy Authority</strong></a><br /><span>How approved controls become production authority.</span></li>
+          <li><a href="/docs/enforcement-runtime"><strong>Enforcement Runtime</strong></a><br /><span>Exact-action authorization and one-time execution authority.</span></li>
+        </ul>
+      </section>
 
-    <h2>Product Overview</h2>
-    <ul>
-      <li><a href="/docs/overview">Overview</a></li>
-    </ul>
+      <section class="content-card docs-index-card">
+        <p class="section-label">ASSURANCE</p>
+        <h2>Evidence and verification</h2>
+        <ul>
+          <li><a href="/docs/compliance-audit"><strong>Evidence and Verification</strong></a><br /><span>Decision evidence, integrity, and reconstruction.</span></li>
+          <li><a href="/sample-decision-record"><strong>Sample Decision Record</strong></a><br /><span>Illustrative authorization evidence.</span></li>
+        </ul>
+      </section>
 
-    <h2>System Architecture</h2>
-    <ul>
-      <li><a href="/docs/architecture">System Architecture</a> — management plane, runtime data plane, and control boundary</li>
-    </ul>
+      <section class="content-card docs-index-card">
+        <p class="section-label">DEPLOYMENT & RESPONSIBILITY</p>
+        <h2>Integration boundaries</h2>
+        <ul>
+          <li><a href="/docs/deployment-integration"><strong>Deployment and Integration</strong></a><br /><span>Where the boundary sits and how systems integrate.</span></li>
+          <li><a href="/control-responsibility-matrix"><strong>Control Responsibility Matrix</strong></a><br /><span>Who owns identity, authorization, execution, and evidence responsibilities.</span></li>
+        </ul>
+      </section>
 
-    <h2>How It Works</h2>
-    <ul>
-      <li><a href="/how-it-works">How It Works</a> — request lifecycle from validation through enforce and record</li>
-    </ul>
-
-    <h2>Compliance Playbooks / Policy Model</h2>
-    <ul>
-      <li><a href="/docs/policy-model">Policy Model</a> — playbook hierarchy, release identity, ALLOW/DENY results</li>
-    </ul>
-
-    <h2>Enforcement Runtime</h2>
-    <ul>
-      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a> — Runtime Control Boundary, fail-closed semantics, System Connector</li>
-    </ul>
-
-    <h2>Evidence</h2>
-    <ul>
-      <li><a href="/docs/compliance-audit">Compliance and Audit</a> — Verifiable Decision Records and qualified evidence claims</li>
-    </ul>
-
-    <h2>Deployment</h2>
-    <ul>
-      <li><a href="/docs/deployment-integration">Deployment and Integration</a> — placement, customer responsibilities, Active Verified Release</li>
-    </ul>
-
-    <h2>Threat Model</h2>
-    <ul>
-      <li><a href="/docs/threat-model">Threat Model</a> — release, connector, control-plane, and evidence threats</li>
-      <li><a href="/docs/dfd-threat-flow">DFD and Threat Flow</a> — data-flow view supporting threat review</li>
-    </ul>
+      <section class="content-card docs-index-card">
+        <p class="section-label">SECURITY</p>
+        <h2>Threat and trust analysis</h2>
+        <ul>
+          <li><a href="/docs/threat-model"><strong>Threat Model</strong></a><br /><span>Primary threats, responses, assumptions, and residual risk.</span></li>
+          <li><a href="/docs/dfd-threat-flow"><strong>Data-Flow Trust Analysis</strong></a><br /><span>Trust boundaries and authority transitions.</span></li>
+        </ul>
+      </section>
+    </div>
   </section>
+
+  <style>
+    .docs-index-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin-top:1.5rem; }
+    .docs-index-card h2 { margin-top:.2rem; }
+    .docs-index-card ul { margin:.75rem 0 0; padding-left:1.15rem; }
+    .docs-index-card li { margin:.85rem 0; }
+    .docs-index-card span { color:var(--text-muted); font-size:.93rem; }
+    @media (max-width:800px){ .docs-index-grid{ grid-template-columns:1fr; } }
+  </style>
 </BaseLayout>

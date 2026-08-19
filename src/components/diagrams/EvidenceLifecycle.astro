@@ -1,48 +1,15 @@
----
-import DiagramShell from "./DiagramShell.astro";
----
-
-<DiagramShell
-  title="Evidence lifecycle"
-  caption="Every deterministic ALLOW or DENY produces a Verifiable Decision Record that can be integrity-checked, stored via the configured evidence provider, and used for replay, reconstruction, and audit review."
-  className="bg-diagram--evidence"
->
-  <div class="bg-flow" role="list">
-    <div class="bg-flow-step bg-flow-step--inputs" role="listitem">
-      <strong>Inputs</strong>
-      <ul class="bg-inline-list">
-        <li>Normalized Request Context</li>
-        <li>Active Release Identity</li>
-        <li>Control Evaluation</li>
-      </ul>
-    </div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step bg-flow-step--decision" role="listitem">
-      ALLOW or DENY
-    </div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step bg-outcome-evidence" role="listitem">
-      Verifiable Decision Record
-    </div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step" role="listitem">Integrity Verification</div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step" role="listitem">Configured Evidence Provider</div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step bg-outcome-evidence" role="listitem">
-      Replay / Reconstruction / Audit Review
-    </div>
-  </div>
-
-  <div slot="text">
-    <p>
-      Normalized Request Context + Active Release Identity + Control Evaluation →
-      ALLOW or DENY → Verifiable Decision Record → Integrity Verification →
-      Configured Evidence Provider → Replay / Reconstruction / Audit Review.
-    </p>
-    <p>
-      Retention, append-only behavior, durability, and storage integrity depend
-      on the configured evidence provider and deployment controls.
-    </p>
-  </div>
-</DiagramShell>
+<figure class="figma-diagram">
+  <img
+    class="figma-diagram-image"
+    src="/diagrams/beaconguard-authorization-assurance-chain.svg"
+    alt="Authorization assurance chain: identity establishes who is acting; delegation establishes for whom; invocation controls establish what can be invoked; BeaconGuard decides whether the exact action should occur; evidence and reconstruction establish whether the decision can be proven later."
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption>Identity, delegation, and tool access establish important permissions. They do not by themselves authorize every consequential action.</figcaption>
+</figure>
+<style>
+  .figma-diagram { margin:1.5rem 0; }
+  .figma-diagram-image { display:block; width:100%; height:auto; border-radius:1rem; }
+  figcaption { margin-top:.7rem; color:var(--text-muted); font-size:.9rem; }
+</style>

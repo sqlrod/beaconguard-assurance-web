@@ -3,14 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Use Cases | BeaconGuard Regulated AI Operations"
-  description="BeaconGuard workflow patterns for healthcare privacy review, financial services review, and regulated internal automation with ALLOW/DENY enforcement."
+  title="Use Cases | BeaconGuard Consequential AI Authorization"
+  description="BeaconGuard use cases for independently authorizing exact consequential AI actions in healthcare, financial services, and regulated internal automation."
 >
   <section>
     <h1>Use Cases</h1>
-    <p>
-      BeaconGuard deploys alongside existing applications for regulated enterprise workflows where probabilistic model behavior cannot serve as the authorization boundary.
-      It evaluates trusted request context against an Active Verified Release and returns ALLOW or DENY before governed execution.
+    <p class="lead">
+      BeaconGuard is for workflows where AI can do more than generate content. The relevant boundary appears when an agent can create a consequential side effect in an enterprise system or external interaction.
     </p>
   </section>
 
@@ -18,50 +17,45 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h2>Priority workflow patterns</h2>
     <div class="section-grid">
       <div class="content-card">
-        <h3>Healthcare privacy and operational AI review</h3>
-        <p>Deterministic context tags, user role, source-system trust, and approved pathway requirements can be playbook-gated before AI-assisted work is allowed to proceed. Absent approval yields DENY with Execution Prevented.</p>
+        <h3>Healthcare operational actions</h3>
+        <p>Patient communication, scheduling, operational record updates, and bounded discharge operations where the exact side effect must be authorized without replacing clinical or EHR authority.</p>
       </div>
       <div class="content-card">
-        <h3>Financial crime, fraud, and dispute review</h3>
-        <p>AML, KYC, fraud, dispute, and account exception workflows can require approval before customer-impacting recommendations proceed. Missing approval is DENY, not permission via review.</p>
+        <h3>Financial workflow actions</h3>
+        <p>AML/KYC, fraud, dispute, case-state, customer communication, and other customer-impacting actions where broad system access should not equal blanket action authority.</p>
       </div>
       <div class="content-card">
         <h3>Regulated internal automation</h3>
-        <p>Internal tools and agents touching regulated systems can be denied before action when controls or trust conditions fail. Verifiable Decision Records support governance follow-up without changing the DENY result.</p>
+        <p>Agents changing production systems, configurations, records, or external communications under exact-action, one-time, fail-closed authorization.</p>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Operational patterns</h2>
+    <h2>Use-case selection test</h2>
+    <p>A strong BeaconGuard use case has four properties:</p>
     <ul>
-      <li>Playbook-gated requests before governed execution</li>
-      <li>Deterministic ALLOW or DENY at the Runtime Control Boundary</li>
-      <li>DENY when approval is absent (illustrative reason style: <code>APPROVAL_REQUIRED</code>)</li>
-      <li>Verifiable Decision Records for Evidence, Replay, and Verification</li>
-      <li>Fail-closed handling when required release, trust, or freshness conditions are not met</li>
+      <li>An AI or agent can propose or initiate a concrete side effect.</li>
+      <li>The side effect is consequential enough that broad access alone is insufficient.</li>
+      <li>Customer policy, approval, identity, delegation, or context should determine whether it may occur.</li>
+      <li>The organization benefits from reconstructing what action was authorized under which policy authority.</li>
     </ul>
   </section>
 
   <section>
-    <h2>Regulated workflow focus</h2>
+    <h2>Not the target problem</h2>
     <p>
-      BeaconGuard is focused on regulated enterprise workflows where authorization, evidence, and control ownership remain explicit.
-      It is not a generic AI governance consulting service, chatbot, model host, or GRC repository.
+      BeaconGuard is not primarily a prompt filter, chatbot guardrail, model-evaluation platform, AI inventory, or general GRC repository. Those products may remain complementary. BeaconGuard's focus is the authorization boundary immediately before consequential execution.
     </p>
   </section>
 
   <section>
-    <h2>Explore by outcome</h2>
-    <ul>
-      <li><a href="/platform">Understand platform coverage</a></li>
-      <li><a href="/trust-assurance">Review assurance model</a></li>
-      <li><a href="/deployment">Compare deployment posture</a></li>
-      <li><a href="/canonical-workflow">Review workflow examples</a></li>
-    </ul>
+    <h2>Explore</h2>
     <div class="page-actions">
-      <a class="btn-primary" href="/design-partner-program">Request Controlled Architecture Evaluation</a>
-      <a class="btn-secondary" href="/contact">Start a platform discussion</a>
+      <a class="btn-primary" href="/canonical-workflow">Review Workflow Examples</a>
+      <a class="btn-secondary" href="/healthcare">Healthcare</a>
+      <a class="btn-secondary" href="/fintech">Financial</a>
+      <a class="btn-secondary" href="/design-partner-program">Controlled Evaluation</a>
     </div>
   </section>
 </BaseLayout>

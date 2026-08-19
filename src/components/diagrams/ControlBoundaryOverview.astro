@@ -1,45 +1,58 @@
----
-import DiagramShell from "./DiagramShell.astro";
-import OutcomeFork from "./OutcomeFork.astro";
----
-
-<DiagramShell
-  title="Control boundary at a glance"
-  caption="Enterprise requests pass through the Runtime Control Boundary. After ALLOW or DENY is determined, a Verifiable Decision Record is persisted, then outcomes fork: ALLOW may proceed; DENY hard-stops."
-  className="bg-diagram--control-boundary"
->
-  <div class="bg-flow" role="list">
-    <div class="bg-flow-step" role="listitem">Enterprise Application</div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step bg-flow-step--optional" role="listitem">
-      Optional System Connector
-    </div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step bg-flow-step--boundary" role="listitem">
-      Runtime Control Boundary
-    </div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step bg-flow-step--decision" role="listitem">
-      Determine ALLOW or DENY
-    </div>
-    <div class="bg-flow-arrow" aria-hidden="true">↓</div>
-    <div class="bg-flow-step bg-outcome-evidence" role="listitem">
-      <strong>Persist Verifiable Decision Record</strong>
-      <span>Required before any downstream effect</span>
-    </div>
+<figure class="figma-diagram figma-diagram--hero" aria-labelledby="hero-diagram-caption">
+  <div class="figma-hero-visual">
+    <img
+      src="/diagrams/beaconguard-hero-authorization.svg"
+      alt="AI or agent proposes a consequential action. BeaconGuard independently authorizes the exact action. ALLOW can issue one-time execution authority; DENY issues no execution authority. Verifiable evidence records the exact action and governing authority."
+      loading="eager"
+      decoding="async"
+    />
+    <span class="hero-motion hero-motion--proposal" aria-hidden="true"></span>
+    <span class="hero-motion hero-motion--allow" aria-hidden="true"></span>
+    <span class="hero-motion hero-motion--deny" aria-hidden="true"></span>
+    <span class="hero-state hero-state--allow" aria-hidden="true"></span>
+    <span class="hero-state hero-state--deny" aria-hidden="true"></span>
   </div>
+  <figcaption id="hero-diagram-caption" class="figma-diagram-caption">
+    Identity, delegation, and approved policy provide authorization context. BeaconGuard separately decides whether the exact consequential action may execute.
+  </figcaption>
+</figure>
 
-  <OutcomeFork
-    allowLabel="Governed AI / API / Automated System"
-    denyLabel="Hard Stop / No Downstream Execution"
-  />
+<style>
+  .figma-diagram { margin: 1.5rem 0; }
+  .figma-hero-visual { position: relative; width: 100%; overflow: hidden; border-radius: 1rem; }
+  .figma-hero-visual img { display: block; width: 100%; height: auto; }
+  .figma-diagram-caption { margin-top: .7rem; color: var(--text-muted); font-size: .9rem; }
 
-  <div slot="text">
-    <p>
-      Enterprise Application → Optional System Connector → Runtime Control
-      Boundary → Determine ALLOW or DENY → Persist Verifiable Decision Record.
-      Then fork: ALLOW → governed AI / API / automated system; DENY → hard stop
-      with no downstream execution.
-    </p>
-  </div>
-</DiagramShell>
+  .hero-motion,
+  .hero-state { position: absolute; pointer-events: none; }
+
+  .hero-motion { height: 2px; transform-origin: left center; transform: scaleX(0); opacity: 0; }
+  .hero-motion--proposal { left: 23.35%; top: 41.8%; width: 10%; background: #2eabed; animation: bgFlow 4.8s ease-out .25s infinite; }
+  .hero-motion--allow { left: 60%; top: 35.6%; width: 10.8%; background: #38c78c; animation: bgFlow 4.8s ease-out 1.15s infinite; }
+  .hero-motion--deny { left: 60%; top: 67.2%; width: 10.8%; background: #f55c61; animation: bgFlow 4.8s ease-out 2.05s infinite; }
+
+  .hero-state { width: 21.7%; height: 23%; border-radius: 1rem; opacity: 0; box-shadow: 0 0 0 0 transparent; }
+  .hero-state--allow { left: 70.8%; top: 24.5%; border: 1px solid rgba(56,199,140,.75); animation: bgAllowPulse 4.8s ease-out 1.55s infinite; }
+  .hero-state--deny { left: 70.8%; top: 55.7%; border: 1px solid rgba(245,92,97,.72); animation: bgDenyPulse 4.8s ease-out 2.45s infinite; }
+
+  @keyframes bgFlow {
+    0%, 8% { transform: scaleX(0); opacity: 0; }
+    18%, 52% { transform: scaleX(1); opacity: .95; }
+    68%, 100% { transform: scaleX(1); opacity: 0; }
+  }
+  @keyframes bgAllowPulse {
+    0%, 10% { opacity: 0; box-shadow: 0 0 0 0 rgba(56,199,140,0); }
+    22%, 48% { opacity: 1; box-shadow: 0 0 26px 2px rgba(56,199,140,.18); }
+    64%, 100% { opacity: 0; box-shadow: 0 0 0 0 rgba(56,199,140,0); }
+  }
+  @keyframes bgDenyPulse {
+    0%, 10% { opacity: 0; box-shadow: 0 0 0 0 rgba(245,92,97,0); }
+    22%, 48% { opacity: 1; box-shadow: 0 0 26px 2px rgba(245,92,97,.15); }
+    64%, 100% { opacity: 0; box-shadow: 0 0 0 0 rgba(245,92,97,0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-motion,
+    .hero-state { animation: none !important; opacity: 0 !important; }
+  }
+</style>

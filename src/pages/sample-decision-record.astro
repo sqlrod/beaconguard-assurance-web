@@ -5,76 +5,66 @@ import RecordAnatomy from "../components/diagrams/RecordAnatomy.astro";
 
 <BaseLayout
   title="Sample Decision Record | BeaconGuard Assurance"
-  description="A sanitized BeaconGuard Verifiable Decision Record sample showing DENY when a required precondition approval is absent, with release identity and playbook identity."
+  description="A sanitized illustrative BeaconGuard consequential-action authorization record showing exact-action identity, governing release identity, delegated authority context, and DENY enforcement."
 >
   <section class="stack-section">
     <h1>Sample Decision Record</h1>
     <p class="lead">
-      This sample illustrates the kinds of decision context BeaconGuard emits for reviewer analysis.
-      It is an illustrative Verifiable Decision Record, not a real customer record and not a claim that every deployment will expose fields in identical presentation form.
-      The illustrative reason <code>APPROVAL_REQUIRED</code> means a required precondition approval is absent at request time. It is not the privileged-review reason <code>REVIEW_REQUIRED</code> shown in The BeaconGuard Review Process demonstration.
+      This sample shows the categories of evidence BeaconGuard preserves around a consequential-action decision. It is illustrative, synthetic, and not a normative public API schema.
     </p>
   </section>
 
   <section class="stack-section">
     <h2>Record anatomy</h2>
-    <p>
-      Annotated field groups for an illustrative Verifiable Decision Record. This is anatomy of the evidence artifact, not a process diagram.
-    </p>
     <RecordAnatomy />
   </section>
 
   <section class="stack-section">
-    <h2>What this sample is for</h2>
-    <ul>
-      <li>Help reviewers understand what a Verifiable Decision Record contains</li>
-      <li>Show how release_identity, playbook_identity, signed request context, and decision outcome are separated from downstream business records</li>
-      <li>Support architecture, security, risk, and audit review</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Sample fields (illustrative)</h2>
+    <h2>Illustrative DENY record</h2>
     <div class="sample-record sample-record--compact">
       <div class="sample-record-row">
-        <span class="sample-record-label">Decision outcome</span>
-        <span class="sample-record-value">DENY</span>
+        <span class="sample-record-label">Decision scope</span>
+        <span class="sample-record-value">CONSEQUENTIAL_ACTION</span>
       </div>
       <div class="sample-record-row">
-        <span class="sample-record-label">Reason code (illustrative)</span>
-        <span class="sample-record-value">APPROVAL_REQUIRED</span>
+        <span class="sample-record-label">Decision outcome</span>
+        <span class="sample-record-value">ACTION DENY</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">Reason</span>
+        <span class="sample-record-value">Required approval absent for the proposed side effect</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">Material action</span>
+        <span class="sample-record-value">patient_followup.schedule</span>
+      </div>
+      <div class="sample-record-row">
+        <span class="sample-record-label">material_action_digest</span>
+        <span class="sample-record-value">sha256:illustrative-action-digest</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">release_identity</span>
         <span class="sample-record-value">release.healthcare.ops.v12</span>
       </div>
       <div class="sample-record-row">
+        <span class="sample-record-label">release_manifest_identity</span>
+        <span class="sample-record-value">sha256:illustrative-release-manifest</span>
+      </div>
+      <div class="sample-record-row">
         <span class="sample-record-label">playbook_identity</span>
-        <span class="sample-record-value">playbook.healthcare.ops.summarize.v12</span>
+        <span class="sample-record-value">playbook.healthcare.followup.v12</span>
       </div>
       <div class="sample-record-row">
-        <span class="sample-record-label">Decision reason</span>
-        <span class="sample-record-value">Required precondition approval absent; governed execution prevented</span>
+        <span class="sample-record-label">Actor / agent context</span>
+        <span class="sample-record-value">Synthetic delegated discharge-operations agent</span>
       </div>
       <div class="sample-record-row">
-        <span class="sample-record-label">Request action</span>
-        <span class="sample-record-value">AI-assisted operational summary request</span>
-      </div>
-      <div class="sample-record-row">
-        <span class="sample-record-label">Actor type</span>
-        <span class="sample-record-value">Regulated operations user</span>
+        <span class="sample-record-label">Execution authority</span>
+        <span class="sample-record-value">NOT ISSUED</span>
       </div>
       <div class="sample-record-row">
         <span class="sample-record-label">Outcome</span>
-        <span class="sample-record-value">Execution Prevented</span>
-      </div>
-      <div class="sample-record-row">
-        <span class="sample-record-label">Review obligation</span>
-        <span class="sample-record-value">Privacy governance notification (does not permit execution)</span>
-      </div>
-      <div class="sample-record-row">
-        <span class="sample-record-label">Fail-closed result</span>
-        <span class="sample-record-value">DENY before governed execution; no downstream call</span>
+        <span class="sample-record-value">No scheduling side effect</span>
       </div>
     </div>
   </section>
@@ -82,20 +72,21 @@ import RecordAnatomy from "../components/diagrams/RecordAnatomy.astro";
   <section class="stack-section">
     <h2>What reviewers should notice</h2>
     <ul>
-      <li>BeaconGuard records the Deterministic Decision Result, not the business transaction itself</li>
-      <li>Runtime permission results are ALLOW or DENY only; absent approval is DENY, not a permission-to-execute review state</li>
-      <li>release_identity and playbook_identity support reconstruction against the Active Verified Release</li>
-      <li>A review obligation may notify governance; it does not change the DENY result</li>
-      <li>Downstream systems remain responsible for business-state and transaction authority</li>
+      <li>The evidence describes the action decision, not the business transaction itself.</li>
+      <li>The exact material action has a deterministic identity separate from the original request.</li>
+      <li>The record identifies the verified release / policy authority that governed the decision.</li>
+      <li>Actor and delegated-authority context are decision inputs, not substitutes for the action decision.</li>
+      <li>DENY issues no execution authority.</li>
+      <li>ALLOW records can additionally identify a one-time execution grant and its consumption state.</li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>Next step</h2>
     <div class="page-actions">
-      <a class="btn-primary" href="/reviewer-kit">Return to Reviewer Kit</a>
-      <a class="btn-secondary" href="/proof-evidence">View more evidence samples</a>
-      <a class="btn-secondary" href="/trust-assurance">Review Trust Center</a>
+      <a class="btn-primary" href="/proof-evidence">View Proof and Evidence</a>
+      <a class="btn-secondary" href="/trust-assurance">Review Assurance</a>
+      <a class="btn-secondary" href="/reviewer-kit">Reviewer Kit</a>
     </div>
   </section>
 </BaseLayout>

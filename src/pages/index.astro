@@ -4,284 +4,99 @@ import ControlBoundaryOverview from "../components/diagrams/ControlBoundaryOverv
 ---
 
 <BaseLayout
-  title="BeaconGuard Assurance | Runtime Control and Evidence Boundary"
-  description="BeaconGuard provides deterministic runtime control and verifiable decision evidence for regulated enterprise AI, API, and automation workflows."
+  title="BeaconGuard Assurance | Authorization for Consequential AI Actions"
+  description="BeaconGuard independently authorizes consequential AI actions before execution, fails closed when they are not authorized, and preserves verifiable evidence tied to the governing policy authority."
 >
-  <section class="landing">
-    <p class="hero-eyebrow">BeaconGuard Runtime Control Boundary</p>
-    <h1>Policy control before governed execution. Evidence after every decision.</h1>
+  <section class="landing landing--compressed">
+    <p class="hero-eyebrow">Independent authorization for consequential AI actions</p>
+    <h1>AI can take action. BeaconGuard decides if it should.</h1>
     <p class="hero-subheadline">
-      BeaconGuard is a deterministic control and evidence boundary for high-risk enterprise workflows across healthcare, financial services, and regulated internal automation.
-    </p>
-    <p class="hero-subheadline">
-      BeaconGuard evaluates trusted request context against the Active Verified Release and returns an explicit ALLOW or DENY result before governed execution. Every deterministic result produces a Verifiable Decision Record.
+      BeaconGuard checks the exact consequential action an AI or agent is attempting before execution. If it is not authorized, it does not happen.
     </p>
     <div class="page-actions">
-      <a class="btn-primary" href="/platform">Review the Platform</a>
-      <a class="btn-secondary" href="/healthcare">Healthcare Architecture Review</a>
-      <a class="btn-secondary" href="/fintech">Financial Workflow Review</a>
+      <a class="btn-primary" href="/platform">See the Product</a>
+      <a class="btn-secondary" href="/design-partner-program">Request Evaluation</a>
+    </div>
+    <ControlBoundaryOverview />
+  </section>
+
+  <section class="stack-section homepage-block">
+    <p class="section-label">THE CONTROL GAP</p>
+    <h2>Access is not authority</h2>
+    <p>
+      Identity, delegation, and tool access establish reachability and context. BeaconGuard makes a separate authorization decision on the business consequence itself.
+    </p>
+    <p class="home-principle"><strong>Request ALLOW does not equal Action ALLOW.</strong></p>
+  </section>
+
+  <section class="stack-section homepage-block">
+    <p class="section-label">WHY BEACONGUARD</p>
+    <h2>Authorize the action. Prove the decision.</h2>
+    <div class="section-grid section-grid--compact">
+      <div class="content-card">
+        <h3>Action-level authority</h3>
+        <p>Permission to use a tool does not mean permission to perform every action it can trigger. BeaconGuard authorizes the specific action before execution.</p>
+      </div>
+      <div class="content-card">
+        <h3>Verified authority</h3>
+        <p>Only approved and verified customer controls can govern production authorization.</p>
+      </div>
+      <div class="content-card">
+        <h3>Verifiable evidence</h3>
+        <p>Each decision preserves the action and governing authority needed for later verification.</p>
+      </div>
     </div>
   </section>
 
-  <section
-    class="stack-section homepage-block product-overview-section"
-    aria-labelledby="product-overview-title"
-  >
-    <div class="product-overview-heading">
-      <p class="section-label">Product Overview</p>
-      <h2 id="product-overview-title">
-        Runtime assurance for AI in regulated industries
-      </h2>
-      <p>
-        BeaconGuard introduces a deterministic control and evidence boundary between enterprise workflows and governed AI, APIs, or automated systems. This overview explains the business risk, the operating model, and the value of enforcing approved controls before governed execution.
-      </p>
-    </div>
-
-    <div class="product-overview-video">
+  <section class="stack-section homepage-block product-overview-section">
+    <p class="section-label">2-MINUTE OVERVIEW</p>
+    <h2>See the operating model</h2>
+    <div class="product-overview-video product-overview-video--compact">
       <iframe
         src="https://www.youtube-nocookie.com/embed/OzPMIQ_NHho"
-        title="BeaconGuard product overview: Runtime assurance for AI in regulated industries"
+        title="BeaconGuard product overview"
         loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen
       ></iframe>
     </div>
-
-    <p class="product-overview-qualifier">
-      This overview explains BeaconGuard’s purpose and operating model. It is not a live product demonstration.
-    </p>
-
-    <div class="product-overview-validation">
-      <h3>Continue with technical validation</h3>
-      <div class="page-actions product-overview-actions">
-        <a class="btn-primary" href="/docs/architecture">Review System Architecture</a>
-        <a class="product-overview-link" href="/how-it-works">See How It Works</a>
-        <a class="product-overview-link" href="/security">Review Security and Trust</a>
-        <a class="product-overview-link" href="/design-partner-program">Request a Controlled Evaluation</a>
-      </div>
-    </div>
   </section>
 
   <section class="stack-section homepage-block">
-    <h2>Business outcomes</h2>
-    <p>
-      BeaconGuard keeps existing enterprise applications in place while inserting a fail-closed control boundary before governed AI, APIs, or automated systems execute.
-    </p>
-    <ul>
-      <li>Existing applications continue to own workflow logic and systems of record.</li>
-      <li>Deterministic ALLOW or DENY results are returned before governed execution.</li>
-      <li>Verifiable Decision Records support security, privacy, compliance, risk, and audit review without changing the enforcement result.</li>
-    </ul>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Control boundary at a glance</h2>
-    <p>
-      The Runtime Control Boundary evaluates trusted request context and returns ALLOW or DENY before governed execution. Evidence is recorded for both outcomes; only ALLOW may proceed.
-    </p>
-    <p>
-      When required approvals or trust conditions are absent, BeaconGuard returns DENY with an explicit deterministic reason. An illustrative reason style is <code>APPROVAL_REQUIRED</code>. Human or governance review may follow from the Verifiable Decision Record; review does not permit execution.
-    </p>
-    <ControlBoundaryOverview />
-    <p>
-      For the full management and runtime planes—including Compliance Playbook release lifecycle—see <a href="/docs/architecture">System Architecture</a>.
-    </p>
-  </section>
-
-  <section class="stack-section homepage-block" aria-labelledby="homepage-review-demo-title">
-    <div class="content-card proof-demo-card">
-      <p class="section-label">PRODUCT IN OPERATION</p>
-      <h2 id="homepage-review-demo-title">See BeaconGuard Enforce the Review Boundary</h2>
-      <p>
-        Watch The BeaconGuard Review Process demonstrate immutable denial, reviewer step-up authentication, a new governed request, one-time authorization consumption, and rejection of authorization reuse.
-      </p>
-      <div class="page-actions">
-        <a class="btn-primary" href="/proof-evidence#beaconguard-review-process">Watch the Controlled Demonstration</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Industry review paths</h2>
+    <p class="section-label">INDUSTRIES</p>
+    <h2>Same authorization boundary. Different consequences.</h2>
     <div class="section-grid section-grid--compact">
       <div class="content-card">
-        <h3>Healthcare Operations</h3>
-        <p>For PHI-sensitive operational workflows, approved pathways, role-based request controls, and Verifiable Decision Records for privacy and compliance review.</p>
-        <p><a href="/healthcare">Review Healthcare Use Case</a></p>
+        <h3>Healthcare</h3>
+        <p>Patient communications, scheduling actions, and operational record changes.</p>
+        <p><a href="/healthcare">Healthcare</a></p>
       </div>
       <div class="content-card">
-        <h3>Financial Workflows</h3>
-        <p>For AML, KYC, fraud, dispute review, and customer-impacting recommendations that require deterministic request control before governed execution.</p>
-        <p><a href="/fintech">Review Financial Use Case</a></p>
-      </div>
-      <div class="content-card">
-        <h3>Regulated Internal Automation</h3>
-        <p>For internal agents or automations that need fail-closed enforcement before acting against production systems or sensitive operational data.</p>
-        <p><a href="/canonical-workflow">Review Workflow Examples</a></p>
+        <h3>Financial services</h3>
+        <p>Case actions, customer communications, and account or workflow side effects.</p>
+        <p><a href="/fintech">Financial services</a></p>
       </div>
     </div>
   </section>
 
   <section class="stack-section homepage-block">
-    <h2>Technical validation</h2>
-    <p>
-      Continue from the business case into the architecture, runtime sequence, security posture, and evidence surfaces reviewers use during due diligence.
-    </p>
+    <p class="section-label">CONTROLLED EVALUATION</p>
+    <h2>Start with one consequential workflow</h2>
+    <p>Evaluate boundary placement, exact-action controls, evidence, and deployment fit without replacing existing systems of record.</p>
     <div class="page-actions">
-      <a class="btn-primary" href="/docs/architecture">System Architecture</a>
-      <a class="btn-secondary" href="/how-it-works">How It Works</a>
-      <a class="btn-secondary" href="/proof-evidence">Proof and Evidence</a>
-      <a class="btn-secondary" href="/trust-assurance">Trust Center</a>
-    </div>
-  </section>
-
-  <section class="stack-section homepage-block" aria-labelledby="product-maturity-title">
-    <p class="section-label">PRODUCT MATURITY</p>
-    <h2 id="product-maturity-title">Controlled internal qualification</h2>
-    <p>
-      BeaconGuard is currently in controlled internal qualification across enterprise security, identity, evidence integrity, deployment operations, recovery, and cross-platform packaging. Customer-specific architecture and deployment-fit reviews are available through a bounded Controlled Evaluation.
-    </p>
-    <div class="section-grid section-grid--scenarios">
-      <div class="content-card">
-        <h3>Enterprise identity boundaries</h3>
-        <p>Federated workforce identity, service identity, privileged step-up, delegated administration, and lifecycle controls.</p>
-      </div>
-      <div class="content-card">
-        <h3>Distributed runtime protection</h3>
-        <p>Request authenticity, replay resistance, tenant and environment isolation, and fail-closed dependency handling.</p>
-      </div>
-      <div class="content-card">
-        <h3>Verifiable evidence integrity</h3>
-        <p>Decision context, release identity, control results, integrity verification, and reconstruction support.</p>
-      </div>
-      <div class="content-card">
-        <h3>Controlled deployment qualification</h3>
-        <p>Installation, operation, recovery, rollback, removal, reinstall, and Windows and Linux packaging paths evaluated in controlled environments.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="stack-section homepage-block">
-    <h2>Request a Controlled Evaluation</h2>
-    <p>
-      Use a bounded workflow review to validate boundary placement, Compliance Playbook mapping, ALLOW and DENY cases, evidence review, and deployment fit without replacing existing systems of record.
-    </p>
-    <div class="page-actions">
-      <a class="btn-primary" href="/design-partner-program">Start Controlled Evaluation</a>
-      <a class="btn-secondary" href="/contact">Contact architecture@beaconguardassurance.com</a>
+      <a class="btn-primary" href="/design-partner-program">Request Evaluation</a>
+      <a class="btn-secondary" href="/trust-assurance">Review Assurance</a>
     </div>
   </section>
 
   <style>
-    .home-boundary-section,
-    .homepage-block {
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .product-overview-section {
-      margin: -0.75rem auto 3.5rem;
-    }
-
-    .product-overview-heading {
-      max-width: 780px;
-      margin: 0 auto 1.5rem;
-      text-align: center;
-    }
-
-    .product-overview-heading .section-label {
-      text-align: center;
-    }
-
-    .product-overview-heading h2 {
-      margin-bottom: 0.75rem;
-    }
-
-    .product-overview-heading p {
-      max-width: 720px;
-      margin: 0 auto;
-      color: var(--text-secondary);
-    }
-
-    .product-overview-video {
-      width: min(880px, 100%);
-      margin: 0 auto;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      border-radius: 0.6rem;
-      background: #0b1220;
-    }
-
-    .product-overview-video iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .product-overview-qualifier {
-      max-width: 720px;
-      margin: 0.75rem auto 0;
-      text-align: center;
-      font-size: 0.82rem;
-      font-weight: 400;
-      line-height: 1.45;
-      color: var(--text-muted);
-    }
-
-    .product-overview-validation {
-      max-width: 880px;
-      margin: 1.25rem auto 0;
-      text-align: center;
-    }
-
-    .product-overview-validation h3 {
-      margin: 0 0 0.7rem;
-      font-size: 0.98rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .product-overview-actions {
-      justify-content: center;
-      align-items: center;
-      gap: 0.65rem 1.15rem;
-    }
-
-    .product-overview-link {
-      display: inline-block;
-      padding: 0.45rem 0.15rem;
-      color: var(--text-secondary);
-      font-size: 0.92rem;
-      font-weight: 500;
-      text-decoration: underline;
-      text-underline-offset: 0.18em;
-      text-decoration-thickness: 1px;
-      border: 0;
-      background: transparent;
-    }
-
-    .product-overview-link:hover,
-    .product-overview-link:focus-visible {
-      color: var(--text-primary);
-    }
-
-    @media (max-width: 900px) {
-      .product-overview-heading,
-      .product-overview-qualifier,
-      .product-overview-validation {
-        text-align: left;
-      }
-
-      .product-overview-heading .section-label {
-        text-align: left;
-      }
-
-      .product-overview-actions {
-        justify-content: flex-start;
-      }
-    }
+    .landing--compressed { padding-bottom: 1rem; }
+    .landing--compressed .figma-diagram { margin-top: 2rem; }
+    .homepage-block { overflow-wrap:anywhere; word-break:break-word; }
+    .home-principle { max-width:760px; margin-top:1rem; padding:.85rem 1rem; border-left:3px solid var(--brand-accent); border-radius:.45rem; background:rgba(18,31,52,.72); color:var(--text-primary); }
+    .product-overview-section { margin:0 auto 3rem; }
+    .product-overview-video--compact { width:min(680px,100%); margin:1rem auto 0; aspect-ratio:16/9; overflow:hidden; border:1px solid rgba(148,163,184,.28); border-radius:.6rem; background:#0b1220; }
+    .product-overview-video--compact iframe { display:block; width:100%; height:100%; border:0; }
   </style>
 </BaseLayout>

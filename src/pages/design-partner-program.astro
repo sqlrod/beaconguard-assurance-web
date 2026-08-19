@@ -4,38 +4,29 @@ import ControlledEvaluationFlow from "../components/diagrams/ControlledEvaluatio
 ---
 
 <BaseLayout
-  title="Controlled Evaluation | BeaconGuard Architecture Review"
-  description="Request a bounded BeaconGuard Controlled Evaluation covering boundary placement, identity and trust mapping, Compliance Playbook controls, ALLOW and DENY cases, evidence review, and deployment-fit qualification."
+  title="Controlled Evaluation | BeaconGuard"
+  description="Evaluate BeaconGuard on one bounded consequential AI workflow, including identity and delegation context, exact-action authorization, verified policy authority, evidence, and deployment fit."
 >
   <section class="stack-section">
-    <h1>Controlled Evaluation</h1>
+    <p class="section-label">CONTROLLED EVALUATION</p>
+    <h1>Validate one consequential AI workflow before production deployment</h1>
     <p class="lead">
-      A Controlled Evaluation is a bounded architecture review for one regulated workflow. It validates Runtime Control Boundary placement, Compliance Playbook mapping, ALLOW and DENY cases, Verifiable Decision Records, and deployment fit without replacing existing systems of record.
-    </p>
-    <p>
-      BeaconGuard is currently in controlled internal qualification across enterprise security, identity, evidence integrity, deployment operations, recovery, and cross-platform packaging. Customer-specific architecture and deployment-fit reviews are available through this bounded evaluation model.
+      BeaconGuard is completing controlled qualification before customer production deployment because it sits directly in the path of consequential actions. A Controlled Evaluation lets security, architecture, risk, and workflow owners test one bounded use case without replacing existing systems of record.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Not a rip-and-replace proposal</h2>
-    <p>
-      Existing applications continue to own workflow logic and records. BeaconGuard is evaluated as a deterministic control and evidence boundary before governed execution.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Inputs</h2>
+    <h2>What the evaluation answers</h2>
     <ul>
-      <li>One bounded regulated workflow</li>
-      <li>Representative request contract</li>
-      <li>Workforce and workload identity assumptions</li>
-      <li>Tenant and environment boundaries</li>
-      <li>Required trust context</li>
-      <li>Compliance Playbook controls</li>
-      <li>Evidence and retention expectations</li>
-      <li>Target deployment assumptions</li>
-      <li>Recovery and rollback expectations</li>
+      <li>Where does the exact consequential-action boundary belong?</li>
+      <li>Which identity, workload, agent, and delegated-authority signals are authoritative?</li>
+      <li>Which MCP, A2A, API, or application invocation paths feed the workflow?</li>
+      <li>What material action must be bound before execution?</li>
+      <li>Which customer-approved controls may govern the action?</li>
+      <li>What produces ACTION ALLOW or ACTION DENY?</li>
+      <li>How is one-time execution authority consumed?</li>
+      <li>What evidence is required to verify and reconstruct the decision?</li>
+      <li>Where do customer systems remain authoritative?</li>
     </ul>
   </section>
 
@@ -45,34 +36,60 @@ import ControlledEvaluationFlow from "../components/diagrams/ControlledEvaluatio
   </section>
 
   <section class="stack-section">
+    <h2>Inputs</h2>
+    <ul>
+      <li>One bounded consequential workflow</li>
+      <li>Representative actor / agent and delegated-authority model</li>
+      <li>Representative MCP, A2A, API, or application invocation path</li>
+      <li>Material-action contract</li>
+      <li>Customer policy and approval requirements</li>
+      <li>Tenant, environment, trust, freshness, and replay assumptions</li>
+      <li>Evidence and retention expectations</li>
+      <li>Target deployment and execution-system assumptions</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
     <h2>Activities</h2>
     <ul>
-      <li>Runtime boundary placement</li>
-      <li>System Connector fit</li>
-      <li>Request-authenticity mapping</li>
-      <li>Identity and service-identity mapping</li>
-      <li>Tenant and environment isolation review</li>
-      <li>Compliance Playbook mapping</li>
-      <li>ALLOW and DENY case design</li>
-      <li>Post-DENY governance review scenario design (review does not permit execution)</li>
-      <li>Replay and duplicate-request analysis</li>
-      <li>Evidence-provider and retention review</li>
-      <li>Installation-target preflight</li>
-      <li>Release and package identity verification</li>
-      <li>Backup, restore, rollback, and recovery planning</li>
-      <li>Responsibility and operational-acceptance review</li>
+      <li>Request-admission versus action-authorization boundary mapping</li>
+      <li>Identity and delegated-authority mapping</li>
+      <li>MCP / A2A / connector integration fit</li>
+      <li>Exact material-action definition and binding</li>
+      <li>Customer policy / Compliance Playbook mapping</li>
+      <li>ACTION ALLOW and ACTION DENY case design</li>
+      <li>One-time execution-grant validation</li>
+      <li>Replay, reuse, mismatch, expiry, and fail-closed analysis</li>
+      <li>Verified-release and trust-authority review</li>
+      <li>Decision-evidence and reconstruction review</li>
+      <li>Deployment, recovery, rollback, and operating-responsibility review</li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>Outputs</h2>
+    <ul>
+      <li>Architecture-fit memo</li>
+      <li>Control responsibility matrix</li>
+      <li>Identity, delegation, and trust-boundary map</li>
+      <li>Material-action contract</li>
+      <li>Policy / Compliance Playbook mapping artifact</li>
+      <li>ACTION ALLOW / DENY case set</li>
+      <li>Illustrative Verifiable Decision Records</li>
+      <li>Deployment qualification assessment</li>
+      <li>Blocker and residual-risk register</li>
     </ul>
   </section>
 
   <section class="stack-section" aria-labelledby="controlled-demo-card-title">
     <div class="content-card proof-demo-card">
       <p class="section-label">CONTROLLED DEMONSTRATION</p>
-      <h2 id="controlled-demo-card-title">See the BeaconGuard Review Process in Operation</h2>
+      <h2 id="controlled-demo-card-title">Review fail-closed and one-time authorization behavior</h2>
       <p>
-        Watch a controlled example of deterministic denial, reviewer step-up authentication, bounded one-time authorization, a new governed request, and rejection of authorization reuse.
+        The existing laboratory demonstration shows immutable denial, reviewer step-up authentication, a new governed request, bounded one-time authorization, successful consumption, and rejection of authorization reuse.
       </p>
       <p>
-        The demonstration provides a preview of the enforcement and evidence behavior that enterprise reviewers can examine during a bounded Controlled Evaluation.
+        The demonstration is synthetic and is not customer-production evidence.
       </p>
       <div class="page-actions">
         <a class="btn-primary" href="/proof-evidence#beaconguard-review-process">Watch the Review Process</a>
@@ -81,46 +98,38 @@ import ControlledEvaluationFlow from "../components/diagrams/ControlledEvaluatio
   </section>
 
   <section class="stack-section">
-    <h2>Outputs</h2>
-    <ul>
-      <li>Architecture-fit memo</li>
-      <li>Control responsibility matrix</li>
-      <li>Identity and trust-boundary map</li>
-      <li>Compliance Playbook or mapping artifact</li>
-      <li>Sample Verifiable Decision Records</li>
-      <li>Deployment qualification assessment</li>
-      <li>Recovery and rollback considerations</li>
-      <li>Blocker register</li>
-      <li>Next-step recommendation</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
     <h2>Who should participate</h2>
     <div class="section-grid section-grid--compact">
       <div class="content-card">
-        <h3>Healthcare</h3>
-        <p>Teams owning PHI-sensitive operational AI pathways and privacy review obligations.</p>
+        <h3>Security / Architecture</h3>
+        <p>Boundary placement, identity, trust, key custody, deployment, and fail-closed behavior.</p>
       </div>
       <div class="content-card">
-        <h3>Financial services</h3>
-        <p>Teams owning AML, KYC, fraud, dispute, or customer-impacting recommendation workflows.</p>
+        <h3>Workflow Owner</h3>
+        <p>Material actions, business-system authority, approval conditions, and operational impact.</p>
       </div>
       <div class="content-card">
-        <h3>Regulated internal automation</h3>
-        <p>Teams placing agents or automations against production systems under fail-closed controls.</p>
+        <h3>Risk / Compliance / Privacy</h3>
+        <p>Policy authority, evidence requirements, review obligations, and control ownership.</p>
       </div>
     </div>
   </section>
 
   <section class="stack-section">
-    <h2>Contact the team</h2>
+    <h2>Current maturity</h2>
     <p>
-      Timing and commercial terms are confirmed during intake. Do not submit PHI, customer records, credentials, production secrets, or confidential evidence in the initial message.
+      BeaconGuard is in controlled internal qualification, not general customer-production deployment. The Controlled Evaluation is intended to validate architecture and deployment fit while preserving that distinction.
+    </p>
+  </section>
+
+  <section class="stack-section">
+    <h2>Contact</h2>
+    <p>
+      Do not submit PHI, customer records, credentials, production secrets, or confidential evidence in the initial message.
     </p>
     <div class="page-actions">
-      <a class="btn-primary" href="/contact">Request Controlled Evaluation</a>
-      <a class="btn-secondary" href="/platform">Review platform overview</a>
+      <a class="btn-primary" href="/contact">Request a Controlled Evaluation</a>
+      <a class="btn-secondary" href="/platform">Review the Product</a>
     </div>
   </section>
 </BaseLayout>

@@ -4,86 +4,93 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Control Responsibility Matrix | BeaconGuard Assurance"
-  description="BeaconGuard responsibility boundaries for Deterministic Playbook Evaluation, application enforcement, governed systems, systems of record, and reviewers."
+  description="Responsibility boundaries among BeaconGuard, identity/delegation systems, applications, MCP/A2A paths, executors, systems of record, policy authorities, and reviewers."
 >
   <section class="stack-section">
     <h1>Control Responsibility Matrix</h1>
     <p class="lead">
-      This page helps reviewers understand which responsibilities BeaconGuard owns, which remain with the application and system of record, and which stay outside BeaconGuard's control boundary. It is intended to reduce ambiguity during architecture, security, risk, and procurement review.
+      BeaconGuard owns the exact consequential-action authorization decision and its assurance evidence. It does not absorb the responsibilities of identity systems, protocol layers, business applications, execution systems, systems of record, or customer governance authorities.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Responsibility model</h2>
-    <p>
-      BeaconGuard governs whether a request may proceed to governed execution under an Active Verified Release, returning ALLOW or DENY only.
-      BeaconGuard does not replace transaction systems, systems of record, model or API providers,
-      or downstream operational ownership. Human review via a Verifiable Decision Record obligation does not permit execution.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Responsibility Matrix</h2>
+    <h2>Responsibility matrix</h2>
     <div class="responsibility-matrix-wrap">
       <table class="responsibility-matrix">
         <thead>
           <tr>
             <th>Responsibility</th>
             <th>BeaconGuard</th>
-            <th>Application</th>
-            <th>Governed system provider</th>
-            <th>System of record</th>
-            <th>Operations / reviewers</th>
+            <th>Identity / Delegation</th>
+            <th>Application / MCP / A2A</th>
+            <th>Executor / System of Record</th>
+            <th>Customer Governance / Review</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Authorization decision at the Runtime Control Boundary</td>
-            <td>Owns Deterministic Playbook Evaluation and explicit ALLOW or DENY decisioning</td>
-            <td>Submits trusted request context (or via System Connector) and enforces returned decision</td>
-            <td>Does not own authorization policy</td>
-            <td>Does not own request authorization</td>
-            <td>Review boundary correctness and Compliance Playbook fit</td>
+            <td>Who or what is acting</td>
+            <td>Consumes and validates required identity context</td>
+            <td>Authoritative source for human, service, workload, or agent identity</td>
+            <td>Carries validated context where required</td>
+            <td>May verify calling service / execution authority</td>
+            <td>Defines identity and access governance</td>
           </tr>
           <tr>
-            <td>Business transaction execution</td>
-            <td>Does not execute business transactions</td>
-            <td>Orchestrates allowed workflow steps after ALLOW</td>
-            <td>Does not execute business transactions on BeaconGuard's behalf</td>
-            <td>Remains authoritative for transaction/state recording</td>
-            <td>Validate control separation and escalation paths</td>
+            <td>For whom the agent is acting</td>
+            <td>Consumes delegation as an authorization constraint</td>
+            <td>Authoritative for delegation chain / authority context</td>
+            <td>A2A or application path may transport delegation</td>
+            <td>Does not infer broader authority from delegation alone</td>
+            <td>Defines delegation policy and revocation expectations</td>
           </tr>
           <tr>
-            <td>Model / API / automation behavior and output quality</td>
-            <td>Does not claim quality or business correctness of governed systems</td>
-            <td>Determines how allowed outputs are used</td>
-            <td>Owns serving characteristics of the governed system</td>
-            <td>Does not determine model or API quality</td>
-            <td>Evaluate suitability and downstream control expectations</td>
+            <td>Capability / tool invocation</td>
+            <td>May perform request admission checks; does not treat invocation as final action authority</td>
+            <td>May constrain scopes / capabilities</td>
+            <td>MCP / API / application layer owns invocation mechanics</td>
+            <td>Provides callable capability</td>
+            <td>Reviews permitted integration paths</td>
           </tr>
           <tr>
-            <td>Decision evidence and review context</td>
-            <td>Emits Verifiable Decision Records with release identity and decision context</td>
-            <td>Correlates BeaconGuard decisions with workflow context as needed</td>
-            <td>Does not provide BeaconGuard decision evidence</td>
-            <td>May hold downstream business records, not BeaconGuard decision evidence by default</td>
-            <td>Review evidence, reconstruct decisions, and assess control operation</td>
+            <td>Exact consequential-action authorization</td>
+            <td>Owns deterministic ACTION ALLOW / ACTION DENY under the Active Verified Release</td>
+            <td>Provides bounded identity/delegation inputs</td>
+            <td>Provides the proposed material action and required context</td>
+            <td>Must not execute without valid bound authority</td>
+            <td>Defines / approves governing control intent</td>
           </tr>
           <tr>
-            <td>Fail-closed behavior when required conditions are not met</td>
-            <td>Returns DENY when release, trust, approval, freshness, or replay conditions are missing, malformed, or out of bounds</td>
-            <td>Must respect and enforce DENY outcomes; must not treat review as permission</td>
-            <td>Does not control BeaconGuard fail-closed semantics</td>
-            <td>Not responsible for request gating</td>
-            <td>Validate that failure handling is explicit and reviewable</td>
+            <td>Production policy authority</td>
+            <td>Validates, packages, verifies, and enforces only the activated verified release</td>
+            <td>Does not own BeaconGuard policy</td>
+            <td>Does not silently substitute policy</td>
+            <td>Does not determine BeaconGuard policy</td>
+            <td>Owns approval/signing authority and trust configuration</td>
           </tr>
           <tr>
-            <td>Active Verified Release and evidence provider operations</td>
-            <td>Defines release verification expectations and evidence record shape</td>
-            <td>Consumes only activated releases in the governed path</td>
-            <td>Out of scope</td>
-            <td>Out of scope</td>
-            <td>Customer configures evidence provider durability and monitors release activation</td>
+            <td>Business side-effect execution</td>
+            <td>Issues or denies one-time execution authority; does not become the business system of record</td>
+            <td>Does not execute the side effect</td>
+            <td>Orchestrates the allowed workflow as designed</td>
+            <td>Verifies the action binding, consumes authority, and performs/records the side effect</td>
+            <td>Defines operational approval and oversight requirements</td>
+          </tr>
+          <tr>
+            <td>Authorization evidence</td>
+            <td>Preserves action decision, governing release, authority context, and integrity/reconstruction information</td>
+            <td>Provides identity/delegation provenance where configured</td>
+            <td>Correlates request and workflow context</td>
+            <td>Maintains downstream business records and execution state</td>
+            <td>Reviews, verifies, audits, and investigates</td>
+          </tr>
+          <tr>
+            <td>Fail-closed behavior</td>
+            <td>DENY/refuse execution when required authorization conditions fail</td>
+            <td>Revocation/expiry should invalidate authority context</td>
+            <td>Must not bypass the action boundary</td>
+            <td>Must reject invalid/mismatched/reused execution authority</td>
+            <td>Reviews deployment controls and exception handling</td>
           </tr>
         </tbody>
       </table>
@@ -91,24 +98,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="stack-section">
-    <h2>What reviewers should verify</h2>
+    <h2>Reviewer checks</h2>
     <ul>
-      <li>The application submits the trusted request context BeaconGuard requires (signed metadata, workflow identity, role, trust, pathway, freshness, and related inputs)</li>
-      <li>BeaconGuard's ALLOW or DENY response is enforced before governed execution</li>
-      <li>Absent approval yields DENY (for example APPROVAL_REQUIRED), not a permission-to-execute review state</li>
-      <li>Governed system behavior is not treated as the authorization boundary</li>
-      <li>Systems of record remain authoritative for business state</li>
-      <li>Reviewers can distinguish Verifiable Decision Records from downstream business records</li>
+      <li>Identity and delegation remain authoritative inputs, not the final action decision.</li>
+      <li>MCP/A2A/API invocation permission cannot bypass action authorization.</li>
+      <li>The exact material action is bound before execution.</li>
+      <li>Only an Active Verified Release governs production authorization.</li>
+      <li>ALLOW produces only bounded one-time execution authority.</li>
+      <li>The executor rejects mismatched, expired, revoked, or reused authority.</li>
+      <li>Systems of record remain authoritative for business state.</li>
+      <li>Evidence allows reviewers to distinguish the authorization decision from downstream business records.</li>
     </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Next step</h2>
-    <p>Reviewers can continue structured evaluation through the Reviewer Kit, Trust Center, and Contact path.</p>
     <div class="page-actions">
       <a class="btn-primary" href="/reviewer-kit">Open Reviewer Kit</a>
-      <a class="btn-secondary" href="/trust-assurance">Review Trust Center</a>
-      <a class="btn-secondary" href="/contact">Continue via contact</a>
+      <a class="btn-secondary" href="/docs/architecture">Review Architecture</a>
     </div>
   </section>
 </BaseLayout>

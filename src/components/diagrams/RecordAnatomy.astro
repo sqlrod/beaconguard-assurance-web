@@ -3,48 +3,52 @@ import DiagramShell from "./DiagramShell.astro";
 
 const groups = [
   {
-    title: "Decision outcome and reason",
+    title: "Authorization result",
     fields: [
-      "Decision outcome (ALLOW or DENY)",
-      "Reason code / decision reason (illustrative)",
+      "Decision scope (consequential action)",
+      "ACTION ALLOW or ACTION DENY",
+      "Reason / failed condition",
     ],
   },
   {
-    title: "Request and correlation identity",
-    fields: ["Request action / correlation identity", "Request identifiers"],
-  },
-  {
-    title: "Actor, tenant, environment, and workflow",
+    title: "Exact-action identity",
     fields: [
-      "Actor type",
-      "Tenant and environment context",
-      "Workflow identity",
+      "Material action description / type",
+      "Canonical action identity or digest",
+      "Target resource / system context",
     ],
   },
   {
-    title: "Active release and playbook identity",
-    fields: ["release_identity", "playbook_identity"],
-  },
-  {
-    title: "Trust, freshness, and replay results",
+    title: "Actor and delegated authority",
     fields: [
-      "Authenticity / trust check results",
-      "Freshness result",
-      "Replay resistance result",
+      "Human / service / agent identity",
+      "Delegation chain or authority context",
+      "Tenant and environment binding",
     ],
   },
   {
-    title: "Evidence identity and integrity",
+    title: "Governing policy authority",
     fields: [
-      "Evidence / record identity",
+      "release_identity",
+      "release / manifest integrity identity",
+      "playbook / policy identity",
+      "trust epoch or equivalent trust state",
+    ],
+  },
+  {
+    title: "Execution authority",
+    fields: [
+      "One-time grant identity when ALLOW",
+      "Grant binding to material-action identity",
+      "Consumption / reuse status",
+    ],
+  },
+  {
+    title: "Evidence integrity",
+    fields: [
+      "Evidence / correlation identity",
       "Integrity-verification information",
-    ],
-  },
-  {
-    title: "Optional review obligation",
-    fields: [
-      "Review obligation (does not change permission)",
-      "Governance notification context",
+      "Reconstruction inputs and references",
     ],
   },
 ];
@@ -52,22 +56,20 @@ const groups = [
 
 <DiagramShell
   title="Verifiable Decision Record anatomy"
-  caption="Illustrative field groups for reviewer orientation. Not a normative public schema."
+  caption="Illustrative field groups showing the evidence needed to verify what action was authorized, under which authority, and with what execution binding. Not a normative public schema."
   className="bg-diagram--record-anatomy"
 >
   <p class="bg-diagram-banner">
-    Illustrative sample — field names and grouping are for reviewer orientation
-    only, not a published public schema.
+    Illustrative sample — field names and grouping are for reviewer orientation only.
   </p>
+
   <div class="bg-anatomy-grid" role="list">
     {
       groups.map((group) => (
         <section class="bg-anatomy-group" role="listitem">
           <h4 class="bg-anatomy-title">{group.title}</h4>
           <ul>
-            {group.fields.map((field) => (
-              <li>{field}</li>
-            ))}
+            {group.fields.map((field) => <li>{field}</li>)}
           </ul>
         </section>
       ))
@@ -76,12 +78,10 @@ const groups = [
 
   <div slot="text">
     <p>
-      Annotated groups: decision outcome and reason; request and correlation
-      identity; actor, tenant, environment, and workflow context; active release
-      and playbook identity; trust, freshness, and replay results; evidence
-      identity and integrity-verification information; optional review
-      obligation that does not change permission. Labelled illustrative — not a
-      normative public schema.
+      The evidence model distinguishes the action being authorized, the actor and
+      delegated authority, the verified release allowed to govern the decision,
+      one-time execution authority when ALLOW is issued, and integrity information
+      required for verification and deterministic reconstruction.
     </p>
   </div>
 </DiagramShell>

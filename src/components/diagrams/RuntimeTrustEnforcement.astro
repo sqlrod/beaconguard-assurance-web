@@ -3,19 +3,19 @@ import DiagramShell from "./DiagramShell.astro";
 import OutcomeFork from "./OutcomeFork.astro";
 
 const stages = [
-  "Enterprise Request",
-  "Authenticity",
-  "Tenant and Environment",
-  "Freshness and Replay",
-  "Active Verified Release",
-  "Deterministic Evaluation",
-  "Persist Verifiable Decision Record",
+  "Validated Identity and Delegation Context",
+  "Request Admission / Invocation Controls",
+  "AI or Agent Proposes Action",
+  "Canonical Material Action + Digest",
+  "Verify Active Policy Authority",
+  "Deterministic Exact-Action Evaluation",
+  "Persist Verifiable Decision Evidence",
 ];
 ---
 
 <DiagramShell
-  title="Runtime trust and enforcement"
-  caption="Trust gates complete before deterministic evaluation. Evidence is persisted before outcomes fork: ALLOW may proceed; DENY is a hard stop with no downstream execution."
+  title="Runtime trust and exact-action enforcement"
+  caption="Admission and invocation controls establish context but do not authorize the final side effect. BeaconGuard separately evaluates the exact material action, records the decision evidence, and issues one-time execution authority only on ACTION ALLOW."
   className="bg-diagram--runtime-trust"
 >
   <div class="bg-flow" role="list">
@@ -25,26 +25,23 @@ const stages = [
           <div
             class:list={[
               "bg-flow-step",
-              stage === "Persist Verifiable Decision Record" &&
-                "bg-outcome-evidence",
-              stage === "Deterministic Evaluation" && "bg-flow-step--decision",
-              stage === "Active Verified Release" && "bg-flow-step--boundary",
+              stage === "Persist Verifiable Decision Evidence" && "bg-outcome-evidence",
+              stage === "Deterministic Exact-Action Evaluation" && "bg-flow-step--decision",
+              stage === "Verify Active Policy Authority" && "bg-flow-step--boundary",
             ]}
             role="listitem"
           >
-            {stage === "Persist Verifiable Decision Record" ? (
+            {stage === "Persist Verifiable Decision Evidence" ? (
               <>
                 <strong>{stage}</strong>
-                <span>Required before any downstream effect</span>
+                <span>Tied to the exact action and governing release identity</span>
               </>
             ) : (
               stage
             )}
           </div>
           {index < stages.length - 1 && (
-            <div class="bg-flow-arrow" aria-hidden="true">
-              ↓
-            </div>
+            <div class="bg-flow-arrow" aria-hidden="true">↓</div>
           )}
         </>
       ))
@@ -52,17 +49,18 @@ const stages = [
   </div>
 
   <OutcomeFork
-    allowLabel="Governed execution may proceed"
-    denyLabel="Hard stop — no downstream execution"
+    allowLabel="One-time action-bound execution authority → executor verification → side effect"
+    denyLabel="No execution authority → hard stop → no side effect"
   />
 
   <div slot="text">
     <p>
-      Enterprise Request → Authenticity → Tenant and Environment → Freshness and
-      Replay → Active Verified Release → Deterministic Evaluation → Persist
-      Verifiable Decision Record → mutually exclusive fork. Branch ALLOW →
-      governed execution may proceed. Branch DENY → hard stop — no downstream
-      execution.
+      Validated identity and delegation context → request admission / invocation
+      controls → AI or agent proposes action → canonical material action and digest
+      → verify active policy authority → deterministic exact-action evaluation →
+      persist verifiable decision evidence → mutually exclusive fork. ACTION ALLOW
+      issues one-time execution authority bound to the exact action; ACTION DENY
+      issues no execution authority and the side effect does not occur.
     </p>
   </div>
 </DiagramShell>

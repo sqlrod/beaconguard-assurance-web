@@ -3,100 +3,91 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Reviewer Kit | BeaconGuard Due Diligence Materials"
-  description="BeaconGuard Reviewer Kit for executive, architecture, security, evidence, and deployment-responsibility reviews using ALLOW/DENY semantics and Verifiable Decision Records."
+  title="Reviewer Kit | BeaconGuard Due Diligence"
+  description="BeaconGuard due-diligence path for exact-action authorization, verified policy authority, identity and delegation separation, one-time execution authority, evidence, security, and deployment."
 >
   <section class="stack-section">
     <h1>Reviewer Kit</h1>
-    <p class="lead">Policy control before governed execution. Evidence after every decision.</p>
-    <p>
-      Use this kit to review BeaconGuard as a Runtime Control Boundary that evaluates trusted request context against an Active Verified Release and returns ALLOW or DENY before governed execution. Runtime permission results are binary; review obligations do not permit execution.
+    <p class="lead">
+      Start with the product problem, then verify the architecture: BeaconGuard separates identity and invocation access from exact consequential-action authorization, governs which policy authority may control production, and preserves evidence for verification and deterministic reconstruction.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Reviewer path</h2>
+    <h2>10-minute executive review</h2>
     <ol>
-      <li>Understand boundary placement — <a href="/docs/architecture">System Architecture</a></li>
-      <li>Inspect release governance — <a href="/docs/architecture">System Architecture</a> and <a href="/docs/policy-model">Policy Model</a></li>
-      <li>Inspect runtime sequence — <a href="/how-it-works">How It Works</a></li>
-      <li>Inspect evidence — <a href="/proof-evidence">Proof and Evidence</a></li>
-      <li>Confirm responsibility separation — <a href="/control-responsibility-matrix">Control Responsibility Matrix</a></li>
-      <li>Review deployment assumptions — <a href="/deployment">Deployment</a></li>
-      <li>Enter Controlled Evaluation — <a href="/design-partner-program">Controlled Evaluation</a></li>
+      <li><a href="/">Homepage</a> — why the authorization boundary exists</li>
+      <li><a href="/platform">Product</a> — what BeaconGuard owns and does not replace</li>
+      <li><a href="/how-it-works">How It Works</a> — REQUEST ALLOW ≠ ACTION ALLOW</li>
+      <li><a href="/design-partner-program">Controlled Evaluation</a> — current qualification and evaluation path</li>
     </ol>
   </section>
 
   <section class="stack-section">
-    <h2>10-minute executive review</h2>
+    <h2>Architecture review</h2>
     <ul>
-      <li><a href="/">Homepage business case and Product Overview</a> — available</li>
-      <li><a href="/platform">Platform capability overview</a> — available</li>
-      <li><a href="/design-partner-program">Controlled Evaluation offer</a> — available</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>30-minute architecture review</h2>
-    <ul>
-      <li><a href="/docs/architecture">System Architecture</a> — available</li>
-      <li><a href="/how-it-works">How It Works runtime sequence</a> — available</li>
-      <li><a href="/docs/overview">Documentation overview</a> — available</li>
+      <li><a href="/docs/architecture">Govern · Authorize · Verify Architecture</a></li>
+      <li><a href="/docs/enforcement-runtime">Exact-Action Enforcement Runtime</a></li>
+      <li><a href="/docs/policy-model">Policy Authority Model</a></li>
+      <li><a href="/control-responsibility-matrix">Control Responsibility Matrix</a></li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>Security review</h2>
     <ul>
-      <li><a href="/security">Security page</a> — available</li>
-      <li><a href="/docs/threat-model">Threat Model</a> — available</li>
-      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a> — available</li>
+      <li><a href="/security">Security invariants and fail-closed behavior</a></li>
+      <li><a href="/docs/threat-model">Threat Model</a></li>
+      <li><a href="/docs/dfd-threat-flow">DFD and Threat Flow</a></li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>Evidence review</h2>
     <ul>
-      <li><a href="/proof-evidence">Proof and Evidence samples</a> — sample</li>
-      <li><a href="/sample-decision-record">Sample Decision Record</a> — sample</li>
-      <li><a href="/docs/compliance-audit">Compliance and Audit</a> — available</li>
+      <li><a href="/proof-evidence">Proof and Evidence</a></li>
+      <li><a href="/sample-decision-record">Sample Decision Record</a></li>
+      <li><a href="/docs/compliance-audit">Evidence, Verification, and Audit</a></li>
+      <li><a href="/trust-assurance">Authorization Assurance</a></li>
     </ul>
   </section>
 
   <section class="stack-section">
-    <h2>Deployment responsibility review</h2>
+    <h2>Deployment review</h2>
     <ul>
-      <li><a href="/control-responsibility-matrix">Control Responsibility Matrix</a> — available</li>
-      <li><a href="/deployment">Deployment overview</a> — available</li>
-      <li><a href="/docs/deployment-integration">Deployment and Integration</a> — available</li>
+      <li><a href="/deployment">Deployment overview</a></li>
+      <li><a href="/docs/deployment-integration">Deployment and Integration</a></li>
+      <li><a href="/control-responsibility-matrix">Responsibility Matrix</a></li>
+    </ul>
+  </section>
+
+  <section class="stack-section">
+    <h2>What reviewers should be able to answer</h2>
+    <ul>
+      <li>What question does identity answer, and what question does BeaconGuard answer?</li>
+      <li>Why does an MCP or A2A permission not automatically authorize the final business side effect?</li>
+      <li>How is the exact material action bound before execution?</li>
+      <li>What customer-approved release is permitted to govern the decision?</li>
+      <li>How is one-time execution authority verified and consumed?</li>
+      <li>What evidence ties the decision to the exact action and governing authority?</li>
+      <li>What must the verifier trust to reconstruct the decision?</li>
+      <li>Which responsibilities remain with the customer and systems of record?</li>
     </ul>
   </section>
 
   <section class="stack-section">
     <h2>Controlled-evaluation prerequisites</h2>
     <ul>
-      <li>One bounded workflow</li>
-      <li>Representative request contract and required trust context</li>
-      <li>Desired Compliance Playbook controls</li>
-      <li>Deployment assumptions and identity-provider context</li>
-    </ul>
-    <p>
-      Customer-specific architecture-fit memos and sample mappings are controlled-access outputs of a Controlled Evaluation.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>What reviewers can assess</h2>
-    <ul>
-      <li>How ALLOW and DENY decisions are returned (binary runtime outcomes only)</li>
-      <li>How Active Verified Releases govern evaluation</li>
-      <li>What a Verifiable Decision Record contains</li>
-      <li>Where customer and BeaconGuard responsibilities divide</li>
-      <li>What remains out of scope for BeaconGuard</li>
+      <li>One bounded consequential workflow</li>
+      <li>Representative identity / agent / delegation model</li>
+      <li>Representative invocation and execution path</li>
+      <li>Material-action contract</li>
+      <li>Customer policy and approval requirements</li>
+      <li>Evidence and deployment assumptions</li>
     </ul>
     <div class="page-actions">
       <a class="btn-primary" href="/design-partner-program">Request Controlled Evaluation</a>
-      <a class="btn-secondary" href="/trust-assurance">Open Trust Center</a>
+      <a class="btn-secondary" href="/contact">Contact BeaconGuard</a>
     </div>
   </section>
 </BaseLayout>

@@ -4,161 +4,146 @@ import ArchitecturePlanes from "../../components/diagrams/ArchitecturePlanes.ast
 ---
 
 <BaseLayout
-  title="BeaconGuard Architecture"
-  description="BeaconGuard inserts a deterministic control and evidence boundary between enterprise workflows and governed AI, APIs, or automated systems with release management separated from runtime enforcement."
+  title="BeaconGuard Architecture | Govern · Authorize · Verify"
+  description="BeaconGuard separates policy authority, exact consequential-action authorization, and evidence verification while consuming identity, MCP, A2A, and enterprise systems as bounded inputs."
 >
   <section class="doc-architecture">
     <h1>System Architecture</h1>
 
     <p>
-      BeaconGuard inserts a deterministic control and evidence boundary between enterprise workflows and governed AI, APIs, or automated systems. Release management is separated from runtime enforcement so every request is evaluated against an approved control set before execution, with verifiable evidence produced for every decision.
+      BeaconGuard is an independent authorization and assurance boundary for consequential AI actions. The architecture separates three responsibilities: govern which policy authority may control production, authorize the exact material action before execution, and verify the decision afterward.
     </p>
 
     <ArchitecturePlanes />
 
     <section class="doc-architecture-section">
-      <h2>What this diagram shows</h2>
+      <h2>Core architectural invariant</h2>
+      <p><strong>REQUEST ALLOW ≠ ACTION ALLOW.</strong></p>
       <p>
-        The architecture separates BeaconGuard into two governed operating planes.
-      </p>
-      <p>
-        The management plane (BeaconGuard Control Plane) defines, validates, compiles, approves, signs, and distributes immutable release artifacts. It operates outside the per-request path.
-      </p>
-      <p>
-        The runtime data plane validates and normalizes request context, performs trust, freshness, and replay checks, and evaluates each request deterministically against the Active Verified Release before downstream execution.
-      </p>
-      <p>
-        Every deterministic decision produces a Verifiable Decision Record. Evidence persists before ALLOW proceeds to the governed AI, API, or automated system. DENY is a hard stop with no downstream execution.
+        A request may pass identity, delegation, invocation, transport, and capability checks without authorizing the exact business side effect that results. BeaconGuard therefore separates request admission from consequential-action authorization.
       </p>
     </section>
 
     <section class="doc-architecture-section">
-      <h2>BeaconGuard Control Plane</h2>
+      <h2>Govern plane</h2>
       <p>
-        The BeaconGuard Control Plane manages the governed release lifecycle for Compliance Playbooks. It separates control definition from runtime enforcement through validation, compilation, approval, immutable release creation, and controlled distribution. The Control Plane is not part of the per-request execution path.
+        The Govern plane controls which customer-approved policy authority may govern production authorization. Compliance Playbooks move through validation, compilation, governance approval, signing, controlled distribution, verification, and explicit activation.
       </p>
       <p>
-        A distributed release is not automatically active. It must pass release verification and activation before it becomes the Active Verified Release used by the runtime.
+        A release artifact does not become production authority merely because it was distributed. Only an Active Verified Release may govern runtime authorization. Draft, unsigned, mixed, revoked, or unverified material must not enter the production decision path.
       </p>
     </section>
 
     <section class="doc-architecture-section">
-      <h2>Deterministic runtime enforcement</h2>
+      <h2>Authorize plane</h2>
       <p>
-        The BeaconGuard Runtime Control Boundary operates in the request path before governed execution.
+        The Authorize plane consumes validated identity, delegated authority, tenant/environment, trust, freshness, replay, and invocation context. These inputs constrain the decision but do not independently authorize the material side effect.
+      </p>
+      <p>The consequential-action path is:</p>
+      <ol>
+        <li>Validate identity, workload identity, delegation, and request context.</li>
+        <li>Admit the invocation path required to reach the AI, agent, provider, or tool.</li>
+        <li>Treat the AI result as an untrusted proposal.</li>
+        <li>Construct and canonicalize the exact material action.</li>
+        <li>Derive its deterministic material-action identity.</li>
+        <li>Resolve the current Active Verified Release and trust state.</li>
+        <li>Evaluate the exact action deterministically.</li>
+        <li>Return ACTION ALLOW or ACTION DENY.</li>
+        <li>Persist authorization evidence tied to the governing release and exact action.</li>
+        <li>For ALLOW only, issue one-time execution authority bound to the exact action.</li>
+        <li>At execution, recompute the action binding and consume the grant once.</li>
+      </ol>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>Exact-action binding</h2>
+      <p>
+        BeaconGuard authorizes the material action, not a vague textual intent. The material action is represented canonically and assigned a deterministic identity. Execution authority is bound to that identity.
       </p>
       <p>
-        It performs:
+        If the action presented to the executor differs from the action that was authorized, the binding fails and execution is denied. This prevents an authorized Action A from being replaced by Action B after policy evaluation.
+      </p>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>One-time execution authority</h2>
+      <p>
+        ACTION ALLOW does not become a reusable bearer permission. One-time execution authority is bound to the authorized action and consumed on successful use. Replay or reuse attempts fail closed.
+      </p>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>MCP relationship</h2>
+      <p>
+        MCP supplies protocol and tool-invocation context. It can establish whether an agent may invoke a capability, but MCP invocation permission does not automatically authorize the exact consequential side effect produced by that capability.
+      </p>
+      <p><strong>MCP ALLOW ≠ ACTION ALLOW.</strong></p>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>A2A relationship</h2>
+      <p>
+        A2A supplies agent-to-agent identity, communication, and delegated-authority context. Valid delegation constrains what may be considered authorized but does not override downstream BeaconGuard policy or independently grant the final side effect.
+      </p>
+      <p><strong>A2A delegation ≠ ACTION ALLOW.</strong></p>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>Enterprise identity relationship</h2>
+      <p>
+        The customer identity provider remains authoritative for workforce identity, and workload/agent identity systems remain authoritative for their own identities. BeaconGuard normalizes validated identity and delegation context for authorization.
+      </p>
+      <p>
+        Identity answers who is acting and for whom. BeaconGuard answers whether this exact material action may execute under the current approved governance state.
+      </p>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>Verify plane</h2>
+      <p>
+        The Verify plane preserves the evidence required to check not only what decision was recorded, but what authority governed it and what exact action was evaluated.
       </p>
       <ul>
-        <li>request validation and context normalization;</li>
-        <li>trust, freshness, and replay checks;</li>
-        <li>deterministic Compliance Playbook evaluation against the Active Verified Release;</li>
-        <li>explicit ALLOW or DENY enforcement;</li>
-        <li>evidence persistence before ALLOW proceeds;</li>
-        <li>fail-closed handling when required controls or trusted context are invalid, missing, stale, replayed, or outside approved bounds.</li>
-      </ul>
-      <p>
-        Only an ALLOW result may proceed to the governed AI, API, or automated system after the decision record is persisted. DENY hard-stops with no downstream execution.
-      </p>
-    </section>
-
-    <section class="doc-architecture-section">
-      <h2>Evidence, replay, and verification</h2>
-      <p>
-        BeaconGuard emits a Verifiable Decision Record for every deterministic result, including ALLOW and DENY.
-      </p>
-      <p>
-        The record identifies the decision context, active release identity, control result, and outcome. This evidence supports reconstruction, replay, verification, audit review, incident analysis, and governance reporting.
-      </p>
-      <p>
-        Evidence integrity, retention, and tamper-resistance guarantees depend on the configured evidence provider and deployment controls. Append-only or durable-retention claims apply only where those controls are explicitly configured and verified.
-      </p>
-    </section>
-
-    <section class="doc-architecture-section">
-      <h2>Enterprise identity and workload boundaries</h2>
-      <p>
-        BeaconGuard integrates with enterprise identity systems while the customer identity provider remains the workforce identity authority. The IdP does not make the BeaconGuard decision. Architecture reviews typically examine:
-      </p>
-      <ul>
-        <li>enterprise identity integration for workforce access;</li>
-        <li>workload and service identity for non-human actors;</li>
-        <li>tenant and environment boundaries for authorization context;</li>
-        <li>privileged step-up for sensitive management operations;</li>
-        <li>session revocation and lifecycle controls where configured.</li>
-      </ul>
-    </section>
-
-    <section class="doc-architecture-section">
-      <h2>Distributed runtime trust dependencies</h2>
-      <p>
-        Supporting trust dependencies reinforce the primary request path without becoming alternate execution paths:
-      </p>
-      <ul>
-        <li>distributed replay authority and shared-state coordination where configured;</li>
-        <li>immutable authorization context during evaluation;</li>
-        <li>evidence-before-forward ordering for governed execution;</li>
-        <li>fail-closed shared dependencies when required verification cannot complete.</li>
-      </ul>
-    </section>
-
-    <section class="doc-architecture-section">
-      <h2>Trust boundaries</h2>
-      <ul>
-        <li><strong>What enters the runtime boundary:</strong> normalized request context and required trust signals.</li>
-        <li><strong>What governs evaluation:</strong> the Active Verified Release produced through the controlled release lifecycle.</li>
-        <li><strong>What BeaconGuard decides:</strong> an explicit deterministic ALLOW or DENY result.</li>
-        <li><strong>What proceeds downstream:</strong> only requests that receive ALLOW, after evidence is persisted.</li>
-        <li><strong>What is prevented:</strong> DENY results and requests that fail required validation, trust, freshness, or replay checks.</li>
-        <li><strong>What is emitted for verification:</strong> a decision record containing release identity, decision context, control result, and outcome.</li>
-      </ul>
-    </section>
-
-    <section class="doc-architecture-section">
-      <h2>System Connector for non-native integrations</h2>
-      <p>
-        Some enterprise applications do not natively produce the protocol or context structure required by the BeaconGuard runtime. An optional System Connector can map source protocols and context into the required request format before the request enters the Runtime Control Boundary.
-      </p>
-      <p>
-        The System Connector is optional and non-evaluating: it is not the policy evaluator, does not activate releases, and cannot bypass fail-closed enforcement. Deterministic evaluation and decision evidence remain functions of the BeaconGuard Runtime Control Boundary.
-      </p>
-    </section>
-
-    <section class="doc-architecture-section">
-      <h2>Reviewer checkpoints</h2>
-      <ul>
-        <li>Confirm that the BeaconGuard Runtime Control Boundary is positioned before governed execution.</li>
-        <li>Confirm that Compliance Playbooks pass validation, compilation, approval, and immutable release creation before distribution.</li>
-        <li>Confirm that a distributed release is verified and activated before it becomes the active runtime release.</li>
-        <li>Confirm that request validation, trust, freshness, and replay checks occur before deterministic evaluation.</li>
-        <li>Confirm that ALLOW and DENY results originate from deterministic evaluation.</li>
-        <li>Confirm that evidence persists before ALLOW proceeds and that DENY does not reach the downstream system.</li>
-        <li>Confirm that every deterministic result emits a Verifiable Decision Record.</li>
-        <li>Confirm that evidence identifies the active release used for the decision.</li>
-        <li>Confirm that the Control Plane is outside the per-request path and the System Connector remains optional and non-evaluating.</li>
+        <li>Decision and correlation identity</li>
+        <li>Material-action identity</li>
+        <li>Actor and delegated-authority context</li>
+        <li>Tenant and environment binding</li>
+        <li>Active Verified Release / manifest identity</li>
+        <li>Policy / playbook identity</li>
+        <li>Execution-grant identity and consumption state when applicable</li>
+        <li>Integrity-verification information</li>
+        <li>Inputs and references required for deterministic reconstruction</li>
       </ul>
     </section>
 
     <section class="doc-architecture-section">
-      <h2>What BeaconGuard is not</h2>
+      <h2>Failure semantics</h2>
+      <p>
+        Authorization fails closed if required policy authority, trust state, identity/delegation, action binding, replay state, evidence persistence, or shared dependencies cannot be established or verified. No permissive fallback is permitted.
+      </p>
+    </section>
+
+    <section class="doc-architecture-section">
+      <h2>Systems BeaconGuard does not replace</h2>
       <ul>
-        <li>BeaconGuard is not the enterprise system of record.</li>
-        <li>BeaconGuard is not the business transaction processor.</li>
-        <li>BeaconGuard is not the AI or model host.</li>
-        <li>BeaconGuard is not the enterprise application UI.</li>
-        <li>The System Connector is not an enforcement bypass.</li>
-        <li>The Control Plane is not part of the per-request execution path.</li>
+        <li>Enterprise IAM or identity providers</li>
+        <li>MCP or A2A as protocols</li>
+        <li>AI models or model hosts</li>
+        <li>Enterprise applications and systems of record</li>
+        <li>EHR, AML, fraud, payment, case-management, or workflow platforms</li>
+        <li>Clinical, compliance, legal, privacy, or risk authorities</li>
+        <li>SIEM or GRC systems</li>
       </ul>
     </section>
 
     <section class="doc-architecture-section">
-      <h2>Relationship to runtime flow</h2>
+      <h2>Related review material</h2>
       <ul>
         <li><a href="/how-it-works">How It Works</a></li>
-        <li><a href="/trust-assurance">Trust Center</a></li>
+        <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
+        <li><a href="/docs/compliance-audit">Evidence and Audit</a></li>
+        <li><a href="/trust-assurance">Assurance</a></li>
         <li><a href="/deployment">Deployment</a></li>
-        <li><a href="/contact">Contact</a></li>
       </ul>
     </section>
   </section>

@@ -1,147 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import TrustResponsibilityMap from "../components/diagrams/TrustResponsibilityMap.astro";
+import EvidenceLifecycle from "../components/diagrams/EvidenceLifecycle.astro";
 ---
-
 <BaseLayout
-  title="Trust Center | BeaconGuard Assurance"
-  description="Review BeaconGuard’s identity, runtime isolation, release assurance, evidence integrity, and shared deployment responsibility model."
+  title="Assurance | BeaconGuard Trust and Verification"
+  description="Review how BeaconGuard verifies policy authority, binds authorization to exact actions, preserves evidence, and supports deterministic reconstruction."
 >
   <section class="stack-section">
-    <h1>Trust Center</h1>
-    <p class="lead">
-      This Trust Center summarizes how BeaconGuard approaches product security, evidence, and shared deployment responsibility. It does not provide legal compliance guarantees and does not replace customer compliance, privacy, security, clinical, AML, fraud, SIEM, IAM, or GRC programs.
-    </p>
+    <p class="section-label">ASSURANCE</p>
+    <h1>Authorize the action. Prove the decision.</h1>
+    <p class="lead">BeaconGuard connects the exact action, the authority allowed to govern it, the runtime decision, and the evidence needed to verify that decision afterward.</p>
   </section>
-
   <section class="stack-section">
-    <h2>Product security architecture</h2>
-    <p>
-      BeaconGuard separates the management plane from the runtime data plane. Compliance Playbooks become Signed Immutable Release Artifacts. Only an Active Verified Release governs the Runtime Control Boundary, which returns ALLOW or DENY before governed execution.
-    </p>
+    <h2>The authorization assurance chain</h2>
+    <EvidenceLifecycle />
   </section>
-
   <section class="stack-section">
-    <h2>Identity and privileged access</h2>
-    <p>
-      BeaconGuard integrates with enterprise identity systems while the customer identity provider remains the workforce identity authority.
-    </p>
-    <ul>
-      <li>Federated workforce identity</li>
-      <li>Service and workload identities</li>
-      <li>Role and tenant boundaries</li>
-      <li>Privileged step-up</li>
-      <li>Session revocation</li>
-      <li>Delegated administration</li>
-      <li>Break-glass governance</li>
-      <li>Customer identity provider remains authoritative</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Runtime isolation and replay protection</h2>
-    <ul>
-      <li>Request authenticity</li>
-      <li>Tenant binding</li>
-      <li>Environment binding</li>
-      <li>Distributed replay resistance</li>
-      <li>Single-use authorization</li>
-      <li>Fail-closed handling when required dependencies cannot be verified</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Evidence integrity</h2>
-    <p>
-      Every deterministic result produces a Verifiable Decision Record containing decision context, release identity, control result, and outcome. Evidence is designed for replay and verification and supports audit and governance review.
-    </p>
-    <ul>
-      <li>Evidence-before-forward ordering</li>
-      <li>Decision and release identity</li>
-      <li>Integrity verification</li>
-      <li>Tamper detection</li>
-      <li>Restart continuity</li>
-      <li>Replay and reconstruction</li>
-      <li>Deployment-dependent retention and durability</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Release and artifact assurance</h2>
-    <ul>
-      <li>Validated and compiled Compliance Playbooks</li>
-      <li>Signed immutable release artifacts</li>
-      <li>Release verification</li>
-      <li>Explicit activation</li>
-      <li>Active Verified Release enforcement</li>
-      <li>Prevention of unverified or mixed release material entering the governed runtime path</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Operational resilience</h2>
-    <ul>
-      <li>Controlled installation qualification</li>
-      <li>Backup and restore</li>
-      <li>Rollback</li>
-      <li>Removal and reinstall</li>
-      <li>Restart continuity</li>
-      <li>Graceful shutdown behavior</li>
-      <li>Controlled Windows and Linux deployment paths</li>
-    </ul>
-    <p>
-      These paths are evaluated under controlled internal qualification. Public package downloads and general installer distribution are not implied.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Deployment responsibilities</h2>
-    <p>
-      Customers remain responsible for identity providers, network controls, secrets, host hardening, evidence-provider configuration, and operational monitoring. BeaconGuard provides the control and evidence boundary; deployment responsibilities are shared.
-    </p>
-    <TrustResponsibilityMap />
-  </section>
-
-  <section class="stack-section">
-    <h2>Available review materials</h2>
-    <ul>
-      <li><a href="/docs/architecture">System Architecture</a> — available</li>
-      <li><a href="/how-it-works">How It Works</a> — available</li>
-      <li><a href="/proof-evidence">Proof and Evidence samples</a> — sample</li>
-      <li><a href="/sample-decision-record">Sample Decision Record</a> — sample</li>
-      <li><a href="/control-responsibility-matrix">Control Responsibility Matrix</a> — available</li>
-      <li><a href="/docs/threat-model">Threat Model</a> — available</li>
-      <li><a href="/reviewer-kit">Reviewer Kit</a> — available</li>
-      <li>Customer-specific architecture-fit materials — controlled-access via Controlled Evaluation</li>
-    </ul>
-  </section>
-
-  <section class="stack-section">
-    <h2>Security contact</h2>
-    <p>
-      For architecture and security review inquiries, contact
-      <a href="mailto:architecture@beaconguardassurance.com">architecture@beaconguardassurance.com</a>.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Compliance and certification status</h2>
-    <p>
-      BeaconGuard publishes technical architecture and controlled review materials for due diligence. This site does not claim SOC 2, ISO 27001, HITRUST, HIPAA certification, FedRAMP authorization, or similar attestation status. Ask during Controlled Evaluation for the current status of any formal assessment work.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Evidence and legal boundaries</h2>
-    <ul>
-      <li>Evidence supports governance and audit review; legal evidentiary status and regulatory admissibility are not claimed.</li>
-      <li>Append-only or durable retention applies only where the configured evidence provider and operational controls provide those guarantees.</li>
-      <li>BeaconGuard does not replace customer systems of record or compliance programs.</li>
-      <li>BeaconGuard enforcement results are deterministic ALLOW or DENY outcomes, not probabilistic authorization.</li>
-    </ul>
-    <div class="page-actions">
-      <a class="btn-primary" href="/platform">Review platform assumptions</a>
-      <a class="btn-secondary" href="/contact">Discuss review expectations</a>
+    <h2>What reviewers can verify</h2>
+    <div class="section-grid section-grid--compact">
+      <div class="content-card"><h3>Policy authority</h3><p>Which approved and verified release governed the authorization decision.</p></div>
+      <div class="content-card"><h3>Exact action</h3><p>Which consequential action was evaluated and bound to execution authority.</p></div>
+      <div class="content-card"><h3>Decision evidence</h3><p>Which actor/delegation context, outcome, and integrity information support reconstruction.</p></div>
     </div>
+  </section>
+  <section class="stack-section">
+    <h2>Technical review</h2>
+    <div class="page-actions"><a class="btn-primary" href="/proof-evidence">Proof and Evidence</a><a class="btn-secondary" href="/docs/architecture">Architecture</a><a class="btn-secondary" href="/design-partner-program">Request Evaluation</a></div>
   </section>
 </BaseLayout>

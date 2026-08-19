@@ -1,97 +1,26 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import IndustryControlFlow from "../components/diagrams/IndustryControlFlow.astro";
 ---
-
 <BaseLayout
-  title="Healthcare | BeaconGuard for PHI-Sensitive Workflows"
-  description="BeaconGuard enforces ALLOW or DENY decisions for PHI-sensitive healthcare workflows before governed execution, with Verifiable Decision Records for privacy and compliance review."
+  title="Healthcare | BeaconGuard Authorization for Consequential AI Actions"
+  description="BeaconGuard independently authorizes consequential AI-assisted healthcare actions before execution while preserving EHR, clinical, privacy, and operational authority."
 >
   <section class="stack-section">
-    <h1>Deterministic control for PHI-sensitive AI workflows</h1>
-    <p class="lead">
-      BeaconGuard deploys alongside existing healthcare applications as a Runtime Control Boundary. It evaluates trusted request context against the Active Verified Release and returns ALLOW or DENY before governed execution, preserving Verifiable Decision Records for privacy, security, compliance, risk, and architecture teams.
-    </p>
+    <p class="section-label">HEALTHCARE</p>
+    <h1>Authorize AI actions before they affect patients or operations</h1>
+    <p class="lead">As healthcare AI moves from summarizing information to taking action, access alone is not enough. BeaconGuard checks the exact side effect before it reaches the system that will carry it out.</p>
   </section>
-
   <section class="stack-section">
-    <h2>Healthcare control-boundary workflow</h2>
-    <p>
-      One reusable control-boundary sequence: evaluate trusted context, return ALLOW or DENY, record evidence, then apply the effect. Review obligations sit outside the runtime permission path.
-    </p>
-    <IndustryControlFlow industry="healthcare" />
-  </section>
-
-  <section class="stack-section">
-    <h2>Existing healthcare systems remain in place</h2>
-    <p>
-      BeaconGuard does not replace the EHR, privacy office, clinical governance process, care-management platform, or other systems of record. Those systems remain authoritative. BeaconGuard enforces the request boundary before governed AI, APIs, or automated systems execute.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Scenario structure</h2>
-    <p>
-      Each scenario below follows the same review pattern: existing workflow, required trusted context, control evaluated, ALLOW or DENY result, why or when denied, evidence produced, and the system that remains authoritative.
-    </p>
-  </section>
-
-  <section class="stack-section">
-    <h2>Healthcare scenarios</h2>
-    <div class="section-grid section-grid--scenarios">
-      <div class="content-card">
-        <h3>Unapproved pathway for PHI-heavy summary</h3>
-        <p><strong>Existing workflow:</strong> Operational summarization over PHI-bearing records.</p>
-        <p><strong>Required trusted context:</strong> Approved pathway, role, source-system trust, freshness.</p>
-        <p><strong>Control evaluated:</strong> Pathway approval against the Active Verified Release.</p>
-        <p><strong>Result:</strong> DENY</p>
-        <p><strong>Why / When denied:</strong> The pathway is not approved for this workflow.</p>
-        <p><strong>Evidence:</strong> Verifiable Decision Record with release identity and decision context.</p>
-        <p><strong>Authoritative system:</strong> EHR and clinical operations remain systems of record.</p>
-      </div>
-      <div class="content-card">
-        <h3>Required privacy approval absent</h3>
-        <p><strong>Existing workflow:</strong> Privacy-gated operational AI assist.</p>
-        <p><strong>Required trusted context:</strong> Privacy approval status and role boundaries.</p>
-        <p><strong>Control evaluated:</strong> Approval requirement in the Compliance Playbook.</p>
-        <p><strong>Result:</strong> DENY</p>
-        <p><strong>Why / When denied:</strong> Required privacy approval is absent. An illustrative reason style is <code>APPROVAL_REQUIRED</code>.</p>
-        <p><strong>Evidence:</strong> Verifiable Decision Record; governance review may follow without permitting execution.</p>
-        <p><strong>Authoritative system:</strong> Privacy office and EHR remain authoritative.</p>
-      </div>
-      <div class="content-card">
-        <h3>Stale or replayed request</h3>
-        <p><strong>Existing workflow:</strong> Patient outreach or operational follow-up assistance.</p>
-        <p><strong>Required trusted context:</strong> Request identity, timestamps, freshness window.</p>
-        <p><strong>Control evaluated:</strong> Trust, freshness, and replay checks.</p>
-        <p><strong>Result:</strong> DENY</p>
-        <p><strong>Why / When denied:</strong> The request is stale or appears replayed.</p>
-        <p><strong>Evidence:</strong> Verifiable Decision Record capturing check outcomes.</p>
-        <p><strong>Authoritative system:</strong> Care operations systems remain authoritative.</p>
-      </div>
-      <div class="content-card">
-        <h3>Approved operational request</h3>
-        <p><strong>Existing workflow:</strong> Approved pathway with valid role and trust context.</p>
-        <p><strong>Required trusted context:</strong> Signed/trusted metadata, pathway, freshness, role.</p>
-        <p><strong>Control evaluated:</strong> Deterministic Playbook Evaluation against the Active Verified Release.</p>
-        <p><strong>Result:</strong> ALLOW</p>
-        <p><strong>Evidence:</strong> Verifiable Decision Record for later audit and reconstruction.</p>
-        <p><strong>Authoritative system:</strong> EHR and workflow application remain systems of record.</p>
-      </div>
+    <h2>Consequential actions</h2>
+    <div class="section-grid section-grid--compact">
+      <div class="content-card"><h3>Patient communication</h3><p>Authorize the exact message or outreach action before it is sent.</p></div>
+      <div class="content-card"><h3>Scheduling</h3><p>Authorize the exact create, change, or cancel action before scheduling state changes.</p></div>
+      <div class="content-card"><h3>Operational record change</h3><p>Authorize the exact workflow or EHR-adjacent update before the system changes state.</p></div>
     </div>
   </section>
-
   <section class="stack-section">
     <h2>What BeaconGuard does not replace</h2>
-    <ul>
-      <li>Electronic health records or clinical documentation systems</li>
-      <li>Privacy office judgment or clinical governance</li>
-      <li>Independent HIPAA certification or legal compliance attestation</li>
-      <li>Probabilistic clinical diagnosis or model-hosted clinical reasoning</li>
-    </ul>
-    <div class="page-actions">
-      <a class="btn-primary" href="mailto:architecture@beaconguardassurance.com?subject=Healthcare%20Workflow%20Review">Request a Healthcare Workflow Review</a>
-      <a class="btn-secondary" href="/docs/architecture">Review System Architecture</a>
-    </div>
+    <p>The EHR, clinical judgment, privacy governance, patient-safety process, and healthcare system of record remain authoritative. BeaconGuard enforces the exact-action authorization boundary those authorities require.</p>
+    <div class="page-actions"><a class="btn-primary" href="/design-partner-program">Evaluate a Healthcare Workflow</a><a class="btn-secondary" href="/trust-assurance">Review Assurance</a></div>
   </section>
 </BaseLayout>

@@ -1,72 +1,70 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ControlBoundaryOverview from "../components/diagrams/ControlBoundaryOverview.astro";
+import RuntimeDecisionSequence from "../components/diagrams/RuntimeDecisionSequence.astro";
 ---
 
 <BaseLayout
-  title="Workflow Examples | BeaconGuard Regulated AI Operations"
-  description="Workflow examples for BeaconGuard control across healthcare operations, financial crime and fraud review, and regulated internal automation using ALLOW and DENY."
+  title="Workflow Examples | BeaconGuard Consequential-Action Authorization"
+  description="Concrete BeaconGuard workflow examples showing why valid identity and tool access do not automatically authorize patient, financial, or production side effects."
 >
   <section class="stack-section">
     <h1>Workflow Examples</h1>
     <p class="lead">
-      BeaconGuard applies one Runtime Control Boundary across healthcare, financial services, and regulated internal automation. Existing systems remain in place while requests to governed AI, APIs, or automated systems are controlled before execution. Runtime permission results are ALLOW or DENY only.
+      The same BeaconGuard architecture applies across industries: validate identity and delegated authority, admit the required invocation path, treat the AI result as a proposal, and separately authorize the exact consequential action before execution.
     </p>
   </section>
 
   <section class="stack-section">
-    <h2>Shared control-boundary sequence</h2>
-    <p>
-      Every industry context uses the same reusable sequence: enterprise application context enters the Runtime Control Boundary (optionally via System Connector), evaluation returns ALLOW or DENY, a Verifiable Decision Record is produced, and only ALLOW may proceed to governed execution.
-    </p>
-    <ControlBoundaryOverview />
-    <p class="muted-copy">
-      When required approval is absent, the result is DENY with a reason code such as APPROVAL_REQUIRED. Review obligations do not permit execution and are not a third runtime result.
-    </p>
+    <h2>Shared sequence</h2>
+    <RuntimeDecisionSequence />
   </section>
 
   <section class="stack-section">
-    <h2>Industry context panels</h2>
-    <p>
-      The same control boundary applies in each context. What changes is the source application, required deterministic context, control conditions, governed downstream system, and review stakeholders—not the runtime decision model.
-    </p>
-    <div class="section-grid section-grid--scenarios">
-      <div class="content-card">
-        <h3>Healthcare</h3>
-        <p><strong>Typical source application:</strong> Care operations, privacy-gated assist, or EHR-adjacent workflow UI.</p>
-        <p><strong>Required deterministic context:</strong> Role, workflow identity, approved pathway, source-system trust, context tags, freshness.</p>
-        <p><strong>Example control conditions:</strong> Pathway approval; privacy approval present when required; trust and freshness within bounds.</p>
-        <p><strong>Governed downstream system:</strong> Approved model pathway or operational AI assist.</p>
-        <p><strong>Review stakeholders:</strong> Privacy, compliance, clinical governance, security, architecture.</p>
-      </div>
-      <div class="content-card">
-        <h3>Financial</h3>
-        <p><strong>Typical source application:</strong> AML, KYC, fraud, or dispute analyst workflow.</p>
-        <p><strong>Required deterministic context:</strong> Analyst or service identity, case and transaction context, source trust, requested action, freshness.</p>
-        <p><strong>Example control conditions:</strong> Role and pathway controls; approval state when required; replay and freshness checks.</p>
-        <p><strong>Governed downstream system:</strong> Approved governed analysis or recommendation service.</p>
-        <p><strong>Review stakeholders:</strong> Risk, compliance, fraud operations, security, audit.</p>
-      </div>
-      <div class="content-card">
-        <h3>Regulated Internal Automation</h3>
-        <p><strong>Typical source application:</strong> Existing internal agent or automation orchestrator.</p>
-        <p><strong>Required deterministic context:</strong> Trusted context for role, environment, requested action, change window, freshness.</p>
-        <p><strong>Example control conditions:</strong> Approved automation pathway; environment and change-window bounds; Active Verified Release match.</p>
-        <p><strong>Governed downstream system:</strong> Production system or regulated automation target.</p>
-        <p><strong>Review stakeholders:</strong> Security, operations, risk, audit.</p>
-      </div>
+    <h2>Healthcare example</h2>
+    <div class="content-card">
+      <h3>AI-assisted post-discharge scheduling</h3>
+      <p><strong>Request:</strong> A delegated discharge-operations agent is permitted to use a scheduling capability.</p>
+      <p><strong>Proposal:</strong> Create a specific follow-up appointment for a specific patient, time, location, and service.</p>
+      <p><strong>BeaconGuard decision:</strong> Authorize that exact scheduling side effect under current approved policy and authority context.</p>
+      <p><strong>ALLOW:</strong> Issue one-time execution authority bound to the exact scheduling action.</p>
+      <p><strong>DENY:</strong> No appointment is created.</p>
+      <p><strong>Authority preserved:</strong> EHR, scheduling, clinical, and privacy systems remain authoritative in their own domains.</p>
     </div>
   </section>
 
   <section class="stack-section">
-    <h2>Decision Evidence</h2>
+    <h2>Financial example</h2>
+    <div class="content-card">
+      <h3>AI-assisted fraud case disposition</h3>
+      <p><strong>Request:</strong> An authenticated agent can access a fraud case-management capability.</p>
+      <p><strong>Proposal:</strong> Change a specific case disposition and initiate a defined customer-impacting follow-on action.</p>
+      <p><strong>BeaconGuard decision:</strong> Evaluate the exact proposed side effect against actor/delegation, case context, policy, thresholds, approvals, tenant/environment, and current release authority.</p>
+      <p><strong>ALLOW:</strong> One-time authority applies only to the bound action.</p>
+      <p><strong>DENY:</strong> Case state and customer outcome remain unchanged.</p>
+    </div>
+  </section>
+
+  <section class="stack-section">
+    <h2>Regulated automation example</h2>
+    <div class="content-card">
+      <h3>Production configuration change</h3>
+      <p><strong>Request:</strong> An internal agent is permitted to invoke an operations tool.</p>
+      <p><strong>Proposal:</strong> Modify a named production resource with specific parameters.</p>
+      <p><strong>BeaconGuard decision:</strong> Bind and authorize that exact production change, not the agent's general access to the tool.</p>
+      <p><strong>ALLOW:</strong> Executor verifies the action binding and consumes the grant once.</p>
+      <p><strong>DENY or mismatch:</strong> No production change occurs.</p>
+    </div>
+  </section>
+
+  <section class="stack-section">
+    <h2>The reusable rule</h2>
     <p>
-      Each workflow emits Verifiable Decision Records after BeaconGuard decides ALLOW or DENY. Reviewers inspect the decision signal, request metadata, release identity, freshness and replay checks, and any review obligation—without treating review as a permission result.
+      The protocol and business objects change by industry. The core authorization invariant does not:
     </p>
+    <p><strong>Being able to reach a capability is not the same as being authorized to perform every consequential action that capability can produce.</strong></p>
     <div class="page-actions">
-      <a class="btn-primary" href="/proof-evidence">Review Decision Evidence</a>
-      <a class="btn-secondary" href="/healthcare">Healthcare Use Case</a>
-      <a class="btn-secondary" href="/fintech">Financial Use Case</a>
+      <a class="btn-primary" href="/how-it-works">See How It Works</a>
+      <a class="btn-secondary" href="/proof-evidence">Review Decision Evidence</a>
     </div>
   </section>
 </BaseLayout>

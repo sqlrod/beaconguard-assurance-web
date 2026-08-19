@@ -4,160 +4,74 @@ import DeploymentTopology from "../../components/diagrams/DeploymentTopology.ast
 ---
 
 <BaseLayout
-  title="Deployment and Integration"
-  description="How BeaconGuard is deployed and integrated into existing systems as a Runtime Control Boundary with evidence-before-forward ordering."
+  title="Deployment and Integration | BeaconGuard"
+  description="Technical deployment model for placing BeaconGuard on the consequential execution path while integrating identity, delegation, MCP/A2A or application invocation, verified policy authority, executors, and evidence."
 >
   <section class="stack-section">
-    <h1>Deployment and Integration</h1>
-
-    <p>
-      This section describes how BeaconGuard is deployed and integrated into existing
-      systems. Guidance is conservative and environment-agnostic for regulated
-      enterprise settings.
-    </p>
-
-    <p>
-      BeaconGuard deploys alongside existing applications. Applications submit trusted
-      request context, enforce the returned <strong>ALLOW</strong> or <strong>DENY</strong> result before
-      governed execution, and rely on Verifiable Decision Records for governance
-      review. Deployment responsibilities are shared with the customer.
+    <p class="section-label">DEPLOYMENT & INTEGRATION</p>
+    <h1>Keep the authorization boundary on the execution path</h1>
+    <p class="lead">
+      BeaconGuard deploys between the proposed consequential action and the enterprise executor that can create the side effect. The core deployment invariant is that the action cannot reach execution without crossing the BeaconGuard boundary.
     </p>
 
     <DeploymentTopology />
+  </section>
 
-    <h2>Deployment Model</h2>
+  <section class="stack-section">
+    <h2>Integration contract</h2>
+    <div class="docs-table-wrap">
+      <table>
+        <thead><tr><th>Domain</th><th>Establishes</th><th>Does not establish</th></tr></thead>
+        <tbody>
+          <tr><td>Identity / delegation</td><td>Who or what is acting, for whom, and within what bounds</td><td>Automatic authority for every downstream side effect</td></tr>
+          <tr><td>MCP / A2A / API / application</td><td>Invocation and capability path</td><td>Final action authorization</td></tr>
+          <tr><td>AI / agent</td><td>A proposed result or consequential action</td><td>Execution authority</td></tr>
+          <tr><td>BeaconGuard</td><td>Exact-action ALLOW or DENY under governing policy authority</td><td>Business-system execution or source-of-record ownership</td></tr>
+          <tr><td>Executor / system of record</td><td>Validated execution and resulting business state</td><td>Policy authority</td></tr>
+          <tr><td>Evidence provider</td><td>Integrity, retention, and reconstruction material as configured</td><td>Runtime permission to execute</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-    <p>
-      BeaconGuard is deployed as a <strong>Runtime Control Boundary</strong> on the path to a
-      Governed AI / API / Automated System. An optional <strong>System Connector</strong> may map
-      source protocols into the required request format. The Control Plane operates
-      outside the per-request path.
-    </p>
-
-    <p>Common characteristics:</p>
-    <ul>
-      <li>Standalone process or container on the runtime data plane</li>
-      <li>Deterministic evaluation against an Active Verified Release</li>
-      <li>Horizontal scalability where the environment supports it</li>
-      <li>Externalized configuration and secrets</li>
-    </ul>
-
-    <p>The deployment environment (customer) is responsible for:</p>
-    <ul>
-      <li>Process isolation and host hardening</li>
-      <li>Network controls that keep the boundary on the governed path</li>
-      <li>Transport security (for example TLS)</li>
-      <li>Secrets and signing-key management</li>
-      <li>Identity provider integration</li>
-      <li>Evidence-provider configuration and monitoring</li>
-    </ul>
-
-    <h2>Integration Pattern</h2>
-
-    <p>Typical request flow (evidence before forward):</p>
+  <section class="stack-section">
+    <h2>Runtime sequence</h2>
     <ol>
-      <li>Application (or System Connector) prepares trusted request context</li>
-      <li>Runtime performs Request Validation and Context Normalization</li>
-      <li>Trust, Freshness, and Replay Checks run as configured</li>
-      <li>Deterministic Playbook Evaluation uses the Active Verified Release</li>
-      <li>Runtime determines <strong>ALLOW</strong> or <strong>DENY</strong></li>
-      <li>Verifiable Decision Record is persisted</li>
-      <li>Application enforces the result; only after record persistence may ALLOW proceed to governed execution</li>
+      <li>Validate required identity, delegation, tenant/environment, freshness, and replay context.</li>
+      <li>Admit the required invocation path and allow the AI or agent interaction to produce a proposal.</li>
+      <li>Construct and canonicalize the exact material action that would create the side effect.</li>
+      <li>Authorize that action under the current governing policy authority and return ALLOW or DENY.</li>
+      <li>Persist authorization evidence; ALLOW may issue one-time execution authority bound to the action.</li>
+      <li>The executor recomputes the action identity, validates and consumes the grant once, then creates the side effect.</li>
     </ol>
+  </section>
 
-    <p>BeaconGuard does not:</p>
-    <ul>
-      <li>Call back into applications to execute workflow steps</li>
-      <li>Replace workflow logic or systems of record</li>
-      <li>Treat review obligations as permission to execute</li>
-      <li>Treat human review as a permission to execute</li>
-    </ul>
+  <section class="stack-section">
+    <h2>Production placement requirements</h2>
+    <div class="section-grid section-grid--compact">
+      <div class="content-card"><h3>On path</h3><p>The application or connector architecture must prevent a consequential action from bypassing BeaconGuard.</p></div>
+      <div class="content-card"><h3>Verified authority</h3><p>Only verified and explicitly activated customer policy authority may govern production decisions.</p></div>
+      <div class="content-card"><h3>Executor enforcement</h3><p>Executors reject missing, mismatched, expired, revoked, or previously consumed execution authority.</p></div>
+    </div>
+  </section>
 
+  <section class="stack-section">
+    <h2>MCP and A2A</h2>
     <p>
-      When required approval is absent, the result is <strong>DENY</strong> (for example
-      <code>APPROVAL_REQUIRED</code>) with Execution Prevented.
+      MCP and A2A are supported as invocation and delegated-authority context. They do not replace the exact-action decision.
     </p>
+    <p><strong>Invocation permission and delegated authority constrain the decision; they do not equal final action authority.</strong></p>
+  </section>
 
-    <h2>Request Inputs</h2>
-
-    <p>Integration requires explicit inputs, including as applicable:</p>
-    <ul>
-      <li>Actor identity (user, system, service)</li>
-      <li>Signed request metadata</li>
-      <li>Workflow identity and requested action</li>
-      <li>Source-system trust and approved-pathway status</li>
-      <li>Deterministic context tags</li>
-      <li>Request IDs, timestamps, and freshness windows</li>
-      <li>Attributes required by the Compliance Playbook</li>
-    </ul>
-
-    <p>Missing or malformed required inputs result in fail-closed <strong>DENY</strong>.</p>
-
-    <h2>Release Distribution and Activation</h2>
-
+  <section class="stack-section">
+    <h2>Environment and evidence boundaries</h2>
     <p>
-      Signed Immutable Release Artifacts are distributed through Controlled Release
-      Distribution. Before use:
+      Development, validation, and production should use explicit trust, release, key, replay, and evidence boundaries. Evidence-provider durability, retention, append-only behavior, and external anchoring remain deployment-dependent.
     </p>
-    <ul>
-      <li>Signatures and integrity are verified (Release Verification and Activation)</li>
-      <li>Only an <strong>Active Verified Release</strong> governs runtime evaluation</li>
-      <li>release_identity is fixed for each evaluation and recorded in evidence</li>
-    </ul>
-
-    <p>Draft playbooks and unsigned artifacts must not govern production evaluation.</p>
-
-    <h2>Evidence Integration</h2>
-
-    <p>
-      BeaconGuard emits Verifiable Decision Records per evaluation, including
-      decision outcome, reason codes, release_identity, playbook_identity, and check
-      outcomes where applicable.
-    </p>
-
-    <p>
-      Evidence is integrity-protected decision evidence designed for replay and
-      verification. Append-only retention is supported when configured with a
-      required evidence provider. Customers own provider selection, retention, and
-      operational monitoring.
-    </p>
-
-    <h2>Failure Handling</h2>
-
-    <p>
-      Applications must enforce <strong>DENY</strong> outcomes and must not proceed with governed
-      execution on admission or evaluation failure.
-    </p>
-
-    <p>Failure cases include:</p>
-    <ul>
-      <li>Missing or unverifiable Active Verified Release</li>
-      <li>Trust, freshness, or replay check failures</li>
-      <li>Input normalization errors</li>
-      <li>Internal evaluation faults</li>
-      <li>Absent required approvals (<code>APPROVAL_REQUIRED</code> and similar reason codes)</li>
-    </ul>
-
-    <p>
-      All blocking cases return deterministic <strong>DENY</strong>. Human review via a Verifiable
-      Decision Record obligation does not permit execution.
-    </p>
-
-    <h2>Environment Separation</h2>
-
-    <p>
-      Recommended environments include development, testing / validation, and
-      production. Release artifacts and signing keys must not be casually shared
-      across environments.
-    </p>
-
-    <h2>Related Sections</h2>
-    <ul>
-      <li><a href="/docs/enforcement-runtime">Enforcement Runtime</a></li>
-      <li><a href="/docs/policy-model">Policy Model</a></li>
-      <li><a href="/docs/compliance-audit">Compliance and Audit</a></li>
-      <li><a href="/docs/threat-model">Threat Model</a></li>
-      <li><a href="/deployment">Deployment page</a></li>
-    </ul>
+    <div class="page-actions">
+      <a class="btn-primary" href="/control-responsibility-matrix">Control Responsibility Matrix</a>
+      <a class="btn-secondary" href="/docs/enforcement-runtime">Enforcement Runtime</a>
+      <a class="btn-secondary" href="/docs/dfd-threat-flow">Data-Flow Trust Analysis</a>
+    </div>
   </section>
 </BaseLayout>

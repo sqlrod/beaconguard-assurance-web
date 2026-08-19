@@ -3,8 +3,7 @@ import DiagramShell from "./DiagramShell.astro";
 
 const customer = [
   "Identity provider",
-  "Network controls",
-  "Host hardening",
+  "Network and host controls",
   "Secrets and key custody",
   "Evidence-provider configuration",
   "Monitoring and incident response",
@@ -14,79 +13,77 @@ const shared = [
   "Identity mapping",
   "Request context",
   "Environment separation",
-  "Retention design",
-  "Recovery procedures",
-  "Operational acceptance",
+  "Retention and recovery design",
 ];
 
 const beacon = [
   "Release verification",
   "Deterministic evaluation",
-  "Binary enforcement",
+  "Fail-closed authorization",
   "Decision-record generation",
-  "Fail-closed behavior",
+  "One-time execution authority",
 ];
 ---
 
 <DiagramShell
-  title="Trust and shared responsibility map"
-  caption="Customer, shared, and BeaconGuard-controlled domains. Certification and legal compliance status remain separate from this control boundary model."
+  title="Shared responsibility"
+  caption="BeaconGuard controls the authorization boundary while customers continue to control identity, infrastructure, and systems of record."
   className="bg-diagram--trust-map"
 >
-  <div class="bg-diagram-columns" role="list">
-    <section
-      class="bg-diagram-column"
-      role="listitem"
-      aria-labelledby="trust-customer"
-    >
-      <h4 id="trust-customer" class="bg-diagram-column-title">
-        Customer-Controlled
-      </h4>
+  <div class="srm-grid" role="list">
+    <section class="srm-column" role="listitem" aria-labelledby="srm-customer">
+      <h4 id="srm-customer">Customer-Controlled</h4>
       <ul>
         {customer.map((item) => <li>{item}</li>)}
       </ul>
     </section>
-    <section
-      class="bg-diagram-column"
-      role="listitem"
-      aria-labelledby="trust-shared"
-    >
-      <h4 id="trust-shared" class="bg-diagram-column-title">
-        Shared Integration Boundary
-      </h4>
+    <section class="srm-column" role="listitem" aria-labelledby="srm-shared">
+      <h4 id="srm-shared">Shared Integration Boundary</h4>
       <ul>
         {shared.map((item) => <li>{item}</li>)}
       </ul>
     </section>
-    <section
-      class="bg-diagram-column bg-diagram-column--accent"
-      role="listitem"
-      aria-labelledby="trust-beacon"
-    >
-      <h4 id="trust-beacon" class="bg-diagram-column-title">
-        BeaconGuard-Controlled
-      </h4>
+    <section class="srm-column srm-column--accent" role="listitem" aria-labelledby="srm-beacon">
+      <h4 id="srm-beacon">BeaconGuard-Controlled</h4>
       <ul>
         {beacon.map((item) => <li>{item}</li>)}
       </ul>
     </section>
   </div>
 
-  <div slot="text">
-    <p>
-      <strong>Customer-Controlled:</strong> Identity provider; Network controls;
-      Host hardening; Secrets and key custody; Evidence-provider configuration;
-      Monitoring and incident response.
-    </p>
-    <p>
-      <strong>Shared Integration Boundary:</strong> Identity mapping; Request
-      context; Environment separation; Retention design; Recovery procedures;
-      Operational acceptance.
-    </p>
-    <p>
-      <strong>BeaconGuard-Controlled:</strong> Release verification; Deterministic
-      evaluation; Binary enforcement; Decision-record generation; Fail-closed
-      behavior.
-    </p>
-  </div>
+  <style>
+    .srm-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+    .srm-column {
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 16px;
+      background: rgba(10, 15, 27, 0.9);
+      padding: 1rem 1rem 0.85rem;
+    }
+    .srm-column--accent {
+      border-color: rgba(56, 189, 248, 0.28);
+      background: rgba(18, 31, 52, 0.82);
+    }
+    .srm-column h4 {
+      margin: 0 0 0.75rem;
+      color: var(--text-primary);
+      font-size: 0.98rem;
+    }
+    .srm-column ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--text-secondary);
+    }
+    .srm-column li + li {
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 900px) {
+      .srm-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </DiagramShell>

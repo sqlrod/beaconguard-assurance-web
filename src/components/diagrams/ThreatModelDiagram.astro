@@ -1,0 +1,17 @@
+<figure class="figma-diagram" aria-labelledby="threat-model-caption">
+  <img
+    class="figma-diagram-image"
+    src="/diagrams/beaconguard-threat-model.svg"
+    alt="BeaconGuard threat model showing identity and delegation confusion, access mistaken for authority, out-of-policy AI actions, action substitution, grant replay or reuse, release tampering, evidence alteration, and downstream bypass around the exact-action authorization boundary."
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption id="threat-model-caption">
+    Threats are addressed at the boundary closest to the consequence: identity and delegation, invocation, exact-action authorization, execution authority, policy authority, evidence, and deployment placement.
+  </figcaption>
+</figure>
+<style>
+  .figma-diagram { margin:1.5rem 0; }
+  .figma-diagram-image { display:block; width:100%; height:auto; border-radius:1rem; }
+  figcaption { margin-top:.7rem; color:var(--text-muted); font-size:.9rem; }
+</style>
