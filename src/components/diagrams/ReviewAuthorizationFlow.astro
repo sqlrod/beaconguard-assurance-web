@@ -1,99 +1,70 @@
 ---
 import DiagramShell from "./DiagramShell.astro";
-import OutcomeFork from "./OutcomeFork.astro";
-
-const originalPath = [
-  "Original Request",
-  "Independent Evaluation",
-  "DENY with REVIEW_REQUIRED",
-  "Original Request Finalized",
-  "Verifiable Decision Record",
-];
-
-const reviewPath = [
-  "Reviewer Step-Up",
-  "Bounded Single-Use Authorization",
-  "New Application Request",
-  "Independent Evaluation of New Request",
-];
 ---
 
 <DiagramShell
   title="Privileged review authorization flow"
-  caption="Review does not change the original DENY. Any later execution requires a new request. The new request is independently evaluated. The authorization is bounded and single-use. Reuse is denied."
+  caption="Review does not change the original DENY. Any later execution requires a new request. The new request is independently evaluated. The authorization is bounded and single-use. Review itself is not permission. Reuse is denied."
   className="bg-diagram--review-auth"
 >
-  <p class="bg-diagram-banner">
-    Phase 1 — Original request remains final after DENY
-  </p>
-  <div class="bg-flow" role="list">
-    {
-      originalPath.map((step, index) => (
-        <>
-          <div
-            class:list={[
-              "bg-flow-step",
-              step.startsWith("DENY") && "bg-outcome-deny",
-              step === "Verifiable Decision Record" && "bg-outcome-evidence",
-              step === "Original Request Finalized" && "bg-flow-step--boundary",
-            ]}
-            role="listitem"
-          >
-            {step}
+  <div class="bg-review">
+    <section class="bg-review-lane" aria-labelledby="bg-review-lane1-title">
+      <h4 id="bg-review-lane1-title" class="bg-review-lane-title">ORIGINAL REQUEST</h4>
+      <div class="bg-review-row" role="list">
+        <div class="bg-review-card" role="listitem">Original Request</div>
+        <span class="bg-review-arrow bg-review-arrow--blue" aria-hidden="true">→</span>
+        <div class="bg-review-card" role="listitem">Independent Evaluation</div>
+        <span class="bg-review-arrow bg-review-arrow--blue" aria-hidden="true">→</span>
+        <div class="bg-review-card bg-review-card--deny" role="listitem">
+          <strong>ACTION DENY</strong>
+          <span>REVIEW_REQUIRED</span>
+        </div>
+        <span class="bg-review-arrow bg-review-arrow--blue" aria-hidden="true">→</span>
+        <div class="bg-review-card bg-review-card--boundary" role="listitem">Original Request Finalized</div>
+        <span class="bg-review-arrow bg-review-arrow--amber" aria-hidden="true">→</span>
+        <div class="bg-review-card bg-review-card--evidence" role="listitem">Authorization Evidence</div>
+      </div>
+      <p class="bg-review-lane-note">Original DENY remains final.</p>
+    </section>
+
+    <div class="bg-review-separator" role="separator">
+      <p>REVIEW DOES NOT CHANGE THE ORIGINAL DENY</p>
+      <p>NEW AUTHORITY APPLIES TO A NEW REQUEST</p>
+    </div>
+
+    <section class="bg-review-lane" aria-labelledby="bg-review-lane2-title">
+      <h4 id="bg-review-lane2-title" class="bg-review-lane-title">SEPARATE GOVERNED REVIEW PATH</h4>
+      <div class="bg-review-row bg-review-row--review" role="list">
+        <div class="bg-review-card" role="listitem">Reviewer Step-Up</div>
+        <span class="bg-review-arrow bg-review-arrow--blue" aria-hidden="true">→</span>
+        <div class="bg-review-card bg-review-card--bounded" role="listitem">Bounded Single-Use Authorization</div>
+        <span class="bg-review-arrow bg-review-arrow--blue" aria-hidden="true">→</span>
+        <div class="bg-review-card" role="listitem">New Application Request</div>
+        <span class="bg-review-arrow bg-review-arrow--blue" aria-hidden="true">→</span>
+        <div class="bg-review-card bg-review-card--decision" role="listitem">Independent Evaluation</div>
+      </div>
+      <div class="bg-review-fork" aria-label="Mutually exclusive outcomes for the new request evaluation">
+        <p class="bg-review-fork-caption">Mutually exclusive outcomes</p>
+        <div class="bg-review-fork-arms">
+          <div class="bg-review-card bg-review-card--allow" role="group" aria-label="ACTION ALLOW">
+            <strong>ACTION ALLOW</strong>
+            <span>One-time authority consumed</span>
+            <span class="bg-review-reuse">Reuse attempt → DENY</span>
           </div>
-          {index < originalPath.length - 1 && (
-            <div class="bg-flow-arrow" aria-hidden="true">
-              ↓
-            </div>
-          )}
-        </>
-      ))
-    }
-  </div>
-
-  <p class="bg-diagram-banner">
-    Phase 2 — Separate governed review path (does not resume the original request)
-  </p>
-  <div class="bg-flow" role="list">
-    {
-      reviewPath.map((step, index) => (
-        <>
-          <div
-            class:list={[
-              "bg-flow-step",
-              step.includes("Independent Evaluation") &&
-                "bg-flow-step--decision",
-              step.includes("Authorization") && "bg-outcome-evidence",
-            ]}
-            role="listitem"
-          >
-            {step}
+          <div class="bg-review-card bg-review-card--deny" role="group" aria-label="ACTION DENY">
+            <strong>ACTION DENY</strong>
+            <span>No execution; bounded authorization cannot be reused</span>
           </div>
-          {index < reviewPath.length - 1 && (
-            <div class="bg-flow-arrow" aria-hidden="true">
-              ↓
-            </div>
-          )}
-        </>
-      ))
-    }
+        </div>
+      </div>
+      <p class="bg-review-lane-note">Review itself is not permission.</p>
+    </section>
   </div>
-
-  <OutcomeFork
-    allowLabel="New request permitted for this evaluation only — bounded authorization is consumed; reuse attempt is DENIED"
-    denyLabel="New request blocked — no execution; the bounded authorization cannot be reused"
-    forkLabel="Mutually exclusive outcomes for the new request evaluation"
-  />
-
-  <p class="bg-flow-note">
-    Single-use authorization is no longer reusable after the new evaluation
-    attempt.
-  </p>
 
   <div slot="text">
     <p>
       Phase 1: Original Request → Independent Evaluation → DENY with
-      REVIEW_REQUIRED → Original Request Finalized → Verifiable Decision Record.
+      REVIEW_REQUIRED → Original Request Finalized → Authorization Evidence.
       The original DENY is final; review does not convert it to ALLOW or resume
       the original request.
     </p>
@@ -111,3 +82,185 @@ const reviewPath = [
     </p>
   </div>
 </DiagramShell>
+
+<style>
+  .bg-review {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .bg-review-lane {
+    border: 1px solid #3e5678;
+    border-radius: 0.7rem;
+    background: #0e1420;
+    padding: 0.85rem 0.8rem 0.9rem;
+    min-width: 0;
+  }
+
+  .bg-review-lane-title {
+    margin: 0 0 0.7rem;
+    color: #a3b8d1;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .bg-review-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.15fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+
+  .bg-review-row--review {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.15fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
+  .bg-review-card {
+    border: 1px solid #3e5678;
+    border-radius: 0.55rem;
+    background: #121b29;
+    color: #edf5ff;
+    padding: 0.65rem 0.7rem;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    display: grid;
+    gap: 0.28rem;
+    align-content: start;
+    min-width: 0;
+  }
+
+  .bg-review-card strong {
+    color: #edf5ff;
+    font-size: 0.92rem;
+  }
+
+  .bg-review-card span {
+    color: #a3b8d1;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  .bg-review-card--deny {
+    border-color: rgba(245, 92, 97, 0.55);
+    border-left: 3px solid #f55c61;
+  }
+
+  .bg-review-card--deny strong {
+    color: #f55c61;
+  }
+
+  .bg-review-card--allow {
+    border-color: rgba(56, 199, 140, 0.5);
+    border-left: 3px solid #38c78c;
+  }
+
+  .bg-review-card--allow strong {
+    color: #38c78c;
+  }
+
+  .bg-review-card--evidence,
+  .bg-review-card--bounded {
+    border-left: 3px solid #f2ab40;
+  }
+
+  .bg-review-card--boundary,
+  .bg-review-card--decision {
+    border-left: 3px solid #2eabed;
+  }
+
+  .bg-review-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .bg-review-arrow--blue { color: #2eabed; }
+  .bg-review-arrow--amber { color: #f2ab40; }
+
+  .bg-review-lane-note {
+    margin: 0.65rem 0 0;
+    color: #a3b8d1;
+    font-size: 0.86rem;
+    font-weight: 600;
+  }
+
+  .bg-review-separator {
+    margin: 0;
+    padding: 0.7rem 0.85rem;
+    border: 1px dashed rgba(46, 171, 237, 0.45);
+    border-radius: 0.55rem;
+    background: rgba(18, 27, 41, 0.72);
+    text-align: center;
+  }
+
+  .bg-review-separator p {
+    margin: 0;
+    color: #edf5ff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .bg-review-separator p + p {
+    margin-top: 0.28rem;
+    color: #a3b8d1;
+  }
+
+  .bg-review-fork {
+    margin-top: 0.75rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .bg-review-fork-caption {
+    margin: 0;
+    text-align: center;
+    color: #a3b8d1;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .bg-review-fork-arms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+
+  .bg-review-reuse {
+    color: #f55c61 !important;
+    font-weight: 700 !important;
+  }
+
+  @media (max-width: 900px) {
+    .bg-review-row,
+    .bg-review-row--review {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .bg-review-card {
+      flex: 1 1 calc(50% - 0.45rem);
+      min-width: 0;
+      max-width: calc(50% - 0.23rem);
+    }
+
+    .bg-review-arrow {
+      display: none;
+    }
+
+    .bg-review-fork-arms {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
