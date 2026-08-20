@@ -12,6 +12,7 @@
     <span class="hero-motion hero-motion--deny" aria-hidden="true"></span>
     <span class="hero-state hero-state--allow" aria-hidden="true"></span>
     <span class="hero-state hero-state--deny" aria-hidden="true"></span>
+    <span class="hero-state hero-state--evidence" aria-hidden="true"></span>
   </div>
   <figcaption id="hero-diagram-caption" class="figma-diagram-caption">
     Identity, delegation, and governing policy provide authorization context. BeaconGuard separately decides whether the exact consequential action may execute.
@@ -28,9 +29,9 @@
   .hero-state { position: absolute; pointer-events: none; }
 
   .hero-motion { height: 2px; transform-origin: left center; transform: scaleX(0); opacity: 0; }
-  .hero-motion--proposal { left: 23.35%; top: 41.8%; width: 10%; background: #2eabed; animation: bgFlow 4.8s ease-out .25s infinite; }
-  .hero-motion--allow { left: 60%; top: 35.6%; width: 10.8%; background: #38c78c; animation: bgFlow 4.8s ease-out 1.15s infinite; }
-  .hero-motion--deny { left: 60%; top: 67.2%; width: 10.8%; background: #f55c61; animation: bgFlow 4.8s ease-out 2.05s infinite; }
+  .hero-motion--proposal { left: 23.35%; top: 41.8%; width: 9.34%; background: #2eabed; animation: bgFlow 4.8s ease-out .25s infinite; }
+  .hero-motion--allow { left: 60%; top: 35.6%; width: 10.18%; background: #38c78c; animation: bgFlow 4.8s ease-out 1.15s infinite; }
+  .hero-motion--deny { left: 60%; top: 67.2%; width: 10.18%; background: #f55c61; animation: bgFlow 4.8s ease-out 2.05s infinite; }
 
   .hero-state { width: 21.7%; height: 23%; border-radius: 1rem; opacity: 0; box-shadow: 0 0 0 0 transparent; }
   .hero-state--boundary {
@@ -44,6 +45,15 @@
   }
   .hero-state--allow { left: 70.8%; top: 24.5%; border: 1px solid rgba(56,199,140,.75); animation: bgAllowPulse 4.8s ease-out 1.55s infinite; }
   .hero-state--deny { left: 70.8%; top: 55.7%; border: 1px solid rgba(245,92,97,.72); animation: bgDenyPulse 4.8s ease-out 2.45s infinite; }
+  .hero-state--evidence {
+    left: 34.17%;
+    top: 71%;
+    width: 25%;
+    height: 20%;
+    border: 1px solid rgba(242,171,64,.62);
+    background: rgba(242,171,64,.035);
+    animation: bgEvidencePulse 4.8s ease-out 4.18s infinite;
+  }
 
   @keyframes bgFlow {
     0%, 8% { transform: scaleX(0); opacity: 0; }
@@ -69,6 +79,14 @@
         inset 0 0 0 1px rgba(154,192,232,.18);
     }
     56%, 100% { opacity: 0; box-shadow: 0 0 0 0 rgba(46,171,237,0); }
+  }
+  @keyframes bgEvidencePulse {
+    0%, 8% { opacity: 0; box-shadow: 0 0 0 0 rgba(242,171,64,0); }
+    12%, 24% {
+      opacity: 1;
+      box-shadow: 0 0 12px 1px rgba(242,171,64,.12);
+    }
+    32%, 100% { opacity: 0; box-shadow: 0 0 0 0 rgba(242,171,64,0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
