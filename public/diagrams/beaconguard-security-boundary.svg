@@ -52,6 +52,10 @@
 <path id="Polygon_2" d="M832.1 236.103L839.6 240L832.1 243.897Z" fill="#38C78C"/>
 <line id="Line_3" x1="734.57" y1="314.097" x2="832.1" y2="365" stroke="#F55C61" stroke-width="2"/>
 <path id="Polygon_3" d="M830.1 361.2L839.6 365L834.1 368.8Z" fill="#F55C61"/>
+<line id="evidence from boundary" x1="570" y1="349.4" x2="752" y2="349.4" stroke="#F2AB40" stroke-width="2"/>
+<line id="evidence drop" x1="752" y1="349.4" x2="752" y2="452" stroke="#F2AB40" stroke-width="2"/>
+<line id="evidence into" x1="752" y1="452" x2="762.1" y2="452" stroke="#F2AB40" stroke-width="2"/>
+<path id="evidence into arrow" d="M762.1 448.103L769.6 452L762.1 455.897Z" fill="#F2AB40"/>
 <g id="Security invariants">
 <rect x="70.6" y="405.6" width="663.8" height="56.8" rx="11.4" fill="#0E1420"/>
 <rect x="70.6" y="405.6" width="663.8" height="56.8" rx="11.4" stroke="#476185" stroke-width="1.2"/>
