@@ -150,14 +150,16 @@ const jsonLd = {
     </div>
 
     <figure class="article-figure">
-      <img
-        src={figureOne}
-        alt="Comparison of agent-interpreted permission, where an AI agent reasons about permission and executes an action, with independent authorization that evaluates identity, policy, delegation, target, context, and evidence before allowing or denying execution."
-        width="1448"
-        height="1086"
-        loading="lazy"
-        decoding="async"
-      />
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 1">
+        <img
+          src={figureOne}
+          alt="Comparison of agent-interpreted permission, where an AI agent reasons about permission and executes an action, with independent authorization that evaluates identity, policy, delegation, target, context, and evidence before allowing or denying execution."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
       <figcaption><strong>Figure 1 - Agent-interpreted permission versus independent authorization.</strong> An agent can reason about whether it believes an action is permitted; an independent authorization boundary separately determines whether the proposed action may execute.</figcaption>
     </figure>
 
@@ -202,14 +204,16 @@ const jsonLd = {
     </div>
 
     <figure class="article-figure">
-      <img
-        src={figureTwo}
-        alt="Identity, credentials, IAM roles, network paths, tool access, delegation, and human approval flow into authorization context and an independent authorization decision for a specific consequential action."
-        width="1448"
-        height="1086"
-        loading="lazy"
-        decoding="async"
-      />
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 2">
+        <img
+          src={figureTwo}
+          alt="Identity, credentials, IAM roles, network paths, tool access, delegation, and human approval flow into authorization context and an independent authorization decision for a specific consequential action."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
       <figcaption><strong>Figure 2 - Access and identity signals can inform authorization without replacing it.</strong> Credentials, roles, approvals, reachability and context may all contribute to an authorization decision; none alone establishes that a particular consequential action is authorized.</figcaption>
     </figure>
 
@@ -342,14 +346,16 @@ const jsonLd = {
     </div>
 
     <figure class="article-figure">
-      <img
-        src={figureThree}
-        alt="Six-stage authorization assurance reference model from an AI-proposed action through identity, delegation, policy, target and context evaluation, independent allow or deny, scoped execution authority, governed execution, and verifiable evidence."
-        width="1448"
-        height="1086"
-        loading="lazy"
-        decoding="async"
-      />
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 3">
+        <img
+          src={figureThree}
+          alt="Six-stage authorization assurance reference model from an AI-proposed action through identity, delegation, policy, target and context evaluation, independent allow or deny, scoped execution authority, governed execution, and verifiable evidence."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
       <figcaption><strong>Figure 3 - Reference control model for authorization assurance.</strong> Desired properties include independent evaluation of the proposed action, narrowly scoped execution authority, enforcement at the relevant execution boundary, and reconstructable evidence.</figcaption>
     </figure>
 
@@ -387,6 +393,14 @@ const jsonLd = {
         <a class="btn-secondary" href="/platform">See the Product</a>
       </div>
     </section>
+
+    <div class="figure-lightbox" data-lightbox hidden>
+      <button type="button" class="figure-lightbox__close" data-lightbox-close aria-label="Close enlarged image">&times;</button>
+      <div class="figure-lightbox__frame">
+        <img data-lightbox-image src="" alt="" />
+        <p class="figure-lightbox__caption" data-lightbox-caption></p>
+      </div>
+    </div>
   </article>
 
   <style>
@@ -499,6 +513,142 @@ const jsonLd = {
 
     .insight-reading-surface .article-figure figcaption strong {
       color: var(--read-heading);
+    }
+
+    .figure-zoom-trigger {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      background: none;
+      cursor: zoom-in;
+      position: relative;
+      border-radius: 0.5rem;
+    }
+
+    .figure-zoom-trigger:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 3px;
+    }
+
+    .figure-zoom-trigger::after {
+      content: "Click to enlarge";
+      position: absolute;
+      right: 0.85rem;
+      bottom: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(11, 27, 46, 0.72);
+      color: #f6f8fb;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 150ms ease, transform 150ms ease;
+      pointer-events: none;
+    }
+
+    .figure-zoom-trigger:hover::after,
+    .figure-zoom-trigger:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .figure-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(4, 8, 15, 0.92);
+    }
+
+    .figure-lightbox[hidden] {
+      display: none;
+    }
+
+    .figure-lightbox__frame {
+      max-width: min(1400px, 100%);
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .figure-lightbox__frame img {
+      display: block;
+      max-width: 100%;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .figure-lightbox__caption {
+      max-width: 850px;
+      margin: 0;
+      color: #dbe4f0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .figure-lightbox__close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(11, 27, 46, 0.85);
+      color: #f6f8fb;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .figure-lightbox__close:hover {
+      background: rgba(11, 27, 46, 1);
+    }
+
+    .figure-lightbox__close:focus-visible {
+      outline: 3px solid var(--read-accent, #2f7fc7);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .figure-zoom-trigger::after {
+        content: "Tap to enlarge";
+        right: 0.6rem;
+        bottom: 0.6rem;
+        font-size: 0.72rem;
+        opacity: 1;
+        transform: none;
+      }
+
+      .figure-lightbox {
+        padding: 1rem;
+      }
+
+      .figure-lightbox__frame img {
+        max-height: 72vh;
+      }
+
+      .figure-lightbox__close {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
     }
 
     .executive-summary {
@@ -723,4 +873,49 @@ const jsonLd = {
       }
     }
   </style>
+
+  <script>
+    const lightbox = document.querySelector<HTMLDivElement>("[data-lightbox]");
+    const lightboxImage = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-image]");
+    const lightboxCaption = lightbox?.querySelector<HTMLParagraphElement>("[data-lightbox-caption]");
+    const closeButton = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+    let lastFocused: HTMLElement | null = null;
+
+    function openLightbox(trigger: HTMLElement) {
+      const img = trigger.querySelector("img");
+      if (!img || !lightbox || !lightboxImage) return;
+      lightboxImage.src = img.getAttribute("src") ?? "";
+      lightboxImage.alt = img.getAttribute("alt") ?? "";
+      const figure = trigger.closest("figure");
+      const caption = figure?.querySelector("figcaption")?.textContent?.trim() ?? "";
+      if (lightboxCaption) lightboxCaption.textContent = caption;
+      lastFocused = trigger;
+      lightbox.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      closeButton?.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.hidden = true;
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => openLightbox(trigger));
+    });
+
+    closeButton?.addEventListener("click", closeLightbox);
+
+    lightbox?.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox && !lightbox.hidden) closeLightbox();
+    });
+  </script>
 </BaseLayout>
