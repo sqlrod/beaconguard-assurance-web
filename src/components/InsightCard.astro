@@ -1,0 +1,104 @@
+---
+const {
+  href,
+  image,
+  imageAlt,
+  type,
+  title,
+  excerpt,
+  date,
+  author,
+  width,
+  height,
+} = Astro.props;
+---
+
+<article class="insight-card">
+  <a class="insight-card__media" href={href} aria-label={`Read analysis: ${title}`}>
+    <img src={image} alt={imageAlt} width={width} height={height} loading="eager" decoding="async" />
+  </a>
+  <div class="insight-card__body">
+    <p class="insight-card__type">{type}</p>
+    <h2><a href={href}>{title}</a></h2>
+    <p class="insight-card__excerpt">{excerpt}</p>
+    <p class="insight-card__meta">{date} · {author}</p>
+    <a class="insight-card__cta" href={href}>Read analysis &rarr;</a>
+  </div>
+</article>
+
+<style>
+  .insight-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 0.92fr);
+    gap: 1.35rem;
+    align-items: center;
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: linear-gradient(160deg, rgba(18, 31, 52, 0.78), rgba(10, 16, 27, 0.94));
+  }
+
+  .insight-card__media {
+    display: block;
+    border-radius: 0.45rem;
+    overflow: hidden;
+    background: #f7fbff;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+  }
+
+  .insight-card__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .insight-card__body {
+    min-width: 0;
+  }
+
+  .insight-card__type,
+  .insight-card__meta {
+    margin: 0 0 0.7rem;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .insight-card h2 {
+    margin-bottom: 0.85rem;
+    font-size: 1.55rem;
+  }
+
+  .insight-card h2 a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .insight-card h2 a:hover {
+    color: #9bc3f2;
+    text-decoration: underline;
+  }
+
+  .insight-card__excerpt {
+    max-width: none;
+    margin-bottom: 1rem;
+  }
+
+  .insight-card__cta {
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .insight-card__cta:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 860px) {
+    .insight-card {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

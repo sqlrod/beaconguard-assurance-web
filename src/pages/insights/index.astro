@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import InsightCard from "../../components/InsightCard.astro";
+
+const description =
+  "BeaconGuard Insights examines authorization assurance, consequential AI actions, enforcement boundaries, and the controls enterprises need as agentic AI moves into operational workflows.";
+const featuredImage = "/insights/when-ai-agents-cross-the-boundary/featured.png";
+---
+
+<BaseLayout
+  title="BeaconGuard Insights | Authorization Assurance Analysis"
+  description={description}
+  canonical="https://www.beaconguardassurance.com/insights"
+  ogTitle="BeaconGuard Insights"
+  ogDescription={description}
+  ogImage={featuredImage}
+>
+  <section class="insights-hero">
+    <p class="section-label">INSIGHTS</p>
+    <h1>BeaconGuard Insights</h1>
+    <p class="lead">Analysis and perspectives on authorization assurance for agentic AI.</p>
+    <p>
+      Technical analysis of consequential AI actions, execution authority, enforcement boundaries, and the controls enterprises need as AI moves from recommendation to action.
+    </p>
+  </section>
+
+  <section class="insights-list" aria-label="Published insights">
+    <InsightCard
+      href="/insights/when-ai-agents-cross-the-boundary"
+      image={featuredImage}
+      imageAlt="BeaconGuard Insights illustration showing an AI agent approaching an authorization boundary before reaching real systems, for the article When AI Agents Cross the Boundary."
+      width="1448"
+      height="1086"
+      type="Analysis"
+      title="When AI Agents Cross the Boundary: Why Reasoning About Permission Is Not Authorization"
+      excerpt="OpenAI's Hugging Face incident exposes a critical control question for agentic AI: who determines whether a consequential action is actually authorized - the agent interpreting its environment, or an independent enforcement boundary?"
+      date="September 11, 2026"
+      author="BeaconGuard"
+    />
+  </section>
+
+  <style>
+    .insights-hero {
+      padding: 3rem 0 0.5rem;
+    }
+
+    .insights-hero h1 {
+      max-width: 900px;
+    }
+
+    .insights-hero p {
+      max-width: 780px;
+    }
+
+    .insights-list {
+      display: grid;
+      gap: 1.2rem;
+      margin-bottom: 0;
+    }
+  </style>
+</BaseLayout>

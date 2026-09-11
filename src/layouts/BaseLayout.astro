@@ -2,8 +2,18 @@
 const {
   title = "BeaconGuard Assurance",
   description = "BeaconGuard independently authorizes consequential AI actions before execution and preserves verifiable decision evidence tied to governed policy authority.",
+  canonical,
+  ogTitle = title,
+  ogDescription = description,
+  ogImage,
+  ogType = "website",
+  publishedTime,
+  jsonLd,
 } = Astro.props;
 const currentPath = Astro.url.pathname;
+const siteUrl = "https://www.beaconguardassurance.com";
+const canonicalUrl = canonical ?? new URL(currentPath, siteUrl).toString();
+const absoluteOgImage = ogImage ? new URL(ogImage, siteUrl).toString() : undefined;
 import "../styles/global.css";
 ---
 
@@ -15,11 +25,24 @@ import "../styles/global.css";
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    {absoluteOgImage && <meta property="og:image" content={absoluteOgImage} />}
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    <meta name="twitter:card" content={absoluteOgImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    {absoluteOgImage && <meta name="twitter:image" content={absoluteOgImage} />}
 
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
 
   <body>
@@ -40,6 +63,7 @@ import "../styles/global.css";
           <a href="/healthcare" aria-current={currentPath === "/healthcare" ? "page" : undefined}>Healthcare</a>
           <a href="/fintech" aria-current={currentPath === "/fintech" ? "page" : undefined}>Financial</a>
           <a href="/trust-assurance" aria-current={currentPath === "/trust-assurance" ? "page" : undefined}>Assurance</a>
+          <a href="/insights" aria-current={currentPath === "/insights" || currentPath.startsWith("/insights/") ? "page" : undefined}>Insights</a>
           <a href="/contact" aria-current={currentPath === "/contact" ? "page" : undefined}>Contact</a>
         </nav>
       </div>
