@@ -4,7 +4,8 @@ import InsightCard from "../../components/InsightCard.astro";
 
 const description =
   "BeaconGuard Insights examines authorization assurance, consequential AI actions, enforcement boundaries, and the controls enterprises need as agentic AI moves into operational workflows.";
-const featuredImage = "/insights/when-ai-agents-cross-the-boundary/featured.png";
+const featuredImage = "/insights/what-nist-is-asking-about-authority-for-ai-agents/featured.png";
+const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featured.png";
 ---
 
 <BaseLayout
@@ -26,8 +27,20 @@ const featuredImage = "/insights/when-ai-agents-cross-the-boundary/featured.png"
 
   <section class="insights-list" aria-label="Published insights">
     <InsightCard
-      href="/insights/when-ai-agents-cross-the-boundary"
+      href="/insights/what-nist-is-asking-about-authority-for-ai-agents"
       image={featuredImage}
+      imageAlt="BeaconGuard Insights illustration of an AI agent moving through an identity checkpoint and an authority checkpoint before reaching trusted enterprise action, for the article What NIST Is Asking About Authority for AI Agents."
+      width="1448"
+      height="1086"
+      type="Analysis"
+      title="What NIST Is Asking About Authority for AI Agents"
+      excerpt="NIST is exploring how software and AI agents establish identity, delegated authority, and authorization for specific actions. BeaconGuard examines what those questions mean for enterprise AI."
+      date="September 12, 2026"
+      author="BeaconGuard"
+    />
+    <InsightCard
+      href="/insights/when-ai-agents-cross-the-boundary"
+      image={boundaryFeaturedImage}
       imageAlt="BeaconGuard Insights illustration showing an AI agent approaching an authorization boundary before reaching real systems, for the article When AI Agents Cross the Boundary."
       width="1448"
       height="1086"

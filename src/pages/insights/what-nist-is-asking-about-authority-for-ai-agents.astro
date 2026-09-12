@@ -1,0 +1,861 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "What NIST Is Asking About Authority for AI Agents";
+const seoTitle = "What NIST Is Asking About Authority for AI Agents | BeaconGuard Insights";
+const description =
+  "NIST is exploring how software and AI agents establish identity, delegated authority, and authorization for specific actions. BeaconGuard examines what those questions mean for enterprise AI.";
+const canonical = "https://www.beaconguardassurance.com/insights/what-nist-is-asking-about-authority-for-ai-agents";
+const featuredImage = "/insights/what-nist-is-asking-about-authority-for-ai-agents/featured.png";
+const figureOne = "/insights/what-nist-is-asking-about-authority-for-ai-agents/figure-1-identity-to-specific-authority.png";
+const figureTwo = "/insights/what-nist-is-asking-about-authority-for-ai-agents/figure-2-delegated-authority.png";
+const figureThree = "/insights/what-nist-is-asking-about-authority-for-ai-agents/figure-3-authority-chain.png";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: title,
+  description,
+  image: `https://www.beaconguardassurance.com${featuredImage}`,
+  datePublished: "2026-09-12",
+  dateModified: "2026-09-12",
+  author: {
+    "@type": "Organization",
+    name: "BeaconGuard",
+    url: "https://www.beaconguardassurance.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "BeaconGuard Assurance",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.beaconguardassurance.com/beaconguard-master-logo.png",
+    },
+  },
+  mainEntityOfPage: canonical,
+};
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={description}
+  canonical={canonical}
+  ogTitle={seoTitle}
+  ogDescription={description}
+  ogImage={featuredImage}
+  ogType="article"
+  publishedTime="2026-09-12T00:00:00-04:00"
+  jsonLd={jsonLd}
+>
+  <article class="insight-article">
+    <header class="article-header">
+      <p class="section-label">ANALYSIS</p>
+      <p class="article-section">BeaconGuard Insights · Authority &amp; Delegation · Standards</p>
+      <h1>{title}</h1>
+      <p class="article-subtitle">
+        The emerging question is not only how to identify an AI agent, but how an enterprise establishes, delegates, and proves authority for the specific action the agent is about to take.
+      </p>
+      <p class="article-meta">By BeaconGuard · September 12, 2026</p>
+      <figure class="article-featured">
+        <img
+          src={featuredImage}
+          alt="BeaconGuard Insights illustration of an AI agent moving through an identity checkpoint and an authority checkpoint before reaching trusted enterprise action, for the article What NIST Is Asking About Authority for AI Agents."
+          width="1448"
+          height="1086"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
+    </header>
+
+    <div class="insight-reading-surface">
+    <div class="insight-reading-inner">
+    <section class="executive-summary" aria-labelledby="executive-summary">
+      <h2 id="executive-summary">Executive Summary</h2>
+      <div class="summary-grid">
+        <div>
+          <h3>What is happening</h3>
+          <p>
+            The National Institute of Standards and Technology's National Cybersecurity Center of Excellence is exploring how existing identity and authorization standards should apply to software and AI agents. Its draft concept paper asks questions that become increasingly important as agents move from generating information to taking actions: How should agents prove authority for a specific action? How should authority be delegated when an agent acts on behalf of someone? How should agent identity be connected to human authorization? And how can those actions later be verified?
+          </p>
+        </div>
+        <div>
+          <h3>Why it matters</h3>
+          <p>
+            Establishing an agent's identity is fundamental. So are credentials, entitlements, OAuth scopes, access controls, and policy. But agentic systems add a harder enterprise problem: the system may know who or what the agent is while still needing to determine whether this particular consequential action is authorized under the relevant authority, policy, and context.
+          </p>
+        </div>
+        <div>
+          <h3>What enterprises should ask</h3>
+          <p>
+            When an agent proposes a consequential action, can the organization establish who granted its authority, what was delegated, whether that authority covers this specific action, and what evidence will remain afterward?
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="article-body">
+      <section>
+        <h2>AI agents are moving from identity problems to authority problems</h2>
+        <p>Enterprise identity systems have spent decades answering foundational questions:</p>
+        <p>Who are you?</p>
+        <p>Can you prove it?</p>
+        <p>What resources are you permitted to access?</p>
+        <p>What roles or entitlements have been assigned to you?</p>
+        <p>Those questions remain essential for AI agents. NIST's recent work explicitly argues for building agentic systems on established identity and access-management foundations rather than abandoning them for entirely new security models. Its August guidance emphasizes unique identities for agents, appropriate credentials and entitlements, modern authorization standards, tighter scopes, and better token management.</p>
+        <p>But agentic systems change the operational context.</p>
+        <p>Traditional software usually follows execution paths designed in advance. Agents can reason about goals, acquire context, choose tools and take actions with limited human supervision. NIST's concept paper specifically focuses on architectures in which systems can dynamically acquire information and potentially take actions rather than merely generate responses.</p>
+        <p>That creates a question beyond simply recognizing the actor:</p>
+        <p><strong>"What authority does this agent have for the action it is now attempting to perform?"</strong></p>
+        <p>NIST does not present a finalized answer. It explicitly asks the question.</p>
+        <p>Among the authorization questions in its February concept paper is:</p>
+        <p><strong>"What are the mechanisms for an agent to prove its authority to perform a specific action?"</strong></p>
+        <p>The paper separately asks how organizations should handle delegation in "on behalf of" scenarios and how agent identity should be bound to human identity for human-in-the-loop authorization.</p>
+        <p>Those are not merely identity questions.</p>
+        <p>They are questions about authority.</p>
+      </section>
+
+      <section>
+        <h2>Identity can be established while authority remains contextual</h2>
+        <p>Consider an enterprise agent with a legitimate identity.</p>
+        <p>The agent may have:</p>
+        <ul>
+          <li>its own cryptographic credentials</li>
+          <li>an established relationship to a user or service</li>
+          <li>OAuth scopes</li>
+          <li>assigned entitlements</li>
+          <li>access to an approved API</li>
+          <li>authorization to operate within a defined workflow</li>
+        </ul>
+        <p>All of those controls can be legitimate and necessary.</p>
+        <p>Yet the consequential action may still require more context.</p>
+        <p>A healthcare scheduling agent might legitimately have access to appointment systems. But whether it may view, reschedule, cancel, or override a particular appointment may depend on the patient, workflow, delegated authority, organizational policy, current state, and the consequence of the requested change.</p>
+        <p>A financial-services agent might legitimately reach a payments interface. That does not mean every technically reachable payment is authorized merely because the agent possesses the credential needed to submit it.</p>
+        <p>This is not an argument against IAM.</p>
+        <p>It is an argument for preserving the difference between the inputs to an authorization decision and the specific decision being made.</p>
+        <p>NIST's current work makes that distinction increasingly visible. Its August analysis notes that modern authorization protocols do not automatically eliminate overly broad access and discusses mechanisms for more dynamic, granular authorization and for propagating authorization context through human and agentic call chains.</p>
+      </section>
+    </div>
+
+    <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 1">
+        <img
+          src={figureOne}
+          alt="Diagram showing a progression from agent identity and authentication through access, delegated authority, action context, authorization decision, and execution."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 1 - From Identity to Specific Authority.</strong> Identity and access establish critical prerequisites. Agentic execution introduces an additional question: whether the specific proposed action falls within the authority actually granted.</figcaption>
+    </figure>
+
+    <div class="article-body">
+      <section>
+        <h2>Delegation is where the problem becomes harder</h2>
+        <p>Agentic systems frequently operate on behalf of someone else.</p>
+        <p>That may be:</p>
+        <p>a person,</p>
+        <p>a service account,</p>
+        <p>a department,</p>
+        <p>an organization,</p>
+        <p>or another agent.</p>
+        <p>Delegation therefore becomes central.</p>
+        <p>NIST's draft project identifies access delegation as a distinct area of interest, including linking specific user identities to agents so that organizations can maintain accountability for automated actions. It also explicitly asks how authority should be delegated in "on behalf of" scenarios.</p>
+        <p>The important question is not simply:</p>
+        <p><strong>"Who owns this agent?"</strong></p>
+        <p>It is:</p>
+        <p><strong>"What did that principal actually authorize the agent to do?"</strong></p>
+        <p>Those are different claims.</p>
+        <p>A user may authorize an agent to help manage travel.</p>
+        <p>That does not necessarily establish unrestricted authority to:</p>
+        <ul>
+          <li>book any flight</li>
+          <li>spend any amount</li>
+          <li>change an existing reservation</li>
+          <li>accept contractual terms</li>
+          <li>delegate the task to another agent</li>
+        </ul>
+        <p>Likewise, an organization may authorize an AI system to assist with patient scheduling without authorizing every possible mutation of a patient's record.</p>
+        <p>Delegated authority therefore needs boundaries.</p>
+        <p>Those boundaries may include:</p>
+        <ul>
+          <li>permitted actions</li>
+          <li>permitted targets</li>
+          <li>permitted data</li>
+          <li>monetary or operational thresholds</li>
+          <li>time constraints</li>
+          <li>workflow state</li>
+          <li>required approvals</li>
+          <li>conditions under which the authority no longer applies</li>
+        </ul>
+        <p>The agent's identity tells the system which agent is acting.</p>
+        <p>Delegation helps establish whose authority the agent is exercising.</p>
+        <p>The remaining question is whether that authority covers the proposed action now.</p>
+      </section>
+    </div>
+
+    <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 2">
+        <img
+          src={figureTwo}
+          alt="Diagram showing broad organizational intent narrowing through delegation, an AI agent, policy and context, and an authorization decision before a business-system consequence occurs."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 2 - Delegated Authority Should Become More Specific, Not Less.</strong> Delegation should establish the authority an agent may exercise, while runtime authorization determines whether the specific proposed consequence fits within that authority and current policy.</figcaption>
+    </figure>
+
+    <div class="article-body">
+      <section>
+        <h2>Strong IAM remains the foundation</h2>
+        <p>There is a temptation in emerging AI-security discussions to frame identity and authorization as competing approaches.</p>
+        <p>That would be a mistake.</p>
+        <p>NIST's August analysis is explicit that existing IAM practices remain foundational. It warns against credential sharing, static tokens, overly broad permissions and poorly designed human approval. It also points to OAuth, SPIFFE, short-lived credentials, Rich Authorization Requests and emerging mechanisms for carrying authorization context across call chains.</p>
+        <p>That matters because authorization assurance should not be understood as replacing identity.</p>
+        <p>It depends on it.</p>
+        <p>A high-quality authorization decision may need to consider:</p>
+        <p><strong>Identity:</strong> Which agent is requesting the action?</p>
+        <p><strong>Principal:</strong> On whose behalf is it acting?</p>
+        <p><strong>Credential:</strong> What authenticated evidence supports those identities?</p>
+        <p><strong>Entitlements:</strong> What access has already been granted?</p>
+        <p><strong>Delegation:</strong> What authority was transferred to the agent?</p>
+        <p><strong>Policy:</strong> What organizational rules apply?</p>
+        <p><strong>Context:</strong> What is happening now?</p>
+        <p><strong>Target:</strong> What system, record or resource will be affected?</p>
+        <p><strong>Action:</strong> What consequence is actually being proposed?</p>
+        <p>Identity, credentials, roles, scopes and approvals are therefore not discarded.</p>
+        <p>They become inputs into a decision about the proposed consequence.</p>
+      </section>
+
+      <section>
+        <h2>Human approval is not a complete substitute</h2>
+        <p>One obvious response to uncertainty is to ask a person.</p>
+        <p>For some actions, that is entirely appropriate.</p>
+        <p>But NIST also identifies a limitation: excessive human-in-the-loop approval can create consent fatigue. Its August analysis compares repetitive approval requests to authentication fatigue, where users become conditioned to approve prompts simply to keep work moving.</p>
+        <p>This matters for agentic systems because a human click does not automatically answer every authority question.</p>
+        <p>What did the user see?</p>
+        <p>What exact action was approved?</p>
+        <p>Did execution change after approval?</p>
+        <p>Did the agent switch tools?</p>
+        <p>Was the approval for one transaction or an entire workflow?</p>
+        <p>Was another agent subsequently involved?</p>
+        <p>The design challenge is therefore not merely to put a person somewhere in the loop.</p>
+        <p>It is to determine what requires human authority, what can be delegated, and how that authority remains meaningful as the workflow proceeds.</p>
+      </section>
+
+      <section>
+        <h2>Authority also needs evidence</h2>
+        <p>NIST's questions do not end with execution.</p>
+        <p>Its concept paper asks how agent actions and intent can be logged in a tamper-proof and verifiable manner and how non-repudiation can bind agent actions back to human authorization. The proposed project's areas of interest also include linking actions to non-human identities and improving visibility into automated outcomes.</p>
+        <p>That creates a second enterprise problem.</p>
+        <p>It is not enough to ask:</p>
+        <p><strong>"Was the action allowed?"</strong></p>
+        <p>Organizations may later need to establish:</p>
+        <ul>
+          <li>which agent requested it</li>
+          <li>who or what delegated authority</li>
+          <li>what policy applied</li>
+          <li>what relevant context was evaluated</li>
+          <li>what decision was returned</li>
+          <li>what system executed the action</li>
+          <li>whether the resulting record can be trusted</li>
+        </ul>
+        <p>An ordinary activity log may show that something happened.</p>
+        <p>Authorization evidence should help explain why the system permitted it to happen.</p>
+        <p>That distinction becomes particularly important in regulated workflows, where an organization may have to reconstruct a consequential decision after the model, policy, workflow state or surrounding systems have changed.</p>
+      </section>
+    </div>
+
+    <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 3">
+        <img
+          src={figureThree}
+          alt="Authority-chain diagram connecting a human or organizational principal to an agent identity, consequential action, authorization decision, allow or deny outcome, enforced execution, and verifiable evidence."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 3 - The Authority Chain.</strong> The authority chain connects the principal, agent, proposed action, authorization decision and resulting evidence without treating any one component as a substitute for the others.</figcaption>
+    </figure>
+
+    <div class="article-body">
+      <section>
+        <h2>What NIST has not said</h2>
+        <p>Precision matters here.</p>
+        <p>The February document is a draft concept paper, not a final standard or mandate. It was published to solicit stakeholder input and inform the scope and feasibility of a potential NCCoE demonstration effort. The project is currently listed as reviewing comments.</p>
+        <p>NIST has not endorsed BeaconGuard.</p>
+        <p>It has not mandated a specific authorization gateway.</p>
+        <p>It has not prescribed a single architecture for resolving agent authority.</p>
+        <p>And its exploration of agent identity and authorization should not be represented as proof that one commercial implementation is the required answer.</p>
+        <p>What NIST has done is frame a set of questions that enterprises will increasingly have to answer as AI agents take consequential actions.</p>
+        <p>Among them:</p>
+        <p>How does the agent prove authority for the specific action?</p>
+        <p>How is authority delegated when the agent acts on someone else's behalf?</p>
+        <p>How does that authority remain accountable to a human or organization?</p>
+        <p>How can actions and intent later be verified?</p>
+        <p>Those questions are significant on their own.</p>
+      </section>
+
+      <section>
+        <h2>What enterprises should ask now</h2>
+        <p>Organizations deploying agents into operational workflows do not need to wait for standards activity to finish before examining their architecture.</p>
+        <p>They can ask:</p>
+        <ol class="concept-flow">
+          <li>Does each agent have a distinct identity, or is it borrowing a user's credentials?</li>
+          <li>Can we identify the principal on whose behalf the agent is acting?</li>
+          <li>Can we state exactly what authority was delegated?</li>
+          <li>Does that authority apply to the particular action being proposed?</li>
+          <li>Can policy and runtime context narrow or revoke that authority?</li>
+          <li>Where is the authorization decision actually enforced?</li>
+          <li>Can the agent bypass that enforcement path through another tool or interface?</li>
+          <li>When human approval is required, is the approval tied to a meaningful action rather than a vague continuation prompt?</li>
+          <li>Can we reconstruct the authorization decision independently after execution?</li>
+        </ol>
+        <p>These questions move the conversation beyond whether an agent simply has credentials.</p>
+        <p>They ask whether the enterprise can explain and defend why the resulting action was authorized.</p>
+      </section>
+
+      <section>
+        <h2>From agent identity to authorization assurance</h2>
+        <p>BeaconGuard's interpretation of this emerging problem is authorization assurance.</p>
+        <p>The premise is straightforward:</p>
+        <p>An AI system may propose an action.</p>
+        <p>Identity, credentials, roles, entitlements, approvals, delegated authority, policy and context can all contribute to the decision.</p>
+        <p>But before a consequential action changes a real system, that action should be independently evaluated against the authority and policy that actually apply.</p>
+        <p>The resulting decision should then be enforced at the relevant execution boundary, with evidence sufficient to reconstruct what occurred.</p>
+        <p>That is not a replacement for IAM.</p>
+        <p>It is an architectural extension of the control problem that emerges once authenticated agents begin acting.</p>
+        <p>NIST's current work does not settle what that architecture will ultimately look like.</p>
+        <p>But the questions it is asking are increasingly difficult for enterprises to avoid.</p>
+        <p>Once an AI agent can act, identifying it is only the beginning.</p>
+        <p>The enterprise still has to answer:</p>
+        <p><strong>"Who authorized this action?"</strong></p>
+      </section>
+
+      <section class="sources">
+        <h2>Sources and further reading</h2>
+        <ol>
+          <li><a href="https://www.nccoe.nist.gov/sites/default/files/2026-02/accelerating-the-adoption-of-software-and-ai-agent-identity-and-authorization-concept-paper.pdf" rel="noopener noreferrer">NIST National Cybersecurity Center of Excellence - Accelerating the Adoption of Software and AI Agent Identity and Authorization Concept Paper</a> - February 5, 2026. Draft concept paper examining identification, authentication, authorization, delegation, auditing, non-repudiation and related controls for software and AI agents.</li>
+          <li><a href="https://www.nist.gov/blogs/cybersecurity-insights/back-future-why-agentic-ai-needs-strong-identity-foundation" rel="noopener noreferrer">NIST Cybersecurity Insights - Back to the Future: Why Agentic AI Needs a Strong Identity Foundation</a> - August 27, 2026 (Bill Fisher and Ryan Galluzzo). Discussion of credential sharing, static credentials, broad authorization, delegated rights, human-in-the-loop limitations and emerging authorization mechanisms for agentic systems.</li>
+          <li><a href="https://www.nist.gov/news-events/news/2026/02/announcing-ai-agent-standards-initiative-interoperable-and-secure" rel="noopener noreferrer">NIST - AI Agent Standards Initiative</a>. NIST initiative covering agent security, authentication, identity infrastructure, interoperability and standards activity.</li>
+        </ol>
+      </section>
+    </div>
+    </div>
+    </div>
+
+    <section class="article-cta">
+      <p class="section-label">CONTROLLED EVALUATION</p>
+      <h2>Start with one consequential workflow</h2>
+      <p>Evaluate where authorization should sit between an AI-initiated action and the system that ultimately executes it - without replacing the existing identity, access-management, or system-of-record controls.</p>
+      <div class="page-actions">
+        <a class="btn-primary" href="/design-partner-program">Request Evaluation</a>
+        <a class="btn-secondary" href="/platform">See the Product</a>
+      </div>
+    </section>
+
+    <div class="figure-lightbox" data-lightbox hidden>
+      <button type="button" class="figure-lightbox__close" data-lightbox-close aria-label="Close enlarged image">&times;</button>
+      <div class="figure-lightbox__frame">
+        <img data-lightbox-image src="" alt="" />
+        <p class="figure-lightbox__caption" data-lightbox-caption></p>
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .insight-article {
+      margin: 0 auto;
+      color: #102033;
+    }
+
+    .article-header,
+    .executive-summary,
+    .article-body,
+    .pull-quote {
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-header {
+      max-width: 1080px;
+      padding-top: 2rem;
+    }
+
+    .article-section,
+    .article-meta {
+      margin: 0 0 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .article-header h1 {
+      max-width: 900px;
+      color: var(--text-primary);
+      font-size: 3rem;
+    }
+
+    .article-subtitle {
+      max-width: 850px;
+      color: var(--hero-accent);
+      font-size: 1.18rem;
+      line-height: 1.55;
+    }
+
+    .article-featured {
+      max-width: 1050px;
+      margin: 2.2rem auto 0;
+    }
+
+    .article-featured img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: #f7fbff;
+      object-fit: contain;
+    }
+
+    /* =========================
+       LIGHT EDITORIAL READING SURFACE
+       Full-bleed band scoped to the Insights article body only.
+       ========================= */
+    .insight-reading-surface {
+      --read-bg: #f6f8fb;
+      --read-bg-panel: #ffffff;
+      --read-heading: #0b1b2e;
+      --read-body: #334155;
+      --read-muted: #64748b;
+      --read-border: rgba(11, 27, 46, 0.12);
+      --read-accent: #2f7fc7;
+
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-top: 2.75rem;
+      margin-bottom: 0;
+      background: var(--read-bg);
+      border-top: 1px solid var(--read-border);
+    }
+
+    .insight-reading-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 4rem;
+    }
+
+    .article-figure {
+      width: min(1100px, 100%);
+      margin: 3.5rem auto;
+    }
+
+    .insight-reading-surface .article-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid var(--read-border);
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.08);
+      object-fit: contain;
+    }
+
+    .insight-reading-surface .article-figure figcaption {
+      max-width: 850px;
+      margin: 1rem auto 0;
+      color: var(--read-muted);
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface .article-figure figcaption strong {
+      color: var(--read-heading);
+    }
+
+    .figure-zoom-trigger {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      background: none;
+      cursor: zoom-in;
+      position: relative;
+      border-radius: 0.5rem;
+    }
+
+    .figure-zoom-trigger:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 3px;
+    }
+
+    .figure-zoom-trigger::after {
+      content: "Click to enlarge";
+      position: absolute;
+      right: 0.85rem;
+      bottom: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(11, 27, 46, 0.72);
+      color: #f6f8fb;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 150ms ease, transform 150ms ease;
+      pointer-events: none;
+    }
+
+    .figure-zoom-trigger:hover::after,
+    .figure-zoom-trigger:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .figure-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(4, 8, 15, 0.92);
+    }
+
+    .figure-lightbox[hidden] {
+      display: none;
+    }
+
+    .figure-lightbox__frame {
+      max-width: min(1400px, 100%);
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .figure-lightbox__frame img {
+      display: block;
+      max-width: 100%;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .figure-lightbox__caption {
+      max-width: 850px;
+      margin: 0;
+      color: #dbe4f0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .figure-lightbox__close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(11, 27, 46, 0.85);
+      color: #f6f8fb;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .figure-lightbox__close:hover {
+      background: rgba(11, 27, 46, 1);
+    }
+
+    .figure-lightbox__close:focus-visible {
+      outline: 3px solid var(--read-accent, #2f7fc7);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .figure-zoom-trigger::after {
+        content: "Tap to enlarge";
+        right: 0.6rem;
+        bottom: 0.6rem;
+        font-size: 0.72rem;
+        opacity: 1;
+        transform: none;
+      }
+
+      .figure-lightbox {
+        padding: 1rem;
+      }
+
+      .figure-lightbox__frame img {
+        max-height: 72vh;
+      }
+
+      .figure-lightbox__close {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+
+    .executive-summary {
+      border: 1px solid var(--read-border);
+      border-radius: 0.65rem;
+      background: var(--read-bg-panel);
+      padding: 1.75rem 2rem;
+      max-width: 1050px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .executive-summary h2 {
+      color: var(--read-heading);
+      margin-bottom: 1rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .summary-grid div {
+      border-left: 3px solid var(--read-accent);
+      padding-left: 0.85rem;
+    }
+
+    .summary-grid h3 {
+      font-size: 1rem;
+      margin-bottom: 0.45rem;
+      color: var(--read-heading);
+    }
+
+    .summary-grid p {
+      max-width: none;
+      margin-bottom: 0;
+      color: var(--read-body);
+    }
+
+    .article-body section {
+      margin-bottom: 3.2rem;
+    }
+
+    .article-body h2 {
+      margin-top: 0;
+      padding-top: 0.2rem;
+      font-size: 1.8rem;
+      color: var(--read-heading);
+    }
+
+    .article-body h3 {
+      margin-top: 1.8rem;
+      font-size: 1.08rem;
+      color: #16324a;
+    }
+
+    .article-body p,
+    .article-body li {
+      color: var(--read-body);
+      font-size: 1.02rem;
+      line-height: 1.72;
+    }
+
+    .article-body p {
+      max-width: 760px;
+      margin-bottom: 1.05rem;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 1.3rem;
+      padding-left: 1.35rem;
+      color: var(--read-body);
+    }
+
+    .article-body code {
+      padding: 0.12rem 0.32rem;
+      border: 1px solid var(--read-border);
+      border-radius: 0.25rem;
+      background: #eef2f7;
+      color: #0b1b2e;
+    }
+
+    .article-body blockquote,
+    .pull-quote blockquote {
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--read-accent);
+      padding: 0.1rem 0 0.1rem 1rem;
+    }
+
+    .article-body blockquote p {
+      color: var(--read-heading);
+    }
+
+    .article-body a {
+      color: var(--read-accent);
+    }
+
+    .concept-flow {
+      list-style: decimal;
+    }
+
+    .concept-flow li {
+      margin-bottom: 0.65rem;
+    }
+
+    .sources {
+      border-top: 1px solid var(--read-border);
+      padding-top: 1.8rem;
+      margin-bottom: 0;
+    }
+
+    .sources h2 {
+      color: var(--read-heading);
+    }
+
+    .sources ol {
+      padding-left: 1.2rem;
+    }
+
+    .sources li {
+      font-size: 0.95rem;
+      color: var(--read-muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .sources a {
+      color: var(--read-accent);
+    }
+
+    .article-cta {
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.5rem;
+      background: linear-gradient(160deg, rgba(18, 31, 52, 0.78), rgba(10, 16, 27, 0.94));
+      padding: 1.2rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .article-cta p {
+      max-width: none;
+      margin-bottom: 0;
+    }
+
+    .article-cta h2 {
+      margin-bottom: 0.85rem;
+    }
+
+    .article-cta .page-actions {
+      margin-top: 1.2rem;
+    }
+
+    @media (max-width: 900px) {
+      .article-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .article-header {
+        padding-top: 0.5rem;
+      }
+
+      .article-header h1 {
+        font-size: 1.85rem;
+      }
+
+      .article-subtitle,
+      .article-body p,
+      .article-body li {
+        font-size: 1rem;
+      }
+
+      .article-featured {
+        margin-left: -0.2rem;
+        margin-right: -0.2rem;
+      }
+
+      .insight-reading-surface {
+        margin-top: 1.6rem;
+      }
+
+      .insight-reading-inner {
+        padding: 2.4rem 1.15rem 2.6rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .insight-reading-inner {
+        padding: 3.25rem 1.5rem 3.25rem;
+      }
+    }
+  </style>
+
+  <script>
+    const lightbox = document.querySelector<HTMLDivElement>("[data-lightbox]");
+    const lightboxImage = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-image]");
+    const lightboxCaption = lightbox?.querySelector<HTMLParagraphElement>("[data-lightbox-caption]");
+    const closeButton = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+    let lastFocused: HTMLElement | null = null;
+
+    function openLightbox(trigger: HTMLElement) {
+      const img = trigger.querySelector("img");
+      if (!img || !lightbox || !lightboxImage) return;
+      lightboxImage.src = img.getAttribute("src") ?? "";
+      lightboxImage.alt = img.getAttribute("alt") ?? "";
+      const figure = trigger.closest("figure");
+      const caption = figure?.querySelector("figcaption")?.textContent?.trim() ?? "";
+      if (lightboxCaption) lightboxCaption.textContent = caption;
+      lastFocused = trigger;
+      lightbox.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      closeButton?.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.hidden = true;
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => openLightbox(trigger));
+    });
+
+    closeButton?.addEventListener("click", closeLightbox);
+
+    lightbox?.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox && !lightbox.hidden) closeLightbox();
+    });
+  </script>
+</BaseLayout>
