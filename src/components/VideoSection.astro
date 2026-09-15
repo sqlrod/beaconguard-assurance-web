@@ -1,0 +1,31 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  videoId: string;
+  videoTitle: string;
+  disclosure?: string;
+}
+
+const { eyebrow, title, description, videoId, videoTitle, disclosure } = Astro.props;
+---
+
+<section class="stack-section video-section" aria-labelledby={`${videoId}-title`}>
+  <p class="section-label">{eyebrow}</p>
+  <h2 id={`${videoId}-title`}>{title}</h2>
+  <p>{description}</p>
+
+  <div class="video-embed">
+    <iframe
+      src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+      title={videoTitle}
+      loading="lazy"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  {disclosure && <p class="video-disclosure">{disclosure}</p>}
+</section>
