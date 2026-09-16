@@ -11,3 +11,7 @@ yarn-debug.log*
 yarn-error.log*
 .vscode/
 .review-screenshots/
+
+# Local BeaconGuard Insights research workspace (do not commit)
+/BeaconGuard-Insights/Research/
+

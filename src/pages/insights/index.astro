@@ -4,6 +4,7 @@ import InsightCard from "../../components/InsightCard.astro";
 
 const description =
   "BeaconGuard Insights examines authorization assurance, consequential AI actions, enforcement boundaries, and the controls enterprises need as agentic AI moves into operational workflows.";
+const agenticPaymentsFeaturedImage = "/insights/before-an-ai-agent-can-pay/featured-before-an-ai-agent-can-pay.png";
 const featuredImage = "/insights/what-nist-is-asking-about-authority-for-ai-agents/featured.png";
 const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featured.png";
 ---
@@ -14,7 +15,7 @@ const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featu
   canonical="https://www.beaconguardassurance.com/insights"
   ogTitle="BeaconGuard Insights"
   ogDescription={description}
-  ogImage={featuredImage}
+  ogImage={agenticPaymentsFeaturedImage}
 >
   <section class="insights-hero">
     <p class="section-label">INSIGHTS</p>
@@ -26,6 +27,18 @@ const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featu
   </section>
 
   <section class="insights-list" aria-label="Published insights">
+    <InsightCard
+      href="/insights/before-an-ai-agent-can-pay"
+      image={agenticPaymentsFeaturedImage}
+      imageAlt="Modern Authorization Lock canal metaphor: AI agent vessel delivering payment intent approaches an independent AUTHORIZATION gate checking Identity, Mandate, Limits, and Consent; Evidence Control Log and SETTLEMENT beyond; BeaconGuard Insights branding; no NPCI or UPI logos."
+      width="1448"
+      height="1086"
+      type="Analysis"
+      title="Before an AI Agent Can Pay: What NPCI Is Separating Before Settlement"
+      excerpt="NPCI's emerging agentic-payment design separates an AI agent's interpretation of user intent from the controls that verify mandate, limits, consent, and authorization before payment settlement."
+      date="September 16, 2026"
+      author="BeaconGuard"
+    />
     <InsightCard
       href="/insights/what-nist-is-asking-about-authority-for-ai-agents"
       image={featuredImage}

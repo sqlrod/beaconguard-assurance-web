@@ -54,7 +54,7 @@
   </url>
   <url>
     <loc>https://www.beaconguardassurance.com/insights</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -67,6 +67,12 @@
   <url>
     <loc>https://www.beaconguardassurance.com/insights/when-ai-agents-cross-the-boundary</loc>
     <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.beaconguardassurance.com/insights/before-an-ai-agent-can-pay</loc>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

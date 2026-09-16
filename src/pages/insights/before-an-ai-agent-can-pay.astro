@@ -1,0 +1,852 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = 'Before an AI Agent Can Pay: What NPCI Is Separating Before Settlement';
+const seoTitle = 'Before an AI Agent Can Pay | BeaconGuard Insights';
+const description =
+  "NPCI's emerging agentic-payment design separates an AI agent's interpretation of user intent from the controls that verify mandate, limits, consent, and authorization before payment settlement.";
+const canonical = 'https://www.beaconguardassurance.com/insights/before-an-ai-agent-can-pay';
+const featuredImage = '/insights/before-an-ai-agent-can-pay/featured-before-an-ai-agent-can-pay.png';
+const figureOne = '/insights/before-an-ai-agent-can-pay/figure-1-inside-the-authorization-lock.png';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: title,
+  description,
+  image: `https://www.beaconguardassurance.com${featuredImage}`,
+  datePublished: "2026-09-16",
+  dateModified: "2026-09-16",
+  author: {
+    "@type": "Organization",
+    name: "BeaconGuard",
+    url: "https://www.beaconguardassurance.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "BeaconGuard Assurance",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.beaconguardassurance.com/beaconguard-master-logo.png",
+    },
+  },
+  mainEntityOfPage: canonical,
+};
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={description}
+  canonical={canonical}
+  ogTitle={seoTitle}
+  ogDescription={description}
+  ogImage={featuredImage}
+  ogType="article"
+  publishedTime="2026-09-16T00:00:00-04:00"
+  jsonLd={jsonLd}
+>
+  <article class="insight-article">
+    <header class="article-header">
+      <p class="section-label">ANALYSIS</p>
+      <p class="article-section">BeaconGuard Insights — Agentic Payments</p>
+      <h1>{title}</h1>
+      <p class="article-subtitle">
+        NPCI's emerging agentic-payment design separates an AI agent's interpretation of user intent from the controls that verify mandate, limits, consent, and authorization before payment settlement.
+      </p>
+      <p class="article-meta">By BeaconGuard · September 16, 2026</p>
+      <figure class="article-featured">
+        <img
+          src={featuredImage}
+          alt="Modern Authorization Lock canal metaphor: AI agent vessel delivering payment intent approaches an independent AUTHORIZATION gate checking Identity, Mandate, Limits, and Consent; Evidence Control Log and SETTLEMENT beyond; BeaconGuard Insights branding; no NPCI or UPI logos."
+          width="1448"
+          height="1086"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <figcaption>The agent can navigate. It does not control the lock.</figcaption>
+      </figure>
+    </header>
+
+    <div class="insight-reading-surface">
+    <div class="insight-reading-inner">
+    <section class="executive-summary" aria-labelledby="executive-summary">
+      <h2 id="executive-summary">Executive Summary</h2>
+      <div class="summary-grid">
+        <div>
+          <h3>What is changing</h3>
+          <p>
+            Agentic payments are often framed as a new checkout experience. The more consequential change is architectural: before a payment rail moves money on an agent’s behalf, it must separate the agent’s interpretation of user intent from the controls that verify mandate, limits, consent, and authorization — and from settlement finality.
+          </p>
+        </div>
+        <div>
+          <h3>Where the control boundary sits</h3>
+          <p>
+            In NPCI’s emerging agentic-payment discussion, three functions remain distinguishable even when the user experiences one automated workflow: intent interpretation (agent derives a proposed transaction), authorization controls (whether that specific transaction fits established delegation), and settlement (the rail executes and finalizes). The agent can navigate inside standing authority; the rail does not have to treat the agent’s own interpretation of intent as sufficient authorization for the debit.
+          </p>
+        </div>
+        <div>
+          <h3>What financial institutions should ask</h3>
+          <p>
+            Where is delegation created and machine-readable? Where are limits evaluated before the consequential debit? How does revocation propagate? What exactly is bound to the allow decision? What evidence survives so a reviewer can reconstruct authority, constraints, and transaction facts at execution time?
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="article-body">
+      <section>
+      <p>Agentic payments are often described as a new checkout experience: tell an AI what you want, let it find the option, and allow it to pay. The more consequential change is underneath that experience.</p>
+      <p>Before a payment rail can move money on an agent's behalf, it has to answer a different class of questions. Which principal authorized the agent? What mandate exists? What limits apply to this transaction? Is the relevant consent still valid? And which component is responsible for turning an allowed transaction into final settlement?</p>
+      <p>That separation is becoming explicit in India's Unified Payments Interface (UPI) ecosystem.</p>
+      <p>At Global Fintech Fest 2026, Ajay Kumar Choudhary, non-executive chairman and independent director of the National Payments Corporation of India (NPCI), said NPCI was examining protocols to identify and authorize digital agents within UPI while preserving interoperability, auditability, and settlement finality. In contemporaneous reporting of his remarks, Choudhary said the authorizer must verify <strong>identity, mandate, limits, and consent</strong>, and described an architecture that separates <strong>intent, authorization, and settlement</strong>.<a class="footnote-ref" href="#fn1" id="fnref1">[1]</a></p>
+      <p>That is the article-specific signal. It is not merely another statement that AI systems need security controls. It is a financial-execution architecture in which three functions remain distinguishable even when the user experiences them as one automated workflow:</p>
+        <ol class="architecture-list">
+          <li>an agent interprets the user's objective and derives a transaction;</li>
+          <li>authorization controls determine whether that specific transaction fits an established delegation; and</li>
+          <li>the payment rail performs and finalizes settlement.</li>
+        </ol>
+      <p>An AI agent can participate in execution. What the rail does not have to do is treat the agent's own interpretation of the user's intent as sufficient authorization for the debit.</p>
+      <p>NPCI is the payments infrastructure organization behind UPI, not India's regulator. NPCI's own UPI materials describe UPI as an instant payment system developed by NPCI, an RBI-regulated entity.<a class="footnote-ref" href="#fn2" id="fnref2">[2]</a> Its August 2026 statistics report 24,508.96 million UPI transactions across 752 live banks, worth ₹29,82,355.95 crore.<a class="footnote-ref" href="#fn3" id="fnref3">[3]</a> At that scale, the placement of authorization controls is infrastructure design, not merely an application-level UX decision.</p>
+      </section>
+      <section>
+        <h2>Financial execution is being decomposed</h2>
+      <p>An AI agent may understand that a user wants groceries below a budget, identify a merchant, compare alternatives, wait for a sale condition, and select the transaction that best satisfies the goal.</p>
+      <p>Those reasoning capabilities do not, by themselves, answer the payment system's control questions.</p>
+      <p>A payment authorizer still needs trusted inputs that establish whether the proposed debit fits authority that actually exists at that moment. Choudhary's reported formulation is concrete: identity, mandate, limits, and consent belong in that verification step.<a class="footnote-ref" href="#fn1" id="fnref1-2">[1]</a></p>
+      <p>A useful way to read the emerging architecture is therefore:</p>
+        <div class="insight-table-wrap">
+          <table class="insight-table">
+            <thead><tr>
+              <th scope="col">Layer</th>
+              <th scope="col">Function</th>
+              <th scope="col">Core question</th>
+            </tr></thead><tbody>
+              <tr>
+                <td><strong>Intent interpretation</strong></td>
+                <td>Convert a user objective into a proposed transaction or execution plan</td>
+                <td>What transaction best satisfies the user's objective?</td>
+              </tr>
+              <tr>
+                <td><strong>Authorization controls</strong></td>
+                <td>Evaluate identity, delegation, mandate, consent, lifecycle state, and applicable limits</td>
+                <td>Is this specific transaction permitted under authority that is valid now?</td>
+              </tr>
+              <tr>
+                <td><strong>Settlement</strong></td>
+                <td>Commit the financial state change according to payment-system rules</td>
+                <td>Can this authorized transaction be executed and made final?</td>
+              </tr>
+            </tbody></table></div>
+      <p>The distinction does <strong>not</strong> require a human to approve every transaction. Agentic payment systems are specifically exploring the opposite: a user establishes authority in advance, and the agent later initiates or completes qualifying transactions without fresh approval each time.</p>
+      <p>The important boundary is that delegated autonomy operates inside independently established constraints. Agent execution and independent authorization are compatible. They are different functions.</p>
+        <blockquote>
+      <p><strong>Claim boundary:</strong> Choudhary's remarks are an attributed public statement carried by secondary reporting. They support the architectural separation described above. They are not a published NPCI technical specification for a finalized agentic protocol.<a class="footnote-ref" href="#fn1" id="fnref1-3">[1]</a></p>
+        </blockquote>
+        <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 1">
+        <img
+          src={figureOne}
+          alt="Figure 1 Inside the Authorization Lock: INTENT proposed payment request; AUTHORIZATION PROCESSING with Identity, Mandate, Limits, Consent; EVIDENCE LOG; SETTLEMENT after conditions satisfied."
+          width="1672"
+          height="941"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption>Figure 1 - Inside the Authorization Lock. The agent can initiate a proposed payment request, but independent controls evaluate Identity, Mandate, Limits, and Consent before evidence is recorded and the approved payment proceeds to settlement.</figcaption>
+    </figure>
+      </section>
+      <section>
+        <h2>The control lineage predates the 2026 agentic-payment discussion</h2>
+      <p>The September 2026 discussion is not NPCI's first move toward software-mediated payment delegation.</p>
+      <p>On October 8, 2025, NPCI published UPI Operating Circular <strong>NPCI/UPI/OC-201B/2025-26</strong>, extending UPI Circle's Full Delegation framework to IoT devices and software profiles. The circular explicitly lists <strong>AI Profiles</strong> among the software-profile examples, initially for limited users.<a class="footnote-ref" href="#fn4" id="fnref4">[4]</a></p>
+      <p>The circular's significance is not that it defines a 2026 agentic-payment protocol. It does not. Its significance is that it shows an existing first-party control lineage for non-human or software-mediated delegation.</p>
+      <p>OC-201B requires, among other controls:</p>
+        <ul>
+          <li>user consent before linking and authorizing a device or software profile, with two-factor authentication;</li>
+          <li>defined monthly and per-transaction limits;</li>
+          <li>lifecycle management, including limit management and delinking;</li>
+          <li>validation of device or user-profile identifiers during registration and payment requests;</li>
+          <li>security controls and due diligence for participating apps and payment-service providers; and</li>
+          <li>issuer-bank validation of device/user identity and requisite authorization details for every transaction before the account is debited.<a class="footnote-ref" href="#fn4" id="fnref4-2">[4]</a></li>
+        </ul>
+      <p>That lineage matters because it changes the framing. The story is not that NPCI suddenly discovered in September 2026 that software needs payment controls. NPCI already had a documented mechanism for delegating bounded payment capability to software profiles.</p>
+      <p>The newer signal is broader: as agents become capable of interpreting objectives and completing transactions, the infrastructure discussion is separating the agent's decision process from the authorization and settlement functions that financial finality depends on.</p>
+      <p>OC-201B should also not be stretched beyond what it says. It is not evidence that a finalized <strong>Unified Agentic Protocol</strong> has been publicly specified. No published NPCI technical specification for such a finalized protocol was identified in the sources reviewed for this article.</p>
+      </section>
+      <section>
+        <h2>A live example: autonomy after prior authorization</h2>
+      <p>A first-party BLIK pilot from Poland shows the same architectural tension from a different payment ecosystem.</p>
+      <p>On September 9, 2026, BLIK reported that an AI agent independently completed a purchase without the user's involvement at the moment of transaction. The user had provided a prior instruction and granted payment consent in the banking app. When the specified product became available, the agent completed the purchase under the previously defined conditions. BLIK states that the agent operated within prior payment consent, defined spending limits, and specified conditions.<a class="footnote-ref" href="#fn5" id="fnref5">[5]</a></p>
+      <p>This does not establish that BLIK and UPI use the same architecture. It does establish something narrower and useful: <strong>autonomous execution can happen after authority has been created in advance</strong>.</p>
+      <p>That changes the design question for enterprise systems. The choice is not simply between "human approves every action" and "agent acts without controls." A third model is increasingly important: the human or enterprise principal establishes a bounded authority envelope, and the system evaluates each later execution against that envelope.</p>
+      <p>For payments, that envelope can include merchant scope, amount limits, cumulative limits, time windows, device or agent identity, lifecycle state, and revocation. In other domains, the relevant constraints will differ, but the control problem is structurally similar.</p>
+      </section>
+      <section>
+        <h2>What is public versus what remains reported development</h2>
+      <p>A second evidence tier surrounds NPCI's current agentic-payment work and should remain separate from the stronger evidence above.</p>
+      <p>Reuters reported on September 1, citing three unnamed sources familiar with the matter, that India was preparing a framework for agentic UPI payments and that the proposed design could draw on UPI Circle and Reserve Pay, with rule-based instructions, spending limits, identity checks, audit trails, and a liability framework.<a class="footnote-ref" href="#fn6" id="fnref6">[6]</a></p>
+      <p>On September 10, Reuters separately reported, again citing unnamed sources, that NPCI was developing an AI-agent registry associated with a planned agentic protocol.<a class="footnote-ref" href="#fn7" id="fnref7">[7]</a></p>
+      <p>Those reports add useful context. They do not carry the same evidentiary weight as NPCI's published circular or Choudhary's on-record remarks.</p>
+      <p>The strongest public claim that can be made today is narrower: NPCI leadership has publicly described the need to identify and authorize digital agents, verify identity, mandate, limits, and consent, and keep settlement finality distinct from the agent's interpretation of intent.<a class="footnote-ref" href="#fn1" id="fnref1-4">[1]</a></p>
+      <p>The exact mechanics, naming, registry structure, implementation timeline, and production status of any future agentic protocol should remain attributed reporting until NPCI publishes the relevant specification, operating circular, or other first-party artifact.</p>
+      </section>
+      <section>
+        <h2>Payments show both the opportunity and the compression risk</h2>
+      <p>For enterprise AI, the important lesson is architectural rather than promotional.</p>
+      <p>Payments infrastructure has a major advantage over many enterprise environments: the rail can encode domain-specific authorization semantics itself. It can understand payer accounts, mandates, limits, participating banks, revocation, reconciliation, transaction state, and settlement finality. A payment network can therefore place purpose-built authorization controls directly in the payment path.</p>
+      <p>That creates an important boundary for the broader authorization-assurance category. If a payment rail already provides all of the controls an enterprise needs for a payment-only workflow, another external authorization layer may add little value in that path.</p>
+      <p>This is the <strong>payments-native compression risk</strong>. It should not be hidden. The emergence of native agent authorization inside payment rails can simultaneously validate the importance of the control problem and reduce the need for a separate product inside that specific domain.</p>
+      <p>BeaconGuard's relevant category is broader: authorization assurance for consequential AI actions across enterprise systems where equivalent native infrastructure does not exist, or where authority must remain coherent across multiple systems and execution domains.</p>
+      <p>That may include financial actions, but it also includes data release, workflow approval, account changes, infrastructure operations, regulated-system mutations, and other actions where a target system may expose credentials and APIs without exposing a complete agent-specific delegation and authorization model.</p>
+      <p>NPCI is not endorsing BeaconGuard, and this article does not imply that BeaconGuard is a UPI or payment-authorization product.</p>
+      <p>The category signal is more general: once software can act autonomously, infrastructure owners have to decide where authority is represented, how it is constrained, how changes and revocations propagate, and what evidence survives after execution.</p>
+      </section>
+      <section>
+        <h2>Identity is necessary, but it is only part of the decision</h2>
+      <p>The payment architecture also clarifies the role of identity and IAM.</p>
+      <p>Strong identity, authentication, device validation, IAM policy, agent registries, and cryptographic credentials can all be important inputs. OC-201B requires identity and registration checks for linked devices or software profiles, and Choudhary's reported remarks explicitly include identity among the elements an authorizer must verify.<a class="footnote-ref" href="#fn1" id="fnref1-5">[1]</a><a class="footnote-ref" href="#fn4" id="fnref4-3">[4]</a></p>
+      <p>But identifying the actor does not determine the full decision.</p>
+      <p>A payment authorization also depends on the relationship among the principal, the delegated agent, the mandate, current consent, transaction-specific constraints, and the action being attempted. Lifecycle state matters as well: an authorization that was valid yesterday may have been narrowed or revoked today.</p>
+      <p>For enterprise architects, the more useful object is therefore not simply an agent identity. It is the full binding:</p>
+      <p><strong>principal → delegated agent → permitted action → applicable constraints → authorization decision → execution evidence</strong></p>
+      <p>That is where agentic systems become control systems rather than merely model integrations.</p>
+      </section>
+      <section>
+        <h2>Questions enterprise buyers should ask</h2>
+      <p>The payments case makes several discovery questions concrete:</p>
+        <ol class="concept-flow">
+          <li><strong>Where is delegation created?</strong> Is it explicit, machine-readable, attributable to a principal, and separable from the agent's own reasoning?</li>
+          <li><strong>Where are limits evaluated?</strong> Are they enforced before the consequential action, or merely detected afterward?</li>
+          <li><strong>How does revocation work?</strong> Can authority be narrowed or withdrawn immediately, and will every execution path observe the change?</li>
+          <li><strong>What exactly is bound to the decision?</strong> Agent identity alone is insufficient if authorization is not tied to the action, target, amount, merchant, time window, workflow state, or other relevant facts.</li>
+          <li><strong>Who bears responsibility when the agent acts inside formal limits but against the user's actual interest?</strong> That is partly an authorization question and partly a liability, product-design, and dispute-resolution question.</li>
+          <li><strong>What evidence survives?</strong> Can a reviewer reconstruct which authority, constraints, identity signals, and transaction facts produced the allow decision at the time of execution?</li>
+        </ol>
+      <p>Payments make those questions visible because settlement is concrete. Money moves, balances change, disputes occur, and responsibility has to be allocated.</p>
+      <p>Other enterprise actions can be equally consequential without a payment rail's built-in vocabulary. That is where the same architectural separation becomes useful outside finance.</p>
+      </section>
+      <section>
+        <h2>The signal to watch</h2>
+      <p>The most important development in NPCI's public agentic-payment discussion is the decomposition of financial execution.</p>
+      <p>An AI agent may interpret a user's objective. It may select the transaction. It may initiate or complete the payment inside a standing delegation. But before funds move, the infrastructure still needs a defensible answer to a separate question: <strong>does this specific transaction fit the authority that exists right now?</strong></p>
+      <p>After that decision, settlement remains another function with its own rules and finality.</p>
+      <p>That architecture is materially different from simply making a chatbot capable of paying. It turns mandate, limits, consent, identity, lifecycle, and transaction state into enforceable infrastructure around autonomous execution.</p>
+      <p>For enterprise leaders, that is the useful question to carry beyond payments: when an AI system acts, can the organization establish—at execution time—why this action was permitted, under which authority, within which constraints, and with evidence that remains reconstructable afterward?</p>
+      </section>
+      <section class="sources" id="source-notes">
+        <h2>Source notes and claim tiers</h2>
+        <p class="provenance"><strong>Research provenance:</strong> Candidate research date: <strong>2026-09-14</strong>. Evaluation date: <strong>2026-09-16</strong>. Correct packet age at evaluation: <strong>2 days</strong>, not 0. Public sources below were re-checked during authoring on <strong>2026-09-16</strong>.</p>
+        <ol>
+          <li id="fn1"><strong>ATTRIBUTED FACT — secondary reporting carrying on-record NPCI leadership remarks.</strong> <em>The Economic Times</em>, “NPCI working on protocols to authorise AI agents on UPI, says chairman Ajay Kumar Choudhary,” 10 Sep 2026. Supports the claims that NPCI is examining protocols to identify/authorize digital agents, that an authorizer must verify identity, mandate, limits and consent, and that intent, authorization and settlement should be separated. This is not a first-party NPCI technical specification. MediaNama S-001 is classified the same way: secondary reporting containing on-record quotations, not a primary source. Retrieved/re-checked 16 Sep 2026.  <br />
+            <a href="https://economictimes.indiatimes.com/ai/ai-insights/gff-2026-npci-working-on-protocols-to-authorise-ai-agents-on-upi-says-chairman-ajay-kumar-choudhary/articleshow/133998036.cms" rel="noopener noreferrer">https://economictimes.indiatimes.com/ai/ai-insights/gff-2026-npci-working-on-protocols-to-authorise-ai-agents-on-upi-says-chairman-ajay-kumar-choudhary/articleshow/133998036.cms</a><br />
+            <a href="https://www.medianama.com/2026/09/223-npci-ai-agents-upi-payments/" rel="noopener noreferrer">https://www.medianama.com/2026/09/223-npci-ai-agents-upi-payments/</a>
+          </li>
+          <li id="fn2"><strong>FIRST-PARTY — NPCI product background.</strong> NPCI's UPI page states that UPI is an instant payment system developed by NPCI, an RBI-regulated entity. This supports classifying NPCI as payments infrastructure/operator rather than the regulator. Retrieved/re-checked 16 Sep 2026.  <br />
+            <a href="https://www.npci.org.in/product/upi" rel="noopener noreferrer">https://www.npci.org.in/product/upi</a>
+          </li>
+          <li id="fn3"><strong>FIRST-PARTY — NPCI statistics.</strong> NPCI UPI Product Statistics for August 2026: 752 live banks; 24,508.96 million transactions; ₹29,82,355.95 crore in value. Retrieved/re-checked 16 Sep 2026.  <br />
+            <a href="https://www.npci.org.in/product/upi/product-statistics" rel="noopener noreferrer">https://www.npci.org.in/product/upi/product-statistics</a>
+          </li>
+          <li id="fn4"><strong>FIRST-PARTY — NPCI operating circular.</strong> NPCI/UPI/OC-201B/2025-26, dated 8 Oct 2025, “Addendum to NPCI/UPI/2024-25/OC 201 – Introduction of IoT devices &amp; software on UPI Circle.” The circular extends Full Delegation to IoT devices and software profiles including “AI Profiles,” and specifies consent/2FA for linking, limits, lifecycle management and delinking, registration validation, security requirements, and issuer-bank validation of requisite authorization details before debit. It is evidence of prior software/AI-profile delegation controls, not a published specification for a finalized 2026 agentic protocol. Retrieved and visually inspected 16 Sep 2026.  <br />
+            <a href="https://www.npci.org.in/uploads/UPI_OC_No_201_B_FY_2025_26_Addendum_to_NPCI_UPI_2024_25_OC_201_Introduction_of_Io_T_devices_software_on_UPI_Circle_09ec83c893.pdf" rel="noopener noreferrer">https://www.npci.org.in/uploads/UPI_OC_No_201_B_FY_2025_26_Addendum_to_NPCI_UPI_2024_25_OC_201_Introduction_of_Io_T_devices_software_on_UPI_Circle_09ec83c893.pdf</a>
+          </li>
+          <li id="fn5"><strong>FIRST-PARTY CORROBORATION — BLIK.</strong> BLIK, “First pilot BLIK transaction completed independently by an AI agent,” 9 Sep 2026. BLIK states that the user authorized the process in advance and that the agent later completed the purchase without direct user involvement at transaction time, operating within previously granted payment consent, spending limits and specified conditions. Retrieved/re-checked 16 Sep 2026.  <br />
+            <a href="https://www.blik.com/en/first-pilot-blik-transaction-completed-independently-by-an-ai-agent" rel="noopener noreferrer">https://www.blik.com/en/first-pilot-blik-transaction-completed-independently-by-an-ai-agent</a>
+          </li>
+          <li id="fn6"><strong>REPORTED DEVELOPMENT — anonymous-source Reuters reporting.</strong> Reuters, “India preparing rollout of agentic payments on UPI, sources say,” 1 Sep 2026. Three unnamed sources described a planned framework, possible use of UPI Circle and Reserve Pay, rule-based instructions, spending limits, identity checks, audit trails and liability concepts. NPCI did not immediately respond to Reuters' request for comment. These mechanics remain reported development, not a finalized NPCI specification. Retrieved/re-checked 16 Sep 2026.  <br />
+            <a href="https://www.reuters.com/world/india/india-preparing-rollout-agentic-payments-upi-sources-say-2026-09-01/" rel="noopener noreferrer">https://www.reuters.com/world/india/india-preparing-rollout-agentic-payments-upi-sources-say-2026-09-01/</a>
+          </li>
+          <li id="fn7"><strong>REPORTED DEVELOPMENT — anonymous-source Reuters reporting.</strong> Reuters, “India plans AI registry as it looks to roll out agentic payments, sources say,” 10 Sep 2026. Three unnamed sources described a planned AI-agent registry associated with an agentic protocol. This remains attributed reporting unless and until NPCI publishes the relevant first-party artifact. Retrieved/re-checked 16 Sep 2026.  <br />
+            <a href="https://www.reuters.com/world/india/india-plans-ai-registry-it-looks-roll-out-agentic-payments-sources-say-2026-09-10/" rel="noopener noreferrer">https://www.reuters.com/world/india/india-plans-ai-registry-it-looks-roll-out-agentic-payments-sources-say-2026-09-10/</a>
+          </li>
+        </ol>
+      </section>
+    </div>
+    </div>
+    </div>
+
+    <section class="article-cta">
+      <p class="section-label">CONTROLLED EVALUATION</p>
+      <h2>Start with one consequential workflow</h2>
+      <p>Evaluate where authorization should sit between an AI-initiated action and the system that ultimately executes it - without replacing the existing identity, access-management, or system-of-record controls.</p>
+      <div class="page-actions">
+        <a class="btn-primary" href="/design-partner-program">Request Evaluation</a>
+        <a class="btn-secondary" href="/platform">See the Product</a>
+      </div>
+    </section>
+
+    <div class="figure-lightbox" data-lightbox hidden>
+      <button type="button" class="figure-lightbox__close" data-lightbox-close aria-label="Close enlarged image">&times;</button>
+      <div class="figure-lightbox__frame">
+        <img data-lightbox-image src="" alt="" />
+        <p class="figure-lightbox__caption" data-lightbox-caption></p>
+      </div>
+    </div>
+  </article>
+
+  <style>
+
+    .insight-article {
+      margin: 0 auto;
+      color: #102033;
+    }
+
+    .article-header,
+    .pull-quote {
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-body {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .executive-summary,
+    .insight-table-wrap,
+    .article-figure {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-header {
+      max-width: 1080px;
+      padding-top: 2rem;
+    }
+
+    .article-section,
+    .article-meta {
+      margin: 0 0 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .article-header h1 {
+      max-width: 900px;
+      color: var(--text-primary);
+      font-size: 3rem;
+    }
+
+    .article-subtitle {
+      max-width: 850px;
+      color: var(--hero-accent);
+      font-size: 1.18rem;
+      line-height: 1.55;
+    }
+
+    .article-featured {
+      max-width: 1050px;
+      margin: 2.2rem auto 0;
+    }
+
+    .article-featured img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: #f7fbff;
+      object-fit: contain;
+    }
+
+    /* =========================
+       LIGHT EDITORIAL READING SURFACE
+       Full-bleed band scoped to the Insights article body only.
+       ========================= */
+    .insight-reading-surface {
+      --read-bg: #f6f8fb;
+      --read-bg-panel: #ffffff;
+      --read-heading: #0b1b2e;
+      --read-body: #334155;
+      --read-muted: #64748b;
+      --read-border: rgba(11, 27, 46, 0.12);
+      --read-accent: #2a8f9a;
+
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-top: 2.75rem;
+      margin-bottom: 0;
+      background: var(--read-bg);
+      border-top: 1px solid var(--read-border);
+    }
+
+    .insight-reading-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 4rem;
+    }
+
+    .article-figure {
+      width: min(1080px, 100%);
+      margin: 2.75rem auto 3.25rem;
+    }
+
+    .insight-reading-surface .article-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid var(--read-border);
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.08);
+      object-fit: contain;
+    }
+
+    .insight-reading-surface .article-figure figcaption {
+      max-width: 850px;
+      margin: 1rem auto 0;
+      color: var(--read-muted);
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface .article-figure figcaption strong {
+      color: var(--read-heading);
+    }
+
+    .figure-zoom-trigger {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      background: none;
+      cursor: zoom-in;
+      position: relative;
+      border-radius: 0.5rem;
+    }
+
+    .figure-zoom-trigger:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 3px;
+    }
+
+    .figure-zoom-trigger::after {
+      content: "Click to enlarge";
+      position: absolute;
+      right: 0.85rem;
+      bottom: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(11, 27, 46, 0.72);
+      color: #f6f8fb;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 150ms ease, transform 150ms ease;
+      pointer-events: none;
+    }
+
+    .figure-zoom-trigger:hover::after,
+    .figure-zoom-trigger:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .figure-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(4, 8, 15, 0.92);
+    }
+
+    .figure-lightbox[hidden] {
+      display: none;
+    }
+
+    .figure-lightbox__frame {
+      max-width: min(1400px, 100%);
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .figure-lightbox__frame img {
+      display: block;
+      max-width: 100%;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .figure-lightbox__caption {
+      max-width: 850px;
+      margin: 0;
+      color: #dbe4f0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .figure-lightbox__close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(11, 27, 46, 0.85);
+      color: #f6f8fb;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .figure-lightbox__close:hover {
+      background: rgba(11, 27, 46, 1);
+    }
+
+    .figure-lightbox__close:focus-visible {
+      outline: 3px solid var(--read-accent, #2f7fc7);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .figure-zoom-trigger::after {
+        content: "Tap to enlarge";
+        right: 0.6rem;
+        bottom: 0.6rem;
+        font-size: 0.72rem;
+        opacity: 1;
+        transform: none;
+      }
+
+      .figure-lightbox {
+        padding: 1rem;
+      }
+
+      .figure-lightbox__frame img {
+        max-height: 72vh;
+      }
+
+      .figure-lightbox__close {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+
+    .executive-summary {
+      border: 1px solid var(--read-border);
+      border-radius: 0.65rem;
+      background: var(--read-bg-panel);
+      padding: 1.75rem 2rem;
+      max-width: 1080px;
+      margin: 0 auto 3.5rem;
+      border-top: 3px solid var(--read-accent);
+    }
+
+    .executive-summary h2 {
+      color: var(--read-heading);
+      margin-bottom: 1rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .summary-grid div {
+      border-left: 3px solid var(--read-accent);
+      padding-left: 0.85rem;
+    }
+
+    .summary-grid h3 {
+      font-size: 1rem;
+      margin-bottom: 0.45rem;
+      color: var(--read-heading);
+    }
+
+    .summary-grid p {
+      max-width: none;
+      margin-bottom: 0;
+      color: var(--read-body);
+    }
+
+    .article-body section {
+      margin-bottom: 3.6rem;
+    }
+
+    .article-body h2 {
+      margin-top: 0.35rem;
+      padding-top: 0.45rem;
+      font-size: 1.8rem;
+      color: var(--read-heading);
+    }
+
+    .article-body h3 {
+      margin-top: 1.8rem;
+      font-size: 1.08rem;
+      color: #16324a;
+    }
+
+    .article-body p,
+    .article-body li {
+      color: var(--read-body);
+      font-size: 1.02rem;
+      line-height: 1.72;
+    }
+
+    .article-body p {
+      max-width: 760px;
+      margin-bottom: 1.05rem;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 1.3rem;
+      padding-left: 1.35rem;
+      color: var(--read-body);
+    }
+
+    .article-body code {
+      padding: 0.12rem 0.32rem;
+      border: 1px solid var(--read-border);
+      border-radius: 0.25rem;
+      background: #eef2f7;
+      color: #0b1b2e;
+    }
+
+    .article-body blockquote,
+    .pull-quote blockquote {
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--read-accent);
+      padding: 0.1rem 0 0.1rem 1rem;
+    }
+
+    .article-body blockquote p {
+      color: var(--read-heading);
+    }
+
+    .article-body a {
+      color: var(--read-accent);
+    }
+
+    .concept-flow {
+      list-style: decimal;
+    }
+
+    .concept-flow li {
+      margin-bottom: 0.65rem;
+    }
+
+    .sources {
+      border-top: 1px solid var(--read-border);
+      padding-top: 1.8rem;
+      margin-bottom: 0;
+    }
+
+    .sources h2 {
+      color: var(--read-heading);
+    }
+
+    .sources ol {
+      padding-left: 1.2rem;
+    }
+
+    .sources li {
+      font-size: 0.95rem;
+      color: var(--read-muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .sources a {
+      color: var(--read-accent);
+    }
+
+    .article-cta {
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.5rem;
+      background: linear-gradient(160deg, rgba(18, 31, 52, 0.78), rgba(10, 16, 27, 0.94));
+      padding: 1.2rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .article-cta p {
+      max-width: none;
+      margin-bottom: 0;
+    }
+
+    .article-cta h2 {
+      margin-bottom: 0.85rem;
+    }
+
+    .article-cta .page-actions {
+      margin-top: 1.2rem;
+    }
+
+    @media (max-width: 900px) {
+      .article-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .article-header {
+        padding-top: 0.5rem;
+      }
+
+      .article-header h1 {
+        font-size: 1.85rem;
+      }
+
+      .article-subtitle,
+      .article-body p,
+      .article-body li {
+        font-size: 1rem;
+      }
+
+      .article-featured {
+        margin-left: -0.2rem;
+        margin-right: -0.2rem;
+      }
+
+      .insight-reading-surface {
+        margin-top: 1.6rem;
+      }
+
+      .insight-reading-inner {
+        padding: 2.4rem 1.15rem 2.6rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .insight-reading-inner {
+        padding: 3.25rem 1.5rem 3.25rem;
+      }
+    }
+
+    .article-featured figcaption {
+      max-width: 850px;
+      margin: 0.9rem auto 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .article-body a.footnote-ref {
+      font-size: 0.78em;
+      vertical-align: super;
+      line-height: 0;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .architecture-list, .concept-flow { list-style: decimal; }
+    .architecture-list li, .concept-flow li { margin-bottom: 0.65rem; }
+    .insight-table-wrap {
+      width: 100%;
+      max-width: 1080px;
+      margin: 1.75rem auto 2.25rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--read-border);
+      border-radius: 0.55rem;
+      background: var(--read-bg-panel);
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.06);
+    }
+    .insight-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    .insight-table th, .insight-table td {
+      padding: 0.95rem 1.1rem;
+      border-bottom: 1px solid var(--read-border);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      color: var(--read-body);
+    }
+    .insight-table th {
+      text-align: left;
+      color: #f6f8fb;
+      background: #0b1b2e;
+      border-bottom: 3px solid #2a8f9a;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .insight-table tr:last-child td { border-bottom: 0; }
+    .insight-table tbody tr:nth-child(even) td { background: rgba(11, 27, 46, 0.03); }
+    .insight-table strong { color: var(--read-heading); }
+    .sources .provenance {
+      max-width: 760px; color: var(--read-muted); font-size: 0.95rem; margin-bottom: 1.2rem;
+    }
+    @media (max-width: 900px) {
+      .insight-table th, .insight-table td { padding: 0.75rem 0.8rem; font-size: 0.92rem; }
+    }
+    @media (max-width: 560px) {
+      .insight-table th, .insight-table td { padding: 0.65rem 0.7rem; font-size: 0.9rem; }
+    }
+
+  </style>
+
+  <script>
+    const lightbox = document.querySelector<HTMLDivElement>("[data-lightbox]");
+    const lightboxImage = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-image]");
+    const lightboxCaption = lightbox?.querySelector<HTMLParagraphElement>("[data-lightbox-caption]");
+    const closeButton = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+    let lastFocused: HTMLElement | null = null;
+
+    function openLightbox(trigger: HTMLElement) {
+      const img = trigger.querySelector("img");
+      if (!img || !lightbox || !lightboxImage) return;
+      lightboxImage.src = img.getAttribute("src") ?? "";
+      lightboxImage.alt = img.getAttribute("alt") ?? "";
+      const figure = trigger.closest("figure");
+      const caption = figure?.querySelector("figcaption")?.textContent?.trim() ?? "";
+      if (lightboxCaption) lightboxCaption.textContent = caption;
+      lastFocused = trigger;
+      lightbox.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      closeButton?.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.hidden = true;
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => openLightbox(trigger));
+    });
+
+    closeButton?.addEventListener("click", closeLightbox);
+
+    lightbox?.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox && !lightbox.hidden) closeLightbox();
+    });
+  </script>
+</BaseLayout>
