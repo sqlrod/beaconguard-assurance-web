@@ -54,11 +54,17 @@
   </url>
   <url>
     <loc>https://www.beaconguardassurance.com/insights</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
+    <url>
+    <loc>https://www.beaconguardassurance.com/insights/authority-should-narrow-as-ai-agents-delegate</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+<url>
     <loc>https://www.beaconguardassurance.com/insights/what-nist-is-asking-about-authority-for-ai-agents</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
@@ -67,6 +73,12 @@
   <url>
     <loc>https://www.beaconguardassurance.com/insights/when-ai-agents-cross-the-boundary</loc>
     <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.beaconguardassurance.com/insights/trusted-today-authorized-tomorrow</loc>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

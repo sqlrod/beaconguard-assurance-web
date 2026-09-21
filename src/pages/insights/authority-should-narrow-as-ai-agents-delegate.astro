@@ -1,0 +1,769 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = 'Authority Should Narrow as AI Agents Delegate';
+const seoTitle = 'Authority Should Narrow as AI Agents Delegate | BeaconGuard Insights';
+const description =
+  'What CAPMAS reveals about bounded delegation, privilege attenuation, and authorization across multi-agent workflows';
+const canonical = 'https://www.beaconguardassurance.com/insights/authority-should-narrow-as-ai-agents-delegate';
+const featuredImage = '/insights/authority-should-narrow-as-ai-agents-delegate/featured.png';
+const figureOne = '/insights/authority-should-narrow-as-ai-agents-delegate/figure-1-authority-attenuation-across-handoffs.png';
+const figureTwo = '/insights/authority-should-narrow-as-ai-agents-delegate/figure-2-delegation-is-not-final-authorization.png';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: title,
+  description,
+  image: `https://www.beaconguardassurance.com${featuredImage}`,
+  datePublished: "2026-09-17",
+  dateModified: "2026-09-17",
+  author: {
+    "@type": "Organization",
+    name: "BeaconGuard",
+    url: "https://www.beaconguardassurance.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "BeaconGuard Assurance",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.beaconguardassurance.com/beaconguard-master-logo.png",
+    },
+  },
+  mainEntityOfPage: canonical,
+};
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={description}
+  canonical={canonical}
+  ogTitle={seoTitle}
+  ogDescription={description}
+  ogImage={featuredImage}
+  ogType="article"
+  publishedTime="2026-09-17T00:00:00-04:00"
+  jsonLd={jsonLd}
+>
+  <article class="insight-article">
+    <header class="article-header">
+      <p class="section-label">ANALYSIS</p>
+      <p class="article-section">BeaconGuard Insights — Multi-Agent Delegation</p>
+      <h1>{title}</h1>
+      <p class="article-subtitle">
+        What CAPMAS reveals about bounded delegation, privilege attenuation, and authorization across multi-agent workflows
+      </p>
+      <p class="article-meta">By BeaconGuard · September 17, 2026</p>
+      <figure class="article-featured">
+        <img
+          src={featuredImage}
+          alt='Construction-site metaphor for multi-agent privilege attenuation: authority narrows from general contractor through specialized trades to a single approved task.'
+          width="1448"
+          height="1086"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <figcaption>Authority should narrow as work is delegated—each agent receives bounded privilege for an approved task, not the full upstream envelope.</figcaption>
+      </figure>
+    </header>
+
+    <div class="insight-reading-surface">
+    <div class="insight-reading-inner">
+    <div class="article-body">
+      <section>
+        <blockquote class="thesis-quote">
+      <p>When one AI agent delegates work to another, <strong>responsibility may transfer, but authority should not automatically transfer in full</strong>. Delegated authority should remain explicit, bounded, and capable of narrowing across an agent chain. Final consequential action still must be independently authorized before execution.</p>
+        </blockquote>
+      </section>
+      <section>
+        <h2>What CAPMAS reveals about bounded delegation, privilege attenuation, and authorization across multi-agent workflows</h2>
+      <p><strong>Controlling thesis</strong></p>
+      <p>When one AI agent delegates work to another, responsibility may transfer, but authority should not automatically transfer in full. Delegated authority should remain explicit, bounded, and capable of narrowing across an agent chain. Final consequential action still must be independently authorized before execution.</p>
+      <p>CAPMAS is one architectural example of this approach: combining semantic privilege scoping, attenuable credentials, and independent verification before execution. It is not proof that one mechanism is the only solution, and it is not a BeaconGuard implementation claim.</p>
+      </section>
+      <section>
+        <h2>The next AI authorization challenge is not only what an agent can do. It is what happens when another agent takes over.</h2>
+      <p>Single-agent AI workflows already create authorization questions:</p>
+        <ul>
+          <li>Which actions can the agent perform?</li>
+          <li>Which systems can it access?</li>
+          <li>Which user authority can it represent?</li>
+        </ul>
+      <p>Multi-agent systems introduce another layer.</p>
+      <p>An agent may plan a task, delegate part of the work, and call another specialized agent. That second agent may have different capabilities, different context, and different responsibilities.</p>
+      <p>The authorization question changes:</p>
+      <p>When work moves from one agent to another, does authority move with it?</p>
+      <p>Or does the handoff create a new authorization decision?</p>
+      <p>Recent research into CAPMAS (Capability Management for Agentic Systems) provides one example of how delegated authority can be constrained as execution moves through an agent chain.</p>
+      </section>
+      <section>
+        <h2>Why delegated authority must narrow</h2>
+      <p>CAPMAS is an academic research system described in <a href="https://arxiv.org/abs/2609.06500">arXiv:2609.06500</a>. The paper presents a capability-based approach for multi-agent authorization using:</p>
+        <ul>
+          <li>semantic mapping of task requests into bounded privilege sets;</li>
+          <li>attenuable capability credentials;</li>
+          <li>delegation-chain tracking;</li>
+          <li>and IAM verification before consequential actions execute.</li>
+        </ul>
+      <p>The central architectural idea is that an agent receiving delegated work should not automatically inherit the full authority of the upstream actor.</p>
+      <p>Instead, authority can be narrowed.</p>
+      <p>A downstream agent receives only the capabilities required for the delegated task.</p>
+      <p>This creates a delegation chain where authority can move forward while remaining bounded.</p>
+        <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 1">
+        <img
+          src={figureOne}
+          alt="Diagram of Agent A to Agent B to Agent C to execution, with capability scope narrowing at each delegation step."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 1. Authority Attenuation Across Agent Handoffs</strong> — Delegation can transfer responsibility while reducing available authority.</figcaption>
+    </figure>
+
+      </section>
+      <section>
+        <h2>Delegation is not the same as privilege inheritance</h2>
+      <p>Traditional enterprise systems often rely on established identity and access management patterns.</p>
+      <p>A user authenticates.</p>
+      <p>A system evaluates permissions.</p>
+      <p>A service receives an access token or delegated authorization.</p>
+      <p>Those mechanisms remain important.</p>
+      <p>CAPMAS explores a different design point for environments where multiple autonomous agents may repeatedly hand work between each other.</p>
+      <p>The challenge is not replacing identity.</p>
+      <p>The challenge is preventing an agent handoff from silently expanding the authority available to the next participant.</p>
+      <p>A useful architectural distinction:</p>
+      <p><strong>Identity answers who is acting.</strong></p>
+      <p><strong>Delegation answers what authority is being transferred.</strong></p>
+      <p><strong>Authorization determines whether the requested action is allowed.</strong></p>
+      <p>CAPMAS focuses on making the second category more explicit in multi-agent chains.</p>
+      </section>
+      <section>
+        <h2>How CAPMAS narrows delegated authority</h2>
+      <p>The paper describes a process where a natural-language request is mapped into a bounded privilege set.</p>
+      <p>That initial privilege set can then be attenuated during delegation.</p>
+      <p>Each additional handoff can add restrictions rather than expand access.</p>
+      <p>The result is a monotonic model:</p>
+      <p>Authority can remain the same or decrease.</p>
+      <p>It does not automatically grow because additional agents become involved.</p>
+      <p>This is an important property for agentic systems because the number of participating agents may increase while the authorized scope should remain controlled.</p>
+      </section>
+      <section>
+        <h2>Capability attenuation still requires independent enforcement</h2>
+      <p>A critical distinction:</p>
+      <p>Local delegation is not the same as final authorization.</p>
+      <p>CAPMAS uses capability attenuation during agent handoffs, but the paper still describes IAM verification before the consequential service action executes.</p>
+      <p>The final system decision remains separate from the agent's reasoning process.</p>
+      <p>This separation matters because an agent can correctly follow instructions and still operate outside the intended authority boundary if the authorization decision is not independently enforced.</p>
+        <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 2">
+        <img
+          src={figureTwo}
+          alt="Flow from agent planning to capability delegation to IAM/security enforcement to allow or deny execution."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 2. Delegation Is Not Final Authorization</strong> — Capability attenuation controls what may be delegated. Independent enforcement determines whether execution is allowed.</figcaption>
+    </figure>
+
+      </section>
+      <section>
+        <h2>What the CAPMAS results show — and what they do not</h2>
+      <p>The CAPMAS authors report evaluation results across their experiments, including semantic privilege selection and performance comparisons.</p>
+      <p>These results should be interpreted within the scope of the paper.</p>
+      <p>The authors report high perfect-bundle capture rates in their semantic privilege-selection experiments.</p>
+      <p>However, these results are not authorization accuracy measurements.</p>
+      <p>The same evaluations also report relative over-privilege because broader privilege bundles can improve task completion while increasing unnecessary permissions.</p>
+      <p>This demonstrates a continuing security-utility tradeoff:</p>
+      <p>Tighter privilege selection reduces unnecessary authority.</p>
+      <p>Broader privilege selection improves the likelihood of completing complex workflows.</p>
+      <p>The correct operational balance depends on the environment, risk tolerance, and policy requirements.</p>
+      </section>
+      <section>
+        <h2>The importance of threat models</h2>
+      <p>CAPMAS presents its strongest security properties under stated assumptions, including honest-but-curious infrastructure and non-malicious agent-code assumptions.</p>
+      <p>That distinction matters.</p>
+      <p>A system can provide strong guarantees against accidental overreach, unexpected delegation expansion, or untrusted inputs while still having different considerations against actively malicious participants.</p>
+      <p>The paper discusses limitations including potential information leakage from plaintext caveats, memory contamination concerns, threshold selection challenges, and dependence on IAM infrastructure.</p>
+      <p>These are not failures of the approach.</p>
+      <p>They illustrate that authorization architecture remains a system-design problem involving tradeoffs.</p>
+      </section>
+      <section>
+        <h2>Why this matters for enterprise AI authorization</h2>
+      <p>Enterprise AI adoption is moving from individual assistants toward workflows where multiple systems and agents cooperate.</p>
+      <p>That creates a new authorization surface:</p>
+        <ul>
+          <li>an initial user request;</li>
+          <li>one or more AI planners;</li>
+          <li>specialized sub-agents;</li>
+          <li>external tools;</li>
+          <li>enterprise systems of record.</li>
+        </ul>
+      <p>The question becomes whether authority can remain bounded throughout that chain.</p>
+      <p>A future enterprise authorization model may need to answer:</p>
+        <ul>
+          <li>What authority was originally granted?</li>
+          <li>What authority was delegated?</li>
+          <li>What restrictions were added?</li>
+          <li>Which agent performed each step?</li>
+          <li>Which system independently approved execution?</li>
+        </ul>
+      <p>The ability to reconstruct that chain becomes increasingly important as AI systems become more autonomous.</p>
+      </section>
+      <section>
+        <h2>BeaconGuard interpretation: authorization assurance across agent boundaries</h2>
+      <p>CAPMAS provides one research example of how multi-agent systems may manage delegated authority.</p>
+      <p>BeaconGuard's broader authorization-assurance perspective is focused on the same category problem:</p>
+      <p>Consequential AI actions require an authorization boundary independent from AI reasoning.</p>
+      <p>The relevant lesson is not that enterprises must adopt CAPMAS, Macaroons, or any specific mechanism.</p>
+      <p>The broader architectural principle is:</p>
+      <p>AI systems can propose, plan, and delegate.</p>
+      <p>The authorization decision must remain explicit, bounded, and independently verifiable.</p>
+      </section>
+      <section>
+        <h2>Conclusion</h2>
+      <p>Multi-agent AI introduces a new problem beyond granting access to an individual system.</p>
+      <p>Authority now has to survive delegation.</p>
+      <p>The challenge is ensuring that every delegation step preserves the intended scope of authority rather than inheriting unlimited privilege from earlier context.</p>
+      <p>CAPMAS represents one research direction toward bounded delegation through attenuation and independent verification.</p>
+      <p>As agentic systems mature, authorization architectures will need to evolve from answering:</p>
+      <p>"Who has access?"</p>
+      <p>toward answering:</p>
+      <p>"What authority was delegated, how did it change, and why was this action allowed?"</p>
+      <p># Source Notes and Claim Classification</p>
+      </section>
+      <section>
+        <h2>Primary evidence</h2>
+      <p><strong>CAPMAS: Capability Management for Agentic Systems</strong> <a href="https://arxiv.org/abs/2609.06500">arXiv:2609.06500</a></p>
+      <p>Classification: - Verified facts about the paper architecture. - Author-reported evaluation results. - Author-described threat model and limitations.</p>
+      </section>
+      <section>
+        <h2>Author-reported results</h2>
+      <p>The following remain attributed to CAPMAS authors:</p>
+        <ul>
+          <li>semantic privilege-selection evaluation results;</li>
+          <li>benchmark latency comparisons;</li>
+          <li>privilege reduction measurements;</li>
+          <li>prototype evaluation results.</li>
+        </ul>
+      <p>These are not treated as independent enterprise validation.</p>
+      </section>
+      <section>
+        <h2>BeaconGuard interpretation</h2>
+      <p>The following are editorial interpretations:</p>
+        <ul>
+          <li>multi-agent authority handoff requires explicit bounded delegation;</li>
+          <li>authorization should remain independent from agent reasoning;</li>
+          <li>delegation-chain reconstruction becomes increasingly important for</li>
+        </ul>
+      <p>consequential AI workflows.</p>
+      </section>
+      <section>
+        <h2>Claim boundaries</h2>
+      <p>This article does not claim:</p>
+        <ul>
+          <li>CAPMAS is a standard;</li>
+          <li>CAPMAS is production enterprise practice;</li>
+          <li>CAPMAS validates BeaconGuard;</li>
+          <li>BeaconGuard implements CAPMAS;</li>
+          <li>Macaroons are required for enterprise AI authorization;</li>
+          <li>OAuth Token Exchange is insufficient for delegation.</li>
+        </ul>
+      <p>Production adoption and independent reproduction remain unknown.</p>
+      </section>
+    </div>
+    </div>
+    </div>
+
+    <div class="figure-lightbox" data-lightbox hidden>
+      <button type="button" class="figure-lightbox__close" data-lightbox-close aria-label="Close enlarged image">&times;</button>
+      <div class="figure-lightbox__frame">
+        <img data-lightbox-image src="" alt="" />
+        <p class="figure-lightbox__caption" data-lightbox-caption></p>
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .insight-article {
+      margin: 0 auto;
+      color: #102033;
+    }
+
+    .article-header,
+    .pull-quote {
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-body {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .insight-table-wrap,
+    .article-figure {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-header {
+      max-width: 1080px;
+      padding-top: 2rem;
+    }
+
+    .article-section,
+    .article-meta {
+      margin: 0 0 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .article-header h1 {
+      max-width: 900px;
+      color: var(--text-primary);
+      font-size: 3rem;
+    }
+
+    .article-subtitle {
+      max-width: 850px;
+      color: var(--hero-accent);
+      font-size: 1.18rem;
+      line-height: 1.55;
+    }
+
+    .article-featured {
+      max-width: 1050px;
+      margin: 2.2rem auto 0;
+    }
+
+    .article-featured img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: #f7fbff;
+      object-fit: contain;
+    }
+
+    .article-featured figcaption {
+      max-width: 850px;
+      margin: 0.9rem auto 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface {
+      --read-bg: #f6f8fb;
+      --read-bg-panel: #ffffff;
+      --read-heading: #0b1b2e;
+      --read-body: #334155;
+      --read-muted: #64748b;
+      --read-border: rgba(11, 27, 46, 0.12);
+      --read-accent: #2a8f9a;
+
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-top: 2.75rem;
+      margin-bottom: 0;
+      background: var(--read-bg);
+      border-top: 1px solid var(--read-border);
+    }
+
+    .insight-reading-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 4rem;
+    }
+
+    .article-figure {
+      width: min(1080px, 100%);
+      margin: 2.75rem auto 3.25rem;
+    }
+
+    .insight-reading-surface .article-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid var(--read-border);
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.08);
+      object-fit: contain;
+    }
+
+    .insight-reading-surface .article-figure figcaption {
+      max-width: 850px;
+      margin: 1rem auto 0;
+      color: var(--read-muted);
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface .article-figure figcaption strong {
+      color: var(--read-heading);
+    }
+
+    .figure-zoom-trigger {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      background: none;
+      cursor: zoom-in;
+      position: relative;
+      border-radius: 0.5rem;
+    }
+
+    .figure-zoom-trigger:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 3px;
+    }
+
+    .figure-zoom-trigger::after {
+      content: "Click to enlarge";
+      position: absolute;
+      right: 0.85rem;
+      bottom: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(11, 27, 46, 0.72);
+      color: #f6f8fb;
+      font-size: 0.78rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 150ms ease, transform 150ms ease;
+      pointer-events: none;
+    }
+
+    .figure-zoom-trigger:hover::after,
+    .figure-zoom-trigger:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .figure-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(4, 8, 15, 0.92);
+    }
+
+    .figure-lightbox[hidden] {
+      display: none;
+    }
+
+    .figure-lightbox__frame {
+      max-width: min(1400px, 100%);
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .figure-lightbox__frame img {
+      display: block;
+      max-width: 100%;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .figure-lightbox__caption {
+      max-width: 850px;
+      margin: 0;
+      color: #dbe4f0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .figure-lightbox__close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(11, 27, 46, 0.85);
+      color: #f6f8fb;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .figure-lightbox__close:hover {
+      background: rgba(11, 27, 46, 1);
+    }
+
+    .figure-lightbox__close:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .figure-zoom-trigger::after {
+        content: "Tap to enlarge";
+        right: 0.6rem;
+        bottom: 0.6rem;
+        font-size: 0.72rem;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .article-body section {
+      margin-bottom: 3.6rem;
+    }
+
+    .article-body h2 {
+      margin-top: 0.35rem;
+      padding-top: 0.45rem;
+      font-size: 1.8rem;
+      color: var(--read-heading);
+    }
+
+    .article-body p,
+    .article-body li {
+      color: var(--read-body);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .article-body p {
+      margin-bottom: 1.1rem;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 1.35rem 1.2rem;
+    }
+
+    .article-body blockquote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      border-left: 3px solid var(--read-accent);
+      background: var(--read-bg-panel);
+      border-radius: 0 0.45rem 0.45rem 0;
+    }
+
+    .article-body blockquote p {
+      margin-bottom: 0;
+      color: var(--read-heading);
+    }
+
+    .article-body a {
+      color: var(--read-accent);
+    }
+
+    .article-body a.footnote-ref {
+      font-size: 0.78em;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 0.1em;
+    }
+
+    .insight-table-wrap {
+      width: 100%;
+      max-width: 1080px;
+      margin: 1.75rem auto 2.25rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--read-border);
+      border-radius: 0.55rem;
+      background: var(--read-bg-panel);
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.06);
+    }
+
+    .insight-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .insight-table th, .insight-table td {
+      padding: 0.95rem 1.1rem;
+      border-bottom: 1px solid var(--read-border);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      color: var(--read-body);
+    }
+
+    .insight-table th {
+      text-align: left;
+      color: #f6f8fb;
+      background: #0b1b2e;
+      border-bottom: 3px solid #2a8f9a;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .insight-table tr:last-child td { border-bottom: 0; }
+    .insight-table tbody tr:nth-child(even) td { background: rgba(11, 27, 46, 0.03); }
+    .insight-table strong { color: var(--read-heading); }
+
+    .sources {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--read-border);
+    }
+
+    .sources h2 {
+      color: var(--read-heading);
+    }
+
+    .sources ol {
+      padding-left: 1.2rem;
+    }
+
+    .sources li {
+      margin-bottom: 1rem;
+      color: var(--read-body);
+      font-size: 0.95rem;
+    }
+
+    .sources a {
+      word-break: break-all;
+    }
+
+    .article-cta {
+      margin: 0;
+      padding: 3.5rem 1.5rem 4rem;
+      background: linear-gradient(160deg, rgba(18, 31, 52, 0.95), rgba(8, 14, 24, 0.98));
+      color: #e8eef7;
+      text-align: center;
+    }
+
+    .article-cta p {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #c5d0df;
+    }
+
+    .article-cta h2 {
+      margin-bottom: 0.85rem;
+      color: #f6f8fb;
+    }
+
+    .article-cta .page-actions {
+      margin-top: 1.2rem;
+      justify-content: center;
+    }
+
+    @media (max-width: 900px) {
+      .article-header h1 {
+        font-size: 2.2rem;
+      }
+      .insight-reading-inner {
+        padding: 3.25rem 1.5rem 3.25rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .article-header {
+        padding-top: 0.5rem;
+      }
+      .article-header h1 {
+        font-size: 1.85rem;
+      }
+      .article-subtitle,
+      .article-body p,
+      .article-body li {
+        font-size: 1rem;
+      }
+      .insight-reading-surface {
+        margin-top: 1.6rem;
+      }
+      .insight-reading-inner {
+        padding: 2.4rem 1.15rem 2.6rem;
+      }
+    }
+
+    .thesis-quote {
+      margin: 0 0 1.75rem;
+      padding: 1.15rem 1.35rem;
+      border-left: 4px solid var(--read-accent);
+      background: var(--read-bg-panel);
+      border-radius: 0 0.55rem 0.55rem 0;
+    }
+    .thesis-quote p {
+      margin: 0;
+      color: var(--read-heading);
+      font-size: 1.12rem;
+      line-height: 1.55;
+    }
+  </style>
+
+  <script>
+    const lightbox = document.querySelector<HTMLDivElement>("[data-lightbox]");
+    const lightboxImage = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-image]");
+    const lightboxCaption = lightbox?.querySelector<HTMLParagraphElement>("[data-lightbox-caption]");
+    const closeButton = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+    let lastFocused: HTMLElement | null = null;
+
+    function openLightbox(trigger: HTMLElement) {
+      const img = trigger.querySelector("img");
+      if (!img || !lightbox || !lightboxImage) return;
+      lightboxImage.src = img.getAttribute("src") ?? "";
+      lightboxImage.alt = img.getAttribute("alt") ?? "";
+      const figure = trigger.closest("figure");
+      const caption = figure?.querySelector("figcaption")?.textContent?.trim() ?? "";
+      if (lightboxCaption) lightboxCaption.textContent = caption;
+      lastFocused = trigger;
+      lightbox.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      closeButton?.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.hidden = true;
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => openLightbox(trigger));
+    });
+
+    closeButton?.addEventListener("click", closeLightbox);
+
+    lightbox?.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox && !lightbox.hidden) closeLightbox();
+    });
+  </script>
+</BaseLayout>
+

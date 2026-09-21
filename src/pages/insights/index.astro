@@ -4,6 +4,8 @@ import InsightCard from "../../components/InsightCard.astro";
 
 const description =
   "BeaconGuard Insights examines authorization assurance, consequential AI actions, enforcement boundaries, and the controls enterprises need as agentic AI moves into operational workflows.";
+const handOffWorkFeaturedImage = "/insights/authority-should-narrow-as-ai-agents-delegate/featured.png";
+const trustedTodayFeaturedImage = "/insights/trusted-today-authorized-tomorrow/featured.png";
 const agenticPaymentsFeaturedImage = "/insights/before-an-ai-agent-can-pay/featured-before-an-ai-agent-can-pay.png";
 const featuredImage = "/insights/what-nist-is-asking-about-authority-for-ai-agents/featured.png";
 const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featured.png";
@@ -15,7 +17,7 @@ const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featu
   canonical="https://www.beaconguardassurance.com/insights"
   ogTitle="BeaconGuard Insights"
   ogDescription={description}
-  ogImage={agenticPaymentsFeaturedImage}
+  ogImage={handOffWorkFeaturedImage}
 >
   <section class="insights-hero">
     <p class="section-label">INSIGHTS</p>
@@ -27,6 +29,30 @@ const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featu
   </section>
 
   <section class="insights-list" aria-label="Published insights">
+        <InsightCard
+      href="/insights/authority-should-narrow-as-ai-agents-delegate"
+      image={handOffWorkFeaturedImage}
+      imageAlt="Construction-site metaphor for multi-agent privilege attenuation: authority narrows from general contractor through specialized trades to a single approved task."
+      width="1448"
+      height="1086"
+      type="Analysis"
+      title="Authority Should Narrow as AI Agents Delegate"
+      excerpt="What CAPMAS reveals about bounded delegation, privilege attenuation, and authorization across multi-agent workflows"
+      date="September 17, 2026"
+      author="BeaconGuard"
+    />
+<InsightCard
+      href="/insights/trusted-today-authorized-tomorrow"
+      image={trustedTodayFeaturedImage}
+      imageAlt="Split scene: qualified researcher authorized vs qualification changed access denied; same capability different consequences."
+      width="1448"
+      height="1086"
+      type="Analysis"
+      title="Trusted Today, Authorized Tomorrow?"
+      excerpt="Why enterprise AI authorization must account for changing identity, policy, scope, and risk—not just historical trust decisions."
+      date="September 16, 2026"
+      author="BeaconGuard"
+    />
     <InsightCard
       href="/insights/before-an-ai-agent-can-pay"
       image={agenticPaymentsFeaturedImage}

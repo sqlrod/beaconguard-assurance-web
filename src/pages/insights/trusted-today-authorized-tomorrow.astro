@@ -1,0 +1,751 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = 'Trusted Today, Authorized Tomorrow?';
+const seoTitle = 'Trusted Today, Authorized Tomorrow? | BeaconGuard Insights';
+const description =
+  'Why enterprise AI authorization must account for changing identity, policy, scope, and risk—not just historical trust decisions.';
+const canonical = 'https://www.beaconguardassurance.com/insights/trusted-today-authorized-tomorrow';
+const featuredImage = '/insights/trusted-today-authorized-tomorrow/featured.png';
+const figureOne = '/insights/trusted-today-authorized-tomorrow/figure-1-point-in-time-trust-vs-continuously-qualified-access.png';
+const figureTwo = '/insights/trusted-today-authorized-tomorrow/figure-2-multiple-assertions-different-lifetimes.png';
+const figureThree = '/insights/trusted-today-authorized-tomorrow/figure-3-the-qualification-lifecycle.png';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: title,
+  description,
+  image: `https://www.beaconguardassurance.com${featuredImage}`,
+  datePublished: "2026-09-16",
+  dateModified: "2026-09-17",
+  author: {
+    "@type": "Organization",
+    name: "BeaconGuard",
+    url: "https://www.beaconguardassurance.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "BeaconGuard Assurance",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.beaconguardassurance.com/beaconguard-master-logo.png",
+    },
+  },
+  mainEntityOfPage: canonical,
+};
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={description}
+  canonical={canonical}
+  ogTitle={seoTitle}
+  ogDescription={description}
+  ogImage={featuredImage}
+  ogType="article"
+  publishedTime="2026-09-16T00:00:00-04:00"
+  jsonLd={jsonLd}
+>
+  <article class="insight-article">
+    <header class="article-header">
+      <p class="section-label">ANALYSIS</p>
+      <p class="article-section">BeaconGuard Insights — Trusted-Access Safeguards</p>
+      <h1>{title}</h1>
+      <p class="article-subtitle">
+        A decision that was valid yesterday may no longer authorize an AI-initiated action today.
+      </p>
+      <p class="article-meta">By BeaconGuard · September 16, 2026</p>
+      <figure class="article-featured">
+        <img
+          src={featuredImage}
+          alt="Split scene: qualified researcher authorized vs qualification changed access denied; same capability different consequences."
+          width="1448"
+          height="1086"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <figcaption>Trusted Today, Authorized Tomorrow?</figcaption>
+      </figure>
+    </header>
+
+    <div class="insight-reading-surface">
+    <div class="insight-reading-inner">
+    <div class="article-body">
+      <section>
+      <p><strong>ANALYSIS</strong></p>
+      <p><em>A decision that was valid yesterday may no longer authorize an AI-initiated action today.</em></p>
+        <blockquote class="thesis-quote">
+      <p><strong>Trust can be historical. Authority must be current.</strong></p>
+        </blockquote>
+      <p><em>Featured visual — Trusted Today, Authorized Tomorrow?</em></p>
+      <p>Enterprise AI authorization increasingly depends on a simple question: are the facts that justified this specific action still valid at execution time?</p>
+      <p>A user may still exist. A credential may still authenticate. An organization may still be approved. A model may still be available. Yet the conditions surrounding a consequential action may have changed. Roles change, programs expire, scope narrows, policies evolve, and risk assessments are updated.</p>
+      <p>Anthropic’s public work on biological-risk safeguards provides a case study for this time dimension of authorization. Its disclosures describe trusted-access programs, user qualification, request-level safeguards, capability thresholds, and recurring risk reassessments.</p>
+      <p>These controls are not a single unified runtime authorization architecture, and Anthropic does not describe them as “continuous qualification.” <strong>Continuous qualification is BeaconGuard editorial terminology</strong> for the broader architectural idea that authority depends on current conditions rather than only historical approval.</p>
+      <p>The broader lesson is direct: <strong>when the conditions supporting elevated capability access can change, a previous trust decision cannot automatically represent current authority.</strong></p>
+      </section>
+      <section>
+        <h2>ASL-3 made the time dimension visible</h2>
+      <p>Anthropic’s ASL-3 work illustrates how safeguard decisions can evolve with capability evidence. Anthropic deployed Claude Opus 4 under ASL-3 protections on a precautionary basis. The company stated that it had not determined the model definitively required ASL-3, but could no longer confidently rule out the relevant capability threshold. It also described the possibility of adjusting protections as additional evaluation became available.</p>
+      <p>The architectural point is not the classification itself, but its conditional posture. Anthropic also described differentiated access for trusted users: entities with an established relationship are reviewed for organizational legitimacy, security measures, and policy compliance history. Qualified users may receive targeted classifier exemptions, subject to monitoring and possible restoration of classifier protections if scope or misuse concerns arise.</p>
+      <p>This does not demonstrate a BeaconGuard-style continuous qualification system. It demonstrates that approval can remain part of an active lifecycle rather than becoming a permanent state.</p>
+      </section>
+      <section>
+        <h2>Three layers of changing state</h2>
+      <p>Anthropic’s public controls should not be treated as one mechanism. They operate across layers, each with its own changing state.</p>
+        <div class="insight-table-wrap">
+          <table class="insight-table">
+            <thead><tr>
+              <th scope="col">Layer</th>
+              <th scope="col">Anthropic-documented example</th>
+              <th scope="col">What changes?</th>
+              <th scope="col">Enterprise authorization question</th>
+            </tr></thead><tbody>
+              <tr>
+                <td><strong>User / access qualification</strong></td>
+                <td>Trusted-access review, exemptions, ongoing monitoring</td>
+                <td>Whether the actor or organization remains eligible</td>
+                <td>Is this actor still qualified for this capability and scope?</td>
+              </tr>
+              <tr>
+                <td><strong>Request-level safeguards</strong></td>
+                <td>Real-time classifiers, offline monitoring, request controls</td>
+                <td>Whether this interaction satisfies current safeguards</td>
+                <td>Does this request meet the controls required now?</td>
+              </tr>
+              <tr>
+                <td><strong>Model / risk qualification</strong></td>
+                <td>RSP thresholds, Risk Reports, mitigation reassessment</td>
+                <td>Whether capability and risk posture justify controls</td>
+                <td>Is the system operating under current approved conditions?</td>
+              </tr>
+            </tbody></table></div>
+      <p>These layers reinforce the temporal lesson, but they are not one runtime system. Anthropic’s public materials do not establish that every trusted-access request re-verifies institutional affiliation, jurisdiction, project purpose, and identity in real time. Enrollment review and ongoing monitoring are documented; a complete per-request requalification stack is not.</p>
+        <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 1">
+        <img
+          src={figureOne}
+          alt="Point-in-time trust versus continuously qualified access"
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 1. Point-in-Time Trust vs. Continuously Qualified Access</strong></figcaption>
+    </figure>
+
+      <p><em>Figure 1 — Three Layers of Changing State. User qualification, request safeguards, and model risk qualification change on different timelines.</em></p>
+        <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 2">
+        <img
+          src={figureTwo}
+          alt="Multiple assertions with different lifetimes feeding a current authority decision"
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 2. Multiple Assertions, Different Lifetimes</strong></figcaption>
+    </figure>
+
+      <p><em>Figure 2 — Different authorization inputs can change at different rates.</em></p>
+      </section>
+      <section>
+        <h2>Trusted access is more than a binary label</h2>
+      <p>Anthropic’s trusted-access programs show that capability access can depend on more than account possession. Anthropic describes Claude Fable 5.1 and Claude Mythos 5.1 as having different safeguard profiles. Fable 5.1 includes safeguards that can redirect certain requests, while Mythos 5.1 is available through trusted-access programs for vetted individuals and organizations requiring more permissive safeguards.</p>
+      <p>For life sciences, Anthropic describes a Life Sciences Verification Program intended for professional research and development use. The company states that initial participants have been enrolled and that access is currently limited to a set of U.S. organizations.</p>
+      <p>These programs do not prove continuous qualification. The enterprise question is whether current authorization depends on who the actor is, which organization or program they represent, what capability they are accessing, what safeguards apply, and what risk conditions exist. Historical approval is evidence; it is not automatically the final authorization decision.</p>
+      </section>
+      <section>
+        <h2>Current policy matters because risk changes</h2>
+      <p>Anthropic’s Responsible Scaling Policy demonstrates the same lifecycle concept at the model-governance layer. <strong>RSP Version 3.0</strong>, published in February 2026, introduced a more systematic Risk Report structure and maintained conditional safeguards tied to capability thresholds. RSP v3.0 is historical.</p>
+      <p>Anthropic’s current Responsible Scaling Policy is <strong>Version 3.4</strong>, effective July 8, 2026. Anthropic’s August 2026 Risk Report states that it implements RSP v3.4 and evaluates conditions as of a defined coverage date. The report is Anthropic’s own assessment, not independent validation; it assessed relevant chemical and biological risk categories as Low while documenting uncertainty, a remediated access-control gap, and changes in confidence following that discovery.</p>
+      <p>The architectural point is that risk conclusions depend on current evidence, current mitigations, and current assumptions.</p>
+      </section>
+      <section>
+        <h2>Mixed evidence requires reassessment, not simplification</h2>
+      <p>Anthropic reported controlled text-based trials where participants using Claude 4 models with safeguards removed produced higher-scoring hypothetical acquisition plans and fewer critical failures than internet-only controls. Anthropic also noted these trials are imperfect proxies for real-world scenarios.</p>
+      <p>A separate 2024 wet-lab pilot with eight participants reported <strong>no evidence of uplift</strong>. Anthropic stated that the study was too small to provide strong evidence either way.</p>
+      <p>The evidence does not establish that a real-world biological attack occurred. The reviewed sources do not claim that Anthropic prevented one.</p>
+      <p>The relevant lesson is narrower: evidence supporting a risk decision can change, remain uncertain, or point in different directions. Authorization systems need mechanisms to reassess when the conditions behind an earlier decision no longer hold.</p>
+      </section>
+      <section>
+        <h2>Continuous qualification as an authorization pattern</h2>
+      <p>BeaconGuard uses <strong>continuous qualification</strong> as an editorial and architectural term:</p>
+        <blockquote class="thesis-quote">
+      <p>Authority remains valid only while the conditions that justified it remain sufficiently current and within policy.</p>
+        </blockquote>
+      <p>This is not an Anthropic product claim, and Anthropic’s public materials do not describe a unified BeaconGuard-style runtime. Consequential AI actions may depend on multiple qualification facts:</p>
+      <p><strong>actor identity → organization or role → delegated scope → approved workflow → purpose → policy or jurisdiction → capability state → current risk state</strong></p>
+      <p>A continuous qualification model does not require every fact to be rebuilt from zero on every request. Enterprise systems may use time-bounded attestations, authoritative lookups, expiry rules, event-driven invalidation, or reassessment triggered by material changes. The requirement is preventing stale qualification from silently becoming permanent authority.</p>
+        <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 3">
+        <img
+          src={figureThree}
+          alt="Qualification lifecycle covering approve, monitor, reassess, narrow, and revoke"
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 3. The Qualification Lifecycle</strong></figcaption>
+    </figure>
+
+      <p><em>Figure 3 — The qualification lifecycle connects changing evidence to reassessment and current authorization decisions.</em></p>
+      </section>
+      <section>
+        <h2>IAM remains necessary — but freshness becomes part of the decision</h2>
+      <p>Continuous qualification does not replace identity and access management. IAM remains necessary for establishing identity, authentication strength, organizational membership, roles, credentials, and attributes.</p>
+      <p>The additional question is whether those identity and access facts are sufficient for this specific consequential action at this moment. A user can authenticate successfully while a separate entitlement has expired. A service identity can remain valid while the approved workflow purpose has changed. A researcher can remain employed while authorization for a specific capability has narrowed. A credential can remain technically valid after a compromise signal should have changed its authority state.</p>
+      <p><strong>BeaconGuard does not replace IAM. Identity may still be valid while authority for a particular action is not.</strong></p>
+      </section>
+      <section>
+        <h2>What enterprise buyers should ask</h2>
+        <ol>
+          <li><strong>What facts justify elevated access?</strong> Identity alone, or also organization, role, program membership, scope, purpose, environment, and risk state?</li>
+          <li><strong>Which facts can change?</strong> Are attributes treated as durable because they truly are durable, or because the system lacks reassessment?</li>
+          <li><strong>What triggers requalification?</strong> Role changes, policy updates, risk findings, model changes, contract changes, or abnormal behavior?</li>
+          <li><strong>How quickly does revocation propagate?</strong> Can agents, sessions, and downstream systems continue operating under stale authority?</li>
+          <li><strong>What happens when evidence is stale?</strong> Step down, require verification, deny execution, or continue under old assumptions?</li>
+          <li><strong>Can the decision be reconstructed?</strong> Which evidence was relied upon, which policy applied, and why was the action allowed?</li>
+        </ol>
+      </section>
+      <section class="insight-cta-block">
+        <h2>Start with one consequential workflow</h2>
+        <p>Choose one AI-enabled workflow where a stale identity, policy, scope, or risk signal could change the outcome. Map which facts authorize the action, how current those facts must remain, and what happens when conditions change. The result is an outcome-focused evaluation: clearer decisions, safer execution, and an audit trail that explains why authority was current at the moment it mattered.</p>
+        <p class="cta-links"><a class="btn-primary" href="/design-partner-program">Request Evaluation</a> <a class="btn-secondary" href="/platform">See the Product</a></p>
+      </section>
+
+      <section>
+        <h2>Trust is history. Authority is state.</h2>
+      <p>Anthropic’s disclosures do not show that one company has solved continuous qualification. They show that several important controls are treated as revisable: safeguard levels can change with evidence, trusted exceptions can remain monitored, classifiers can be restored, and risk assessments can be updated as conditions change.</p>
+      <p>For enterprise AI, the broader authorization principle is simple:</p>
+      <p>Trust tells you what was established before. Authority determines whether the conditions for action are valid now.</p>
+      <p><strong>Trust can be historical. Authority must be current.</strong></p>
+      </section>
+      <section>
+        <h2>Source notes and claim tiers</h2>
+      <p><strong>Research provenance:</strong> Candidate research and evaluation date: September 16, 2026. Anthropic claims below are based on Anthropic primary materials. Risk conclusions are Anthropic self-assessments, not independent validation. “Continuous qualification” is BeaconGuard editorial terminology.</p>
+        <ul>
+          <li><strong>Verified fact — Anthropic ASL-3 materials (May 22, 2025):</strong> precautionary ASL-3 protections for Claude Opus 4, uncertainty about the capability threshold, potential adjustment as evidence changes, and an evolving safeguard process.</li>
+          <li><strong>Source fact — Anthropic ASL-3 implementation report:</strong> trusted-access review, organizational legitimacy and security checks, targeted exemptions, ongoing monitoring, and restoration of classifier guards when misuse or scope concerns arise. It does not establish complete per-request institutional re-verification.</li>
+          <li><strong>Verified fact — Anthropic product documentation (September 2026):</strong> differentiated Fable 5.1/Mythos 5.1 safeguard profiles, trusted-access programs, and the Life Sciences Verification Program. The public source does not disclose full re-certification cadence or real-time institutional checking.</li>
+          <li><strong>Verified historical fact — RSP v3.0 (February 24, 2026):</strong> conditional capability thresholds, Risk Reports, and historical policy structure. It is not the current policy.</li>
+          <li><strong>Current policy fact + self-assessment — RSP v3.4 and August 2026 Risk Report:</strong> v3.4 effective July 8, 2026; the report implements v3.4, uses a defined coverage date, reports Low categories with uncertainty, and records a remediated access-control gap. These are Anthropic’s conclusions.</li>
+          <li><strong>Mixed-evidence source fact — Anthropic “LLMs and biorisk” (September 5, 2025):</strong> controlled text-based hypothetical trials and a separate 2024 wet-lab pilot with eight participants reporting no evidence of uplift. These evaluations are not evidence of a real-world biological attack or of Anthropic preventing one.</li>
+          <li><strong>Editorial interpretation:</strong> the article connects changing qualification facts to current authorization; it does not claim Anthropic implements BeaconGuard, that continuous qualification is an Anthropic product, or that any specific mechanism is required.</li>
+        </ul>
+        <h3>Claim boundaries and evidence handling</h3>
+        <ul>
+          <li>The ASL-3 evidence supports a conditional safeguard posture and controlled access, not a claim that every request is requalified from scratch.</li>
+          <li>The Fable 5.1/Mythos 5.1 distinction supports different safeguard profiles and trusted-access conditions, not a finding that either program is a BeaconGuard implementation.</li>
+          <li>The Risk Report’s Low assessments and discussion of uncertainty are reported as Anthropic self-assessments. They are not independent validation of the underlying controls or of the absence of future risk.</li>
+          <li>The controlled text trials and wet-lab pilot are reported within their stated methods and limitations. The article does not convert hypothetical acquisition planning into an incident claim, and it does not convert the wet-lab result into proof that risk is absent.</li>
+          <li>RSP v3.0 is retained as historical context. RSP v3.4 is identified as current, with the August 2026 report tied to its stated coverage date; neither version is treated as a universal enterprise standard.</li>
+          <li>The three-layer model is an analytical framework for separating user/access qualification, request-level safeguards, and model/risk qualification. The table does not assert that Anthropic operates a single runtime that evaluates all three together.</li>
+          <li>The IAM discussion is architectural interpretation: identity and access systems remain necessary, while freshness, purpose, scope, and risk can affect whether a particular action is currently authorized.</li>
+          <li>No new Anthropic facts are introduced. Claims about BeaconGuard are limited to editorial terminology and authorization-assurance interpretation; the article does not claim product equivalence, production validation, or independent reproduction.</li>
+        </ul>
+        <h3>Interpretation discipline</h3>
+      <p>The article separates documented controls from architectural interpretation. “Verified fact” and “source fact” refer to what the cited Anthropic material describes. “Self-assessment” identifies a risk conclusion made by Anthropic rather than independently tested. “Historical” identifies RSP v3.0 as context rather than current policy. The BeaconGuard terms explain a broader enterprise authorization pattern; they are not attributed to Anthropic. This distinction keeps the case study useful without turning it into a claim about Anthropic’s internal systems, a claim that a real-world attack was stopped, or a claim that one control mechanism resolves every agentic authorization problem.</p>
+      </section>
+    </div>
+    </div>
+    </div>
+
+    <div class="figure-lightbox" data-lightbox hidden>
+      <button type="button" class="figure-lightbox__close" data-lightbox-close aria-label="Close enlarged image">&times;</button>
+      <div class="figure-lightbox__frame">
+        <img data-lightbox-image src="" alt="" />
+        <p class="figure-lightbox__caption" data-lightbox-caption></p>
+      </div>
+    </div>
+  </article>
+
+  <style>
+
+    .insight-cta-block {
+      margin: 2.5rem 0 1.5rem;
+      padding: 1.75rem 1.5rem;
+      border-radius: 12px;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    .insight-cta-block h2 { color: #f8fafc; margin-top: 0; }
+    .insight-cta-block .cta-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+    .insight-cta-block .btn-primary,
+    .insight-cta-block .btn-secondary {
+      display: inline-block;
+      padding: 0.7rem 1.1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .insight-cta-block .btn-primary { background: #38bdf8; color: #0f172a; }
+    .insight-cta-block .btn-secondary { background: transparent; color: #e2e8f0; border: 1px solid #64748b; }
+
+    .insight-article {
+      margin: 0 auto;
+      color: #102033;
+    }
+
+    .article-header,
+    .pull-quote {
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-body {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .insight-table-wrap,
+    .article-figure {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-header {
+      max-width: 1080px;
+      padding-top: 2rem;
+    }
+
+    .article-section,
+    .article-meta {
+      margin: 0 0 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .article-header h1 {
+      max-width: 900px;
+      color: var(--text-primary);
+      font-size: 3rem;
+    }
+
+    .article-subtitle {
+      max-width: 850px;
+      color: var(--hero-accent);
+      font-size: 1.18rem;
+      line-height: 1.55;
+    }
+
+    .article-featured {
+      max-width: 1050px;
+      margin: 2.2rem auto 0;
+    }
+
+    .article-featured img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: #f7fbff;
+      object-fit: contain;
+    }
+
+    .article-featured figcaption {
+      max-width: 850px;
+      margin: 0.9rem auto 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface {
+      --read-bg: #f6f8fb;
+      --read-bg-panel: #ffffff;
+      --read-heading: #0b1b2e;
+      --read-body: #334155;
+      --read-muted: #64748b;
+      --read-border: rgba(11, 27, 46, 0.12);
+      --read-accent: #2a8f9a;
+
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-top: 2.75rem;
+      margin-bottom: 0;
+      background: var(--read-bg);
+      border-top: 1px solid var(--read-border);
+    }
+
+    .insight-reading-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 4rem;
+    }
+
+    .article-figure {
+      width: min(1080px, 100%);
+      margin: 2.75rem auto 3.25rem;
+    }
+
+    .insight-reading-surface .article-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid var(--read-border);
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.08);
+      object-fit: contain;
+    }
+
+    .insight-reading-surface .article-figure figcaption {
+      max-width: 850px;
+      margin: 1rem auto 0;
+      color: var(--read-muted);
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface .article-figure figcaption strong {
+      color: var(--read-heading);
+    }
+
+    .figure-zoom-trigger {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      background: none;
+      cursor: zoom-in;
+      position: relative;
+      border-radius: 0.5rem;
+    }
+
+    .figure-zoom-trigger:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 3px;
+    }
+
+    .figure-zoom-trigger::after {
+      content: "Click to enlarge";
+      position: absolute;
+      right: 0.85rem;
+      bottom: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(11, 27, 46, 0.72);
+      color: #f6f8fb;
+      font-size: 0.78rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 150ms ease, transform 150ms ease;
+      pointer-events: none;
+    }
+
+    .figure-zoom-trigger:hover::after,
+    .figure-zoom-trigger:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .figure-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(4, 8, 15, 0.92);
+    }
+
+    .figure-lightbox[hidden] {
+      display: none;
+    }
+
+    .figure-lightbox__frame {
+      max-width: min(1400px, 100%);
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .figure-lightbox__frame img {
+      display: block;
+      max-width: 100%;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .figure-lightbox__caption {
+      max-width: 850px;
+      margin: 0;
+      color: #dbe4f0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .figure-lightbox__close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(11, 27, 46, 0.85);
+      color: #f6f8fb;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .figure-lightbox__close:hover {
+      background: rgba(11, 27, 46, 1);
+    }
+
+    .figure-lightbox__close:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .figure-zoom-trigger::after {
+        content: "Tap to enlarge";
+        right: 0.6rem;
+        bottom: 0.6rem;
+        font-size: 0.72rem;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .article-body section {
+      margin-bottom: 3.6rem;
+    }
+
+    .article-body h2 {
+      margin-top: 0.35rem;
+      padding-top: 0.45rem;
+      font-size: 1.8rem;
+      color: var(--read-heading);
+    }
+
+    .article-body p,
+    .article-body li {
+      color: var(--read-body);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .article-body p {
+      margin-bottom: 1.1rem;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 1.35rem 1.2rem;
+    }
+
+    .article-body blockquote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      border-left: 3px solid var(--read-accent);
+      background: var(--read-bg-panel);
+      border-radius: 0 0.45rem 0.45rem 0;
+    }
+
+    .article-body blockquote p {
+      margin-bottom: 0;
+      color: var(--read-heading);
+    }
+
+    .article-body a {
+      color: var(--read-accent);
+    }
+
+    .article-body a.footnote-ref {
+      font-size: 0.78em;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 0.1em;
+    }
+
+    .insight-table-wrap {
+      width: 100%;
+      max-width: 1080px;
+      margin: 1.75rem auto 2.25rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--read-border);
+      border-radius: 0.55rem;
+      background: var(--read-bg-panel);
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.06);
+    }
+
+    .insight-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .insight-table th, .insight-table td {
+      padding: 0.95rem 1.1rem;
+      border-bottom: 1px solid var(--read-border);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      color: var(--read-body);
+    }
+
+    .insight-table th {
+      text-align: left;
+      color: #f6f8fb;
+      background: #0b1b2e;
+      border-bottom: 3px solid #2a8f9a;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .insight-table tr:last-child td { border-bottom: 0; }
+    .insight-table tbody tr:nth-child(even) td { background: rgba(11, 27, 46, 0.03); }
+    .insight-table strong { color: var(--read-heading); }
+
+    .sources {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--read-border);
+    }
+
+    .sources h2 {
+      color: var(--read-heading);
+    }
+
+    .sources ol {
+      padding-left: 1.2rem;
+    }
+
+    .sources li {
+      margin-bottom: 1rem;
+      color: var(--read-body);
+      font-size: 0.95rem;
+    }
+
+    .sources a {
+      word-break: break-all;
+    }
+
+    .article-cta {
+      margin: 0;
+      padding: 3.5rem 1.5rem 4rem;
+      background: linear-gradient(160deg, rgba(18, 31, 52, 0.95), rgba(8, 14, 24, 0.98));
+      color: #e8eef7;
+      text-align: center;
+    }
+
+    .article-cta p {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #c5d0df;
+    }
+
+    .article-cta h2 {
+      margin-bottom: 0.85rem;
+      color: #f6f8fb;
+    }
+
+    .article-cta .page-actions {
+      margin-top: 1.2rem;
+      justify-content: center;
+    }
+
+    @media (max-width: 900px) {
+      .article-header h1 {
+        font-size: 2.2rem;
+      }
+      .insight-reading-inner {
+        padding: 3.25rem 1.5rem 3.25rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .article-header {
+        padding-top: 0.5rem;
+      }
+      .article-header h1 {
+        font-size: 1.85rem;
+      }
+      .article-subtitle,
+      .article-body p,
+      .article-body li {
+        font-size: 1rem;
+      }
+      .insight-reading-surface {
+        margin-top: 1.6rem;
+      }
+      .insight-reading-inner {
+        padding: 2.4rem 1.15rem 2.6rem;
+      }
+    }
+  </style>
+
+  <script>
+    const lightbox = document.querySelector<HTMLDivElement>("[data-lightbox]");
+    const lightboxImage = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-image]");
+    const lightboxCaption = lightbox?.querySelector<HTMLParagraphElement>("[data-lightbox-caption]");
+    const closeButton = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+    let lastFocused: HTMLElement | null = null;
+
+    function openLightbox(trigger: HTMLElement) {
+      const img = trigger.querySelector("img");
+      if (!img || !lightbox || !lightboxImage) return;
+      lightboxImage.src = img.getAttribute("src") ?? "";
+      lightboxImage.alt = img.getAttribute("alt") ?? "";
+      const figure = trigger.closest("figure");
+      const caption = figure?.querySelector("figcaption")?.textContent?.trim() ?? "";
+      if (lightboxCaption) lightboxCaption.textContent = caption;
+      lastFocused = trigger;
+      lightbox.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      closeButton?.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.hidden = true;
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => openLightbox(trigger));
+    });
+
+    closeButton?.addEventListener("click", closeLightbox);
+
+    lightbox?.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox && !lightbox.hidden) closeLightbox();
+    });
+  </script>
+</BaseLayout>
