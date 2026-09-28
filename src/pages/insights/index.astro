@@ -4,6 +4,7 @@ import InsightCard from "../../components/InsightCard.astro";
 
 const description =
   "BeaconGuard Insights examines authorization assurance, consequential AI actions, enforcement boundaries, and the controls enterprises need as agentic AI moves into operational workflows.";
+const quiescenceFeaturedImage = "/insights/when-ai-agents-stop-can-you-prove-they-stopped/featured.png";
 const handOffWorkFeaturedImage = "/insights/authority-should-narrow-as-ai-agents-delegate/featured.png";
 const trustedTodayFeaturedImage = "/insights/trusted-today-authorized-tomorrow/featured.png";
 const agenticPaymentsFeaturedImage = "/insights/before-an-ai-agent-can-pay/featured-before-an-ai-agent-can-pay.png";
@@ -17,7 +18,7 @@ const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featu
   canonical="https://www.beaconguardassurance.com/insights"
   ogTitle="BeaconGuard Insights"
   ogDescription={description}
-  ogImage={handOffWorkFeaturedImage}
+  ogImage={quiescenceFeaturedImage}
 >
   <section class="insights-hero">
     <p class="section-label">INSIGHTS</p>
@@ -29,7 +30,18 @@ const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featu
   </section>
 
   <section class="insights-list" aria-label="Published insights">
-        <InsightCard
+                <InsightCard
+      href="/insights/when-ai-agents-stop-can-you-prove-they-stopped"
+      image={quiescenceFeaturedImage}
+      imageAlt="Enterprise kitchen closeout: Kitchen Closed sign and cancelled tickets while a Service Closeout checklist still shows root-scoped quiescence as indeterminate."
+      width="1448"
+      height="1086"
+      type="Analysis"
+      title="When AI Agents Stop, Can You Prove They Stopped?"
+      excerpt="Why AI authorization shutdown requires evidence that retired authority can no longer produce protected effects across distributed workflows."
+      date="September 27, 2026"
+      author="BeaconGuard"
+    /><InsightCard
       href="/insights/authority-should-narrow-as-ai-agents-delegate"
       image={handOffWorkFeaturedImage}
       imageAlt="Construction-site metaphor for multi-agent privilege attenuation: authority narrows from general contractor through specialized trades to a single approved task."

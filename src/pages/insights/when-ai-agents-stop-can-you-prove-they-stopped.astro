@@ -1,0 +1,886 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = 'When AI Agents Stop, Can You Prove They Stopped?';
+const seoTitle = 'When AI Agents Stop, Can You Prove They Stopped? | BeaconGuard Insights';
+const description =
+  'Why AI authorization shutdown requires evidence that retired authority can no longer produce protected effects across distributed workflows.';
+const canonical = 'https://www.beaconguardassurance.com/insights/when-ai-agents-stop-can-you-prove-they-stopped';
+const featuredImage = '/insights/when-ai-agents-stop-can-you-prove-they-stopped/featured.png';
+const figureOne = '/insights/when-ai-agents-stop-can-you-prove-they-stopped/figure-1-root-scoped-quiescence-decision-model.png';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: title,
+  description,
+  image: `https://www.beaconguardassurance.com${featuredImage}`,
+  datePublished: "2026-09-27",
+  dateModified: "2026-09-27",
+  author: {
+    "@type": "Organization",
+    name: "BeaconGuard",
+    url: "https://www.beaconguardassurance.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "BeaconGuard Assurance",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.beaconguardassurance.com/beaconguard-master-logo.png",
+    },
+  },
+  mainEntityOfPage: canonical,
+};
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={description}
+  canonical={canonical}
+  ogTitle={seoTitle}
+  ogDescription={description}
+  ogImage={featuredImage}
+  ogType="article"
+  publishedTime="2026-09-27T00:00:00-04:00"
+  jsonLd={jsonLd}
+>
+  <article class="insight-article">
+    <header class="article-header">
+      <p class="section-label">ANALYSIS</p>
+      <p class="article-section">BeaconGuard Insights — Shutdown Assurance</p>
+      <h1>{title}</h1>
+      <p class="article-subtitle">
+        Cancellation ends a request. Quiescence proves an authority path is closed.
+      </p>
+      <p class="article-meta">By BeaconGuard · September 27, 2026</p>
+      <figure class="article-featured">
+        <img
+          src={featuredImage}
+          alt="Enterprise kitchen closeout: Kitchen Closed sign and cancelled tickets while a Service Closeout checklist still shows root-scoped quiescence as indeterminate."
+          width="1448"
+          height="1086"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <figcaption>Stopping work is a control action. Proving retired authority can no longer produce protected effects is an assurance decision — and missing evidence is indeterminate, not success.</figcaption>
+      </figure>
+    </header>
+
+    <div class="insight-reading-surface">
+    <div class="insight-reading-inner">
+    <div class="article-body">
+      <section>
+      <p><em>Cancellation ends a request. Quiescence proves an authority path is closed.</em></p>
+        <blockquote class="thesis-quote">
+      <p><strong>A shutdown command and proof of shutdown are different assurance objects.</strong></p>
+        </blockquote>
+      <p>Long-running AI workflows introduce a question that traditional application controls were not designed to answer:</p>
+      <p>When an authorization is withdrawn, revoked, or cancelled, what evidence proves that the retired authority can no longer produce a consequential effect?</p>
+      <p>A cancellation request is a control transition. A credential revocation is a control transition. A workflow stop signal is a control transition.</p>
+      <p>They may all be necessary.</p>
+      <p>But in distributed AI systems, the assurance question is different:</p>
+      <p>Has every remaining path that could allow the retired authorization to create a future protected effect been closed, or has the system lost enough visibility that the answer is unknown?</p>
+      <p>This distinction matters as AI systems become more autonomous, distributed, and capable of delegating work across multiple services.</p>
+      <p>The question is not whether a system received a stop command.</p>
+      <p>The question is whether the system can produce evidence that the authority behind future execution has actually ended.</p>
+      </section>
+      <section>
+        <h2>A different decision object</h2>
+      <p>Research by Zhu and Wang introduces the concept of <strong>root-scoped authorization quiescence</strong> for long-running AI agent workflows.</p>
+      <p>The paper examines a specific assurance problem:</p>
+      <p>A user or system authority initiates work. That authority is later retired. Some work may already have been delegated, queued, reserved, or distributed across multiple execution paths.</p>
+      <p>The remaining question is not:</p>
+      <p>"Was cancellation requested?"</p>
+      <p>The question is:</p>
+      <p>"Can this retired authorization root still cause a future protected effect?"</p>
+      <p>The authors propose a protocol architecture involving concepts such as:</p>
+        <ul>
+          <li>durable authorization cuts;</li>
+          <li>sink fences;</li>
+          <li>support accounting;</li>
+          <li>channel-token tracking;</li>
+          <li>atomic rebind;</li>
+          <li>and signed evidence certificates.</li>
+        </ul>
+      <p>These mechanisms are one proposed architecture for proving root-scoped quiescence. They should not be interpreted as a universal requirement for every AI system.</p>
+      <p>Simpler systems may establish sufficient closure through simpler mechanisms when they can demonstrate complete mediation, complete coverage, and reliable evidence.</p>
+      <p>The broader architectural lesson is independent of any specific implementation:</p>
+      <p>A shutdown command and proof of shutdown are different assurance objects.</p>
+      </section>
+      <section>
+        <h2>The difference between cancellation and quiescence</h2>
+      <p>In many systems today, cancellation semantics are intentionally limited.</p>
+      <p>A request to cancel work may mean:</p>
+        <ul>
+          <li>stop future scheduling;</li>
+          <li>request cooperative termination;</li>
+          <li>invalidate a credential;</li>
+          <li>prevent new operations;</li>
+          <li>or notify downstream components.</li>
+        </ul>
+      <p>Those controls can be valuable.</p>
+      <p>However, they do not automatically prove that every previously issued authority path has stopped.</p>
+      <p>Distributed AI workflows complicate this further because authority can exist in multiple forms:</p>
+        <ul>
+          <li>delegated tasks;</li>
+          <li>queued actions;</li>
+          <li>service credentials;</li>
+          <li>provider-side execution state;</li>
+          <li>callbacks;</li>
+          <li>asynchronous jobs;</li>
+          <li>external integrations.</li>
+        </ul>
+      <p>A system may successfully process a cancellation request while still lacking evidence that every relevant execution path has closed.</p>
+      <p>The assurance boundary therefore moves from:</p>
+      <p>"Did we issue the stop?"</p>
+      <p>to:</p>
+      <p>"Can we demonstrate that the retired authority cannot continue producing protected effects?"</p>
+      </section>
+      <section>
+        <h2>The CAPABILITY of a control is not the same as evidence of closure</h2>
+      <p>The distinction is important because different controls answer different questions.</p>
+      <p>Credential revocation can answer:</p>
+      <p>"Is this credential still accepted?"</p>
+      <p>A workflow cancellation can answer:</p>
+      <p>"Was this workflow asked to stop?"</p>
+      <p>A provider shutdown mechanism can answer:</p>
+      <p>"Did this provider stop this execution path?"</p>
+      <p>None of those automatically answer:</p>
+      <p>"Are all paths derived from this retired authority unable to create future protected effects?"</p>
+      <p>That final question requires a defined scope, evidence model, and decision boundary.</p>
+      </section>
+      <section>
+        <h2>Three possible outcomes: quiescent, not quiescent, or unknown</h2>
+      <p>One of the most important ideas in the paper is treating uncertainty as a real state.</p>
+      <p>A shutdown evaluation should not be forced into a binary answer when evidence is incomplete.</p>
+      <p>A root-scoped evaluation can result in:</p>
+        <h3>QUIESCENT</h3>
+      <p>Evidence supports that the retired authority root no longer has a path to produce a protected effect within the declared boundary.</p>
+        <h3>NOT QUIESCENT</h3>
+      <p>Evidence shows that a remaining path can still produce a protected effect.</p>
+        <h3>INDETERMINATE</h3>
+      <p>The system cannot establish either outcome because required evidence is missing, stale, incomplete, conflicting, or outside the observable boundary.</p>
+      <p>For high-consequence AI workflows, this third state is important.</p>
+      <p>Unknown is not equivalent to stopped.</p>
+        <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 1">
+        <img
+          src={figureOne}
+          alt="Decision-model diagram from authority active through cancellation or revocation to evidence-complete QUIESCENT, evidence-missing INDETERMINATE, or remaining-path NOT_QUIESCENT."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 1. From Cancellation Request to Verified Quiescence</strong></figcaption>
+    </figure>
+      <p><em>Figure 1 — A cancellation or revocation event is a control transition. Quiescence is an evidence-backed determination — incomplete evidence is indeterminate, not success.</em></p>
+      </section>
+      <section>
+        <h2>The paper's proposed architecture</h2>
+      <p>Zhu and Wang's work describes a formal architecture intended to establish quiescence under stated assumptions.</p>
+      <p>The model includes:</p>
+        <h3>Durable authorization cut</h3>
+      <p>A point after which new effects from a retired authority root should no longer be accepted.</p>
+        <h3>Sink fences</h3>
+      <p>Controls that prevent downstream effect commitments associated with the retired root.</p>
+        <h3>Support accounting</h3>
+      <p>A method for determining which authority roots still support a piece of work.</p>
+        <h3>Atomic rebind</h3>
+      <p>A mechanism for preserving work that remains independently authorized while removing dependence on the retired root.</p>
+      <p>This final point is important.</p>
+      <p>A safe shutdown model is not necessarily "terminate everything."</p>
+      <p>Consider a delegated task supported by two independent authorization roots. Removing one root should not automatically invalidate work that remains legitimately supported by another.</p>
+      <p>The assurance objective is not destruction of activity.</p>
+      <p>It is accurate authority accounting.</p>
+      </section>
+      <section>
+        <h2>Assumptions matter: proving closure requires visibility</h2>
+      <p>The paper's results depend on explicit assumptions.</p>
+      <p>Among the stated requirements are:</p>
+        <ul>
+          <li>complete authorization-root coverage;</li>
+          <li>accurate manifest completeness;</li>
+          <li>reliable sink-fence enforcement;</li>
+          <li>exact channel accounting;</li>
+          <li>authentic evidence;</li>
+          <li>durable state transitions;</li>
+          <li>atomic rebind behavior;</li>
+          <li>crash-safe monotonic state handling;</li>
+          <li>eventual evidence stabilization for convergence.</li>
+        </ul>
+      <p>These assumptions are significant.</p>
+      <p>A system cannot prove that authority has disappeared if it cannot enumerate where that authority may still exist.</p>
+      <p>Missing visibility does not become success.</p>
+      <p>It becomes indeterminate.</p>
+      <p>This is a broader lesson for enterprise AI systems:</p>
+      <p>The quality of an authorization decision depends not only on policy rules, but also on whether the system can observe and prove the state those rules depend on.</p>
+      </section>
+      <section>
+        <h2>What the evaluation results show — and what they do not</h2>
+      <p>The authors report evaluation results for their implementation and test harness.</p>
+      <p>Reported results include:</p>
+        <ul>
+          <li>a provider-free late-effect test suite with 17 registered outcomes;</li>
+          <li>checker validation of 17/17 traces;</li>
+          <li>rejection of 44/44 semantic regressions.</li>
+        </ul>
+      <p>These are <strong>author-reported results from the paper's evaluation artifacts</strong>.</p>
+      <p>They demonstrate the behavior of the authors' implementation and testing approach under the described scenarios.</p>
+      <p>They do not establish:</p>
+        <ul>
+          <li>production deployment success;</li>
+          <li>universal effectiveness across AI platforms;</li>
+          <li>independent reproduction;</li>
+          <li>adoption by standards bodies;</li>
+          <li>or validation by BeaconGuard.</li>
+        </ul>
+      <p>Independent validation of the protocol remains unknown due to the recency of the work.</p>
+      </section>
+      <section>
+        <h2>Existing protocols and the shutdown question</h2>
+      <p>Current ecosystem protocols often provide cancellation or revocation primitives.</p>
+      <p>For example:</p>
+        <ul>
+          <li>MCP task semantics describe cancellation as a cooperative operation rather than guaranteed immediate termination.</li>
+          <li>Agent communication systems may provide task lifecycle controls.</li>
+          <li>OAuth token revocation provides a mechanism for invalidating credentials.</li>
+        </ul>
+      <p>These mechanisms solve important problems.</p>
+      <p>They do not necessarily attempt to prove root-scoped effect closure.</p>
+      <p>That is a different decision object.</p>
+      <p>The distinction is not that existing controls are insufficient.</p>
+      <p>The distinction is that they answer different questions.</p>
+      </section>
+      <section>
+        <h2>Where this fits in enterprise AI authorization</h2>
+      <p>Enterprise AI authorization is moving beyond initial approval.</p>
+      <p>Organizations increasingly need answers across the lifecycle:</p>
+        <ul>
+          <li>Who initiated this action?</li>
+          <li>What authority allowed it?</li>
+          <li>Was that authority still valid?</li>
+          <li>Was delegated work still within scope?</li>
+          <li>What happened when authority changed?</li>
+          <li>Can we prove that retired authority stopped producing effects?</li>
+        </ul>
+      <p>This creates several related assurance dimensions:</p>
+        <h3>Identity</h3>
+      <p>Who is acting?</p>
+        <h3>Authority</h3>
+      <p>What actions are allowed?</p>
+        <h3>Delegation</h3>
+      <p>What authority was transferred and how far?</p>
+        <h3>Lifecycle</h3>
+      <p>What happens when authority changes?</p>
+        <h3>Closure</h3>
+      <p>Can the organization prove that retired authority no longer has execution impact?</p>
+      <p>Root-scoped quiescence addresses the final dimension.</p>
+      </section>
+      <section>
+        <h2>How this relates to BeaconGuard</h2>
+      <p>BeaconGuard uses the term <strong>continuous authorization assurance</strong> to describe the broader category of evaluating consequential AI actions against current authority, policy, and evidence conditions.</p>
+      <p>The Zhu/Wang paper is not a BeaconGuard implementation, validation, or endorsement.</p>
+      <p>BeaconGuard does not claim to implement the paper's protocol mechanisms.</p>
+      <p>The relevance is architectural:</p>
+      <p>Authorization assurance does not end when authority is granted.</p>
+      <p>Organizations operating consequential AI workflows also need confidence that authority transitions, delegation changes, and shutdown events produce verifiable outcomes.</p>
+      </section>
+      <section>
+        <h2>Questions enterprise teams should ask</h2>
+      <p>Before relying on cancellation or revocation controls for autonomous workflows:</p>
+        <ul>
+          <li>What exactly does cancellation guarantee?</li>
+          <li>Which execution paths can retain authority after cancellation?</li>
+          <li>Can delegated work continue under another valid authority?</li>
+          <li>What evidence proves a retired authority root is no longer effective?</li>
+          <li>What happens when a provider cannot provide closure evidence?</li>
+          <li>Does missing evidence produce a safe unknown state, or an assumed success?</li>
+        </ul>
+      <p>These questions become more important as AI workflows become longer-lived and more distributed.</p>
+      </section>
+      <section class="insight-cta-block">
+        <h2>Start with one consequential workflow</h2>
+      <p>Organizations do not need to solve every AI shutdown scenario at once.</p>
+        <ul>
+          <li>identify the authorization boundary;</li>
+          <li>identify where delegated execution occurs;</li>
+          <li>identify what evidence exists when authority changes;</li>
+          <li>determine whether shutdown means a request was sent or a state can be proven.</li>
+        </ul>
+      <p>The goal is not simply stopping an AI workflow.</p>
+      <p>The goal is knowing what authority remains, what authority ended, and what evidence supports that conclusion.</p>
+      <p># Source Notes and Claim Tiers</p>
+        <p class="cta-links"><a class="btn-primary" href="/design-partner-program">Request Evaluation</a> <a class="btn-secondary" href="/platform">See the Product</a></p>
+      </section>
+      <section>
+        <h2>Tier 1 — Primary source</h2>
+      <p><strong>Zhu and Wang, "Root-Scoped Authorization Quiescence for Long-Running AI Agent Workflows," arXiv:2609.21284</strong></p>
+      <p>Used for:</p>
+        <ul>
+          <li>definition of root-scoped authorization quiescence;</li>
+          <li>proposed protocol architecture;</li>
+          <li>formal assumptions;</li>
+          <li>three-valued decision model;</li>
+          <li>author-reported evaluation results;</li>
+          <li>scope limitations.</li>
+        </ul>
+      <p>Claim classification:</p>
+      <p><strong>FACT ABOUT THE PAPER / AUTHOR-DOCUMENTED DESIGN</strong></p>
+      </section>
+      <section>
+        <h2>Tier 2 — Author-reported evaluation</h2>
+      <p>Claims:</p>
+        <ul>
+          <li>17/17 registered outcomes;</li>
+          <li>checker validation;</li>
+          <li>44/44 semantic regression rejection.</li>
+        </ul>
+      <p>Classification:</p>
+      <p><strong>AUTHOR-REPORTED RESULTS</strong></p>
+      <p>Not independently verified.</p>
+      </section>
+      <section>
+        <h2>Tier 3 — Protocol ecosystem context</h2>
+      <p>Sources:</p>
+        <ul>
+          <li>MCP task lifecycle documentation.</li>
+          <li>Agent communication lifecycle documentation.</li>
+          <li>RFC 7009 OAuth token revocation.</li>
+        </ul>
+      <p>Used for:</p>
+        <ul>
+          <li>cancellation semantics;</li>
+          <li>credential revocation context.</li>
+        </ul>
+      <p>Classification:</p>
+      <p><strong>PRIMARY PROTOCOL FACTS</strong></p>
+      <p>Interpretation that these mechanisms answer a different decision object is:</p>
+      <p><strong>BeaconGuard editorial analysis.</strong></p>
+      </section>
+      <section>
+        <h2>Claim boundaries</h2>
+      <p>This article does not claim:</p>
+        <ul>
+          <li>Zhu/Wang's protocol is a universal requirement.</li>
+          <li>Existing cancellation mechanisms are defective.</li>
+          <li>MCP or A2A systems are non-quiescent in production.</li>
+          <li>OAuth revocation is inadequate.</li>
+          <li>BeaconGuard implements the paper's architecture.</li>
+          <li>The paper validates BeaconGuard.</li>
+          <li>The paper represents an adopted standard.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Editorial thesis</h2>
+      <p>A cancellation request changes control state.</p>
+      <p>A quiescence determination requires evidence that retired authority can no longer produce protected effects within a defined scope.</p>
+      <p>When evidence is incomplete, the correct state is not success.</p>
+      <p>It is indeterminate.</p>
+      </section>
+    </div>
+    </div>
+    </div>
+
+    <div class="figure-lightbox" data-lightbox hidden>
+      <button type="button" class="figure-lightbox__close" data-lightbox-close aria-label="Close enlarged image">&times;</button>
+      <div class="figure-lightbox__frame">
+        <img data-lightbox-image src="" alt="" />
+        <p class="figure-lightbox__caption" data-lightbox-caption></p>
+      </div>
+    </div>
+  </article>
+
+  <style>
+
+    .insight-cta-block {
+      margin: 2.5rem 0 1.5rem;
+      padding: 1.75rem 1.5rem;
+      border-radius: 12px;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    .insight-cta-block h2 { color: #f8fafc; margin-top: 0; }
+    .insight-cta-block .cta-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+    .insight-cta-block .btn-primary,
+    .insight-cta-block .btn-secondary {
+      display: inline-block;
+      padding: 0.7rem 1.1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .insight-cta-block .btn-primary { background: #38bdf8; color: #0f172a; }
+    .insight-cta-block .btn-secondary { background: transparent; color: #e2e8f0; border: 1px solid #64748b; }
+
+    .insight-article {
+      margin: 0 auto;
+      color: #102033;
+    }
+
+    .article-header,
+    .pull-quote {
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-body {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .insight-table-wrap,
+    .article-figure {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-header {
+      max-width: 1080px;
+      padding-top: 2rem;
+    }
+
+    .article-section,
+    .article-meta {
+      margin: 0 0 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .article-header h1 {
+      max-width: 900px;
+      color: var(--text-primary);
+      font-size: 3rem;
+    }
+
+    .article-subtitle {
+      max-width: 850px;
+      color: var(--hero-accent);
+      font-size: 1.18rem;
+      line-height: 1.55;
+    }
+
+    .article-featured {
+      max-width: 1050px;
+      margin: 2.2rem auto 0;
+    }
+
+    .article-featured img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: #f7fbff;
+      object-fit: contain;
+    }
+
+    .article-featured figcaption {
+      max-width: 850px;
+      margin: 0.9rem auto 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface {
+      --read-bg: #f6f8fb;
+      --read-bg-panel: #ffffff;
+      --read-heading: #0b1b2e;
+      --read-body: #334155;
+      --read-muted: #64748b;
+      --read-border: rgba(11, 27, 46, 0.12);
+      --read-accent: #2a8f9a;
+
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-top: 2.75rem;
+      margin-bottom: 0;
+      background: var(--read-bg);
+      border-top: 1px solid var(--read-border);
+    }
+
+    .insight-reading-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 4rem;
+    }
+
+    .article-figure {
+      width: min(1080px, 100%);
+      margin: 2.75rem auto 3.25rem;
+    }
+
+    .insight-reading-surface .article-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid var(--read-border);
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.08);
+      object-fit: contain;
+    }
+
+    .insight-reading-surface .article-figure figcaption {
+      max-width: 850px;
+      margin: 1rem auto 0;
+      color: var(--read-muted);
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface .article-figure figcaption strong {
+      color: var(--read-heading);
+    }
+
+    .figure-zoom-trigger {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      background: none;
+      cursor: zoom-in;
+      position: relative;
+      border-radius: 0.5rem;
+    }
+
+    .figure-zoom-trigger:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 3px;
+    }
+
+    .figure-zoom-trigger::after {
+      content: "Click to enlarge";
+      position: absolute;
+      right: 0.85rem;
+      bottom: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(11, 27, 46, 0.72);
+      color: #f6f8fb;
+      font-size: 0.78rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 150ms ease, transform 150ms ease;
+      pointer-events: none;
+    }
+
+    .figure-zoom-trigger:hover::after,
+    .figure-zoom-trigger:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .figure-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(4, 8, 15, 0.92);
+    }
+
+    .figure-lightbox[hidden] {
+      display: none;
+    }
+
+    .figure-lightbox__frame {
+      max-width: min(1400px, 100%);
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .figure-lightbox__frame img {
+      display: block;
+      max-width: 100%;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .figure-lightbox__caption {
+      max-width: 850px;
+      margin: 0;
+      color: #dbe4f0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .figure-lightbox__close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(11, 27, 46, 0.85);
+      color: #f6f8fb;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .figure-lightbox__close:hover {
+      background: rgba(11, 27, 46, 1);
+    }
+
+    .figure-lightbox__close:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .figure-zoom-trigger::after {
+        content: "Tap to enlarge";
+        right: 0.6rem;
+        bottom: 0.6rem;
+        font-size: 0.72rem;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .article-body section {
+      margin-bottom: 3.6rem;
+    }
+
+
+    .article-body h3 {
+      margin: 1.5rem 0 0.65rem;
+      font-size: 1.25rem;
+      color: var(--read-heading);
+    }
+
+    .article-body h2 {
+      margin-top: 0.35rem;
+      padding-top: 0.45rem;
+      font-size: 1.8rem;
+      color: var(--read-heading);
+    }
+
+    .article-body p,
+    .article-body li {
+      color: var(--read-body);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .article-body p {
+      margin-bottom: 1.1rem;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 1.35rem 1.2rem;
+    }
+
+    .article-body blockquote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      border-left: 3px solid var(--read-accent);
+      background: var(--read-bg-panel);
+      border-radius: 0 0.45rem 0.45rem 0;
+    }
+
+    .article-body blockquote p {
+      margin-bottom: 0;
+      color: var(--read-heading);
+    }
+
+    .article-body a {
+      color: var(--read-accent);
+    }
+
+    .article-body a.footnote-ref {
+      font-size: 0.78em;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 0.1em;
+    }
+
+    .insight-table-wrap {
+      width: 100%;
+      max-width: 1080px;
+      margin: 1.75rem auto 2.25rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--read-border);
+      border-radius: 0.55rem;
+      background: var(--read-bg-panel);
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.06);
+    }
+
+    .insight-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .insight-table th, .insight-table td {
+      padding: 0.95rem 1.1rem;
+      border-bottom: 1px solid var(--read-border);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      color: var(--read-body);
+    }
+
+    .insight-table th {
+      text-align: left;
+      color: #f6f8fb;
+      background: #0b1b2e;
+      border-bottom: 3px solid #2a8f9a;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .insight-table tr:last-child td { border-bottom: 0; }
+    .insight-table tbody tr:nth-child(even) td { background: rgba(11, 27, 46, 0.03); }
+    .insight-table strong { color: var(--read-heading); }
+
+    .sources {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--read-border);
+    }
+
+    .sources h2 {
+      color: var(--read-heading);
+    }
+
+    .sources ol {
+      padding-left: 1.2rem;
+    }
+
+    .sources li {
+      margin-bottom: 1rem;
+      color: var(--read-body);
+      font-size: 0.95rem;
+    }
+
+    .sources a {
+      word-break: break-all;
+    }
+
+    .article-cta {
+      margin: 0;
+      padding: 3.5rem 1.5rem 4rem;
+      background: linear-gradient(160deg, rgba(18, 31, 52, 0.95), rgba(8, 14, 24, 0.98));
+      color: #e8eef7;
+      text-align: center;
+    }
+
+    .article-cta p {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #c5d0df;
+    }
+
+    .article-cta h2 {
+      margin-bottom: 0.85rem;
+      color: #f6f8fb;
+    }
+
+    .article-cta .page-actions {
+      margin-top: 1.2rem;
+      justify-content: center;
+    }
+
+    @media (max-width: 900px) {
+      .article-header h1 {
+        font-size: 2.2rem;
+      }
+      .insight-reading-inner {
+        padding: 3.25rem 1.5rem 3.25rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .article-header {
+        padding-top: 0.5rem;
+      }
+      .article-header h1 {
+        font-size: 1.85rem;
+      }
+      .article-subtitle,
+      .article-body p,
+      .article-body li {
+        font-size: 1rem;
+      }
+      .insight-reading-surface {
+        margin-top: 1.6rem;
+      }
+      .insight-reading-inner {
+        padding: 2.4rem 1.15rem 2.6rem;
+      }
+    }
+  </style>
+
+  <script>
+    const lightbox = document.querySelector<HTMLDivElement>("[data-lightbox]");
+    const lightboxImage = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-image]");
+    const lightboxCaption = lightbox?.querySelector<HTMLParagraphElement>("[data-lightbox-caption]");
+    const closeButton = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+    let lastFocused: HTMLElement | null = null;
+
+    function openLightbox(trigger: HTMLElement) {
+      const img = trigger.querySelector("img");
+      if (!img || !lightbox || !lightboxImage) return;
+      lightboxImage.src = img.getAttribute("src") ?? "";
+      lightboxImage.alt = img.getAttribute("alt") ?? "";
+      const figure = trigger.closest("figure");
+      const caption = figure?.querySelector("figcaption")?.textContent?.trim() ?? "";
+      if (lightboxCaption) lightboxCaption.textContent = caption;
+      lastFocused = trigger;
+      lightbox.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      closeButton?.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.hidden = true;
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => openLightbox(trigger));
+    });
+
+    closeButton?.addEventListener("click", closeLightbox);
+
+    lightbox?.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox && !lightbox.hidden) closeLightbox();
+    });
+  </script>
+
+</BaseLayout>
