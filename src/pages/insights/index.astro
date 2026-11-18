@@ -4,6 +4,7 @@ import InsightCard from "../../components/InsightCard.astro";
 
 const description =
   "BeaconGuard Insights examines authorization assurance, consequential AI actions, enforcement boundaries, and the controls enterprises need as agentic AI moves into operational workflows.";
+const approvalEvidenceFeaturedImage = "/insights/someone-clicked-approve-what-did-they-authorize/featured.png";
 const commitTimeFeaturedImage = "/insights/finished-still-authorized/featured.png";
 const quiescenceFeaturedImage = "/insights/when-ai-agents-stop-can-you-prove-they-stopped/featured.png";
 const handOffWorkFeaturedImage = "/insights/authority-should-narrow-as-ai-agents-delegate/featured.png";
@@ -19,7 +20,7 @@ const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featu
   canonical="https://www.beaconguardassurance.com/insights"
   ogTitle="BeaconGuard Insights"
   ogDescription={description}
-  ogImage={commitTimeFeaturedImage}
+  ogImage={approvalEvidenceFeaturedImage}
 >
   <section class="insights-hero">
     <p class="section-label">INSIGHTS</p>
@@ -31,6 +32,18 @@ const boundaryFeaturedImage = "/insights/when-ai-agents-cross-the-boundary/featu
   </section>
 
   <section class="insights-list" aria-label="Published insights">
+    <InsightCard
+      href="/insights/someone-clicked-approve-what-did-they-authorize"
+      image={approvalEvidenceFeaturedImage}
+      imageAlt="BeaconGuard Insights editorial image of a print-shop operator comparing a fresh printed sheet with a client-signed press proof for JOB 4471, while a sheet containing a mismatched “Suite 200” line differs from the approved proof, illustrating the chain from what was shown to what was approved to what executed."
+      width="1448"
+      height="1086"
+      type="Analysis"
+      title="Someone Clicked Approve. What Did They Authorize?"
+      excerpt="Human approval is only strong authorization evidence when the enterprise can show what was presented, what the approval was bound to, and whether that same effect executed."
+      date="November 18, 2026"
+      author="BeaconGuard"
+    />
     <InsightCard
       href="/insights/finished-still-authorized"
       image={commitTimeFeaturedImage}
