@@ -1,0 +1,863 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = 'Finished. Still Authorized?';
+const seoTitle = 'Finished. Still Authorized? | BeaconGuard Insights';
+const description =
+  'Agent completion produces a proposal; current authority still determines whether the effect may be committed.';
+const canonical = 'https://www.beaconguardassurance.com/insights/finished-still-authorized';
+const featuredImage = '/insights/finished-still-authorized/featured.png';
+const figureOne = '/insights/finished-still-authorized/figure-1-commit-time-admission.png';
+const figureTwo = '/insights/finished-still-authorized/figure-2-complete-mediation-bypass.png';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: title,
+  description,
+  image: `https://www.beaconguardassurance.com${featuredImage}`,
+  datePublished: "2026-10-07",
+  dateModified: "2026-10-07",
+  author: {
+    "@type": "Organization",
+    name: "BeaconGuard",
+    url: "https://www.beaconguardassurance.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "BeaconGuard Assurance",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.beaconguardassurance.com/beaconguard-master-logo.png",
+    },
+  },
+  mainEntityOfPage: canonical,
+};
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={description}
+  canonical={canonical}
+  ogTitle={seoTitle}
+  ogDescription={description}
+  ogImage={featuredImage}
+  ogType="article"
+  publishedTime="2026-10-07T00:00:00-04:00"
+  jsonLd={jsonLd}
+>
+  <article class="insight-article">
+    <header class="article-header">
+      <p class="section-label">ANALYSIS</p>
+      <p class="article-section">BeaconGuard Insights — Commit-Time Admission</p>
+      <h1>{title}</h1>
+      <p class="article-subtitle">
+        Agent completion produces a proposal; current authority still determines whether the effect may be committed.
+      </p>
+      <p class="article-meta">By BeaconGuard · October 7, 2026</p>
+      <figure class="article-featured">
+        <img
+          src={featuredImage}
+          alt="Pharmacist bagging a verified prescription beside a current-verification checklist, with a return/update bin for a prescription that is not admitted."
+          width="1672"
+          height="941"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <figcaption>Featured visual — A completed prescription is still checked against current conditions before it may be dispensed. The analogy illustrates the gap between finished work and institutional admission of a consequential effect.</figcaption>
+      </figure>
+    </header>
+
+    <div class="insight-reading-surface">
+    <div class="insight-reading-inner">
+    <div class="article-body">
+      <section>
+      <p>An AI agent can finish a task successfully and still produce a result that should not be executed.</p>
+      <p>The reason is simple: completion happens at one moment, while consequential action may happen later.</p>
+      <p>During that interval, permissions can change. A governing fact can change. A task can move to a different state. A model, adapter, prompt, tool, or verifier can be updated. The proposal may still be internally coherent while the assumptions that justified it are no longer current.</p>
+      <p>That creates a distinct authorization question:</p>
+      <p><strong>When an agent finishes, what proves the institution still authorizes the proposed effect at the moment it is about to become durable?</strong></p>
+      <p>A recent preprint by Jesus Salas, <em>Authority at Commit Time: Reject-and-Rerun Semantics for Governed Agentic Systems</em>, explores one architecture for answering that question.<a class="footnote-ref" href="#fn1" id="fnref1">[1]</a> The paper treats agent output as a proposal and reserves effect admission for a logically authoritative decision point that validates current governing state before a consequential effect is committed.</p>
+      <p>The important distinction is not that every system must implement Salas's exact OCC, manifest, verifier, or outbox construction. It is that <strong>completion and institutional admission are separate decision states</strong>.</p>
+      </section>
+      <section>
+        <h2>Completion is a proposal state</h2>
+      <p>Many agent workflows implicitly treat "done" as the end of the decision process.</p>
+      <p>The model finishes reasoning.<br />
+      The tool plan completes.<br />
+      The workflow produces a result.<br />
+      The agent reports success.</p>
+      <p>But none of those events necessarily establishes that the institution should still act on the result.</p>
+      <p>Salas's paper formalizes the gap by treating long-running computation as speculative work over a snapshot of governing inputs. The proposal can depend on authority, facts, task state, and component versions. Before the effect becomes durable, an admission service compares the proposal's declared dependencies against current state and applies the current verifier.<a class="footnote-ref" href="#fn1" id="fnref1-2">[1]</a></p>
+      <p>The architecture can then produce one of the paper's documented outcomes:</p>
+        <ul>
+          <li><strong>accept</strong> — current state still admits the proposed effect;</li>
+          <li><strong>reject-stale</strong> — one or more relevant dependencies changed;</li>
+          <li><strong>reject-verify</strong> — the current verifier does not admit the proposal;</li>
+          <li><strong>duplicate</strong> — an equivalent effect has already been handled;</li>
+          <li><strong>unavailable</strong> — the required authoritative decision state is not available, so the central design pauses rather than silently admitting locally.<a class="footnote-ref" href="#fn1" id="fnref1-3">[1]</a></li>
+        </ul>
+      <p>There is no <code>INDETERMINATE</code> state in this paper. That three-valued framing belongs to a different assurance problem. Here, unavailability is an explicit pause condition.</p>
+      <p>The practical consequence is straightforward: <strong>agent completion does not itself carry institutional effect authority</strong>.</p>
+        <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 1">
+        <img
+          src={figureOne}
+          alt="Decision-flow diagram showing a completed AI proposal passing to a current admission check that evaluates authority, dependencies, component state, and verifier state, then results in accept, reject-stale, reject-verify, duplicate, or unavailable/pause."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 1. From Completion to Commit-Time Admission</strong> — A completed proposal is evaluated against current authority, relevant dependencies, component state, and the current verifier before an effect is admitted. Stale, invalid, duplicate, or unavailable cases do not become a new durable effect.</figcaption>
+    </figure>
+      </section>
+      <section>
+        <h2>Why commit-time authority matters</h2>
+      <p>This problem becomes more important as agent execution gets longer.</p>
+      <p>Suppose an agent begins work while:</p>
+        <ul>
+          <li>the user has a valid entitlement;</li>
+          <li>a case is in an approved workflow state;</li>
+          <li>a particular model and tool set are approved;</li>
+          <li>a governing policy permits the requested operation.</li>
+        </ul>
+      <p>Ten minutes later, the agent finishes.</p>
+      <p>But perhaps the entitlement was withdrawn during those ten minutes. Or the case was closed by another process. Or the current policy changed. Or a verifier was updated because the previous contract was incomplete.</p>
+      <p>The agent may have performed its computation correctly relative to the earlier snapshot.</p>
+      <p>That is not the same as saying the institution should commit the proposed consequence now.</p>
+      <p>The paper maps this problem to optimistic concurrency control: computation proceeds optimistically, relevant dependencies form a governance-aware read set, and admission validates that read set before effect commitment. If a relevant dependency has changed, affected work is rejected for current-state resolution and rerun.<a class="footnote-ref" href="#fn1" id="fnref1-4">[1]</a></p>
+      <p>Salas does <strong>not</strong> claim OCC itself is novel. The architectural contribution is the way classical OCC ideas are composed with institutional authority, component manifests, verification, effect mediation, and evidence.</p>
+      <p>The distinction also avoids an overly conservative policy: <strong>not every state change must invalidate every proposal</strong>. Only changes relevant to the proposal's declared governing dependencies should force stale rejection. Unrelated changes can remain outside the invalidation set.</p>
+      </section>
+      <section>
+        <h2>Current authority is broader than a permission check</h2>
+      <p>Commit-time admission is not merely "check the user's role again."</p>
+      <p>The paper's design treats several categories of state as potentially relevant to whether a proposal may become an effect:</p>
+        <ul>
+          <li>current authority;</li>
+          <li>governing facts and task state;</li>
+          <li>the components the proposal depended on;</li>
+          <li>the current verifier or contract.</li>
+        </ul>
+      <p>That matters because a proposal can become stale even when identity remains valid.</p>
+      <p>A user may still be authenticated while the case state has changed.</p>
+      <p>A service may still be reachable while the approved tool version has changed.</p>
+      <p>A proposal may have been generated correctly while the current verifier now rejects it.</p>
+      <p>The institutional decision therefore concerns the <strong>current admissibility of this effect</strong>, not simply whether the originating actor remains recognizable.</p>
+      <p>This is the distinction from earlier BeaconGuard Insights work. <a href="/insights/trusted-today-authorized-tomorrow"><em>Trusted Today, Authorized Tomorrow?</em></a> examined whether authority remains current while access is active. <a href="/insights/authority-should-narrow-as-ai-agents-delegate"><em>Authority Should Narrow as AI Agents Delegate</em></a> examined how authority should narrow during delegation. <a href="/insights/when-ai-agents-stop-can-you-prove-they-stopped"><em>When AI Agents Stop, Can You Prove They Stopped?</em></a> examined whether retired authority has actually stopped producing residual effects.</p>
+      <p>This article focuses on a different point in the lifecycle:</p>
+      <p><strong>The work is finished. Before the consequence becomes durable, does current institutional authority still admit it?</strong></p>
+      </section>
+      <section>
+        <h2>Complete mediation is the load-bearing precondition</h2>
+      <p>The paper's central architecture depends on <strong>complete mediation</strong>.</p>
+      <p>Every governed effect path must terminate at an authority-controlled adapter or equivalent admission boundary. If an agent can bypass that path with direct credentials to an external system, the central admission invariant no longer covers that effect.<a class="footnote-ref" href="#fn1" id="fnref1-5">[1]</a></p>
+      <p>This is not a minor deployment detail.</p>
+      <p>It determines whether "commit-time authority" is actually the place where consequential action is controlled.</p>
+      <p>The paper's local composition experiment deliberately includes a direct-credential bypass arm. In that controlled setup, eight effects occurred outside the authority path and were detected later through an independent reconciliation journal.<a class="footnote-ref" href="#fn1" id="fnref1-6">[1]</a></p>
+      <p>That finding must be interpreted carefully.</p>
+      <p>Reconciliation detected those declared journaled effects <strong>after they occurred</strong>.</p>
+      <p>It did not prevent them.</p>
+      <p>It did not reverse them.</p>
+      <p>It did not compensate for them.</p>
+      <p>And if an external effect is absent from the journal or evidence source, reconciliation may not detect it at all.</p>
+        <figure class="article-figure">
+      <button type="button" class="figure-zoom-trigger" data-lightbox-trigger aria-label="Enlarge Figure 2">
+        <img
+          src={figureTwo}
+          alt="Two-path architecture diagram comparing a governed effect path through current institutional authorization with a direct-credential bypass in which an external effect occurs before reconciliation detects it."
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption><strong>Figure 2. Complete Mediation and the Bypass Risk</strong> — Under complete mediation, a proposal passes through current institutional admission before the effect is released. Direct credentials can bypass that path; reconciliation may detect a bypass afterward, but detection is not prevention or reversal.</figcaption>
+    </figure>
+      <p>For enterprise architects, the question is therefore not only "Do we have an authorization service?"</p>
+      <p>It is:</p>
+      <p><strong>Can every consequential path actually be forced through it?</strong></p>
+      </section>
+      <section>
+        <h2>Three evidence layers — not one validation claim</h2>
+      <p>The paper presents several forms of experimental evidence. They should not be collapsed into a single statement that the architecture is "validated."</p>
+        <h3>1. Matrix lifecycle tests</h3>
+      <p>The author reports <strong>60/60 route-specific assertions</strong> passing across three self-authored Phi-4 seed runs.<a class="footnote-ref" href="#fn1" id="fnref1-7">[1]</a></p>
+      <p>These are controlled, deterministic fixtures intended to exercise lifecycle behavior such as admission, invalidation, selective rerun, preservation, replay, and receipt closure.</p>
+      <p>They are not an enterprise success rate.</p>
+      <p>They are not an independent benchmark.</p>
+      <p>They are not evidence that 60 production scenarios were independently reproduced.</p>
+        <h3>2. Local composition tests</h3>
+      <p>The paper separately reports a local composition involving authority, outbox, reconciliation, local HTTP services, and SQLite.</p>
+      <p>In the mediated path, the author reports <strong>18 authority commands and 18 external effects</strong> in the controlled run.<a class="footnote-ref" href="#fn1" id="fnref1-8">[1]</a></p>
+      <p>In the deliberately bypassed direct-credential arm, the paper reports <strong>eight additional effects</strong> detected by reconciliation.<a class="footnote-ref" href="#fn1" id="fnref1-9">[1]</a></p>
+      <p>Again, these results are author-reported controlled outcomes, not independent production validation.</p>
+        <h3>3. Delegated-gateway fallback study</h3>
+      <p>The paper also examines a different topology for situations where complete central mediation cannot be maintained and some effect authority is delegated to gateway-local state.</p>
+      <p>That is a fallback study, not evidence that only a central service can ever possess effect authority.</p>
+      <p>The fallback creates additional obligations around leases, clocks, ordering, release observation, and quorum. The paper's stress testing intentionally exposes failure modes, including a premature clock-driven effect and a majority-loss liveness miss.<a class="footnote-ref" href="#fn1" id="fnref1-10">[1]</a></p>
+      <p>Those negative outcomes are useful because they show why delegated authority changes the proof burden.</p>
+      <p>The central complete-mediation architecture is the preferred design in the paper, but the delegated study makes clear that availability and decentralization choices change the assumptions an enterprise must defend.</p>
+      </section>
+      <section>
+        <h2>Dependency completeness is part of the assurance boundary</h2>
+      <p>Commit-time validation can only compare dependencies the system knows about.</p>
+      <p>If a proposal materially depended on something that was omitted from its declared read set or component manifest, a change to that omitted dependency may not trigger stale rejection.</p>
+      <p>That produces an important limitation:</p>
+      <p><strong>a correct comparison over an incomplete dependency set can still admit a proposal whose real-world assumptions have changed.</strong></p>
+      <p>The same problem applies to verifier contracts.</p>
+      <p>The admission service can enforce the current verifier, but that verifier may itself be incomplete or incorrect. A bad contract can admit unsafe work or reject valid work.<a class="footnote-ref" href="#fn1" id="fnref1-11">[1]</a></p>
+      <p>This prevents the architecture from being reduced to a slogan such as:</p>
+        <blockquote>
+      <p>Compare versions at commit and the result is safe.</p>
+        </blockquote>
+      <p>The more defensible statement is:</p>
+        <blockquote>
+      <p>Compare the proposal's declared governing dependencies against current state, apply the current declared verifier, and admit only through the governed effect path.</p>
+        </blockquote>
+      <p>That is a bounded assurance property.</p>
+      </section>
+      <section>
+        <h2>The outbox is a mechanism, not the thesis</h2>
+      <p>Salas's central prototype uses an authority service and controlled release path that includes an outbox-style mechanism.</p>
+      <p>That is one implementation strategy for binding admission to effect release.</p>
+      <p>It is not the article's claim that every enterprise AI architecture needs the same outbox design.</p>
+      <p>The broader requirement is that there be a defensible point at which:</p>
+        <ol>
+          <li>the completed proposal is still only a proposal;</li>
+          <li>current authority and relevant state are evaluated;</li>
+          <li>a decision admits or rejects the effect;</li>
+          <li>the consequential path cannot silently bypass that decision.</li>
+        </ol>
+      <p>Different systems may realize those properties differently.</p>
+      <p>The paper offers one architecture for making them explicit and testable.</p>
+      </section>
+      <section>
+        <h2>What happens when the authority service is unavailable?</h2>
+      <p>Availability is where authorization architecture becomes operational architecture.</p>
+      <p>In the paper's central design, if required authoritative state is unavailable, the system does not silently fall back to cached local permission and continue.</p>
+      <p>The outcome is <strong>unavailable</strong>, and the workflow pauses.<a class="footnote-ref" href="#fn1" id="fnref1-12">[1]</a></p>
+      <p>That is a fail-closed choice.</p>
+      <p>It protects the authority invariant at the cost of availability.</p>
+      <p>Enterprises therefore have to decide whether a workflow can tolerate that tradeoff. For high-consequence actions, pausing may be preferable to executing under stale or unverifiable authority. For low-consequence operations, a different architecture may be acceptable.</p>
+      <p>The important point is to make the fallback explicit rather than allowing operational convenience to redefine authority silently.</p>
+      </section>
+      <section>
+        <h2>What this does — and does not — say about BeaconGuard</h2>
+      <p>BeaconGuard's interpretation is that consequential AI systems need an authorization decision that remains independent from model completion.</p>
+      <p>That aligns conceptually with the paper's separation between proposal generation and effect admission.</p>
+      <p>But the paper does not implement BeaconGuard.</p>
+      <p>BeaconGuard does not claim to implement Salas's Matrix lifecycle, exact OCC construction, component manifest, outbox design, or delegated-gateway protocol.</p>
+      <p>The paper does not validate or endorse BeaconGuard.</p>
+      <p>Its value here is architectural evidence for a broader category question:</p>
+      <p><strong>Should completed AI work be allowed to create durable institutional consequences without a current authorization decision at the effect boundary?</strong></p>
+      <p>For regulated enterprises, that question is likely more important than whether the agent itself reported success.</p>
+      </section>
+      <section>
+        <h2>Questions enterprise buyers should ask</h2>
+      <p>A practical review of one consequential AI workflow can start with these questions:</p>
+        <ol>
+          <li><strong>How long can an agent work before a consequence is committed?</strong><br />
+            The longer the interval, the more opportunity there is for governing state to change.</li>
+          <li><strong>Which facts actually govern the final effect?</strong><br />
+            Identity, entitlement, task state, policy, model version, tool version, external facts, or verifier state?</li>
+          <li><strong>Which changes should invalidate the proposal?</strong><br />
+            The goal is not blanket invalidation. It is accurate dependency scoping.</li>
+          <li><strong>Where is the actual admission point?</strong><br />
+            Is there a single governed place where current authority decides whether the effect may proceed?</li>
+          <li><strong>Can the agent bypass that point?</strong><br />
+            Direct credentials or unmanaged connectors can make the governed path optional.</li>
+          <li><strong>What happens after bypass?</strong><br />
+            Reconciliation may detect an effect later, but can it prevent, reverse, or compensate for it?</li>
+          <li><strong>What happens when authoritative state is unavailable?</strong><br />
+            Pause, fail closed, use delegated authority, or continue with cached state?</li>
+          <li><strong>Can the final decision be reconstructed?</strong><br />
+            What authority, dependency versions, component state, verifier, and effect record explain why this proposal was admitted?</li>
+        </ol>
+      <p>These are not questions about whether an AI system can finish a task.</p>
+      <p>They are questions about whether the enterprise still authorizes the consequence.</p>
+      </section>
+      <section>
+        <h2>Completion should end computation — not governance</h2>
+      <p>Agentic systems will continue to become faster, more capable, and more autonomous.</p>
+      <p>That does not remove the gap between computing an answer and creating an institutional effect.</p>
+      <p>Long-running work can become stale.</p>
+      <p>Relevant state can change.</p>
+      <p>A valid earlier snapshot can become an invalid current basis for action.</p>
+      <p>The architectural response is not necessarily one specific protocol.</p>
+      <p>It is to preserve a decision point where completion remains a proposal until current institutional authority admits the effect.</p>
+      <p><strong>The agent can finish the work. The institution still decides whether that finished work may act.</strong></p>
+      </section>
+      <section class="sources" id="source-notes">
+        <h2>Source notes and claim tiers</h2>
+        <h3>Primary research source</h3>
+      <p><strong>Jesus Salas, <em>Authority at Commit Time: Reject-and-Rerun Semantics for Governed Agentic Systems</em>, arXiv:2609.31490v1, September 25, 2026, cs.DC.</strong><a class="footnote-ref" href="#fn1" id="fnref1-13">[1]</a></p>
+      <p>The paper is a recent preprint and should be treated as architecture research, not established practice.</p>
+        <h3>Claim tier: AUTHOR-DOCUMENTED / FACT ABOUT THE PAPER</h3>
+      <p>This tier includes:</p>
+        <ul>
+          <li>the proposal-versus-admission architecture;</li>
+          <li>governance-aware dependency validation;</li>
+          <li>the paper's <code>accept</code>, <code>reject-stale</code>, <code>reject-verify</code>, <code>duplicate</code>, and <code>unavailable</code> outcomes;</li>
+          <li>complete mediation as a central precondition;</li>
+          <li>the complete-mediation central design;</li>
+          <li>the separate delegated-gateway fallback study;</li>
+          <li>the paper's limits around dependency, journal, and verifier-contract completeness;</li>
+          <li>the statement that OCC itself is inherited from classical optimistic concurrency control rather than claimed as a new concurrency algorithm.</li>
+        </ul>
+      <p>These statements describe the paper's architecture and stated properties. They do not establish independent production effectiveness.</p>
+        <h3>Claim tier: AUTHOR-REPORTED CONTROLLED RESULTS</h3>
+      <p>The following remain attributed to the author:</p>
+        <ul>
+          <li><strong>60/60</strong> route-specific assertions across three self-authored Phi-4 seed fixtures/runs;</li>
+          <li><strong>18 authority commands / 18 external effects</strong> in the controlled mediated local-composition run;</li>
+          <li><strong>eight direct-credential bypass effects</strong> detected by reconciliation;</li>
+          <li>results from the delegated-gateway healthy and stress studies.</li>
+        </ul>
+      <p>These are controlled experimental outcomes reported by the paper. They are not independent reproduction, production rates, or BeaconGuard validation.</p>
+        <h3>Claim tier: BEACONGUARD INTERPRETATION</h3>
+      <p>BeaconGuard's editorial interpretation is:</p>
+        <blockquote>
+      <p>Long-running AI completion should be treated as a proposal state when consequential execution depends on governing conditions that can change before commit. A current, independently enforced authorization decision should determine whether the proposed effect may become durable.</p>
+        </blockquote>
+      <p>This is an architecture interpretation informed by the paper. It is not terminology attributed to Salas and is not a claim that BeaconGuard implements his protocol.</p>
+        <h3>Claim tier: UNKNOWN / NOT ESTABLISHED</h3>
+      <p>As of this authoring package:</p>
+        <ul>
+          <li>independent reimplementation is <strong>not established / not found in the current review</strong>;</li>
+          <li>production deployment is <strong>unknown</strong>;</li>
+          <li>production throughput, WAN behavior, regional failover, cross-ledger atomicity, and arbitrary external-journal completeness are not established by the controlled prototypes;</li>
+          <li>dependency completeness and verifier correctness are not guaranteed merely by the architecture.</li>
+        </ul>
+        <h3>Affiliation / endorsement boundary</h3>
+      <p>The paper states that Salas is employed by Microsoft but conducted the research independently, on personal time and equipment, outside the scope of his employment, and that the work does <strong>not</strong> represent Microsoft's views.<a class="footnote-ref" href="#fn1" id="fnref1-14">[1]</a></p>
+      <p>This article therefore does not describe the paper as Microsoft research and does not imply Microsoft product endorsement, sponsorship, or adoption.</p>
+        <h3>BeaconGuard boundary</h3>
+      <p>This article does <strong>not</strong> claim that:</p>
+        <ul>
+          <li>BeaconGuard implements the paper;</li>
+          <li>BeaconGuard reproduced the experiments;</li>
+          <li>the paper validates BeaconGuard;</li>
+          <li>the author endorses BeaconGuard;</li>
+          <li>the paper's OCC, outbox, manifest, or delegated-gateway construction is a universal enterprise requirement.</li>
+        </ul>
+        <ol>
+          <li id="fn1">Jesus Salas, <em>Authority at Commit Time: Reject-and-Rerun Semantics for Governed Agentic Systems</em>, arXiv:2609.31490v1, September 25, 2026. <a href="https://arxiv.org/abs/2609.31490" rel="noopener noreferrer">https://arxiv.org/abs/2609.31490</a> <a href="#fnref1" aria-label="Back to first reference">↩</a></li>
+        </ol>
+      </section>
+    </div>
+    </div>
+    </div>
+
+    <section class="article-cta">
+      <p class="section-label">CONTROLLED EVALUATION</p>
+      <h2>Start with one consequential workflow</h2>
+      <p>Evaluate where authorization should sit between an AI-initiated action and the system that ultimately executes it - without replacing the existing system of record.</p>
+      <div class="page-actions">
+        <a class="btn-primary" href="/design-partner-program">Request Evaluation</a>
+        <a class="btn-secondary" href="/platform">See the Product</a>
+      </div>
+    </section>
+
+    <div class="figure-lightbox" data-lightbox hidden>
+      <button type="button" class="figure-lightbox__close" data-lightbox-close aria-label="Close enlarged image">&times;</button>
+      <div class="figure-lightbox__frame">
+        <img data-lightbox-image src="" alt="" />
+        <p class="figure-lightbox__caption" data-lightbox-caption></p>
+      </div>
+    </div>
+  </article>
+
+  <style>
+
+    .insight-cta-block {
+      margin: 2.5rem 0 1.5rem;
+      padding: 1.75rem 1.5rem;
+      border-radius: 12px;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    .insight-cta-block h2 { color: #f8fafc; margin-top: 0; }
+    .insight-cta-block .cta-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+    .insight-cta-block .btn-primary,
+    .insight-cta-block .btn-secondary {
+      display: inline-block;
+      padding: 0.7rem 1.1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .insight-cta-block .btn-primary { background: #38bdf8; color: #0f172a; }
+    .insight-cta-block .btn-secondary { background: transparent; color: #e2e8f0; border: 1px solid #64748b; }
+
+    .insight-article {
+      margin: 0 auto;
+      color: #102033;
+    }
+
+    .article-header,
+    .pull-quote {
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-body {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .insight-table-wrap,
+    .article-figure {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-header {
+      max-width: 1080px;
+      padding-top: 2rem;
+    }
+
+    .article-section,
+    .article-meta {
+      margin: 0 0 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .article-header h1 {
+      max-width: 900px;
+      color: var(--text-primary);
+      font-size: 3rem;
+    }
+
+    .article-subtitle {
+      max-width: 850px;
+      color: var(--hero-accent);
+      font-size: 1.18rem;
+      line-height: 1.55;
+    }
+
+    .article-featured {
+      max-width: 1050px;
+      margin: 2.2rem auto 0;
+    }
+
+    .article-featured img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: #f7fbff;
+      object-fit: contain;
+    }
+
+    .article-featured figcaption {
+      max-width: 850px;
+      margin: 0.9rem auto 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface {
+      --read-bg: #f6f8fb;
+      --read-bg-panel: #ffffff;
+      --read-heading: #0b1b2e;
+      --read-body: #334155;
+      --read-muted: #64748b;
+      --read-border: rgba(11, 27, 46, 0.12);
+      --read-accent: #2a8f9a;
+
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-top: 2.75rem;
+      margin-bottom: 0;
+      background: var(--read-bg);
+      border-top: 1px solid var(--read-border);
+    }
+
+    .insight-reading-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 4rem;
+    }
+
+    .article-figure {
+      width: min(1080px, 100%);
+      margin: 2.75rem auto 3.25rem;
+    }
+
+    .insight-reading-surface .article-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid var(--read-border);
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.08);
+      object-fit: contain;
+    }
+
+    .insight-reading-surface .article-figure figcaption {
+      max-width: 850px;
+      margin: 1rem auto 0;
+      color: var(--read-muted);
+      line-height: 1.5;
+    }
+
+    .insight-reading-surface .article-figure figcaption strong {
+      color: var(--read-heading);
+    }
+
+    .figure-zoom-trigger {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      background: none;
+      cursor: zoom-in;
+      position: relative;
+      border-radius: 0.5rem;
+    }
+
+    .figure-zoom-trigger:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 3px;
+    }
+
+    .figure-zoom-trigger::after {
+      content: "Click to enlarge";
+      position: absolute;
+      right: 0.85rem;
+      bottom: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(11, 27, 46, 0.72);
+      color: #f6f8fb;
+      font-size: 0.78rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 150ms ease, transform 150ms ease;
+      pointer-events: none;
+    }
+
+    .figure-zoom-trigger:hover::after,
+    .figure-zoom-trigger:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .figure-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(4, 8, 15, 0.92);
+    }
+
+    .figure-lightbox[hidden] {
+      display: none;
+    }
+
+    .figure-lightbox__frame {
+      max-width: min(1400px, 100%);
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .figure-lightbox__frame img {
+      display: block;
+      max-width: 100%;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .figure-lightbox__caption {
+      max-width: 850px;
+      margin: 0;
+      color: #dbe4f0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .figure-lightbox__close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(11, 27, 46, 0.85);
+      color: #f6f8fb;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .figure-lightbox__close:hover {
+      background: rgba(11, 27, 46, 1);
+    }
+
+    .figure-lightbox__close:focus-visible {
+      outline: 3px solid var(--read-accent);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .figure-zoom-trigger::after {
+        content: "Tap to enlarge";
+        right: 0.6rem;
+        bottom: 0.6rem;
+        font-size: 0.72rem;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .article-body section {
+      margin-bottom: 3.6rem;
+    }
+
+
+    .article-body h3 {
+      margin: 1.5rem 0 0.65rem;
+      font-size: 1.25rem;
+      color: var(--read-heading);
+    }
+
+    .article-body h2 {
+      margin-top: 0.35rem;
+      padding-top: 0.45rem;
+      font-size: 1.8rem;
+      color: var(--read-heading);
+    }
+
+    .article-body p,
+    .article-body li {
+      color: var(--read-body);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .article-body p {
+      margin-bottom: 1.1rem;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 1.35rem 1.2rem;
+    }
+
+    .article-body blockquote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      border-left: 3px solid var(--read-accent);
+      background: var(--read-bg-panel);
+      border-radius: 0 0.45rem 0.45rem 0;
+    }
+
+    .article-body blockquote p {
+      margin-bottom: 0;
+      color: var(--read-heading);
+    }
+
+    .article-body a {
+      color: var(--read-accent);
+    }
+
+    .article-body a.footnote-ref {
+      font-size: 0.78em;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 0.1em;
+    }
+
+    .insight-table-wrap {
+      width: 100%;
+      max-width: 1080px;
+      margin: 1.75rem auto 2.25rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--read-border);
+      border-radius: 0.55rem;
+      background: var(--read-bg-panel);
+      box-shadow: 0 8px 24px rgba(11, 27, 46, 0.06);
+    }
+
+    .insight-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .insight-table th, .insight-table td {
+      padding: 0.95rem 1.1rem;
+      border-bottom: 1px solid var(--read-border);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      color: var(--read-body);
+    }
+
+    .insight-table th {
+      text-align: left;
+      color: #f6f8fb;
+      background: #0b1b2e;
+      border-bottom: 3px solid #2a8f9a;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .insight-table tr:last-child td { border-bottom: 0; }
+    .insight-table tbody tr:nth-child(even) td { background: rgba(11, 27, 46, 0.03); }
+    .insight-table strong { color: var(--read-heading); }
+
+    .sources {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--read-border);
+    }
+
+    .sources h2 {
+      color: var(--read-heading);
+    }
+
+    .sources ol {
+      padding-left: 1.2rem;
+    }
+
+    .sources li {
+      margin-bottom: 1rem;
+      color: var(--read-body);
+      font-size: 0.95rem;
+    }
+
+    .sources a {
+      word-break: break-all;
+    }
+
+    .article-cta {
+      margin: 0;
+      padding: 3.5rem 1.5rem 4rem;
+      background: linear-gradient(160deg, rgba(18, 31, 52, 0.95), rgba(8, 14, 24, 0.98));
+      color: #e8eef7;
+      text-align: center;
+    }
+
+    .article-cta p {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #c5d0df;
+    }
+
+    .article-cta h2 {
+      margin-bottom: 0.85rem;
+      color: #f6f8fb;
+    }
+
+    .article-cta .page-actions {
+      margin-top: 1.2rem;
+      justify-content: center;
+    }
+
+    @media (max-width: 900px) {
+      .article-header h1 {
+        font-size: 2.2rem;
+      }
+      .insight-reading-inner {
+        padding: 3.25rem 1.5rem 3.25rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .article-header {
+        padding-top: 0.5rem;
+      }
+      .article-header h1 {
+        font-size: 1.85rem;
+      }
+      .article-subtitle,
+      .article-body p,
+      .article-body li {
+        font-size: 1rem;
+      }
+      .insight-reading-surface {
+        margin-top: 1.6rem;
+      }
+      .insight-reading-inner {
+        padding: 2.4rem 1.15rem 2.6rem;
+      }
+    }
+  </style>
+
+  <script>
+    const lightbox = document.querySelector<HTMLDivElement>("[data-lightbox]");
+    const lightboxImage = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-image]");
+    const lightboxCaption = lightbox?.querySelector<HTMLParagraphElement>("[data-lightbox-caption]");
+    const closeButton = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+    let lastFocused: HTMLElement | null = null;
+
+    function openLightbox(trigger: HTMLElement) {
+      const img = trigger.querySelector("img");
+      if (!img || !lightbox || !lightboxImage) return;
+      lightboxImage.src = img.getAttribute("src") ?? "";
+      lightboxImage.alt = img.getAttribute("alt") ?? "";
+      const figure = trigger.closest("figure");
+      const caption = figure?.querySelector("figcaption")?.textContent?.trim() ?? "";
+      if (lightboxCaption) lightboxCaption.textContent = caption;
+      lastFocused = trigger;
+      lightbox.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      closeButton?.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.hidden = true;
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => openLightbox(trigger));
+    });
+
+    closeButton?.addEventListener("click", closeLightbox);
+
+    lightbox?.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox && !lightbox.hidden) closeLightbox();
+    });
+  </script>
+
+</BaseLayout>
